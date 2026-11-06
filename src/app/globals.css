@@ -79,8 +79,6 @@
   --header-h: 68px;
   --frame: 1280px;
   --section-pad: clamp(72px, 11vw, 160px);
-  --gutter-start: max(16px, env(safe-area-inset-left, 0px));
-  --gutter-end: max(16px, env(safe-area-inset-right, 0px));
   --page-bg: var(--color-espresso); /* tweened by ToneController */
 
   /* Light tone (default) */
@@ -106,22 +104,26 @@
   color-scheme: light;
 }
 
-@media (min-width: 760px) {
-  :root {
-    --gutter-start: max(40px, env(safe-area-inset-left, 0px));
-    --gutter-end: max(40px, env(safe-area-inset-right, 0px));
-  }
+/* Logical safe-area insets: the one place the physical side swaps for RTL
+   (inline-start is the physical right in Arabic). Gutters and anything pinned to an
+   inline edge (e.g. the WhatsApp button) build on --safe-start / --safe-end.
+   Declared on every [dir] element so nested direction changes resolve locally. */
+:root,
+[dir] {
+  --safe-start: env(safe-area-inset-left, 0px);
+  --safe-end: env(safe-area-inset-right, 0px);
+  --gutter-start: max(16px, var(--safe-start));
+  --gutter-end: max(16px, var(--safe-end));
 }
-
 [dir="rtl"] {
-  /* Logical gutters: in RTL the inline-start edge is the physical right. */
-  --gutter-start: max(16px, env(safe-area-inset-right, 0px));
-  --gutter-end: max(16px, env(safe-area-inset-left, 0px));
+  --safe-start: env(safe-area-inset-right, 0px);
+  --safe-end: env(safe-area-inset-left, 0px);
 }
 @media (min-width: 760px) {
-  [dir="rtl"] {
-    --gutter-start: max(40px, env(safe-area-inset-right, 0px));
-    --gutter-end: max(40px, env(safe-area-inset-left, 0px));
+  :root,
+  [dir] {
+    --gutter-start: max(40px, var(--safe-start));
+    --gutter-end: max(40px, var(--safe-end));
   }
 }
 
@@ -531,7 +533,7 @@ html:not([data-js]) #site-header {
 }
 /* backdrop-filter makes the header the containing block for its position:fixed
    descendants (mobile overlay, mega backdrop), so it is dropped while a menu is open. */
-#site-header[data-menu-open] {
+html[data-overlay-open] #site-header {
   backdrop-filter: none;
   background: var(--color-espresso);
   color: var(--color-ivory);
@@ -594,4 +596,15 @@ html:not([data-js]) #site-header {
 }
 .burger[aria-expanded="true"] span:last-child {
   transform: translateY(-3.5px) rotate(-45deg);
+}
+
+/* Floating WhatsApp button: out of the way (and out of the tab order) while a menu is open. */
+.wa-fab {
+  transition:
+    opacity 0.3s var(--ease-expo-out),
+    visibility 0.3s;
+}
+html[data-overlay-open] .wa-fab {
+  opacity: 0;
+  visibility: hidden;
 }

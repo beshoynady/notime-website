@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useReducer, useRef, type FocusEvent, type PointerEvent } from "react";
 import type { CategorySlug } from "@/content/types";
 import { CLOSE_DELAY_MS, OPEN_INTENT_MS, initialMenuState, menuReducer } from "@/lib/menu-reducer";
+import { setOverlayOpen } from "@/lib/overlay";
 
 const PANEL_ID = "mega-panel";
 
@@ -29,7 +30,7 @@ export function useMegaMenu(firstCategory: CategorySlug) {
     if (returnFocus) triggerRef.current?.focus();
   }, []);
 
-  // Header-level hover tracking, Esc, resize, and the header's menu-open attribute.
+  // Header-level hover tracking; Esc, resize and the page-level overlay flag below.
   useEffect(() => {
     const header = triggerRef.current?.closest<HTMLElement>("#site-header");
     if (!header) return;
@@ -50,12 +51,11 @@ export function useMegaMenu(firstCategory: CategorySlug) {
   }, []);
 
   useEffect(() => {
-    const header = triggerRef.current?.closest<HTMLElement>("#site-header");
     if (!state.open) {
-      if (header) delete header.dataset.menuOpen;
+      setOverlayOpen(false);
       return;
     }
-    if (header) header.dataset.menuOpen = "";
+    setOverlayOpen(true);
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && close(true);
     const mq = window.matchMedia("(min-width: 900px)");
     const onMq = () => !mq.matches && close();

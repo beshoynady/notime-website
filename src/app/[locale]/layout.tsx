@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { CustomCursor } from "@/components/layout/custom-cursor";
+import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { WhatsAppButton } from "@/components/layout/whatsapp-button";
 import { DirectionProvider } from "@/components/providers/direction-provider";
 import { LenisProvider } from "@/components/providers/lenis-provider";
 import { ToneController } from "@/components/providers/tone-controller";
@@ -53,7 +56,12 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
           <DirectionProvider direction={dir}>
             <LenisProvider>
               <SiteHeader />
-              <div id="stage">{children}</div>
+              <div id="stage">
+                {children}
+                <SiteFooter />
+              </div>
+              <WhatsAppButton />
+              <CustomCursor />
               <ToneController />
             </LenisProvider>
           </DirectionProvider>

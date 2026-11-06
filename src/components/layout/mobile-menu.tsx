@@ -8,6 +8,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { Link } from "@/i18n/navigation";
 import { ease } from "@/lib/motion";
+import { setOverlayOpen } from "@/lib/overlay";
 import { cn } from "@/lib/utils";
 import { Numeral, ProductStrip } from "./mega-menu";
 import type { MenuData } from "./menu-data";
@@ -38,10 +39,9 @@ export function MobileMenu({ data }: { data: MenuData }) {
   }, []);
 
   useEffect(() => {
-    const header = burger.current?.closest<HTMLElement>("#site-header");
     const stage = document.getElementById("stage");
     if (!open) return;
-    if (header) header.dataset.menuOpen = "";
+    setOverlayOpen(true);
     stage?.setAttribute("inert", "");
     document.documentElement.style.overflow = "hidden";
     lenis.stop();
@@ -51,7 +51,7 @@ export function MobileMenu({ data }: { data: MenuData }) {
     document.addEventListener("keydown", onKey);
     mq.addEventListener("change", onMq);
     return () => {
-      if (header) delete header.dataset.menuOpen;
+      setOverlayOpen(false);
       stage?.removeAttribute("inert");
       document.documentElement.style.overflow = "";
       lenis.start();
