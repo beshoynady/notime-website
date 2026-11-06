@@ -529,7 +529,10 @@ html:not([data-js]) #site-header {
   border-color: var(--color-line-dark);
   backdrop-filter: blur(10px);
 }
+/* backdrop-filter makes the header the containing block for its position:fixed
+   descendants (mobile overlay, mega backdrop), so it is dropped while a menu is open. */
 #site-header[data-menu-open] {
+  backdrop-filter: none;
   background: var(--color-espresso);
   color: var(--color-ivory);
   border-color: var(--color-line-dark);
@@ -576,4 +579,19 @@ html:not([data-js]) #site-header {
   50% {
     opacity: 0.25;
   }
+}
+
+/* Burger → X (CSS on aria-expanded, 0.45s expo.out). */
+.burger span {
+  display: block;
+  width: 18px;
+  height: 1px;
+  background: currentColor;
+  transition: transform 0.45s var(--ease-expo-out);
+}
+.burger[aria-expanded="true"] span:first-child {
+  transform: translateY(3.5px) rotate(45deg);
+}
+.burger[aria-expanded="true"] span:last-child {
+  transform: translateY(-3.5px) rotate(-45deg);
 }

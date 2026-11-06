@@ -1,10 +1,10 @@
 import { useLocale, useTranslations } from "next-intl";
-import type { ReactNode } from "react";
 import { Link } from "@/i18n/navigation";
 import { ButtonLink } from "@/components/ui/button";
 import { LangToggle } from "./lang-toggle";
 import { Logo } from "./logo";
 import { MegaMenu } from "./mega-menu";
+import { MobileMenu } from "./mobile-menu";
 import { getMenuData } from "./menu-data";
 import { NAV_LINKS, QUOTE_HREF } from "./nav-links";
 import type { Locale } from "@/content";
@@ -12,9 +12,8 @@ import type { Locale } from "@/content";
 /**
  * Fixed 68px header. The outer [data-header-shell] is the only element the hero intro
  * fades (GSAP); the header itself switches tone via ToneController.
- * `menuSlot` holds the mobile burger (Task 7).
  */
-export function SiteHeader({ menuSlot }: { menuSlot?: ReactNode }) {
+export function SiteHeader() {
   const t = useTranslations();
   const menu = getMenuData(useLocale() as Locale);
   return (
@@ -42,7 +41,7 @@ export function SiteHeader({ menuSlot }: { menuSlot?: ReactNode }) {
             <ButtonLink href={QUOTE_HREF} size="sm" className="hidden min-[1100px]:inline-flex">
               {t("header.quote")}
             </ButtonLink>
-            {menuSlot}
+            <MobileMenu data={menu} />
           </div>
         </div>
       </header>
