@@ -543,3 +543,37 @@ html:not([data-js]) #site-header {
 .nav-link[aria-expanded="true"] {
   opacity: 1;
 }
+
+/* "Coming soon" badge: champagne tag with a slow pulsing dot (2px radius, never a pill). */
+.badge-soon {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 7px;
+  border-radius: var(--radius-tag);
+  background: var(--color-champagne);
+  color: var(--color-espresso);
+  font-size: 0.56rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+.badge-soon::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-cocoa);
+  animation: pulse-dot 2s infinite;
+}
+.badge-soon:lang(ar) {
+  font-size: 0.72rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+@keyframes pulse-dot {
+  50% {
+    opacity: 0.25;
+  }
+}

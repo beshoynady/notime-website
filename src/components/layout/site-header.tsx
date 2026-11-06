@@ -1,26 +1,22 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 import { Link } from "@/i18n/navigation";
 import { ButtonLink } from "@/components/ui/button";
 import { LangToggle } from "./lang-toggle";
 import { Logo } from "./logo";
-
-// TODO: replace placeholder — these anchors point at homepage sections until the pages exist.
-export const NAV_LINKS = [
-  { key: "work", href: "/#work" },
-  { key: "digital", href: "/#digital" },
-  { key: "about", href: "/#about" },
-  { key: "contact", href: "/#contact" },
-] as const;
-export const QUOTE_HREF = "/#contact"; // TODO: replace placeholder — quote form page
+import { MegaMenu } from "./mega-menu";
+import { getMenuData } from "./menu-data";
+import { NAV_LINKS, QUOTE_HREF } from "./nav-links";
+import type { Locale } from "@/content";
 
 /**
  * Fixed 68px header. The outer [data-header-shell] is the only element the hero intro
  * fades (GSAP); the header itself switches tone via ToneController.
- * `servicesSlot` holds the mega-menu trigger and `menuSlot` the mobile burger.
+ * `menuSlot` holds the mobile burger (Task 7).
  */
-export function SiteHeader({ servicesSlot, menuSlot }: { servicesSlot?: ReactNode; menuSlot?: ReactNode }) {
+export function SiteHeader({ menuSlot }: { menuSlot?: ReactNode }) {
   const t = useTranslations();
+  const menu = getMenuData(useLocale() as Locale);
   return (
     <div data-header-shell="">
       <a
@@ -34,11 +30,7 @@ export function SiteHeader({ servicesSlot, menuSlot }: { servicesSlot?: ReactNod
         <div className="frame flex h-[var(--header-h)] items-center justify-between gap-4">
           <Logo />
           <nav aria-label={t("nav.label")} className="hidden items-center gap-[30px] text-[0.78rem] tracking-[0.16em] uppercase min-[900px]:flex lang-ar:text-[0.9rem] lang-ar:tracking-normal lang-ar:normal-case">
-            {servicesSlot ?? (
-              <Link href="/#services" className="nav-link no-underline">
-                {t("nav.services")}
-              </Link>
-            )}
+            <MegaMenu data={menu} />
             {NAV_LINKS.map((l) => (
               <Link key={l.key} href={l.href} className="nav-link no-underline">
                 {t(`nav.${l.key}`)}

@@ -1,6 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
 
 const PORT = 3100;
+/** Point at an already running server (e.g. `PW_BASE_URL=http://localhost:3200`) to skip the production build. */
+const external = process.env.PW_BASE_URL;
 
 // Uses the locally installed Chrome (channel: "chrome"); no Playwright browser downloads.
 export default defineConfig({
@@ -8,7 +10,7 @@ export default defineConfig({
   fullyParallel: true,
   reporter: "list",
   use: {
-    baseURL: `http://localhost:${PORT}`,
+    baseURL: external ?? `http://localhost:${PORT}`,
     channel: "chrome",
   },
   projects: [
@@ -18,10 +20,12 @@ export default defineConfig({
       use: { ...devices["Pixel 7"], viewport: { width: 390, height: 844 }, channel: "chrome" },
     },
   ],
-  webServer: {
-    command: `npm run build && npm run start -- -p ${PORT}`,
-    url: `http://localhost:${PORT}/en`,
-    reuseExistingServer: true,
-    timeout: 300_000,
-  },
+  webServer: external
+    ? undefined
+    : {
+        command: `npm run build && npm run start -- -p ${PORT}`,
+        url: `http://localhost:${PORT}/en`,
+        reuseExistingServer: true,
+        timeout: 300_000,
+      },
 });
