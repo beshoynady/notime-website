@@ -608,3 +608,21 @@ html[data-overlay-open] .wa-fab {
   opacity: 0;
   visibility: hidden;
 }
+
+/* Logo variants (header, tone="auto"): dark-bg logo over the hero, dark sections and open
+   menus; light-bg logo over ivory sections. The logo files are never recoloured. */
+.logo-on-light {
+  display: none;
+}
+#site-header[data-header-tone="light"] .logo-on-dark {
+  display: none;
+}
+#site-header[data-header-tone="light"] .logo-on-light {
+  display: block;
+}
+html[data-overlay-open] #site-header .logo-on-dark {
+  display: block;
+}
+html[data-overlay-open] #site-header .logo-on-light {
+  display: none;
+}

@@ -452,6 +452,25 @@ Use `gsap-framer-scroll-animation` for the ScrollTrigger pin.
 
 ## CHECKPOINT 3: send the hero intro end state, the mid-scroll state, and the `hero.webm` recording. Stop.
 
+Added 2026-11-06 for checkpoint 3: intro screenshots at 1440 and 390 in EN and AR, the reduced-motion static frame, measured mobile LCP element and time for `/en` and `/ar`. Extra hero requirements from that message: intro once per session (`sessionStorage`); skippable (scroll, key, click → `tl.progress(1)`); header stays focusable during the intro and tabbing into it finishes the intro; canvas pauses while any menu is open (`html[data-overlay-open]`), off-screen or tab hidden; pin uses `svh` + `invalidateOnRefresh` + `ignoreMobileResize`, tested with a real touch scroll at 390px.
+
+---
+
+### Task 11b (added 2026-11-06): profile extraction and content inventory
+
+Source: `docs/brand/company-profile-2026.pdf` (38 pages), the client's official 2026 profile and the primary content source (replaces the old profile). Runs after the hero, before the copy deck (checkpoint 4). Full instructions are in the user's message of 2026-11-06. Summary:
+
+1. Extract the embedded images at native resolution (image objects, not page screenshots) to `public/images/work/raw/p{page}-{n}.{ext}`. Skip pages 34–36 (influencer network) and page 20 (media logos). Requested tool: Python + PyMuPDF. Check the interpreter first, because the `python` on PATH is the Windows Store stub.
+2. `docs/content/profile-inventory.md`: one row per image with page/section, client/project, pixel size + quality, identifiable people, AI-generated (page 14 is "Produced with AI"), stock (the page 3 About photo is stock: never use it), proposed slot. Curate the good, relevant images into `public/images/work/<project-slug>/` as AVIF/WebP.
+3. `docs/content/profile-copy.md`: the text verbatim, by page.
+4. Real projects for Our Work (Challenge → Idea → Execution → Result, `{{TODO}}` where the profile doesn't support it): UAE Pro League; UAE Athletics Federation (incl. Oregon 26: 487K views, +37.6K followers, 271K reach in the first week); EgyptAir pavilion; Ultimate Power Solution; Smith Gulf; Sandoz; private celebrations & heritage (no client names).
+5. Verified figures only: 6 markets; 360° integrated; the Oregon 26 figures. Never "49+ talent network".
+6. `docs/content/services-reconciliation.md` (profile vs draft vs `services-list.md`). Do not change `services.ts` until the user confirms.
+7. Hero variant with the official line "IT'S TIME TO START." plus an OPEN_QUESTIONS entry (being confirmed with the client).
+8. OPEN_QUESTIONS / CONTENT_CHECKLIST: permission for each client name/logo; rights to photos of identifiable people; which page-20 media outlets actually published (show none until confirmed); NO TIME's role in the government portals on the Marketing page.
+
+Report the inventory summary and the reconciliation table at checkpoint 4.
+
 ---
 
 ### Task 12: `/[locale]/styleguide`

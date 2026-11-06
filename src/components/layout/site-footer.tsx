@@ -1,7 +1,8 @@
 import { getTranslations } from "next-intl/server";
+import { CopyrightYear } from "./copyright-year";
 import { Logo } from "./logo";
 
-/** Build-time year: cached so cacheComponents can prerender it (no request-time Date). */
+/** Build year for the prerendered HTML (cached, so cacheComponents can prerender it). */
 async function copyrightYear() {
   "use cache";
   return String(new Date().getFullYear());
@@ -18,9 +19,9 @@ export async function SiteFooter() {
     <footer>
       <section data-tone="dark" data-bg="own" className="border-t border-line-dark">
         <div className="frame flex flex-wrap items-end justify-between gap-x-8 gap-y-6 py-14 pb-[calc(56px+env(safe-area-inset-bottom,0px))]">
-          <Logo />
+          <Logo tone="dark" />
           <div className="grid gap-1.5 text-[0.85rem] text-ivory/70">
-            <p>{t("rights", { year })}</p>
+            <CopyrightYear buildYear={year} />
             {/* TODO: replace placeholder — full footer (links, contact, socials) in a later phase */}
             <p className="text-ivory/50">{t("stub")}</p>
           </div>

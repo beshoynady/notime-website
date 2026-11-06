@@ -6,7 +6,8 @@
   "brand": {
     "name": "NO TIME",
     "tagline": "Creative House",
-    "homeLabel": "NO TIME Creative House — الصفحة الرئيسية"
+    "homeLabel": "NO TIME Creative House — الصفحة الرئيسية",
+    "logoAlt": "NO TIME Creative House"
   },
   "common": {
     "skipToContent": "انتقل إلى المحتوى",
@@ -64,8 +65,9 @@
   },
   "hud": {
     "scene": "المشهد 01 — NO TIME",
-    "coords": "25.2048° N · 55.2708° E — دبي",
-    "scroll": "مرّر"
+    "coords": "25.2048° N · 55.2708° E",
+    "scroll": "مرّر",
+    "city": "دبي"
   },
   "footer": {
     "rights": "© {year} NO TIME Creative House.",

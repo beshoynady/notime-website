@@ -17,3 +17,4 @@ Status values: **Missing** · **Requested** · **Received** · **Approved**
 | 11 | Final product names | QR event check-in system and restaurant management system; working names in `src/content/products.ts`. OPEN_QUESTIONS #5. | Missing |
 | 12 | Contact fields for the site | `src/config/contact.ts`: email, WhatsApp number (or `NEXT_PUBLIC_WHATSAPP_NUMBER`), Instagram URL, Facebook URL. Until filled, the WhatsApp button shows "number pending". | Missing |
 | 13 | Images for 18 slots | Slot list in `src/content/images.ts`; prompts in `docs/content/image-prompts.md` (Task 14). Each slot shows a designed placeholder until a file is added. | Missing |
+| 14 | Logo as SVG (all 4 variants) | The site uses trimmed PNGs exported from `docs/brand/logo-source/` by `scripts/export-logos.mjs` into `public/images/brand/logo/`. Replace them with the designer's SVG/AI files, including a dark-background version with a legible tagline (OPEN_QUESTIONS #12). | Missing |

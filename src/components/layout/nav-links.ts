@@ -7,3 +7,6 @@ export const NAV_LINKS = [
 ] as const;
 
 export const QUOTE_HREF = "/#contact"; // TODO: replace placeholder — quote form page
+
+/** Homepage services section; menus and the hero CTA point here until service pages exist. */
+export const SERVICES_HREF = "/#services"; // TODO: replace placeholder — services index page
