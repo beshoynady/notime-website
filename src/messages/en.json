@@ -1,1 +1,78 @@
-{}
+{
+  "meta": {
+    "title": "NO TIME Creative House",
+    "description": "A Dubai creative house for events, creative production, marketing and digital solutions."
+  },
+  "brand": {
+    "name": "NO TIME",
+    "tagline": "Creative House",
+    "homeLabel": "NO TIME Creative House — home"
+  },
+  "common": {
+    "skipToContent": "Skip to content",
+    "aiPlaceholder": "AI image · placeholder",
+    "illustrative": "Illustrative",
+    "preview": "Preview",
+    "comingSoon": "Coming soon"
+  },
+  "nav": {
+    "label": "Main",
+    "services": "Services",
+    "work": "Work",
+    "digital": "Digital Solutions",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "header": {
+    "quote": "Request a quote"
+  },
+  "langToggle": {
+    "label": "Language",
+    "en": "EN",
+    "ar": "ع",
+    "enName": "English",
+    "arName": "العربية"
+  },
+  "megaMenu": {
+    "eyebrow": "Services",
+    "headingLead": "One house.",
+    "headingKey": "Five crafts.",
+    "intro": "Everything an event or a brand needs, delivered by one team.",
+    "count": "{count, plural, one {# service} other {# services}}",
+    "viewCategory": "View category",
+    "inDevelopment": "In development",
+    "allServices": "All {count} services"
+  },
+  "mobileMenu": {
+    "open": "Open menu",
+    "close": "Close menu",
+    "services": "Services"
+  },
+  "whatsapp": {
+    "label": "Chat with us on WhatsApp",
+    "pending": "WhatsApp · number pending",
+    "prefill": "Hello NO TIME, I'd like to talk about a project."
+  },
+  "hero": {
+    "titleLine1": "IT'S TIME",
+    "titleLine2": "TO CREATE.",
+    "titleLabel": "It's time to create.",
+    "lead": "Events, creative production, marketing and digital solutions, planned and delivered by one house.",
+    "cta": "Explore our services",
+    "beatLead": "Every second",
+    "beatKey": "is planned."
+  },
+  "hud": {
+    "scene": "Scene 01 — NO TIME",
+    "coords": "25.2048° N · 55.2708° E — Dubai",
+    "scroll": "Scroll"
+  },
+  "footer": {
+    "rights": "© {year} NO TIME Creative House.",
+    "stub": "The full footer arrives in a later phase."
+  },
+  "notFound": {
+    "title": "This page doesn't exist.",
+    "back": "Back to home"
+  }
+}

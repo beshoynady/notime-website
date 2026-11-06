@@ -1,1 +1,78 @@
-{}
+{
+  "meta": {
+    "title": "NO TIME Creative House",
+    "description": "بيت إبداعي في دبي للفعاليات والإنتاج الإبداعي والتسويق والحلول الرقمية."
+  },
+  "brand": {
+    "name": "NO TIME",
+    "tagline": "Creative House",
+    "homeLabel": "NO TIME Creative House — الصفحة الرئيسية"
+  },
+  "common": {
+    "skipToContent": "انتقل إلى المحتوى",
+    "aiPlaceholder": "صورة AI · مؤقتة",
+    "illustrative": "صورة توضيحية",
+    "preview": "معاينة",
+    "comingSoon": "قريبًا"
+  },
+  "nav": {
+    "label": "القائمة الرئيسية",
+    "services": "الخدمات",
+    "work": "أعمالنا",
+    "digital": "الحلول الرقمية",
+    "about": "من نحن",
+    "contact": "تواصل معنا"
+  },
+  "header": {
+    "quote": "اطلب عرض سعر"
+  },
+  "langToggle": {
+    "label": "اللغة",
+    "en": "EN",
+    "ar": "ع",
+    "enName": "English",
+    "arName": "العربية"
+  },
+  "megaMenu": {
+    "eyebrow": "الخدمات",
+    "headingLead": "بيت واحد.",
+    "headingKey": "خمس حِرَف.",
+    "intro": "كل ما تحتاجه فعاليتك أو علامتك التجارية، يتولّاه فريق واحد.",
+    "count": "{count, plural, zero {لا خدمات} one {خدمة واحدة} two {خدمتان} few {# خدمات} many {# خدمة} other {# خدمة}}",
+    "viewCategory": "استعرض الفئة",
+    "inDevelopment": "قيد التطوير",
+    "allServices": "جميع الخدمات ({count})"
+  },
+  "mobileMenu": {
+    "open": "افتح القائمة",
+    "close": "أغلق القائمة",
+    "services": "الخدمات"
+  },
+  "whatsapp": {
+    "label": "تحدّث معنا عبر واتساب",
+    "pending": "واتساب · الرقم قريبًا",
+    "prefill": "مرحبًا NO TIME، أودّ الحديث معكم عن مشروع."
+  },
+  "hero": {
+    "titleLine1": "حان وقت",
+    "titleLine2": "الإبداع.",
+    "titleLabel": "حان وقت الإبداع.",
+    "lead": "فعاليات، إنتاج إبداعي، تسويق وحلول رقمية، نخطط لها وننفذها تحت سقف واحد.",
+    "cta": "اكتشف خدماتنا",
+    "beatLead": "كل ثانية",
+    "beatKey": "محسوبة."
+  },
+  "hud": {
+    "scene": "المشهد 01 — NO TIME",
+    "coords": "25.2048° N · 55.2708° E — دبي",
+    "scroll": "مرّر"
+  },
+  "footer": {
+    "rights": "© {year} NO TIME Creative House.",
+    "stub": "التذييل الكامل يصل في مرحلة لاحقة."
+  },
+  "notFound": {
+    "title": "هذه الصفحة غير موجودة.",
+    "back": "العودة إلى الرئيسية"
+  }
+}
