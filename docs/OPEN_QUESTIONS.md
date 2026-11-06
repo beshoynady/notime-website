@@ -17,3 +17,6 @@ Items that need an answer from Rand or the user before the related work can be b
 6. **shadcn/ui component base:** `shadcn init --defaults` chose the `base-nova` style, built on **Base UI** (`@base-ui/react`) rather than Radix. Keep Base UI, or switch to Radix before any components are added? (Easy to change now; harder later.)
 <!-- #7, #8 and #9 were resolved in Phase 1: see DECISIONS D26–D28. -->
 10. **npm audit:** `npm install` reports 12 vulnerabilities (4 low, 8 moderate) in transitive dependencies. Review them before launch. `npm audit fix --force` was **not** run, because it can introduce breaking changes.
+
+## Added in Phase 1
+11. **Services list still uses the prototype draft.** `src/content/services.ts` holds the 30 services (6 per category) from `docs/design/notime-styleguide.html`, all marked `status: "draft"`. Approve this list or paste the final one into `docs/content/services-list.md`; slugs become URLs, so they should be fixed before service pages are built.

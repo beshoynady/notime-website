@@ -336,3 +336,81 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ==========================================================================
+   Interaction base (UX checklist: focus not obscured, tap delay)
+   ========================================================================== */
+html {
+  scroll-padding-top: calc(var(--header-h) + 16px);
+}
+a,
+button,
+summary,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+/* ==========================================================================
+   Designed image placeholders ("paints"), ported from the reference.
+   TODO: replace placeholder — shown wherever an image slot has src: null.
+   ========================================================================== */
+.paint {
+  position: absolute;
+  inset: 0;
+}
+.paint-event {
+  background:
+    radial-gradient(60% 40% at 72% 30%, rgba(234, 212, 171, 0.55), transparent 60%),
+    radial-gradient(30% 22% at 20% 22%, rgba(255, 220, 160, 0.45), transparent 70%),
+    radial-gradient(80% 60% at 50% 100%, rgba(99, 71, 49, 0.95), transparent 70%),
+    linear-gradient(180deg, #1f150e, #3b2a1d 55%, #2a1d13);
+}
+.paint-table {
+  background:
+    radial-gradient(40% 30% at 50% 35%, rgba(245, 233, 211, 0.6), transparent 70%),
+    radial-gradient(70% 20% at 50% 78%, rgba(187, 154, 121, 0.7), transparent 70%),
+    linear-gradient(160deg, #4a3526, #241810);
+}
+.paint-studio {
+  background:
+    conic-gradient(from 200deg at 30% 40%, rgba(234, 212, 171, 0), rgba(234, 212, 171, 0.45), rgba(234, 212, 171, 0) 30%),
+    radial-gradient(30% 50% at 75% 50%, rgba(187, 154, 121, 0.55), transparent 70%),
+    linear-gradient(120deg, #2b1e15, #5b412d 60%, #2e2017);
+}
+.paint-print {
+  background:
+    repeating-linear-gradient(90deg, rgba(245, 233, 211, 0.12) 0 2px, transparent 2px 22px),
+    radial-gradient(50% 50% at 40% 40%, rgba(234, 212, 171, 0.55), transparent 70%),
+    linear-gradient(200deg, #6d4f37, #2e2017);
+}
+.paint-code {
+  background:
+    repeating-linear-gradient(0deg, rgba(234, 212, 171, 0.1) 0 1px, transparent 1px 18px),
+    radial-gradient(40% 40% at 65% 40%, rgba(234, 212, 171, 0.4), transparent 70%),
+    linear-gradient(140deg, #1d140d, #3e2c1f);
+}
+.paint-brand {
+  background:
+    radial-gradient(35% 35% at 35% 50%, rgba(245, 233, 211, 0.55), transparent 70%),
+    radial-gradient(25% 25% at 70% 40%, rgba(187, 154, 121, 0.6), transparent 70%),
+    linear-gradient(60deg, #3a291c, #634731);
+}
+
+/* Small label on placeholders and AI images ("AI image · placeholder", "Illustrative"). */
+.image-tag {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  padding: 5px 8px;
+  border-radius: var(--radius-tag);
+  background: rgba(46, 32, 23, 0.72);
+  color: var(--color-champagne);
+  border: 1px solid rgba(234, 212, 171, 0.25);
+}
+.image-tag:lang(ar) {
+  font-size: 0.75rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
