@@ -62,7 +62,7 @@ This is Next.js 16. Its APIs differ from older versions. Before using any Next.j
 
 ## Centralized config
 
-- Contact info, social links, and the WhatsApp number live in **one** config file in `src/lib/`. Never duplicate them in components.
+- Contact info, social links, and the WhatsApp number live in **one** config file: `src/config/contact.ts`. Never duplicate them in components. (Changed from `src/lib/` on 2026-11-06, see DECISIONS D11.)
 - Services, work/projects, and products live in data files in `src/content/`. One template per content type, driven by its data.
 - Secrets and environment-specific values come from env vars (see `.env.example`). Never commit `.env*` files other than `.env.example`.
 - Keep the content layer CMS-ready (a future Sanity migration should only swap the data source, not the components).
@@ -94,13 +94,24 @@ src/
   components/ui/                # shadcn/ui primitives
   components/motion/            # reusable animation wrappers
   content/                      # services, work, products data files
-  lib/                          # utilities, site config
+  config/                       # contact.ts (email, WhatsApp, socials)
+  lib/                          # utilities, pure logic, motion tokens
   i18n/                         # next-intl routing/request config
   messages/                     # en.json, ar.json
 public/images/{brand,work,services,ai}/
 public/video/
 docs/
 ```
+
+## Skill and plugin installation
+
+- Install every skill or plugin **globally (user scope)**, never project scope.
+  - Skills go in `~/.claude/skills/`, never `.claude/skills/` inside this repo.
+  - Plugins: use the user scope (`/plugin install <name>` with `--scope user` where the command supports it).
+  - CLI installers (e.g. `npx skills add ...`): use the global flag (`-g` / `--global`).
+- After installing, confirm the location with `/find-skills` or by listing `~/.claude/skills/`, and report it.
+- If a skill can only be installed per project, stop and ask before installing it.
+- Never commit skill files into this repo.
 
 ## Commands
 

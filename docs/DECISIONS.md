@@ -99,3 +99,21 @@ Environment: Node v24.21.0, npm 11.19.0, Windows 10.
 | P20 | Centralized config for contact, social links, and WhatsApp; content in `src/content/` | Single source of truth. |
 | P21 | Performance: `next/image` AVIF/WebP + lazy loading, video loaded in view, mobile Lighthouse 90+ | Luxury visuals without hurting speed or SEO. |
 | P22 | Non-goals: no talent/influencer section, no pricing, no fake claims, no agency comparisons; nqshmedia.com is a structural reference only | Brand positioning and honesty. |
+
+## Phase 1 decisions (approved with `docs/plans/phase-1.md` — 2026-11-06)
+
+| # | Decision | Reason |
+|---|---|---|
+| D11 | Contact, social, and WhatsApp config lives in `src/config/contact.ts` (CLAUDE.md rule updated from `src/lib/`) | The Phase 1 brief names this path; one single source of truth either way. |
+| D12 | Vitest (unit) and @playwright/test (e2e, screenshots, recording) added as devDependencies only; Playwright uses the installed Chrome (`channel: "chrome"`), no browser downloads | No test runner existed; TDD for pure logic is a project rule. |
+| D13 | i18n: keep `cacheComponents` + `partialPrefetching` on; root layout at `app/[locale]/layout.tsx` with `generateStaticParams`; locale read via `next/root-params` in `i18n/request.ts`; `src/proxy.ts` runs next-intl middleware. Fallback (if root-params fails in next-intl 4.14.9): `requestLocale` + `setRequestLocale`, logged here | next-intl 4.14 deprecates `requestLocale`/`setRequestLocale` in favour of root-params; keeps the static shell. Resolves OPEN_QUESTIONS #9 once Task 2's build passes. |
+| D14 | Hero atmosphere uses Canvas 2D (not WebGL/OGL) | ≤170 sprites + 4 rays are cheap in 2D; WebGL adds weight and a context-loss path for no visible gain. Revisit only if mid-range Android < 50 fps. |
+| D15 | Hero text and clock are server-rendered and visible at rest; intro-only states apply under `html[data-js]:not([data-reduced])` | Content must survive JS failure; protects LCP. |
+| D16 | Animation ownership by element: GSAP = scroll, hero, tone, reveal primitives, header-shell intro fade; Motion = mega/mobile menus, magnetic, cursor, button micro-states; CSS = marquee, grain, pulses | Makes "never both on one element" easy to audit. |
+| D17 | Text splitting via the GSAP SplitText plugin (`autoSplit`, `aria: "auto"`): chars in EN, words in AR | Arabic letters must stay joined; plugin handles resize and ARIA. |
+| D18 | Content shape: `Localized<T>`, typed arrays behind getters in `src/content/index.ts`; images referenced by slot id in `src/content/images.ts` | CMS swap point; generated images drop in by slot id. |
+| D19 | LCP rule: the largest text element paints at first render and is never at opacity 0; on mobile the title reveal starts at t=0 (mask rise only) and the lead is visible from frame one. Result is measured and logged here | Approved at checkpoint 1; LCP < 2.5s on mobile. |
+| D20 | Styleguide contrast badges show computed WCAG ratios (e.g. espresso/ivory ≈ 13.1:1), not the prototype's labels (13.6) | The prototype's numbers were not computed. |
+| D21 | Execution is native (this session); the end-of-phase code review is done by a fresh subagent that has not seen the build | Tasks share interfaces tightly; an independent reviewer avoids self-review. |
+| D22 | Skills and plugins are installed globally (user scope) only; never committed to the repo (rule in CLAUDE.md) | User's permanent rule. |
+| D23 | AI image generation is on hold until checkpoint 4 | User instruction. |

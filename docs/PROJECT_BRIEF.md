@@ -19,6 +19,7 @@
 
 - **Fonts:** Montserrat (English), Alexandria (Arabic).
 - **Logo text:** "NO TIME Creative House".
+- **Approved visual and motion reference:** [docs/design/notime-styleguide.html](design/notime-styleguide.html), a vanilla-JS prototype. Port its intent; do not copy its code. Phase 1 plan: [docs/plans/phase-1.md](plans/phase-1.md).
 
 ## 3. Languages
 
