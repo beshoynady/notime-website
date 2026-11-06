@@ -1,0 +1,364 @@
+/* ==========================================================================
+   Cinematic hero. Static frame first: everything here renders complete without JS.
+   "Motion mode" = html[data-js]:not([data-reduced]). Intro-only states additionally
+   need #hero[data-hero-intro] and no html[data-intro-seen] (set by the boot script on
+   a repeat visit in the same session).
+   ========================================================================== */
+.hero {
+  --lb-top: calc(var(--header-h) + 8px + env(safe-area-inset-top, 0px));
+  --lb-bottom: clamp(44px, 8svh, 84px);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  /* At rest (no JS / reduced motion) the hero is not pinned: row 1 is one viewport with
+     the title block centred in it; the second beat follows in row 2. */
+  display: grid;
+  grid-template-rows: minmax(max(100svh, 620px), auto) auto;
+  padding-block-end: calc(var(--lb-bottom) + 88px);
+  color: var(--color-ivory);
+  /* Same gradient the canvas paints, so the frame is complete without it. */
+  background:
+    radial-gradient(ellipse 95% 80% at 50% 42%, #5c412b 0%, #2e2017 42%, #120c07 100%),
+    #1a110b;
+}
+html[data-js]:not([data-reduced]) .hero {
+  grid-template-rows: none;
+  place-content: center;
+  height: 100svh;
+  min-height: 620px;
+  padding-block: calc(var(--lb-top) + 16px) calc(var(--lb-bottom) + 16px);
+}
+
+/* 1 · Canvas (HeroScene) */
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* 2 · Vignette */
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(110% 85% at 50% 46%, transparent 38%, rgba(13, 8, 5, 0.88));
+}
+
+/* 3 · Clock */
+.hero-clock-wrap {
+  --clock: min(76vmin, 700px);
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 2;
+  /* centred on the first viewport (row 1), behind the title */
+  margin: calc(max(50svh, 310px) - var(--clock) / 2) auto 0;
+  inline-size: var(--clock);
+  block-size: var(--clock);
+  pointer-events: none;
+  perspective: 900px;
+}
+html[data-js]:not([data-reduced]) .hero-clock-wrap {
+  inset: 0;
+  margin: auto;
+}
+.hero-clock {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+}
+.hero-clock-ring {
+  fill: none;
+  stroke: rgba(234, 212, 171, 0.5);
+  stroke-width: 1;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+.hero-clock-ring2 {
+  fill: none;
+  stroke: rgba(234, 212, 171, 0.14);
+  stroke-width: 1;
+  stroke-dasharray: 1 7;
+}
+.hero-clock-ticks line {
+  stroke: rgba(234, 212, 171, 0.24);
+  stroke-width: 1;
+}
+.hero-clock-ticks line.major {
+  stroke: rgba(234, 212, 171, 0.6);
+}
+.hero-clock-hand {
+  stroke: var(--color-champagne);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+}
+.hero-clock-hub {
+  fill: var(--color-champagne);
+}
+
+/* 4 · Film grain (CSS-owned, D16) */
+.hero-grain {
+  position: absolute;
+  inset: -60%;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.1;
+  mix-blend-mode: screen;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  animation: hero-grain 1.2s steps(6) infinite;
+}
+@keyframes hero-grain {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  17% {
+    transform: translate(-4%, 3%);
+  }
+  33% {
+    transform: translate(3%, -5%);
+  }
+  50% {
+    transform: translate(-6%, -2%);
+  }
+  67% {
+    transform: translate(5%, 4%);
+  }
+  83% {
+    transform: translate(-2%, 6%);
+  }
+}
+
+/* 5 · Content */
+.hero-content {
+  position: relative;
+  z-index: 4;
+  align-self: center;
+  padding-block: calc(var(--lb-top) + 24px) 24px;
+  display: grid;
+  justify-items: center;
+  gap: clamp(22px, 3vw, 34px);
+  inline-size: 100%;
+  text-align: center;
+}
+.hero-title {
+  margin: 0;
+  font-size: clamp(3.2rem, 12.5vw, 11.5rem);
+  font-weight: 200;
+  line-height: 0.9;
+  text-shadow: 0 4px 40px rgba(13, 8, 5, 0.55);
+  text-wrap: nowrap;
+}
+.hero-title:lang(ar) {
+  line-height: 1.18;
+}
+.hero-line {
+  display: block;
+  padding-block-end: 0.06em;
+}
+.hero-line:first-child {
+  letter-spacing: 0.04em;
+  color: var(--color-ivory);
+}
+.hero-line b {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--color-champagne);
+}
+.hero-title:lang(ar) .hero-line,
+.hero-title:lang(ar) .hero-line b {
+  letter-spacing: 0;
+}
+/* Mask for the char/word rise; motion mode only, so the static frame keeps its full shadow. */
+html[data-js]:not([data-reduced]) .hero-line {
+  overflow: hidden;
+}
+html[data-js]:not([data-reduced]) .hero-content {
+  padding-block: 0;
+}
+.hero-sub {
+  display: grid;
+  justify-items: center;
+  gap: 24px;
+  max-inline-size: 46ch;
+}
+.hero-lead {
+  margin: 0;
+  text-align: center;
+  text-wrap: balance;
+  color: rgba(245, 233, 211, 0.82);
+  text-shadow: 0 2px 24px rgba(13, 8, 5, 0.7);
+}
+
+/* 6 · Second beat: in flow below the CTA at rest; a centred overlay revealed on scroll in motion mode. */
+.hero-beat {
+  position: relative;
+  z-index: 5;
+  margin: 0 auto;
+  max-inline-size: 14ch;
+  padding-inline: 16px;
+  font-size: clamp(2.1rem, 6vw, 5.2rem);
+  font-weight: 200;
+  line-height: 1.08;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--color-ivory);
+  pointer-events: none;
+}
+.hero-beat:lang(ar) {
+  line-height: 1.35;
+}
+.hero-beat b {
+  font-weight: 600;
+  color: var(--color-champagne);
+}
+html[data-js]:not([data-reduced]) .hero-beat {
+  position: absolute;
+  inset: 0;
+  block-size: fit-content;
+  margin: auto;
+  opacity: 0; /* the controller reveals it word by word on scroll */
+}
+
+/* 7 · Letterbox bars, gold hairlines on their inner edges */
+.hero-letterbox {
+  position: absolute;
+  inset-inline: 0;
+  z-index: 6;
+  background: var(--color-night);
+  pointer-events: none;
+}
+.hero-letterbox.top {
+  top: 0;
+  block-size: var(--lb-top);
+  border-block-end: 1px solid rgba(234, 212, 171, 0.12);
+}
+.hero-letterbox.bottom {
+  bottom: 0;
+  block-size: var(--lb-bottom);
+  border-block-start: 1px solid rgba(234, 212, 171, 0.12);
+}
+
+/* 8 · HUD */
+.hero-hud {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  pointer-events: none;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(234, 212, 171, 0.72);
+}
+.hero-hud:lang(ar) {
+  font-size: 0.76rem;
+  letter-spacing: 0.02em;
+}
+.hero-hud > div {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero-hud-tl,
+.hero-hud-tr {
+  top: calc(var(--lb-top) + 20px);
+}
+.hero-hud-bl,
+.hero-hud-br {
+  bottom: calc(var(--lb-bottom) + 20px);
+}
+.hero-hud-tl,
+.hero-hud-bl {
+  inset-inline-start: max(var(--gutter-start), 4vw);
+}
+.hero-hud-tr,
+.hero-hud-br {
+  inset-inline-end: max(var(--gutter-end), 4vw);
+}
+.hero-hud-tr {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.2em;
+}
+@media (max-width: 600px) {
+  .hero-hud-bl {
+    display: none;
+  }
+}
+.hero-rec {
+  inline-size: 6px;
+  block-size: 6px;
+  border-radius: 50%;
+  background: var(--color-champagne);
+  animation: hero-rec 1.6s ease-in-out infinite;
+}
+@keyframes hero-rec {
+  50% {
+    opacity: 0.25;
+  }
+}
+.hero-cue {
+  position: relative;
+  inline-size: 1px;
+  block-size: 38px;
+  overflow: hidden;
+  background: rgba(234, 212, 171, 0.25);
+}
+.hero-cue::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0;
+  inline-size: 1px;
+  block-size: 40%;
+  background: var(--color-champagne);
+  transform: translateY(-100%);
+  animation: hero-cue 2s var(--ease-expo-out) infinite;
+}
+@keyframes hero-cue {
+  to {
+    transform: translateY(250%);
+  }
+}
+
+/* 9 · Shutters: only while the first-visit intro is pending (motion mode). */
+.hero-shutter {
+  position: absolute;
+  inset-inline: 0;
+  z-index: 8;
+  display: none;
+  block-size: 50.5%;
+  background: var(--color-night);
+  pointer-events: none;
+}
+.hero-shutter.top {
+  top: 0;
+}
+.hero-shutter.bottom {
+  bottom: 0;
+}
+/* Failsafes: if the controller never runs (e.g. a chunk fails to load), the shutters lift
+   and the header returns after 5s. CSS animations outrank GSAP's inline styles, but the
+   intro has finished well before 5s and then removes [data-hero-intro], so they never fight. */
+html[data-js]:not([data-reduced]):not([data-intro-seen]) #hero[data-hero-intro] .hero-shutter {
+  display: block;
+  animation: hero-failsafe-hide 0.01s 5s forwards;
+}
+html[data-js]:not([data-reduced]):not([data-intro-seen]):has(#hero[data-hero-intro]) [data-header-shell] {
+  opacity: 0; /* opacity only: the header stays focusable during the intro */
+  animation: hero-failsafe-show 0.01s 5s forwards;
+}
+@keyframes hero-failsafe-hide {
+  to {
+    visibility: hidden;
+  }
+}
+@keyframes hero-failsafe-show {
+  to {
+    opacity: 1;
+  }
+}

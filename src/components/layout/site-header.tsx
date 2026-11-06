@@ -17,7 +17,10 @@ export function SiteHeader() {
   const t = useTranslations();
   const menu = getMenuData(useLocale() as Locale);
   return (
-    <div data-header-shell="">
+    // relative z-50: the hero intro fades this shell, and opacity < 1 creates a stacking
+    // context; without its own level the shell would sit under #stage, so the hero would
+    // cover the header and catch its clicks.
+    <div data-header-shell="" className="relative z-50">
       <a
         href="#main"
         className="text-eyebrow fixed start-4 top-3 z-[70] -translate-y-24 rounded-[var(--radius)] bg-champagne px-4 py-3 text-espresso focus-visible:translate-y-0"

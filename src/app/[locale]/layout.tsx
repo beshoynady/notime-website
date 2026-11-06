@@ -20,7 +20,9 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
  * intro-only states (shutters, hidden chars) apply only when they can be animated
  * away. Without JS the page renders complete and static (DECISIONS D15).
  */
-const BOOT_SCRIPT = `(function(d){d.dataset.js="";try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)d.dataset.reduced=""}catch(e){}})(document.documentElement)`;
+// Before first paint: data-js (JS runs), data-reduced (reduced motion), data-intro-seen
+// (the hero intro already played this session, so no shutters or hidden header).
+const BOOT_SCRIPT = `(function(d){d.dataset.js="";try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)d.dataset.reduced=""}catch(e){}try{if(sessionStorage.getItem("nt-intro"))d.dataset.introSeen=""}catch(e){}})(document.documentElement)`;
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
