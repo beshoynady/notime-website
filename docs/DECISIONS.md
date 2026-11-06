@@ -117,3 +117,5 @@ Environment: Node v24.21.0, npm 11.19.0, Windows 10.
 | D21 | Execution is native (this session); the end-of-phase code review is done by a fresh subagent that has not seen the build | Tasks share interfaces tightly; an independent reviewer avoids self-review. |
 | D22 | Skills and plugins are installed globally (user scope) only; never committed to the repo (rule in CLAUDE.md) | User's permanent rule. |
 | D23 | AI image generation is on hold until checkpoint 4 | User instruction. |
+| D24 | `@types/node` raised from `^20` to `^24` (24.19.2) | Vitest 5.1 requires `@types/node` ≥ 22 as a peer; the runtime is Node v24.21.0, so the types now match it. Avoided `--legacy-peer-deps`. |
+| D25 | Test tooling installed: vitest 5.1.0, @playwright/test 1.65.0 (no browsers downloaded; `PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1`). npm 11 reports blocked install scripts for `@parcel/watcher` and `@swc/core` (pre-existing transitive deps); left blocked | Nothing in Phase 1 needs those native builds. Revisit if a build step fails because of them. |
