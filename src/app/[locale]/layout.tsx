@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { SiteHeader } from "@/components/layout/site-header";
 import { DirectionProvider } from "@/components/providers/direction-provider";
 import { LenisProvider } from "@/components/providers/lenis-provider";
 import { ToneController } from "@/components/providers/tone-controller";
@@ -51,6 +52,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
         <NextIntlClientProvider>
           <DirectionProvider direction={dir}>
             <LenisProvider>
+              <SiteHeader />
               <div id="stage">{children}</div>
               <ToneController />
             </LenisProvider>

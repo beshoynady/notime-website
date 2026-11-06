@@ -27,7 +27,9 @@ export function ToneController() {
       if (!stage) return;
       const duration = prefersReducedMotion() ? 0 : 0.9;
       const headerH = header?.offsetHeight ?? 68;
-      const sections = gsap.utils.toArray<HTMLElement>("section[data-tone]");
+      // Only the visible page: under cacheComponents, pages left behind by a client
+      // navigation stay in the DOM hidden (React Activity) and must not get triggers.
+      const sections = gsap.utils.toArray<HTMLElement>("#stage section[data-tone]").filter((s) => s.checkVisibility());
 
       sections.forEach((section) => {
         const tone = (section.dataset.tone as Tone) ?? "dark";

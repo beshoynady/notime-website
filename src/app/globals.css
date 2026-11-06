@@ -10,6 +10,8 @@
 /* RTL / LTR variants keyed off <html dir>. */
 @custom-variant rtl (&:where([dir="rtl"], [dir="rtl"] *));
 @custom-variant ltr (&:where([dir="ltr"], [dir="ltr"] *));
+/* Arabic-only adjustments (no tracking, no uppercase, one step larger). */
+@custom-variant lang-ar (&:lang(ar));
 /* Tone variants keyed off the nearest data-tone ancestor. */
 @custom-variant tone-dark (&:where([data-tone="dark"], [data-tone="dark"] *));
 @custom-variant tone-light (&:where([data-tone="light"], [data-tone="light"] *));
@@ -490,4 +492,54 @@ section[data-tone="light"] {
   [dir="rtl"] .marquee-track {
     animation: none;
   }
+}
+
+/* ==========================================================================
+   Header tones. Transparent over the hero; tone-aware after it.
+   Without JS (no ToneController) it falls back to a solid espresso bar.
+   ========================================================================== */
+.safe-top-strip {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 60;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--color-espresso);
+}
+#site-header {
+  color: var(--color-ivory);
+  border-block-end: 1px solid transparent;
+  transition:
+    background-color 0.3s var(--ease-expo-out),
+    color 0.3s var(--ease-expo-out),
+    border-color 0.3s var(--ease-expo-out);
+}
+html:not([data-js]) #site-header {
+  background: rgba(46, 32, 23, 0.94);
+}
+#site-header[data-header-tone="light"] {
+  background: rgba(245, 233, 211, 0.86);
+  color: var(--color-espresso);
+  border-color: var(--color-line-light);
+  backdrop-filter: blur(10px);
+}
+#site-header[data-header-tone="dark"] {
+  background: rgba(46, 32, 23, 0.82);
+  color: var(--color-ivory);
+  border-color: var(--color-line-dark);
+  backdrop-filter: blur(10px);
+}
+#site-header[data-menu-open] {
+  background: var(--color-espresso);
+  color: var(--color-ivory);
+  border-color: var(--color-line-dark);
+}
+.nav-link {
+  opacity: 0.78;
+  transition: opacity 0.3s var(--ease-expo-out);
+}
+.nav-link:hover,
+.nav-link:focus-visible,
+.nav-link[aria-expanded="true"] {
+  opacity: 1;
 }
