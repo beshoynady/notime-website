@@ -8,6 +8,10 @@ const external = process.env.PW_BASE_URL;
 export default defineConfig({
   testDir: "./e2e",
   fullyParallel: true,
+  // One worker: the suite has timing-sensitive checks (CLS, intro failsafe, menu timing),
+  // and parallel browsers starved this dev machine into timeouts. Measured: all green in
+  // ~60 s with 1 worker vs 6 timeouts with the default. Override with --workers.
+  workers: 1,
   reporter: "list",
   use: {
     baseURL: external ?? `http://localhost:${PORT}`,

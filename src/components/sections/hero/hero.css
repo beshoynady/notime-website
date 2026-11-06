@@ -37,6 +37,8 @@ html[data-js]:not([data-reduced]) .hero {
   display: block;
   inline-size: 100%;
   block-size: 100%;
+  /* Transparent canvas lights the .hero gradient additively (HeroScene). */
+  mix-blend-mode: plus-lighter;
 }
 
 /* 2 · Vignette */
@@ -173,9 +175,15 @@ html[data-js]:not([data-reduced]) .hero-clock-wrap {
 .hero-title:lang(ar) .hero-line b {
   letter-spacing: 0;
 }
-/* Mask for the char/word rise; motion mode only, so the static frame keeps its full shadow. */
+/* Mask for the char/word rise; motion mode only. The mask would clip the 40px text-shadow
+   into hard-edged boxes, so in motion mode the same shadow moves to the title as a
+   drop-shadow filter, computed from the already-masked lines. */
 html[data-js]:not([data-reduced]) .hero-line {
   overflow: hidden;
+}
+html[data-js]:not([data-reduced]) .hero-title {
+  text-shadow: none;
+  filter: drop-shadow(0 4px 40px rgba(13, 8, 5, 0.55));
 }
 html[data-js]:not([data-reduced]) .hero-content {
   padding-block: 0;

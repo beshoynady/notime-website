@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { ButtonLink } from "@/components/ui/button";
 import { SERVICES_HREF } from "@/components/layout/nav-links";
 import { HeroClock } from "./hero-clock";
+import { HeroController } from "./hero-controller";
 import { HeroHud } from "./hero-hud";
 
 /**
@@ -9,7 +10,7 @@ import { HeroHud } from "./hero-hud";
  * at rest (DECISIONS D15); intro-only states (shutters, hidden header, hidden beat) are
  * CSS-gated under `html[data-js]:not([data-reduced])` on `[data-hero-intro]`.
  *
- * Layers, back to front: 1 canvas (HeroScene, mounted by the controller) · 2 vignette ·
+ * Layers, back to front: 1 canvas (HeroScene, mounted client-only by HeroController) · 2 vignette ·
  * 3 clock · 4 grain · 5 content · 6 second beat · 7 letterbox · 8 HUD · 9 shutters.
  */
 export async function Hero() {
@@ -25,6 +26,7 @@ export async function Hero() {
       data-hero-intro=""
       aria-labelledby="hero-title"
     >
+      <HeroController />
       <div className="hero-vignette" aria-hidden="true" />
       <div className="hero-clock-wrap" aria-hidden="true">
         <HeroClock />

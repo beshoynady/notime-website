@@ -396,10 +396,21 @@ particleCount(w: number, h: number): number;          // round(clamp(70, 170, w*
     - Resize is debounced (150 ms). Resize only re-seeds when the particle count changes by more than 10%, otherwise it rescales positions.
   - **Reduced motion:** one draw, then the hand and timecode update once per second through `setInterval`, and nothing else moves.
 
-- [ ] **Step 1:** Build it. Profile in Chrome DevTools with the Performance panel, 4× CPU throttle, 390px: hold a steady frame rate (target ≥ 50 fps) and record the result in the plan's notes. On desktop, no long tasks over 50 ms after the intro.
-- [ ] **Step 2:** Commit `feat(hero): canvas atmosphere with depth particles, rays, flare, perf guards`.
+- [x] **Step 1:** Build it. Profile in Chrome DevTools with the Performance panel, 4× CPU throttle, 390px: hold a steady frame rate (target ≥ 50 fps) and record the result in the plan's notes. On desktop, no long tasks over 50 ms after the intro.
+- [x] **Step 2:** Commit `feat(hero): canvas atmosphere with depth particles, rays, flare, perf guards`.
+
+**Notes (Task 10 profile, 2026-11-07, production build, Playwright + installed Chrome, rAF sampling):**
+- Pixel 7 (412×839, DPR 2.625 → backing scale 1.5, 618×1259), 4× CPU throttle: EN 60 fps, AR 52 fps. Target ≥ 50 met.
+- Desktop 1440×900 on an Intel HD 5500: before the D39 changes 31–38 fps, with long tasks of 50–79 ms (EN); after them 45–53 fps and no long tasks. Hiding the canvas gives 60, so the canvas is the whole cost (fill rate).
+- The canvas pauses while the menu is open (0 timecode writes in 1.5 s), resumes on close (36–37 writes), and pauses off-screen (0 writes).
+- Numbers are noisy on this shared machine (the user's Chrome was running); calm runs are quoted.
+- Found: the line masks clipped the title text-shadow into boxes; fixed (D39).
+- Found: `display: optional` falls back on most cold loads; re-decided in Task 11 (D38 amendment).
+
 
 ### Task 11: Hero intro and scroll timelines
+
+**Added 2026-11-07, fonts (D38 amendment):** decide `optional` vs `swap`. Candidate: `swap`, with the first-visit intro revealing the title after `document.fonts.ready` (with a timeout) so the swap happens behind the shutters. Repeat visits have the font cached. Verify with `cls.spec.ts` and with cold-load face checks (`fontcheck`: title width per face) on `/en` and `/ar`.
 
 Use `gsap-framer-scroll-animation` for the ScrollTrigger pin.
 

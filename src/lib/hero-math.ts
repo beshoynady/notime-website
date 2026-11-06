@@ -30,3 +30,16 @@ export function tickGeometry(i: number): Tick {
 export function particleCount(w: number, h: number): number {
   return Math.round(Math.min(170, Math.max(70, (w * h) / 8500)));
 }
+
+/** Canvas backing-store budget in device pixels (the atmosphere is soft; fill rate is the cost). */
+const PIXEL_BUDGET = 900_000;
+
+/**
+ * Backing-store scale for the hero canvas: the DPR, capped at 1.5 below 900px wide and
+ * 2 above, then lowered (to a floor of 0.5) so w × h × scale² stays within ~0.9 MP.
+ */
+export function canvasScale(w: number, h: number, dpr: number): number {
+  const capped = Math.min(dpr || 1, w < 900 ? 1.5 : 2);
+  const fit = Math.sqrt(PIXEL_BUDGET / (w * h));
+  return Math.max(0.5, Math.floor(Math.min(capped, fit) * 100) / 100);
+}
