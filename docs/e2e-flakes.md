@@ -10,3 +10,4 @@ Rules (D50):
 | Date | Run | Test | Outcome | Notes |
 |---|---|---|---|---|
 | 2026-11-07 | Full suite, before CP5 (no retries yet) | `cls` (en, ar), `hero-intro` (3 desktop, 1 mobile), `locale-switch` (2), `mega-keyboard` (4) | fail ×11 | Run took 16.3 min (normal ~3). All passed when rerun alone (27 s). Counted as load failures, not passes. |
+| 2026-11-07 | Full suite, before CP6 (workers 1, retries 1, quiet machine) | all | pass 39 · flaky 0 · fail 0 · skipped 19 | 3.5 min including the build. The 19 skips are viewport-specific (desktop-only or mobile-only tests). |
