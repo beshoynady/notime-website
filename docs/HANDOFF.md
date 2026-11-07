@@ -124,9 +124,9 @@ No file is half-written.
      - the ToneController fix (D41);
      - the `ignoreMobileResize` semantics (a height-only resize keeps the pin spacer; an orientation change re-measures);
      - OQ #15 and OQ #16.
-4. **Task 11b: profile extraction and content inventory** from `docs/brand/company-profile-2026.pdf` (38 pages). Full spec: `docs/plans/phase-1.md` → Task 11b.
-   - Use PyMuPDF and find a real Python first: the `python` on PATH is the Windows Store stub. Try `py -3`.
-   - Extract to `public/images/work/raw/`, skipping pages 20 and 34–36.
+4. **Task 11b: profile extraction and content inventory** (done 2026-11-07; see the plan's status line, D47 and D48). From `docs/brand/company-profile-2026.pdf` (38 pages). Full spec: `docs/plans/phase-1.md` → Task 11b.
+   - Tool: MuPDF.js in %TEMP%, via `scripts/extract-profile.mjs` (D47). Never add it to `package.json`.
+   - Extract to `public/images/work/raw/` (gitignored), skipping pages 20, 30 and 34–37. Then run `scripts/curate-profile.mjs`.
    - Write `docs/content/profile-inventory.md`, `profile-copy.md` and `services-reconciliation.md`.
    - Do not change `services.ts` until the user confirms.
    - Case studies use verified figures only.
@@ -161,7 +161,7 @@ All of them are in `docs/OPEN_QUESTIONS.md`:
 - added at handoff: **#15** (hero line "TO CREATE" vs the profile's "TO START") and **#16** (the `.gitignore` ` /docs` entry);
 - #7–#9 are resolved (D26–D28).
 
-Task 11b will add its permission questions when it runs. The list is in the plan: client names and logos, identifiable people, page-20 media outlets, government portals.
+Task 11b added #17–#21: client names and logos, identifiable people, press and media outlets, the government portals, and original files. #14 and #16 are resolved (D45, D46).
 
 ## Known issues and gotchas
 

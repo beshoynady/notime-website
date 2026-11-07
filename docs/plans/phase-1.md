@@ -489,6 +489,15 @@ Source: `docs/brand/company-profile-2026.pdf` (38 pages), the client's official 
 
 Report the inventory summary and the reconciliation table at checkpoint 4.
 
+**Status (2026-11-07): done.**
+
+- **Tool:** MuPDF.js instead of PyMuPDF (D47).
+- **Skipped pages:** 20, 30 and 34–37. The influencer roster runs to page 37, and pages 30 and 34 are talent booking (D48).
+- **Images:** 98 extracted to the gitignored `raw/`; 32 curated by `scripts/curate-profile.mjs`.
+- **Docs written:** `profile-inventory.md`, `profile-copy.md`, `services-reconciliation.md`, and `case-studies.md` (step 4).
+- **Open questions:** #17–#21 added; checklist rows 15–19.
+- **Unchanged:** `services.ts` and `services-list.md`.
+
 ---
 
 ### Task 12: `/[locale]/styleguide`
