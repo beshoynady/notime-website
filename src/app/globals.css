@@ -345,8 +345,16 @@
 /* ==========================================================================
    Interaction base (UX checklist: focus not obscured, tap delay)
    ========================================================================== */
+/* Native fragment scrolls (before hydration, without JS, focus into view) stop where the
+   anchor utility lands: the target's top at the header's bottom (D53). */
 html {
-  scroll-padding-top: calc(var(--header-h) + 16px);
+  scroll-padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px));
+}
+/* Headings focused by the anchor utility (tabindex="-1"): focus moves, no outline appears. */
+h1[tabindex="-1"]:focus,
+h2[tabindex="-1"]:focus,
+h3[tabindex="-1"]:focus {
+  outline: none;
 }
 a,
 button,

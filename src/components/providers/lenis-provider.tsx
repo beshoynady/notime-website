@@ -10,7 +10,12 @@ import { afterFirstPaint } from "@/lib/idle";
 export interface LenisControls {
   stop(): void;
   start(): void;
-  scrollTo(target: number | string | HTMLElement, opts?: { offset?: number; immediate?: boolean }): void;
+  scrollTo(
+    target: number | string | HTMLElement,
+    opts?: { offset?: number; immediate?: boolean; force?: boolean; onComplete?: () => void },
+  ): void;
+  /** True while Lenis runs (off under reduced motion, and until the first paint). */
+  readonly active: boolean;
 }
 
 const LenisContext = createContext<LenisControls | null>(null);
@@ -57,9 +62,13 @@ export function LenisProvider({ children }: { children: ReactNode }) {
       stop: () => lenisRef.current?.stop(),
       start: () => lenisRef.current?.start(),
       scrollTo: (target, opts) => {
-        if (lenisRef.current) lenisRef.current.scrollTo(target, opts);
-        else if (typeof target === "number") window.scrollTo({ top: target });
+        if (lenisRef.current) return lenisRef.current.scrollTo(target, opts);
+        if (typeof target === "number") window.scrollTo({ top: target, behavior: "instant" });
         else (typeof target === "string" ? document.querySelector(target) : target)?.scrollIntoView();
+        opts?.onComplete?.();
+      },
+      get active() {
+        return lenisRef.current !== null;
       },
     }),
     [],

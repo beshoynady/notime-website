@@ -11,7 +11,7 @@ import { CategoryCards } from "./category-cards";
 export async function Categories() {
   const t = await getTranslations("categories");
   return (
-    <section id="services" data-tone="light" aria-labelledby="services-title" className="section-pad scroll-mt-[var(--header-h)]">
+    <section id="services" data-tone="light" aria-labelledby="services-title" className="section-pad">
       <div className="frame">
         <header className="cats-head">
           <div>
