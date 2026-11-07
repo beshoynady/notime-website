@@ -27,6 +27,19 @@ Status: **for review at Checkpoint 4.** Live in `src/messages/{en,ar}.json`, gua
 
 ---
 
+## Hero (`hero.*`)
+
+The brand line is **"IT'S TIME TO START." / «حان وقت البداية.»** (DECISIONS D54, 2026-11-07). It is set by `HERO_LINE = "start"` in `src/config/hero.ts`. The reference's "TO CREATE." / «الإبداع.» stays in the messages for comparison only.
+
+| Key | EN | AR | Why this AR phrasing |
+|---|---|---|---|
+| titleLine1 | IT'S TIME | حان وقت | Unchanged anchor line. |
+| title.start.line2 | TO START. | البداية. | The user's wording. «البداية» is the noun "the beginning", not «الانطلاق» ("the launch"), which leans towards product launches. |
+| title.start.label | It's time to start. | حان وقت البداية. | The heading's accessible name, in sentence case, so screen readers don't spell out the capitals. |
+| beatLead + beatKey | Every second is planned. | كل ثانية محسوبة. | Unchanged second beat. Checked against the new line at 1440 and 390. |
+
+---
+
 ## About (`about.*`)
 
 | Key | EN | AR | Why this AR phrasing |

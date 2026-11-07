@@ -21,9 +21,9 @@ Items that need an answer from Rand or the user before the related work can be b
 ## Added in Phase 1
 11. **Services list still uses the prototype draft.** `src/content/services.ts` holds the 30 services (6 per category) from `docs/design/notime-styleguide.html`, all marked `status: "draft"`. Approve this list or paste the final one into `docs/content/services-list.md`; slugs become URLs, so they should be fixed before service pages are built.
 12. **Dark-background logo.** Need a dark-background logo version from the designer (tagline in taupe or champagne) plus SVG/AI files for all variants. In the supplied dark-bg PNGs (`logo-4`, `logo-2`) the cocoa parts sit on espresso at about 1.9:1: the "CREATIVE HOUSE" tagline in both, plus the "NO" mark in `logo-4` and "TIME" in `logo-2`. The tagline is hard to read at header size. The site uses the files as supplied (never recoloured) until the designer sends a fixed version.
-13. **Gotham web licence.** The brand guide lists Gotham as primary and Montserrat as secondary. Will the client buy a Gotham web licence? If yes, swap it in for display and headings. Until then Montserrat stays the site's primary face (DECISIONS D36).
+<!-- #13 (Gotham web licence) was closed on 2026-11-07: Gotham is dropped, Montserrat stays primary; see DECISIONS D55. -->
 <!-- #14 (font loading) was resolved after Checkpoint 3: `swap`, see DECISIONS D45. -->
-15. **Hero line: "IT'S TIME TO CREATE." or the profile's "IT'S TIME TO START."?** The 2026 company profile uses "IT'S TIME TO START." as its official line; the site uses the approved reference's "IT'S TIME / TO CREATE." until the client confirms. Both are ready: switching is `HERO_LINE` in `src/config/hero.ts` (copy in `hero.title.{create,start}`). The Arabic of the "start" variant, «حان وقت / الانطلاق.», is written natively by us; if the profile has an official Arabic line, use that instead.
+<!-- #15 (hero line) was closed on 2026-11-07: "IT'S TIME TO START." / «حان وقت البداية.»; see DECISIONS D54. -->
 <!-- #16 (.gitignore ` /docs`) was resolved after Checkpoint 3: removed, `docs/` stays tracked; see DECISIONS D46. -->
 
 ## Added with the 2026 profile (Task 11b)
