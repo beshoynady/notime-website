@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { ButtonLink } from "@/components/ui/button";
 import { SERVICES_HREF } from "@/components/layout/nav-links";
+import { HERO_LINE } from "@/config/hero";
 import { HeroClock } from "./hero-clock";
 import { HeroController } from "./hero-controller";
 import { HeroHud } from "./hero-hud";
@@ -10,8 +11,9 @@ import { HeroHud } from "./hero-hud";
  * at rest (DECISIONS D15); intro-only states (shutters, hidden header, hidden beat) are
  * CSS-gated under `html[data-js]:not([data-reduced])` on `[data-hero-intro]`.
  *
- * Layers, back to front: 1 canvas (HeroScene, mounted client-only by HeroController) · 2 vignette ·
- * 3 clock · 4 grain · 5 content · 6 second beat · 7 letterbox · 8 HUD · 9 shutters.
+ * Layers, back to front: 1 canvas (HeroScene, mounted client-only by HeroController; it also
+ * draws the film grain, D45) · 2 vignette · 3 clock · 5 content · 6 second beat · 7 letterbox ·
+ * 8 HUD · 9 shutters.
  */
 export async function Hero() {
   const t = await getTranslations("hero");
@@ -36,19 +38,18 @@ export async function Hero() {
         <div className="hero-clock-wrap" aria-hidden="true">
           <HeroClock />
         </div>
-        <div className="hero-grain" aria-hidden="true" />
 
         <div className="hero-content frame">
           {/* The lines are decorative (they get split into chars/words); the heading's
               name is the sentence-case label, so screen readers don't spell out capitals. */}
-          <h1 id="hero-title" className="hero-title" aria-label={t("titleLabel")}>
+          <h1 id="hero-title" className="hero-title" aria-label={t(`title.${HERO_LINE}.label`)}>
             {/* .hero-line is the mask (scroll timeline moves it); .hero-line-inner rises
                 inside it (intro / repeat-visit reveal). */}
             <span className="hero-line" aria-hidden="true">
               <span className="hero-line-inner">{t("titleLine1")}</span>
             </span>
             <span className="hero-line" aria-hidden="true">
-              <b className="hero-line-inner">{t("titleLine2")}</b>
+              <b className="hero-line-inner">{t(`title.${HERO_LINE}.line2`)}</b>
             </span>
           </h1>
           <div className="hero-sub">

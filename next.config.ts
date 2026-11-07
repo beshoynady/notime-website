@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  // Self-hosted brand fonts (D45): versioned file names, so they can be cached for good.
+  async headers() {
+    return [{ source: "/fonts/:file*", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] }];
+  },
   turbopack: {
     rules: {
       "*.css": {

@@ -71,9 +71,14 @@ describe("messages", () => {
 
   it("keeps the approved anchor lines verbatim", () => {
     expect(EN["hero.titleLine1"]).toBe("IT'S TIME");
-    expect(EN["hero.titleLine2"]).toBe("TO CREATE.");
+    expect(EN["hero.title.create.line2"]).toBe("TO CREATE.");
     expect(AR["hero.titleLine1"]).toBe("حان وقت");
-    expect(AR["hero.titleLine2"]).toBe("الإبداع.");
+    expect(AR["hero.title.create.line2"]).toBe("الإبداع.");
+    // OQ #15: the company profile's line, ready behind HERO_LINE in src/config/hero.ts.
+    expect(EN["hero.title.start.line2"]).toBe("TO START.");
+    expect(EN["hero.title.start.label"]).toBe("It's time to start.");
+    expect(AR["hero.title.start.line2"]).toBe("الانطلاق.");
+    expect(AR["hero.title.start.label"]).toBe("حان وقت الانطلاق.");
     expect(EN["hero.lead"]).toBe(
       "Events, creative production, marketing and digital solutions, planned and delivered by one house.",
     );

@@ -20,8 +20,6 @@
 # production
 /build
 
-# docs
- /docs
 # misc
 .DS_Store
 *.pem
@@ -44,3 +42,9 @@ yarn-error.log*
 next-env.d.ts
 test-results/
 playwright-report/
+
+# Heavy checkpoint artifacts (summaries and screenshots stay tracked). Scoped to
+# docs/checkpoints so real site media (public/video, WebP images) is never ignored.
+docs/checkpoints/lighthouse/**/raw/
+docs/checkpoints/**/*.webm
+docs/checkpoints/**/*.webp

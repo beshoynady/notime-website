@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { prefersReducedMotion } from "@/hooks/use-reduced-motion";
+import { grainOffset, noiseTile } from "@/lib/grain";
 import { canvasScale, particleCount } from "@/lib/hero-math";
 import { formatTimecode, secondHandAngle } from "@/lib/time";
 import type { SceneState } from "./scene-state";
@@ -9,6 +10,11 @@ import type { SceneState } from "./scene-state";
 /** Below this width: half the bokeh discs (perf lever, DECISIONS D39; DPR cap is in canvasScale). */
 const SMALL = 900;
 const SPRITE = 128;
+/** Film grain (D45): tile size in CSS px (one noise pixel per CSS px), flicker rate, strength. */
+const GRAIN_TILE = 128;
+const GRAIN_FPS = 12;
+const GRAIN_ALPHA = 0.06;
+const CHAMPAGNE: [number, number, number] = [234, 212, 171];
 
 type Particle = {
   x: number;
@@ -49,11 +55,20 @@ function flareSprite() {
   return c;
 }
 
+/** The grain tile, rendered once: champagne-tinted noise (additive, so its hue stays in the palette). */
+function grainSprite() {
+  const c = document.createElement("canvas");
+  c.width = c.height = GRAIN_TILE;
+  c.getContext("2d")!.putImageData(new ImageData(noiseTile(GRAIN_TILE, CHAMPAGNE), GRAIN_TILE), 0, 0);
+  return c;
+}
+
 /**
  * Hero atmosphere (layer 1), additive over the CSS espresso→night gradient: 4 swaying stage-light
  * rays, an anamorphic flare where they enter the frame, and 70–170 depth particles
  * (dust < 0.5, mid, bokeh > 0.82) drifting upward with pointer parallax by depth.
- * Each frame also turns the clock hand to real time and writes the 24fps timecode.
+ * Film grain (D45) is drawn last, over the whole frame. Each frame also turns the clock hand
+ * to real time and writes the 24fps timecode.
  *
  * Pauses when off-screen, when the tab is hidden and while a menu is open
  * (html[data-overlay-open]). Reduced motion: one draw, then hand + timecode once per second.
@@ -84,6 +99,7 @@ export function HeroScene({ state }: { state: SceneState }) {
       [1, "rgba(245,233,211,0)"],
     ]);
     const flare = flareSprite();
+    const grain = ctx.createPattern(grainSprite(), "repeat");
 
     let W = 0;
     let H = 0;
@@ -209,6 +225,17 @@ export function HeroScene({ state }: { state: SceneState }) {
         const s = p.r * 2 * (1 + (state.spread - 1) * p.z);
         ctx.globalAlpha = p.a * state.alpha * (0.62 + 0.38 * Math.sin(p.ph * 1.3));
         ctx.drawImage(p.near ? bokeh : dust, px - s / 2, py - s / 2, s, s);
+      }
+
+      // Film grain over the whole frame, fading in with the atmosphere; it flickers at
+      // GRAIN_FPS by jumping the pattern to another offset (static under reduced motion).
+      if (grain) {
+        const o = grainOffset(reduced ? 0 : t, GRAIN_FPS, GRAIN_TILE);
+        ctx.globalAlpha = GRAIN_ALPHA * state.alpha;
+        ctx.fillStyle = grain;
+        ctx.translate(-o.x, -o.y);
+        ctx.fillRect(o.x, o.y, W, H);
+        ctx.translate(o.x, o.y);
       }
       clock(t);
     };

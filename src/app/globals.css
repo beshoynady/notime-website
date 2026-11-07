@@ -30,7 +30,7 @@
   --color-line-light: rgba(46, 32, 23, 0.14);
   --color-error: #9b3b2a;
 
-  /* Fonts (CSS variables injected by next/font in src/lib/fonts.ts) */
+  /* Fonts (variables and @font-face in src/app/fonts.css, self-hosted, D45) */
   --font-en: var(--font-montserrat), ui-sans-serif, system-ui, "Segoe UI", Arial, sans-serif;
   --font-ar: var(--font-alexandria), "Segoe UI", Tahoma, sans-serif;
 

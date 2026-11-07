@@ -56,8 +56,16 @@
   },
   "hero": {
     "titleLine1": "IT'S TIME",
-    "titleLine2": "TO CREATE.",
-    "titleLabel": "It's time to create.",
+    "title": {
+      "create": {
+        "line2": "TO CREATE.",
+        "label": "It's time to create."
+      },
+      "start": {
+        "line2": "TO START.",
+        "label": "It's time to start."
+      }
+    },
     "lead": "Events, creative production, marketing and digital solutions, planned and delivered by one house.",
     "cta": "Explore our services",
     "beatLead": "Every second",
