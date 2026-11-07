@@ -66,11 +66,15 @@ test.describe("header tone through the pin", () => {
       await page.waitForTimeout(150);
       return page.locator("#site-header").getAttribute("data-header-tone");
     };
-    // The pin lasts 1.4 viewports after the hero's top; the light stub follows the spacer.
+    // The pin lasts 1.4 viewports after the hero's top; About (dark) follows the spacer, then
+    // Categories (light).
     expect(await toneAt(0.5)).toBe("hero");
     expect(await toneAt(1.3)).toBe("hero");
-    expect(await toneAt(2.6)).toBe("light");
+    expect(await toneAt(2.6)).toBe("dark");
     expect(await toneAt(1.0)).toBe("hero");
+    await page.locator("#services").evaluate((el) => scrollTo(0, el.getBoundingClientRect().top + scrollY + 40));
+    await page.waitForTimeout(150);
+    expect(await page.locator("#site-header").getAttribute("data-header-tone")).toBe("light");
   });
 });
 

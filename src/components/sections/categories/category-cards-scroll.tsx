@@ -16,7 +16,7 @@ export function CategoryCardsScroll({ children }: { children: ReactNode }) {
       if (!el.current || prefersReducedMotion()) return;
       const mm = gsap.matchMedia();
       mm.add("(max-width: 899.98px)", () => {
-        const cards = gsap.utils.toArray<HTMLElement>(".sg-cat", el.current);
+        const cards = gsap.utils.toArray<HTMLElement>(".cat", el.current);
         cards.forEach((card) =>
           ScrollTrigger.create({
             trigger: card,
@@ -33,7 +33,7 @@ export function CategoryCardsScroll({ children }: { children: ReactNode }) {
   );
 
   return (
-    <div ref={el} className="sg-cats" data-scroll-cards="">
+    <div ref={el} className="cats" data-scroll-cards="">
       {children}
     </div>
   );

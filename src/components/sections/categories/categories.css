@@ -1,0 +1,185 @@
+/* Categories section and the expanding category cards (approved in the styleguide, CP5).
+   Unlayered on purpose: spacing for these classes lives here, not in utilities on the same
+   element (an unlayered rule beats Tailwind's layered utilities). */
+
+.cats-head {
+  display: grid;
+  gap: 24px;
+  margin-block-end: clamp(40px, 6vw, 72px);
+}
+.cats-head h2 {
+  margin: 20px 0 0;
+}
+/* Lead and key on their own lines: "Five crafts," / "one team behind them." */
+.cats-head h2 b {
+  display: block;
+}
+.cats-intro {
+  margin: 0;
+  color: var(--color-cocoa);
+}
+@media (min-width: 900px) {
+  .cats-head {
+    grid-template-columns: 7fr 5fr;
+    align-items: end;
+  }
+  .cats-intro {
+    padding-block-end: 0.5em;
+  }
+}
+.cats-foot {
+  display: flex;
+  justify-content: flex-end;
+  margin-block-start: 28px;
+}
+
+/* Cards */
+.cats {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cat {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-inline-size: 0;
+  min-block-size: 300px;
+  padding: 22px;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--color-espresso);
+  color: var(--color-ivory);
+  text-decoration: none;
+  transition: flex-grow 0.9s var(--ease-expo-out);
+}
+.cat::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, transparent 30%, rgba(46, 32, 23, 0.92));
+}
+.cat-media {
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+  transform: scale(1.08);
+  transition:
+    opacity 0.9s var(--ease-expo-out),
+    transform 1.4s var(--ease-expo-out);
+}
+/* The placeholder tag moves to the top so the card text keeps the bottom. */
+.cat-media .image-tag {
+  inset-block: 12px auto;
+}
+.cat-txt {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 10px;
+}
+.cat-num {
+  font-size: 0.7rem;
+  letter-spacing: 0.24em;
+  color: var(--color-champagne);
+}
+.cat h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
+.cat h3:lang(ar) {
+  line-height: 1.45;
+}
+.cat ul {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.86rem;
+  color: rgba(245, 233, 211, 0.78);
+}
+.cat-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-block-start: 12px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--color-champagne);
+}
+
+/* Closed state: the fold (services + "View services") collapses and the image dims until a
+   card opens. Desktop opens on hover or focus (CSS). Phones open the card in view
+   (ScrollTrigger adds is-on), so without JS or under reduced motion, nothing could open
+   them: there they all stay open. */
+.cat-fold {
+  max-block-size: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-block-size 0.9s var(--ease-expo-out),
+    opacity 0.6s;
+}
+.cat:hover .cat-fold,
+.cat:focus-visible .cat-fold,
+.cat.is-on .cat-fold {
+  max-block-size: 200px;
+  opacity: 1;
+}
+.cat:hover .cat-media,
+.cat:focus-visible .cat-media,
+.cat.is-on .cat-media {
+  opacity: 0.9;
+  transform: scale(1);
+}
+@media (min-width: 900px) {
+  .cats {
+    flex-direction: row;
+    block-size: 460px;
+  }
+  .cat {
+    min-block-size: 0;
+  }
+  .cat:hover,
+  .cat:focus-visible,
+  .cat.is-on {
+    flex-grow: 3.2;
+  }
+  /* While another card is hovered or focused, the default open card steps back. */
+  .cats:has(.cat:hover, .cat:focus-visible) .cat.is-on:not(:hover, :focus-visible) {
+    flex-grow: 1;
+  }
+  .cats:has(.cat:hover, .cat:focus-visible) .cat.is-on:not(:hover, :focus-visible) .cat-fold {
+    max-block-size: 0;
+    opacity: 0;
+  }
+  .cats:has(.cat:hover, .cat:focus-visible) .cat.is-on:not(:hover, :focus-visible) .cat-media {
+    opacity: 0.35;
+    transform: scale(1.08);
+  }
+}
+@media (max-width: 899.98px) {
+  html:not([data-js]) .cat-fold,
+  html[data-reduced] .cat-fold {
+    max-block-size: none;
+    opacity: 1;
+  }
+  html:not([data-js]) .cat-media,
+  html[data-reduced] .cat-media {
+    opacity: 0.85;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cat,
+  .cat-media,
+  .cat-fold {
+    transition: none;
+  }
+}

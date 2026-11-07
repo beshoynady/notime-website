@@ -28,19 +28,6 @@
     align-items: end;
   }
 }
-.sg-idx {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.sg-idx::after {
-  content: "";
-  flex: 1;
-  max-inline-size: 120px;
-  block-size: 1px;
-  background: currentColor;
-  opacity: 0.25;
-}
 
 /* Colour */
 .sg-swatches {
@@ -248,7 +235,7 @@
 .sg-cards-head {
   display: grid;
   gap: 12px;
-  margin-block-start: 48px;
+  margin-block: 48px 28px;
 }
 .sg-cards-head p {
   max-inline-size: 60ch;
@@ -440,156 +427,6 @@
   border-radius: var(--radius);
   background: var(--color-espresso);
 }
-.sg-textlink {
-  justify-self: start;
-  font-size: 0.85rem;
-  text-decoration: none;
-  background: linear-gradient(currentColor, currentColor) no-repeat;
-  background-size: 0% 1px;
-  background-position: 0 100%;
-  transition: background-size 0.5s var(--ease-expo-out);
-}
-[dir="rtl"] .sg-textlink {
-  background-position: 100% 100%;
-}
-.sg-textlink:hover,
-.sg-textlink:focus-visible {
-  background-size: 100% 1px;
-}
-
-/* Category cards */
-.sg-cats {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-block-start: 28px;
-}
-.sg-cat {
-  position: relative;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: flex-end;
-  min-inline-size: 0;
-  min-block-size: 300px;
-  padding: 22px;
-  overflow: hidden;
-  border-radius: var(--radius);
-  background: var(--color-espresso);
-  color: var(--color-ivory);
-  text-decoration: none;
-  transition: flex-grow 0.9s var(--ease-expo-out);
-}
-.sg-cat::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(180deg, transparent 30%, rgba(46, 32, 23, 0.92));
-}
-.sg-cat-media {
-  position: absolute;
-  inset: 0;
-  transform: scale(1.08);
-  transition:
-    opacity 0.9s var(--ease-expo-out),
-    transform 1.4s var(--ease-expo-out);
-}
-/* The placeholder tag moves to the top so the card text keeps the bottom. */
-.sg-cat-media .image-tag {
-  inset-block: 12px auto;
-}
-.sg-cat-txt {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  gap: 10px;
-}
-.sg-cat-num {
-  font-size: 0.7rem;
-  letter-spacing: 0.24em;
-  color: var(--color-champagne);
-}
-.sg-cat h3 {
-  margin: 0;
-  font-size: 1.3rem;
-  font-weight: 400;
-  line-height: 1.2;
-}
-.sg-cat ul {
-  display: grid;
-  gap: 2px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  font-size: 0.86rem;
-  color: rgba(245, 233, 211, 0.78);
-}
-
-/* Closed state: the list folds away and the image dims until a card opens. Desktop opens on
-   hover or focus (CSS). Phones open the card in view (ScrollTrigger adds is-on), so without
-   JS or under reduced motion, nothing could open them: there they all stay open. */
-.sg-cat ul {
-  max-block-size: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition:
-    max-block-size 0.9s var(--ease-expo-out),
-    opacity 0.6s;
-}
-.sg-cat-media {
-  opacity: 0.35;
-}
-.sg-cat:hover ul,
-.sg-cat:focus-visible ul,
-.sg-cat.is-on ul {
-  max-block-size: 120px;
-  opacity: 1;
-}
-.sg-cat:hover .sg-cat-media,
-.sg-cat:focus-visible .sg-cat-media,
-.sg-cat.is-on .sg-cat-media {
-  opacity: 0.9;
-  transform: scale(1);
-}
-@media (min-width: 900px) {
-  .sg-cats {
-    flex-direction: row;
-    block-size: 460px;
-  }
-  .sg-cat {
-    min-block-size: 0;
-  }
-  .sg-cat:hover,
-  .sg-cat:focus-visible,
-  .sg-cat.is-on {
-    flex-grow: 3.2;
-  }
-  /* While another card is hovered or focused, the default open card steps back. */
-  .sg-cats:has(.sg-cat:hover, .sg-cat:focus-visible) .sg-cat.is-on:not(:hover, :focus-visible) {
-    flex-grow: 1;
-  }
-  .sg-cats:has(.sg-cat:hover, .sg-cat:focus-visible) .sg-cat.is-on:not(:hover, :focus-visible) ul {
-    max-block-size: 0;
-    opacity: 0;
-  }
-  .sg-cats:has(.sg-cat:hover, .sg-cat:focus-visible) .sg-cat.is-on:not(:hover, :focus-visible) .sg-cat-media {
-    opacity: 0.35;
-    transform: scale(1.08);
-  }
-}
-@media (max-width: 899.98px) {
-  html:not([data-js]) .sg-cat ul,
-  html[data-reduced] .sg-cat ul {
-    max-block-size: none;
-    opacity: 1;
-  }
-  html:not([data-js]) .sg-cat-media,
-  html[data-reduced] .sg-cat-media {
-    opacity: 0.85;
-    transform: none;
-  }
-}
 
 /* Closing band */
 .sg-closing {
@@ -608,11 +445,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sg-cat,
-  .sg-cat-media,
-  .sg-cat ul,
-  .sg-toast,
-  .sg-textlink {
+  .sg-toast {
     transition: none;
   }
 }

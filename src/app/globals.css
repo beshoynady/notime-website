@@ -718,3 +718,46 @@ html[data-overlay-open] #site-header .logo-on-dark {
 html[data-overlay-open] #site-header .logo-on-light {
   display: none;
 }
+
+/* ==========================================================================
+   Section eyebrow (label plus a short rule) and the quiet text link.
+   Shared by the homepage sections and the styleguide.
+   ========================================================================== */
+.sec-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+}
+.sec-eyebrow::after {
+  content: "";
+  flex: 1;
+  max-inline-size: 120px;
+  block-size: 1px;
+  background: currentColor;
+  opacity: 0.25;
+}
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  background: linear-gradient(currentColor, currentColor) no-repeat;
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  transition: background-size 0.5s var(--ease-expo-out);
+}
+[dir="rtl"] .text-link {
+  background-position: 100% 100%;
+}
+.text-link:hover,
+.text-link:focus-visible {
+  background-size: 100% 1px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .text-link {
+    transition: none;
+  }
+}

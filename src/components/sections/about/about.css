@@ -1,0 +1,58 @@
+/* Home · About. Unlayered: spacing for these classes lives here, not in utilities. */
+
+.about-statement {
+  max-inline-size: 21ch;
+  margin-block: clamp(36px, 5vw, 64px) 0;
+  font-size: clamp(2rem, 5vw, 4.4rem);
+  font-weight: 300;
+  line-height: 1.14;
+  letter-spacing: -0.015em;
+}
+.about-statement:lang(ar) {
+  max-inline-size: 22ch;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+.about-foot {
+  display: grid;
+  gap: 40px;
+  margin-block-start: clamp(56px, 8vw, 112px);
+  padding-block-start: 32px;
+  border-block-start: 1px solid var(--color-line-dark);
+}
+.about-body {
+  margin: 0;
+  color: rgba(245, 233, 211, 0.72);
+}
+.about-figures {
+  display: flex;
+  gap: clamp(32px, 6vw, 72px);
+  margin: 0;
+}
+/* Value above its label visually; the label stays first for assistive tech (dt, then dd). */
+.about-figures > div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 6px;
+}
+.about-figures dt {
+  color: rgba(245, 233, 211, 0.6);
+}
+.about-figures dd {
+  margin: 0;
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--color-champagne);
+}
+@media (min-width: 900px) {
+  .about-foot {
+    grid-template-columns: 7fr 5fr;
+    align-items: start;
+  }
+  .about-figures {
+    justify-content: flex-end;
+  }
+}

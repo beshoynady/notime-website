@@ -41,7 +41,7 @@ export async function ComponentsDemo() {
               <span>{t("secondary")}</span>
             </a>
           </div>
-          <a href="#components" className="sg-textlink">
+          <a href="#components" className="text-link">
             {t("link")}
           </a>
         </div>

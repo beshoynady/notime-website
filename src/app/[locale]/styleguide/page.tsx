@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 import { Marquee } from "@/components/motion/marquee";
 import { ScrubColorWords } from "@/components/motion/scrub-color-words";
-import { CategoryCards } from "@/components/styleguide/category-cards";
+import { CategoryCards } from "@/components/sections/categories/category-cards";
 import { ContrastPairs } from "@/components/styleguide/contrast-pairs";
 import { ComponentsDemo } from "@/components/styleguide/components-demo";
 import { MotionDemos } from "@/components/styleguide/motion-demos";
@@ -135,7 +135,7 @@ export default async function StyleguidePage({ params }: PageProps<"/[locale]/st
 function SecHead({ id, eyebrow, lead, accent }: { id: string; eyebrow: ReactNode; lead: ReactNode; accent: ReactNode }) {
   return (
     <div className="sg-sec-head">
-      <p className="sg-idx text-eyebrow m-0">{eyebrow}</p>
+      <p className="sec-eyebrow text-eyebrow">{eyebrow}</p>
       <h2 id={id} className="text-h1 m-0 scroll-mt-24">
         {lead} <b>{accent}</b>
       </h2>
