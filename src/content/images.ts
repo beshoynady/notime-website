@@ -1,36 +1,42 @@
 import type { ImageSlot } from "./types";
 
 /**
- * Image slots. Every slot has a matching entry in docs/content/image-prompts.md.
- * To drop in a generated or real image: save it under public/images/ai/<id>.webp
- * (or /images/work/ for real photos), then set `src` (and `blurDataURL`).
+ * Image slots. Every slot has a matching entry in docs/content/image-prompts.md (tested).
+ * `kind: "real"` slots use curated NO TIME photos from public/images/work/ (D49); AI images go
+ * to public/images/ai/<id>.{avif,webp}. To drop one in, set `src` (and `blurDataURL`).
  *
  * TODO: replace placeholder — every `src: null` slot renders the designed placeholder.
  */
 export const imageSlots: ImageSlot[] = [
   // Category images (4:5 for menu and cards, 16:9 for headers)
+  // Real NO TIME photo from the 2026 profile (D49): no client name, no identifiable person.
   {
     id: "cat-events-hospitality-4x5",
-    kind: "ai",
+    kind: "real",
     aspect: "4:5",
-    src: null,
+    src: "/images/work/private-celebrations/private-celebrations-2.webp",
+    blurDataURL:
+      "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAACwAQCdASoHAAoAA4BaJZACdADzY2sgAP4JyEXoc37eMG3RwywrbwDF3LvHIJkBLzdOcZyV3itfbZEL33Sy2+xS34Q4AA==",
     paint: "event",
     illustrative: false,
     alt: {
-      en: "A warmly lit ballroom set for an evening event, with soft haze and candlelight.",
-      ar: "قاعة احتفالات بإضاءة دافئة مهيّأة لأمسية، يلفّها ضباب خفيف وضوء الشموع.",
+      en: "White roses and blue hydrangeas on a dressed table, lit by candles.",
+      ar: "ورود بيضاء وزهور كوبية زرقاء على طاولة مزيّنة، تضيئها الشموع.",
     },
   },
+  // Real NO TIME photo from the 2026 profile (D49): no client name, no identifiable person.
   {
     id: "cat-events-hospitality-16x9",
-    kind: "ai",
+    kind: "real",
     aspect: "16:9",
-    src: null,
+    src: "/images/work/private-celebrations/private-celebrations-1.webp",
+    blurDataURL:
+      "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADwAQCdASoKAAcAA4BaJaACdAD8KBZPIgAA/peX4eqyIk2lR2nNopviJJZTLarHuLt2BpjJJaheQGXG2xLcPNnRwAA=",
     paint: "event",
     illustrative: false,
     alt: {
-      en: "A wide view of an event stage under warm light, guests' tables in soft focus.",
-      ar: "مشهد واسع لمسرح فعالية تحت إضاءة دافئة، وطاولات الضيوف في تركيز ناعم.",
+      en: "A glass-roofed hall set with long candlelit tables under red lanterns.",
+      ar: "قاعة بسقف زجاجي مهيّأة بطاولات طويلة على ضوء الشموع، تحت فوانيس حمراء.",
     },
   },
   {
@@ -45,16 +51,19 @@ export const imageSlots: ImageSlot[] = [
       ar: "موقع تصوير في استوديو، كاميرا على عربة وضوء رئيسي دافئ واحد.",
     },
   },
+  // Real NO TIME photo from the 2026 profile (D49): no client name, no identifiable person.
   {
     id: "cat-creative-production-16x9",
-    kind: "ai",
+    kind: "real",
     aspect: "16:9",
-    src: null,
+    src: "/images/work/catering/catering-4.webp",
+    blurDataURL:
+      "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAADwAQCdASoKAAYAA4BaJZgCdADdYsVAzwAA/U79h4LcuO8dBP+JfqNv6nmzCLf8I4SWbas99YFDbGtRK63LH627bcwAAA==",
     paint: "studio",
     illustrative: false,
     alt: {
-      en: "A wide studio frame with lighting stands and a seamless backdrop in warm tones.",
-      ar: "لقطة واسعة لاستوديو بحوامل إضاءة وخلفية متصلة بدرجات دافئة.",
+      en: "Food styling for a shoot: plated desserts on wooden boards beside palm leaves.",
+      ar: "تنسيق طعام لجلسة تصوير: حلويات مصفوفة على ألواح خشبية بجانب سعف النخيل.",
     },
   },
   {
@@ -69,6 +78,7 @@ export const imageSlots: ImageSlot[] = [
       ar: "مواد هوية على مكتب: عيّنات ورق ودرجات ألوان ودفتر مغلق.",
     },
   },
+  // TODO: swap to real photo after approval (OQ #17; image-prompts.md names the photo).
   {
     id: "cat-marketing-brand-16x9",
     kind: "ai",
@@ -81,6 +91,7 @@ export const imageSlots: ImageSlot[] = [
       ar: "مكتب هادئ ولوحات هوية مثبّتة على الجدار في ضوء آخر النهار.",
     },
   },
+  // TODO: swap to real photo after approval (OQ #17; image-prompts.md names the photo).
   {
     id: "cat-production-print-gifts-4x5",
     kind: "ai",
@@ -93,18 +104,22 @@ export const imageSlots: ImageSlot[] = [
       ar: "أوراق تخرج من طابعة كبيرة الحجم في ورشة طباعة خافتة الإضاءة.",
     },
   },
+  // Real NO TIME photo from the 2026 profile (D49): no client name, no identifiable person.
   {
     id: "cat-production-print-gifts-16x9",
-    kind: "ai",
+    kind: "real",
     aspect: "16:9",
-    src: null,
+    src: "/images/work/gifts/gifts-1.webp",
+    blurDataURL:
+      "data:image/webp;base64,UklGRjYAAABXRUJQVlA4ICoAAACwAQCdASoKAAYAA4BaJYwCdADcqAaAAP6D2Fn//xF0g7K5LaGdCwB1YAA=",
     paint: "print",
     illustrative: false,
     alt: {
-      en: "A print workshop with stacked boxes and wrapped gifts under warm overhead lamps.",
-      ar: "ورشة طباعة فيها صناديق مرصوصة وهدايا مغلّفة تحت مصابيح دافئة.",
+      en: "A gold bookmark cut in the shape of the Dubai skyline.",
+      ar: "فاصل كتاب ذهبي مقصوص على شكل أفق دبي.",
     },
   },
+  // TODO: swap to real photo after approval (OQ #17; image-prompts.md names the photo).
   {
     id: "cat-software-digital-4x5",
     kind: "ai",
@@ -117,6 +132,7 @@ export const imageSlots: ImageSlot[] = [
       ar: "مساحة عمل مرتّبة ليلًا، وشاشة حاسوب تتوهّج بنعومة خارج التركيز.",
     },
   },
+  // TODO: swap to real photo after approval (OQ #17; image-prompts.md names the photo).
   {
     id: "cat-software-digital-16x9",
     kind: "ai",
@@ -169,40 +185,49 @@ export const imageSlots: ImageSlot[] = [
       ar: "طاولة تخطيط عليها مخططات القاعة وقلم وفنجان قهوة عربية.",
     },
   },
+  // Real NO TIME photo from the 2026 profile (D49): no client name, no identifiable person.
   {
     id: "process-build-4x5",
-    kind: "ai",
+    kind: "real",
     aspect: "4:5",
-    src: null,
+    src: "/images/work/private-celebrations/private-celebrations-8.webp",
+    blurDataURL:
+      "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADQAQCdASoKAAgAA4BaJYwCdADb7CxxUADyoXsqGlV6gAmRmduiiJQJa84TgyQsQ5pmQrRlmBnG+yOFeRAun0+AAAA=",
     paint: "studio",
     illustrative: false,
     alt: {
-      en: "A stage being built in an exhibition hall, frames and lights half rigged.",
-      ar: "مسرح قيد التركيب في قاعة معارض، والهياكل والإضاءة نصف مجهّزة.",
+      en: "A ballroom during setup, with truss and scaffolding going up.",
+      ar: "قاعة احتفالات أثناء التجهيز، والهياكل المعدنية والسقالات قيد التركيب.",
     },
   },
+  // Real NO TIME photo from the 2026 profile (D49): no client name, no identifiable person.
   {
     id: "process-produce-4x5",
-    kind: "ai",
+    kind: "real",
     aspect: "4:5",
-    src: null,
+    src: "/images/work/catering/catering-5.webp",
+    blurDataURL:
+      "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAAAQAgCdASoJAAoAA4BaJZACdH8AE5xZ+z0AAP6bVN7hkQ7IcdYvM51d2n3fhLZSSx/a2Oyvuk9+hAh8HKqtfwknJeYV6jwAAAA=",
     paint: "print",
     illustrative: false,
     alt: {
-      en: "Hands checking a printed proof under a warm lamp.",
-      ar: "يدان تراجعان نسخة مطبوعة تحت مصباح دافئ.",
+      en: "A server carrying a tiered silver stand of desserts.",
+      ar: "نادل يحمل حاملًا فضيًا من عدة طبقات عليه حلويات.",
     },
   },
+  // Real NO TIME photo from the 2026 profile (D49): no client name, no identifiable person.
   {
     id: "process-launch-4x5",
-    kind: "ai",
+    kind: "real",
     aspect: "4:5",
-    src: null,
+    src: "/images/work/heritage/heritage-5.webp",
+    blurDataURL:
+      "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADwAQCdASoKAAcAA4BaJZQCdAELT7t+8AAA/vMQoINyNf5ShMq7Dwpa8Ps9oWeDZq/6gmmgAAA=",
     paint: "event",
     illustrative: false,
     alt: {
-      en: "A desert evening setup with lanterns lit, moments before guests arrive.",
-      ar: "تجهيز مسائي في الصحراء والفوانيس مضاءة، قبل وصول الضيوف بلحظات.",
+      en: "A desert tent at night, its carpets laid out for guests.",
+      ar: "خيمة صحراوية ليلًا، وسجّادها مفروش لاستقبال الضيوف.",
     },
   },
 

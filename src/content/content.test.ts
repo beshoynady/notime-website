@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { getCategories, getCategory, getImageSlot, getImageSlots, getProducts, getServices } from "./index";
@@ -95,6 +95,28 @@ describe("image slots", () => {
       const entry = doc.split(/^### /m).find((e) => e.startsWith(`\`${s.id}\``))!;
       expect(entry, `${s.id} alt EN`).toContain(`**Alt EN:** ${s.alt.en}`);
       expect(entry, `${s.id} alt AR`).toContain(`**Alt AR:** ${s.alt.ar}`);
+    }
+  });
+
+  // D49: the 7 slots with a usable real profile photo use it (no client name, no identifiable person).
+  it("real-photo slots point at an existing curated file under /images/work/", () => {
+    const real = getImageSlots().filter((s) => s.kind === "real");
+    expect(real.map((s) => s.id).sort()).toEqual(
+      [
+        "cat-events-hospitality-4x5",
+        "cat-events-hospitality-16x9",
+        "cat-creative-production-16x9",
+        "cat-production-print-gifts-16x9",
+        "process-build-4x5",
+        "process-produce-4x5",
+        "process-launch-4x5",
+      ].sort(),
+    );
+    for (const s of real) {
+      expect(s.src, s.id).toMatch(/^\/images\/work\/[a-z0-9-]+\/[a-z0-9-]+\.webp$/);
+      expect(existsSync(path.join(process.cwd(), "public", s.src!)), `${s.id}: ${s.src}`).toBe(true);
+      expect(s.illustrative, s.id).toBe(false);
+      expect(s.blurDataURL, s.id).toMatch(/^data:image\/webp;base64,/);
     }
   });
 

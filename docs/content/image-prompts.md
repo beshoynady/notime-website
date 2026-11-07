@@ -9,14 +9,15 @@ Status: **for approval at Checkpoint 4. No image is generated before approval** 
 
 These are **mood images** for categories, process steps and product cards. None of them stands in for a real past project, so none carries the "Illustrative" label (`illustrative: false` everywhere). If a future slot shows an AI image *in place of* a real project, that slot gets `illustrative: true`, and the label appears ("Illustrative" / «صورة توضيحية», CLAUDE.md).
 
-## Real photos: a choice for Checkpoint 4
+## Real photos (decided at Checkpoint 4, D49)
 
-The 2026 profile gave 32 curated real photos (`docs/content/profile-inventory.md`). Some fit a slot better than any AI image could. Each entry below lists its **real alternative** where one exists.
+The 2026 profile gave 32 curated real photos (`docs/content/profile-inventory.md`).
 
-- Private-celebration, catering and heritage photos carry no client name and no identifiable person, so they could be used now.
-- Photos that show a client's brand wait for OQ #17.
-- **Size:** all real alternatives are below the 2× delivery size, so they are sharp at 1× only.
-- **Recommendation:** use real photos where marked "usable now", and AI for the rest. The real photos are NO TIME's actual work, which matters more than resolution.
+- **7 slots use a real photo now.** They carry no client name and no identifiable person. Their prompt is kept as a fallback only.
+- **4 slots get an AI image** until the client named in their real photo approves (OQ #17). Then they swap to the photo.
+- **7 slots are AI only.**
+- **Size:** the real photos are below the 2× delivery size, so they are sharp at 1× only. The user accepted that: they are NO TIME's actual work.
+- **Never used anywhere:** the page-7 AI image (generator watermark, portraits of the UAE President).
 
 ## House style (part of every prompt)
 
@@ -43,10 +44,10 @@ The palette's hex values are #2E2017, #634731, #BB9A79, #EAD4AB and #F5E9D3. Giv
 ### `cat-events-hospitality-4x5`
 
 - **Page · section:** Home › Categories (card 1); mega menu tile · **Aspect:** 4:5
-- **Prompt:** House style. A ballroom set for an evening event, seen from a low angle between two dressed tables: ivory linen, crystal glasses and tall white florals catch candlelight in the foreground. Behind, soft haze and a warm wash of light across an empty stage. Calm, minutes before the doors open.
-- **Alt EN:** A warmly lit ballroom set for an evening event, with soft haze and candlelight.
-- **Alt AR:** قاعة احتفالات بإضاءة دافئة مهيّأة لأمسية، يلفّها ضباب خفيف وضوء الشموع.
-- **Real alternative:** `private-celebrations-2` (white and blue florals with candles, 859 × 1290, crop to 4:5). **Usable now.**
+- **Prompt (fallback only):** House style. A ballroom set for an evening event, seen from a low angle between two dressed tables: ivory linen, crystal glasses and tall white florals catch candlelight in the foreground. Behind, soft haze and a warm wash of light across an empty stage. Calm, minutes before the doors open.
+- **Alt EN:** White roses and blue hydrangeas on a dressed table, lit by candles.
+- **Alt AR:** ورود بيضاء وزهور كوبية زرقاء على طاولة مزيّنة، تضيئها الشموع.
+- **In use: real photo** `/images/work/private-celebrations/private-celebrations-2.webp` (D49). Was: `private-celebrations-2` (white and blue florals with candles, 859 × 1290, crop to 4:5).
 
 ### `cat-creative-production-4x5`
 
@@ -71,6 +72,7 @@ The palette's hex values are #2E2017, #634731, #BB9A79, #EAD4AB and #F5E9D3. Giv
 - **Alt EN:** Sheets coming off a large-format printer in a dim print workshop.
 - **Alt AR:** أوراق تخرج من طابعة كبيرة الحجم في ورشة طباعة خافتة الإضاءة.
 - **Real alternative:** `gifts-2` (sports T-shirt mock-up, 905 × 1019) shows a client brand (OQ #17). Note: the profile's evidence here is **gifts**, not print (reconciliation §1). Consider re-briefing this slot to a gift box being finished by hand.
+- **Now:** AI image until the client approves; marked `// TODO: swap to real photo after approval` in `images.ts` (D49).
 
 ### `cat-software-digital-4x5`
 
@@ -79,24 +81,25 @@ The palette's hex values are #2E2017, #634731, #BB9A79, #EAD4AB and #F5E9D3. Giv
 - **Alt EN:** A clean workspace at night, a laptop screen glowing softly out of focus.
 - **Alt AR:** مساحة عمل مرتّبة ليلًا، وشاشة حاسوب تتوهّج بنعومة خارج التركيز.
 - **Real alternative:** `uae-athletics-federation-2` (the federation's app on mobile, 459 × 1048) is real NO TIME work, but small and named (OQ #17).
+- **Now:** AI image until the client approves; marked `// TODO: swap to real photo after approval` in `images.ts` (D49).
 
 ## Categories, 16:9 (category page headers)
 
 ### `cat-events-hospitality-16x9`
 
 - **Page · section:** Services › Events & Hospitality, header · **Aspect:** 16:9
-- **Prompt:** House style. A wide view of an event hall from the back: rows of round tables dressed in ivory, low florals and candle clusters in soft focus, leading to a stage washed in warm amber light through haze. Symmetrical, deep perspective, empty of guests.
-- **Alt EN:** A wide view of an event stage under warm light, guests' tables in soft focus.
-- **Alt AR:** مشهد واسع لمسرح فعالية تحت إضاءة دافئة، وطاولات الضيوف في تركيز ناعم.
-- **Real alternative:** `private-celebrations-1` (conservatory hall with lanterns and long tables, 1600 × 1066, crop to 16:9). **Usable now.**
+- **Prompt (fallback only):** House style. A wide view of an event hall from the back: rows of round tables dressed in ivory, low florals and candle clusters in soft focus, leading to a stage washed in warm amber light through haze. Symmetrical, deep perspective, empty of guests.
+- **Alt EN:** A glass-roofed hall set with long candlelit tables under red lanterns.
+- **Alt AR:** قاعة بسقف زجاجي مهيّأة بطاولات طويلة على ضوء الشموع، تحت فوانيس حمراء.
+- **In use: real photo** `/images/work/private-celebrations/private-celebrations-1.webp` (D49). Was: `private-celebrations-1` (conservatory hall with lanterns and long tables, 1600 × 1066, crop to 16:9).
 
 ### `cat-creative-production-16x9`
 
 - **Page · section:** Services › Creative Production, header · **Aspect:** 16:9
-- **Prompt:** House style. A wide studio frame: two lighting stands with large soft boxes either side of a curved seamless backdrop in warm taupe, a camera on a tripod in the foreground left, slightly out of focus. Haze catches the light. Empty, ready for a shoot.
-- **Alt EN:** A wide studio frame with lighting stands and a seamless backdrop in warm tones.
-- **Alt AR:** لقطة واسعة لاستوديو بحوامل إضاءة وخلفية متصلة بدرجات دافئة.
-- **Real alternative:** `catering-4` (food styling on wooden boards, 1187 × 668), real photography from profile section 11. **Usable now**, but it shows the result, not the studio.
+- **Prompt (fallback only):** House style. A wide studio frame: two lighting stands with large soft boxes either side of a curved seamless backdrop in warm taupe, a camera on a tripod in the foreground left, slightly out of focus. Haze catches the light. Empty, ready for a shoot.
+- **Alt EN:** Food styling for a shoot: plated desserts on wooden boards beside palm leaves.
+- **Alt AR:** تنسيق طعام لجلسة تصوير: حلويات مصفوفة على ألواح خشبية بجانب سعف النخيل.
+- **In use: real photo** `/images/work/catering/catering-4.webp` (D49). Was: `catering-4` (food styling on wooden boards, 1187 × 668), real photography from profile section 11.
 
 ### `cat-marketing-brand-16x9`
 
@@ -105,14 +108,15 @@ The palette's hex values are #2E2017, #634731, #BB9A79, #EAD4AB and #F5E9D3. Giv
 - **Alt EN:** A calm studio desk with brand boards pinned to a wall in late-afternoon light.
 - **Alt AR:** مكتب هادئ ولوحات هوية مثبّتة على الجدار في ضوء آخر النهار.
 - **Real alternative:** `uae-pro-league-1` (UAE PL Sponsor's Tournament identity on fabric, 1224 × 664) is real identity work (OQ #17).
+- **Now:** AI image until the client approves; marked `// TODO: swap to real photo after approval` in `images.ts` (D49).
 
 ### `cat-production-print-gifts-16x9`
 
 - **Page · section:** Services › Production, Print & Gifts, header · **Aspect:** 16:9
-- **Prompt:** House style. A print and finishing workshop: stacked rigid gift boxes in black and ivory, some wrapped with champagne ribbon, on a long workbench under warm pendant lamps. A foil-stamping press in soft focus behind. No text or logos on any box.
-- **Alt EN:** A print workshop with stacked boxes and wrapped gifts under warm overhead lamps.
-- **Alt AR:** ورشة طباعة فيها صناديق مرصوصة وهدايا مغلّفة تحت مصابيح دافئة.
-- **Real alternative:** `gifts-1` (gold Dubai-skyline bookmark, 1280 × 719). **Usable now** (no client brand).
+- **Prompt (fallback only):** House style. A print and finishing workshop: stacked rigid gift boxes in black and ivory, some wrapped with champagne ribbon, on a long workbench under warm pendant lamps. A foil-stamping press in soft focus behind. No text or logos on any box.
+- **Alt EN:** A gold bookmark cut in the shape of the Dubai skyline.
+- **Alt AR:** فاصل كتاب ذهبي مقصوص على شكل أفق دبي.
+- **In use: real photo** `/images/work/gifts/gifts-1.webp` (D49). Was: `gifts-1` (gold Dubai-skyline bookmark, 1280 × 719).
 
 ### `cat-software-digital-16x9`
 
@@ -121,6 +125,7 @@ The palette's hex values are #2E2017, #634731, #BB9A79, #EAD4AB and #F5E9D3. Giv
 - **Alt EN:** A wide, minimal software workspace with two screens in warm ambient light.
 - **Alt AR:** مساحة عمل برمجية واسعة وبسيطة بشاشتين تحت إضاءة محيطة دافئة.
 - **Real alternative:** `uae-athletics-federation-1` (uaeathletics.ae home page, 1544 × 965) is real NO TIME work (OQ #17).
+- **Now:** AI image until the client approves; marked `// TODO: swap to real photo after approval` in `images.ts` (D49).
 
 ## Hero fallback (only if the canvas scene is ever replaced by media)
 
@@ -155,26 +160,26 @@ The hero today is code-driven (canvas, clock, shutters; D43–D45) and uses neit
 ### `process-build-4x5`
 
 - **Page · section:** Home › How we work, step "Build" · **Aspect:** 4:5
-- **Prompt:** House style. A stage under construction in an exhibition hall: aluminium truss half rigged, light fixtures hanging unlit, a scissor lift in shadow, one work light throwing warm light across the deck. Crew only as distant, out-of-focus silhouettes.
-- **Alt EN:** A stage being built in an exhibition hall, frames and lights half rigged.
-- **Alt AR:** مسرح قيد التركيب في قاعة معارض، والهياكل والإضاءة نصف مجهّزة.
-- **Real alternative:** `private-celebrations-8` (ballroom truss and scaffold setup, 953 × 715, crop to 4:5 = 572 × 715). **Usable now**, small.
+- **Prompt (fallback only):** House style. A stage under construction in an exhibition hall: aluminium truss half rigged, light fixtures hanging unlit, a scissor lift in shadow, one work light throwing warm light across the deck. Crew only as distant, out-of-focus silhouettes.
+- **Alt EN:** A ballroom during setup, with truss and scaffolding going up.
+- **Alt AR:** قاعة احتفالات أثناء التجهيز، والهياكل المعدنية والسقالات قيد التركيب.
+- **In use: real photo** `/images/work/private-celebrations/private-celebrations-8.webp` (D49). Was: `private-celebrations-8` (ballroom truss and scaffold setup, 953 × 715, crop to 4:5 = 572 × 715).
 
 ### `process-produce-4x5`
 
 - **Page · section:** Home › How we work, step "Produce" · **Aspect:** 4:5
-- **Prompt:** House style. Close-up of two hands checking a printed proof under a warm desk lamp: a loupe resting on the sheet, colour bars at its edge, a stack of proofs beside it. The printed image is abstract warm tones, no text.
-- **Alt EN:** Hands checking a printed proof under a warm lamp.
-- **Alt AR:** يدان تراجعان نسخة مطبوعة تحت مصباح دافئ.
-- **Real alternative:** `catering-5` (tiered silver stand carried by a server, 718 × 759) shows production of the day itself rather than print. **Usable now.**
+- **Prompt (fallback only):** House style. Close-up of two hands checking a printed proof under a warm desk lamp: a loupe resting on the sheet, colour bars at its edge, a stack of proofs beside it. The printed image is abstract warm tones, no text.
+- **Alt EN:** A server carrying a tiered silver stand of desserts.
+- **Alt AR:** نادل يحمل حاملًا فضيًا من عدة طبقات عليه حلويات.
+- **In use: real photo** `/images/work/catering/catering-5.webp` (D49). Was: `catering-5` (tiered silver stand carried by a server, 718 × 759) shows production of the day itself rather than print.
 
 ### `process-launch-4x5`
 
 - **Page · section:** Home › How we work, step "Launch" · **Aspect:** 4:5
-- **Prompt:** House style. A desert evening setup moments before guests arrive: a low majlis of carpets and cushions on the sand, brass lanterns lit along a path, the last blue of dusk over dunes. Still, expectant, no people.
-- **Alt EN:** A desert evening setup with lanterns lit, moments before guests arrive.
-- **Alt AR:** تجهيز مسائي في الصحراء والفوانيس مضاءة، قبل وصول الضيوف بلحظات.
-- **Real alternative:** `heritage-5` (desert tent at night with carpets, 891 × 668, crop to 4:5 = 534 × 668). **Usable now**, small; matches the alt closely.
+- **Prompt (fallback only):** House style. A desert evening setup moments before guests arrive: a low majlis of carpets and cushions on the sand, brass lanterns lit along a path, the last blue of dusk over dunes. Still, expectant, no people.
+- **Alt EN:** A desert tent at night, its carpets laid out for guests.
+- **Alt AR:** خيمة صحراوية ليلًا، وسجّادها مفروش لاستقبال الضيوف.
+- **In use: real photo** `/images/work/heritage/heritage-5.webp` (D49). Was: `heritage-5` (desert tent at night with carpets, 891 × 668, crop to 4:5 = 534 × 668).
 
 ## Products, 16:9 (Digital solutions product cards; product page headers)
 
@@ -198,13 +203,13 @@ These are concept backgrounds behind the products' "Preview" screens. The screen
 
 ---
 
-## Summary for Checkpoint 4
+## Summary
 
 | | Slots |
 |---|---|
-| Real alternative **usable now** (no client name, no identifiable person) | 7: events 4:5 and 16:9, creative 16:9, print & gifts 16:9, process build, produce (loose fit) and launch |
-| Real alternative waiting on a client name (OQ #17) | 4: print & gifts 4:5, software 4:5 and 16:9, marketing 16:9 |
-| AI only (no real alternative) | 7: creative 4:5, marketing 4:5, hero fallback ×2, process plan, products ×2 |
+| **Real photo in use** (D49) | 7: events 4:5 and 16:9, creative 16:9, print & gifts 16:9, process build, produce and launch |
+| **AI now**, real photo after the client approves (OQ #17) | 4: print & gifts 4:5, software 4:5 and 16:9, marketing 16:9 |
+| **AI only** | 7: creative 4:5, marketing 4:5, hero fallback ×2, process plan, products ×2 |
 | **Total** | **18** |
 
-Every slot also has an AI prompt, so either path stays open.
+That leaves 11 slots to generate. The first 3 go to the user for review before the rest (D49).
