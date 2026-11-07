@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { gotoReady } from "./helpers";
+import { controllerReady, gotoReady } from "./helpers";
 
 /** Language switches mid-pin and with a menu open leave no stale triggers, splits or menus (D31). */
 test.describe("locale switch", () => {
@@ -14,8 +14,13 @@ test.describe("locale switch", () => {
     await page.locator("header a[hreflang=ar]").click();
     await page.waitForURL(/\/ar$/);
     await page.locator("#stage[data-tone-ready]").waitFor({ state: "attached" });
+    // The pin belongs to the hero controller, and the page can hydrate after the layout's
+    // ToneController (D40): wait for the controller's own marker, not only the layout's.
+    await controllerReady(page);
 
     expect(await page.locator(".pin-spacer").count()).toBe(1);
+    // The pin uses the server-rendered wrapper as its spacer, so the hero is never moved in the DOM (D43).
+    expect(await page.locator(".pin-spacer").evaluate((el) => el.classList.contains("hero-pin"))).toBe(true);
     const title = await page.locator("#hero-title").evaluate((el) => ({
       text: el.textContent ?? "",
       label: el.getAttribute("aria-label") ?? "",

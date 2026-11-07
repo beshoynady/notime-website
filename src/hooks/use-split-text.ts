@@ -2,7 +2,8 @@
 
 import type { RefObject } from "react";
 import type { AppLocale } from "@/i18n/routing";
-import { SplitText, useGSAP } from "@/lib/gsap";
+import { useGSAP } from "@/lib/gsap";
+import { withSplitText, type SplitText } from "@/lib/split-text";
 import { prefersReducedMotion } from "./use-reduced-motion";
 
 interface SplitOptions {
@@ -35,14 +36,17 @@ export function splitVars(locale: AppLocale, { mask = true, wordsOnly = false }:
  * GSAP SplitText with the project's language rules: chars in English, words in Arabic.
  * Reverts on unmount and on locale change (the split is recorded in the useGSAP context);
  * re-splits on resize and when fonts load (`autoSplit`). Skipped under reduced motion,
- * so the original, unsplit text is the final state.
+ * so the original, unsplit text is the final state. The plugin is downloaded on first use
+ * (`loadSplitText`); until then, or if it fails to load, the text stays as rendered.
  */
 export function useSplitText(ref: RefObject<HTMLElement | null>, { locale, onSplit, mask = true, wordsOnly = false }: SplitOptions) {
   useGSAP(
-    () => {
+    (context) => {
       const el = ref.current;
       if (!el || prefersReducedMotion()) return;
-      SplitText.create(el, { ...splitVars(locale, { mask, wordsOnly }), autoSplit: true, onSplit: (split) => onSplit(split) });
+      return withSplitText(context, (Split) => {
+        Split.create(el, { ...splitVars(locale, { mask, wordsOnly }), autoSplit: true, onSplit: (split) => onSplit(split) });
+      });
     },
     { scope: ref, dependencies: [locale], revertOnUpdate: true },
   );

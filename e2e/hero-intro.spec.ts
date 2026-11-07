@@ -1,10 +1,8 @@
 import { expect, test, type Page } from "@playwright/test";
+import { controllerReady, waitForIntroEnd } from "./helpers";
 
 const shellOpacity = (page: Page) =>
   page.locator("[data-header-shell]").evaluate((el) => Number(getComputedStyle(el).opacity));
-
-/** The controller has taken over (first visit: the intro is running). */
-const controllerReady = (page: Page) => page.locator("#hero[data-hero-ready]").waitFor({ state: "attached" });
 
 test.describe("hero intro (motion)", () => {
   test("first visit: shutters cover, header stays focusable, Tab finishes the intro", async ({ page, isMobile }) => {
@@ -39,7 +37,7 @@ test.describe("hero intro (motion)", () => {
   test("plays once per session: a reload skips the shutters and reveals the title", async ({ page }) => {
     for (const locale of ["en", "ar"]) {
       await page.goto(`/${locale}`);
-      await page.waitForFunction(() => document.documentElement.hasAttribute("data-intro-seen"), null, { timeout: 10_000 });
+      await waitForIntroEnd(page);
       await page.reload();
       // Before and after hydration: no shutters, header visible.
       await expect(page.locator(".hero-shutter.top")).toBeHidden();
@@ -62,7 +60,7 @@ test.describe("header tone through the pin", () => {
     // Skip with a key, not a wheel: Lenis would still be easing the wheel's scroll and
     // override the first programmatic jump.
     await page.keyboard.press("Shift");
-    await page.waitForFunction(() => document.documentElement.hasAttribute("data-intro-seen"));
+    await waitForIntroEnd(page);
     const toneAt = async (f: number) => {
       await page.evaluate((f) => scrollTo(0, innerHeight * f), f);
       await page.waitForTimeout(150);
@@ -74,6 +72,42 @@ test.describe("header tone through the pin", () => {
     expect(await toneAt(2.6)).toBe("light");
     expect(await toneAt(1.0)).toBe("hero");
   });
+});
+
+test.describe("hero LCP rule below 900px (D43)", () => {
+  test.beforeEach(({ isMobile }) => test.skip(!isMobile, "mobile viewport only"));
+
+  for (const locale of ["en", "ar"] as const) {
+    // What the hero code controls: the title is never masked, split or held, so its paint
+    // waits on nothing but the text itself. (When the text paints is the webfont's block
+    // period, D38 / OPEN_QUESTIONS #14: the first contentful paint can be the clock SVG or
+    // the logo a little earlier, measured 100-500 ms, with or without the intro.)
+    test(`the title is the LCP, never masked or split (${locale})`, async ({ page }) => {
+      await page.addInitScript(() => {
+        const w = window as unknown as { __lcp: string[] };
+        w.__lcp = [];
+        new PerformanceObserver((l) => {
+          for (const e of l.getEntries() as unknown as { element: Element | null }[]) w.__lcp.push(e.element?.className ?? "");
+        }).observe({ type: "largest-contentful-paint", buffered: true });
+      });
+      // First visit (intro plays), then a repeat visit in the same tab (intro skipped).
+      for (const visit of ["first", "repeat"]) {
+        await page.goto(`/${locale}`);
+        await controllerReady(page);
+        await page.waitForTimeout(1500);
+        const r = await page.evaluate(() => ({
+          lcp: (window as unknown as { __lcp: string[] }).__lcp.at(-1),
+          splitNodes: document.querySelectorAll(".hero-line-inner *").length,
+          masks: [...document.querySelectorAll(".hero-line")].map((el) => getComputedStyle(el).overflow),
+          visible: [...document.querySelectorAll(".hero-line-inner")].map((el) => getComputedStyle(el).visibility),
+        }));
+        expect(r.lcp, `${visit} visit LCP element`).toContain("hero-line-inner");
+        expect(r.splitNodes, `${visit} visit: no SplitText below 900px`).toBe(0);
+        expect(r.masks, `${visit} visit: no line masks below 900px`).toEqual(["visible", "visible"]);
+        expect(r.visible, `${visit} visit: lines never hidden`).toEqual(["visible", "visible"]);
+      }
+    });
+  }
 });
 
 test.describe("hero intro (reduced motion)", () => {

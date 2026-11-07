@@ -1,5 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
-import { gotoReady } from "./helpers";
+import { gotoReady, waitForIntroEnd } from "./helpers";
 
 /** Pin geometry: hero height + 140% of the viewport (the scroll timeline's `end: "+=140%"`). */
 async function pinState(page: Page) {
@@ -23,7 +23,7 @@ test.describe("hero pin on mobile", () => {
     await page.setViewportSize({ width: 390, height: 844 });
     await gotoReady(page, "/en");
     await page.touchscreen.tap(30, 420); // skip the intro
-    await page.waitForFunction(() => document.documentElement.hasAttribute("data-intro-seen"));
+    await waitForIntroEnd(page);
     // Real touch events (touchstart → touchmove → touchend), so the browser's native touch
     // scrolling moves the page. (Input.synthesizeScrollGesture with gestureSourceType
     // "touch" does not scroll in headless Chrome; measured.)
@@ -59,7 +59,7 @@ test.describe("hero pin on mobile", () => {
     await page.setViewportSize({ width: 390, height: 844 });
     await gotoReady(page, "/en");
     await page.touchscreen.tap(30, 420);
-    await page.waitForFunction(() => document.documentElement.hasAttribute("data-intro-seen"));
+    await waitForIntroEnd(page);
     await page.evaluate(() => scrollTo(0, innerHeight * 0.7));
     await page.waitForTimeout(400);
     const before = await pinState(page);

@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { gotoReady } from "./helpers";
+import { gotoReady, waitForIntroEnd } from "./helpers";
 
 /** Sum of layout-shift entries not caused by input (CLS proxy), observed from navigation start. */
 test.describe("no layout shift on load (font swap, hero intro)", () => {
@@ -17,7 +17,7 @@ test.describe("no layout shift on load (font swap, hero intro)", () => {
       await gotoReady(page, `/${locale}`);
       await page.evaluate(() => document.fonts.ready);
       // Through the whole first-visit intro (it sets html[data-intro-seen] when it ends), then a margin.
-      await page.waitForFunction(() => document.documentElement.hasAttribute("data-intro-seen"), null, { timeout: 10_000 });
+      await waitForIntroEnd(page);
       await page.waitForTimeout(500);
       const cls = await page.evaluate(() => (window as unknown as { __cls: number }).__cls);
       expect(cls).toBeLessThan(0.001);

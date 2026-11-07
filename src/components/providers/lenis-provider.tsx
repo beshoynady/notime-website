@@ -5,6 +5,7 @@ import "lenis/dist/lenis.css";
 import { createContext, useContext, useEffect, useMemo, useRef, type ReactNode } from "react";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { afterFirstPaint } from "@/lib/idle";
 
 export interface LenisControls {
   stop(): void;
@@ -24,22 +25,28 @@ export function LenisProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (reduced) return;
-    const lenis = new Lenis({
-      duration: 1.15,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      autoRaf: false,
+    const tick = (time: number) => lenisRef.current?.raf(time * 1000);
+    // Created after the first paint, outside the hydration task (D44); until then the page
+    // scrolls natively, and the controls below fall back to native scrolling.
+    const cancel = afterFirstPaint(() => {
+      const lenis = new Lenis({
+        duration: 1.15,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        autoRaf: false,
+      });
+      lenisRef.current = lenis;
+      lenis.on("scroll", ScrollTrigger.update);
+      gsap.ticker.add(tick);
+      gsap.ticker.lagSmoothing(0);
+      if (process.env.NODE_ENV !== "production") (window as unknown as { lenis?: Lenis }).lenis = lenis;
     });
-    lenisRef.current = lenis;
-    lenis.on("scroll", ScrollTrigger.update);
-    const tick = (time: number) => lenis.raf(time * 1000);
-    gsap.ticker.add(tick);
-    gsap.ticker.lagSmoothing(0);
-    if (process.env.NODE_ENV !== "production") (window as unknown as { lenis?: Lenis }).lenis = lenis;
 
     return () => {
+      cancel();
+      if (!lenisRef.current) return;
       gsap.ticker.remove(tick);
       gsap.ticker.lagSmoothing(500, 33);
-      lenis.destroy();
+      lenisRef.current.destroy();
       lenisRef.current = null;
       if (process.env.NODE_ENV !== "production") delete (window as unknown as { lenis?: Lenis }).lenis;
     };

@@ -1,0 +1,452 @@
+{
+  "lighthouse": "13.5.0",
+  "base": "http://localhost:3100",
+  "runs": 3,
+  "profile": "mobile, Moto G Power emulation, simulated throttling (150 ms RTT, 1.6 Mbps, 4x CPU)",
+  "medians": {
+    "en": {
+      "first": {
+        "perf": 61,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 92,
+        "fcp": 810,
+        "lcp": 4082,
+        "lcpObserved": 1111,
+        "tbt": 1251,
+        "cls": 0,
+        "si": 4211,
+        "benchmarkIndex": 1437,
+        "lcpElements": [
+          "div.hero-content > h1#hero-title > span.hero-line > b.hero-line-inner | \"TO CREATE.\"",
+          "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"IT'S TIME\""
+        ]
+      },
+      "return": {
+        "perf": 94,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 92,
+        "fcp": 685,
+        "lcp": 1151,
+        "lcpObserved": 380,
+        "tbt": 293,
+        "cls": 0,
+        "si": 752,
+        "benchmarkIndex": 1135,
+        "lcpElements": [
+          "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"IT'S TIME\""
+        ]
+      },
+      "skipped": {
+        "perf": 71,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 92,
+        "fcp": 786,
+        "lcp": 3882,
+        "lcpObserved": 1000,
+        "tbt": 672,
+        "cls": 0,
+        "si": 2752,
+        "benchmarkIndex": 1447,
+        "lcpElements": [
+          "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"IT'S TIME\""
+        ]
+      }
+    },
+    "ar": {
+      "first": {
+        "perf": 56,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 92,
+        "fcp": 896,
+        "lcp": 4130,
+        "lcpObserved": 1491,
+        "tbt": 1708,
+        "cls": 0,
+        "si": 5002,
+        "benchmarkIndex": 1445,
+        "lcpElements": [
+          "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\""
+        ]
+      },
+      "return": {
+        "perf": 93,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 92,
+        "fcp": 832,
+        "lcp": 1231,
+        "lcpObserved": 420,
+        "tbt": 312,
+        "cls": 0,
+        "si": 893,
+        "benchmarkIndex": 1113,
+        "lcpElements": [
+          "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\"",
+          "div.hero-content > h1#hero-title > span.hero-line > b.hero-line-inner | \"الإبداع.\""
+        ]
+      },
+      "skipped": {
+        "perf": 63,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 92,
+        "fcp": 794,
+        "lcp": 3866,
+        "lcpObserved": 1395,
+        "tbt": 1347,
+        "cls": 0,
+        "si": 3250,
+        "benchmarkIndex": 1455,
+        "lcpElements": [
+          "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\""
+        ]
+      }
+    }
+  },
+  "runsDetail": {
+    "en": {
+      "first": [
+        {
+          "perf": 64,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 831,
+          "lcp": 4082,
+          "lcpObserved": 1019,
+          "tbt": 915,
+          "cls": 0,
+          "si": 4211,
+          "benchmarkIndex": 1180,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > b.hero-line-inner | \"TO CREATE.\"",
+          "lcpParts": {
+            "timeToFirstByte": 18,
+            "elementRenderDelay": 1001
+          }
+        },
+        {
+          "perf": 58,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 810,
+          "lcp": 4304,
+          "lcpObserved": 1111,
+          "tbt": 1396,
+          "cls": 0,
+          "si": 4153,
+          "benchmarkIndex": 1452,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"IT'S TIME\"",
+          "lcpParts": {
+            "timeToFirstByte": 33,
+            "elementRenderDelay": 1078
+          }
+        },
+        {
+          "perf": 61,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 787,
+          "lcp": 4010,
+          "lcpObserved": 1145,
+          "tbt": 1251,
+          "cls": 0,
+          "si": 4241,
+          "benchmarkIndex": 1437,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"IT'S TIME\"",
+          "lcpParts": {
+            "timeToFirstByte": 20,
+            "elementRenderDelay": 1125
+          }
+        }
+      ],
+      "return": [
+        {
+          "perf": 94,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 685,
+          "lcp": 1151,
+          "lcpObserved": 363,
+          "tbt": 291,
+          "cls": 0,
+          "si": 752,
+          "benchmarkIndex": 1141,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"IT'S TIME\"",
+          "lcpParts": {
+            "timeToFirstByte": 10,
+            "elementRenderDelay": 353
+          }
+        },
+        {
+          "perf": 94,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 810,
+          "lcp": 1202,
+          "lcpObserved": 451,
+          "tbt": 293,
+          "cls": 0,
+          "si": 830,
+          "benchmarkIndex": 1135,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"IT'S TIME\"",
+          "lcpParts": {
+            "timeToFirstByte": 11,
+            "elementRenderDelay": 440
+          }
+        },
+        {
+          "perf": 93,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 666,
+          "lcp": 1103,
+          "lcpObserved": 380,
+          "tbt": 317,
+          "cls": 0,
+          "si": 732,
+          "benchmarkIndex": 1121,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"IT'S TIME\"",
+          "lcpParts": {
+            "timeToFirstByte": 8,
+            "elementRenderDelay": 372
+          }
+        }
+      ],
+      "skipped": [
+        {
+          "perf": 75,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 786,
+          "lcp": 3854,
+          "lcpObserved": 1000,
+          "tbt": 512,
+          "cls": 0,
+          "si": 2752,
+          "benchmarkIndex": 1461,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"IT'S TIME\"",
+          "lcpParts": {
+            "timeToFirstByte": 13,
+            "elementRenderDelay": 987
+          }
+        },
+        {
+          "perf": 70,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 785,
+          "lcp": 3887,
+          "lcpObserved": 994,
+          "tbt": 723,
+          "cls": 0,
+          "si": 2536,
+          "benchmarkIndex": 1436,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"IT'S TIME\"",
+          "lcpParts": {
+            "timeToFirstByte": 18,
+            "elementRenderDelay": 975
+          }
+        },
+        {
+          "perf": 71,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 845,
+          "lcp": 3882,
+          "lcpObserved": 1065,
+          "tbt": 672,
+          "cls": 0,
+          "si": 2857,
+          "benchmarkIndex": 1447,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"IT'S TIME\"",
+          "lcpParts": {
+            "timeToFirstByte": 24,
+            "elementRenderDelay": 1041
+          }
+        }
+      ]
+    },
+    "ar": {
+      "first": [
+        {
+          "perf": 56,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 844,
+          "lcp": 4159,
+          "lcpObserved": 1491,
+          "tbt": 1708,
+          "cls": 0,
+          "si": 5002,
+          "benchmarkIndex": 1454,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\"",
+          "lcpParts": {
+            "timeToFirstByte": 26,
+            "elementRenderDelay": 1465
+          }
+        },
+        {
+          "perf": 54,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 896,
+          "lcp": 4130,
+          "lcpObserved": 1605,
+          "tbt": 2427,
+          "cls": 0,
+          "si": 5334,
+          "benchmarkIndex": 1445,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\"",
+          "lcpParts": {
+            "timeToFirstByte": 24,
+            "elementRenderDelay": 1581
+          }
+        },
+        {
+          "perf": 61,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 902,
+          "lcp": 4008,
+          "lcpObserved": 1324,
+          "tbt": 1258,
+          "cls": 0,
+          "si": 4175,
+          "benchmarkIndex": 1420,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\"",
+          "lcpParts": {
+            "timeToFirstByte": 39,
+            "elementRenderDelay": 1286
+          }
+        }
+      ],
+      "return": [
+        {
+          "perf": 94,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 832,
+          "lcp": 1231,
+          "lcpObserved": 420,
+          "tbt": 297,
+          "cls": 0,
+          "si": 832,
+          "benchmarkIndex": 1107,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\"",
+          "lcpParts": {
+            "timeToFirstByte": 14,
+            "elementRenderDelay": 407
+          }
+        },
+        {
+          "perf": 93,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 781,
+          "lcp": 1178,
+          "lcpObserved": 397,
+          "tbt": 312,
+          "cls": 0,
+          "si": 893,
+          "benchmarkIndex": 1113,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > b.hero-line-inner | \"الإبداع.\"",
+          "lcpParts": {
+            "timeToFirstByte": 10,
+            "elementRenderDelay": 387
+          }
+        },
+        {
+          "perf": 91,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 903,
+          "lcp": 1278,
+          "lcpObserved": 431,
+          "tbt": 385,
+          "cls": 0,
+          "si": 908,
+          "benchmarkIndex": 1119,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > b.hero-line-inner | \"الإبداع.\"",
+          "lcpParts": {
+            "timeToFirstByte": 14,
+            "elementRenderDelay": 417
+          }
+        }
+      ],
+      "skipped": [
+        {
+          "perf": 63,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 788,
+          "lcp": 3850,
+          "lcpObserved": 1395,
+          "tbt": 1347,
+          "cls": 0,
+          "si": 3354,
+          "benchmarkIndex": 1461,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\"",
+          "lcpParts": {
+            "timeToFirstByte": 20,
+            "elementRenderDelay": 1375
+          }
+        },
+        {
+          "perf": 65,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 794,
+          "lcp": 3866,
+          "lcpObserved": 1271,
+          "tbt": 1062,
+          "cls": 0,
+          "si": 3025,
+          "benchmarkIndex": 1455,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\"",
+          "lcpParts": {
+            "timeToFirstByte": 16,
+            "elementRenderDelay": 1255
+          }
+        },
+        {
+          "perf": 59,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 867,
+          "lcp": 3972,
+          "lcpObserved": 1414,
+          "tbt": 1846,
+          "cls": 0,
+          "si": 3250,
+          "benchmarkIndex": 1439,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\"",
+          "lcpParts": {
+            "timeToFirstByte": 22,
+            "elementRenderDelay": 1392
+          }
+        }
+      ]
+    }
+  }
+}

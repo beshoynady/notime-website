@@ -337,7 +337,7 @@ useMegaMenu(): { state; triggerProps; panelProps; categoryProps(slug); close(ret
   - Size grows to 64px over `a, button, [data-cursor], img, video` (detected with `pointerover` delegation).
   - `aria-hidden`.
 - `<SiteFooter />`: a dark stub with the logo, `© {year} NO TIME Creative House`, and a `footer.stub` TODO line. The year comes from a server `new Date()` and is cached (cacheComponents safe via `"use cache"`, or rendered statically at build).
-- `scripts/shots.mjs [label]`: uses `@playwright/test`'s `chromium.launch({ channel: "chrome" })` against `http://localhost:3100`. It writes `docs/checkpoints/<label>/{en,ar}-{1440,390}[-reduced].png`, and with `--hero` also writes `hero-intro-end.png`, `hero-mid-scroll.png` and `hero.webm`.
+- `scripts/shots.mjs [label]`: uses `@playwright/test`'s `chromium.launch({ channel: "chrome" })` against `http://localhost:3100`. It writes `docs/checkpoints/<label>/{en,ar}-{1440,390}[-reduced].png`, and with `--hero` also writes, per locale and width, `hero-{locale}-{width}-intro-end.png`, `-scroll-split.png` and `-scroll-beat.png`, plus `cold-first-visit-en-1440.png` and the recording as `hero.webm` (VP9 via Chrome's MediaRecorder) and `hero.webp` (animated WebP via sharp), both from CDP screencast frames (Playwright's `recordVideo` needs an ffmpeg download, not allowed).
 
 - [x] **Step 1:** Write `e2e/overflow.spec.ts`. For `/en` and `/ar` at 360×780, with the menu closed and then open, assert `document.documentElement.scrollWidth <= innerWidth`. Run → PASS once the shell is complete.
 - [x] **Step 2:** Run `superpowers:verification-before-completion`. Then build, lint, typecheck, test and e2e; then `node scripts/shots.mjs checkpoint-2` with reduced motion on and off.
@@ -459,14 +459,16 @@ Use `gsap-framer-scroll-animation` for the ScrollTrigger pin.
 - [ ] **Step 4 (LCP rule, approved):** the largest text element must paint at first render and is **never at opacity 0**. Below 900px the title reveal starts at t = 0, with the masked rise only and no opacity fade. The lead is visible from frame one, so the intro animates its `y` only. The shutters sit over the hero during the intro, so identify the actual LCP element in the Lighthouse trace and confirm its paint is not deferred by them. If it is, the mobile shutters become a clip-path on the letterbox and do not cover the text. Run `npx lighthouse http://localhost:3100/{en,ar} --form-factor=mobile` 3× each: LCP < 2.5s and CLS 0. Log the median and the LCP element in DECISIONS.
 - [ ] **Step 5:** Run `verification-before-completion`, then `node scripts/shots.mjs checkpoint-3 --hero`, then `/simplify`, then commit `feat(hero): intro and pinned scroll timelines, RTL-mirrored split, focus pull`.
 
+**Status 2026-11-07 (session 2):** Step 4 done. The mobile title is still from first paint (D43); the TBT deferrals are in (D44); Lighthouse medians are in `docs/checkpoints/lighthouse/{baseline,after,final}/summary.json`. Simulated LCP on cold loads is still ~4 s (observed: the still title at ~1.1–1.7 s). The trace findings are handed to Task 16 (see its Step 2). Step 5 follows.
+
 **Status at the session handoff (2026-11-07):** Steps 1-3 done and committed in `chore: session handoff` (intro, scroll timeline, locale-switch, hero-resize and hero-intro specs, ToneController numeric zones D41, late-hydration path). Still to do:
 - Step 4: run Lighthouse (`node scripts/lighthouse.mjs http://localhost:3100 docs/checkpoints/lighthouse`) 3x per locale on a quiet machine; log the median, LCP element and CLS in DECISIONS (D38 amendment / new row).
 - Step 5: re-capture `node scripts/shots.mjs checkpoint-3 --hero` (the committed beat frames predate the header-tone fix), run `/simplify`, commit `feat(hero): ...polish` if anything changes.
-- Then the CHECKPOINT 3 report (in Arabic), including the OPEN_QUESTIONS #14 font decision. The recording is `hero.webp` (animated WebP via CDP screencast + sharp), not `hero.webm`: Playwright video needs an ffmpeg download, which is not allowed.
+- Then the CHECKPOINT 3 report (in Arabic), including the OPEN_QUESTIONS #14 font decision. The recording exists twice, from the same CDP screencast frames: `hero.webm` (VP9, encoded by Chrome's MediaRecorder) and `hero.webp` (animated WebP via sharp). Playwright's own `recordVideo` is not used, because it needs an ffmpeg download, which is not allowed.
 
 ---
 
-## CHECKPOINT 3: send the hero intro end state, the mid-scroll state, and the `hero.webm` recording. Stop.
+## CHECKPOINT 3: send the hero intro end state, the mid-scroll state, and the recording (`hero.webm` + `hero.webp`). Stop.
 
 Added 2026-11-06 for checkpoint 3: intro screenshots at 1440 and 390 in EN and AR, the reduced-motion static frame, measured mobile LCP element and time for `/en` and `/ar`. Extra hero requirements from that message: intro once per session (`sessionStorage`); skippable (scroll, key, click → `tl.progress(1)`); header stays focusable during the intro and tabbing into it finishes the intro; canvas pauses while any menu is open (`html[data-overlay-open]`), off-screen or tab hidden; pin uses `svh` + `invalidateOnRefresh` + `ignoreMobileResize`, tested with a real touch scroll at 390px.
 
@@ -560,6 +562,11 @@ This session has `Canva generate-image` and `Figma generate_image` MCP tools. If
 
 - [ ] **Step 1:** Run `design:accessibility-review`, `wcag-audit-patterns` checks and `design:design-critique` against `/en`, `/ar` and `/en/styleguide`. Fix the findings.
 - [ ] **Step 2:** Run mobile Lighthouse for `/en` and `/ar` (3 runs each, median). Targets: Performance ≥ 90, Accessibility ≥ 95, Best Practices ≥ 95, SEO ≥ 95. Save the JSON reports to `docs/checkpoints/lighthouse/`.
+  **Input from Checkpoint 3 (trace of a cold mobile load at 4x CPU, 2026-11-07; see D44):** the first frame is painted and committed at ~600 ms but presented only at ~1.4 s. The causes, in order of evidence:
+  1. The hero grain's SVG `feTurbulence` image: hiding the grain moves FCP from ~1.4–1.7 s to ~0.85–1.05 s. Layer size and animation are not the cost. Candidates: a pre-rendered noise tile (check that it never becomes an LCP candidate), or a grain that appears after first paint. Verify on a real phone, because headless Chrome composites in software.
+  2. Framework JS evaluated before the frame: `react-dom` + Next app-router client (223 KB raw / 70 KB gz, ~260 ms at 4x) and the RSC client runtime (165 / 45 KB, ~340 ms). Profile hydration and trim client islands.
+  3. All three font files (Montserrat latin, Alexandria arabic + latin) are preloaded on both locales. Preload per locale only what the first screen uses.
+  4. SEO 92 is the local build only: without `NEXT_PUBLIC_SITE_URL`, the canonical points to `localhost:3000`. Run Step 2 with the variable set.
 - [ ] **Step 3:** Run every e2e spec in both projects, plus a reduced-motion pass (`reducedMotion: "reduce"`) asserting no `.pin-spacer` and visible beat text.
 - [ ] **Step 4:** Grep `src` for `ml-|mr-|pl-|pr-|left-|right-|text-left|text-right` and for raw string literals in JSX. Both must return nothing outside allow-listed geometry (the canvas maths). Grep for `TODO: replace placeholder` and cross-check `CONTENT_CHECKLIST.md`.
 - [ ] **Step 5:** Run `superpowers:requesting-code-review` and address the findings. Update `DECISIONS.md` and `OPEN_QUESTIONS.md`. Then run `superpowers:finishing-a-development-branch`.

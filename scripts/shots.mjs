@@ -5,8 +5,9 @@
  * Writes docs/checkpoints/<label>/{en,ar}-{1440,390}[-reduced].png plus menu-open states
  * ({locale}-{width}-menu.png). With --hero, per locale and width: hero-{locale}-{width}-intro-end.png,
  * -scroll-split.png (title splitting, particles warping) and -scroll-beat.png (second beat), plus
- * hero.webp (animated recording of intro + scroll, 1440 viewport at 960px, EN).
- * Uses the installed Chrome (channel: "chrome"); no Playwright browser downloads.
+ * the recording of intro + scroll (1440 viewport at 960px, EN) twice: hero.webm (VP9 video)
+ * and hero.webp (animated WebP, plays inline in docs and chat).
+ * Uses the installed Chrome (channel: "chrome"); no Playwright browser or ffmpeg downloads.
  */
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -114,8 +115,9 @@ if (hero) {
     await ctx.close();
   }
 
-  // Recording: Playwright video needs its own ffmpeg download (not allowed here), so the
-  // frames come from Chrome's CDP screencast and sharp assembles an animated WebP.
+  // Recording: Playwright's recordVideo needs its own ffmpeg download (not allowed here), so
+  // the frames come from Chrome's CDP screencast; sharp assembles the animated WebP and
+  // Chrome's MediaRecorder encodes the WebM (encodeWebm below).
   const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   const page = await ctx.newPage();
   await warmFonts(page, "en");
@@ -156,6 +158,62 @@ if (hero) {
     .toBuffer();
   await writeFile(path.join(out, "hero.webp"), webp);
   console.log(`✓ hero.webp (${picked.length} frames, ${(picked.length / FPS).toFixed(1)}s, ${(webp.length / 1e6).toFixed(1)} MB)`);
+
+  const webm = await encodeWebm(picked, FPS);
+  await writeFile(path.join(out, "hero.webm"), webm.buf);
+  console.log(`✓ hero.webm (${webm.mime}, ${(webm.buf.length / 1e6).toFixed(1)} MB)`);
+}
+
+/**
+ * The same frames as a WebM video, encoded by Chrome itself: the frames are drawn onto a
+ * canvas at a steady rate and captured with MediaRecorder (VP9). No ffmpeg involved. It plays
+ * in real time, so encoding takes as long as the clip.
+ */
+async function encodeWebm(frames, fps) {
+  const ctx = await browser.newContext({ viewport: { width: 320, height: 200 } });
+  const page = await ctx.newPage();
+  await page.goto("about:blank");
+  await page.evaluate(() => (window.__frames = []));
+  for (let i = 0; i < frames.length; i += 40) {
+    const chunk = frames.slice(i, i + 40).map((b) => b.toString("base64"));
+    await page.evaluate(async (list) => {
+      for (const b64 of list) {
+        const bytes = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+        window.__frames.push(await createImageBitmap(new Blob([bytes], { type: "image/jpeg" })));
+      }
+    }, chunk);
+  }
+  const res = await page.evaluate(async (fps) => {
+    const list = window.__frames;
+    const canvas = document.createElement("canvas");
+    canvas.width = list[0].width;
+    canvas.height = list[0].height;
+    const g = canvas.getContext("2d");
+    g.drawImage(list[0], 0, 0);
+    const stream = canvas.captureStream(0);
+    const track = stream.getVideoTracks()[0];
+    const mime = ["video/webm;codecs=vp9", "video/webm;codecs=vp8", "video/webm"].find((m) => MediaRecorder.isTypeSupported(m));
+    const rec = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 6_000_000 });
+    const chunks = [];
+    rec.ondataavailable = (e) => e.data.size && chunks.push(e.data);
+    const stopped = new Promise((r) => (rec.onstop = r));
+    rec.start();
+    const t0 = performance.now();
+    for (let i = 0; i < list.length; i++) {
+      g.drawImage(list[i], 0, 0);
+      track.requestFrame();
+      const wait = t0 + ((i + 1) * 1000) / fps - performance.now();
+      await new Promise((r) => setTimeout(r, Math.max(0, wait)));
+    }
+    rec.stop();
+    await stopped;
+    const u = new Uint8Array(await new Blob(chunks, { type: mime }).arrayBuffer());
+    let s = "";
+    for (let i = 0; i < u.length; i += 0x8000) s += String.fromCharCode(...u.subarray(i, i + 0x8000));
+    return { mime, b64: btoa(s) };
+  }, fps);
+  await ctx.close();
+  return { mime: res.mime, buf: Buffer.from(res.b64, "base64") };
 }
 
 await browser.close();

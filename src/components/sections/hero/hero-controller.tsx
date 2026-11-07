@@ -3,10 +3,13 @@
 import dynamic from "next/dynamic";
 import { useLocale } from "next-intl";
 import { useEffect, useRef, useState } from "react";
+import { mediaQueryList } from "@/hooks/use-media-query";
 import { prefersReducedMotion } from "@/hooks/use-reduced-motion";
 import { splitVars } from "@/hooks/use-split-text";
 import type { AppLocale } from "@/i18n/routing";
-import { gsap, ScrollTrigger, SplitText, useGSAP } from "@/lib/gsap";
+import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
+import { afterFirstPaint } from "@/lib/idle";
+import { withSplitText, type SplitTextPlugin } from "@/lib/split-text";
 import { createSceneState } from "./scene-state";
 
 // Client-only: the canvas has nothing to server-render (the CSS gradient on .hero is the
@@ -21,24 +24,36 @@ const INTRO_DEADLINE_MS = 4500;
 const REVEAL_DEADLINE_MS = 2400;
 /** Same as the motion-mode CSS on .hero-title, so the focus pull can add blur to it. */
 const TITLE_SHADOW = "drop-shadow(0px 4px 40px rgba(13, 8, 5, 0.55))";
+/** Same breakpoint as the CSS: masks, letter rise and SplitText only from here up. */
+const WIDE = "(min-width: 900px)";
+const NARROW = "(max-width: 899.98px)";
 
 /**
  * Client half of the hero. Owns the SceneState shared by reference with the canvas, the
  * clock hand and GSAP, and runs:
  * - the first-visit intro (once per session; skippable by wheel, touch, key or click, and
  *   finished early when focus enters the header);
- * - the short title reveal on repeat visits (no shutters);
+ * - the short title reveal on repeat visits (no shutters; desktop only);
  * - the pinned, scrubbed scroll timeline (mirrored in Arabic).
  * Each element is animated by one timeline only: the intro moves inner elements, the
  * scroll timeline their wrappers. Reduced motion: none of this; the static frame is final.
+ *
+ * LCP (D43): below 900px the title is painted in place from the first frame on every
+ * visit (no masks, no split, no fade, no motion); the first-visit shutters part over it.
+ * SplitText is downloaded only at >= 900px (letter rise, beat words).
  */
 export function HeroController() {
   const [state] = useState(createSceneState);
+  const [sceneOn, setSceneOn] = useState(false);
   const anchor = useRef<HTMLSpanElement>(null);
   const locale = useLocale() as AppLocale;
 
+  // The canvas is atmosphere, not content (the CSS gradient is the same picture): mount it
+  // after the first paint, outside the hydration task (D44).
+  useEffect(() => afterFirstPaint(() => setSceneOn(true)), []);
+
   useGSAP(
-    () => {
+    (context) => {
       // Via the anchor, not getElementById: pages kept hidden by <Activity> after a client
       // navigation can leave a second #hero in the DOM (DECISIONS D32).
       const hero = anchor.current?.closest<HTMLElement>("#hero");
@@ -50,18 +65,25 @@ export function HeroController() {
       const beat = q(".hero-beat")[0];
       const inners = q(".hero-line-inner");
       const dir = locale === "ar" ? -1 : 1;
+      // Width at start, for the intro and the repeat-visit reveal (each runs once).
+      const wide = mediaQueryList(WIDE).matches;
+      let alive = true;
+      let cancelTitle = () => {};
 
       // ---- Scroll: pinned, scrubbed --------------------------------------------------
-      const beatSplit = SplitText.create(beat, { ...splitVars(locale, { wordsOnly: true }), aria: "none" });
+      // Built synchronously at every width, so the pin spacer exists before the
+      // ToneController measures its zones; only the desktop beat words wait for SplitText.
       const mm = gsap.matchMedia();
       // Both conditions: matchMedia only runs the callback while at least one matches.
-      mm.add({ wide: "(min-width: 900px)", narrow: "(max-width: 899.98px)" }, (ctx) => {
+      mm.add({ wide: WIDE, narrow: NARROW }, (ctx) => {
         const lines = q(".hero-line");
         const tl = gsap.timeline({
           defaults: { ease: "none" },
           scrollTrigger: {
             trigger: hero,
             pin: true,
+            // The server-rendered wrapper (hero.tsx), so the hero is never moved in the DOM.
+            pinSpacer: hero.parentElement?.classList.contains("hero-pin") ? hero.parentElement : undefined,
             start: "top top",
             end: "+=140%",
             scrub: 1,
@@ -82,14 +104,22 @@ export function HeroController() {
           .to(q(".hero-hud"), { opacity: 0, duration: 0.4 }, 0)
           .to(q(".hero-letterbox.top"), { yPercent: -100, duration: 0.8 }, 0.25)
           .to(q(".hero-letterbox.bottom"), { yPercent: 100, duration: 0.8 }, 0.25)
-          .set(beat, { opacity: 1 }, 0.95)
-          .from(beatSplit.words, { yPercent: 110, stagger: 0.09, duration: 0.5, ease: "power2.out" }, 0.95)
           .to(state, { speed: 1.4, spread: 1.7, duration: 0.6 }, 1.2)
           .to(beat, { y: -30, duration: 0.6 }, 1.8);
-        // Focus pull (elevation): the title racks out of focus as it leaves. Desktop only.
-        if (ctx.conditions?.wide) {
-          tl.fromTo(title, { filter: `${TITLE_SHADOW} blur(0px)` }, { filter: `${TITLE_SHADOW} blur(6px)`, duration: 0.4 }, 0.6);
+        if (!ctx.conditions?.wide) {
+          // Mobile: the beat rises as one block (no SplitText below 900px).
+          tl.fromTo(beat, { opacity: 0, yPercent: 18 }, { opacity: 1, yPercent: 0, duration: 0.6, ease: "power2.out" }, 0.95);
+          return;
         }
+        tl.set(beat, { opacity: 1 }, 0.95);
+        // Focus pull (elevation): the title racks out of focus as it leaves. Desktop only.
+        tl.fromTo(title, { filter: `${TITLE_SHADOW} blur(0px)` }, { filter: `${TITLE_SHADOW} blur(6px)`, duration: 0.4 }, 0.6);
+        // Beat words rise once SplitText is in (ends at 1.95, inside the timeline's length).
+        // Without it, the beat still appears at 0.95 as one block.
+        return withSplitText(ctx, (Split) => {
+          const words = Split.create(beat, { ...splitVars(locale, { wordsOnly: true }), aria: "none" }).words;
+          tl.from(words, { yPercent: 110, stagger: 0.09, duration: 0.5, ease: "power2.out" }, 0.95);
+        });
       });
 
       // ---- Intro or repeat-visit reveal ----------------------------------------------
@@ -108,8 +138,9 @@ export function HeroController() {
         // has already opened the shutters): record the intro as seen either way.
         markSeen();
         root.dataset.introSeen = "";
-        // Same masked state the CSS held (as yPercent, so GSAP owns it), then rise.
-        const reveal = performance.now() < REVEAL_DEADLINE_MS;
+        // Desktop: same masked state the CSS held (as yPercent, so GSAP owns it), then rise.
+        // Mobile: the title is already painted in place (LCP), so it stays put.
+        const reveal = wide && performance.now() < REVEAL_DEADLINE_MS;
         if (reveal) gsap.set(inners, { y: 0, yPercent: 115 });
         hero.dataset.heroReady = "";
         delete hero.dataset.heroIntro;
@@ -119,14 +150,13 @@ export function HeroController() {
         hero.dataset.heroReady = "";
         const shutters = q(".hero-shutter");
         const hud = q("[data-hud]");
-        const narrow = innerWidth < 900;
         const owned = shell ? [...shutters, shell] : shutters;
         // The controller owns these now: cancel the CSS failsafe animations.
         gsap.set(owned, { animation: "none" });
-        const split = SplitText.create(inners, { ...splitVars(locale, { mask: false }), aria: "none" });
-        const units = locale === "ar" ? split.words : split.chars;
 
         const finish = () => {
+          // Desktop: shows the held lines if the intro ended before their rise was added.
+          gsap.set(inners, { visibility: "visible" });
           cleanupSkip();
           root.dataset.introSeen = "";
           delete hero.dataset.heroIntro; // shutters and intro-only CSS off
@@ -146,16 +176,33 @@ export function HeroController() {
           .fromTo(q(".hero-clock-ring"), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 2.4, ease: "power3.inOut" }, 0.55)
           .to(state, { handIntro: 1, duration: 2.6, ease: "power3.inOut" }, 0.7)
           .from(q(".hero-clock-ticks line"), { autoAlpha: 0, duration: 0.6, stagger: 0.014 }, 0.8)
-          // LCP rule: below 900px the title rises from t=0, mask only (no rotation, no fade).
-          .from(
-            units,
-            { yPercent: 118, rotate: narrow ? 0 : 5, duration: 1.5, ease: "expo.out", stagger: locale === "ar" ? 0.11 : 0.045 },
-            narrow ? 0 : 1.15,
-          )
           // The lead is visible from frame one (LCP candidate): y only.
           .from([q(".hero-lead")[0], q(".hero-sub a")[0]], { y: 26, duration: 1.1, ease: "power3.out", stagger: 0.12 }, 1.9)
           .from(hud, { autoAlpha: 0, duration: 0.8, stagger: 0.08 }, 2.1)
           .to(shell ?? [], { opacity: 1, duration: 0.8, ease: "power2.out" }, 2.1);
+
+        // Mobile (LCP rule, D43): the title is painted in place and stays still; the shutters
+        // part over it. Any animation of it after its first paint (a transform settle, even a
+        // blur) made Chrome report a second LCP entry when the tween ended: measured +1.1-2.1 s
+        // at 4x CPU, versus LCP = first contentful paint with the title still.
+        if (wide) {
+          // Desktop: letters (EN) or words (AR) rise out of the line masks at 1.15s. The lines
+          // are held with visibility, not moved: the split can change their width (a cold
+          // first visit re-renders in the loaded webfont), and a hidden box is not a layout
+          // shift. If SplitText never arrives, the lines rise whole.
+          gsap.set(inners, { visibility: "hidden" });
+          const addTitle = (Split: SplitTextPlugin | null) => {
+            if (intro.progress() === 1) return; // skipped or ended meanwhile: finish() showed the lines
+            const at = Math.max(1.15, intro.time());
+            const split = Split?.create(inners, { ...splitVars(locale, { mask: false }), aria: "none" });
+            const units = split ? (locale === "ar" ? split.words : split.chars) : inners;
+            const stagger = split ? (locale === "ar" ? 0.11 : 0.045) : 0.08;
+            intro
+              .set(inners, { visibility: "visible" }, at)
+              .from(units, { duration: 1.5, ease: "expo.out", yPercent: 118, rotate: split ? 5 : 0, stagger }, at);
+          };
+          cancelTitle = withSplitText(context, addTitle, () => addTitle(null));
+        }
 
         // Skippable: any scroll, touch, key or click jumps to the end state; so does
         // focus entering the header (e.g. Tab to the skip link) before it has faded in.
@@ -178,11 +225,11 @@ export function HeroController() {
       }
 
       // Webfonts change line widths: re-measure the pin once they are in.
-      let alive = true;
       document.fonts?.ready.then(() => alive && ScrollTrigger.refresh());
 
       return () => {
         alive = false;
+        cancelTitle();
         cleanupSkip();
         delete hero.dataset.heroReady;
       };
@@ -204,7 +251,7 @@ export function HeroController() {
   return (
     <>
       <span ref={anchor} hidden />
-      <HeroScene state={state} />
+      {sceneOn && <HeroScene state={state} />}
     </>
   );
 }

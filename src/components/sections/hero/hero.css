@@ -23,7 +23,11 @@
 }
 html[data-js]:not([data-reduced]) .hero {
   grid-template-rows: none;
-  place-content: center;
+  /* Vertical centring only: the column stretches, so .hero-content is the full frame width
+     whatever the title's own width. With `place-content: center` the column was as wide as
+     the title, and a late width change (the desktop split re-rendering a cold first visit's
+     fallback face in the loaded webfont) moved the whole block: measured CLS 0.073 (D43). */
+  align-content: center;
   height: 100svh;
   min-height: 620px;
   padding-block: calc(var(--lb-top) + 16px) calc(var(--lb-bottom) + 16px);
@@ -175,25 +179,34 @@ html[data-js]:not([data-reduced]) .hero-clock-wrap {
 .hero-title:lang(ar) .hero-line b {
   letter-spacing: 0;
 }
-/* Mask for the char/word rise; motion mode only. The mask would clip the 40px text-shadow
-   into hard-edged boxes, so in motion mode the same shadow moves to the title as a
-   drop-shadow filter, computed from the already-masked lines. */
-html[data-js]:not([data-reduced]) .hero-line {
-  overflow: hidden;
+/* Mask for the char/word rise; motion mode at >= 900px only. Below 900px the title is
+   painted in place from the first frame (LCP, D43), so it has no mask. The mask would clip
+   the 40px text-shadow into hard-edged boxes, so in motion mode the same shadow moves to
+   the title as a drop-shadow filter, computed from the already-masked lines. */
+@media (min-width: 900px) {
+  html[data-js]:not([data-reduced]) .hero-line {
+    overflow: hidden;
+  }
 }
 html[data-js]:not([data-reduced]) .hero-title {
+  /* Full width, so the title and its line masks keep their boxes when the lines' own
+     width changes (desktop split after a late webfont; D43). Lines stay centred. */
+  justify-self: stretch;
   text-shadow: none;
   filter: drop-shadow(0 4px 40px rgba(13, 8, 5, 0.55));
 }
 .hero-line-inner {
   display: inline-block;
 }
-/* Repeat visit in the same session: no shutters, so the title waits inside its masks for
-   the short reveal instead of painting and then jumping down. The controller takes over
-   by setting #hero[data-hero-ready]; the failsafe shows it if the controller never runs. */
-html[data-js]:not([data-reduced])[data-intro-seen] #hero:not([data-hero-ready]) .hero-line-inner {
-  transform: translateY(115%);
-  animation: hero-failsafe-rise 0.01s 2.5s forwards;
+/* Repeat visit in the same session, >= 900px: no shutters, so the title waits inside its
+   masks for the short reveal instead of painting and then jumping down. The controller
+   takes over by setting #hero[data-hero-ready]; the failsafe shows it if the controller
+   never runs. Below 900px the title is simply in place (LCP, D43). */
+@media (min-width: 900px) {
+  html[data-js]:not([data-reduced])[data-intro-seen] #hero:not([data-hero-ready]) .hero-line-inner {
+    transform: translateY(115%);
+    animation: hero-failsafe-rise 0.01s 2.5s forwards;
+  }
 }
 @keyframes hero-failsafe-rise {
   to {

@@ -4,7 +4,8 @@ import { useLocale } from "next-intl";
 import { useImperativeHandle, useRef, type ElementType, type ReactNode, type Ref } from "react";
 import { useSplitText } from "@/hooks/use-split-text";
 import type { AppLocale } from "@/i18n/routing";
-import { gsap, type SplitText } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
+import type { SplitText } from "@/lib/split-text";
 import { motionTokens, stagger } from "@/lib/motion";
 
 export interface ReplayHandle {

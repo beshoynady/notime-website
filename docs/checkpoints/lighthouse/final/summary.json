@@ -1,0 +1,450 @@
+{
+  "lighthouse": "13.5.0",
+  "base": "http://localhost:3100",
+  "runs": 3,
+  "profile": "mobile, Moto G Power emulation, simulated throttling (150 ms RTT, 1.6 Mbps, 4x CPU)",
+  "medians": {
+    "en": {
+      "first": {
+        "perf": 59,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 92,
+        "fcp": 831,
+        "lcp": 4322,
+        "lcpObserved": 1090,
+        "tbt": 1156,
+        "cls": 0,
+        "si": 4305,
+        "benchmarkIndex": 1354,
+        "lcpElements": [
+          "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"IT'S TIME\""
+        ]
+      },
+      "return": {
+        "perf": 79,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 92,
+        "fcp": 849,
+        "lcp": 1170,
+        "lcpObserved": 416,
+        "tbt": 897,
+        "cls": 0,
+        "si": 1023,
+        "benchmarkIndex": 756,
+        "lcpElements": [
+          "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"IT'S TIME\""
+        ]
+      },
+      "skipped": {
+        "perf": 57,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 92,
+        "fcp": 820,
+        "lcp": 4205,
+        "lcpObserved": 1293,
+        "tbt": 1818,
+        "cls": 0,
+        "si": 3709,
+        "benchmarkIndex": 1273,
+        "lcpElements": [
+          "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"IT'S TIME\""
+        ]
+      }
+    },
+    "ar": {
+      "first": {
+        "perf": 58,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 92,
+        "fcp": 962,
+        "lcp": 3838,
+        "lcpObserved": 1735,
+        "tbt": 2642,
+        "cls": 0,
+        "si": 5987,
+        "benchmarkIndex": 995,
+        "lcpElements": [
+          "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\""
+        ]
+      },
+      "return": {
+        "perf": 77,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 92,
+        "fcp": 883,
+        "lcp": 1430,
+        "lcpObserved": 520,
+        "tbt": 1110,
+        "cls": 0,
+        "si": 1802,
+        "benchmarkIndex": 758,
+        "lcpElements": [
+          "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\""
+        ]
+      },
+      "skipped": {
+        "perf": 59,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 92,
+        "fcp": 860,
+        "lcp": 4060,
+        "lcpObserved": 1438,
+        "tbt": 1588,
+        "cls": 0,
+        "si": 3743,
+        "benchmarkIndex": 1298,
+        "lcpElements": [
+          "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\""
+        ]
+      }
+    }
+  },
+  "runsDetail": {
+    "en": {
+      "first": [
+        {
+          "perf": 53,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 85,
+          "fcp": 941,
+          "lcp": 4503,
+          "lcpObserved": 1395,
+          "tbt": 1699,
+          "cls": 0,
+          "si": 5434,
+          "benchmarkIndex": 1354,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"IT'S TIME\"",
+          "lcpParts": {
+            "timeToFirstByte": 81,
+            "elementRenderDelay": 1314
+          }
+        },
+        {
+          "perf": 64,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 796,
+          "lcp": 3946,
+          "lcpObserved": 1090,
+          "tbt": 996,
+          "cls": 0,
+          "si": 4194,
+          "benchmarkIndex": 1431,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"IT'S TIME\"",
+          "lcpParts": {
+            "timeToFirstByte": 34,
+            "elementRenderDelay": 1056
+          }
+        },
+        {
+          "perf": 59,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 831,
+          "lcp": 4322,
+          "lcpObserved": 1088,
+          "tbt": 1156,
+          "cls": 0,
+          "si": 4305,
+          "benchmarkIndex": 1318,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"IT'S TIME\"",
+          "lcpParts": {
+            "timeToFirstByte": 20,
+            "elementRenderDelay": 1068
+          }
+        }
+      ],
+      "return": [
+        {
+          "perf": 71,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 1075,
+          "lcp": 1821,
+          "lcpObserved": 736,
+          "tbt": 2310,
+          "cls": 0,
+          "si": 2664,
+          "benchmarkIndex": 209,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"IT'S TIME\"",
+          "lcpParts": {
+            "timeToFirstByte": 19,
+            "elementRenderDelay": 717
+          }
+        },
+        {
+          "perf": 95,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 849,
+          "lcp": 1170,
+          "lcpObserved": 398,
+          "tbt": 270,
+          "cls": 0,
+          "si": 849,
+          "benchmarkIndex": 962,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"IT'S TIME\"",
+          "lcpParts": {
+            "timeToFirstByte": 11,
+            "elementRenderDelay": 387
+          }
+        },
+        {
+          "perf": 79,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 761,
+          "lcp": 1062,
+          "lcpObserved": 416,
+          "tbt": 897,
+          "cls": 0,
+          "si": 1023,
+          "benchmarkIndex": 756,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"IT'S TIME\"",
+          "lcpParts": {
+            "timeToFirstByte": 23,
+            "elementRenderDelay": 393
+          }
+        }
+      ],
+      "skipped": [
+        {
+          "perf": 54,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 820,
+          "lcp": 4455,
+          "lcpObserved": 1679,
+          "tbt": 2405,
+          "cls": 0,
+          "si": 4231,
+          "benchmarkIndex": 502,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"IT'S TIME\"",
+          "lcpParts": {
+            "timeToFirstByte": 51,
+            "elementRenderDelay": 1628
+          }
+        },
+        {
+          "perf": 65,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 837,
+          "lcp": 4058,
+          "lcpObserved": 1214,
+          "tbt": 955,
+          "cls": 0,
+          "si": 3193,
+          "benchmarkIndex": 1456,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"IT'S TIME\"",
+          "lcpParts": {
+            "timeToFirstByte": 53,
+            "elementRenderDelay": 1161
+          }
+        },
+        {
+          "perf": 57,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 790,
+          "lcp": 4205,
+          "lcpObserved": 1293,
+          "tbt": 1818,
+          "cls": 0,
+          "si": 3709,
+          "benchmarkIndex": 1273,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"IT'S TIME\"",
+          "lcpParts": {
+            "timeToFirstByte": 29,
+            "elementRenderDelay": 1264
+          }
+        }
+      ]
+    },
+    "ar": {
+      "first": [
+        {
+          "perf": 58,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 1450,
+          "lcp": 2425,
+          "lcpObserved": 1776,
+          "tbt": 8397,
+          "cls": 0,
+          "si": 12248,
+          "benchmarkIndex": 657,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\"",
+          "lcpParts": {
+            "timeToFirstByte": 54,
+            "elementRenderDelay": 1722
+          }
+        },
+        {
+          "perf": 64,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 794,
+          "lcp": 3838,
+          "lcpObserved": 1215,
+          "tbt": 1098,
+          "cls": 0,
+          "si": 3950,
+          "benchmarkIndex": 1487,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\"",
+          "lcpParts": {
+            "timeToFirstByte": 21,
+            "elementRenderDelay": 1194
+          }
+        },
+        {
+          "perf": 50,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 962,
+          "lcp": 4601,
+          "lcpObserved": 1735,
+          "tbt": 2642,
+          "cls": 0,
+          "si": 5987,
+          "benchmarkIndex": 995,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\"",
+          "lcpParts": {
+            "timeToFirstByte": 39,
+            "elementRenderDelay": 1695
+          }
+        }
+      ],
+      "return": [
+        {
+          "perf": 77,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 883,
+          "lcp": 1485,
+          "lcpObserved": 520,
+          "tbt": 1110,
+          "cls": 0,
+          "si": 1802,
+          "benchmarkIndex": 889,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\"",
+          "lcpParts": {
+            "timeToFirstByte": 11,
+            "elementRenderDelay": 509
+          }
+        },
+        {
+          "perf": 87,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 848,
+          "lcp": 1430,
+          "lcpObserved": 484,
+          "tbt": 515,
+          "cls": 0,
+          "si": 1097,
+          "benchmarkIndex": 758,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\"",
+          "lcpParts": {
+            "timeToFirstByte": 15,
+            "elementRenderDelay": 469
+          }
+        },
+        {
+          "perf": 73,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 972,
+          "lcp": 1260,
+          "lcpObserved": 908,
+          "tbt": 1820,
+          "cls": 0,
+          "si": 2445,
+          "benchmarkIndex": 654,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\"",
+          "lcpParts": {
+            "timeToFirstByte": 45,
+            "elementRenderDelay": 864
+          }
+        }
+      ],
+      "skipped": [
+        {
+          "perf": 59,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 870,
+          "lcp": 4060,
+          "lcpObserved": 1438,
+          "tbt": 1588,
+          "cls": 0,
+          "si": 3743,
+          "benchmarkIndex": 1298,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\"",
+          "lcpParts": {
+            "timeToFirstByte": 23,
+            "elementRenderDelay": 1415
+          }
+        },
+        {
+          "perf": 61,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 860,
+          "lcp": 3896,
+          "lcpObserved": 1294,
+          "tbt": 1505,
+          "cls": 0,
+          "si": 3199,
+          "benchmarkIndex": 1422,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\"",
+          "lcpParts": {
+            "timeToFirstByte": 23,
+            "elementRenderDelay": 1271
+          }
+        },
+        {
+          "perf": 51,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 806,
+          "lcp": 4469,
+          "lcpObserved": 1850,
+          "tbt": 4127,
+          "cls": 0,
+          "si": 5191,
+          "benchmarkIndex": 870,
+          "lcpEl": "div.hero-content > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\"",
+          "lcpParts": {
+            "timeToFirstByte": 29,
+            "elementRenderDelay": 1821
+          }
+        }
+      ]
+    }
+  }
+}
