@@ -15,6 +15,8 @@ export const imageSlots: ImageSlot[] = [
     kind: "real",
     aspect: "4:5",
     src: "/images/work/private-celebrations/private-celebrations-2.webp",
+    width: 859,
+    height: 1290,
     blurDataURL:
       "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAACwAQCdASoHAAoAA4BaJZACdADzY2sgAP4JyEXoc37eMG3RwywrbwDF3LvHIJkBLzdOcZyV3itfbZEL33Sy2+xS34Q4AA==",
     paint: "event",
@@ -30,6 +32,8 @@ export const imageSlots: ImageSlot[] = [
     kind: "real",
     aspect: "16:9",
     src: "/images/work/private-celebrations/private-celebrations-1.webp",
+    width: 1600,
+    height: 1066,
     blurDataURL:
       "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADwAQCdASoKAAcAA4BaJaACdAD8KBZPIgAA/peX4eqyIk2lR2nNopviJJZTLarHuLt2BpjJJaheQGXG2xLcPNnRwAA=",
     paint: "event",
@@ -43,10 +47,12 @@ export const imageSlots: ImageSlot[] = [
     id: "cat-creative-production-4x5",
     kind: "ai",
     aspect: "4:5",
-    // AI image (D50): Canva master in "NO TIME – Website AI", passed the full-size inspection.
+    // AI image (D50, D51): native-size Canva master in "NO TIME – Website AI", passed the full-size inspection.
     src: "/images/ai/cat-creative-production-4x5.webp",
+    width: 1136,
+    height: 1408,
     blurDataURL:
-      "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAQAgCdASoKAA0AAsBMJZgCdAEfUoCMZ9agAP75WlGSx8pXwpJFTUhwOfe0xdl7XvZmcJEyHmz7RS46UGZ0b2S+02vJo8ZTly84j4kVXyxJ0vGwAAA=",
+      "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAQAgCdASoKAAwAAsBMJZgCdAELYMYiJXUAAP75WlGS+E4G7Y1kmU8fFjO07j+EQtYATJxfz3Yd50DUSjvIQE9CpaRUa5IlxSOydlLAIieIfgAA",
     paint: "studio",
     illustrative: false,
     alt: {
@@ -60,6 +66,8 @@ export const imageSlots: ImageSlot[] = [
     kind: "real",
     aspect: "16:9",
     src: "/images/work/catering/catering-4.webp",
+    width: 1187,
+    height: 668,
     blurDataURL:
       "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAADwAQCdASoKAAYAA4BaJZgCdADdYsVAzwAA/U79h4LcuO8dBP+JfqNv6nmzCLf8I4SWbas99YFDbGtRK63LH627bcwAAA==",
     paint: "studio",
@@ -73,10 +81,12 @@ export const imageSlots: ImageSlot[] = [
     id: "cat-marketing-brand-4x5",
     kind: "ai",
     aspect: "4:5",
-    // AI image (D50): Canva master in "NO TIME – Website AI", passed the full-size inspection.
+    // AI image (D50, D51): native-size Canva master in "NO TIME – Website AI", passed the full-size inspection.
     src: "/images/ai/cat-marketing-brand-4x5.webp",
+    width: 1136,
+    height: 1408,
     blurDataURL:
-      "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAQAgCdASoKAA0AAsBMJYwCdAD0orfwqK5cAP70vHLZK2ojb7QJVnDYAJ8LrzJwDLhdiCNlvrsALoOMYChAvNWtW5luCCbkC2trfKCmGBhoq4KA/3v2YwKsAAA=",
+      "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAACwAQCdASoKAAwAAsBMJYwCdADyVeqAAP70u4PC/wauR/GNL9FPp3/QmAXjyDIhfFPR3aTzd8yD95KYf2LJNR9Pw2RBdwt1HIFvAQ/IZ6gZxIIaMemDAqwAAAA=",
     paint: "brand",
     illustrative: false,
     alt: {
@@ -102,10 +112,12 @@ export const imageSlots: ImageSlot[] = [
     id: "cat-production-print-gifts-4x5",
     kind: "ai",
     aspect: "4:5",
-    // AI image (D50): Canva master in "NO TIME – Website AI", passed the full-size inspection.
+    // AI image (D50, D51): native-size Canva master in "NO TIME – Website AI", passed the full-size inspection.
     src: "/images/ai/cat-production-print-gifts-4x5.webp",
+    width: 1136,
+    height: 1408,
     blurDataURL:
-      "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADwAQCdASoKAA0AAsBMJQBOgCPtyNmFvMAA/vGCH4UiC+f16EW8jmBgsCIYnTHND5iAdZZORz7YsIlCqU/DfStk5Uzq7nPL7wPBeVKwLlOO5mkAAAA=",
+      "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAQCdASoKAAwAAsBMJQBOgCKTrDgWf8AA/vMw9ZB6XHMrCgFFMBQByF0ffZg458YTBqemAEQSzOsr0mFWfoZCK0iV2QDdUq9a2EGCbSygAA==",
     paint: "print",
     illustrative: false,
     alt: {
@@ -119,6 +131,8 @@ export const imageSlots: ImageSlot[] = [
     kind: "real",
     aspect: "16:9",
     src: "/images/work/gifts/gifts-1.webp",
+    width: 1280,
+    height: 719,
     blurDataURL:
       "data:image/webp;base64,UklGRjYAAABXRUJQVlA4ICoAAACwAQCdASoKAAYAA4BaJYwCdADcqAaAAP6D2Fn//xF0g7K5LaGdCwB1YAA=",
     paint: "print",
@@ -133,10 +147,12 @@ export const imageSlots: ImageSlot[] = [
     id: "cat-software-digital-4x5",
     kind: "ai",
     aspect: "4:5",
-    // AI image (D50): Canva master in "NO TIME – Website AI", passed the full-size inspection.
+    // AI image (D50, D51): native-size Canva master in "NO TIME – Website AI", passed the full-size inspection.
     src: "/images/ai/cat-software-digital-4x5.webp",
+    width: 1136,
+    height: 1408,
     blurDataURL:
-      "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAAAQAgCdASoKAA0AAsBMJYgCdAEO/6tCnpgAAP75+13DR7s9MNZPQRdbbEvJFqGZXdSPqryTrpa8qyQpvMcGKxX7N9Vn3IOkwm6wf3FyrIAAAA==",
+      "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAAAQAgCdASoKAAwAAsBMJYgCdAD5jkT85aPgAP75+7prx597OcL6B8ghwF/U6sYtthv6w7n25ijTTTYLYymqWnQVCa64j5wAodwUSDIV5AAAAA==",
     paint: "code",
     illustrative: false,
     alt: {
@@ -175,10 +191,12 @@ export const imageSlots: ImageSlot[] = [
     id: "hero-fallback-9x16",
     kind: "ai",
     aspect: "9:16",
-    // AI image (D50): Canva master in "NO TIME – Website AI", passed the full-size inspection.
+    // AI image (D50, D51): native-size Canva master in "NO TIME – Website AI", passed the full-size inspection.
     src: "/images/ai/hero-fallback-9x16.webp",
+    width: 944,
+    height: 1680,
     blurDataURL:
-      "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADQAwCdASoKABIAPtFYpkwoJSOiMAgBABoJYwCdAB53joOK55QGaQAA/vNQe7RoO3QMvT4TidBdrfw6vRfSh7zynIN3uuEC1GjY6UTnN1P+XTWEhpzheqcAAAA=",
+      "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADwAwCdASoKABIAPtFWpEuoJKOhsAgBABoJYwCdAB53ibzBJg9i9NkAAP7zUHu0aDt0DL0+E4z8cMIeRpWgsmU3ulaYVhybLc/RLx3HEzfo15zuPS/XyO2vwAA=",
     paint: "event",
     illustrative: false,
     alt: {
@@ -192,10 +210,12 @@ export const imageSlots: ImageSlot[] = [
     id: "process-plan-4x5",
     kind: "ai",
     aspect: "4:5",
-    // AI image (D50): Canva master in "NO TIME – Website AI", passed the full-size inspection.
+    // AI image (D50, D51): native-size Canva master in "NO TIME – Website AI", passed the full-size inspection.
     src: "/images/ai/process-plan-4x5.webp",
+    width: 1136,
+    height: 1408,
     blurDataURL:
-      "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAwAgCdASoKAA0AAsBMJQBOgMWltcNdhEaQYAD8+vF2iWv0R3xon7MiAjmPa2SXnY3bPlc5rurPI2XGUC21Hbj4W0qLyf+tcL3WfgOB0RIxk3c5vB1nWUAkgAA=",
+      "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADQAQCdASoKAAwAAsBMJQBOgBuLLYMjoAD87Mtsn57TAF/Z1ja45EqS713+LWfcFvmFFA+yqYYts3Z7mL+jILN0jiT6aMWWtRUxmR5IiUgVtir96yd+sAAA",
     paint: "table",
     illustrative: false,
     alt: {
@@ -209,6 +229,8 @@ export const imageSlots: ImageSlot[] = [
     kind: "real",
     aspect: "4:5",
     src: "/images/work/private-celebrations/private-celebrations-8.webp",
+    width: 953,
+    height: 715,
     blurDataURL:
       "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADQAQCdASoKAAgAA4BaJYwCdADb7CxxUADyoXsqGlV6gAmRmduiiJQJa84TgyQsQ5pmQrRlmBnG+yOFeRAun0+AAAA=",
     paint: "studio",
@@ -224,6 +246,8 @@ export const imageSlots: ImageSlot[] = [
     kind: "real",
     aspect: "4:5",
     src: "/images/work/catering/catering-5.webp",
+    width: 718,
+    height: 759,
     blurDataURL:
       "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAAAQAgCdASoJAAoAA4BaJZACdH8AE5xZ+z0AAP6bVN7hkQ7IcdYvM51d2n3fhLZSSx/a2Oyvuk9+hAh8HKqtfwknJeYV6jwAAAA=",
     paint: "print",
@@ -239,6 +263,8 @@ export const imageSlots: ImageSlot[] = [
     kind: "real",
     aspect: "4:5",
     src: "/images/work/heritage/heritage-5.webp",
+    width: 891,
+    height: 668,
     blurDataURL:
       "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADwAQCdASoKAAcAA4BaJZQCdAELT7t+8AAA/vMQoINyNf5ShMq7Dwpa8Ps9oWeDZq/6gmmgAAA=",
     paint: "event",
@@ -254,10 +280,12 @@ export const imageSlots: ImageSlot[] = [
     id: "product-qr-check-in-16x9",
     kind: "ai",
     aspect: "16:9",
-    // AI image (D50): Canva master in "NO TIME – Website AI", passed the full-size inspection.
+    // AI image (D50, D51): native-size Canva master in "NO TIME – Website AI", passed the full-size inspection.
     src: "/images/ai/product-qr-check-in-16x9.webp",
+    width: 1680,
+    height: 944,
     blurDataURL:
-      "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAACwAQCdASoKAAYAAsBMJQBOgCBtwvfAAP72sJvduM4pFdRRpHEt325gEPMbRXRX/B6PFrplC/feCbZTxO5V73LRbEKWlWTEkAAAAA==",
+      "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAACwAQCdASoKAAYAAsBMJQBOgBufBbloAP72sJvduM4pFdRRpHEt37tgHQ2GkSYG8SP4j74P1ueWcvP/vqROXuWi2IUtKsmJIAA=",
     paint: "code",
     illustrative: false,
     alt: {

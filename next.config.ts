@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
   partialPrefetching: true,
   images: {
     formats: ["image/avif", "image/webp"],
+    // Defaults plus Canva's native widths (944, 1136, 1680), so the capped srcset ends exactly
+    // at the file's own width (D51, src/lib/srcset.ts).
+    deviceSizes: [640, 750, 828, 944, 1080, 1136, 1200, 1680, 1920, 2048, 3840],
   },
   // Self-hosted brand fonts (D45): versioned file names, so they can be cached for good.
   async headers() {

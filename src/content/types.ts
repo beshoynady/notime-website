@@ -29,6 +29,9 @@ export interface ImageSlot {
   src: string | null;
   /** Optional blur placeholder (base64) once a real file exists. */
   blurDataURL?: string;
+  /** Pixel size of the file at `src` (required with `src`, tested). Caps the srcset (D51). */
+  width?: number;
+  height?: number;
   paint: Paint;
   alt: Localized<string>;
   /** True when an AI image stands in for a real past project → visible "Illustrative" label. */

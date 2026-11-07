@@ -1,6 +1,7 @@
-import Image from "next/image";
+import { getImageProps } from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { getImageSlot, type Aspect, type Locale } from "@/content";
+import { capSrcSet } from "@/lib/srcset";
 import { cn } from "@/lib/utils";
 import { AiPlaceholder } from "./ai-placeholder";
 
@@ -24,8 +25,10 @@ interface BrandImageProps {
 }
 
 /**
- * Renders an image slot: the real/AI file via next/image (AVIF/WebP, lazy unless
+ * Renders an image slot: the real/AI file via the next/image optimizer (AVIF/WebP, lazy unless
  * `priority`), or the designed placeholder while the slot has no file.
+ * The srcset is capped at the file's native width (D51), so no screen ever requests more pixels
+ * than the image has; that is why this uses getImageProps instead of <Image>.
  * AI images that stand in for real past projects carry the visible "Illustrative" label.
  */
 export function BrandImage({ slot, sizes, priority = false, className, fill = false }: BrandImageProps) {
@@ -33,23 +36,27 @@ export function BrandImage({ slot, sizes, priority = false, className, fill = fa
   const t = useTranslations("common");
   const s = getImageSlot(slot);
   const alt = s.alt[locale];
+  const img = s.src
+    ? getImageProps({
+        src: s.src,
+        alt,
+        fill: true,
+        sizes,
+        ...(priority ? { loading: "eager", fetchPriority: "high" } : {}),
+        placeholder: s.blurDataURL ? "blur" : "empty",
+        blurDataURL: s.blurDataURL,
+        className: "object-cover",
+      }).props
+    : null;
 
   return (
     <div
       className={cn("relative overflow-hidden rounded-[var(--radius)] bg-espresso-2", !fill && ASPECT[s.aspect], fill && "absolute inset-0", className)}
       {...(s.src ? {} : { role: "img", "aria-label": alt })}
     >
-      {s.src ? (
-        <Image
-          src={s.src}
-          alt={alt}
-          fill
-          sizes={sizes}
-          priority={priority}
-          placeholder={s.blurDataURL ? "blur" : "empty"}
-          blurDataURL={s.blurDataURL}
-          className="object-cover"
-        />
+      {img ? (
+        // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text -- getImageProps output (alt included); <Image> cannot take a trimmed srcset
+        <img {...img} srcSet={capSrcSet(img.srcSet, s.width)} />
       ) : (
         <AiPlaceholder paint={s.paint} />
       )}

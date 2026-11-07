@@ -4,7 +4,7 @@ Status: prompts approved at Checkpoint 4. Generation started after Checkpoint 5 
 
 ## Generation status (D50)
 
-Masters are full-size PNG exports from the Canva folder "NO TIME – Website AI" (design "NO TIME – Website AI images", one page per slot). Each is inspected at full size (quadrants at 1:1) before `scripts/convert-ai.mjs` converts it. Canva generates at 1136 × 1408 (4:5), 1680 × 944 (16:9) and about 944 × 1680 (9:16), so the delivery sizes below are upscales of about 1.4–1.5×.
+Masters are PNG exports from the Canva folder "NO TIME – Website AI", design "NO TIME – Website AI images". The "native · <slot>" pages (12–18) are each exactly the image's size, so the export is 1:1. Pages 2–11 are the first, upscaled exports and are superseded (D51). Each image is inspected at full size (quadrants at 1:1) before `scripts/convert-ai.mjs` converts it.
 
 | Slot | Status | Note |
 |---|---|---|
@@ -19,6 +19,8 @@ Masters are full-size PNG exports from the Canva folder "NO TIME – Website AI"
 | `cat-software-digital-16x9` | rejected | Pseudo-text on the screens and a badge on a bezel. Regenerate. |
 | `hero-fallback-16x9` | rejected | A see-through pillar right of the beam (the palm and arch show through it). Regenerate. |
 | `product-restaurant-system-16x9` | not generated | Canva credit quota ran out. |
+
+The 4 open slots wait for the Canva credits to renew, so the style stays consistent; no other generator (D51). Until then they render the designed placeholder. If the credits have not renewed within a few days, the user generates them from this file and drops them in by slot id.
 
 - **Slots:** `src/content/images.ts`, 18 slots. `src/content/content.test.ts` checks that every slot has exactly one entry here (`### \`<id>\``) and that the alt texts match.
 - **Until a file exists**, each slot renders the designed placeholder (`src/components/ui/ai-placeholder.tsx`), tagged "AI image · placeholder".
@@ -49,10 +51,10 @@ The palette's hex values are #2E2017, #634731, #BB9A79, #EAD4AB and #F5E9D3. Giv
 
 ## Delivery spec (every slot)
 
-- **Size (2× the largest display size):** 4:5 → 1600 × 2000 · 16:9 → 2560 × 1440 · 9:16 → 1440 × 2560.
+- **Size: Canva's native generation size, never upscaled (D51):** 4:5 → 1136 × 1408 · 16:9 → 1680 × 944 · 9:16 → 944 × 1680. Record `width`/`height` on the slot. `BrandImage` caps the srcset at that width, so no screen requests more pixels than the file has. The 16:9 hero image is only a fallback (the hero is canvas), so 1680 px is enough.
 - **Format:** AVIF (quality ~55) and WebP (quality ~78), sRGB, converted with `sharp`.
 - **Path:** `public/images/ai/<slot>.{avif,webp}`.
-- **Wiring:** in `images.ts`, set `src: "/images/ai/<slot>.webp"` and a `blurDataURL`. The test refuses any AI `src` outside `/images/ai/`.
+- **Wiring:** in `images.ts`, set `src: "/images/ai/<slot>.webp"`, `width`, `height` and a `blurDataURL` (all printed by `scripts/convert-ai.mjs`). The test refuses any AI `src` outside `/images/ai/`.
 - **Checks before wiring:** no text or logos in the frame; no identifiable face; hands correct; colour within the palette; reads at thumbnail size (mega menu tiles are ~200 px wide).
 
 ---

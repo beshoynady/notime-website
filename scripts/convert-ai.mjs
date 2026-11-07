@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 /**
  * AI image masters -> public/images/ai/<slot>.{avif,webp} (delivery spec in
- * docs/content/image-prompts.md: AVIF q55, WebP q78, sRGB, size as exported).
+ * docs/content/image-prompts.md: AVIF q55, WebP q78, sRGB, native size, never resized).
  *   node scripts/convert-ai.mjs <masters-dir>
  *
- * Masters are the full-size PNG exports from the Canva folder "NO TIME – Website AI" (D50),
- * named <slot>.png and kept outside the repo. Only slots listed in PASSED are converted: each
- * one was inspected at full size (no text or logos, hands correct, no artefacts). Prints the
- * 10px WebP blur placeholder to paste into src/content/images.ts.
+ * Masters are PNG exports of the "native" pages in the Canva folder "NO TIME – Website AI"
+ * (D50, D51): each page is exactly the generated image's size, so the export is 1:1, never
+ * upscaled. Named <slot>.png and kept outside the repo. Only slots listed in PASSED are
+ * converted: each one was inspected at full size (no text or logos, hands correct, no
+ * artefacts). Prints width, height and the 10px WebP blur placeholder for src/content/images.ts.
  */
 import { createRequire } from "node:module";
 import { existsSync, mkdirSync } from "node:fs";
@@ -41,6 +42,6 @@ for (const slot of PASSED) {
     img.clone().webp({ quality: 78 }).toFile(`${base}.webp`),
     img.clone().resize(10).webp({ quality: 50 }).toBuffer(),
   ]);
-  console.log(`${slot} ${avif.width}x${avif.height} avif ${(avif.size / 1024).toFixed(0)}KB webp ${(webp.size / 1024).toFixed(0)}KB`);
+  console.log(`${slot} width: ${avif.width}, height: ${avif.height} · avif ${(avif.size / 1024).toFixed(0)}KB webp ${(webp.size / 1024).toFixed(0)}KB`);
   console.log(`  blurDataURL: "data:image/webp;base64,${blur.toString("base64")}"`);
 }

@@ -144,4 +144,20 @@ describe("image slots", () => {
       expect(s.blurDataURL, s.id).toMatch(/^data:image\/webp;base64,/);
     }
   });
+
+  // D51: files are kept at their native size (no upscaling), and each slot records it so
+  // BrandImage can cap the srcset. AI files are Canva's native generation sizes.
+  it("every slot with a file records the file's real pixel size", async () => {
+    const sharp = (await import("sharp")).default;
+    const CANVA: Record<string, [number, number]> = { "4:5": [1136, 1408], "16:9": [1680, 944], "9:16": [944, 1680] };
+    for (const s of getImageSlots().filter((x) => x.src)) {
+      for (const ext of ["webp", "avif"]) {
+        const file = path.join("public", s.src!.replace(/\.webp$/, `.${ext}`));
+        if (!existsSync(file)) continue; // real photos ship WebP only
+        const m = await sharp(file).metadata();
+        expect([m.width, m.height], `${s.id}.${ext}`).toEqual([s.width, s.height]);
+      }
+      if (s.kind === "ai") expect([s.width, s.height], s.id).toEqual(CANVA[s.aspect]);
+    }
+  });
 });
