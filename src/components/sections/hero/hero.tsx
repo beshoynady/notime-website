@@ -37,11 +37,13 @@ export async function Hero() {
         {/* The lines are decorative (they get split into chars/words); the heading's
             name is the sentence-case label, so screen readers don't spell out capitals. */}
         <h1 id="hero-title" className="hero-title" aria-label={t("titleLabel")}>
+          {/* .hero-line is the mask (scroll timeline moves it); .hero-line-inner rises
+              inside it (intro / repeat-visit reveal). */}
           <span className="hero-line" aria-hidden="true">
-            {t("titleLine1")}
+            <span className="hero-line-inner">{t("titleLine1")}</span>
           </span>
           <span className="hero-line" aria-hidden="true">
-            <b>{t("titleLine2")}</b>
+            <b className="hero-line-inner">{t("titleLine2")}</b>
           </span>
         </h1>
         <div className="hero-sub">

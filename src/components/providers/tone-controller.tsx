@@ -31,21 +31,32 @@ export function ToneController() {
       // navigation stay in the DOM hidden (React Activity) and must not get triggers.
       const sections = gsap.utils.toArray<HTMLElement>("#stage section[data-tone]").filter((s) => s.checkVisibility());
 
-      sections.forEach((section) => {
+      // A section's scroll box: its pin spacer when another controller pins it (the spacer
+      // holds the whole pinned distance), otherwise the section itself. Read at refresh time,
+      // so a pin created after these triggers is still included.
+      const box = (el: HTMLElement) => (el.parentElement?.classList.contains("pin-spacer") ? el.parentElement : el);
+      const docTop = (el: HTMLElement) => box(el).getBoundingClientRect().top + window.scrollY;
+
+      sections.forEach((section, i) => {
         const tone = (section.dataset.tone as Tone) ?? "dark";
+        // Zones run from a section's top to the next section's top (no gaps), as numbers
+        // rather than trigger strings: with the pinned hero as the trigger element,
+        // ScrollTrigger subtracts the pin's own length from its positions (measured: the
+        // header went back to the hero tone only 1.4 viewports too late on the way up).
+        const next = sections[i + 1];
+        const zone = (line: () => number) => ({
+          start: () => docTop(section) - line(),
+          end: () => (next ? docTop(next) : docTop(section) + box(section).offsetHeight) - line(),
+        });
         ScrollTrigger.create({
-          trigger: section,
-          start: "top 55%",
-          end: "bottom 55%",
+          ...zone(() => innerHeight * 0.55),
           onToggle: (self) => {
             if (self.isActive) gsap.to(stage, { "--page-bg": PAGE_BG[tone], duration, ease: "power2.out", overwrite: "auto" });
           },
         });
         if (header) {
           ScrollTrigger.create({
-            trigger: section,
-            start: `top ${headerH}px`,
-            end: `bottom ${headerH}px`,
+            ...zone(() => headerH),
             onToggle: (self) => {
               if (self.isActive) header.dataset.headerTone = section.dataset.header === "hero" ? "hero" : tone;
             },

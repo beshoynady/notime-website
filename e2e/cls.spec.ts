@@ -16,7 +16,9 @@ test.describe("no layout shift on load (font swap, hero intro)", () => {
       });
       await gotoReady(page, `/${locale}`);
       await page.evaluate(() => document.fonts.ready);
-      await page.waitForTimeout(3500); // through the hero intro
+      // Through the whole first-visit intro (it sets html[data-intro-seen] when it ends), then a margin.
+      await page.waitForFunction(() => document.documentElement.hasAttribute("data-intro-seen"), null, { timeout: 10_000 });
+      await page.waitForTimeout(500);
       const cls = await page.evaluate(() => (window as unknown as { __cls: number }).__cls);
       expect(cls).toBeLessThan(0.001);
     });

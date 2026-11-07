@@ -185,6 +185,21 @@ html[data-js]:not([data-reduced]) .hero-title {
   text-shadow: none;
   filter: drop-shadow(0 4px 40px rgba(13, 8, 5, 0.55));
 }
+.hero-line-inner {
+  display: inline-block;
+}
+/* Repeat visit in the same session: no shutters, so the title waits inside its masks for
+   the short reveal instead of painting and then jumping down. The controller takes over
+   by setting #hero[data-hero-ready]; the failsafe shows it if the controller never runs. */
+html[data-js]:not([data-reduced])[data-intro-seen] #hero:not([data-hero-ready]) .hero-line-inner {
+  transform: translateY(115%);
+  animation: hero-failsafe-rise 0.01s 2.5s forwards;
+}
+@keyframes hero-failsafe-rise {
+  to {
+    transform: none;
+  }
+}
 html[data-js]:not([data-reduced]) .hero-content {
   padding-block: 0;
 }

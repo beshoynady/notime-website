@@ -19,6 +19,19 @@ interface SplitOptions {
 }
 
 /**
+ * SplitText vars for the project's language rule: chars in English, words in Arabic
+ * (Arabic letters must stay joined). Shared by useSplitText and the hero controller.
+ */
+export function splitVars(locale: AppLocale, { mask = true, wordsOnly = false }: { mask?: boolean; wordsOnly?: boolean } = {}) {
+  const byWords = wordsOnly || locale === "ar";
+  return {
+    type: byWords ? "words" : "words,chars",
+    mask: mask ? (byWords ? ("words" as const) : ("chars" as const)) : undefined,
+    aria: "auto" as const,
+  };
+}
+
+/**
  * GSAP SplitText with the project's language rules: chars in English, words in Arabic.
  * Reverts on unmount and on locale change (the split is recorded in the useGSAP context);
  * re-splits on resize and when fonts load (`autoSplit`). Skipped under reduced motion,
@@ -29,14 +42,7 @@ export function useSplitText(ref: RefObject<HTMLElement | null>, { locale, onSpl
     () => {
       const el = ref.current;
       if (!el || prefersReducedMotion()) return;
-      const byWords = wordsOnly || locale === "ar";
-      SplitText.create(el, {
-        type: byWords ? "words" : "words,chars",
-        mask: mask ? (byWords ? "words" : "chars") : undefined,
-        aria: "auto",
-        autoSplit: true,
-        onSplit: (split) => onSplit(split),
-      });
+      SplitText.create(el, { ...splitVars(locale, { mask, wordsOnly }), autoSplit: true, onSplit: (split) => onSplit(split) });
     },
     { scope: ref, dependencies: [locale], revertOnUpdate: true },
   );

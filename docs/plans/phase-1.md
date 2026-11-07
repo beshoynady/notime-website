@@ -119,10 +119,10 @@ docs/content/{copy-deck.md,image-prompts.md}
   ```
 - Produces CSS tokens for every later task: `--color-{espresso,cocoa,taupe,champagne,ivory,night}`, `--color-line-dark`, `--color-line-light`, `--font-en`, `--font-ar`, `--radius` = 4px, `--radius-tag` = 2px, `--section-pad: clamp(72px,11vw,160px)`, `--frame: 1280px`, `--gutter` (`max(16px, env(safe-area-inset-*))` < 760px, `40px` ≥ 760px), `--header-h: 68px`; utilities `.frame` (max-width and gutters), `.grid-12` (4 cols/16px → 12 cols/24px at ≥ 900px), `.text-display`, `.text-h1`, `.text-h2`, `.text-lead`, `.text-body` (65ch), `.text-eyebrow`, `[data-tone=dark]` grain `::before`.
 
-- [ ] **Step 1:** Install the devDeps, add the scripts, and write `motion.test.ts`. It asserts `stagger.char === 0.03`, `stagger.word === 0.06`, `motionTokens.base.duration === 0.8`, and that `microTransition` has no `type: "spring"`.
-- [ ] **Step 2:** Run `npm test` → FAIL (module missing).
-- [ ] **Step 3:** Implement `src/lib/motion.ts` as above → `npm test` PASS.
-- [ ] **Step 4:** Rewrite `globals.css`.
+- [x] **Step 1:** Install the devDeps, add the scripts, and write `motion.test.ts`. It asserts `stagger.char === 0.03`, `stagger.word === 0.06`, `motionTokens.base.duration === 0.8`, and that `microTransition` has no `type: "spring"`.
+- [x] **Step 2:** Run `npm test` → FAIL (module missing).
+- [x] **Step 3:** Implement `src/lib/motion.ts` as above → `npm test` PASS.
+- [x] **Step 4:** Rewrite `globals.css`.
   - Delete the neutral oklch tokens, the `.dark` block, chart/sidebar tokens and Geist.
   - Keep `@import "shadcn/tailwind.css"`.
   - Map the shadcn semantics: `--background: ivory`, `--foreground: espresso`, `--primary: espresso`, `--primary-foreground: ivory`, `--secondary: champagne`, `--secondary-foreground: espresso`, `--muted: #EBDDC4` (ivory/espresso 6%), `--muted-foreground: cocoa`, `--accent: champagne`, `--accent-foreground: espresso`, `--border` and `--input` = line-light, `--ring: taupe`, `--destructive: #9B3B2A`, `--radius: 4px`. Inside `[data-tone=dark]`, remap to espresso/ivory/champagne/line-dark.
@@ -136,8 +136,8 @@ docs/content/{copy-deck.md,image-prompts.md}
     - AR: `html[lang=ar]` sets body 17px and zeroes letter-spacing and text-transform on every scale class.
     - `text-wrap: balance` on h1–h3.
   - `:focus-visible` is a 2px taupe outline with a 3px offset. `::selection` is champagne on espresso.
-- [ ] **Step 5:** `npm run build && npm run lint && npm run typecheck` → all pass. (The template page is still in place; it is removed in Task 2.)
-- [ ] **Step 6:** Commit `feat(tokens): brand design tokens, type scale, motion tokens, test tooling`.
+- [x] **Step 5:** `npm run build && npm run lint && npm run typecheck` → all pass. (The template page is still in place; it is removed in Task 2.)
+- [x] **Step 6:** Commit `feat(tokens): brand design tokens, type scale, motion tokens, test tooling`.
 
 ### Task 2: i18n wiring
 
@@ -149,11 +149,11 @@ docs/content/{copy-deck.md,image-prompts.md}
 **Interfaces:**
 - Produces: `routing` (`locales: ["en","ar"] as const`, `defaultLocale: "en"`, `localePrefix: "always"`); `type AppLocale = (typeof routing.locales)[number]`; `isRtl(locale: AppLocale): boolean`; `Link`, `usePathname`, `useRouter` from `@/i18n/navigation`. The layout sets `<html lang={locale} dir={isRtl ? "rtl" : "ltr"}>`, puts both font variables on `<html>`, and wraps children in `NextIntlClientProvider` and `<DirectionProvider direction>` (from `@base-ui/react/direction-provider`). It exports `generateStaticParams` → `[{locale:"en"},{locale:"ar"}]` and `generateMetadata` with `alternates.languages` {en, ar, x-default → /en}.
 
-- [ ] **Step 1:** Write `messages.test.ts`. It asserts that the deep key sets of `en.json` and `ar.json` are identical, that no value is an empty string, and that no AR value contains Latin letters other than the allow-list (`NO TIME`, `SEO`, `QR`, `AI`, `TC`, `WhatsApp`, `{{TODO}}`, `N`, `E`, digits). Run → FAIL.
-- [ ] **Step 2:** Implement routing, navigation, the `next/root-params` request config, proxy (`matcher: "/((?!api|_next|_vercel|.*\\..*).*)"`), the layout, and the shell message namespaces in EN then AR. Run `npm test` → PASS.
-- [ ] **Step 3 (spike gate for decision A):** run `npm run build`. Expected: `/en` and `/ar` listed as prerendered (○ or ◐), and no "Uncached data accessed outside `<Suspense>`" error. If root-params fails, apply the fallback from decision A and log it.
-- [ ] **Step 4:** `npm run dev`. `/` redirects to `/en`; `/ar` has `<html lang="ar" dir="rtl">`; `/fr` returns 404.
-- [ ] **Step 5:** Commit `feat(i18n): next-intl routing via root-params, RTL, direction provider`. Remove OPEN_QUESTIONS #7, #8 and #9 and log the answers in DECISIONS.
+- [x] **Step 1:** Write `messages.test.ts`. It asserts that the deep key sets of `en.json` and `ar.json` are identical, that no value is an empty string, and that no AR value contains Latin letters other than the allow-list (`NO TIME`, `SEO`, `QR`, `AI`, `TC`, `WhatsApp`, `{{TODO}}`, `N`, `E`, digits). Run → FAIL.
+- [x] **Step 2:** Implement routing, navigation, the `next/root-params` request config, proxy (`matcher: "/((?!api|_next|_vercel|.*\\..*).*)"`), the layout, and the shell message namespaces in EN then AR. Run `npm test` → PASS.
+- [x] **Step 3 (spike gate for decision A):** run `npm run build`. Expected: `/en` and `/ar` listed as prerendered (○ or ◐), and no "Uncached data accessed outside `<Suspense>`" error. If root-params fails, apply the fallback from decision A and log it.
+- [x] **Step 4:** `npm run dev`. `/` redirects to `/en`; `/ar` has `<html lang="ar" dir="rtl">`; `/fr` returns 404.
+- [x] **Step 5:** Commit `feat(i18n): next-intl routing via root-params, RTL, direction provider`. Remove OPEN_QUESTIONS #7, #8 and #9 and log the answers in DECISIONS.
 
 ### Task 3: Content system and image slots
 
@@ -185,7 +185,7 @@ whatsappHref(number: string, text?: string): string | null;  // null when number
 - `contact` default export: `{ email: "", whatsapp: "", instagram: "", facebook: "" }`. Each field carries `// TODO: replace placeholder`. `whatsapp` falls back to `process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? ""`.
 - `<BrandImage slot locale sizes priority?>` renders `next/image` (AVIF/WebP, `placeholder="blur"` when a blurDataURL is known, otherwise lazy). When `src === null`, it renders `<AiPlaceholder paint>` instead: a CSS gradient plus a soft bokeh SVG and the tag `common.aiPlaceholder` ("AI image · placeholder" / "صورة AI · مؤقتة"). If `illustrative`, it also shows the badge `common.illustrative`.
 
-- [ ] **Step 1:** Write `content.test.ts`:
+- [x] **Step 1:** Write `content.test.ts`:
   - 5 categories with orders 1–5.
   - Exactly 30 services, 6 per category.
   - Unique slugs; slugs match `/^[a-z0-9-]+$/`.
@@ -193,13 +193,13 @@ whatsappHref(number: string, text?: string): string | null;  // null when number
   - Every `image` resolves via `getImageSlot`.
   - 2 products, both `comingSoon`.
   - All services are `status: "draft"` while `services-list.md` is TODO.
-- [ ] **Step 2:** Write `roman.test.ts` (`toRoman(4) === "IV"`, throws on 0) and `whatsapp.test.ts`:
+- [x] **Step 2:** Write `roman.test.ts` (`toRoman(4) === "IV"`, throws on 0) and `whatsapp.test.ts`:
   - `whatsappHref("", "x") === null`
   - `whatsappHref("+971 50 123 4567", "Hi")` → `"https://wa.me/971501234567?text=Hi"`
   - The `+971…` number is a test fixture, not site data.
-- [ ] **Step 3:** Run → FAIL. Then implement. Service and category copy comes from the prototype's `CATS` draft list (6 × 5), with `// TODO: replace with approved list` at the top of `services.ts`. Categories IV and V map to the `print` and `code` paints. Run → PASS.
-- [ ] **Step 4:** Add OPEN_QUESTIONS entry #11, "Services list still uses the prototype draft; approve or replace". Add CONTENT_CHECKLIST rows: approved services list, product names, contact fields.
-- [ ] **Step 5:** Commit `feat(content): typed categories, services, products, image slots, contact config`.
+- [x] **Step 3:** Run → FAIL. Then implement. Service and category copy comes from the prototype's `CATS` draft list (6 × 5), with `// TODO: replace with approved list` at the top of `services.ts`. Categories IV and V map to the `print` and `code` paints. Run → PASS.
+- [x] **Step 4:** Add OPEN_QUESTIONS entry #11, "Services list still uses the prototype draft; approve or replace". Add CONTENT_CHECKLIST rows: approved services list, product names, contact fields.
+- [x] **Step 5:** Commit `feat(content): typed categories, services, products, image slots, contact config`.
 
 ### Task 4: Motion infrastructure and primitives
 
@@ -228,9 +228,9 @@ Invoke `frontend-design` and then `ui-ux-pro-max` before the primitives, and `fr
   - `Marquee({ items, durationSec = 50 })`: CSS keyframes `mq` and `mq-rtl`; the list is duplicated for the loop and the duplicate is `aria-hidden`; pauses on hover; static under reduced motion.
   - Each primitive exposes `replay()` through a ref, for the styleguide demos.
 
-- [ ] **Step 1:** Implement `lib/gsap.ts`, the hooks and the providers. Verify in `npm run dev` that a test page scrolls smoothly, `ScrollTrigger.getAll()` stays stable across a locale toggle (no growth), and with OS reduced motion on, `window.lenis` is undefined.
-- [ ] **Step 2:** Implement the six primitives. Each is mounted temporarily on the dev page and checked in EN and AR (MaskReveal and Marquee visibly reverse in AR).
-- [ ] **Step 3:** `npm run build && npm run lint && npm run typecheck` → pass. Commit `feat(motion): lenis+gsap sync, tone controller, split text hook, motion primitives`.
+- [x] **Step 1:** Implement `lib/gsap.ts`, the hooks and the providers. Verify in `npm run dev` that a test page scrolls smoothly, `ScrollTrigger.getAll()` stays stable across a locale toggle (no growth), and with OS reduced motion on, `window.lenis` is undefined.
+- [x] **Step 2:** Implement the six primitives. Each is mounted temporarily on the dev page and checked in EN and AR (MaskReveal and Marquee visibly reverse in AR).
+- [x] **Step 3:** `npm run build && npm run lint && npm run typecheck` → pass. Commit `feat(motion): lenis+gsap sync, tone controller, split text hook, motion primitives`.
 
 ### Task 5: Header, logo, language toggle
 
@@ -250,8 +250,8 @@ Invoke `frontend-design`, then `ui-ux-pro-max` (touch targets ≥ 44px, focus st
   - Hover is an ivory fill `scaleY(0 → 1)` from the bottom, over 0.5s expo.out (CSS).
   - The arrow child slides 5px on hover and is mirrored in RTL via `rtl:-scale-x-100`.
 
-- [ ] **Step 1:** Build the components. Check `/en` → toggle → `/ar` at the same path, focus visible on each control, tab order logical in RTL.
-- [ ] **Step 2:** lint/typecheck/build pass → commit `feat(shell): header, logo lockup, language toggle, button`.
+- [x] **Step 1:** Build the components. Check `/en` → toggle → `/ar` at the same path, focus visible on each control, tab order logical in RTL.
+- [x] **Step 2:** lint/typecheck/build pass → commit `feat(shell): header, logo lockup, language toggle, button`.
 
 ### Task 6: Mega menu
 
@@ -270,20 +270,20 @@ type MenuEvent =
 menuReducer(state: MenuState, e: MenuEvent): MenuState;
 useMegaMenu(): { state; triggerProps; panelProps; categoryProps(slug); close(returnFocus?: boolean) };
 ```
-- [ ] **Step 1:** Write the reducer tests:
+- [x] **Step 1:** Write the reducer tests:
   - `INTENT_OPEN` opens and stores `now`.
   - `CLICK_TRIGGER` at `openedAt + 200` stays open.
   - `CLICK_TRIGGER` at `openedAt + 600` closes.
   - `CLOSE` keeps `active`.
   - `SET_ACTIVE` while closed only changes `active`.
   - Run → FAIL → implement → PASS.
-- [ ] **Step 2:** Write `use-mega-menu`. Hover open is delayed 90ms (pointer-fine only), and leaving the header closes after 240ms. Also handle:
+- [x] **Step 2:** Write `use-mega-menu`. Hover open is delayed 90ms (pointer-fine only), and leaving the header closes after 240ms. Also handle:
   - Esc closes and refocuses the trigger.
   - `focusout` closes when `relatedTarget` is outside the header.
   - Backdrop click closes.
   - Resize below 900px closes.
   - Trigger attributes: `aria-expanded`, `aria-controls="mega-panel"`.
-- [ ] **Step 3:** Build `MegaMenu`, an espresso panel that is full width under the header.
+- [x] **Step 3:** Build `MegaMenu`, an espresso panel that is full width under the header.
   - Grid `4fr 5fr 3fr`; max-height `calc(100dvh - 68px)`; `data-lenis-prevent`.
   - **Column 1:** eyebrow, "One house. **Five crafts.**", intro, then the category list. Each row shows the `toRoman(order)` numeral, the title, and an arrow that flips in RTL. The active row is indented (`ps-2.5`), weight 500, and `aria-current="true"`. Categories activate on hover or focus.
   - **Column 2:** a count line (`{count} services · {numeral}`) with a "View category" link, then 2 columns of services.
@@ -292,7 +292,7 @@ useMegaMenu(): { state; triggerProps; panelProps; categoryProps(slug); close(ret
   - **Motion:** the panel opens with `clipPath inset(0 0 100% 0) → inset(0 0 0% 0)` over 0.75s `ease.expoOut` and closes over 0.45s. Items stagger at 0.04s. When the category changes, services swap with `AnimatePresence mode="popLayout"`: y 10 → 0, stagger 0.035. The backdrop is `fixed inset-0` with `rgba(30,20,14,.55)` and a 3px blur.
   - Reduced motion: no animation.
   - All data comes from the `@/content` getters.
-- [ ] **Step 4:** Write `e2e/mega-keyboard.spec.ts` (desktop project). Steps and expected results:
+- [x] **Step 4:** Write `e2e/mega-keyboard.spec.ts` (desktop project). Steps and expected results:
   - Focus the trigger, press Enter → `aria-expanded=true`.
   - Tab → the first category is focused, and the services column shows that category.
   - ArrowDown/Tab to category III → the services update.
@@ -300,7 +300,7 @@ useMegaMenu(): { state; triggerProps; panelProps; categoryProps(slug); close(ret
   - Reopen, then Shift+Tab from the trigger's first focusable → closed.
   - Repeat on `/ar`.
   Run `npm run e2e -- mega-keyboard` → PASS.
-- [ ] **Step 5:** Commit `feat(shell): data-driven mega menu with intent timing and keyboard support`.
+- [x] **Step 5:** Commit `feat(shell): data-driven mega menu with intent timing and keyboard support`.
 
 ### Task 7: Mobile menu
 
@@ -318,8 +318,8 @@ useMegaMenu(): { state; triggerProps; panelProps; categoryProps(slug); close(ret
   - The product strip.
   - The full-width quote CTA.
 
-- [ ] **Step 1:** Build it. Check at 390px in EN and AR: all items reachable by keyboard, the background does not scroll, and the accordion works without JS (native details).
-- [ ] **Step 2:** Commit `feat(shell): mobile menu with accordions and scroll lock`.
+- [x] **Step 1:** Build it. Check at 390px in EN and AR: all items reachable by keyboard, the background does not scroll, and the accordion works without JS (native details).
+- [x] **Step 2:** Commit `feat(shell): mobile menu with accordions and scroll lock`.
 
 ### Task 8: WhatsApp button, custom cursor, footer stub, overflow guard
 
@@ -339,9 +339,9 @@ useMegaMenu(): { state; triggerProps; panelProps; categoryProps(slug); close(ret
 - `<SiteFooter />`: a dark stub with the logo, `© {year} NO TIME Creative House`, and a `footer.stub` TODO line. The year comes from a server `new Date()` and is cached (cacheComponents safe via `"use cache"`, or rendered statically at build).
 - `scripts/shots.mjs [label]`: uses `@playwright/test`'s `chromium.launch({ channel: "chrome" })` against `http://localhost:3100`. It writes `docs/checkpoints/<label>/{en,ar}-{1440,390}[-reduced].png`, and with `--hero` also writes `hero-intro-end.png`, `hero-mid-scroll.png` and `hero.webm`.
 
-- [ ] **Step 1:** Write `e2e/overflow.spec.ts`. For `/en` and `/ar` at 360×780, with the menu closed and then open, assert `document.documentElement.scrollWidth <= innerWidth`. Run → PASS once the shell is complete.
-- [ ] **Step 2:** Run `superpowers:verification-before-completion`. Then build, lint, typecheck, test and e2e; then `node scripts/shots.mjs checkpoint-2` with reduced motion on and off.
-- [ ] **Step 3:** Run `/simplify` within its guardrails. Commit `feat(shell): whatsapp button, cursor, footer stub, overflow guard`.
+- [x] **Step 1:** Write `e2e/overflow.spec.ts`. For `/en` and `/ar` at 360×780, with the menu closed and then open, assert `document.documentElement.scrollWidth <= innerWidth`. Run → PASS once the shell is complete.
+- [x] **Step 2:** Run `superpowers:verification-before-completion`. Then build, lint, typecheck, test and e2e; then `node scripts/shots.mjs checkpoint-2` with reduced motion on and off.
+- [x] **Step 3:** Run `/simplify` within its guardrails. Commit `feat(shell): whatsapp button, cursor, footer stub, overflow guard`.
 
 ---
 
@@ -374,10 +374,10 @@ particleCount(w: number, h: number): number;          // round(clamp(70, 170, w*
 - `<HeroClock />` (server component): SVG with viewBox 600, `ring` (r284, `pathLength=1`), dotted `ring2` (r252, dasharray `1 7`), 60 ticks via `tickGeometry`, `hand` (300,332 → 300,30), and the hub. Size `min(76vmin, 700px)`.
 - CSS for pre-intro states (shutters shown, chars down, beat words hidden) is gated under `html[data-js]:not([data-reduced]) [data-hero-intro]`, so it is removed once the intro runs.
 
-- [ ] **Step 1:** Write `time.test.ts` and `hero-math.test.ts` with the exact values above → FAIL → implement → PASS.
-- [ ] **Step 2:** Build the static hero.
-- [ ] **Step 3:** Write `e2e/no-js.spec.ts` (`javaScriptEnabled: false`). On `/en` and `/ar`, the `h1` is visible with a non-zero bounding box, the shutters are not visible, and the CTA link is visible and has an `href`. → PASS.
-- [ ] **Step 4:** Commit `feat(hero): static cinematic frame, clock, HUD, pure time math`.
+- [x] **Step 1:** Write `time.test.ts` and `hero-math.test.ts` with the exact values above → FAIL → implement → PASS.
+- [x] **Step 2:** Build the static hero.
+- [x] **Step 3:** Write `e2e/no-js.spec.ts` (`javaScriptEnabled: false`). On `/en` and `/ar`, the `h1` is visible with a non-zero bounding box, the shutters are not visible, and the CTA link is visible and has an `href`. → PASS.
+- [x] **Step 4:** Commit `feat(hero): static cinematic frame, clock, HUD, pure time math`.
 
 ### Task 10: HeroScene canvas
 
@@ -449,15 +449,20 @@ Use `gsap-framer-scroll-animation` for the ScrollTrigger pin.
 - Use `ScrollTrigger.config({ ignoreMobileResize: true })`, height `100svh`, and `ScrollTrigger.refresh()` after `document.fonts.ready`.
 - **Reduced motion:** no pin and no intro; the static frame from Task 9 is the final state, and the beat is visible below the title.
 
-- [ ] **Step 1:** Implement the intro and verify it visually in EN and AR.
-- [ ] **Step 2:** Implement the scroll timeline. In AR, line 1 exits to the right and line 2 to the left.
-- [ ] **Step 3:** Write `e2e/locale-switch.spec.ts`:
+- [x] **Step 1:** Implement the intro and verify it visually in EN and AR.
+- [x] **Step 2:** Implement the scroll timeline. In AR, line 1 exits to the right and line 2 to the left.
+- [x] **Step 3:** Write `e2e/locale-switch.spec.ts`:
   - Scroll to 50% of the pin and toggle the language.
   - Expect `document.querySelectorAll(".pin-spacer").length === 1`, the title to have no leftover split spans from the other locale (SplitText reverted), and the URL to be `/ar`.
   - Open the mega menu, toggle the language, and expect it to be closed.
   Write `e2e/hero-resize.spec.ts`: at 390×844 mid-pin, resize to 390×700 and then 844×390. Expect no page error, the pin spacer height to equal `innerHeight * 2.4 ± 2px`, and the canvas size to match its box. Run → PASS.
 - [ ] **Step 4 (LCP rule, approved):** the largest text element must paint at first render and is **never at opacity 0**. Below 900px the title reveal starts at t = 0, with the masked rise only and no opacity fade. The lead is visible from frame one, so the intro animates its `y` only. The shutters sit over the hero during the intro, so identify the actual LCP element in the Lighthouse trace and confirm its paint is not deferred by them. If it is, the mobile shutters become a clip-path on the letterbox and do not cover the text. Run `npx lighthouse http://localhost:3100/{en,ar} --form-factor=mobile` 3× each: LCP < 2.5s and CLS 0. Log the median and the LCP element in DECISIONS.
 - [ ] **Step 5:** Run `verification-before-completion`, then `node scripts/shots.mjs checkpoint-3 --hero`, then `/simplify`, then commit `feat(hero): intro and pinned scroll timelines, RTL-mirrored split, focus pull`.
+
+**Status at the session handoff (2026-11-07):** Steps 1-3 done and committed in `chore: session handoff` (intro, scroll timeline, locale-switch, hero-resize and hero-intro specs, ToneController numeric zones D41, late-hydration path). Still to do:
+- Step 4: run Lighthouse (`node scripts/lighthouse.mjs http://localhost:3100 docs/checkpoints/lighthouse`) 3x per locale on a quiet machine; log the median, LCP element and CLS in DECISIONS (D38 amendment / new row).
+- Step 5: re-capture `node scripts/shots.mjs checkpoint-3 --hero` (the committed beat frames predate the header-tone fix), run `/simplify`, commit `feat(hero): ...polish` if anything changes.
+- Then the CHECKPOINT 3 report (in Arabic), including the OPEN_QUESTIONS #14 font decision. The recording is `hero.webp` (animated WebP via CDP screencast + sharp), not `hero.webm`: Playwright video needs an ffmpeg download, which is not allowed.
 
 ---
 
