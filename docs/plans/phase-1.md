@@ -515,10 +515,18 @@ Report the inventory summary and the reconciliation table at checkpoint 4.
   4. **Motion:** the tokens table plus 4 demos (RevealWords with replay, MaskReveal with replay, Parallax, Magnetic), then ScrubColorWords on the statement, then a Marquee of all 30 services from `getServices()`.
   5. **Components:** buttons (light and dark), badges (Coming soon, Illustrative, Preview), fields with an error state (`aria-invalid`, `aria-describedby`), and the expanding category cards. On desktop, cards expand on hover or focus (CSS flex-grow 0.9s). On mobile, the active card is driven by scroll through a GSAP ScrollTrigger per card (`top 60%`).
   6. **Closing band.**
-- [ ] **Step 1:** Write `contrast.test.ts` → FAIL → implement → PASS.
-- [ ] **Step 2:** Build the page.
-- [ ] **Step 3:** Run e2e overflow for the styleguide in both locales → PASS. Verify the 4 demo replays, RTL mask direction and the marquee direction.
-- [ ] **Step 4:** Commit `feat(styleguide): approval page mirroring the reference with real components`.
+- [x] **Step 1:** Write `contrast.test.ts` → FAIL → implement → PASS.
+- [x] **Step 2:** Build the page.
+- [x] **Step 3:** Run e2e overflow for the styleguide in both locales → PASS. Verify the 4 demo replays, RTL mask direction and the marquee direction.
+- [x] **Step 4:** Commit `feat(styleguide): approval page mirroring the reference with real components`.
+**Status (2026-11-07): done.**
+
+- **Built from the site's own pieces:** motion wrappers, `Button`, `BrandImage`, `Marquee`, plus the new `Badge` and `Field`. The tokens table reads `motionTokens`/`stagger`, so it cannot drift from the code. Contrast badges are computed (espresso/ivory 13.1, AAA).
+- **Media:** the mask demo uses `cat-events-hospitality-16x9` and the parallax demo `process-launch-4x5` (both real photos, D49). Category cards use each category's 4:5 slot, so the placeholders (with their tag, moved to the top of the card) are visible here too, which closes Task 14 Step 2 on the styleguide.
+- **Cards:** desktop is pure CSS (hover/focus, `:has()` lets the default open card step back). Phones: a ScrollTrigger per card toggles `is-on` only; without JS or under reduced motion every card stays open.
+- **CSS:** `styleguide.css` is imported by the page only. It is unlayered, so it beats Tailwind utilities on the same element: spacing on sg-* elements lives in sg-* classes, not utilities.
+- **Verified:** overflow 0 at 1440/390/360 in EN and AR, no console errors; mask wipes from the logical start (EN `inset(0 64% 0 0)` mid-wipe, AR `inset(0 0 0 49%)`); marquee moves left in EN, right in AR; word replay restarts from 110%; on a phone the centred card is the open one (`10000` → `00100` → `00001`). Screenshots: `docs/checkpoints/checkpoint-5/` (full page, final state under reduced motion, each section on its own ground; mobile at 1× because full-page captures over ~16k px repeat content).
+- **Not in the sitemap**, `robots: noindex, nofollow`.
 
 ### Task 13: Homepage copy deck
 
@@ -559,7 +567,7 @@ Invoke `design:ux-copy`.
 
 **Status (2026-11-07): Tasks 13 and 14 done, in the user's order (profile → copy deck + prompts → Checkpoint 4).**
 
-- **Task 12 (styleguide) is not built yet**, so Task 14 Step 2 was verified in the mega menu only. EN and AR, 1440: one placeholder visible, tag "AI image · placeholder" / «صورة AI · مؤقتة» at the logical start.
+- **Task 12 (styleguide) was not built yet at the time**, so Task 14 Step 2 was first verified in the mega menu (and later on the styleguide, see Task 12 status). EN and AR, 1440: one placeholder visible, tag "AI image · placeholder" / «صورة AI · مؤقتة» at the logical start.
 - **`content.test.ts`** checks that slot ids and alt texts match `image-prompts.md`. The test failed when an alt was changed in the doc, and passes once restored.
 - **`image-prompts.md`** also lists a real profile-photo alternative per slot: 7 usable now, 4 waiting on OQ #17.
 

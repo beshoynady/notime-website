@@ -22,5 +22,18 @@ test.describe("no horizontal scroll at 360px", () => {
       await page.locator("#mobile-nav details").first().locator("summary").click();
       expect(await overflow(page)).toBeLessThanOrEqual(0);
     });
+
+    test(`styleguide, top to bottom (${locale})`, async ({ page }) => {
+      await gotoReady(page, `/${locale}/styleguide`);
+      expect(await overflow(page)).toBeLessThanOrEqual(0);
+      // Walk the page so scroll-driven states (open card, parallax, marquee) all run.
+      await page.evaluate(async () => {
+        for (let y = 0; y < document.documentElement.scrollHeight; y += 700) {
+          window.scrollTo(0, y);
+          await new Promise((r) => setTimeout(r, 60));
+        }
+      });
+      expect(await overflow(page)).toBeLessThanOrEqual(0);
+    });
   }
 });

@@ -28,6 +28,10 @@ const AR_LATIN_ALLOW = [
   "WhatsApp",
   "iOS",
   "Android",
+  // Library names on the styleguide's motion tokens (proper nouns, like WhatsApp).
+  "ScrollTrigger",
+  "GSAP",
+  "Motion",
   "UI/UX",
   "SEO",
   "QR",

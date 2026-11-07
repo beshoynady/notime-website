@@ -213,6 +213,168 @@
     "licence": "TODO: trade licence number · legal entity · issuing authority",
     "backToTop": "Back to top"
   },
+  "styleguide": {
+    "meta": {
+      "title": "Styleguide",
+      "description": "Colour, type, space, motion and components for the NO TIME Creative House website."
+    },
+    "intro": {
+      "eyebrow": "NO TIME Creative House · Styleguide",
+      "headingLead": "The foundations,",
+      "headingKey": "for your approval.",
+      "lead": "Colour, type, space, motion and the components built from them. Every page of the site is assembled from what is on this one."
+    },
+    "px": "{n}px",
+    "colour": {
+      "eyebrow": "Foundations · Colour",
+      "headingLead": "Five tones,",
+      "headingKey": "one warm house.",
+      "copy": "Copy {hex}",
+      "copied": "Copied {hex}",
+      "selected": "{hex} is selected. Copy it with your keyboard.",
+      "pair": "{fg} on {bg}",
+      "contrast": "Contrast {ratio} to 1, {level}",
+      "swatches": {
+        "espresso": {
+          "name": "Deep Espresso",
+          "chip": "Dark ground",
+          "role": "Dark section backgrounds, primary text on light."
+        },
+        "cocoa": {
+          "name": "Cocoa Brown",
+          "chip": "Secondary",
+          "role": "Secondary text and hover states on light."
+        },
+        "taupe": {
+          "name": "Warm Taupe",
+          "chip": "Detail",
+          "role": "Dividers, small labels, quiet details."
+        },
+        "champagne": {
+          "name": "Champagne Beige",
+          "chip": "Accent",
+          "role": "Primary buttons and highlights on dark."
+        },
+        "ivory": {
+          "name": "Vanilla Ivory",
+          "chip": "Light ground",
+          "role": "Light section backgrounds, text on dark."
+        }
+      }
+    },
+    "type": {
+      "eyebrow": "Foundations · Typography",
+      "headingLead": "Light for presence.",
+      "headingKey": "Bold for the word that matters.",
+      "roles": {
+        "display": "Display",
+        "h1": "Heading 1",
+        "h2": "Heading 2",
+        "lead": "Lead",
+        "body": "Body",
+        "eyebrow": "Eyebrow"
+      },
+      "samples": {
+        "displayLead": "Time to",
+        "displayKey": "create",
+        "h1Lead": "Every event is a",
+        "h1Key": "first impression.",
+        "h2": "Conferences, launches and private celebrations",
+        "lead": "From the first concept sketch to the last guest leaving, one team carries the idea, so nothing is lost between suppliers.",
+        "body": "Body copy stays calm and readable. Lines are held near 65 characters, and Arabic is set one step larger, so both languages carry the same visual weight on the page.",
+        "eyebrow": "Events & Hospitality"
+      },
+      "fontCard": {
+        "label": "English · Montserrat",
+        "sampleLead": "Aa",
+        "sampleKey": "Aa",
+        "weights": "ExtraLight 200 · Light 300 · Regular 400 · Medium 500 · SemiBold 600"
+      }
+    },
+    "shape": {
+      "eyebrow": "Foundations · Shape & space",
+      "headingLead": "Sharp edges.",
+      "headingKey": "Generous space.",
+      "radius": "Radius",
+      "radiusNote": "4px is the default for buttons, cards and fields. Tags use 2px.",
+      "spacing": "Spacing · base 8",
+      "grid": "Grid",
+      "gridDesktop": "Desktop · 12 columns · 24px gaps",
+      "gridMobile": "Mobile · 4 columns · 16px gaps"
+    },
+    "motion": {
+      "eyebrow": "Foundations · Motion",
+      "headingLead": "Slow, smooth,",
+      "headingKey": "never bouncy.",
+      "tokens": {
+        "micro": {
+          "name": "Micro",
+          "desc": "Buttons, links and toggles. Owned by Motion."
+        },
+        "base": {
+          "name": "Base",
+          "desc": "Section and card reveals. Owned by GSAP."
+        },
+        "display": {
+          "name": "Display",
+          "desc": "Large headlines, letter by letter."
+        },
+        "stagger": {
+          "name": "Stagger",
+          "desc": "The gap between letters or words in a reveal."
+        }
+      },
+      "words": {
+        "line1": "We plan it.",
+        "line2": "We build it.",
+        "line3": "We launch it."
+      },
+      "demos": {
+        "words": "Word reveal",
+        "mask": "Mask reveal",
+        "parallax": "Parallax",
+        "magnetic": "Magnetic button",
+        "magneticButton": "Plan your event"
+      },
+      "replay": "Replay",
+      "replayLabel": "Replay the {demo}",
+      "scroll": "Scroll",
+      "hover": "Hover",
+      "statementLabel": "Scroll · the words colour in",
+      "marqueeLabel": "All 30 services"
+    },
+    "components": {
+      "eyebrow": "Components",
+      "headingLead": "Built once,",
+      "headingKey": "used everywhere.",
+      "buttons": "Buttons",
+      "onLight": "On light",
+      "onDark": "On dark",
+      "secondary": "View work",
+      "disabled": "Disabled",
+      "link": "Text link with an underline that draws in",
+      "labels": "Labels",
+      "labelsNote": "“Illustrative” sits on any AI image that stands in for a real project. “Preview” marks concept screens of products still in development.",
+      "fields": "Form fields",
+      "eventType": "Event type",
+      "options": {
+        "conference": "Conference",
+        "launch": "Product launch",
+        "private": "Private celebration"
+      },
+      "email": "Email",
+      "emailError": "Add the domain after the @, for example {example}",
+      "categories": "Category cards",
+      "categoriesNote": "On a computer, a card opens when you hover over it or tab to it. On a phone, the card in view opens as you scroll."
+    },
+    "closing": {
+      "headingLead": "Approve the foundations,",
+      "headingKey": "then we build.",
+      "body": "Every section of the site will be assembled from the colours, type, spacing and motion on this page.",
+      "meta": "NO TIME Creative House · Styleguide, version 0.1",
+      "phase": "Phase 1 · Design foundations"
+    }
+  },
   "notFound": {
     "title": "This page doesn't exist.",
     "back": "Back to home"

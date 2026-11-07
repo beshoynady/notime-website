@@ -584,6 +584,97 @@ html[data-overlay-open] #site-header {
   }
 }
 
+/* Labels (components/ui/badge.tsx). Outline tones take the current text colour, so they read
+   on light and dark grounds; "preview" is dashed, since it marks concept screens. */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 7px;
+  border: 1px solid currentColor;
+  border-radius: var(--radius-tag);
+  font-size: 0.56rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+.badge:lang(ar) {
+  font-size: 0.72rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.badge.badge-soon {
+  border-color: var(--color-champagne);
+}
+.badge-preview {
+  border-style: dashed;
+}
+.badge-md {
+  gap: 8px;
+  padding: 6px 10px;
+  font-size: 0.66rem;
+}
+.badge-md:lang(ar) {
+  font-size: 0.8rem;
+}
+.badge-md.badge-soon::before {
+  width: 6px;
+  height: 6px;
+}
+
+/* Underlined form fields (components/ui/field.tsx). */
+.field {
+  display: grid;
+  gap: 8px;
+}
+.field label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-cocoa);
+}
+.field label:lang(ar) {
+  font-size: 0.85rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.field-control {
+  inline-size: 100%;
+  min-inline-size: 0;
+  padding-block: 12px;
+  padding-inline: 0;
+  border: 0;
+  border-block-end: 1px solid var(--color-line-light);
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  transition:
+    border-color 0.3s var(--ease-expo-out),
+    box-shadow 0.3s var(--ease-expo-out);
+}
+/* Focus: the rule darkens and thickens to 2px (no outline box on an underlined field). */
+.field-control:focus-visible {
+  outline: none;
+  border-block-end-color: var(--color-espresso);
+  box-shadow: 0 1px 0 var(--color-espresso);
+}
+.field-hint {
+  font-size: 0.78rem;
+  color: var(--color-cocoa);
+}
+.field-error .field-control {
+  border-block-end-color: var(--color-error);
+}
+.field-error .field-control:focus-visible {
+  box-shadow: 0 1px 0 var(--color-error);
+}
+.field-error .field-hint {
+  color: var(--color-error);
+}
+
 /* Burger → X (CSS on aria-expanded, 0.45s expo.out). */
 .burger span {
   display: block;
