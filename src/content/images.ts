@@ -43,7 +43,10 @@ export const imageSlots: ImageSlot[] = [
     id: "cat-creative-production-4x5",
     kind: "ai",
     aspect: "4:5",
-    src: null,
+    // AI image (D50): Canva master in "NO TIME – Website AI", passed the full-size inspection.
+    src: "/images/ai/cat-creative-production-4x5.webp",
+    blurDataURL:
+      "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAQAgCdASoKAA0AAsBMJZgCdAEfUoCMZ9agAP75WlGSx8pXwpJFTUhwOfe0xdl7XvZmcJEyHmz7RS46UGZ0b2S+02vJo8ZTly84j4kVXyxJ0vGwAAA=",
     paint: "studio",
     illustrative: false,
     alt: {
@@ -70,7 +73,10 @@ export const imageSlots: ImageSlot[] = [
     id: "cat-marketing-brand-4x5",
     kind: "ai",
     aspect: "4:5",
-    src: null,
+    // AI image (D50): Canva master in "NO TIME – Website AI", passed the full-size inspection.
+    src: "/images/ai/cat-marketing-brand-4x5.webp",
+    blurDataURL:
+      "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAQAgCdASoKAA0AAsBMJYwCdAD0orfwqK5cAP70vHLZK2ojb7QJVnDYAJ8LrzJwDLhdiCNlvrsALoOMYChAvNWtW5luCCbkC2trfKCmGBhoq4KA/3v2YwKsAAA=",
     paint: "brand",
     illustrative: false,
     alt: {
@@ -91,17 +97,20 @@ export const imageSlots: ImageSlot[] = [
       ar: "مكتب هادئ ولوحات هوية مثبّتة على الجدار في ضوء آخر النهار.",
     },
   },
-  // TODO: swap to real photo after approval (OQ #17; image-prompts.md names the photo).
+  // TODO: swap to real photo after approval: the UAE Pro League gift photos (uae-pro-league-5; p24-1 gift box once a clean original arrives, OQ #21). OQ #17.
   {
     id: "cat-production-print-gifts-4x5",
     kind: "ai",
     aspect: "4:5",
-    src: null,
+    // AI image (D50): Canva master in "NO TIME – Website AI", passed the full-size inspection.
+    src: "/images/ai/cat-production-print-gifts-4x5.webp",
+    blurDataURL:
+      "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADwAQCdASoKAA0AAsBMJQBOgCPtyNmFvMAA/vGCH4UiC+f16EW8jmBgsCIYnTHND5iAdZZORz7YsIlCqU/DfStk5Uzq7nPL7wPBeVKwLlOO5mkAAAA=",
     paint: "print",
     illustrative: false,
     alt: {
-      en: "Sheets coming off a large-format printer in a dim print workshop.",
-      ar: "أوراق تخرج من طابعة كبيرة الحجم في ورشة طباعة خافتة الإضاءة.",
+      en: "Hands tying a champagne ribbon on a dark corporate gift box.",
+      ar: "يدان تعقدان شريطًا بلون الشمبانيا على علبة هدايا داكنة.",
     },
   },
   // Real NO TIME photo from the 2026 profile (D49): no client name, no identifiable person.
@@ -124,7 +133,10 @@ export const imageSlots: ImageSlot[] = [
     id: "cat-software-digital-4x5",
     kind: "ai",
     aspect: "4:5",
-    src: null,
+    // AI image (D50): Canva master in "NO TIME – Website AI", passed the full-size inspection.
+    src: "/images/ai/cat-software-digital-4x5.webp",
+    blurDataURL:
+      "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAAAQAgCdASoKAA0AAsBMJYgCdAEO/6tCnpgAAP75+13DR7s9MNZPQRdbbEvJFqGZXdSPqryTrpa8qyQpvMcGKxX7N9Vn3IOkwm6wf3FyrIAAAA==",
     paint: "code",
     illustrative: false,
     alt: {
@@ -163,7 +175,10 @@ export const imageSlots: ImageSlot[] = [
     id: "hero-fallback-9x16",
     kind: "ai",
     aspect: "9:16",
-    src: null,
+    // AI image (D50): Canva master in "NO TIME – Website AI", passed the full-size inspection.
+    src: "/images/ai/hero-fallback-9x16.webp",
+    blurDataURL:
+      "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADQAwCdASoKABIAPtFYpkwoJSOiMAgBABoJYwCdAB53joOK55QGaQAA/vNQe7RoO3QMvT4TidBdrfw6vRfSh7zynIN3uuEC1GjY6UTnN1P+XTWEhpzheqcAAAA=",
     paint: "event",
     illustrative: false,
     alt: {
@@ -177,7 +192,10 @@ export const imageSlots: ImageSlot[] = [
     id: "process-plan-4x5",
     kind: "ai",
     aspect: "4:5",
-    src: null,
+    // AI image (D50): Canva master in "NO TIME – Website AI", passed the full-size inspection.
+    src: "/images/ai/process-plan-4x5.webp",
+    blurDataURL:
+      "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAwAgCdASoKAA0AAsBMJQBOgMWltcNdhEaQYAD8+vF2iWv0R3xon7MiAjmPa2SXnY3bPlc5rurPI2XGUC21Hbj4W0qLyf+tcL3WfgOB0RIxk3c5vB1nWUAkgAA=",
     paint: "table",
     illustrative: false,
     alt: {
@@ -236,7 +254,10 @@ export const imageSlots: ImageSlot[] = [
     id: "product-qr-check-in-16x9",
     kind: "ai",
     aspect: "16:9",
-    src: null,
+    // AI image (D50): Canva master in "NO TIME – Website AI", passed the full-size inspection.
+    src: "/images/ai/product-qr-check-in-16x9.webp",
+    blurDataURL:
+      "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAACwAQCdASoKAAYAAsBMJQBOgCBtwvfAAP72sJvduM4pFdRRpHEt325gEPMbRXRX/B6PFrplC/feCbZTxO5V73LRbEKWlWTEkAAAAA==",
     paint: "code",
     illustrative: false,
     alt: {

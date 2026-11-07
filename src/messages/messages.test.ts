@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
+import { createTranslator } from "next-intl";
 import { describe, expect, it } from "vitest";
 import ar from "./ar.json";
 import en from "./en.json";
@@ -122,5 +123,36 @@ describe("messages", () => {
     expect(AR["hero.beatLead"] + " " + AR["hero.beatKey"]).toBe("كل ثانية محسوبة.");
     expect(EN["megaMenu.headingLead"] + " " + EN["megaMenu.headingKey"]).toBe("One house. Five crafts.");
     expect(AR["megaMenu.headingLead"] + " " + AR["megaMenu.headingKey"]).toBe("بيت واحد. خمس حِرَف.");
+  });
+});
+
+/**
+ * Arabic UI and data use Western digits (30, not ٣٠). ICU's plural `#` and `{x, number}` go through
+ * Intl.NumberFormat("ar"), which gives Arabic-Indic digits in Chrome (Node's ICU 78 gives Western ones,
+ * so the two would also disagree at hydration). A plain `{count}` is rendered with String(), so it is
+ * always Western. "ar-u-nu-arab" forces the Arabic-Indic case on every machine.
+ */
+describe("arabic numerals", () => {
+  const INDIC = /[٠-٩۰-۹]/;
+  const t = createTranslator({ locale: "ar-u-nu-arab", messages: ar });
+
+  it("the mega menu counts read 30, not ٣٠", () => {
+    expect(t("megaMenu.count", { count: 30 })).toBe("30 خدمة");
+    expect(t("megaMenu.count", { count: 7 })).toBe("7 خدمات");
+    expect(t("megaMenu.allServices", { count: 30 })).toBe("جميع الخدمات (30)");
+  });
+
+  it("no arabic message formats a number with Arabic-Indic digits", () => {
+    for (const [key, msg] of Object.entries(AR)) {
+      if (msg.includes("<")) continue; // rich text: covered by the pattern check below
+      const args = Object.fromEntries([...msg.matchAll(/\{(\w+)/g)].map(([, name]) => [name, 30]));
+      expect(t(key as never, args as never), key).not.toMatch(INDIC);
+    }
+  });
+
+  it("no arabic message uses # or a number format", () => {
+    for (const [key, msg] of Object.entries(AR)) {
+      expect(msg, key).not.toMatch(/#|,\s*number/);
+    }
   });
 });

@@ -39,7 +39,7 @@
     "headingLead": "بيت واحد.",
     "headingKey": "خمس حِرَف.",
     "intro": "كل ما تحتاجه فعاليتك أو علامتك التجارية، يتولّاه فريق واحد.",
-    "count": "{count, plural, zero {لا خدمات} one {خدمة واحدة} two {خدمتان} few {# خدمات} many {# خدمة} other {# خدمة}}",
+    "count": "{count, plural, zero {لا خدمات} one {خدمة واحدة} two {خدمتان} few {{count} خدمات} many {{count} خدمة} other {{count} خدمة}}",
     "viewCategory": "استعرض الفئة",
     "inDevelopment": "قيد التطوير",
     "allServices": "جميع الخدمات ({count})"

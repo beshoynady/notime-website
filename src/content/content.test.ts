@@ -123,4 +123,25 @@ describe("image slots", () => {
   it("no AI image is marked as real documentation", () => {
     for (const s of getImageSlots()) if (s.kind === "ai") expect(s.src === null || s.src.startsWith("/images/ai/")).toBe(true);
   });
+
+  it("every wired AI slot has its WebP and AVIF on disk and a blur placeholder (D50)", () => {
+    const wired = getImageSlots().filter((s) => s.kind === "ai" && s.src);
+    expect(wired.map((s) => s.id).sort()).toEqual(
+      [
+        "cat-creative-production-4x5",
+        "cat-marketing-brand-4x5",
+        "cat-production-print-gifts-4x5",
+        "cat-software-digital-4x5",
+        "hero-fallback-9x16",
+        "process-plan-4x5",
+        "product-qr-check-in-16x9",
+      ].sort(),
+    );
+    for (const s of wired) {
+      expect(s.src, s.id).toBe(`/images/ai/${s.id}.webp`);
+      expect(existsSync(path.join("public", s.src!)), s.id).toBe(true);
+      expect(existsSync(path.join("public", s.src!.replace(/\.webp$/, ".avif"))), s.id).toBe(true);
+      expect(s.blurDataURL, s.id).toMatch(/^data:image\/webp;base64,/);
+    }
+  });
 });

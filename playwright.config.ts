@@ -8,14 +8,20 @@ const external = process.env.PW_BASE_URL;
 export default defineConfig({
   testDir: "./e2e",
   fullyParallel: true,
-  // One worker: the suite has timing-sensitive checks (CLS, intro failsafe, menu timing),
+  // One worker locally: the suite has timing-sensitive checks (CLS, intro failsafe, menu timing),
   // and parallel browsers starved this dev machine into timeouts. Measured: all green in
-  // ~60 s with 1 worker vs 6 timeouts with the default. Override with --workers.
-  workers: 1,
+  // ~60 s with 1 worker vs 6 timeouts with the default. Parallel only on CI, if CI is added.
+  workers: process.env.CI ? undefined : 1,
+  // One retry. A test that passes only on the retry is reported as "flaky" by the list
+  // reporter and counts as flaky, never as passed (D50). Log it in docs/e2e-flakes.md;
+  // the second flake of the same test is debugged, not retried.
+  retries: 1,
   reporter: "list",
   use: {
     baseURL: external ?? `http://localhost:${PORT}`,
     channel: "chrome",
+    // The first retry keeps a trace, so a flake leaves evidence (action timings show load).
+    trace: "on-first-retry",
   },
   projects: [
     { name: "desktop", use: { viewport: { width: 1440, height: 900 } } },

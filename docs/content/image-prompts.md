@@ -1,6 +1,24 @@
 # Image art direction: one entry per slot
 
-Status: **for approval at Checkpoint 4. No image is generated before approval** (Task 15).
+Status: prompts approved at Checkpoint 4. Generation started after Checkpoint 5 (D50).
+
+## Generation status (D50)
+
+Masters are full-size PNG exports from the Canva folder "NO TIME – Website AI" (design "NO TIME – Website AI images", one page per slot). Each is inspected at full size (quadrants at 1:1) before `scripts/convert-ai.mjs` converts it. Canva generates at 1136 × 1408 (4:5), 1680 × 944 (16:9) and about 944 × 1680 (9:16), so the delivery sizes below are upscales of about 1.4–1.5×.
+
+| Slot | Status | Note |
+|---|---|---|
+| `cat-creative-production-4x5` | wired | |
+| `cat-marketing-brand-4x5` | wired | |
+| `cat-production-print-gifts-4x5` | wired | Gift box re-brief. Back lid corner slightly soft, out of focus. |
+| `cat-software-digital-4x5` | wired | Key legends illegible, phone screen blank. |
+| `hero-fallback-9x16` | wired | |
+| `process-plan-4x5` | wired | Plans and ruler show lines and ticks only. |
+| `product-qr-check-in-16x9` | wired | Tablet screen blank. |
+| `cat-marketing-brand-16x9` | rejected | Small pseudo-text mark on a pinned sheet. Regenerate. |
+| `cat-software-digital-16x9` | rejected | Pseudo-text on the screens and a badge on a bezel. Regenerate. |
+| `hero-fallback-16x9` | rejected | A see-through pillar right of the beam (the palm and arch show through it). Regenerate. |
+| `product-restaurant-system-16x9` | not generated | Canva credit quota ran out. |
 
 - **Slots:** `src/content/images.ts`, 18 slots. `src/content/content.test.ts` checks that every slot has exactly one entry here (`### \`<id>\``) and that the alt texts match.
 - **Until a file exists**, each slot renders the designed placeholder (`src/components/ui/ai-placeholder.tsx`), tagged "AI image · placeholder".
@@ -68,10 +86,11 @@ The palette's hex values are #2E2017, #634731, #BB9A79, #EAD4AB and #F5E9D3. Giv
 ### `cat-production-print-gifts-4x5`
 
 - **Page · section:** Home › Categories (card 4); mega menu tile · **Aspect:** 4:5
-- **Prompt:** House style. A dim print workshop: a wide sheet of heavy ivory stock coming off a large-format printer, caught in a pool of warm overhead light. Rolls of paper and a cutting table in shadow behind. The printed surface shows only an abstract warm gradient, no text.
-- **Alt EN:** Sheets coming off a large-format printer in a dim print workshop.
-- **Alt AR:** أوراق تخرج من طابعة كبيرة الحجم في ورشة طباعة خافتة الإضاءة.
-- **Real alternative:** `gifts-2` (sports T-shirt mock-up, 905 × 1019) shows a client brand (OQ #17). Note: the profile's evidence here is **gifts**, not print (reconciliation §1). Consider re-briefing this slot to a gift box being finished by hand.
+- **Prompt:** House style. A corporate gift box being prepared by hand on a dark walnut worktable: a rigid deep-espresso box with its lid set aside, ivory tissue paper folded inside, and two hands at the edge of the frame tying a champagne satin ribbon. Warm low-key light from one side, the rest of the workshop in shadow. No logos, text or emblems on the box, lid, ribbon or tissue.
+- **Alt EN:** Hands tying a champagne ribbon on a dark corporate gift box.
+- **Alt AR:** يدان تعقدان شريطًا بلون الشمبانيا على علبة هدايا داكنة.
+- **Re-briefed at Checkpoint 5 (D50):** from a print workshop to a hand-prepared gift box, because the profile's evidence for this category is gifts, not print (reconciliation §1). The first print-workshop image was dropped.
+- **Real alternative:** the UAE Pro League gift photos: `uae-pro-league-5` (gift set, 1280 × 882) and the PU gift box on p24-1 (needs a clean original without the baked-in carousel badge, OQ #21). Client brand, so OQ #17.
 - **Now:** AI image until the client approves; marked `// TODO: swap to real photo after approval` in `images.ts` (D49).
 
 ### `cat-software-digital-4x5`
