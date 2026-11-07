@@ -557,6 +557,12 @@ Invoke `design:ux-copy`.
 - [ ] **Step 2:** Verify that every `src: null` slot renders `AiPlaceholder` with its tag on the styleguide and in the mega menu.
 - [ ] **Step 3:** Commit `docs(images): AI art-direction prompts per slot, placeholder wiring`.
 
+**Status (2026-11-07): Tasks 13 and 14 done, in the user's order (profile → copy deck + prompts → Checkpoint 4).**
+
+- **Task 12 (styleguide) is not built yet**, so Task 14 Step 2 was verified in the mega menu only. EN and AR, 1440: one placeholder visible, tag "AI image · placeholder" / «صورة AI · مؤقتة» at the logical start.
+- **`content.test.ts`** checks that slot ids and alt texts match `image-prompts.md`. The test failed when an alt was changed in the doc, and passes once restored.
+- **`image-prompts.md`** also lists a real profile-photo alternative per slot: 7 usable now, 4 waiting on OQ #17.
+
 ---
 
 ## CHECKPOINT 4: send the copy deck and `image-prompts.md`, before any image generation. Stop.

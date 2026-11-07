@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { getCategories, getCategory, getImageSlot, getImageSlots, getProducts, getServices } from "./index";
 
@@ -80,6 +82,20 @@ describe("image slots", () => {
       for (const l of locales) expect(s.alt[l].trim(), `${s.id}.alt.${l}`).not.toBe("");
     }
     expect(() => getImageSlot("missing-slot")).toThrow();
+  });
+
+  // Task 14: every slot has exactly one art-direction entry (`### \`<id>\``) and vice versa.
+  it("matches docs/content/image-prompts.md one to one", () => {
+    const doc = readFileSync(path.join(process.cwd(), "docs", "content", "image-prompts.md"), "utf8");
+    const documented = [...doc.matchAll(/^### `([a-z0-9-]+)`/gm)].map((m) => m[1]);
+    expect(new Set(documented).size, "duplicate entries in image-prompts.md").toBe(documented.length);
+    expect([...documented].sort()).toEqual(getImageSlots().map((s) => s.id).sort());
+    // The documented alt texts are the ones the site renders.
+    for (const s of getImageSlots()) {
+      const entry = doc.split(/^### /m).find((e) => e.startsWith(`\`${s.id}\``))!;
+      expect(entry, `${s.id} alt EN`).toContain(`**Alt EN:** ${s.alt.en}`);
+      expect(entry, `${s.id} alt AR`).toContain(`**Alt AR:** ${s.alt.ar}`);
+    }
   });
 
   it("no AI image is marked as real documentation", () => {
