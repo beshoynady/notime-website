@@ -13,7 +13,7 @@ Status values: **Missing** · **Requested** · **Received** · **Approved**
 | 7 | Contact info and social URLs | Phone, email, WhatsApp number, address, social profiles. | Missing |
 | 8 | Dubai trade license details | License number, legal entity name, and issuing authority (footer and legal pages). Placeholder key: `footer.licence`. | Missing |
 | 9 | Domain | Domain name plus DNS access for Vercel and Resend (email sending domain). | Missing |
-| 10 | Approved list of 30 services | Draft from the prototype is live in `src/content/services.ts` (status `draft`). OPEN_QUESTIONS #11. | Missing |
+| 10 | Approved list of 30 services | Approved 2026-11-07 (DECISIONS D56): `docs/content/services-list.md`, live in `src/content/services.ts` (status `approved`). | Approved |
 | 11 | Final product names | QR event check-in system and restaurant management system; working names in `src/content/products.ts`. OPEN_QUESTIONS #5. | Missing |
 | 12 | Contact fields for the site | `src/config/contact.ts`: email, WhatsApp number (or `NEXT_PUBLIC_WHATSAPP_NUMBER`), Instagram URL, Facebook URL. Until filled, the WhatsApp button shows "number pending". | Missing |
 | 13 | Images for 18 slots | Slot list in `src/content/images.ts`; prompts in `docs/content/image-prompts.md` (Task 14). Each slot shows a designed placeholder until a file is added. 7 slots use real profile photos (D49). 4 slots carry an AI image until their client approves, then swap to the real photo (`// TODO: swap to real photo after approval`): `cat-production-print-gifts-4x5` (→ UAE Pro League gift photos: `uae-pro-league-5`, and the p24-1 gift box once a clean original arrives, OQ #21), `cat-software-digital-4x5`, `cat-software-digital-16x9`, `cat-marketing-brand-16x9` (OQ #17). | Missing |

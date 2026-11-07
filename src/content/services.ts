@@ -1,6 +1,6 @@
-// TODO: replace with approved list — these 30 services are the draft list from the
-// reference prototype (docs/design/notime-styleguide.html). docs/content/services-list.md
-// is still TODO (OPEN_QUESTIONS #2, #11). Every entry stays `status: "draft"` until approved.
+// The approved list (DECISIONS D56, 2026-11-07): docs/content/services-list.md, from
+// services-proposal.md (the five profile services folded into four renamed entries).
+// Slugs follow the English titles and are the future page addresses; keep them stable.
 import { categories } from "./categories";
 import { imageSlots } from "./images";
 import type { CategorySlug, Localized, Service } from "./types";
@@ -19,7 +19,7 @@ function group(category: CategorySlug, rows: Row[]): Service[] {
     // Services share their category image until service-specific images exist.
     image: cat.image,
     imageAlt: slot.alt,
-    status: "draft",
+    status: "approved",
   }));
 }
 
@@ -42,27 +42,27 @@ export const services: Service[] = [
       },
     ],
     [
-      "product-launches",
-      { en: "Product launches", ar: "إطلاق المنتجات" },
+      "product-launches-activations",
+      { en: "Product launches & brand activations", ar: "إطلاق المنتجات وتفعيل العلامات" },
       {
-        en: "The reveal, the room and the story around it, timed to the second.",
-        ar: "لحظة الكشف والمكان والقصة من حولها، بتوقيت دقيق.",
+        en: "Launches and brand activations in malls, venues and exhibitions, including technology and robotics experiences.",
+        ar: "إطلاقات وتفعيلات للعلامات في المراكز التجارية والقاعات والمعارض، بما فيها تجارب التقنية والروبوتات.",
       },
     ],
     [
-      "galas-private-events",
-      { en: "Galas & private events", ar: "الحفلات والمناسبات الخاصة" },
+      "galas-private-celebrations",
+      { en: "Galas & private celebrations", ar: "الحفلات والاحتفالات الخاصة" },
       {
-        en: "Evenings with a clear mood, from the guest list to the last light.",
-        ar: "أمسيات بطابع واضح، من قائمة الضيوف حتى آخر ضوء.",
+        en: "Galas, weddings, baby receptions and intimate gatherings: theming, décor, florals, keepsakes and the full day.",
+        ar: "حفلات وأعراس واستقبالات مواليد وتجمّعات عائلية: الفكرة والديكور والزهور والتذكارات، وتنفيذ اليوم كاملًا.",
       },
     ],
     [
-      "hospitality-guest-management",
-      { en: "Hospitality & guest management", ar: "الضيافة وإدارة الضيوف" },
+      "catering-heritage-hospitality",
+      { en: "Catering & heritage hospitality", ar: "الضيافة والمجالس التراثية" },
       {
-        en: "Invitations, arrivals, seating and care for every guest.",
-        ar: "الدعوات والاستقبال والجلوس، وعناية بكل ضيف.",
+        en: "Private and corporate catering, signature desserts and beverages, majlis setups, desert tents and Arabic coffee service.",
+        ar: "ضيافة للمناسبات الخاصة والشركات، وحلويات ومشروبات مميّزة، ومجالس وخيام صحراوية وتقديم القهوة العربية.",
       },
     ],
     [
@@ -184,11 +184,11 @@ export const services: Service[] = [
       },
     ],
     [
-      "event-signage",
-      { en: "Event signage", ar: "لافتات الفعاليات" },
+      "stand-fabrication-signage",
+      { en: "Stand fabrication & signage", ar: "تصنيع الأجنحة واللافتات" },
       {
-        en: "Wayfinding and signage that guide guests without a word.",
-        ar: "لافتات إرشادية تقود الضيوف دون كلمة.",
+        en: "Exhibition stands, activations and branded spaces, designed, fabricated and installed, with the signage that guides guests.",
+        ar: "أجنحة معارض ومساحات تفعيل وبيئات تحمل هوية العلامة، نصمّمها ونصنّعها ونركّبها، مع لافتات ترشد الضيوف.",
       },
     ],
     [

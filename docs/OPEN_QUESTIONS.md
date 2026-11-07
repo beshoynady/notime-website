@@ -4,7 +4,7 @@ Items that need an answer from Rand or the user before the related work can be b
 
 ## Content & CMS
 1. **Does Rand need to edit content herself?** The answer decides between TypeScript data files (current plan) and Sanity CMS.
-2. **Full list of the 30 services:** to be pasted by the user into `docs/content/services-list.md`.
+<!-- #2 (the 30 services) was closed on 2026-11-07: docs/content/services-list.md is the approved list; see DECISIONS D56. -->
 3. **Location of the brand assets:** the ~75 photos and the logo variants from the old landing project. Where are they? *Partly answered (2026-11-07):* the 2026 profile holds 98 images, 32 of them usable now (`docs/content/profile-inventory.md`). Originals at full resolution are still wanted (#21).
 
 ## Forms
@@ -19,7 +19,7 @@ Items that need an answer from Rand or the user before the related work can be b
 10. **npm audit:** `npm install` reports 12 vulnerabilities (4 low, 8 moderate) in transitive dependencies. Review them before launch. `npm audit fix --force` was **not** run, because it can introduce breaking changes.
 
 ## Added in Phase 1
-11. **Services list still uses the prototype draft.** `src/content/services.ts` holds the 30 services (6 per category) from `docs/design/notime-styleguide.html`, all marked `status: "draft"`. Approve this list or paste the final one into `docs/content/services-list.md`; slugs become URLs, so they should be fixed before service pages are built.
+<!-- #11 (services list still the prototype draft) was closed on 2026-11-07: services.ts holds the approved list, status "approved"; see DECISIONS D56. -->
 12. **Dark-background logo.** Need a dark-background logo version from the designer (tagline in taupe or champagne) plus SVG/AI files for all variants. In the supplied dark-bg PNGs (`logo-4`, `logo-2`) the cocoa parts sit on espresso at about 1.9:1: the "CREATIVE HOUSE" tagline in both, plus the "NO" mark in `logo-4` and "TIME" in `logo-2`. The tagline is hard to read at header size. The site uses the files as supplied (never recoloured) until the designer sends a fixed version.
 <!-- #13 (Gotham web licence) was closed on 2026-11-07: Gotham is dropped, Montserrat stays primary; see DECISIONS D55. -->
 <!-- #14 (font loading) was resolved after Checkpoint 3: `swap`, see DECISIONS D45. -->

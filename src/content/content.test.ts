@@ -60,8 +60,23 @@ describe("services", () => {
     }
   });
 
-  it("all services stay draft until services-list.md is approved", () => {
-    expect(services.every((s) => s.status === "draft")).toBe(true);
+  it("every service is approved (D56)", () => {
+    expect(services.every((s) => s.status === "approved")).toBe(true);
+  });
+
+  it("matches the approved list in docs/content/services-list.md (slug, EN and AR titles, order)", () => {
+    const md = readFileSync(path.join(process.cwd(), "docs/content/services-list.md"), "utf8");
+    const rows = [...md.matchAll(/^\| (\d+) \| ([a-z0-9-]+) \| [a-z0-9-]+ \| (.+?) \| (.+?) \|$/gm)].map((m) => ({
+      n: Number(m[1]),
+      slug: m[2],
+      en: m[3],
+      ar: m[4],
+    }));
+    expect(rows).toHaveLength(30);
+    expect(rows.map((r) => r.n)).toEqual(Array.from({ length: 30 }, (_, i) => i + 1));
+    expect(services.map((s) => ({ slug: s.slug, en: s.title.en, ar: s.title.ar }))).toEqual(
+      rows.map(({ slug, en, ar }) => ({ slug, en, ar })),
+    );
   });
 });
 

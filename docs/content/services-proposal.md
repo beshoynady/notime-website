@@ -2,7 +2,7 @@
 
 **For:** Rand, NO TIME Creative House
 **Date:** 7 November 2026
-**Status:** proposal, waiting for your approval. Nothing on the site changes until you approve.
+**Status:** approved on 7 November 2026 (DECISIONS D56). The final list is [services-list.md](services-list.md); this file keeps the reasoning.
 
 ## What this is
 
