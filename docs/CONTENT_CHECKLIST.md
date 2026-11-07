@@ -9,9 +9,9 @@ Status values: **Missing** · **Requested** · **Received** · **Approved**
 | 3 | Founder story | Rand's story, in her own words (EN; AR written natively). | Missing |
 | 4 | Client logos **and permission to use them** | Written permission needed for each logo. | Missing |
 | 5 | Testimonials | Real quotes with name, title, company, and consent. | Missing |
-| 6 | Past-work details | Per project: Challenge → Idea → Execution → Result, date, location, client (if publishable). | Missing |
+| 6 | Past-work details | Per project: Challenge → Idea → Execution → Result, date, location, client (if publishable). Drafts from the 2026 profile: `docs/content/case-studies.md`. Placeholder keys: `work.todo.title`, `work.todo.summary`. | Missing |
 | 7 | Contact info and social URLs | Phone, email, WhatsApp number, address, social profiles. | Missing |
-| 8 | Dubai trade license details | License number, legal entity name, and issuing authority (footer and legal pages). | Missing |
+| 8 | Dubai trade license details | License number, legal entity name, and issuing authority (footer and legal pages). Placeholder key: `footer.licence`. | Missing |
 | 9 | Domain | Domain name plus DNS access for Vercel and Resend (email sending domain). | Missing |
 | 10 | Approved list of 30 services | Draft from the prototype is live in `src/content/services.ts` (status `draft`). OPEN_QUESTIONS #11. | Missing |
 | 11 | Final product names | QR event check-in system and restaurant management system; working names in `src/content/products.ts`. OPEN_QUESTIONS #5. | Missing |

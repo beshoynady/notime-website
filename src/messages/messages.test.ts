@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import { describe, expect, it } from "vitest";
 import ar from "./ar.json";
 import en from "./en.json";
@@ -24,6 +26,8 @@ const AR_LATIN_ALLOW = [
   "CREATIVE HOUSE",
   "English", // endonym on the language toggle: each language is named in its own script
   "WhatsApp",
+  "iOS",
+  "Android",
   "UI/UX",
   "SEO",
   "QR",
@@ -66,6 +70,33 @@ describe("messages", () => {
   it("arabic strings use Arabic punctuation, not Latin comma or question mark", () => {
     for (const [k, v] of Object.entries(AR)) {
       expect(v, `ar:${k}`).not.toMatch(/[؀-ۿ]\s*,|[؀-ۿ]\s*\?/);
+    }
+  });
+
+  // Copy deck (Task 13): phrases the brand voice rules out, in both languages.
+  const BANNED = ["elevate", "cutting-edge", "cutting edge", "one-stop", "one stop", "unleash", "الارتقاء بعلامتك", "متطور جدًا", "حلول متكاملة شاملة"];
+
+  it("uses none of the banned phrases", () => {
+    for (const [k, v] of [...Object.entries(EN), ...Object.entries(AR)]) {
+      for (const phrase of BANNED) expect(v.toLowerCase(), `${k} contains "${phrase}"`).not.toContain(phrase);
+    }
+  });
+
+  it("has every homepage namespace of the copy deck", () => {
+    for (const ns of ["about", "categories", "work", "marquee", "digital", "process", "markets", "cta", "footer"]) {
+      expect(Object.keys(EN).some((k) => k.startsWith(`${ns}.`)), ns).toBe(true);
+    }
+  });
+
+  // Placeholders in messages start with "TODO:" (ICU reserves braces, so `{{TODO}}` would not
+  // parse). Each one must be tracked in the content checklist by its key.
+  it("lists every TODO message key in docs/CONTENT_CHECKLIST.md", () => {
+    const checklist = readFileSync(path.join(process.cwd(), "docs", "CONTENT_CHECKLIST.md"), "utf8");
+    const todo = Object.keys(EN).filter((k) => /\bTODO\b/.test(EN[k]) || /\bTODO\b/.test(AR[k]));
+    for (const k of todo) {
+      expect(EN[k], `en:${k} must start with "TODO:"`).toMatch(/^TODO:/);
+      expect(AR[k], `ar:${k} must start with "TODO:"`).toMatch(/^TODO:/);
+      expect(checklist, `${k} missing from CONTENT_CHECKLIST.md`).toContain(`\`${k}\``);
     }
   });
 

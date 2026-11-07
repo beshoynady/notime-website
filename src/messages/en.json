@@ -77,9 +77,141 @@
     "scroll": "Scroll",
     "city": "Dubai"
   },
+  "about": {
+    "eyebrow": "About NO TIME",
+    "statement": "A creative house for events, brands and the ideas in between. One team plans it, builds it, prints it and launches it.",
+    "body": "Based in Dubai, we deliver events, marketing and PR for clients across local, regional and global markets. We build each idea where the brand meets its audience, then carry it all the way through: strategy, creative, production and delivery, under one roof.",
+    "stats": {
+      "markets": {
+        "value": "6",
+        "label": "Markets"
+      },
+      "integrated": {
+        "value": "360°",
+        "label": "Integrated"
+      }
+    }
+  },
+  "categories": {
+    "eyebrow": "What we do",
+    "headingLead": "Five crafts,",
+    "headingKey": "one team behind them.",
+    "intro": "Each craft stands on its own. Together they carry an event or a brand from the first idea to the last detail.",
+    "viewServices": "View services",
+    "allServices": "See all services"
+  },
+  "work": {
+    "eyebrow": "Our work",
+    "headingLead": "Real projects,",
+    "headingKey": "start to finish.",
+    "intro": "Each project is told the way it was built: the challenge, the idea, the execution and the result.",
+    "labels": {
+      "challenge": "Challenge",
+      "idea": "Idea",
+      "execution": "Execution",
+      "result": "Result"
+    },
+    "illustrativeNote": "Images marked “Illustrative” are AI visuals. They stand in for project photos we can't show yet.",
+    "viewProject": "View project",
+    "allWork": "All work",
+    "todo": {
+      "title": "TODO: project title, pending client approval",
+      "summary": "TODO: one-line project summary from docs/content/case-studies.md"
+    }
+  },
+  "marquee": {
+    "label": "All our services"
+  },
+  "digital": {
+    "eyebrow": "Beyond events",
+    "headingLead": "Digital solutions,",
+    "headingKey": "built to keep working.",
+    "intro": "End-to-end digital builds, from UX and design systems to development, content management and analytics, delivered bilingual and performance-ready.",
+    "capabilities": {
+      "websites": {
+        "title": "Websites",
+        "body": "Bilingual sites with a content system your team can run."
+      },
+      "apps": {
+        "title": "Mobile apps",
+        "body": "iOS and Android, connected to your website."
+      },
+      "systems": {
+        "title": "Internal systems",
+        "body": "Dashboards, admin panels and integrations, built around how you work."
+      },
+      "ecommerce": {
+        "title": "E-commerce",
+        "body": "Online stores, from the catalogue to the checkout."
+      }
+    },
+    "productsEyebrow": "Our products",
+    "productsIntro": "Two products of our own, in development now.",
+    "registerInterest": "Register interest",
+    "requestDemo": "Request a demo",
+    "viewProduct": "View product"
+  },
+  "process": {
+    "eyebrow": "How we work",
+    "headingLead": "Four steps,",
+    "headingKey": "one team throughout.",
+    "steps": {
+      "plan": {
+        "title": "Plan",
+        "body": "We start with the brief, the audience and the date, then set the idea, the budget and the timeline."
+      },
+      "build": {
+        "title": "Build",
+        "body": "Design, décor, content and the platforms behind them take shape, reviewed with you at every stage."
+      },
+      "produce": {
+        "title": "Produce",
+        "body": "Fabrication, print, catering and crew come together on site, run by one team."
+      },
+      "launch": {
+        "title": "Launch",
+        "body": "The doors open, the campaign goes live, and we stay with you through to the final report."
+      }
+    }
+  },
+  "markets": {
+    "eyebrow": "Where we work",
+    "headingLead": "Six markets,",
+    "headingKey": "one base in Dubai.",
+    "countries": {
+      "ae": "United Arab Emirates",
+      "sa": "Saudi Arabia",
+      "eg": "Egypt",
+      "qa": "Qatar",
+      "om": "Oman",
+      "kw": "Kuwait"
+    }
+  },
+  "cta": {
+    "headingLead": "Have a date in mind?",
+    "headingKey": "Let's plan every second of it.",
+    "body": "Tell us what you're planning, and we'll come back to you with the next steps.",
+    "primary": "Request a quote",
+    "secondary": "Chat on WhatsApp"
+  },
   "footer": {
     "rights": "© {year} NO TIME Creative House.",
-    "stub": "The full footer arrives in a later phase."
+    "stub": "The full footer arrives in a later phase.",
+    "tagline": "Events · Marketing · PR · Production",
+    "columns": {
+      "services": "Services",
+      "company": "Company",
+      "contact": "Contact",
+      "follow": "Follow us"
+    },
+    "address": "Dubai, United Arab Emirates",
+    "legal": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Use",
+      "cookies": "Cookie Policy"
+    },
+    "licence": "TODO: trade licence number · legal entity · issuing authority",
+    "backToTop": "Back to top"
   },
   "notFound": {
     "title": "This page doesn't exist.",
