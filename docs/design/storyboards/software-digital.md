@@ -106,24 +106,28 @@ Mobile: the cursor, then the wireframe filling in, then the phone alone.
 
 ---
 
-## 2 · Proof: UAE Athletics Federation (`#case-study`, the peak)
+## 2 · Proof: a national sports federation (`#case-study`, the peak)
 
-**Switch:** `caseStudies.uaeaf.enabled = false` until the client approves its name and logo (OQ #17). While it's off, the section doesn't render and the CTA band follows the opening directly. The rail is unaffected, since it lists services only.
+**Two variants, one switch (D67):** `caseStudies.uaeaf.named` (false).
+- **Anonymised (default, shown now):** "A national sports federation" / «اتحاد رياضي وطني».
+  - No name, no logo, no real screenshots, no URL.
+  - The devices show **stylised mockups** redrawn in the brand palette: an abstract layout of a header, a results table and athlete cards as grey bars, in HTML/CSS. Nothing of the client's branding.
+- **Named (after the client approves, OQ #17):** "UAE Athletics Federation", the real p18 screens in the device frames (`uae-athletics-federation-1`, 1544 × 965 in the laptop; `-2`, 459 × 1048 in the phone), and the live URL. Flipping the one flag switches every text and visual.
 
-**Facts:** only from the profile (p16, p18; `docs/content/case-studies.md` §2). Anything else is `{{TODO}}`. The federation's own statistics visible in the screenshots are never quoted as ours.
+**Facts (both variants):** only from the profile (p16, p18; `docs/content/case-studies.md` §2). Anything else is `{{TODO}}`. The federation's own statistics seen in the screenshots are never quoted as ours.
 
-| Part | Content (EN draft; AR written natively with the copy deck) |
-|---|---|
-| Eyebrow | Case study · UAE Athletics Federation |
-| Title | "A national federation's platform, rebuilt and live." |
-| Challenge | "A full rebuild of the federation's digital platform." (p18) · `{{TODO}}`: the starting point and what had to change. |
-| Solution | "A modern bilingual website with a complete CMS and a connected mobile application." (p18) NO TIME is the federation's appointed digital and media partner (p16). |
-| What we built | UX/UI redesign, fully responsive · athletes, clubs, coaches and referees modules · championships, results and national records · news, media library and live coverage · admin dashboard, CMS and analytics · Arabic/English, SEO and performance (p18). |
-| Result | Live: website, admin panel and mobile app at uaeathletics.ae (p18) · `{{TODO}}`: platform results (no numbers until supplied). |
+| Part | Anonymised (default; EN draft, AR written natively with the copy deck) | Named variant adds |
+|---|---|---|
+| Eyebrow | Case study · A national sports federation | · UAE Athletics Federation |
+| Title | "A national federation's platform, rebuilt and live." | — |
+| Challenge | "A full rebuild of the federation's digital platform." (p18) · `{{TODO}}`: the starting point and what had to change. | — |
+| Solution | "A modern bilingual website with a complete CMS and a connected mobile application." (p18) NO TIME is the federation's official digital and media partner (p16). | — |
+| What we built | Bilingual website · mobile app · CMS · admin dashboard and analytics (p18). The module list (athletes, clubs, coaches, referees; championships, results and records; news and live coverage) stays: it describes the build, not the client. | — |
+| Result | All live: website, admin panel and mobile app (p18) · `{{TODO}}`: platform results (no numbers until supplied). | the URL uaeathletics.ae |
 
 **Visuals:**
-- The real screens from profile p18, `uae-athletics-federation-1` (desktop, 1544 × 965) in the laptop frame and `-2` (mobile, 459 × 1048) in the phone frame, the same CSS frames as the opening (a visual rhyme).
-- Fresh screenshots of the live site only with the client's approval; until then, the profile screens.
+- Both variants use the same CSS laptop and phone frames as the opening (a visual rhyme).
+- Anonymised: the stylised mockups described above. Named: the profile screens. Fresh screenshots of the live site only with the client's approval.
 
 **Motion (GSAP, the page's one big scene after the opening):**
 - The devices slide in on entry, then the four parts reveal in sequence (no pin).
@@ -164,7 +168,7 @@ Mobile: the cursor, then the wireframe filling in, then the phone alone.
 - **Three items:**
   1. **Registration and check-in.** Links to the QR check-in product (Coming soon).
   2. **Event apps and websites.** Agenda, speakers, live updates.
-  3. **Live results and screens.** The UAEAF platform's championships, results and live coverage are the real reference, shown only when the case study is on.
+  3. **Live results and screens.** The federation platform's championships, results and live coverage are the real reference (anonymised unless the case study is named, D67).
 - **Motion:** the band's grid lines draw on entry (GSAP).
 - **Why a band:** this is the page's second high point, where NO TIME's two worlds meet.
 
@@ -248,7 +252,7 @@ The "Beyond events: Digital solutions" section becomes a dark interface band:
 
 - espresso ground with the 8px grid in champagne at 6%;
 - the core message as its heading;
-- the UAEAF teaser (rendered only while the case study switch is on; otherwise the event-tech line);
+- the case-study teaser (anonymised by default, named once the switch is on, D67);
 - the two product cards (existing);
 - the CTA "Explore Software & Digital" → `/services/software-digital`.
 
@@ -274,7 +278,7 @@ Its four capability cards link to the matching sections (`#websites`, `#apps`, `
 
 ## Open items for this page
 
-- OQ #17: UAEAF name and logo approval (the switch).
+- OQ #17: UAEAF name and logo approval (the `named` switch; the anonymised case study shows until then, D67).
 - OQ #5: product names.
 - New OQ #24: product feature lists.
 - CONTENT_CHECKLIST #25: budget bands.

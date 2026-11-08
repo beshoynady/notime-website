@@ -383,7 +383,7 @@ e2e/category-*.spec.ts, e2e/opening.spec.ts, e2e/forms.spec.ts, e2e/software-pag
 
 **Files:**
 - Create: `src/components/category/category-opening.tsx`.
-- Modify: `category-hero.tsx` (retired into the opening), `service-index.tsx`, `category.css`, `messages` (`category.skip`).
+- Modify: `category-hero.tsx` (retired into the opening), `service-index.tsx`, `category.css`, `messages` (`category.skip`), `src/content/{types,categories,images}.ts`: `Category.imageWide` and the cancelled slots `cat-marketing-brand-16x9` and `cat-software-digital-16x9` are removed (D67); the real 16:9 photos stay as slots, since they're used elsewhere or are scene sources.
 - Test: `e2e/opening.spec.ts`.
 
 **Interfaces:**
@@ -563,7 +563,7 @@ Storyboard: [software-digital.md](../design/storyboards/software-digital.md). De
 
 ### Task 4.1: Software copy, SEO metadata
 
-**Files:** `docs/content/category-copy-software.md`; `src/content/services.ts` (software entries: promise and **3** deliverables, D65); `src/content/case-studies.ts`; `src/content/products.ts` (problem statement, features as `TODO` until confirmed, OQ #24); messages; `generateMetadata` titles and descriptions per the storyboard's SEO section.
+**Files:** `docs/content/category-copy-software.md`; `src/content/services.ts` (software entries: promise and **3** deliverables, D65); `src/content/case-studies.ts` (anonymised and named variants); `src/content/products.ts` (problem statement, features as `TODO` until confirmed, OQ #24); messages; `generateMetadata` titles and descriptions per the storyboard's SEO section.
 
 - [ ] **Step 1:** Update `content.test.ts`:
   - software services have exactly 3 points, the others 4–6;
@@ -631,7 +631,7 @@ Storyboard: [software-digital.md](../design/storyboards/software-digital.md). De
 
 **Interfaces:**
 - `Category.blocks?: PageBlock[]` (default: the shared skeleton).
-- `caseStudies.uaeaf.enabled` (false).
+- `caseStudies.uaeaf.named` (false): the anonymised variant renders by default (D67). One flag switches every text and visual to the named variant.
 - `readLighthouseSummary(path): { date, url, perf, a11y, bp, seo } | null`. It returns null unless the summary is a **production-domain** run.
 - `OUR_WORK_ENABLED` is true only when that run is ≥ 90 in every category (D65).
 
@@ -643,7 +643,8 @@ Storyboard: [software-digital.md](../design/storyboards/software-digital.md). De
   - one with all categories ≥ 90 → on.
 
   E2E:
-  - The case study is absent while disabled; with the switch on (a test-only build env), the 4 parts and both device frames render, with real image alt text.
+  - The case study renders **anonymised** by default: the title "A national sports federation", stylised HTML mockups, and no image, no client name and no URL anywhere in the section (a text search for "Athletics" and "uaeathletics" finds nothing).
+  - With `named: true` (a test-only build env), the name, the URL and both real screens render, with their alt text.
   - The CTA band's button lands `#consult`.
   - The microcopy is present in EN and AR.
   - The sticky bar (mobile) appears after the opening and hides when `#consult` is in view.
@@ -678,7 +679,7 @@ Specs are in category-pages.md §6. **The user confirms the specs first.**
 - [ ] **Step 1:** Write the tests:
   - the band has `data-tone="dark"` and the core message as its heading;
   - its capability links go to `/services/software-digital#websites` (etc.);
-  - the UAEAF teaser renders only when the case study switch is on;
+  - the case-study teaser is anonymised by default and named only with the switch;
   - the product cards keep "Coming soon";
   - `cls.spec` stays at 0.
 - [ ] **Step 2–4:** Fail, implement, pass.

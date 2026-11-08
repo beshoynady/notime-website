@@ -93,7 +93,9 @@ The signature (§5.3): each section opens like a magazine spread with its own fo
 
 ## Act 3 · Closing
 
-1. **Related work:** hidden until approved. When OQ #17 clears, UAEAF social (the Oregon 26 figures, always with their scope: "Oregon 26 campaign, first week") is the strongest candidate.
+1. **Related work:** hidden until approved (OQ #17).
+   - **Campaign proof (D67), in section II Social:** anonymised by default as "A national sports federation campaign" / «حملة لاتحاد رياضي وطني». It shows the Oregon 26 first-week figures, always with their scope: "first week of the campaign: 487K views · +37.6K new followers · 271K reach" (profile p17). There's no client name, no championship name, no logo and no key visuals.
+   - The same `named` flag as the Software case study switches it to the named version (UAE Athletics Federation, World Athletics U20 Championships, Oregon 26) once the client approves.
 2. **FAQ.**
 3. **Bookend:** the blank page returns with the grid drawn faintly. Line: "Your page is next." / «صفحتك هي التالية.» → the quote block.
 
@@ -105,7 +107,7 @@ The signature (§5.3): each section opens like a magazine spread with its own fo
 | Build | Shots 2–3 | 3 |
 | First peak | Shot 4 | 4 |
 | Calm | I Branding | 3 |
-| **Peak** | **II Social:** the only service with real, scoped figures in the profile (once approved), and the liveliest module | **5** |
+| **Peak** | **II Social:** the only service with real, scoped figures in the profile (anonymised campaign proof, D67), and the liveliest module | **5** |
 | Calm | III–IV | 2 |
 | Build | V PR | 3 |
 | Calm | VI Media planning | 2 |

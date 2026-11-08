@@ -52,7 +52,7 @@
 
 ## V · Software & Digital
 
-**No image layers.** The opening is drawn in code (README §3, L0–L3 as grid, SVG, HTML, CSS frames). The case study uses the existing real screens `uae-athletics-federation-1` (1544 × 965) and `-2` (459 × 1048) inside device frames. Their alt text is meaningful, because they're evidence:
+**No image layers.** The opening is drawn in code (README §3, L0–L3 as grid, SVG, HTML, CSS frames). The case study is **anonymised by default** (D67): its devices show stylised brand-palette mockups in HTML/CSS, with no images. The **named variant** (after client approval) uses the existing real screens `uae-athletics-federation-1` (1544 × 965) and `-2` (459 × 1048) inside device frames. Their alt text is meaningful, because they're evidence:
 
 | Slot | Alt EN | Alt AR |
 |---|---|---|
@@ -117,5 +117,7 @@
 | **Total** | **15 (+2)** | **≈ 23–26** | **14** | |
 
 - **Units:** counted in Canva generation calls. Each call returns several candidates. The credit cost per call (and whether remove-background uses credits on this account) is confirmed on the account before the first batch and reported with the Events contact sheet.
-- **Saving on the pending images:** 4 earlier AI images are still waiting for credits. With the opening scenes (D64), the category headers no longer use a 16:9 image, so `cat-marketing-brand-16x9` and `cat-software-digital-16x9` are no longer needed (proposal: drop them). `hero-fallback-16x9` and `product-restaurant-system-16x9` stay. That frees 2 generations.
+- **Cancelled (D67):** `cat-marketing-brand-16x9` and `cat-software-digital-16x9`. The category openings (D64) replace the 16:9 header image. They're removed from the data in Task 2.8.
+- **Still pending from before:** `hero-fallback-16x9` and `product-restaurant-system-16x9`, 2 generations (≈ 3 with retries).
+- **Grand total:** 17 (+2) generations, ≈ 26–29 with retries, and 14 background removals.
 - **Contact sheet for each category** (stop point 3 for Events): every layer at full size, with cutouts on a checkerboard, the graded and ungraded versions side by side, and the measured weight per file.

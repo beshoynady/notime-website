@@ -15,8 +15,8 @@ Masters are PNG exports from the Canva folder "NO TIME – Website AI", design "
 | `hero-fallback-9x16` | wired | |
 | `process-plan-4x5` | wired | Plans and ruler show lines and ticks only. |
 | `product-qr-check-in-16x9` | wired | Tablet screen blank. |
-| `cat-marketing-brand-16x9` | rejected | Small pseudo-text mark on a pinned sheet. Regenerate. |
-| `cat-software-digital-16x9` | rejected | Pseudo-text on the screens and a badge on a bezel. Regenerate. |
+| `cat-marketing-brand-16x9` | **cancelled (D67)** | Rejected at CP5; no longer needed: the category opening replaces the header image (D64). |
+| `cat-software-digital-16x9` | **cancelled (D67)** | Rejected at CP5; no longer needed: the Interface opening is drawn in code (D64). |
 | `hero-fallback-16x9` | rejected | A see-through pillar right of the beam (the palm and arch show through it). Regenerate. |
 | `product-restaurant-system-16x9` | not generated | Canva credit quota ran out. |
 
@@ -122,7 +122,9 @@ The palette's hex values are #2E2017, #634731, #BB9A79, #EAD4AB and #F5E9D3. Giv
 - **Alt AR:** تنسيق طعام لجلسة تصوير: حلويات مصفوفة على ألواح خشبية بجانب سعف النخيل.
 - **In use: real photo** `/images/work/catering/catering-4.webp` (D49). Was: `catering-4` (food styling on wooden boards, 1187 × 668), real photography from profile section 11.
 
-### `cat-marketing-brand-16x9`
+### `cat-marketing-brand-16x9` (cancelled, D67)
+
+> Not generated: the category opening replaces the header image (D64). Kept for the record.
 
 - **Page · section:** Services › Marketing & Brand, header · **Aspect:** 16:9
 - **Prompt:** House style. A calm studio corner: brand boards pinned to a plaster wall (abstract shapes and swatches in the brand browns and champagne, no text), a long desk below with paper samples and a closed notebook, late-afternoon light raking across the wall from the left.
@@ -139,7 +141,9 @@ The palette's hex values are #2E2017, #634731, #BB9A79, #EAD4AB and #F5E9D3. Giv
 - **Alt AR:** فاصل كتاب ذهبي مقصوص على شكل أفق دبي.
 - **In use: real photo** `/images/work/gifts/gifts-1.webp` (D49). Was: `gifts-1` (gold Dubai-skyline bookmark, 1280 × 719).
 
-### `cat-software-digital-16x9`
+### `cat-software-digital-16x9` (cancelled, D67)
+
+> Not generated: the Interface opening is drawn in code (D64). Kept for the record.
 
 - **Page · section:** Services › Software & Digital, header · **Aspect:** 16:9
 - **Prompt:** House style. A wide, minimal workspace in warm ambient light: two monitors on a long oak desk showing soft, abstract interface shapes in champagne and taupe (no readable text), a keyboard and a small plant. Evening, one desk lamp, the rest of the room in shadow.
@@ -236,9 +240,9 @@ Each category page hero uses its category's `imageWide` slot. No new hero slots.
 |---|---|---|
 | Events & Hospitality (The Evening) | `cat-events-hospitality-16x9` | Real photo (D49) |
 | Creative Production (The Studio) | `cat-creative-production-16x9` | Real photo (D49), letterboxed to 2.39:1 by the theme |
-| Marketing & Brand (The Editorial) | `cat-marketing-brand-16x9` | AI, rejected in the CP5 inspection; regenerate when credits renew |
+| Marketing & Brand (The Editorial) | `cat-marketing-brand-16x9` | **Cancelled (D67):** the opening scene replaces it |
 | Production, Print & Gifts (The Workshop) | `cat-production-print-gifts-16x9` | Real photo (D49) |
-| Software & Digital (The Interface) | `cat-software-digital-16x9` | AI, rejected in the CP5 inspection; regenerate when credits renew. The Interface hero is mostly HTML device frames, so this image is secondary there |
+| Software & Digital (The Interface) | `cat-software-digital-16x9` | **Cancelled (D67):** the opening is drawn in code |
 
 ### Module visuals (AI)
 
