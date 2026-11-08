@@ -272,7 +272,9 @@ e2e/category-*.spec.ts, e2e/opening.spec.ts, e2e/forms.spec.ts, e2e/software-pag
 - [x] **Step 4:** Run the tests. Expected: PASS.
 - [x] **Step 5:** Commit `feat(modules): lazy module slot with static fallback and failure safety`.
 
-### Task 2.5: Category sections, FAQ, quote block, themes and grounds (in progress)
+### Task 2.5: Category sections, FAQ, quote block, themes and grounds
+
+Done (D69). As built: `category-faq.tsx`, `category-quote.tsx` and `quote-actions.tsx` (client, reads `?service=`); theme tokens live in `category.css` (no separate `theme.css`); the closing line is `Category.closing`; the index track releases early when Act 3's tone differs. The service select arrives with the form (Task 4.2); related work stays hidden until real work exists (OQ #17).
 
 **Files:**
 - Create: `src/components/category/{category-faq,quote-block}.tsx`, `src/components/category/theme.css`.
@@ -299,10 +301,10 @@ e2e/category-*.spec.ts, e2e/opening.spec.ts, e2e/forms.spec.ts, e2e/software-pag
   - JSON-LD has ItemList and BreadcrumbList, and FAQPage only once the FAQ is written;
   - `data-header-tone` equals each section's tone at the header line;
   - `#page-stage`'s background equals the theme's ground mid-section.
-- [ ] **Step 2:** Run it. Expected: FAIL.
-- [ ] **Step 3:** Implement the sections, the 5 theme blocks and the grounds.
-- [ ] **Step 4:** Run it, plus `npm run lint`. Expected: PASS.
-- [ ] **Step 5:** Commit `feat(services): category sections, FAQ, quote block, theme tokens and grounds`.
+- [x] **Step 2:** Run it. Expected: FAIL.
+- [x] **Step 3:** Implement the sections, the 5 theme blocks and the grounds.
+- [x] **Step 4:** Run it, plus `npm run lint`. Expected: PASS.
+- [x] **Step 5:** Commit `feat(services): category sections, FAQ, quote block, theme tokens and grounds`.
 
 ### Task 2.6: Menus, links and the quote preset
 

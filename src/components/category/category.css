@@ -98,21 +98,20 @@
 .cat-page > section[data-tone] {
   background-color: transparent;
 }
-#page-stage:not([data-tone-ready]) .cat-page[data-tone="dark"] {
-  background-color: var(--color-espresso);
-}
-#page-stage:not([data-tone-ready]) .cat-page[data-tone="light"] {
-  background-color: var(--color-ivory);
+#page-stage:not([data-tone-ready]) .cat-page {
+  background-color: var(--tone-ground);
 }
 .cat-index-track {
-  --theme-scrim: rgba(245, 233, 211, 0.6);
+  --theme-scrim: color-mix(in srgb, var(--tone-ground) 60%, transparent);
   position: absolute;
   inset: 0;
   z-index: 20;
   pointer-events: none;
 }
-.cat-index-track[data-tone="dark"] {
-  --theme-scrim: rgba(46, 32, 23, 0.55);
+/* An Act 3 in the other tone: the ground turns when its top crosses 55% of the viewport
+   (ToneController), so the track ends 55svh short and the index has scrolled away by then. */
+.cat-index-track[data-release="early"] {
+  inset-block-end: 55svh;
 }
 .cat-index-frame {
   block-size: 100%;
@@ -365,4 +364,138 @@
 }
 .module-placeholder p {
   margin: 0;
+}
+
+/* Theme tokens (spec §5), set per tone: a theme can span both (the Evening's ivory end). The
+   per-category builds dress the rest; this is the ground, ink, accent and rule each starts from. */
+main[data-theme] [data-tone="dark"] {
+  --theme-ink: var(--color-ivory);
+  --theme-accent: var(--color-champagne);
+  --theme-line: var(--color-line-dark);
+}
+main[data-theme] [data-tone="light"] {
+  --theme-ink: var(--color-espresso);
+  --theme-accent: var(--color-cocoa);
+  --theme-line: var(--border);
+}
+main[data-theme="studio"] [data-tone="dark"] {
+  --tone-ground: var(--color-night); /* the black box */
+}
+main[data-theme="workshop"] [data-tone="light"] {
+  --tone-ground: var(--color-champagne); /* paper stock */
+  --theme-ink: var(--color-cocoa);
+}
+main[data-theme] [data-tone] {
+  color: var(--theme-ink);
+}
+
+/* Act 3 · the FAQ and the quote block (CategoryFaq, CategoryQuote). At ≥ 900px they keep the
+   page's columns: the label in the rail's column, the content in the sections' column. */
+.cat-end {
+  padding-block: clamp(64px, 9vw, 128px);
+}
+.cat-faq + .cat-quote {
+  padding-block-start: 0;
+}
+.cat-end-grid {
+  display: grid;
+  gap: 24px 24px;
+}
+@media (min-width: 900px) {
+  .cat-end-grid {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+  }
+  .cat-end-head {
+    align-self: start;
+  }
+}
+.cat-end-head .text-eyebrow,
+.cat-end-head.text-eyebrow {
+  margin: 0 0 12px;
+  color: var(--theme-accent);
+}
+.cat-faq-title {
+  margin: 0;
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  font-weight: 300;
+  line-height: 1.15;
+}
+.cat-faq-title:lang(ar) {
+  line-height: 1.45;
+}
+.cat-faq-list {
+  border-block-start: 1px solid var(--theme-line);
+}
+.cat-faq-item {
+  border-block-end: 1px solid var(--theme-line);
+}
+.cat-faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-block-size: 64px;
+  padding-block: 16px;
+  font-size: clamp(1.0625rem, 1.4vw, 1.2rem);
+  font-weight: 500;
+  line-height: 1.4;
+  list-style: none;
+  cursor: pointer;
+}
+.cat-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.cat-faq-icon {
+  flex: none;
+  inline-size: 20px;
+  block-size: 20px;
+  color: var(--theme-accent);
+  transition: transform 0.4s var(--ease-expo-out);
+}
+.cat-faq-item[open] .cat-faq-icon {
+  transform: rotate(45deg);
+}
+.cat-faq-a {
+  padding-block-end: 24px;
+  max-inline-size: 64ch;
+  line-height: 1.65;
+  opacity: 0.85;
+}
+.cat-faq-a p {
+  margin: 0;
+}
+
+.cat-quote-body {
+  display: grid;
+  justify-items: start;
+  gap: 20px;
+}
+.cat-quote-title {
+  margin: 0;
+  max-inline-size: 18ch;
+  font-size: clamp(2.2rem, 5.2vw, 4.4rem);
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+}
+.cat-quote-title:lang(ar) {
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+.cat-quote-note,
+.cat-quote-pending {
+  margin: 0;
+  max-inline-size: 56ch;
+  line-height: 1.65;
+  opacity: 0.85;
+}
+.cat-quote-service {
+  margin: 0;
+  font-weight: 600;
+}
+.cat-quote-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-block-start: 8px;
 }

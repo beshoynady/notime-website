@@ -51,6 +51,8 @@ export interface Category {
   intro: Localized<string>;
   /** FAQ (4–6) for the page and its FAQPage JSON-LD. Answers state process, never unconfirmed numbers. */
   faq: { q: Localized<string>; a: Localized<string> }[];
+  /** The closing line (the storyboard's bookend): the quote block's H2, echoing the opening. */
+  closing: Localized<string>;
 }
 
 export type CategoryTheme = "evening" | "studio" | "editorial" | "workshop" | "interface";

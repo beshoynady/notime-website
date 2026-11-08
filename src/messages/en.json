@@ -123,13 +123,12 @@
     "faqHeading": "Common questions",
     "quote": {
       "eyebrow": "Request a quote",
-      "headingLead": "Tell us what you're planning.",
-      "headingKey": "We'll take it from there.",
       "body": "The online quote form is on its way. Until then, message us on WhatsApp or by email, and we'll come back to you with the next steps.",
       "service": "Service: {service}",
       "whatsapp": "Chat on WhatsApp",
       "email": "Email us",
-      "contactPending": "Our contact details will appear here soon."
+      "contactPending": "Our contact details will appear here soon.",
+      "prefill": "Hello NO TIME, I'd like a quote for {service}."
     },
     "modulePending": "Interactive preview in design",
     "skip": "Skip to services"

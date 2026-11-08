@@ -28,6 +28,8 @@ export const categories: Category[] = [
     theme: "evening",
     intro: placeholderIntro(),
     faq: placeholderFaq(),
+    // Draft from the storyboard (Act 3), pending approval with the copy deck.
+    closing: { en: "Tell us the date. We'll ready the room.", ar: "أخبرنا بالموعد، ونجهّز لك القاعة." },
   },
   {
     slug: "creative-production",
@@ -41,6 +43,8 @@ export const categories: Category[] = [
     theme: "studio",
     intro: placeholderIntro(),
     faq: placeholderFaq(),
+    // Draft from the storyboard (Act 3), pending approval with the copy deck.
+    closing: { en: "Your take one starts here.", ar: "لقطتك الأولى تبدأ من هنا." },
   },
   {
     slug: "marketing-brand",
@@ -54,6 +58,8 @@ export const categories: Category[] = [
     theme: "editorial",
     intro: placeholderIntro(),
     faq: placeholderFaq(),
+    // Draft from the storyboard (Act 3), pending approval with the copy deck.
+    closing: { en: "Your page is next.", ar: "صفحتك هي التالية." },
   },
   {
     slug: "production-print-gifts",
@@ -67,6 +73,8 @@ export const categories: Category[] = [
     theme: "workshop",
     intro: placeholderIntro(),
     faq: placeholderFaq(),
+    // Draft from the storyboard (Act 3), pending approval with the copy deck.
+    closing: { en: "What should we make for you?", ar: "ماذا نصنع لك؟" },
   },
   {
     slug: "software-digital",
@@ -80,5 +88,7 @@ export const categories: Category[] = [
     theme: "interface",
     intro: placeholderIntro(),
     faq: placeholderFaq(),
+    // Draft from the storyboard (Act 3), pending approval with the copy deck.
+    closing: { en: "Your idea is the next blinking cursor.", ar: "فكرتك هي المؤشّر الذي يومض الآن." },
   },
 ];

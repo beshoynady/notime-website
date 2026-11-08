@@ -12,3 +12,13 @@ export const THEME_TONE: Record<CategoryTheme, "dark" | "light"> = {
   workshop: "light",
   interface: "light",
 };
+
+/** The tone of Act 3 (FAQ and quote block): the Evening ends in its ivory "morning after" band;
+ * the Studio stays dark; the light themes stay light (storyboards, Act 3). */
+export const END_TONE: Record<CategoryTheme, "dark" | "light"> = {
+  evening: "light",
+  studio: "dark",
+  editorial: "light",
+  workshop: "light",
+  interface: "light",
+};

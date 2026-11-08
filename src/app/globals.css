@@ -306,10 +306,14 @@
 /* ==========================================================================
    Tones and grain
    ========================================================================== */
+/* --tone-ground: the ground a tone paints. Themes may change it (category.css: the Studio's
+   night, the Workshop's champagne); ToneController tweens #page-stage to each section's value. */
 [data-tone="dark"] {
+  --tone-ground: var(--color-espresso);
   color: var(--color-ivory);
 }
 [data-tone="light"] {
+  --tone-ground: var(--color-ivory);
   color: var(--color-espresso);
 }
 /* Grain overlay on every dark section (static; the hero has its own animated layer). */
@@ -437,11 +441,8 @@ summary,
   background: var(--page-bg);
   min-height: 100dvh;
 }
-section[data-tone="dark"] {
-  background-color: var(--color-espresso);
-}
-section[data-tone="light"] {
-  background-color: var(--color-ivory);
+section[data-tone] {
+  background-color: var(--tone-ground);
 }
 #page-stage[data-tone-ready] section[data-tone]:not([data-bg="own"]) {
   background-color: transparent;

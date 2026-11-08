@@ -7,7 +7,9 @@ import { localeAlternates } from "@/lib/seo";
 
 /**
  * The five category pages (D57), prerendered. Under Cache Components `dynamicParams` is not
- * available: any other slug renders on request and resolve() answers it with notFound().
+ * available. `ensureStatic = "navigation"` makes any other slug wait for its complete render
+ * instead of getting the App Shell with a 200, so resolve()'s notFound() is a real 404 on the
+ * first request (D68).
  */
 export const ensureStatic = "navigation";
 

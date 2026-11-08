@@ -1,6 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import { getCategories, getServices, type CategoryTheme } from "../src/content";
-import { gotoReady } from "./helpers";
+import { END_TONE, THEME_TONE } from "../src/components/category/theme";
+import { gotoReady, lcpEntry } from "./helpers";
 
 /**
  * Category pages · structure and themes (Task 2.5), every category in EN and AR: one H1, the six
@@ -17,7 +18,8 @@ const GROUND: Record<CategoryTheme, { dark?: string; light?: string }> = {
 
 const overflow = (page: Page) => page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
 
-/** Scrolls so that `y` (a document offset of the section's top, minus `line`) is at the top. */
+/** Scrolls the section's top to just above the header's bottom (or mid-viewport). Returns false
+ * when the page ends first (the footer under a short last section never reaches the header). */
 const scrollSectionTo = (page: Page, i: number, line: "header" | "mid") =>
   page.evaluate(
     ([i, line]) => {
@@ -25,6 +27,7 @@ const scrollSectionTo = (page: Page, i: number, line: "header" | "mid") =>
       const header = document.getElementById("site-header")!.getBoundingClientRect().bottom;
       const at = line === "header" ? header : innerHeight * 0.5;
       window.scrollTo(0, s.getBoundingClientRect().top + scrollY - at + 12);
+      return s.getBoundingClientRect().top <= at;
     },
     [i, line] as const,
   );
@@ -46,11 +49,25 @@ for (const category of getCategories()) {
         expect(await overflow(page)).toBeLessThanOrEqual(0);
       });
 
+      if (END_TONE[category.theme] !== THEME_TONE[category.theme]) {
+        test("the index has scrolled away before the ground turns to Act 3's tone", async ({ page }) => {
+          await gotoReady(page, path);
+          // ToneController turns the ground when the FAQ's top crosses 55% of the viewport.
+          const overlap = await page.evaluate(async () => {
+            const faq = document.querySelector("section.cat-faq")!;
+            window.scrollTo(0, faq.getBoundingClientRect().top + scrollY - innerHeight * 0.55);
+            await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+            const header = document.getElementById("site-header")!.getBoundingClientRect().bottom;
+            return document.querySelector(".cat-index-track .svc-index")!.getBoundingClientRect().bottom - header;
+          });
+          expect(overlap).toBeLessThanOrEqual(0);
+        });
+      }
+
       test.describe("desktop only", () => {
         test.skip(({ isMobile }) => isMobile, "structure is the same at every width");
 
-        // FIXME(Task 2.5): the FAQ and quote block are not built yet.
-        test.fixme("one H1, six sections in data order, FAQ and quote block", async ({ page }) => {
+        test("one H1, six sections in data order, FAQ and quote block", async ({ page }) => {
           await gotoReady(page, path);
           await expect(page.locator("h1")).toHaveCount(1);
           const ids = await page.locator(".cat-sections > section[id]").evaluateAll((els) => els.map((e) => e.id));
@@ -63,8 +80,7 @@ for (const category of getCategories()) {
           await expect(page.locator("section#quote h2")).toHaveCount(1);
         });
 
-        // FIXME(Task 2.5): the FAQ is not built yet.
-        test.fixme("the FAQ opens and closes with Enter", async ({ page }) => {
+        test("the FAQ opens and closes with Enter", async ({ page }) => {
           await gotoReady(page, path);
           const item = page.locator("section.cat-faq details").first();
           await item.locator("summary").focus();
@@ -73,6 +89,24 @@ for (const category of getCategories()) {
           await expect(item.locator("summary + *")).toBeVisible();
           await page.keyboard.press("Enter");
           await expect(item).not.toHaveAttribute("open");
+        });
+
+        test("grain only on dark grounds: none over a light section, never the LCP", async ({ page }) => {
+          await gotoReady(page, path);
+          // For each visible section in main: does it or any ancestor paint the grain tile?
+          const sections = await page.locator("main section[data-tone]").evaluateAll((els) =>
+            els
+              .filter((e) => e.checkVisibility())
+              .map((e) => {
+                let grained = false;
+                for (let a: Element | null = e; a; a = a.parentElement) {
+                  if (getComputedStyle(a, "::before").backgroundImage.includes("feTurbulence")) grained = true;
+                }
+                return { tone: (e as HTMLElement).dataset.tone, grained };
+              }),
+          );
+          for (const s of sections) expect(s.grained, `a ${s.tone} section`).toBe(s.tone === "dark");
+          expect((await lcpEntry(page)).url, "the LCP is text, not the grain tile").toBe("");
         });
 
         test("JSON-LD parses: ItemList, BreadcrumbList, FAQPage once the FAQ is written", async ({ page }) => {
@@ -86,8 +120,7 @@ for (const category of getCategories()) {
           expect(types.includes("FAQPage")).toBe(written);
         });
 
-        // FIXME(Task 2.5): the theme grounds (workshop champagne, studio night, the Evening ivory band) are not built yet.
-        test.fixme("header tone follows each section; the page ground is the theme's", async ({ page }) => {
+        test("header tone follows each section; the page ground is the theme's", async ({ page }) => {
           await gotoReady(page, path);
           const tones = await page
             .locator("#page-stage section[data-tone]")
@@ -95,7 +128,7 @@ for (const category of getCategories()) {
           const header = page.locator("#site-header");
           const stage = page.locator("#page-stage");
           for (const [i, [tone, headerKind, where]] of tones.entries()) {
-            await scrollSectionTo(page, i, "header");
+            if (!(await scrollSectionTo(page, i, "header"))) continue;
             await expect(header).toHaveAttribute("data-header-tone", headerKind === "hero" ? "hero" : tone!);
             if (where !== "main") continue; // the footer paints its own ground
             await scrollSectionTo(page, i, "mid");

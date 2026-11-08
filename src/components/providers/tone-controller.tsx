@@ -11,11 +11,17 @@ export type HeaderTone = Tone | "hero";
 
 /**
  * Page tone system (DECISIONS F):
- * - the page background (#page-stage, `--page-bg`) tweens to a section's tone as it crosses 55% of the viewport;
+ * - the page background (#page-stage, `--page-bg`) tweens to a section's ground (`--tone-ground`, which a
+ *   theme may set, globals.css) as it crosses 55% of the viewport;
  * - the header switches tone when a section passes under it (`data-header-tone` on #site-header).
  * Sections only become transparent once this controller has run (`#page-stage[data-tone-ready]`),
  * so the page stays readable if JS fails.
  */
+/** A section's ground: its `--tone-ground`, or the tone's default when a page sets none. */
+function groundOf(section: HTMLElement) {
+  return getComputedStyle(section).getPropertyValue("--tone-ground").trim() || PAGE_BG[(section.dataset.tone as Tone) ?? "dark"];
+}
+
 export function ToneController() {
   const pathname = usePathname();
   const locale = useLocale();
@@ -39,6 +45,7 @@ export function ToneController() {
 
       sections.forEach((section, i) => {
         const tone = (section.dataset.tone as Tone) ?? "dark";
+        const ground = groundOf(section);
         // Zones run from a section's top to the next section's top (no gaps), as numbers
         // rather than trigger strings: with the pinned hero as the trigger element,
         // ScrollTrigger subtracts the pin's own length from its positions (measured: the
@@ -51,7 +58,7 @@ export function ToneController() {
         ScrollTrigger.create({
           ...zone(() => innerHeight * 0.55),
           onToggle: (self) => {
-            if (self.isActive) gsap.to(stage, { "--page-bg": PAGE_BG[tone], duration, ease: "power2.out", overwrite: "auto" });
+            if (self.isActive) gsap.to(stage, { "--page-bg": ground, duration, ease: "power2.out", overwrite: "auto" });
           },
         });
         if (header) {
@@ -66,7 +73,7 @@ export function ToneController() {
 
       // Initial state for the first section (before any toggle fires).
       const first = sections[0];
-      if (first) gsap.set(stage, { "--page-bg": PAGE_BG[(first.dataset.tone as Tone) ?? "dark"] });
+      if (first) gsap.set(stage, { "--page-bg": groundOf(first) });
       stage.dataset.toneReady = "";
       ScrollTrigger.refresh();
 
