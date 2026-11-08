@@ -4,6 +4,9 @@
  * `<LayeredScene>` renders it; `src/lib/scene-math.ts` holds the maths and the limits.
  */
 
+import type { Grade } from "../../lib/grade";
+import type { CategorySlug, Localized } from "../types";
+
 export type Viewport = "desktop" | "mobile";
 
 /** A shot's scroll range in vh of pinned scroll, `[start, end]`; null when it doesn't play at that width. */
@@ -39,7 +42,7 @@ export interface SceneLayer {
   depth: number;
   /** Scale added over the whole scene (scale = 1 + push × progress). */
   push?: number;
-  /** Image slot id (src/content/images.ts or the scene slots). None on L3. */
+  /** Scene image slot id (`SCENE_IMAGES`, scenes/images.ts). None on L3. */
   slot?: string;
   /** L3 effect class (`fx-<name>` in layered-scene.css), e.g. "glow", "shade", "beam". */
   fx?: string;
@@ -61,4 +64,27 @@ export interface SceneConfig {
   id: string;
   shots: SceneShot[];
   layers: SceneLayer[];
+}
+
+/**
+ * A scene layer's image (Task 2.10; layers.md). Files are graded at export (scripts/grade.mjs)
+ * and stored at native size in public/images/scenes/<category>/.
+ */
+export interface SceneImageSlot {
+  /** Stable id, as in layers.md, e.g. "ev-open-hall". */
+  id: string;
+  category: CategorySlug;
+  /** The category's grade, baked into the file. */
+  grade: Grade;
+  /** Where the pixels come from: a curated real photo (D49, its id) or AI (new, or the slot it re-uses). */
+  source: { kind: "real"; from: string } | { kind: "ai"; from?: string };
+  /** URL of the graded WebP; null until it exists. A plate's 16:9 file. */
+  src: string | null;
+  /** Native pixel size of `src` (required with `src`, tested). */
+  width?: number;
+  height?: number;
+  /** Plates only: the 9:16 file used below 900px. */
+  mobile?: { src: string | null; width?: number; height?: number };
+  /** Only for a layer that shows real work as evidence; every other layer is decorative (alt=""). */
+  alt?: Localized<string>;
 }

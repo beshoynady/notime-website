@@ -1,9 +1,9 @@
 import type { CSSProperties, ReactNode } from "react";
 import type { SceneConfig, SceneLayer } from "@/content/scenes";
-import { BrandImage } from "@/components/ui/brand-image";
 import { stillState } from "@/lib/scene-math";
 import { cn } from "@/lib/utils";
 import { SceneDirector } from "./scene-director";
+import { SceneImage } from "./scene-image";
 import "./layered-scene.css";
 
 /**
@@ -85,7 +85,7 @@ function Layer({ layer, variant }: { layer: SceneLayer; variant: "live" | "anima
               </span>
             </span>
           ) : layer.slot ? (
-            <BrandImage slot={layer.slot} sizes={layer.level === 0 ? "100vw" : "50vw"} fill eager={layer.eager} className="scene-img" />
+            <SceneImage slot={layer.slot} sizes={layer.level === 0 ? "100vw" : "50vw"} eager={layer.eager} />
           ) : null}
         </div>
       </div>

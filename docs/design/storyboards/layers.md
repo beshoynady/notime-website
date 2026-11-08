@@ -21,7 +21,7 @@
 - **Formats:**
   - Cutouts: AVIF and WebP with alpha.
   - Plates: AVIF (q≈55) and WebP (q≈78).
-  - Paths: `public/images/scenes/<category>/<slot>.{avif,webp}`. Real-source cutouts keep a note of their source photo in the slot data.
+  - Paths: `public/images/scenes/<category>/<slot>.{avif,webp}`; a plate's 9:16 file is `<slot>-9x16`. The slots are data in `src/content/scenes/images.ts`, tested one to one against this file. Real-source cutouts keep a note of their source photo in the slot data.
   - Sizes and srcset rules as before: `BrandImage`, native `width`/`height`, srcset capped at native width (D51).
 - **Budget per opening:** ≤ 5 image layers and ≤ ~600 KB on mobile. Later shots and mid-page scenes lazy-load one viewport ahead. The build reports the **measured** weight per scene.
 - **Alt text:** scene layers are decorative (`alt=""`), because the shot copy carries the meaning in text. The one exception is a layer that shows real work as evidence (marked below).

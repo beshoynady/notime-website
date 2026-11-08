@@ -30,10 +30,6 @@
   opacity: var(--still-opacity, var(--rest-opacity, 1));
   transform: scale(var(--still-scale, 1));
 }
-.scene-img {
-  border-radius: 0;
-  background: none;
-}
 @media (max-width: 899.98px) {
   .scene-layer:not([data-mobile]) {
     display: none;

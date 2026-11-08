@@ -50,3 +50,5 @@ export function labCategory(param: string): CategorySlug | undefined {
   const m = /^([a-z]+)-animatic$/.exec(param);
   return m && Object.hasOwn(LAB_IDS, m[1]) ? LAB_IDS[m[1] as keyof typeof LAB_IDS] : undefined;
 }
+
+export { getSceneImage, SCENE_IMAGES } from "./images";

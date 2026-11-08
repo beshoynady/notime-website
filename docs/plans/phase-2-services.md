@@ -431,6 +431,8 @@ e2e/category-*.spec.ts, e2e/opening.spec.ts, e2e/forms.spec.ts, e2e/software-pag
 
 ### Task 2.10: Scene images: slots, grade and export
 
+**Done.** As built: the grades and their category map live in `src/lib/grade.ts` (erasable TypeScript, unit-tested, imported by the script; Software has none). The matrices are starting values, marked TODO, to be tuned on the graded/ungraded contact sheet (stop point 3). `src/content/scenes/images.ts` holds the 23 slots of layers.md (tested one to one), each with its grade and source; plates carry a 9:16 file (`<slot>-9x16`). The script prints per-file sizes and batch totals; the per-scene mobile budget is enforced by the content test, which reads the files a scene's mobile layers use. LayeredScene's live variant draws slots through `SceneImage` (decorative `alt=""`, art-directed plates, srcset capped); BrandImage's `eager` prop went with it. `image-native.spec.ts` is unchanged: no scene image renders yet, and the unit test checks native sizes.
+
 **Files:**
 - Create: `scripts/grade.mjs`, `src/content/scenes/images.ts` (scene layer slots, the same `ImageSlot` type plus `source: { kind: "real" | "ai"; from?: string }` and `grade`).
 - Modify: `src/content/content.test.ts`, `image-native.spec.ts`.
@@ -439,12 +441,12 @@ e2e/category-*.spec.ts, e2e/opening.spec.ts, e2e/forms.spec.ts, e2e/software-pag
 - `node scripts/grade.mjs <category> <in> <out>` applies the category's colour matrix (`GRADES` in the script: Evening, Workshop, Editorial, Studio) and writes AVIF and WebP (alpha kept) at native size.
 - It refuses to upscale, and prints each file's bytes and the scene's mobile total.
 
-- [ ] **Step 1:** Write the unit tests:
+- [x] **Step 1:** Write the unit tests:
   - every scene layer slot with a `src` has `width`/`height` equal to the file's real size;
   - real-source layers name their source photo;
   - a scene's mobile layers total ≤ 600 KB on disk (read with `fs.stat`).
-- [ ] **Step 2–4:** Fail, implement, pass. The slots have `src: null` until images exist, so the size tests are skipped per slot until then.
-- [ ] **Step 5:** Commit `feat(scenes): scene image slots and the colour grade export`.
+- [x] **Step 2–4:** Fail, implement, pass. The slots have `src: null` until images exist, so the size tests are skipped per slot until then.
+- [x] **Step 5:** Commit `feat(scenes): scene image slots and the colour grade export`.
 
 ---
 
