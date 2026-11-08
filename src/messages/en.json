@@ -131,7 +131,9 @@
       "email": "Email us",
       "contactPending": "Our contact details will appear here soon."
     },
-    "modulePending": "Interactive preview in design"
+    "modulePending": "Interactive preview in design",
+    "skip": "Skip to services",
+    "sceneLabel": "Opening"
   },
   "work": {
     "eyebrow": "Our work",
@@ -411,5 +413,13 @@
   "notFound": {
     "title": "This page doesn't exist.",
     "back": "Back to home"
+  },
+  "scenes": {
+    "draft": {
+      "s1": "TODO: shot 1 line",
+      "s2": "TODO: shot 2 line",
+      "s3": "TODO: shot 3 line",
+      "s4": "TODO: shot 4 line"
+    }
   }
 }
