@@ -49,7 +49,7 @@ Items that need an answer from Rand or the user before the related work can be b
 
 ## Added with the category pages (D57, 2026-11-08)
 <!-- Category pages replacing per-service pages was approved by the user under Rand's delegation (2026-11-07): DECISIONS D57, no open question. -->
-22. **Rental equipment inventory.** Which cameras, lenses, lighting, sound and stage equipment does NO TIME actually rent out? Until this list arrives, the rental module shows four categories only (Camera, Lighting, Sound, Stage): no models, brands, quantities or prices (CONTENT_CHECKLIST #20).
+22. **Rental equipment inventory.** Which cameras, lenses, lighting, sound and stage equipment does NO TIME actually rent out? Until this list arrives, the rental module shows four categories only (Camera, Lighting, Sound, Stage): no models, brands, quantities or prices (CONTENT_CHECKLIST #20). **Also (D71):** does NO TIME rent out event equipment (LED screens, audio, lighting, kiosks) as well as cameras? If yes, LED screens and kiosks join the module as two more categories; until the client confirms, they are not shown.
 23. **Online print store.** Is an online print store live today, or planned? Until a real store exists, the page presents "Order your print online" through the quote form: no cart, no prices (CONTENT_CHECKLIST #21).
 
 ## Added with the Software & Digital brief (D65, 2026-11-08)

@@ -76,7 +76,7 @@ export type ModuleKey =
   | "example-dashboard"
   | "content-calendar"
   | "press-release"
-  | "flighting-chart"
+  | "campaign-funnel"
   | "human-scale"
   | "build-layers"
   | "unboxing"

@@ -44,7 +44,7 @@ The canonical list is [docs/content/services-list.md](../content/services-list.m
 |---|---|
 | I Events & Hospitality | Conferences & summits (`conferences`) · Exhibitions & booths (`exhibitions`) · Product launches & brand activations (`launches`) · Galas & private celebrations (`celebrations`) · Catering & heritage hospitality (`hospitality`) · Stage & technical production (`stage`) |
 | II Creative Production | Photography (`photography`) · Video production (`video`) · Motion graphics (`motion`) · AI content creation (`ai-content`) · Set & stage design (`set-design`) · Equipment & camera rental (`rental`) |
-| III Marketing & Brand | Branding & identity (`branding`) · Social media management (`social`) · Digital marketing & SEO (`digital-marketing`) · Content strategy (`content-strategy`) · Public relations (`pr`) · Media planning (`media-planning`) |
+| III Marketing & Brand | Branding & identity (`branding`) · Social media management (`social`) · Digital marketing & SEO (`digital-marketing`) · Content strategy (`content-strategy`) · Public relations (`pr`) · Paid media & media planning (Google & Meta ads) (`paid-media`, D71) |
 | IV Production, Print & Gifts | Large-format printing (`large-format`) · Stand fabrication & signage (`fabrication`) · Packaging design (`packaging`) · Corporate gifts (`gifts`) · Online print store (`print-store`) · Branded merchandise (`merchandise`) |
 | V Software & Digital | Websites (`websites`) · Mobile apps (`apps`) · Custom systems (`systems`) · E-commerce (`e-commerce`) · UI/UX design (`ux`) · AI consulting (`ai-consulting`) |
 
@@ -739,7 +739,7 @@ Its quote block switches from the WhatsApp/email actions to the real quote form 
 | Order | Category | Storyboard | Modules (effort) | Checkpoint | Waits on |
 |---|---|---|---|---|---|
 | 4 | Production, Print & Gifts (The Workshop) | [production-print-gifts.md](../design/storyboards/production-print-gifts.md) | human-scale S, print-order S, merch-placement S, build-layers M, gift-configurator M, unboxing M ⚠ | CP9 | OQ #23 (print store) for its section V |
-| 5 | Marketing & Brand (The Editorial) | [marketing-brand.md](../design/storyboards/marketing-brand.md) | mark-build M, content-calendar M, press-release M, flighting-chart M, example-dashboard M, phone-feed M ⚠ | CP10 | Logo SVG (CONTENT_CHECKLIST #14) for the full mark build |
+| 5 | Marketing & Brand (The Editorial) | [marketing-brand.md](../design/storyboards/marketing-brand.md) | mark-build M, content-calendar M, press-release M, campaign-funnel M, example-dashboard M, phone-feed M ⚠ | CP10 | Logo SVG (CONTENT_CHECKLIST #14) for the full mark build |
 | 6 | Creative Production (The Studio) | [creative-production.md](../design/storyboards/creative-production.md) | motion-playground S, idea-to-image M, set-model M, rental-categories S, aperture-gallery M ⚠, scrub-reel M ⚠ | CP11 | Showreel (#1), equipment inventory (OQ #22), photo consent (OQ #18) |
 
 **Effort:**

@@ -1,228 +1,101 @@
-# Session handoff: Phase 1
+# Session handoff: Phase 2, Events animatic review
 
-Written 2026-11-07 at the end of a session, for the session that continues the work. Read `CLAUDE.md` and `AGENTS.md` first; they hold the permanent rules.
+Written 2026-11-08 at the end of a session, for the session that runs the Events animatic review. Read `CLAUDE.md` and `AGENTS.md` first; they hold the permanent rules. Decisions are in `docs/DECISIONS.md` (latest: D68–D71), the plan in `docs/plans/phase-2-services.md`.
 
-## Status
+## Branch and remote
 
-- **Branch:** `phase-1-foundations`. Not merged; do not merge. `main` stays at `c2c85b2`.
-- **Last commit:** `chore: session handoff`, which contains this file. Run `git log -1` for its hash. The last feature commit before it is `83bd6da` (hero canvas).
-- **Working tree:** clean after the handoff commit.
-- **Servers:** none running. Production uses port 3100 and the dev server port 3200; both were stopped.
+- **Working branch: `main`.** All Phase 2 work is committed on `main`, locally and on `origin/main` (GitHub, private repo `beshoynady/notime-website`).
+- **`phase-1-foundations`** (GitHub's default branch) stays at `fee1d73`, the storyboard docs commit. `main` is a straight fast-forward of it: `fee1d73` is an ancestor of `main`, with no merge commits. The Phase 2 commits after `fee1d73` exist only on `main`.
+- **Nothing has been merged, and nothing should be** without the user's say-so. Don't change GitHub's default branch either.
+- **Last commits on `main`** (newest first):
 
-### Verification at handoff
+| Commit | What |
+|---|---|
+| this commit | `chore: session handoff; services update (D71)`. Run `git log -1` for its hash |
+| `1d39101` | `feat(lab)`: Events & Hospitality animatic (Task 3.0) |
+| `12873c6` | `feat(services)`: category sections, FAQ, quote block, theme tokens and grounds (Task 2.5) |
+| `ca28d79` | `fix(seo)`: real 404 on the first request for unknown categories and lab pages |
+| `1a2c0c0` | `test(services)`: park Task 2.5's unbuilt checks as fixme |
+| `510fdab` | `feat(scenes)`: scene image slots and the colour grade export (Task 2.10) |
 
-The production build includes the late-hydration fix.
+- **Servers:** none running. Both were stopped at handoff.
+
+## Events animatic (Task 3.0): built, awaiting the user's rhythm review
+
+This is **stop point 2**. Don't start 3.1 until the user has judged the rhythm on the animatic.
+
+- **Where:** `/en/lab/events-animatic` and `/ar/lab/events-animatic`.
+  - **Opening:** `EVENTS_OPENING`, four shots on a 2.0 vh pin; on mobile, three shots on 1.2 vh.
+  - **Majlis:** `EVENTS_MAJLIS`, a pass scene in section V. It is never pinned and plays over its crossing.
+  - Config: `src/content/scenes/events-hospitality.ts`. Shot lines are drafts in `scenes.events.s1`–`s4`.
+- **Lab only:** both scenes are in `LAB_SCENES` / `LAB_SECTION_SCENES` (`src/content/scenes/index.ts`). On approval, move them to `SCENES` / `SECTION_SCENES`; the public page then shows them (D70).
+- **Shot timings:**
+
+  | Shot | Desktop (vh) | Mobile (vh) |
+  |---|---|---|
+  | 1 Empty room | 0 → 0.45 | 0 → 0.35 |
+  | 2 Lights up | 0.45 → 0.95 | merged into 3 |
+  | 3 Dressed | 0.95 → 1.5 | 0.35 → 1.0 |
+  | 4 Ready | 1.5 → 2.0 | 1.0 → 1.2 |
+
+  The majlis pour runs over 40–70% of its crossing. One call the user should confirm: on mobile, lights and dressing merge into one shot, and that shot's line is shot 3's (D70 (3)).
+- **Review material sent to the user:** 18 screenshots (1440/390, EN/AR, each shot and the majlis) and three animated-WebP recordings (EN 1440, EN 390, AR 1440). They are in the previous session's scratchpad and are not in the repo. To make new ones, see "Recordings" below.
+- **Tests:** `e2e/events-animatic.spec.ts` covers shot order on the pin, the majlis crossing, reduced motion, and the public page staying static. `src/lib/scene-math.test.ts` covers pass-scene rules; `src/content/scenes/scenes.test.ts` covers the review gating.
+
+## How to run the lab
+
+The lab route is a 404 unless the build has the flag. It is read at build time.
+
+```bash
+NEXT_PUBLIC_ENABLE_LAB=1 npm run build
+NEXT_PUBLIC_ENABLE_LAB=1 npm run start -- -p 3100
+# open http://localhost:3100/en/lab/events-animatic
+```
+
+- **Playwright** reuses a server already on 3100 (`playwright.config.ts`). Lab specs skip themselves when the lab is off.
+- **Before rebuilding,** stop whatever holds 3100 (PowerShell): `Get-NetTCPConnection -LocalPort 3100 -State Listen | % { Stop-Process -Id $_.OwningProcess -Force }`.
+- **Recordings:** Playwright video needs an ffmpeg download, which the rules forbid. Capture frames with Playwright screenshots while stepping the scroll, then join them with sharp into a **near-lossless** animated WebP. Lossy WebP leaves stale blocks in dark gradients, and GIF's palette breaks the browns (D70 (4)).
+
+## Verification at handoff
 
 | Check | Result |
 |---|---|
-| `npm run build` | pass (exit 0). `/en` and `/ar` are prerendered static (○). |
-| `npm run lint` | pass, 0 warnings |
-| `npm run typecheck` | pass |
-| `npm test` (Vitest) | 9 files, 61/61 pass |
-| `npx playwright test` (full suite, 1 worker) | 25 passed, 15 skipped, 6 failed in 9.7 min. See below. |
-| Rerun of the 6 failing specs alone (`locale-switch`, `mega-keyboard`, desktop) | 6/6 pass |
-| `cls` + `hero-intro` (desktop, `--repeat-each=3`) | Intermittent timeouts before the fix below. After the fix, all pass in the full-suite run above. |
+| `npm run build` (with the lab flag) | pass |
+| `npm run lint`, `npm run typecheck` | pass |
+| Vitest | 27 files, 190/190 pass |
+| Full e2e on `1d39101` (1 worker, retries 1; machine loaded) | **210 passed, 1 flaky, 0 failed**, 103 skipped (width-specific), 11.6 min |
+| After D71 (services update): `category-structure`, `category-index`, `category-modules`, `anchor-scroll`, `mega-keyboard`, `mobile-menu` | 110 passed, 0 failed, 0 flaky, 70 skipped |
 
-**About the 6 full-suite failures.** They are `locale-switch` ×2 and `mega-keyboard` ×4, all with timeouts and "page closed" errors. The run took 9.7 min, against 4.7 min for the run before it on the same code, which means the machine was under heavy load. Every one of those specs passes when run alone.
+## Open items
 
-The earlier intermittent `cls`/`hero-intro` failures had a real cause, now fixed:
-- When hydration landed after the 4.5 s intro deadline, the controller took the short-reveal path.
-- That path never set `html[data-intro-seen]`, so the specs waiting for it timed out.
-- It now records the intro as seen (D40 addendum).
-- `hero-intro.spec.ts` "first visit" now skips itself when the late path ran, because no shutters are expected then.
+1. **Workshop texture.** Spec §5.4 gives Production, Print & Gifts a paper grain on champagne. That conflicts with the rule the user set: grain on dark grounds only, never on light (D69). The Workshop has no grain now. Ask the user whether it stays that way.
+2. **Flaky `mega-keyboard` (ar).** This was its second occurrence (after 2026-11-07), so it was investigated, not retried. Details in `docs/e2e-flakes.md`.
+   - Diagnosis: machine load, no code change.
+   - Alone, it failed 1 in 10. With traces, it passed 8 of 8 but took 10–41 s per run (normal ~3 s): one key press 2.6 s, context teardown 29 s.
+   - Memory: 8.1 of 10.1 GB committed.
+   - Next step: rerun it on a quiet machine. If it fails there, debug the menu.
+3. **Services update for paid media (D71): applied in the handoff commit.** Points the user still has to answer:
+   - Business cards and brochures are small-format items inside "Large-format printing". Should the title and summary widen?
+   - "Digital marketing & SEO" still mentions "paid media" in its summary, which now overlaps service 18.
+   - Event equipment rental (LED screens, audio, lighting, kiosks) is only added if the client confirms (OPEN_QUESTIONS #22).
+4. **Draft copy awaiting approval:**
+   - the closing line per category (`Category.closing`, CONTENT_CHECKLIST #27);
+   - the Events shot lines (CONTENT_CHECKLIST #26).
+5. **Canva:** 2 AI images still pending until credits renew.
 
-**First action next session:** run the full suite on a quiet machine. If anything still fails, debug it (`superpowers:systematic-debugging`) before Checkpoint 3.
+## Next tasks (after the animatic is approved)
 
-## Done
+- **3.1 Events copy.**
+  - Write the copy deck `docs/content/category-copy-events.md`: intro, the promise and 4–6 points per service, 5 FAQ entries, the approved shot lines. EN first; AR written natively.
+  - Sources: only `profile-copy.md` and `services-proposal.md`. Anything that needs client facts becomes a TODO in CONTENT_CHECKLIST.
+- **3.1b Events layer images: stop point 3.**
+  - Confirm the Canva credit costs first.
+  - Generate `ev-open-hall` and `ev-majlis-dusk` (16:9 and 9:16), cut out the real sources, and grade them with `scripts/grade.mjs evening`.
+  - Build a contact sheet, then stop for approval.
+- **Then 3.2:** the live Evening theme, opening and majlis (section lights, candle flicker, the pour drawn as an SVG stroke).
 
-| Task | Commit | Notes |
-|---|---|---|
-| Setup and docs | `c2c85b2`, `cc5e85c` | Scaffold (Next 16.4.5), the plan, the approved reference `docs/design/notime-styleguide.html`, D1–D23 |
-| **Checkpoint 1** (plan) | approved | Contact config in `src/config/contact.ts`; Vitest/Playwright as devDeps only; Chrome channel; image generation on hold until Checkpoint 4 |
-| 1 Tokens and fonts | `c4b17fe` | Brand tokens, type scale, motion tokens, test tooling |
-| 2 i18n | `28d000b`, `93347ec` | next-intl via `next/root-params`, RTL, DirectionProvider (D13, D26–D30) |
-| 3 Content system | `498ca2c` | Typed categories, services (prototype draft, OQ #11), products, image slots, contact config |
-| 4 Motion infrastructure | `57a1113` | Lenis on the GSAP ticker, ToneController, `useSplitText`, 6 primitives |
-| 5 Header | `4ddbcd3` | Logo lockup, language toggle (plain `<a>`, D31), Button |
-| 6 Mega menu | `e8ecffc` | Data-driven; hover-intent timing and keyboard support; reducer tests |
-| 7 Mobile menu | `f40ea1f` | Accordions (native `details`), scroll lock |
-| 8 Shell extras | `5d2d6f9` | WhatsApp button, cursor, footer stub, overflow guard (360px) |
-| **Checkpoint 2** (shell) | approved | Screenshots in `docs/checkpoints/checkpoint-2/`. The approval added the hero requirements listed under "In progress". |
-| Logo integration (from `docs/brand/logo-source/`) | `070b3f6` | **Done.** Real logo with tone variants, `scripts/export-logo` (D37), client-side footer year (D33), zero-CLS fonts (D34, D35, D38). The dark-background logo is still needed (OQ #12). |
-| 9 Hero static layers | `2a085f2` | Server-rendered, visible-at-rest frame, clock, HUD, `time.ts`/`hero-math.ts` tests, `no-js.spec.ts` |
-| 10 Hero canvas | `83bd6da` | Transparent canvas with `plus-lighter`, pixel budget, IntersectionObserver/visibility/overlay pauses. Mobile at 4× CPU throttle: 52–60 fps (D39). |
-| 11 Steps 1–3: intro + scroll timelines | `chore: session handoff` | See below |
+## Standing rules this session added
 
-### Task 11 and the Checkpoint 2 hero requirements
-
-All of this code is in the handoff commit.
-
-**Code**
-- `hero-controller.tsx`: intro timeline, pinned scrubbed scroll timeline (`gsap.matchMedia` with complementary wide/narrow conditions), repeat-visit reveal, skip listeners, focus pull.
-- `hero.tsx`/`hero.css`: `.hero-line-inner` wrappers and the repeat-visit CSS mask with a 2.5 s failsafe.
-- `use-split-text.ts`: `splitVars()`.
-- `tone-controller.tsx`: numeric zones (D41).
-
-**Requirements status**
-
-| # | Requirement | Status |
-|---|---|---|
-| 1 | Intro once per session | Done. `sessionStorage["nt-intro"]`; the boot script sets `html[data-intro-seen]`. A repeat visit gets a short title reveal. |
-| 2 | Skippable intro | Done. Wheel, touch, pointer or key calls `tl.progress(1)`. |
-| 3 | Header keyboard access | Done. The header stays focusable (opacity only); focus entering it finishes the intro. |
-| 4 | Canvas pause | Done. Pauses on `html[data-overlay-open]`, when off-screen, and when the tab is hidden. |
-| 5 | Mobile pin stability | Done. `svh`, `invalidateOnRefresh`, `ignoreMobileResize`. `e2e/hero-resize.spec.ts` uses a real touch swipe through CDP `Input.dispatchTouchEvent` at 390px. |
-| 6 | LCP report | **Not done.** See Next steps 2. |
-| 7 | Deliverables | Captured in `docs/checkpoints/checkpoint-3/`, but **stale**: the beat frames were captured before the header-tone fix and must be re-captured. |
-
-**Specs:** `e2e/hero-intro.spec.ts`, `e2e/locale-switch.spec.ts`, `e2e/hero-resize.spec.ts`. `e2e/cls.spec.ts` now waits for the intro to end.
-
-**Scripts**
-- `scripts/shots.mjs --hero`: warm fonts by reloading in the same tab, plus the intro, split and beat frames at 1440 and 390 in EN and AR, the cold first visit, and the `hero.webp` recording.
-- `scripts/lighthouse.mjs`: 3 runs per locale, mobile, medians plus the LCP element.
-
-**Decisions and questions logged:** D38 amendment (font measurements), D40 (controller design), D41 (tone zones), OPEN_QUESTIONS #14 (font display).
-
-## In progress
-
-**Task 11, Step 4 (LCP report) and Step 5 (re-capture, simplify, report).**
-
-- **Already written and committed:**
-  - all of the Task 11 code and specs;
-  - the docs listed above;
-  - `scripts/lighthouse.mjs`.
-- **What's left:**
-  1. Run Lighthouse.
-  2. Log the LCP element and time for `/en` and `/ar`.
-  3. Re-capture the screenshots.
-  4. Run `/simplify` within its guardrails.
-  5. Commit.
-  6. Send the Checkpoint 3 report.
-
-No file is half-written.
-
-## Next steps, in order
-
-1. **Re-verify the e2e suite** on a quiet machine (`npm run build`, then `npx playwright test`). Fix any real failure. The 6 load-related failures listed above should pass.
-2. **Finish Task 11 Step 4, the LCP report** (the last Checkpoint 2 hero requirement):
-   - start production with `node node_modules/next/dist/bin/next start -p 3100`;
-   - with nothing else running, run `node scripts/lighthouse.mjs http://localhost:3100 docs/checkpoints/lighthouse`;
-   - log the median Performance/A11y/BP/SEO scores, LCP time, LCP element and CLS for `/en` and `/ar` in DECISIONS (new row D42 or the D38 amendment);
-   - targets: LCP < 2.5 s and CLS 0.
-   - If the shutters defer the LCP paint on mobile, apply the fallback in the plan: the mobile shutters become a clip-path on the letterbox.
-3. **Finish Task 11 Step 5 and send Checkpoint 3:**
-   - run `node scripts/shots.mjs checkpoint-3 --hero` with the production server up;
-   - run `/simplify`; the guardrails are in CLAUDE.md and the plan: keep reduced motion, RTL, TODOs, ARIA, and the IntersectionObserver/DPR safeguards;
-   - commit `feat(hero): …`.
-   - Then send the **Checkpoint 3 report in Arabic** and stop for approval. The report must cover:
-     - the deliverable paths;
-     - the LCP numbers;
-     - the fps numbers (D39);
-     - OQ #14 (recommend `swap`; show `cold-first-visit-en-1440.png`);
-     - that the recording is `hero.webp`, because Playwright video needs an ffmpeg download, which is not allowed;
-     - that every font file is preloaded on every page (Alexandria on `/en` too);
-     - the ToneController fix (D41);
-     - the `ignoreMobileResize` semantics (a height-only resize keeps the pin spacer; an orientation change re-measures);
-     - OQ #15 and OQ #16.
-4. **Task 11b: profile extraction and content inventory** (done 2026-11-07; see the plan's status line, D47 and D48). From `docs/brand/company-profile-2026.pdf` (38 pages). Full spec: `docs/plans/phase-1.md` → Task 11b.
-   - Tool: MuPDF.js in %TEMP%, via `scripts/extract-profile.mjs` (D47). Never add it to `package.json`.
-   - Extract to `public/images/work/raw/` (gitignored), skipping pages 20, 30 and 34–37. Then run `scripts/curate-profile.mjs`.
-   - Write `docs/content/profile-inventory.md`, `profile-copy.md` and `services-reconciliation.md`.
-   - Do not change `services.ts` until the user confirms.
-   - Case studies use verified figures only.
-   - Add the hero variant "IT'S TIME TO START." (OQ #15).
-   - Log the permission questions.
-   - The inventory summary and the reconciliation table are reported at Checkpoint 4.
-5. **Task 12: `/[locale]/styleguide`.** The approval page mirrors the reference, with computed contrast badges (D20).
-6. **Task 13: homepage copy deck** (EN first, then AR written natively), with the banned-phrase test.
-7. **Task 14: `image-prompts.md`** and the designed placeholders. Then **Checkpoint 4**: send the copy deck, `image-prompts.md`, the profile inventory summary and the reconciliation table. **No image generation before approval.**
-8. **Task 15:** image generation, only if approved. Then **Task 16:** the final review by a **fresh subagent** (`superpowers:requesting-code-review`), accessibility review and Lighthouse ≥ 90/95/95/95. Then **Checkpoint 5**.
-
-## Decisions made this session
-
-All of them are in `docs/DECISIONS.md`:
-
-- **D33** footer year;
-- **D34, D35** fonts;
-- **D36** Montserrat stays the primary face;
-- **D37** logo export;
-- **D38**: fonts use `display: optional`, plus the Task 11 amendment;
-- **D39** canvas performance;
-- **D40** hero controller, including the late-hydration addendum;
-- **D41** numeric tone zones.
-
-Earlier sessions: D1–D32.
-
-## Open questions
-
-All of them are in `docs/OPEN_QUESTIONS.md`:
-
-- open: #1–#6 and #10–#14;
-- added at handoff: **#15** (hero line "TO CREATE" vs the profile's "TO START") and **#16** (the `.gitignore` ` /docs` entry);
-- #7–#9 are resolved (D26–D28).
-
-Task 11b added #17–#21: client names and logos, identifiable people, press and media outlets, the government portals, and original files. #14 and #16 are resolved (D45, D46).
-
-## Known issues and gotchas
-
-- **Ports:**
-  - production on **3100** (Playwright's `webServer` reuses it; `PW_BASE_URL=http://localhost:3200` points the suite at the dev server instead);
-  - dev on **3200**.
-  - Dev and production share `.next`, so stop the other one before `npm run build`.
-- **Start production** with `node node_modules/next/dist/bin/next start -p 3100`; in a background shell, prefix it with `exec` so stopping the task kills the server.
-- **Slow E: drive:** the project lives on `E:`. Next warns that the filesystem is slow, builds take minutes, and Turbopack caches aggressively. After a change, grep `.next/static` to confirm that it reached the bundle.
-- **Machine load:** e2e runs with `workers: 1` on purpose; parallel browsers starve this machine. Timing specs (CLS, intro, menu timing) can fail when the machine is busy. Rerun a failing spec alone before you debug it.
-- **next-intl + `cacheComponents`:**
-  - `app/[locale]/layout.tsx` is the root layout, with `next/root-params`;
-  - the request config pins `timeZone: "Asia/Dubai"`;
-  - `cacheComponents` and `partialPrefetching` stay on (D13, D28);
-  - unknown paths go to the `[...rest]` catch-all (D29);
-  - pages left behind by a client navigation stay in the DOM hidden (React Activity), so controllers bind only `checkVisibility()` elements (D32).
-- **Next.js 16:** read `node_modules/next/dist/docs/` before using any API (AGENTS.md).
-- **Playwright:**
-  - `channel: "chrome"` (the installed Chrome); **never download browsers or ffmpeg**;
-  - video needs ffmpeg, so `shots.mjs` records with CDP `Page.startScreencast` and builds an animated WebP with sharp;
-  - CDP `Input.synthesizeScrollGesture` does not scroll in headless; use `Input.dispatchTouchEvent`.
-- **Fonts:**
-  - `display: optional` means a cold first visit usually renders the fallback face (OQ #14);
-  - for screenshots, warm the fonts by reloading in the same tab after `sessionStorage.clear()`; a separate warm-up tab does not work.
-- **Hero gating attributes:**
-  - motion mode is `html[data-js]:not([data-reduced])`;
-  - the intro gate is `#hero[data-hero-intro]` without `html[data-intro-seen]`;
-  - `#hero[data-hero-ready]` means the controller has taken over;
-  - CSS failsafes: shutters and header at 5 s, repeat-visit rise at 2.5 s;
-  - the intro deadline is 4.5 s.
-- **ScrollTrigger:** when the trigger element is itself pinned, ScrollTrigger subtracts the pin length from its positions. Use numeric start and end values (D41), and give pins `refreshPriority`.
-- **Windows and Git Bash:**
-  - files use CRLF, and `sed -i` rewrites them as LF; use a Node script that keeps the line endings, or the Edit tool;
-  - avoid backticks and nested quotes in inline `node -e`; write a script file instead.
-- **Session scratchpad:** temporary helper scripts lived in this session's scratchpad and are gone. The ones worth keeping are now `scripts/shots.mjs` and `scripts/lighthouse.mjs`.
-- **Repo size:** the handoff commit includes `docs/brand/company-profile-2026.pdf` (15 MB) and `docs/checkpoints/checkpoint-3/` (31 MB), because the user asked to commit everything. Consider Git LFS or moving them out before pushing.
-
-## Skills used and skill rules
-
-**Used:**
-- `superpowers:brainstorming`, `superpowers:writing-plans`, `superpowers:test-driven-development`, `superpowers:verification-before-completion`;
-- `frontend-design`, `ui-ux-pro-max`, `framer-motion-animator` (the package is `motion`; import from `motion/react`, tweens only);
-- `gsap-framer-scroll-animation`, `design:ux-copy`, `simplify`, `find-skills`.
-
-**Still to use:**
-- `superpowers:requesting-code-review` (Task 16, with a fresh subagent);
-- `design:accessibility-review`, `wcag-audit-patterns`, `design:design-critique`.
-
-**Rules:**
-- install every skill or plugin **globally (user scope) only**: `~/.claude/skills/`, `--scope user`, `-g`;
-- never install into `.claude/skills/` in this repo, and never commit skill files;
-- confirm the location after installing;
-- if a skill only installs per project, stop and ask.
-
-## Files to read first, in order
-
-1. `CLAUDE.md` and `AGENTS.md`: permanent rules.
-2. `docs/HANDOFF.md`: this file.
-3. `docs/plans/phase-1.md`: Global Constraints, then Task 11 to the end (Tasks 11b–16).
-4. `docs/DECISIONS.md`: D13, D16, D19, D32, D38–D41.
-5. `docs/OPEN_QUESTIONS.md` and `docs/CONTENT_CHECKLIST.md`.
-6. `docs/PROJECT_BRIEF.md` and `docs/design/notime-styleguide.html`: the approved reference. Never replace its palette, fonts or 4px radius.
-7. `src/components/sections/hero/hero-controller.tsx`, `hero.css` and `hero.tsx`, then `src/components/providers/tone-controller.tsx`.
-8. `scripts/shots.mjs`, `scripts/lighthouse.mjs` and `playwright.config.ts`.
+- A spec for unbuilt work is committed as `test.fixme` with a task reference, never red. Remove the fixme as each part is built.
+- Report e2e as pass / flaky / fail. A retry-pass counts as flaky. A test's second flake gets debugged, not retried.
+- Never download Playwright browsers or ffmpeg (`channel: "chrome"`). Run nothing in parallel with a full e2e run or Lighthouse.

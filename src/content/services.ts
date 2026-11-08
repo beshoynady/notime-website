@@ -8,6 +8,21 @@ import type { CategorySlug, Localized, ModuleKey, QuoteType, Service } from "./t
 type Row = [slug: string, title: Localized<string>, summary: Localized<string>];
 
 /**
+ * Named deliverables the user confirmed (D71), as the service's "what we deliver" points. Every
+ * other service keeps the TODO placeholders until its category's copy deck.
+ */
+const NAMED_POINTS: Record<string, Localized<string[]>> = {
+  "large-format-printing": {
+    en: ["Roll-up banners", "Feather flags", "Business cards", "Brochures"],
+    ar: ["لافتات رول أب", "أعلام الريشة", "بطاقات العمل", "البروشورات"],
+  },
+  "corporate-gifts": {
+    en: ["Gift sets", "Branded bottles", "Bags", "Notebooks & pens", "Giveaways"],
+    ar: ["أطقم الهدايا", "قوارير بهوية العلامة", "الحقائب", "الدفاتر والأقلام", "الهدايا الترويجية"],
+  },
+};
+
+/**
  * Category-page fields per service (D57): the anchor (docs/content/services-list.md) and the
  * signature module (docs/design/category-pages.md §6). quoteType defaults to the category's.
  */
@@ -29,7 +44,7 @@ const PAGE: Record<string, { anchor: string; module: ModuleKey; quoteType?: Quot
   "digital-marketing-seo": { anchor: "digital-marketing", module: "example-dashboard" },
   "content-strategy": { anchor: "content-strategy", module: "content-calendar" },
   "public-relations": { anchor: "pr", module: "press-release" },
-  "media-planning": { anchor: "media-planning", module: "flighting-chart" },
+  "paid-media-planning": { anchor: "paid-media", module: "campaign-funnel" },
   "large-format-printing": { anchor: "large-format", module: "human-scale" },
   "stand-fabrication-signage": { anchor: "fabrication", module: "build-layers" },
   "packaging-design": { anchor: "packaging", module: "unboxing" },
@@ -77,7 +92,7 @@ function group(category: CategorySlug, rows: Row[]): Service[] {
       status: "approved",
       anchor: page.anchor,
       signatureModule: page.module,
-      points: placeholderPoints(),
+      points: NAMED_POINTS[slug] ?? placeholderPoints(),
       relatedWork: [],
       quoteType: page.quoteType ?? QUOTE_TYPE[category],
     };
@@ -227,11 +242,11 @@ export const services: Service[] = [
       },
     ],
     [
-      "media-planning",
-      { en: "Media planning", ar: "تخطيط الإعلام" },
+      "paid-media-planning",
+      { en: "Paid media & media planning (Google & Meta ads)", ar: "الإعلانات المدفوعة وتخطيط الإعلام (Google وMeta)" },
       {
-        en: "Channels, budgets and timing matched to the audience.",
-        ar: "القنوات والميزانيات والتوقيت، بما يناسب الجمهور.",
+        en: "Google and Meta campaigns, with the channels, budgets and timing behind them matched to the audience.",
+        ar: "حملات Google وMeta، ومعها القنوات والميزانيات والتوقيت بما يناسب الجمهور.",
       },
     ],
   ]),

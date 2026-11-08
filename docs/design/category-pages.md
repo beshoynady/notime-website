@@ -83,7 +83,7 @@ Source for the accessibility and motion rules: the `ui-ux-pro-max` skill's built
   - **From another page,** a normal navigation happens. The form reads `?service` on mount (a client island under Suspense, so the page stays static), and the anchor utility lands on `#quote`. Its effect re-runs when the search params change.
 - **Breadcrumbs** on category pages: Home › Services › Category.
 
-**Standalone service pages later (not built):** the user plans standalone SEO pages for the 3–4 services people search for most (event management, exhibition stand design, corporate gifts in Dubai). The data model allows them without changing components:
+**Standalone service pages later (not built):** the user plans standalone SEO pages for the services people search for most. Candidates (D57, extended in D71): event management, exhibition stand design, exhibition stand contractor, corporate gifts Dubai, roll-up banner printing, Google Ads / Meta Ads, SEO; and for Software & Digital, the four in its storyboard (website development Dubai, mobile app development UAE, event registration system, bilingual Arabic English website). The data model allows them without changing components:
 
 - The service `slug` stays the permanent id and the future path (`/services/<category>/<slug>`, or a keyword path).
 - A future `src/content/landings.ts` would map a search intent to one or more services, e.g. "exhibition stand design" → `exhibitions-booths` + `stand-fabrication-signage`.
@@ -110,7 +110,7 @@ interface Category {
 type ModuleKey =
   | "agenda-timeline" | "stand-assembly" | "launch-reveal" | "candle-moodboard" | "menu-majlis" | "stage-lights"
   | "aperture-gallery" | "scrub-reel" | "motion-playground" | "idea-to-image" | "set-model" | "rental-categories"
-  | "mark-build" | "phone-feed" | "example-dashboard" | "content-calendar" | "press-release" | "flighting-chart"
+  | "mark-build" | "phone-feed" | "example-dashboard" | "content-calendar" | "press-release" | "campaign-funnel"
   | "human-scale" | "build-layers" | "unboxing" | "gift-configurator" | "print-order" | "merch-placement"
   | "responsive-frames" | "app-screens" | "data-flow" | "checkout-flow" | "fidelity-slider" | "ai-sorter";
 
@@ -361,6 +361,7 @@ Format per module:
 
 **12. Equipment & camera rental** · `#rental` · `rental-categories` · S
 - **Shows:** four equipment categories (**Camera, Lighting, Sound, Stage**), not a catalogue (user, 2026-11-08). Each card has a line drawing, the category name and one line on what it covers.
+- **Event equipment (D71, only if the client confirms, OQ #22):** LED screens and kiosks would join as two more cards (audio and lighting are already Sound and Lighting). Not shown until confirmed.
 - **Interaction:** selecting a card (a toggle button with `aria-pressed`) lifts it and reveals its line. "Ask about availability" opens the quote form with `?service=rental` and the chosen category in the message.
 - **Owner:** Motion.
 - **Reduced:** all four lines visible; selection still works, instantly.
@@ -399,11 +400,11 @@ Format per module:
 - **Reduced:** all annotations visible.
 - **Data:** an example release. **Content:** "Example". **No outlet names, logos or clippings** until the client confirms which actually published (OQ #19).
 
-**18. Media planning** · `#media-planning` · `flighting-chart` · M
-- **Shows:** a flighting chart: channels as rows, 12 weeks as columns, bursts as bars that draw in. A toggle switches the objective (Awareness, Consideration, Conversion), and the bursts re-flow.
-- **Owner:** GSAP (draw); Motion `layout` (re-flow).
-- **Reduced:** the static chart, with the toggle working.
-- **Data:** example plans × 3. **Content:** "Example", no budgets or figures. The table alternative lists the weeks per channel.
+**18. Paid media & media planning (Google & Meta ads)** · `#paid-media` · `campaign-funnel` · M (D71; replaces `flighting-chart`)
+- **Shows:** a campaign funnel: four stages (Reach, Clicks, Leads, Customers) as bars that narrow as they draw in, with the channel that feeds each stage beside it. A toggle switches the platform (Google Ads, Meta Ads, Both) and the stages re-flow; a second row shows the plan behind it (channels across the weeks of one flight).
+- **Owner:** GSAP (draw on entry); Motion `layout` (re-flow on toggle).
+- **Reduced:** the static funnel, with the toggle working instantly.
+- **Data:** example campaigns × 3 (one per toggle position). **Content:** labelled **"Example data"** in the module's title and the table caption. Stage sizes are relative widths only: no numbers, budgets, costs, rates or results, and no client names. The table alternative lists stage → channel per platform.
 
 ### IV. Production, Print & Gifts ("The Workshop")
 
@@ -499,7 +500,7 @@ Format per module:
 |---|---|---|---|---|
 | I Events & Hospitality | 0 | 5 | 1 | agenda-timeline M, stand-assembly **L**, launch-reveal M, candle-moodboard M, menu-majlis M, stage-lights M |
 | II Creative Production | 2 | 4 | 0 | aperture-gallery M, scrub-reel M, motion-playground S, idea-to-image M, set-model M, rental-categories S |
-| III Marketing & Brand | 0 | 6 | 0 | mark-build M, phone-feed M, example-dashboard M, content-calendar M, press-release M, flighting-chart M |
+| III Marketing & Brand | 0 | 6 | 0 | mark-build M, phone-feed M, example-dashboard M, content-calendar M, press-release M, campaign-funnel M |
 | IV Production, Print & Gifts | 3 | 3 | 0 | human-scale S, build-layers M, unboxing M, gift-configurator M, print-order S, merch-placement S |
 | V Software & Digital | 2 | 4 | 0 | responsive-frames M, app-screens M, data-flow M, checkout-flow M, fidelity-slider S, ai-sorter S |
 | **Total** | **7** | **22** | **1** | 30 |

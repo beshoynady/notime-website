@@ -38,7 +38,7 @@ This file and `src/content/services.ts` must match: `src/content/content.test.ts
 | 15 | digital-marketing-seo | digital-marketing | Digital marketing & SEO | التسويق الرقمي وSEO |
 | 16 | content-strategy | content-strategy | Content strategy | استراتيجية المحتوى |
 | 17 | public-relations | pr | Public relations | العلاقات العامة |
-| 18 | media-planning | media-planning | Media planning | تخطيط الإعلام |
+| 18 | paid-media-planning | paid-media | Paid media & media planning (Google & Meta ads) | الإعلانات المدفوعة وتخطيط الإعلام (Google وMeta) |
 
 ## 4. Production, Print & Gifts · الإنتاج والطباعة والهدايا (`production-print-gifts`)
 

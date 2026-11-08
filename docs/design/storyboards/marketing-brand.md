@@ -87,7 +87,7 @@ The signature (§5.3): each section opens like a magazine spread with its own fo
 | III | Digital marketing & SEO | The chart axis draws | `example-dashboard` | C |
 | IV | Content strategy | The month grid's rules draw | `content-calendar` | A |
 | V | Public relations | The headline sets from a line mask (≥ 900px only) | `press-release` | B |
-| VI | Media planning | The week columns draw | `flighting-chart` | C |
+| VI | Paid media & media planning (Google & Meta ads) | The funnel's first bar draws across the column | `campaign-funnel` (example data, D71) | C |
 
 **Reading order (all):** folio → H2 → promise → module → deliverables → CTA.
 
@@ -110,5 +110,5 @@ The signature (§5.3): each section opens like a magazine spread with its own fo
 | **Peak** | **II Social:** the only service with real, scoped figures in the profile (anonymised campaign proof, D67), and the liveliest module | **5** |
 | Calm | III–IV | 2 |
 | Build | V PR | 3 |
-| Calm | VI Media planning | 2 |
+| Calm | VI Paid media | 2 |
 | CTA | Bookend | 3 |

@@ -123,7 +123,7 @@ const SIGNATURE_MODULES = {
   "digital-marketing": "example-dashboard",
   "content-strategy": "content-calendar",
   pr: "press-release",
-  "media-planning": "flighting-chart",
+  "paid-media": "campaign-funnel",
   "large-format": "human-scale",
   fabrication: "build-layers",
   packaging: "unboxing",
@@ -160,6 +160,15 @@ describe("category pages (D57)", () => {
           expect(f.a[l].trim()).not.toBe("");
         }
       }
+    }
+  });
+
+  it("lists the named deliverables the user confirmed (D71) in their services", () => {
+    const points = (slug: string) => getServices().find((s) => s.slug === slug)!.points;
+    expect(points("large-format-printing").en).toEqual(["Roll-up banners", "Feather flags", "Business cards", "Brochures"]);
+    expect(points("corporate-gifts").en).toEqual(["Gift sets", "Branded bottles", "Bags", "Notebooks & pens", "Giveaways"]);
+    for (const slug of ["large-format-printing", "corporate-gifts"]) {
+      for (const p of points(slug).ar) expect(p.startsWith("TODO:"), p).toBe(false);
     }
   });
 
