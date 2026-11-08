@@ -14,6 +14,8 @@ import { DRAFT_SCENE, getScene, LAB_IDS, labCategory } from "@/content/scenes";
  */
 const enabled = () => process.env.NEXT_PUBLIC_ENABLE_LAB === "1";
 
+export const ensureStatic = "navigation";
+
 /** All five, always: under Cache Components an empty list is a build error; `enabled` gates the render. */
 export function generateStaticParams() {
   return Object.keys(LAB_IDS).map((id) => ({ animatic: `${id}-animatic` }));

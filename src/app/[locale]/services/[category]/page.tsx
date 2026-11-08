@@ -9,6 +9,8 @@ import { localeAlternates } from "@/lib/seo";
  * The five category pages (D57), prerendered. Under Cache Components `dynamicParams` is not
  * available: any other slug renders on request and resolve() answers it with notFound().
  */
+export const ensureStatic = "navigation";
+
 export function generateStaticParams() {
   return getCategories().map((c) => ({ category: c.slug }));
 }
