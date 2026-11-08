@@ -1,6 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 import { EVENTS_MAJLIS, EVENTS_OPENING } from "../src/content/scenes/events-hospitality";
-import { gotoReady } from "./helpers";
+import { GROUND, gotoReady } from "./helpers";
 
 /**
  * The Events & Hospitality animatic (Task 3.0) on the hidden lab route: the opening's four shots
@@ -53,6 +53,27 @@ test("the majlis is not pinned and plays as it crosses the viewport", async ({ p
     await crossTo((from + to) / 2);
     await expect(majlis(page)).toHaveAttribute("data-shot-active", String(i));
   }
+});
+
+/** The page ground as #page-stage paints it. */
+const ground = (page: Page) => page.locator("#page-stage").evaluate((el) => getComputedStyle(el).backgroundColor);
+
+// The opening's pin adds its spacer below the opening: the tone zones of everything after it must
+// include that distance (measured before the fix: the ground turned one pin length early, so
+// Stage read ivory on ivory and the FAQ espresso on espresso).
+test("the ground follows the sections below the pinned opening", async ({ page }) => {
+  await gotoReady(page, LAB("en"));
+  await page.locator(".cat-opening .scene[data-motion]").waitFor({ state: "attached" });
+  const scrollToTop = (selector: string, at: number) =>
+    page.locator(selector).first().evaluate((el, at) => {
+      window.scrollTo(0, el.getBoundingClientRect().top + scrollY - innerHeight * at);
+    }, at);
+  await scrollToTop("#stage", 0.2); // the last service, on the dark ground
+  await expect.poll(() => ground(page)).toBe(GROUND.evening.dark);
+  await page.waitForTimeout(1500); // past the tone tween and any late refresh: it stays dark
+  expect(await ground(page)).toBe(GROUND.evening.dark);
+  await scrollToTop("section.cat-faq", 0.2); // Act 3, the ivory band
+  await expect.poll(() => ground(page)).toBe(GROUND.evening.light);
 });
 
 test("reduced motion: both scenes show their still, nothing pinned", async ({ page }) => {

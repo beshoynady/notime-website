@@ -1,21 +1,13 @@
 import { expect, test, type Page } from "@playwright/test";
-import { getCategories, getServices, type CategoryTheme } from "../src/content";
+import { getCategories, getServices } from "../src/content";
 import { END_TONE, THEME_TONE } from "../src/components/category/theme";
-import { gotoReady, lcpEntry } from "./helpers";
+import { GROUND, gotoReady, lcpEntry } from "./helpers";
 
 /**
  * Category pages · structure and themes (Task 2.5), every category in EN and AR: one H1, the six
  * service sections in data order, the FAQ and the quote block, JSON-LD, no overflow, and the
  * header never dark-on-dark (it follows each section's tone) while the page ground is the theme's.
  */
-const GROUND: Record<CategoryTheme, { dark?: string; light?: string }> = {
-  evening: { dark: "rgb(46, 32, 23)", light: "rgb(245, 233, 211)" }, // espresso, ivory "morning after" band
-  studio: { dark: "rgb(13, 8, 5)" }, // night
-  editorial: { light: "rgb(245, 233, 211)" }, // ivory
-  workshop: { light: "rgb(234, 212, 171)" }, // champagne
-  interface: { light: "rgb(245, 233, 211)" }, // ivory
-};
-
 const overflow = (page: Page) => page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
 
 /** Scrolls the section's top to just above the header's bottom (or mid-viewport). Returns false

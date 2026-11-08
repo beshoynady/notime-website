@@ -1,4 +1,5 @@
 import { expect, type Page } from "@playwright/test";
+import type { CategoryTheme } from "../src/content";
 
 /** Navigate and wait until client controllers have hydrated (ToneController marks #page-stage). */
 export async function gotoReady(page: Page, path: string) {
@@ -89,3 +90,12 @@ export function lcpEntry(page: Page) {
       }),
   );
 }
+
+/** Each theme's page ground per tone, as `#page-stage` computes it (shared by the category specs). */
+export const GROUND: Record<CategoryTheme, { dark?: string; light?: string }> = {
+  evening: { dark: "rgb(46, 32, 23)", light: "rgb(245, 233, 211)" }, // espresso, ivory "morning after" band
+  studio: { dark: "rgb(13, 8, 5)" }, // night
+  editorial: { light: "rgb(245, 233, 211)" }, // ivory
+  workshop: { light: "rgb(234, 212, 171)" }, // champagne
+  interface: { light: "rgb(245, 233, 211)" }, // ivory
+};

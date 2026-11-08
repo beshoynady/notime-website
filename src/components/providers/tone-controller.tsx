@@ -38,8 +38,11 @@ export function ToneController() {
       const sections = gsap.utils.toArray<HTMLElement>("#page-stage section[data-tone]").filter((s) => s.checkVisibility());
 
       // A section's scroll box: its pin spacer when another controller pins it (the spacer
-      // holds the whole pinned distance), otherwise the section itself. Read at refresh time,
-      // so a pin created after these triggers is still included.
+      // holds the whole pinned distance), otherwise the section itself. Read at refresh time.
+      // These zones only read layout, so they refresh last (refreshPriority -1): ScrollTrigger
+      // re-applies each pin's spacing only when it reaches that pin, and a zone refreshed
+      // before a pin measured every section below it one pin length too high (D73: the Events
+      // opening's pin turned the ground ivory under section VI).
       const box = (el: HTMLElement) => (el.parentElement?.classList.contains("pin-spacer") ? el.parentElement : el);
       const docTop = (el: HTMLElement) => box(el).getBoundingClientRect().top + window.scrollY;
 
@@ -57,6 +60,7 @@ export function ToneController() {
         });
         ScrollTrigger.create({
           ...zone(() => innerHeight * 0.55),
+          refreshPriority: -1,
           onToggle: (self) => {
             if (self.isActive) gsap.to(stage, { "--page-bg": ground, duration, ease: "power2.out", overwrite: "auto" });
           },
@@ -64,6 +68,7 @@ export function ToneController() {
         if (header) {
           ScrollTrigger.create({
             ...zone(() => headerH),
+            refreshPriority: -1,
             onToggle: (self) => {
               if (self.isActive) header.dataset.headerTone = section.dataset.header === "hero" ? "hero" : tone;
             },
