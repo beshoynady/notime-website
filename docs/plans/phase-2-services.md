@@ -162,6 +162,8 @@ e2e/category-*.spec.ts, e2e/modules/<key>.spec.ts
 
 ### Task 2.3: Anchor offsets, the service index and scrollspy
 
+> Done 2026-11-08 (D61). The layout wrapper id `#stage` collided with the `stage` anchor; it is now `#page-stage`, with a guard test.
+
 **Files:**
 - Create: `src/lib/scrollspy.ts` and its test, `src/components/category/service-index.tsx`.
 - Modify: `src/components/providers/anchor-scroll.tsx`, `src/components/layout/site-header.tsx` (add `data-anchor-offset`).
@@ -171,7 +173,7 @@ e2e/category-*.spec.ts, e2e/modules/<key>.spec.ts
 - `activeIndex(tops: number[], line: number): number` returns the index of the last section whose top is ≤ the line, or −1 above the first.
 - In `anchor-scroll.tsx`, `landingTop` uses `max(bottom of every visible [data-anchor-offset])` instead of `#site-header` alone.
 
-- [ ] **Step 1:** Write unit tests:
+- [x] **Step 1:** Write unit tests:
   - `activeIndex([0,800,1600], 700)` is `0`;
   - `activeIndex([0,800,1600], 800)` is `1`;
   - `activeIndex([100,800], 50)` is `-1`;
@@ -185,16 +187,16 @@ e2e/category-*.spec.ts, e2e/modules/<key>.spec.ts
   Desktop:
   - Rail link IV lands within ±4px of the header bottom.
   - After scrolling into section V by wheel, rail item V is `aria-current`.
-- [ ] **Step 2:** Run them. Expected: FAIL.
-- [ ] **Step 3:** Implement.
+- [x] **Step 2:** Run them. Expected: FAIL.
+- [x] **Step 3:** Implement.
   - **Index:** a rail at ≥ 900px; a chip bar below that, with `data-anchor-offset` on the chip bar.
   - **Scrollspy:** a ScrollTrigger refresh reads the section tops, and `activeIndex` with the line at the offset bottom + 1 picks the item.
   - **Indicator:** Motion `layoutId`.
   - **Chip bar:** active chips scroll into view via `container.scrollTo`.
   - **Markup:** `<nav aria-label>` from messages, `category.indexLabel`.
   - **Anchor utility:** also re-run the deep-link effect when `useSearchParams()` changes.
-- [ ] **Step 4:** Run `npx vitest run` and `PW_BASE_URL=http://localhost:3100 npx playwright test category-index anchor-scroll`. Expected: PASS. The existing `anchor-scroll` spec must still pass.
-- [ ] **Step 5:** Commit `feat(services): service index with scrollspy; anchor offset includes sticky bars`.
+- [x] **Step 4:** Run `npx vitest run` and `PW_BASE_URL=http://localhost:3100 npx playwright test category-index anchor-scroll`. Expected: PASS. The existing `anchor-scroll` spec must still pass.
+- [x] **Step 5:** Commit `feat(services): service index with scrollspy; anchor offset includes sticky bars`.
 
 ### Task 2.4: Module slot, registry, static fallbacks and shared module test helpers
 

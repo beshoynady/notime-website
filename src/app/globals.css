@@ -431,9 +431,9 @@ summary,
 /* ==========================================================================
    Stage and section tones. Each tone section paints its own background by
    default (readable without JS). Once ToneController runs, sections turn
-   transparent and #stage tweens --page-bg between espresso and ivory.
+   transparent and #page-stage tweens --page-bg between espresso and ivory.
    ========================================================================== */
-#stage {
+#page-stage {
   background: var(--page-bg);
   min-height: 100dvh;
 }
@@ -443,7 +443,7 @@ section[data-tone="dark"] {
 section[data-tone="light"] {
   background-color: var(--color-ivory);
 }
-#stage[data-tone-ready] section[data-tone]:not([data-bg="own"]) {
+#page-stage[data-tone-ready] section[data-tone]:not([data-bg="own"]) {
   background-color: transparent;
 }
 

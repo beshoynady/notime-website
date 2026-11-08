@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { CustomCursor } from "@/components/layout/custom-cursor";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -64,14 +65,17 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
           <DirectionProvider direction={dir}>
             <LenisProvider>
               <SiteHeader />
-              <div id="stage">
+              <div id="page-stage">
                 {children}
                 <SiteFooter />
               </div>
               <WhatsAppButton />
               <CustomCursor />
               <ToneController />
-              <AnchorScroll />
+              {/* Suspense: AnchorScroll reads the search params; the pages stay static. */}
+              <Suspense fallback={null}>
+                <AnchorScroll />
+              </Suspense>
             </LenisProvider>
           </DirectionProvider>
         </NextIntlClientProvider>

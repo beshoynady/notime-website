@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useLenis, type LenisControls } from "@/components/providers/lenis-provider";
 import { prefersReducedMotion } from "@/hooks/use-reduced-motion";
@@ -25,12 +25,34 @@ function focusHeading(target: HTMLElement) {
   h.focus({ preventScroll: true });
 }
 
+/**
+ * Where content starts under the bars that cover the top of the viewport: the lowest bottom of
+ * every visible `[data-anchor-offset]` element (the fixed header; the sticky chip bar on mobile
+ * category pages). A non-empty attribute value is a media query the element counts under.
+ * A sticky bar counts at its stuck position, and only when `target` is inside its container
+ * (it scrolls away with that container). Viewport px.
+ */
+export function anchorOffset(target?: Element): number {
+  let bottom = 0;
+  for (const el of document.querySelectorAll<HTMLElement>("[data-anchor-offset]")) {
+    const media = el.dataset.anchorOffset;
+    if ((media && !matchMedia(media).matches) || !el.checkVisibility()) continue;
+    const style = getComputedStyle(el);
+    if (style.position === "sticky") {
+      if (target && !el.parentElement?.contains(target)) continue;
+      bottom = Math.max(bottom, parseFloat(style.top) + el.offsetHeight);
+    } else {
+      bottom = Math.max(bottom, el.getBoundingClientRect().bottom);
+    }
+  }
+  return bottom;
+}
+
 function landingTop(target: HTMLElement): number {
-  const header = document.getElementById("site-header");
   return anchorScrollTop({
     targetTop: target.getBoundingClientRect().top,
     scrollY: window.scrollY,
-    headerBottom: header ? header.getBoundingClientRect().bottom : 0,
+    headerBottom: anchorOffset(target),
     maxScroll: document.documentElement.scrollHeight - window.innerHeight,
   });
 }
@@ -83,12 +105,14 @@ function settleOn(lenis: LenisControls, id: string): () => void {
  * land with the target's top under the fixed header, then focus moves to its heading.
  * - Clicks: a window capture listener runs before Next's <Link>, which then sees
  *   defaultPrevented and leaves same-page hashes alone.
- * - Deep links and cross-page links with a hash: re-landed after each route change.
+ * - Deep links and cross-page links with a hash: re-landed after each route change, including
+ *   a change of query only (`?service=…#quote`). Mount it inside <Suspense> (useSearchParams).
  * The skip link (`#main`) keeps its native behaviour.
  */
 export function AnchorScroll() {
   const lenis = useLenis();
   const pathname = usePathname();
+  const search = useSearchParams().toString();
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
@@ -113,7 +137,7 @@ export function AnchorScroll() {
     const id = sameDocumentHash(location.href, location.href);
     if (!id || id === "main" || !document.getElementById(id)) return;
     return settleOn(lenis, id);
-  }, [lenis, pathname]);
+  }, [lenis, pathname, search]);
 
   return null;
 }

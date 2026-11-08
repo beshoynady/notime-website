@@ -13,7 +13,7 @@ test.describe("locale switch", () => {
 
     await page.locator("header a[hreflang=ar]").click();
     await page.waitForURL(/\/ar$/);
-    await page.locator("#stage[data-tone-ready]").waitFor({ state: "attached" });
+    await page.locator("#page-stage[data-tone-ready]").waitFor({ state: "attached" });
     // The pin belongs to the hero controller, and the page can hydrate after the layout's
     // ToneController (D40): wait for the controller's own marker, not only the layout's.
     await controllerReady(page);

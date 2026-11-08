@@ -19,7 +19,7 @@ test.describe("mobile menu", () => {
       const vh = page.viewportSize()!.height;
       expect(box!.y + box!.height).toBeGreaterThanOrEqual(vh - 1);
 
-      await expect(page.locator("#stage")).toHaveAttribute("inert", "");
+      await expect(page.locator("#page-stage")).toHaveAttribute("inert", "");
       expect(await page.evaluate(() => document.documentElement.style.overflow)).toBe("hidden");
 
       // Native <details> accordion.
@@ -31,7 +31,7 @@ test.describe("mobile menu", () => {
       await page.keyboard.press("Escape");
       await expect(nav).toBeHidden();
       await expect(burger).toBeFocused();
-      await expect(page.locator("#stage")).not.toHaveAttribute("inert", "");
+      await expect(page.locator("#page-stage")).not.toHaveAttribute("inert", "");
     });
 
     test(`a link click closes the menu (${locale})`, async ({ page }) => {

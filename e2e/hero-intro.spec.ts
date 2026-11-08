@@ -119,7 +119,7 @@ test.describe("hero intro (reduced motion)", () => {
 
   test("no intro, no pin: the static frame is final", async ({ page }) => {
     await page.goto("/en");
-    await page.locator("#stage[data-tone-ready]").waitFor({ state: "attached" });
+    await page.locator("#page-stage[data-tone-ready]").waitFor({ state: "attached" });
     await expect(page.locator(".hero-shutter.top")).toBeHidden();
     expect(await shellOpacity(page)).toBe(1);
     expect(await page.locator(".pin-spacer").count()).toBe(0);

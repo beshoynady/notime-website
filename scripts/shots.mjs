@@ -54,7 +54,7 @@ async function open(ctx, locale, reduced, { warm = true } = {}) {
   if (warm) await warmFonts(page, locale);
   // Same readiness marker as e2e/helpers.ts gotoReady (importing .ts from .mjs warns in Node).
   await page.goto(`${base}/${locale}`);
-  await page.locator("#stage[data-tone-ready]").first().waitFor({ state: "attached" });
+  await page.locator("#page-stage[data-tone-ready]").first().waitFor({ state: "attached" });
   await page.evaluate(() => document.fonts.ready);
   // First visit: wait for the intro to end (it sets html[data-intro-seen]); none when reduced.
   if (!reduced) {

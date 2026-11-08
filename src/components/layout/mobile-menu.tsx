@@ -40,7 +40,7 @@ export function MobileMenu({ data }: { data: MenuData }) {
   }, []);
 
   useEffect(() => {
-    const stage = document.getElementById("stage");
+    const stage = document.getElementById("page-stage");
     if (!open) return;
     setOverlayOpen(true);
     stage?.setAttribute("inert", "");

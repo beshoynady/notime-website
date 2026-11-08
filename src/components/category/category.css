@@ -140,3 +140,135 @@
 .svc-quote {
   justify-self: start;
 }
+
+/* Service index: a sticky chip bar below 900px, a sticky rail at ≥ 900px (spec §4, part 2).
+   The indicator is one element that Motion moves between links (layoutId). */
+.svc-index {
+  position: sticky;
+  top: calc(var(--header-h) + env(safe-area-inset-top, 0px));
+  z-index: 20;
+  margin-inline: calc(-1 * var(--gutter-start)) calc(-1 * var(--gutter-end));
+  border-block-end: 1px solid var(--color-line-light);
+  background: rgba(245, 233, 211, 0.92);
+  backdrop-filter: blur(10px);
+}
+[data-tone="dark"] .svc-index {
+  border-color: var(--color-line-dark);
+  background: rgba(46, 32, 23, 0.92);
+}
+.svc-index ol {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  padding: 10px var(--gutter-end) 10px var(--gutter-start);
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.svc-index ol::-webkit-scrollbar {
+  display: none;
+}
+.svc-index-link {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  padding: 8px 14px;
+  border: 1px solid var(--color-line-light);
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: color 0.3s var(--ease-expo-out);
+}
+[data-tone="dark"] .svc-index-link {
+  border-color: var(--color-line-dark);
+}
+.svc-index-num {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  opacity: 0.7;
+}
+.svc-index-ind {
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--color-espresso);
+}
+[data-tone="dark"] .svc-index-ind {
+  background: var(--color-champagne);
+}
+.svc-index-link[aria-current="location"] {
+  color: var(--color-ivory);
+}
+[data-tone="dark"] .svc-index-link[aria-current="location"] {
+  color: var(--color-espresso);
+}
+/* Without JS a hash jump uses scroll-padding (the header): leave room for the chip bar too. */
+@media (max-width: 899.98px) {
+  .svc {
+    scroll-margin-top: 58px;
+  }
+}
+
+@media (min-width: 900px) {
+  .svc-index {
+    top: calc(var(--header-h) + 24px);
+    align-self: start;
+    margin: 0;
+    padding-block-start: clamp(16px, 3vw, 40px);
+    border: 0;
+    background: none;
+    backdrop-filter: none;
+  }
+  [data-tone="dark"] .svc-index {
+    background: none;
+  }
+  .svc-index ol {
+    flex-direction: column;
+    gap: 2px;
+    padding: 0;
+    overflow: visible;
+  }
+  .svc-index-link {
+    display: grid;
+    grid-template-columns: 2.4rem minmax(0, 1fr);
+    align-items: baseline;
+    gap: 0;
+    white-space: normal;
+    padding-block: 9px;
+    padding-inline: 16px 12px;
+    border: 0;
+    line-height: 1.35;
+    opacity: 0.62;
+    transition: opacity 0.3s var(--ease-expo-out);
+  }
+  .svc-index-link:hover,
+  .svc-index-link:focus-visible,
+  .svc-index-link[aria-current="location"] {
+    opacity: 1;
+  }
+  .svc-index-link[aria-current="location"],
+  [data-tone="dark"] .svc-index-link[aria-current="location"] {
+    color: inherit;
+  }
+  /* The rail's indicator: a short bar at the inline start of the active item. */
+  .svc-index-ind {
+    inset-block: 9px;
+    inset-inline: 0 auto;
+    inline-size: 2px;
+    border-radius: 1px;
+    background: var(--color-cocoa);
+  }
+  [data-tone="dark"] .svc-index-ind {
+    background: var(--color-champagne);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .svc-index-link {
+    transition: none;
+  }
+}

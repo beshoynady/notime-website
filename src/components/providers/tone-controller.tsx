@@ -11,9 +11,9 @@ export type HeaderTone = Tone | "hero";
 
 /**
  * Page tone system (DECISIONS F):
- * - the page background (#stage, `--page-bg`) tweens to a section's tone as it crosses 55% of the viewport;
+ * - the page background (#page-stage, `--page-bg`) tweens to a section's tone as it crosses 55% of the viewport;
  * - the header switches tone when a section passes under it (`data-header-tone` on #site-header).
- * Sections only become transparent once this controller has run (`#stage[data-tone-ready]`),
+ * Sections only become transparent once this controller has run (`#page-stage[data-tone-ready]`),
  * so the page stays readable if JS fails.
  */
 export function ToneController() {
@@ -22,14 +22,14 @@ export function ToneController() {
 
   useGSAP(
     () => {
-      const stage = document.getElementById("stage");
+      const stage = document.getElementById("page-stage");
       const header = document.getElementById("site-header");
       if (!stage) return;
       const duration = prefersReducedMotion() ? 0 : 0.9;
       const headerH = header?.offsetHeight ?? 68;
       // Only the visible page: under cacheComponents, pages left behind by a client
       // navigation stay in the DOM hidden (React Activity) and must not get triggers.
-      const sections = gsap.utils.toArray<HTMLElement>("#stage section[data-tone]").filter((s) => s.checkVisibility());
+      const sections = gsap.utils.toArray<HTMLElement>("#page-stage section[data-tone]").filter((s) => s.checkVisibility());
 
       // A section's scroll box: its pin spacer when another controller pins it (the spacer
       // holds the whole pinned distance), otherwise the section itself. Read at refresh time,

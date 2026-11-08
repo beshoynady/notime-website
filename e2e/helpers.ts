@@ -1,9 +1,9 @@
 import type { Page } from "@playwright/test";
 
-/** Navigate and wait until client controllers have hydrated (ToneController marks #stage). */
+/** Navigate and wait until client controllers have hydrated (ToneController marks #page-stage). */
 export async function gotoReady(page: Page, path: string) {
   await page.goto(path);
-  await page.locator("#stage[data-tone-ready]").first().waitFor({ state: "attached" });
+  await page.locator("#page-stage[data-tone-ready]").first().waitFor({ state: "attached" });
 }
 
 /** Wait until the hero controller has hydrated and taken over (it sets #hero[data-hero-ready]). */
