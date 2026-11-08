@@ -216,15 +216,15 @@ e2e/category-*.spec.ts, e2e/modules/<key>.spec.ts
   - `spamThenSettle(page, locator, n)` clicks n times quickly, then returns the final state attribute.
   - `expectNoShift(page, selector)` records a CLS PerformanceObserver over the slot while scrolling.
 
-- [ ] **Step 1:** Write e2e tests for a stub module (`agenda-timeline`, registered first with a trivial client body):
+- [x] **Step 1:** Write e2e tests for a stub module (`agenda-timeline`, registered first with a trivial client body):
   - Before scrolling, the slot shows the static fallback and has no `data-module-ready`.
   - After scrolling near it, `data-module-ready` is present and layout-shift entries inside the slot sum to < 0.01.
   - With JS disabled (`javaScriptEnabled: false`), the fallback's text is fully present.
   - With the module chunk request aborted (`page.route('**/*agenda*', r => r.abort())`), the fallback stays and there are no console errors other than the aborted request.
-- [ ] **Step 2:** Run them. Expected: FAIL.
-- [ ] **Step 3:** Implement the slot, the registry and the label.
-- [ ] **Step 4:** Run the tests. Expected: PASS.
-- [ ] **Step 5:** Commit `feat(modules): lazy module slot with static fallback and failure safety`.
+- [x] **Step 2:** Run them. Expected: FAIL.
+- [x] **Step 3:** Implement the slot, the registry and the label.
+- [x] **Step 4:** Run the tests. Expected: PASS.
+- [x] **Step 5:** Commit `feat(modules): lazy module slot with static fallback and failure safety`.
 
 ### Task 2.5: Category page sections and themes
 

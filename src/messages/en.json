@@ -14,7 +14,9 @@
     "aiPlaceholder": "AI image · placeholder",
     "illustrative": "Illustrative",
     "preview": "Preview",
-    "comingSoon": "Coming soon"
+    "comingSoon": "Coming soon",
+    "example": "Example",
+    "aiExample": "AI-generated example"
   },
   "nav": {
     "label": "Main",
@@ -128,7 +130,8 @@
       "whatsapp": "Chat on WhatsApp",
       "email": "Email us",
       "contactPending": "Our contact details will appear here soon."
-    }
+    },
+    "modulePending": "Interactive preview in design"
   },
   "work": {
     "eyebrow": "Our work",

@@ -1,4 +1,6 @@
 import { getLocale, getTranslations } from "next-intl/server";
+import { ModulePlaceholder } from "@/components/modules/module-placeholder";
+import { ModuleSlot } from "@/components/modules/module-slot";
 import { ButtonLink } from "@/components/ui/button";
 import { Numeral } from "@/components/ui/numeral";
 import { quoteHref, type Locale, type Service } from "@/content";
@@ -6,8 +8,8 @@ import { toRoman } from "@/lib/roman";
 
 /**
  * One service on its category page (spec §4, part 3): `section#<anchor>`, named by its H2 so the
- * anchor utility focuses the heading on arrival (D53). The signature module slot (Task 2.4) and
- * the related-work row (real work only, OQ #17) join it later.
+ * anchor utility focuses the heading on arrival (D53). Its signature module loads into a slot
+ * around a static fallback (Task 2.4). The related-work row (real work only, OQ #17) joins later.
  */
 export async function ServiceSection({ service, tone }: { service: Service; tone: "dark" | "light" }) {
   const locale = (await getLocale()) as Locale;
@@ -32,6 +34,9 @@ export async function ServiceSection({ service, tone }: { service: Service; tone
           ))}
         </ul>
       </div>
+      <ModuleSlot moduleKey={service.signatureModule} titleId={titleId} service={service} locale={locale}>
+        <ModulePlaceholder />
+      </ModuleSlot>
       <ButtonLink
         href={quoteHref(service)}
         variant={tone === "dark" ? "primary" : "dark"}
