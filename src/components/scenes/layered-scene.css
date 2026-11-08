@@ -1,0 +1,126 @@
+/* LayeredScene (D64). Three states:
+   - still (default): no JS, or reduced motion. The end frame: keys at their last values, every
+     entrance done, every shot line visible as one short paragraph.
+   - motion (html[data-js]:not([data-reduced])): shot 1 from the first paint. Entering layers and
+     later lines start hidden; SceneDirector (GSAP) takes over from there.
+   - animatic (data-variant="animatic"): the same scene with flat, labelled boxes. */
+
+.scene {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  height: 100svh;
+  min-height: 480px;
+}
+.scene-layers {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.scene-layer {
+  position: absolute;
+}
+.scene-enter,
+.scene-light {
+  position: absolute;
+  inset: 0;
+}
+.scene-light {
+  opacity: var(--still-opacity, var(--rest-opacity, 1));
+  transform: scale(var(--still-scale, 1));
+}
+.scene-img {
+  border-radius: 0;
+  background: none;
+}
+@media (max-width: 899.98px) {
+  .scene-layer:not([data-mobile]) {
+    display: none;
+  }
+}
+
+/* Overlay: the page's own content (eyebrow, H1, skip control) and the shot lines. Its inline
+   box comes from the caller (overlayClassName, e.g. `frame`), so no inline padding here: this
+   sheet is unlayered and would beat a utility's padding. */
+.scene-overlay {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 16px;
+  height: 100%;
+  padding-block: calc(var(--header-h) + var(--scene-top-extra, 0px) + 24px) clamp(32px, 6vh, 64px);
+}
+.scene-copy {
+  max-inline-size: 52ch;
+}
+.scene-line {
+  display: inline;
+  margin: 0;
+}
+.scene-line + .scene-line::before {
+  content: " ";
+}
+
+/* Motion: shot 1 from the first paint. */
+html[data-js]:not([data-reduced]) .scene-light {
+  opacity: var(--rest-opacity, 1);
+  transform: none;
+}
+html[data-js]:not([data-reduced]) .scene-enter[data-enter] {
+  opacity: 0;
+}
+html[data-js]:not([data-reduced]) .scene-copy {
+  display: grid;
+}
+html[data-js]:not([data-reduced]) .scene-line {
+  display: block;
+  grid-area: 1 / 1;
+}
+html[data-js]:not([data-reduced]) .scene-line::before {
+  content: none;
+}
+html[data-js]:not([data-reduced]) .scene-line:not(:first-child) {
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* L3 atmosphere: code only (storyboards README §3). Opacity and scale move; never a filter. */
+.fx-shade {
+  background: var(--color-night);
+}
+.fx-glow {
+  background: radial-gradient(closest-side, rgba(234, 212, 171, 0.14), rgba(234, 212, 171, 0) 100%);
+}
+.fx-beam {
+  background: linear-gradient(to bottom, rgba(234, 212, 171, 0.18), rgba(234, 212, 171, 0) 80%);
+}
+
+/* Animatic: flat boxes, one tone per level, labelled with the slot id and depth. */
+.scene-box {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: start;
+  gap: 2px;
+  padding: 10px 12px;
+  border: 1px dashed rgba(245, 233, 211, 0.4);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: rgba(245, 233, 211, 0.85);
+}
+[data-level="0"] > .scene-enter > .scene-light > .scene-box {
+  background: #3b3027;
+}
+[data-level="1"] > .scene-enter > .scene-light > .scene-box {
+  background: #5a4a3c;
+}
+[data-level="2"] > .scene-enter > .scene-light > .scene-box {
+  background: #7d6a58;
+}
+[data-level="3"] > .scene-enter > .scene-light > .scene-box {
+  background: none;
+  border-color: rgba(234, 212, 171, 0.5);
+}

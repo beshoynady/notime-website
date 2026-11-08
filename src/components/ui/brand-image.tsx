@@ -22,6 +22,8 @@ interface BrandImageProps {
   className?: string;
   /** Let the parent control the box (e.g. absolute fill) instead of the slot's aspect ratio. */
   fill?: boolean;
+  /** Load without lazy-loading, at normal priority: shot-1 scene layers within budget (D64). */
+  eager?: boolean;
 }
 
 /**
@@ -31,7 +33,7 @@ interface BrandImageProps {
  * than the image has; that is why this uses getImageProps instead of <Image>.
  * AI images that stand in for real past projects carry the visible "Illustrative" label.
  */
-export function BrandImage({ slot, sizes, priority = false, className, fill = false }: BrandImageProps) {
+export function BrandImage({ slot, sizes, priority = false, className, fill = false, eager = false }: BrandImageProps) {
   const locale = useLocale() as Locale;
   const t = useTranslations("common");
   const s = getImageSlot(slot);
@@ -42,7 +44,7 @@ export function BrandImage({ slot, sizes, priority = false, className, fill = fa
         alt,
         fill: true,
         sizes,
-        ...(priority ? { loading: "eager", fetchPriority: "high" } : {}),
+        ...(priority ? { loading: "eager", fetchPriority: "high" } : eager ? { loading: "eager" } : {}),
         placeholder: s.blurDataURL ? "blur" : "empty",
         blurDataURL: s.blurDataURL,
         className: "object-cover",
