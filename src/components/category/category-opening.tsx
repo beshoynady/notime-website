@@ -10,9 +10,10 @@ import { THEME_TONE } from "./theme";
 
 /**
  * Category page · Act 1, the opening (D64; storyboards README §2): breadcrumbs, eyebrow, the H1
- * (text, the LCP element), the skip control, then the intro. With a scene, all of it sits on
- * the LayeredScene overlay and the shot lines follow; without one (until a category's scene is
- * approved) it's a static opening with no pin and no image.
+ * (text, the LCP element), the skip control, then the intro. With a scene, all but the intro
+ * sit on the LayeredScene overlay and the shot lines follow; the intro comes after the pinned
+ * scene (D73). Without one (until a category's scene is approved) it's a static opening with
+ * no pin and no image.
  *
  * The skip control is a hash link, so the anchor utility lands it on the first service's H2
  * (D53) and it works without JS. It comes right after the H1 in the DOM (the first Tab stop
@@ -57,10 +58,10 @@ export async function CategoryOpening({
         {t("skip")}
         <ArrowDown aria-hidden="true" strokeWidth={1.25} className="size-4" />
       </a>
-      {/* TODO: replace placeholder — category intros are written per category (Task 3.1 and later). */}
-      <p className="cat-opening-intro text-lead">{category.intro[locale]}</p>
     </>
   );
+  // TODO: replace placeholder — category intros are written per category (Task 3.1 and later).
+  const intro = <p className="cat-opening-intro text-lead">{category.intro[locale]}</p>;
 
   return (
     <section data-tone={THEME_TONE[category.theme]} data-grain="off" aria-labelledby="category-title" className="cat-opening">
@@ -74,8 +75,14 @@ export async function CategoryOpening({
           {head}
         </LayeredScene>
       ) : (
-        <div className="frame cat-opening-overlay cat-opening-static">{head}</div>
+        <div className="frame cat-opening-overlay cat-opening-static">
+          {head}
+          {intro}
+        </div>
       )}
+      {/* With a scene, the frame holds only the H1 and one shot line at a time (storyboard
+          frames; review D73): the intro follows the opening, after the curtain. */}
+      {scene && <div className="frame cat-opening-overlay cat-opening-after">{intro}</div>}
     </section>
   );
 }

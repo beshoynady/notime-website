@@ -32,6 +32,29 @@ for (const locale of ["en", "ar"] as const) {
       expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0);
     });
 
+    // Any service two taps away on mobile (D73): the toggle opens all six as rows.
+    test("the toggle shows all six; one tap lands V and closes the list", async ({ page, isMobile }) => {
+      test.skip(!isMobile, "chip bar: mobile");
+      await gotoReady(page, `/${locale}${PAGE}`);
+      const toggle = page.locator("button.svc-index-toggle");
+      await expect(toggle).toHaveAttribute("aria-expanded", "false");
+      await toggle.click();
+      await expect(toggle).toHaveAttribute("aria-expanded", "true");
+      for (const id of ["conferences", "exhibitions", "launches", "celebrations", "hospitality", "stage"]) {
+        await expect(indexLink(page, id)).toBeInViewport({ ratio: 1 });
+        expect((await indexLink(page, id).boundingBox())!.height).toBeGreaterThanOrEqual(44);
+      }
+      await indexLink(page, "hospitality").click();
+      await expectLanded(page, "hospitality");
+      await expect(toggle).toHaveAttribute("aria-expanded", "false");
+      // Escape closes it and gives focus back to the toggle.
+      await toggle.click();
+      await page.keyboard.press("Escape");
+      await expect(toggle).toHaveAttribute("aria-expanded", "false");
+      await expect(toggle).toBeFocused();
+      expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0);
+    });
+
     test("rail IV lands under the header", async ({ page, isMobile }) => {
       test.skip(isMobile, "rail: desktop");
       await gotoReady(page, `/${locale}${PAGE}`);

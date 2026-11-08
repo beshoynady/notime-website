@@ -458,7 +458,7 @@ Storyboard: [events-hospitality.md](../design/storyboards/events-hospitality.md)
 
 ### Task 3.0: Events animatic → STOP (stop point 2)
 
-Built (D70), awaiting the user's review of the rhythm. As built: `events-hospitality.ts` holds `EVENTS_OPENING` (2.0 / 1.2 vh) and `EVENTS_MAJLIS` (a pass scene in section V); both are lab-only until approved. Shot lines are drafts in `scenes.events.*` (CONTENT_CHECKLIST #26). Tests: `scene-math.test.ts` (pass scenes), `scenes.test.ts` (gating), `e2e/events-animatic.spec.ts`; `layered-scene.spec.ts` now runs on the Studio's draft.
+Built (D70). Independent review and rhythm/layout fixes applied (D72, D73; `docs/checkpoints/events-animatic-review/`); awaiting the user's decision on the review's proposals P1–P7 and on the rhythm. As built: `events-hospitality.ts` holds `EVENTS_OPENING` (2.0 / 1.2 vh) and `EVENTS_MAJLIS` (a pass scene in section V); both are lab-only until approved. Shot lines are drafts in `scenes.events.*` (CONTENT_CHECKLIST #26). Tests: `scene-math.test.ts` (pass scenes), `scenes.test.ts` (gating), `e2e/events-animatic.spec.ts`; `layered-scene.spec.ts` now runs on the Studio's draft.
 
 **Files:** create `src/content/scenes/events-hospitality.ts` (opening and majlis configs, from the storyboard's shot table); add the storyboard's shot lines to the messages as drafts (marked in the copy deck as pending approval).
 

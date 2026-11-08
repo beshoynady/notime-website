@@ -5,8 +5,15 @@ import type { SceneConfig, Viewport } from "@/content/scenes";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { enterFrom, layerDrift, pinLength, shotAt } from "@/lib/scene-math";
 
-/** Fade time of a shot line, in vh of scroll. */
-const LINE_FADE = 0.08;
+/**
+ * Cross-fade of two shot lines, in vh of scroll, centred on the shot boundary: the next line comes
+ * in while the last one goes, so there is never a stretch without a legible line (review D73:
+ * separate 0.08 vh fade-out and fade-in left 26% of the desktop pin with no line at full opacity).
+ */
+const LINE_XFADE = 0.06;
+/** Scrubbed eases: entrances settle, light swells (the Evening, spec §5.1). */
+const ENTER_EASE = "power2.out";
+const LIGHT_EASE = "sine.inOut";
 
 /**
  * Scrubs a LayeredScene (GSAP owns it, CLAUDE.md): pins the scene for its pin length and plays
@@ -52,6 +59,8 @@ export function SceneDirector({ scene }: { scene: SceneConfig }) {
               : { start: "top top", end: () => `+=${pin * innerHeight}`, pin: true }),
             scrub: true,
             invalidateOnRefresh: true,
+            // While active, the moving boxes are promoted (data-live, layered-scene.css).
+            onToggle: (self) => root.toggleAttribute("data-live", self.isActive),
             onUpdate: (self) => {
               root.dataset.shotActive = String(shotAt(self.progress * pin, scene.shots, viewport));
             },
@@ -71,11 +80,11 @@ export function SceneDirector({ scene }: { scene: SceneConfig }) {
 
           if (layer.enter) {
             const [start, stop] = cueAt(layer.enter.shot);
-            tl.fromTo(enter, enterFrom(layer.enter.from, dir), { xPercent: 0, yPercent: 0, opacity: 1, scale: 1, duration: (stop - start) * 0.8 }, start);
+            tl.fromTo(enter, enterFrom(layer.enter.from, dir), { xPercent: 0, yPercent: 0, opacity: 1, scale: 1, duration: (stop - start) * 0.8, ease: ENTER_EASE }, start);
           }
           for (const key of layer.keys ?? []) {
             const [start, stop] = cueAt(key.shot);
-            tl.to(light, { ...key.to, duration: (stop - start) * 0.8 }, start);
+            tl.to(light, { ...key.to, duration: (stop - start) * 0.8, ease: LIGHT_EASE }, start);
           }
         }
 
@@ -91,13 +100,14 @@ export function SceneDirector({ scene }: { scene: SceneConfig }) {
           const last = shown === playing.length - 1;
           shown++;
           if (first) gsap.set(line, { autoAlpha: 1 });
-          else tl.fromTo(line, { autoAlpha: 0 }, { autoAlpha: 1, duration: LINE_FADE }, r[0]);
-          if (!last) tl.to(line, { autoAlpha: 0, duration: LINE_FADE }, r[1] - LINE_FADE);
+          else tl.fromTo(line, { autoAlpha: 0 }, { autoAlpha: 1, duration: LINE_XFADE }, r[0] - LINE_XFADE / 2);
+          if (!last) tl.to(line, { autoAlpha: 0, duration: LINE_XFADE }, r[1] - LINE_XFADE / 2);
         });
 
         root.dataset.motion = viewport;
         return () => {
           delete root.dataset.motion;
+          root.removeAttribute("data-live");
           root.dataset.shotActive = "0";
         };
       },

@@ -83,6 +83,18 @@ html[data-js]:not([data-reduced]) .scene-line:not(:first-child) {
   opacity: 0;
 }
 
+/* While a scene's trigger is active (data-live, SceneDirector), the boxes that move get their own
+   compositor layers, so a scrubbed opacity or transform doesn't repaint the large gradients each
+   frame (review D73: 19.6% of frames over 18 ms through the opening at 4x CPU). Only boxes that
+   tween: every drift box, entrances, and lights with keys. Never in the still. */
+.scene[data-live] .scene-layer,
+.scene[data-live] .scene-enter[data-enter] {
+  will-change: transform;
+}
+.scene[data-live] .scene-light[data-keys] {
+  will-change: opacity, transform;
+}
+
 /* L3 atmosphere: code only (storyboards README §3). Opacity and scale move; never a filter. */
 .fx-shade {
   background: var(--color-night);

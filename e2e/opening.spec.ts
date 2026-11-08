@@ -17,7 +17,7 @@ const overflow = (page: Page) => page.evaluate(() => document.documentElement.sc
 
 for (const locale of ["en", "ar"] as const) {
   test.describe(`opening (${locale})`, () => {
-    test("the index shows at load; Tab goes breadcrumbs → skip → index", async ({ page }) => {
+    test("the index shows at load; Tab goes breadcrumbs → skip → index", async ({ page, isMobile }) => {
       await gotoReady(page, `/${locale}${PAGE}`);
       await expect(page.locator("nav.svc-index")).toBeInViewport();
       await expect(indexLink(page, "conferences")).toBeInViewport();
@@ -25,6 +25,11 @@ for (const locale of ["en", "ar"] as const) {
       await page.keyboard.press("Tab");
       await expect(skip(page)).toBeFocused();
       await page.keyboard.press("Tab");
+      // Below 900px the index starts with its "all services" toggle (D73).
+      if (isMobile) {
+        await expect(page.locator("button.svc-index-toggle")).toBeFocused();
+        await page.keyboard.press("Tab");
+      }
       await expect(indexLink(page, "conferences")).toBeFocused();
     });
 

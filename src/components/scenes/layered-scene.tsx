@@ -79,7 +79,7 @@ function Layer({ layer, variant }: { layer: SceneLayer; variant: "live" | "anima
       style={{ insetBlock: layer.box.block, insetInline: layer.box.inline }}
     >
       <div className="scene-enter" data-enter={layer.enter ? "" : undefined}>
-        <div className={cn("scene-light", layer.fx && `fx-${layer.fx}`)} style={light}>
+        <div className={cn("scene-light", layer.fx && `fx-${layer.fx}`)} data-keys={layer.keys?.length ? "" : undefined} style={light}>
           {variant === "animatic" ? (
             <span className="scene-box">
               <span>{layer.slot ?? layer.id}</span>

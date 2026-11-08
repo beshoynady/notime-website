@@ -4,11 +4,6 @@
 
 /* Act 1 · the opening (CategoryOpening). Its overlay is a `frame`: at ≥ 900px the content
    starts at the sections' column and leaves the first column to the rail (the index track). */
-@media (max-width: 899.98px) {
-  .cat-opening {
-    --scene-top-extra: 58px; /* the chip bar under the header, from the first frame */
-  }
-}
 .cat-opening-static {
   display: flex;
   flex-direction: column;
@@ -35,6 +30,10 @@
   opacity: 0.45;
 }
 .crumbs a {
+  /* A 44px hit area around a 15px line, without moving the line (touch targets). */
+  display: inline-block;
+  padding: 15px 4px;
+  margin: -15px -4px;
   text-decoration: none;
   opacity: 0.75;
 }
@@ -54,6 +53,27 @@
 .cat-opening-intro {
   margin: 0;
   max-inline-size: 56ch;
+}
+.cat-opening-after {
+  padding-block: clamp(40px, 6vw, 72px) 0;
+}
+/* The shot lines: one at a time under the H1. The last shot's line is the promise and is set
+   larger (storyboard shot 4); the still keeps them as one paragraph at one size. */
+html[data-js]:not([data-reduced]) .cat-opening .scene-line {
+  align-self: end;
+}
+/* Wide enough that the promise keeps one line on desktop in the fallback face and in Montserrat:
+   when it wrapped inside 52ch, the font swap changed the cell's height (CLS 0.0039, D73). */
+html[data-js]:not([data-reduced]) .cat-opening .scene-copy {
+  max-inline-size: 42rem;
+}
+html[data-js]:not([data-reduced]) .cat-opening .scene-line:last-child {
+  font-size: clamp(1.25rem, 0.95rem + 0.8vw, 1.6rem);
+  font-weight: 300;
+  line-height: 1.3;
+  /* Two lines reserved: the cell's height never depends on where the promise wraps (narrow
+     desktop widths, Arabic, the fallback face before the swap), so the H1 above never moves. */
+  min-block-size: 2.6em;
 }
 /* "Skip to services": a quiet text control at the opening's bottom, inline-end. Second in the
    DOM (after the H1), last on screen (order). */
@@ -84,14 +104,25 @@
 }
 @media (min-width: 900px) {
   .cat-opening-overlay > * {
-    margin-inline-start: calc((100% - 24px) * 0.25 + 24px);
+    margin-inline-start: calc((100% - var(--rail-gap)) * 0.25 + var(--rail-gap));
   }
 }
 
 /* The index track: spans the opening and the services, so the index shows from the first frame
    and stays sticky to the end (storyboards README §2). Only the index takes pointer events. */
+/* `--rail-gap`: the gap of the 3fr / 9fr rail grid, shared by the grids, the opening's column
+   offset and the majlis bleed. `--scene-top-extra`: what sits under the header from the first
+   frame, the chip bar below 900px (8 + 44 + 8 + 1); openings, scenes and landings read it.
+   overflow-x: clip hides the full-bleed scene's vw overshoot (a classic scrollbar), see below. */
 .cat-page {
+  --rail-gap: 24px;
   position: relative;
+  overflow-x: clip;
+}
+@media (max-width: 899.98px) {
+  .cat-page {
+    --scene-top-extra: 61px;
+  }
 }
 /* The page box carries the grain (CategoryView), so its sections are see-through. Before the
    tone controller runs (or without JS) the box holds the ground the sections would have held. */
@@ -123,7 +154,7 @@
   .cat-index-frame {
     display: grid;
     grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
-    column-gap: 24px;
+    column-gap: var(--rail-gap);
   }
 }
 
@@ -135,7 +166,7 @@
   .cat-layout {
     display: grid;
     grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
-    column-gap: 24px;
+    column-gap: var(--rail-gap);
   }
   .cat-sections {
     grid-column: 2;
@@ -213,6 +244,8 @@
 /* Service index: a sticky chip bar below 900px, a sticky rail at ≥ 900px (spec §4, part 2).
    The indicator is one element that Motion moves between links (layoutId). */
 .svc-index {
+  display: flex;
+  align-items: flex-start;
   position: sticky;
   top: calc(var(--header-h) + env(safe-area-inset-top, 0px));
   z-index: 20;
@@ -226,10 +259,13 @@
   background: rgba(46, 32, 23, 0.92);
 }
 .svc-index ol {
+  flex: 1 1 auto;
+  min-inline-size: 0;
   display: flex;
   gap: 8px;
   margin: 0;
-  padding: 10px var(--gutter-end) 10px var(--gutter-start);
+  padding-block: 8px;
+  padding-inline: 8px var(--gutter-end); /* the toggle holds the gutter at inline-start */
   list-style: none;
   overflow-x: auto;
   overscroll-behavior-x: contain;
@@ -244,6 +280,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  min-block-size: 44px; /* touch target */
   white-space: nowrap;
   padding: 8px 14px;
   border: 1px solid var(--color-line-light);
@@ -276,15 +313,47 @@
 [data-tone="dark"] .svc-index-link[aria-current="location"] {
   color: var(--color-espresso);
 }
+/* The "all services" toggle (below 900px): a 44px square at the bar's inline-start; open, the
+   same list stacks into full-width rows under it. Hidden with the rail, which shows all six. */
+.svc-index-toggle {
+  flex: none;
+  display: grid;
+  place-items: center;
+  inline-size: 44px;
+  block-size: 44px;
+  margin-block: 8px;
+  margin-inline-start: var(--gutter-start);
+  border: 1px solid var(--color-line-light);
+  border-radius: var(--radius);
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+[data-tone="dark"] .svc-index-toggle {
+  border-color: var(--color-line-dark);
+}
+.svc-index-toggle[aria-expanded="true"] {
+  border-color: currentColor;
+}
+.svc-index[data-open] ol {
+  flex-direction: column;
+  max-block-size: calc(100svh - var(--header-h) - 16px);
+  overflow-y: auto;
+}
+.svc-index[data-open] .svc-index-link {
+  white-space: normal;
+}
 /* Without JS a hash jump uses scroll-padding (the header): leave room for the chip bar too. */
-@media (max-width: 899.98px) {
-  .svc {
-    scroll-margin-top: 58px;
-  }
+.svc {
+  scroll-margin-top: var(--scene-top-extra, 0px);
 }
 
 @media (min-width: 900px) {
+  .svc-index-toggle {
+    display: none;
+  }
   .svc-index {
+    display: block;
     top: calc(var(--header-h) + 24px);
     align-self: start;
     margin: 0;
@@ -310,6 +379,7 @@
     align-items: baseline;
     gap: 0;
     white-space: normal;
+    min-block-size: 0; /* the rail is pointer UI; the 44px touch height is the chips' */
     padding-block: 9px;
     padding-inline: 16px 12px;
     border: 0;
@@ -325,6 +395,12 @@
   .svc-index-link[aria-current="location"],
   [data-tone="dark"] .svc-index-link[aria-current="location"] {
     color: inherit;
+  }
+  /* Rail numerals in the theme's accent (spec §5.1: champagne on the Evening), at full opacity:
+     at 0.7 inside a 0.62 link they measured 3.76:1 at 10.9px. */
+  .svc-index-num {
+    color: var(--theme-accent);
+    opacity: 1;
   }
   /* The rail's indicator: a short bar at the inline start of the active item. */
   .svc-index-ind {
@@ -366,18 +442,43 @@
   margin: 0;
 }
 
-/* A section's own scene (the Events majlis): a stage in the section's column, not pinned; the
-   numeral, H2 and promise sit over its lower third. */
+/* A section's own scene (the Events majlis, the page's peak): not pinned, but full-bleed and one
+   screen tall, so it outranks the opening's frame instead of reading as one more card (review
+   D73: it covered 52% of the screen in the column). It breaks out of the sections' column to
+   both viewport edges; the numeral, H2 and promise stay on the column's line, over its lower
+   third. Sized so that a landing on the section (its top under the header and any sticky bar)
+   shows the whole scene with the H2 and the promise above the fold.
+   vw includes a classic scrollbar: the overshoot (half its width at each edge) is clipped by
+   `.cat-page { overflow-x: clip }`, and the overlay uses the same terms, so the H2 still sits
+   on the column's line. */
+.svc[data-scene-section] {
+  padding-block-start: 0;
+  border-block-start: 0;
+}
+.svc-scene {
+  --frame-w: min(100vw, var(--frame));
+  --bleed-start: calc((100vw - var(--frame-w)) / 2 + var(--gutter-start) + var(--col-start, 0px));
+  --bleed-end: calc((100vw - var(--frame-w)) / 2 + var(--gutter-end));
+  margin-inline: calc(-1 * var(--bleed-start)) calc(-1 * var(--bleed-end));
+}
 .svc-scene .scene {
-  block-size: min(88svh, 760px);
-  min-block-size: 420px;
+  block-size: calc(100svh - var(--header-h) - var(--scene-top-extra, 0px));
+  min-block-size: 480px;
 }
 .svc-scene .svc-scene-overlay {
-  padding: 24px clamp(20px, 3vw, 40px) clamp(24px, 4vw, 40px);
+  padding-block: 24px clamp(32px, 6vh, 64px);
+  padding-inline: var(--bleed-start) var(--bleed-end);
+}
+@media (min-width: 900px) {
+  .svc-scene {
+    /* the rail's column: a quarter of the frame's 3fr / 9fr grid plus its gap */
+    --col-start: calc((var(--frame-w) - var(--gutter-start) - var(--gutter-end) - var(--rail-gap)) / 4 + var(--rail-gap));
+  }
 }
 @media (max-width: 899.98px) {
-  .svc-scene .scene {
-    block-size: 78svh;
+  .svc-scene .svc-scene-overlay {
+    /* the floating WhatsApp button sits at the bottom inline-end */
+    padding-block-end: 96px;
   }
 }
 

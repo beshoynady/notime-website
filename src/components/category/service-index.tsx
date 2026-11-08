@@ -1,9 +1,11 @@
 "use client";
 
+import { List, X } from "lucide-react";
 import { motion } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { anchorOffset } from "@/components/providers/anchor-scroll";
 import { Numeral } from "@/components/ui/numeral";
+import { mediaQueryList } from "@/hooks/use-media-query";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { ease } from "@/lib/motion";
@@ -36,11 +38,43 @@ function centerChip(list: HTMLElement, chip: HTMLElement, instant: boolean) {
  * below. Plain hash links, so the anchor utility lands them (D53) and they work without JS.
  * Scrollspy: ScrollTrigger only holds state (tops measured on refresh, activeIndex on update);
  * Motion moves the indicator (layoutId). The active link has aria-current="location".
+ *
+ * Below 900px a toggle at the bar's inline-start opens the same list as full-width rows, so any
+ * service is two taps away (review D73: Catering sat at x = 940 on a 390px screen, three to five
+ * actions away). The links aren't duplicated; choosing one, Escape or a tap outside closes it.
  */
 export function ServiceIndex({ items, label }: { items: IndexItem[]; label: string }) {
   const [active, setActive] = useState(-1);
   const reduced = useReducedMotion();
   const listRef = useRef<HTMLOListElement>(null);
+  const navRef = useRef<HTMLElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const [open, setOpen] = useState(false);
+  const listId = useId();
+
+  // Open: Escape (focus back on the toggle), a tap outside, or growing past the chip bar's
+  // width (the rail has no toggle) closes it, as the mobile menu does.
+  useEffect(() => {
+    if (!open) return;
+    const close = () => setOpen(false);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      close();
+      toggleRef.current?.focus();
+    };
+    const onPointer = (e: PointerEvent) => {
+      if (!navRef.current?.contains(e.target as Node)) close();
+    };
+    const mq = mediaQueryList(CHIP_BAR_MEDIA);
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", onPointer);
+    mq.addEventListener("change", close);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", onPointer);
+      mq.removeEventListener("change", close);
+    };
+  }, [open]);
 
   useGSAP(
     () => {
@@ -62,12 +96,23 @@ export function ServiceIndex({ items, label }: { items: IndexItem[]; label: stri
   useEffect(() => {
     const list = listRef.current;
     const chip = active >= 0 ? list?.children[active]?.firstElementChild : null;
-    if (list && chip instanceof HTMLElement) centerChip(list, chip, reduced);
-  }, [active, reduced]);
+    if (list && chip instanceof HTMLElement && !open) centerChip(list, chip, reduced);
+  }, [active, reduced, open]);
 
   return (
-    <nav aria-label={label} className="svc-index" data-anchor-offset={CHIP_BAR_MEDIA}>
-      <ol ref={listRef}>
+    <nav ref={navRef} aria-label={label} className="svc-index" data-anchor-offset={CHIP_BAR_MEDIA} data-open={open ? "" : undefined}>
+      <button
+        ref={toggleRef}
+        type="button"
+        className="svc-index-toggle"
+        aria-label={label}
+        aria-expanded={open}
+        aria-controls={listId}
+        onClick={() => setOpen((o) => !o)}
+      >
+        {open ? <X aria-hidden="true" strokeWidth={1.25} className="size-5" /> : <List aria-hidden="true" strokeWidth={1.25} className="size-5" />}
+      </button>
+      <ol ref={listRef} id={listId} onClick={(e) => (e.target as HTMLElement).closest("a") && setOpen(false)}>
         {items.map((it, i) => (
           <li key={it.anchor}>
             <a href={`#${it.anchor}`} className="svc-index-link" aria-current={i === active ? "location" : undefined}>
