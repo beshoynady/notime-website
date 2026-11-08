@@ -53,13 +53,15 @@ describe("messages", () => {
     expect(Object.keys(AR).sort()).toEqual(Object.keys(EN).sort());
   });
 
+  // Loops collect violations and assert once: one expect per key (and per phrase) made these
+  // tests slow enough to time out on a loaded machine.
   it("no value is empty", () => {
-    for (const [k, v] of [...Object.entries(EN), ...Object.entries(AR)]) {
-      expect(v.trim(), k).not.toBe("");
-    }
+    const empty = [...Object.entries(EN), ...Object.entries(AR)].filter(([, v]) => v.trim() === "").map(([k]) => k);
+    expect(empty).toEqual([]);
   });
 
   it("arabic strings contain no Latin words outside the allow-list", () => {
+    const bad: string[] = [];
     for (const [k, v] of Object.entries(AR)) {
       // Strip ICU syntax: `{count, plural,` selectors, `one {` keywords, `{year}` placeholders.
       let rest = v
@@ -68,23 +70,28 @@ describe("messages", () => {
         .replace(/=\d+\s*\{/g, "{")
         .replace(/\{\s*\w+\s*\}/g, "");
       for (const token of AR_LATIN_ALLOW) rest = rest.split(token).join("");
-      expect(rest, `ar:${k} → "${v}"`).not.toMatch(/[A-Za-z]/);
+      if (/[A-Za-z]/.test(rest)) bad.push(`ar:${k} → "${v}"`);
     }
+    expect(bad).toEqual([]);
   });
 
   it("arabic strings use Arabic punctuation, not Latin comma or question mark", () => {
-    for (const [k, v] of Object.entries(AR)) {
-      expect(v, `ar:${k}`).not.toMatch(/[؀-ۿ]\s*,|[؀-ۿ]\s*\?/);
-    }
+    const bad = Object.entries(AR)
+      .filter(([, v]) => /[؀-ۿ]\s*,|[؀-ۿ]\s*\?/.test(v))
+      .map(([k]) => `ar:${k}`);
+    expect(bad).toEqual([]);
   });
 
   // Copy deck (Task 13): phrases the brand voice rules out, in both languages.
   const BANNED = ["elevate", "cutting-edge", "cutting edge", "one-stop", "one stop", "unleash", "الارتقاء بعلامتك", "متطور جدًا", "حلول متكاملة شاملة"];
 
   it("uses none of the banned phrases", () => {
+    const hits: string[] = [];
     for (const [k, v] of [...Object.entries(EN), ...Object.entries(AR)]) {
-      for (const phrase of BANNED) expect(v.toLowerCase(), `${k} contains "${phrase}"`).not.toContain(phrase);
+      const lower = v.toLowerCase();
+      for (const phrase of BANNED) if (lower.includes(phrase)) hits.push(`${k} contains "${phrase}"`);
     }
+    expect(hits).toEqual([]);
   });
 
   it("has every homepage namespace of the copy deck", () => {
@@ -98,11 +105,13 @@ describe("messages", () => {
   it("lists every TODO message key in docs/CONTENT_CHECKLIST.md", () => {
     const checklist = readFileSync(path.join(process.cwd(), "docs", "CONTENT_CHECKLIST.md"), "utf8");
     const todo = Object.keys(EN).filter((k) => /\bTODO\b/.test(EN[k]) || /\bTODO\b/.test(AR[k]));
+    const bad: string[] = [];
     for (const k of todo) {
-      expect(EN[k], `en:${k} must start with "TODO:"`).toMatch(/^TODO:/);
-      expect(AR[k], `ar:${k} must start with "TODO:"`).toMatch(/^TODO:/);
-      expect(checklist, `${k} missing from CONTENT_CHECKLIST.md`).toContain(`\`${k}\``);
+      if (!/^TODO:/.test(EN[k])) bad.push(`en:${k} must start with "TODO:"`);
+      if (!/^TODO:/.test(AR[k])) bad.push(`ar:${k} must start with "TODO:"`);
+      if (!checklist.includes(`\`${k}\``)) bad.push(`${k} missing from CONTENT_CHECKLIST.md`);
     }
+    expect(bad).toEqual([]);
   });
 
   it("keeps the approved anchor lines verbatim", () => {
@@ -143,16 +152,24 @@ describe("arabic numerals", () => {
   });
 
   it("no arabic message formats a number with Arabic-Indic digits", () => {
+    const bad: string[] = [];
     for (const [key, msg] of Object.entries(AR)) {
-      if (msg.includes("<")) continue; // rich text: covered by the pattern check below
+      // Only a message with an argument can format a number: a static one is checked as written,
+      // and rich text is covered by the pattern check below.
+      if (!msg.includes("{") || msg.includes("<")) {
+        if (INDIC.test(msg)) bad.push(key);
+        continue;
+      }
       const args = Object.fromEntries([...msg.matchAll(/\{(\w+)/g)].map(([, name]) => [name, 30]));
-      expect(t(key as never, args as never), key).not.toMatch(INDIC);
+      if (INDIC.test(t(key as never, args as never))) bad.push(key);
     }
+    expect(bad).toEqual([]);
   });
 
   it("no arabic message uses # or a number format", () => {
-    for (const [key, msg] of Object.entries(AR)) {
-      expect(msg, key).not.toMatch(/#|,\s*number/);
-    }
+    const bad = Object.entries(AR)
+      .filter(([, msg]) => /#|,\s*number/.test(msg))
+      .map(([key]) => key);
+    expect(bad).toEqual([]);
   });
 });
