@@ -55,8 +55,15 @@
   3. Marketing & Brand (includes PR)
   4. Production, Print & Gifts
   5. Software & Digital Solutions
-- One service-page template, driven by a single data file (`src/content/`).
-- The full approved list: [docs/content/services-list.md](content/services-list.md). **TODO:** the user will paste it.
+- **Five designed category pages** (DECISIONS D57, 2026-11-07). They replace the earlier "one service-page template", which itself changed the client's original request for a detailed page per service. The user approved the change under Rand's delegation.
+  - Routes: `/[locale]/services` (overview) and `/[locale]/services/[category]`.
+  - Each service is a section with a stable anchor, the same in EN and AR, e.g. `/en/services/events-hospitality#conferences`.
+  - Each service section has one signature module (an interactive or visual block).
+  - Each category has its own theme: The Evening, The Studio, The Editorial, The Workshop, The Interface.
+  - Everything is driven by typed data in `src/content/`.
+  - Spec: [docs/design/category-pages.md](design/category-pages.md). Plan: [docs/plans/phase-2-services.md](plans/phase-2-services.md).
+- **Later, optional:** standalone SEO pages for the 3–4 services people search for most (event management, exhibition stand design, corporate gifts in Dubai). The data model keeps room for them (D57).
+- The full approved list: [docs/content/services-list.md](content/services-list.md) (approved 2026-11-07, D56).
 
 ## 6. Our Work
 
@@ -102,8 +109,9 @@
 
 - Bilingual metadata for every page.
 - `hreflang` alternate links between `en` and `ar` (plus `x-default`).
-- `sitemap.ts` and `robots.ts`.
-- JSON-LD: `Organization`, `LocalBusiness`, `Service`.
+- `sitemap.ts` and `robots.ts`. The sitemap lists the home page, `/services` and the 5 category pages, per locale with hreflang alternates. Anchors are not entries.
+- JSON-LD: `Organization`, `LocalBusiness`, `Service`. Category pages carry an `ItemList` of `Service` (each `@id` = page URL + `#anchor`), `FAQPage` and `BreadcrumbList` (D57).
+- One H1 per page. On category pages every service is an H2 with substantial content.
 - OG images (per locale).
 - Speed treated as an SEO factor (Lighthouse 90+ on mobile).
 

@@ -224,6 +224,76 @@ These are concept backgrounds behind the products' "Preview" screens. The screen
 
 ---
 
+## Category pages (D57): heroes and module visuals
+
+Added 2026-11-08 for the five designed category pages (`docs/design/category-pages.md`). **Status: not generated.** Generation waits for Canva credits (D51). Until a file exists, each slot shows the designed placeholder, and each module shows its static, complete fallback.
+
+### Heroes: the existing 16:9 slots
+
+Each category page hero uses its category's `imageWide` slot. No new hero slots.
+
+| Page | Slot | State |
+|---|---|---|
+| Events & Hospitality (The Evening) | `cat-events-hospitality-16x9` | Real photo (D49) |
+| Creative Production (The Studio) | `cat-creative-production-16x9` | Real photo (D49), letterboxed to 2.39:1 by the theme |
+| Marketing & Brand (The Editorial) | `cat-marketing-brand-16x9` | AI, rejected in the CP5 inspection; regenerate when credits renew |
+| Production, Print & Gifts (The Workshop) | `cat-production-print-gifts-16x9` | Real photo (D49) |
+| Software & Digital (The Interface) | `cat-software-digital-16x9` | AI, rejected in the CP5 inspection; regenerate when credits renew. The Interface hero is mostly HTML device frames, so this image is secondary there |
+
+### Module visuals (AI)
+
+Only modules that need a photograph get a slot. Everything else is drawn in SVG or built in HTML (agenda, stand, stage, menu border, catalogue line drawings, gift box, merchandise, dieline, devices, diagrams), or uses real photos (photography gallery, celebrations mood board) or the showreel (video module). Every image below is demo content: it carries **"AI-generated example" / «مثال مولَّد بالذكاء الاصطناعي»** (idea-to-image), or **"Example" / «مثال»** with **"Illustrative" / «صورة توضيحية»** where it could be read as a project.
+
+Native sizes as in the delivery spec: 4:5 → 1136 × 1408, 16:9 → 1680 × 944. For 1:1, record Canva's native size at generation, never upscaled (D51).
+
+#### `mod-launch-plinth-4x5`
+
+- **Page · section:** Events & Hospitality › #launches (launch-reveal) · **Aspect:** 4:5
+- **Prompt:** House style. A single plinth of travertine stone under one soft top light in a dark room, a draped champagne cloth half pulled away from an unbranded sculptural object, haze, nothing else in frame.
+- **Alt EN:** A stone plinth under a single light, its cloth half drawn back. · **Alt AR:** منصّة حجرية تحت ضوء واحد، وقد انسحب عنها نصف الغطاء.
+- **Label:** Example · Illustrative.
+
+#### `mod-set-model-16x9`
+
+- **Page · section:** Creative Production › #set-design (set-model, frame 2) · **Aspect:** 16:9
+- **Prompt:** House style. A white-card architectural model of a stage set on a cutting mat: arches, steps and a backdrop wall in plain white card, a small scale figure, a desk lamp as the single warm light source, shallow depth of field.
+- **Alt EN:** A white-card model of a stage set lit by a desk lamp. · **Alt AR:** مجسّم من الورق الأبيض لديكور مسرح، تحت ضوء مصباح مكتب.
+- **Label:** Example.
+
+#### `mod-set-lit-16x9`
+
+- **Page · section:** Creative Production › #set-design (set-model, frame 3) · **Aspect:** 16:9
+- **Prompt:** House style. The same set built full size and lit for camera: arches, steps and a backdrop wall in warm plaster tones, haze, one amber key light, a camera dolly track in the soft foreground, empty of people.
+- **Alt EN:** A built stage set with arches and steps under amber light. · **Alt AR:** ديكور مسرح منفَّذ بأقواس ودرجات تحت ضوء كهرماني.
+- **Label:** Example · Illustrative.
+
+#### `mod-idea-1-4x5`, `mod-idea-2-4x5`, `mod-idea-3-4x5`
+
+- **Page · section:** Creative Production › #ai-content (idea-to-image) · **Aspect:** 4:5
+- **Prompts:** these are the module's content: each prompt is shown beside its image as "the idea".
+  1. House style. A dallah coffee pot and two finjan cups on a brass tray, steam rising, dark wood behind.
+  2. House style. A desert majlis tent at blue hour, low cushions and lanterns, the dunes soft behind.
+  3. House style. A perfume bottle (unbranded) on raw stone with a single beam of light crossing it.
+- **Alt:** each one restates its prompt in one sentence, in EN and AR.
+- **Label:** AI-generated example.
+
+#### `mod-feed-1-1x1` … `mod-feed-6-1x1`
+
+- **Page · section:** Marketing & Brand › #social (phone-feed) · **Aspect:** 1:1 · six posts for a fictional café feed.
+- **Prompts:** house style for each:
+  1. Latte art on a stone counter, top-down.
+  2. A pastry tray under morning light.
+  3. Hands (no faces) pouring coffee.
+  4. Café chairs in late sun.
+  5. A takeaway cup on a car dashboard at dusk.
+  6. Coffee beans spilling from a kraft bag.
+- **Alt:** a short description of each post, in EN and AR.
+- **Label:** Example. No handles, likes or follower counts in the UI.
+
+**Module visuals total:** 12 new slots (1 + 2 + 3 + 6), plus the 2 rejected heroes to regenerate.
+
+---
+
 ## Summary
 
 | | Slots |

@@ -23,3 +23,5 @@ Status values: **Missing** · **Requested** · **Received** · **Approved**
 | 17 | Confirmed press coverage | Links or dated scans for each outlet on profile pages 19–20. None shown until then. OPEN_QUESTIONS #19. | Missing |
 | 18 | NO TIME's role in the page 12–13 portals and accounts | OPEN_QUESTIONS #20. | Missing |
 | 19 | Full-resolution originals | Smith Gulf, EgyptAir, food styling, UAE PL Awards box without the carousel badge. OPEN_QUESTIONS #21. | Missing |
+| 20 | Rental equipment inventory | Which cameras, lenses, lights and audio NO TIME rents out (names and key specs, no prices). Feeds the rental catalogue on the Creative Production page (`docs/design/category-pages.md` §6, #12). OPEN_QUESTIONS #22. | Missing |
+| 21 | Online print store status | Does the store exist today, or is it planned? If it exists: its link and the item types. OPEN_QUESTIONS #23. | Missing |

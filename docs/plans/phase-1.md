@@ -68,7 +68,7 @@ src/
   app/[locale]/page.tsx                  homepage: Hero + light stub section
   app/[locale]/styleguide/page.tsx       approval page (noindex)
   app/[locale]/not-found.tsx
-  app/robots.ts, app/sitemap.ts          sitemap lists /en, /ar only
+  app/robots.ts, app/sitemap.ts          sitemap lists /en, /ar only (Phase 2 adds /services + 5 category pages per locale, D57)
   config/contact.ts                      email, whatsapp, instagram, facebook (empty + TODO)
   content/types.ts                       Localized, Category, Service, Product, ImageSlot
   content/categories.ts, services.ts, products.ts, images.ts
@@ -254,6 +254,14 @@ Invoke `frontend-design`, then `ui-ux-pro-max` (touch targets ≥ 44px, focus st
 - [x] **Step 2:** lint/typecheck/build pass → commit `feat(shell): header, logo lockup, language toggle, button`.
 
 ### Task 6: Mega menu
+
+> **Updated 2026-11-08 (D57), links only. Built in Phase 2, Task 2.6 of [phase-2-services.md](phase-2-services.md).**
+> - Category titles and "View category" go to `/services/<category>`.
+> - Each service goes to `/services/<category>#<anchor>`, landing via the anchor utility (D53).
+> - "All 30 services" goes to `/services`.
+> - The mobile menu follows the same links.
+>
+> Layout, motion and keyboard behaviour below are unchanged.
 
 Use `frontend-design`, then `ui-ux-pro-max`, then `framer-motion-animator`. Pure logic goes through TDD.
 

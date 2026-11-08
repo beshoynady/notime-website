@@ -46,3 +46,8 @@ Items that need an answer from Rand or the user before the related work can be b
     - **Baked-in UI:** the UAE PL Awards gift box (p24) has a carousel badge in the image.
     - **Not NO TIME's work:** the two notebook sheets on p22 look like supplier catalogue pages. Are they?
     - **Possibly stock:** the sound-and-lighting photos on p33 look like stock or renders. Are any of them real NO TIME setups?
+
+## Added with the category pages (D57, 2026-11-08)
+<!-- Category pages replacing per-service pages was approved by the user under Rand's delegation (2026-11-07): DECISIONS D57, no open question. -->
+22. **Rental equipment inventory.** Which cameras, lenses, lighting and audio does NO TIME actually rent out? The Creative Production page's rental catalogue shows example categories only (no models, brands or prices) until this list arrives (CONTENT_CHECKLIST #20).
+23. **Online print store.** Is the online print store live today, or planned? The Production, Print & Gifts page describes it either as a working service (with its link) or as "on request" (CONTENT_CHECKLIST #21).
