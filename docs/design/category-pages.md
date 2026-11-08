@@ -253,7 +253,7 @@ Each theme takes one deliberate risk, named below. Everything around it stays qu
 
 | | |
 |---|---|
-| **Ground and ink** | Champagne ground (`#EAD4AB`) with a paper grain (a 128px tile, as in the hero grain, D45), cocoa ink, espresso for headings, taupe for technical lines. `data-tone="light"`. |
+| **Ground and ink** | Champagne ground (`#EAD4AB`) with a static paper texture (D72: a small tiled image or CSS only, visually subtle, never animated, never the LCP element; not the animated film grain, which stays on dark grounds only, D69), cocoa ink, espresso for headings, taupe for technical lines. `data-tone="light"`. |
 | **Type** | Montserrat 600 for headings (a printer's sturdy weight); measurements and specs in tabular numerals, e.g. `3000 × 2400 MM`, `350 GSM`. Arabic: Alexandria 600; measurements stay in Western digits. |
 | **Layout** | Print structure as true structural devices: crop marks at image corners, registration targets on section dividers, dimension lines that measure real things in the modules (a banner's height, a box's size). |
 | **Motion** | Assembly: parts slide or fold into place (transform only). Unboxing. Scale changes. Tactile easing (`power3.out`, shorter: 0.6–0.9s). |

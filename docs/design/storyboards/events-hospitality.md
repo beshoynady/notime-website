@@ -54,7 +54,7 @@ Mobile (9:16): the chip bar sits under the header; the H1 sits at the bottom thi
 
 | | |
 |---|---|
-| **Scroll** | Desktop 0.45 → 0.95 vh · mobile 0.35 → 0.7 vh |
+| **Scroll** | Desktop 0.45 → 0.95 vh · mobile: none, merged into shot 3 (D70, approved D72) |
 | **Frame** | The stage wash comes up first, then the pendant lights, layer by layer. The far end of the hall reads as a stage. |
 | **Layers** | L0 `ev-open-hall` (overlay 70% → 40%) · L3 stage glow (champagne radial at 12%, scale 0.6 → 1) · L3 two light beams (CSS gradients, opacity 0 → 0.5, staggered) |
 | **Motion** | Glow scale and opacity; beams opacity; L0 scale 1.02 → 1.04 (push-in begins). |
@@ -66,7 +66,7 @@ Mobile (9:16): the chip bar sits under the header; the H1 sits at the bottom thi
 
 | | |
 |---|---|
-| **Scroll** | Desktop 0.95 → 1.5 vh · mobile 0.7 → 1.0 vh (merged with shot 4's settle) |
+| **Scroll** | Desktop 0.95 → 1.5 vh · mobile 0.35 → 1.0 vh (lights and dressing in one shot, with this shot's line; D70, approved D72) |
 | **Frame** | A long dressed table rises into the midground. Florals drift in from the inline-start edge, candles from the inline-end edge, and crystal glasses pass close to the lens, out of focus. |
 | **Layers** | L1 `ev-open-table` (rises 8 vh → 0, opacity 0 → 1) · L2 `ev-open-florals` (from −30% inline, depth 1.2) · L2 `ev-open-candles` (from +30% inline, depth 1.0) · L2 `ev-open-glasses` (desktop only, depth 1.3, passes through the bottom corner) |
 | **Motion** | Translate and opacity only; each layer's speed comes from its depth. Inline offsets mirror in AR. |
