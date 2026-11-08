@@ -366,6 +366,21 @@
   margin: 0;
 }
 
+/* A section's own scene (the Events majlis): a stage in the section's column, not pinned; the
+   numeral, H2 and promise sit over its lower third. */
+.svc-scene .scene {
+  block-size: min(88svh, 760px);
+  min-block-size: 420px;
+}
+.svc-scene .svc-scene-overlay {
+  padding: 24px clamp(20px, 3vw, 40px) clamp(24px, 4vw, 40px);
+}
+@media (max-width: 899.98px) {
+  .svc-scene .scene {
+    block-size: 78svh;
+  }
+}
+
 /* Theme tokens (spec §5), set per tone: a theme can span both (the Evening's ivory end). The
    per-category builds dress the rest; this is the ground, ink, accent and rule each starts from. */
 main[data-theme] [data-tone="dark"] {

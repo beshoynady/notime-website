@@ -10,7 +10,8 @@ const LINE_FADE = 0.08;
 
 /**
  * Scrubs a LayeredScene (GSAP owns it, CLAUDE.md): pins the scene for its pin length and plays
- * the shots on one timeline whose time is the vh scrolled. Built per width in gsap.matchMedia;
+ * the shots on one timeline whose time is the vh scrolled. A pass scene (`mode: "pass"`) is not
+ * pinned: its timeline runs 0–1 while it crosses the viewport. Built per width in gsap.matchMedia;
  * under reduced motion nothing is built and the still stays. `data-shot-active` on the scene
  * follows the shot in play (tests, and a hook for CSS).
  */
@@ -28,7 +29,8 @@ export function SceneDirector({ scene }: { scene: SceneConfig }) {
       },
       (ctx) => {
         const viewport: Viewport = ctx.conditions?.desktop ? "desktop" : "mobile";
-        const pin = pinLength(scene.shots, viewport);
+        const pass = scene.mode === "pass";
+        const pin = pass ? 1 : pinLength(scene.shots, viewport);
         if (pin === 0) return;
         const dir = document.documentElement.dir === "rtl" ? -1 : 1;
         const shotRange = (i: number) => scene.shots[i]?.[viewport] ?? null;
@@ -45,9 +47,9 @@ export function SceneDirector({ scene }: { scene: SceneConfig }) {
           defaults: { ease: "none" },
           scrollTrigger: {
             trigger: root,
-            start: "top top",
-            end: () => `+=${pin * innerHeight}`,
-            pin: true,
+            ...(pass
+              ? { start: "top bottom", end: "bottom top" }
+              : { start: "top top", end: () => `+=${pin * innerHeight}`, pin: true }),
             scrub: true,
             invalidateOnRefresh: true,
             onUpdate: (self) => {
@@ -77,11 +79,11 @@ export function SceneDirector({ scene }: { scene: SceneConfig }) {
           }
         }
 
-        const lines = root.querySelectorAll<HTMLElement>(".scene-line");
+        const lineOf = (i: number) => root.querySelector<HTMLElement>(`.scene-line[data-shot="${i}"]`);
         const playing = scene.shots.map((_, i) => shotRange(i)).filter((r) => r !== null);
         let shown = 0;
         scene.shots.forEach((_, i) => {
-          const line = lines[i];
+          const line = lineOf(i);
           const r = shotRange(i);
           if (!line) return;
           if (!r) return void gsap.set(line, { autoAlpha: 0 });

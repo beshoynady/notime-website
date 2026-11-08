@@ -9,13 +9,14 @@ import type { CategorySlug, Localized } from "../types";
 
 export type Viewport = "desktop" | "mobile";
 
-/** A shot's scroll range in vh of pinned scroll, `[start, end]`; null when it doesn't play at that width. */
+/** A shot's scroll range, `[start, end]`: vh of pinned scroll (a pinned scene) or fractions of the
+ * crossing (a pass scene, 0–1). Null when it doesn't play at that width. */
 export type ShotRange = [number, number] | null;
 
 export interface SceneShot {
   id: string;
-  /** Message key (namespace `scenes`) of the shot's line. */
-  copyKey: string;
+  /** Message key (namespace `scenes`) of the shot's line; none when the scene carries no lines (a pass scene under its section's H2). */
+  copyKey?: string;
   desktop: ShotRange;
   mobile: ShotRange;
 }
@@ -62,6 +63,12 @@ export interface SceneLayer {
 
 export interface SceneConfig {
   id: string;
+  /**
+   * "pin" (default): an opening, pinned while its shots play (ranges in vh, PIN_LIMIT).
+   * "pass": a scene inside a section, never pinned; it plays while it crosses the viewport, from
+   * its top entering (0) to its bottom leaving (1), e.g. the Events majlis.
+   */
+  mode?: "pin" | "pass";
   shots: SceneShot[];
   layers: SceneLayer[];
 }

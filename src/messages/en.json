@@ -418,6 +418,12 @@
       "s2": "TODO: shot 2 line",
       "s3": "TODO: shot 3 line",
       "s4": "TODO: shot 4 line"
+    },
+    "events": {
+      "s1": "It starts with an empty room.",
+      "s2": "Light first. Then everything else.",
+      "s3": "Tables, flowers and candlelight, each in place.",
+      "s4": "Every detail, ready before the first guest."
     }
   }
 }

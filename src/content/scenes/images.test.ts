@@ -3,8 +3,7 @@ import path from "node:path";
 import sharp from "sharp";
 import { describe, expect, it } from "vitest";
 import { CATEGORY_GRADE, sceneImageFile } from "@/lib/grade";
-import { getCategories } from "..";
-import { DRAFT_SCENE, getScene, getSceneImage, SCENE_IMAGES, type SceneImageSlot } from ".";
+import { allScenes, getSceneImage, SCENE_IMAGES, type SceneImageSlot } from ".";
 
 /** Scene layer slots (Task 2.10; layers.md): data, sources, native sizes and the mobile budget. */
 sharp.cache(false);
@@ -72,7 +71,7 @@ describe("scene image slots", () => {
 });
 
 describe("scene layers and their images", () => {
-  const scenes = [DRAFT_SCENE, ...getCategories().flatMap((c) => getScene(c.slug) ?? [])];
+  const scenes = allScenes();
 
   it("every image layer names a scene slot", () => {
     for (const scene of scenes) {

@@ -70,7 +70,7 @@ for (const locale of ["en", "ar"] as const) {
 
       test("index VI chosen half a screen into the opening lands #stage", async ({ page }) => {
         await gotoReady(page, `/${locale}${LAB}`);
-        await page.locator(".scene[data-motion]").waitFor({ state: "attached" });
+        await page.locator(".cat-opening .scene[data-motion]").waitFor({ state: "attached" });
         await page.evaluate(() => window.scrollTo(0, innerHeight * 0.5));
         await page.waitForTimeout(300);
         await indexLink(page, "stage").click();
@@ -80,7 +80,7 @@ for (const locale of ["en", "ar"] as const) {
 
       test("skip from the top of the pinned opening lands the first service", async ({ page }) => {
         await gotoReady(page, `/${locale}${LAB}`);
-        await page.locator(".scene[data-motion]").waitFor({ state: "attached" });
+        await page.locator(".cat-opening .scene[data-motion]").waitFor({ state: "attached" });
         await skip(page).click();
         await expectLanded(page, "conferences");
         expect(await overflow(page)).toBeLessThanOrEqual(0);

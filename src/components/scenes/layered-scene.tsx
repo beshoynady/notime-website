@@ -28,7 +28,7 @@ export function LayeredScene({
   children,
 }: {
   scene: SceneConfig;
-  /** The shots' lines, already translated, in shot order. */
+  /** The shots' lines, already translated, in shot order; "" for a shot without one. */
   lines: string[];
   variant: "live" | "animatic";
   /** Names the scene as a region; leave it out when the scene sits inside a named section. */
@@ -46,13 +46,17 @@ export function LayeredScene({
       </div>
       <div className={cn("scene-overlay", overlayClassName)}>
         {children}
-        <div className="scene-copy">
-          {scene.shots.map((shot, i) => (
-            <p key={shot.id} className="scene-line" data-shot={i} data-desktop={shot.desktop ? "" : undefined} data-mobile={shot.mobile ? "" : undefined}>
-              {lines[i]}
-            </p>
-          ))}
-        </div>
+        {lines.some(Boolean) && (
+          <div className="scene-copy">
+            {scene.shots.map((shot, i) =>
+              lines[i] ? (
+                <p key={shot.id} className="scene-line" data-shot={i} data-desktop={shot.desktop ? "" : undefined} data-mobile={shot.mobile ? "" : undefined}>
+                  {lines[i]}
+                </p>
+              ) : null,
+            )}
+          </div>
+        )}
       </div>
       <SceneDirector scene={scene} />
     </div>

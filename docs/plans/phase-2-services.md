@@ -458,12 +458,14 @@ Storyboard: [events-hospitality.md](../design/storyboards/events-hospitality.md)
 
 ### Task 3.0: Events animatic → STOP (stop point 2)
 
+Built (D70), awaiting the user's review of the rhythm. As built: `events-hospitality.ts` holds `EVENTS_OPENING` (2.0 / 1.2 vh) and `EVENTS_MAJLIS` (a pass scene in section V); both are lab-only until approved. Shot lines are drafts in `scenes.events.*` (CONTENT_CHECKLIST #26). Tests: `scene-math.test.ts` (pass scenes), `scenes.test.ts` (gating), `e2e/events-animatic.spec.ts`; `layered-scene.spec.ts` now runs on the Studio's draft.
+
 **Files:** create `src/content/scenes/events-hospitality.ts` (opening and majlis configs, from the storyboard's shot table); add the storyboard's shot lines to the messages as drafts (marked in the copy deck as pending approval).
 
-- [ ] **Step 1:** Run `npx vitest run src/lib/scene-math src/content`. Expected: PASS (the config passes `pinLength` and the layer limits).
-- [ ] **Step 2:** Build with `NEXT_PUBLIC_ENABLE_LAB=1`. Run `opening.spec.ts` against `/[locale]/lab/events-animatic`. Expected: PASS.
-- [ ] **Step 3:** Record a short screen capture (Playwright video, desktop and mobile) and take screenshots at 1440 and 390, EN and AR: shot by shot, the majlis scene, the index and the skip control.
-- [ ] **Step 4:** Commit `feat(lab): Events & Hospitality animatic`.
+- [x] **Step 1:** Run `npx vitest run src/lib/scene-math src/content`. Expected: PASS (the config passes `pinLength` and the layer limits).
+- [x] **Step 2:** Build with `NEXT_PUBLIC_ENABLE_LAB=1`. Run `opening.spec.ts` against `/[locale]/lab/events-animatic`. Expected: PASS.
+- [x] **Step 3:** Record a short screen capture (Playwright video, desktop and mobile) and take screenshots at 1440 and 390, EN and AR: shot by shot, the majlis scene, the index and the skip control.
+- [x] **Step 4:** Commit `feat(lab): Events & Hospitality animatic`.
 - [ ] **Step 5:** Report to the user in Arabic with the recording, the screenshots and the timings table. **Stop** for approval of rhythm and layout.
 
 ### Task 3.1: Events copy (EN first, AR written natively)

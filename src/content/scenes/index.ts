@@ -1,4 +1,5 @@
-import type { CategorySlug } from "../types";
+import type { CategorySlug, Service } from "../types";
+import { EVENTS_MAJLIS, EVENTS_OPENING } from "./events-hospitality";
 import type { SceneConfig } from "./types";
 
 export type * from "./types";
@@ -11,6 +12,35 @@ const SCENES: Partial<Record<CategorySlug, SceneConfig>> = {};
 
 export function getScene(slug: CategorySlug): SceneConfig | undefined {
   return SCENES[slug];
+}
+
+/**
+ * Scenes in review: their animatic shows on the lab route only. On approval a scene moves to
+ * SCENES (the opening) or SECTION_SCENES (a section's scene) and the public page shows it.
+ */
+const LAB_SCENES: Partial<Record<CategorySlug, SceneConfig>> = {
+  "events-hospitality": EVENTS_OPENING, // Task 3.0, awaiting approval
+};
+/** Scenes inside a service section, by service slug: public once approved, and those in review. */
+const SECTION_SCENES: Record<string, SceneConfig> = {};
+const LAB_SECTION_SCENES: Record<string, SceneConfig> = {
+  "catering-heritage-hospitality": EVENTS_MAJLIS, // the majlis (Task 3.0, awaiting approval)
+};
+
+/** The opening the lab route shows: the approved scene, else the one in review, else the draft. */
+export function getLabScene(slug: CategorySlug): SceneConfig {
+  return SCENES[slug] ?? LAB_SCENES[slug] ?? DRAFT_SCENE;
+}
+
+/** A service section's own scene (the Events majlis); `lab` includes those in review. */
+export function getSectionScene(service: Pick<Service, "slug">, lab: boolean): SceneConfig | undefined {
+  return SECTION_SCENES[service.slug] ?? (lab ? LAB_SECTION_SCENES[service.slug] : undefined);
+}
+
+/** Every scene, once, for the rule and asset checks (scenes.test.ts, images.test.ts). */
+export function allScenes(): SceneConfig[] {
+  const all = [DRAFT_SCENE, ...Object.values(SCENES), ...Object.values(LAB_SCENES), ...Object.values(SECTION_SCENES), ...Object.values(LAB_SECTION_SCENES)];
+  return [...new Set(all)];
 }
 
 /**

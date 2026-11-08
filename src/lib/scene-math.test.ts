@@ -122,3 +122,21 @@ describe("sceneProblems", () => {
     expect(sceneProblems(scene({ layers: [layer({ enter: { shot: 4, from: {} } })] }))).toContain("layer l: shot 5 does not exist");
   });
 });
+
+describe("sceneProblems · pass scenes (not pinned, e.g. the majlis)", () => {
+  // Shots are fractions of the crossing: from the scene's top entering the viewport (0) to its bottom leaving (1).
+  const crossing: SceneShot[] = [
+    { id: "dusk", desktop: [0, 0.4], mobile: [0, 0.4] },
+    { id: "pour", desktop: [0.4, 0.7], mobile: [0.4, 0.7] },
+    { id: "night", desktop: [0.7, 1], mobile: [0.7, 1] },
+  ];
+
+  it("accepts shots within the crossing, without lines", () => {
+    expect(sceneProblems(scene({ mode: "pass", shots: crossing }))).toEqual([]);
+  });
+
+  it("rejects a shot that ends past the crossing", () => {
+    const long = crossing.map((s, i) => (i === 2 ? { ...s, mobile: [0.7, 1.4] as [number, number] } : s));
+    expect(sceneProblems(scene({ mode: "pass", shots: long }))).toEqual(["mobile shot night ends past the crossing (1.4 > 1)"]);
+  });
+});

@@ -40,11 +40,12 @@ export function sceneProblems(scene: SceneConfig): string[] {
   const problems: string[] = [];
   for (const viewport of ["desktop", "mobile"] as const) {
     const pin = Math.round(pinLength(scene.shots, viewport) * 100) / 100;
-    if (pin > PIN_LIMIT[viewport]) problems.push(`${viewport} pin ${pin} vh > ${PIN_LIMIT[viewport]} vh`);
+    if (scene.mode !== "pass" && pin > PIN_LIMIT[viewport]) problems.push(`${viewport} pin ${pin} vh > ${PIN_LIMIT[viewport]} vh`);
     let prev: SceneShot | undefined;
     for (const shot of scene.shots) {
       const range = shot[viewport];
       if (!range) continue;
+      if (scene.mode === "pass" && range[1] > 1) problems.push(`${viewport} shot ${shot.id} ends past the crossing (${range[1]} > 1)`);
       const prevEnd = prev?.[viewport]?.[1];
       if (prev && prevEnd !== undefined && range[0] < prevEnd) problems.push(`${viewport} shot ${shot.id} starts before shot ${prev.id} ends`);
       prev = shot;

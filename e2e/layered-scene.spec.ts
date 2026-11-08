@@ -3,11 +3,11 @@ import { DRAFT_SCENE } from "../src/content/scenes";
 import { gotoReady, lcpEntry } from "./helpers";
 
 /**
- * LayeredScene (Task 2.7; D64) on the hidden lab route, which shows the draft scene as an
- * animatic until Events has its own. Needs a build with NEXT_PUBLIC_ENABLE_LAB=1; skipped
+ * LayeredScene (Task 2.7; D64) on the hidden lab route, on a category that still shows the draft
+ * scene (the Studio, until its own animatic, Part 4). Needs a build with NEXT_PUBLIC_ENABLE_LAB=1; skipped
  * otherwise (the route answers 404).
  */
-const LAB = (locale: "en" | "ar") => `/${locale}/lab/events-animatic`;
+const LAB = (locale: "en" | "ar") => `/${locale}/lab/studio-animatic`;
 const PIN_LIMIT = { desktop: 2.0, mobile: 1.2 };
 
 const motionReady = (page: Page) => page.locator(".scene[data-motion]").waitFor({ state: "attached" });

@@ -67,7 +67,7 @@ export async function CategoryOpening({
       {scene ? (
         <LayeredScene
           scene={scene}
-          lines={scene.shots.map((s) => ts(s.copyKey))}
+          lines={scene.shots.map((s) => (s.copyKey ? ts(s.copyKey) : ""))}
           variant={variant}
           overlayClassName="frame cat-opening-overlay"
         >
