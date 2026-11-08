@@ -2,9 +2,14 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task by task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Status:** for approval (2026-11-08). No product code until the user approves this plan and `docs/design/category-pages.md`.
+**Status:** approved by the user on 2026-11-08, with adjustments:
+- CP7 is the user's approval (Rand has delegated).
+- The rental and print-store modules are made honest (`rental-categories`, `print-order`).
+- Part 1 is built first.
 
-**Goal:** Build `/[locale]/services` and five designed category pages, where each of the 30 approved services is an anchored section with one signature module. Build Events & Hospitality first as the prototype for client approval.
+**Stop before Tasks 3.3–3.8:** the user confirms the Events module specs first. The user may still send module changes after reviewing `docs/design/category-pages.md`.
+
+**Goal:** Build `/[locale]/services` and five designed category pages, where each of the 30 approved services is an anchored section with one signature module. Build Events & Hospitality first as the prototype for the user's approval (CP7).
 
 **Architecture:**
 - **Pages:** static App Router pages (`generateStaticParams`, 5 categories × 2 locales), driven by typed content in `src/content/`.
@@ -47,6 +52,7 @@ The canonical list is [docs/content/services-list.md](../content/services-list.m
 - No new runtime dependency. Modules use SVG, CSS, GSAP and Motion only.
 - Images go through `BrandImage` with native `width`/`height` and the srcset capped (D51); AI files are native Canva size, never upscaled.
 - Lighthouse mobile 90+ in every category, on each category page.
+- Every commit passes the pre-commit hook (simple-git-hooks: `npm run lint && npm run typecheck && npm test`, no e2e; D58). Never bypass it with `--no-verify`.
 - E2E policy:
   - `workers: 1`, `retries: 1`; a pass on retry counts as flaky.
   - Before each checkpoint, a full run on a quiet machine, reported as pass / flaky / fail.
@@ -334,7 +340,9 @@ Every module task follows the same five steps. The specifics (what it shows, con
 - [ ] **Step 3:** Run the full e2e suite on a quiet machine and report pass / flaky / fail. Log it in `docs/e2e-flakes.md`.
 - [ ] **Step 4:** Take screenshots (`scripts/shots.mjs` extended with `--category=events-hospitality`): the hero at rest and mid-scroll, each module in its key state, the index rail and the chip bar, EN and AR, 1440 and 390.
 
-## CHECKPOINT 7: Events & Hospitality prototype, for client approval
+## CHECKPOINT 7: Events & Hospitality prototype, for the user's approval
+
+Rand has delegated design, content-structure and naming decisions to the user, so CP7 is the user's approval. The user may show the prototype to Rand as a courtesy.
 
 Send in Arabic:
 
@@ -361,12 +369,12 @@ Each category repeats Part 2's pattern:
 
 | Order | Category | Modules (effort) | Checkpoint | Waits on |
 |---|---|---|---|---|
-| 4 | Production, Print & Gifts (The Workshop) | human-scale S, reorder-flow S, merch-placement S, build-layers M, gift-configurator M, unboxing M ⚠ | CP8 | Online print store status (new OQ) |
+| 4 | Production, Print & Gifts (The Workshop) | human-scale S, print-order S, merch-placement S, build-layers M, gift-configurator M, unboxing M ⚠ | CP8 | Online print store status (new OQ) |
 | 5 | Software & Digital (The Interface) | fidelity-slider S, ai-sorter S, responsive-frames M, app-screens M, data-flow M, checkout-flow M | CP9 | — |
 | 6 | Marketing & Brand (The Editorial) | mark-build M, content-calendar M, press-release M, flighting-chart M, example-dashboard M, phone-feed M ⚠ | CP10 | Logo SVG (CONTENT_CHECKLIST #14) for the full mark build |
-| 7 | Creative Production (The Studio) | motion-playground S, idea-to-image M, set-model M, rental-catalogue M, aperture-gallery M ⚠, scrub-reel M ⚠ | CP11 | Showreel (#1), equipment inventory (new OQ), photo consent (OQ #18) |
+| 7 | Creative Production (The Studio) | motion-playground S, idea-to-image M, set-model M, rental-categories S, aperture-gallery M ⚠, scrub-reel M ⚠ | CP11 | Showreel (#1), equipment inventory (new OQ), photo consent (OQ #18) |
 
-**Effort:** 6 S, 23 M, 1 L across the 30 modules, plus about 6–8 days of Part 1 infrastructure. See spec §7.
+**Effort:** 7 S, 22 M, 1 L across the 30 modules, plus about 6–8 days of Part 1 infrastructure. See spec §7.
 
 ---
 

@@ -49,5 +49,5 @@ Items that need an answer from Rand or the user before the related work can be b
 
 ## Added with the category pages (D57, 2026-11-08)
 <!-- Category pages replacing per-service pages was approved by the user under Rand's delegation (2026-11-07): DECISIONS D57, no open question. -->
-22. **Rental equipment inventory.** Which cameras, lenses, lighting and audio does NO TIME actually rent out? The Creative Production page's rental catalogue shows example categories only (no models, brands or prices) until this list arrives (CONTENT_CHECKLIST #20).
-23. **Online print store.** Is the online print store live today, or planned? The Production, Print & Gifts page describes it either as a working service (with its link) or as "on request" (CONTENT_CHECKLIST #21).
+22. **Rental equipment inventory.** Which cameras, lenses, lighting, sound and stage equipment does NO TIME actually rent out? Until this list arrives, the rental module shows four categories only (Camera, Lighting, Sound, Stage): no models, brands, quantities or prices (CONTENT_CHECKLIST #20).
+23. **Online print store.** Is an online print store live today, or planned? Until a real store exists, the page presents "Order your print online" through the quote form: no cart, no prices (CONTENT_CHECKLIST #21).

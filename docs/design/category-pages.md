@@ -109,9 +109,9 @@ interface Category {
 
 type ModuleKey =
   | "agenda-timeline" | "stand-assembly" | "launch-reveal" | "candle-moodboard" | "menu-majlis" | "stage-lights"
-  | "aperture-gallery" | "scrub-reel" | "motion-playground" | "idea-to-image" | "set-model" | "rental-catalogue"
+  | "aperture-gallery" | "scrub-reel" | "motion-playground" | "idea-to-image" | "set-model" | "rental-categories"
   | "mark-build" | "phone-feed" | "example-dashboard" | "content-calendar" | "press-release" | "flighting-chart"
-  | "human-scale" | "build-layers" | "unboxing" | "gift-configurator" | "reorder-flow" | "merch-placement"
+  | "human-scale" | "build-layers" | "unboxing" | "gift-configurator" | "print-order" | "merch-placement"
   | "responsive-frames" | "app-screens" | "data-flow" | "checkout-flow" | "fidelity-slider" | "ai-sorter";
 
 type QuoteType = "event" | "production" | "marketing" | "print" | "digital"; // drives the form's field set
@@ -359,12 +359,12 @@ Format per module:
 - **Reduced:** three frames side by side (stacked on mobile).
 - **Data:** 1 SVG and 2 AI images. **Content:** "Example".
 
-**12. Equipment & camera rental** · `#rental` · `rental-catalogue` · M
-- **Shows:** a filterable catalogue (Cameras, Lenses, Lighting, Audio, Grip) of item cards with a line drawing, a name and key specs. "Ask about availability" opens the quote form with `?service=rental`.
-- **Owner:** Motion `layout` on filter; filters are toggle buttons with `aria-pressed`.
-- **Live region:** "Showing 6 lighting items".
-- **Reduced:** filters work, with instant layout.
-- **Data:** about 12–16 items. **Content:** **needs the client's real inventory** (OPEN_QUESTIONS, new item). Until then "Example" items by category only, with no models, no brand names and no prices.
+**12. Equipment & camera rental** · `#rental` · `rental-categories` · S
+- **Shows:** four equipment categories (**Camera, Lighting, Sound, Stage**), not a catalogue (user, 2026-11-08). Each card has a line drawing, the category name and one line on what it covers.
+- **Interaction:** selecting a card (a toggle button with `aria-pressed`) lifts it and reveals its line. "Ask about availability" opens the quote form with `?service=rental` and the chosen category in the message.
+- **Owner:** Motion.
+- **Reduced:** all four lines visible; selection still works, instantly.
+- **Data:** the 4 categories. **Content:** categories only: **no models, brand names, quantities or prices** until a real inventory exists (OQ #22). Once it arrives, the module can grow into a catalogue under its own spec.
 
 ### III. Marketing & Brand ("The Editorial")
 
@@ -433,11 +433,16 @@ Format per module:
 - **Reduced:** instant updates.
 - **Data:** the options. **Content:** "Example", no prices. "Ask for this gift" opens the quote form with `?service=gifts` and the chosen options in the message.
 
-**23. Online print store** · `#print-store` · `reorder-flow` · S
-- **Shows:** a 3-step mini flow in a browser frame: choose an approved item (business cards, roll-up, letterhead), check the locked artwork, set the quantity. It shows the idea "on brand every time".
-- **Owner:** Motion (steps).
-- **Reduced:** the three steps side by side.
-- **Data:** 3 items. **Content:** "Example", no prices. Whether the store exists today is a client question (OQ, new item).
+**23. Online print store** · `#print-store` · `print-order` · S
+- **Shows:** **"Order your print online" / «اطلب مطبوعاتك عبر الإنترنت»** through the quote form, not a store (user, 2026-11-08). Three steps explain how an order works:
+  1. Tell us the item (business cards, roll-up, letterhead…).
+  2. Send your artwork or reuse your approved files.
+  3. We print and deliver.
+- **Interaction:** the main button opens the quote form with `?service=print-store`.
+- **No cart, no basket, no quantities, no prices**, and nothing that looks like checkout.
+- **Owner:** Motion (the steps reveal in turn on entry; a tap on a step expands its line).
+- **Reduced:** the three steps side by side, all open.
+- **Data:** 3 steps and a few example item types. **Content:** real process copy. If the client later confirms a live store (OQ #23), the button can point to it instead.
 
 **24. Branded merchandise** · `#merchandise` · `merch-placement` · S
 - **Shows:** 4 objects (tote, cap, tee, bottle) in line drawings. The visitor moves a "Your mark" placeholder between placements (chest, sleeve, side) and switches tone-on-tone or contrast. A dimension line shows the print area.
@@ -493,18 +498,18 @@ Format per module:
 | Category | S | M | L | Modules |
 |---|---|---|---|---|
 | I Events & Hospitality | 0 | 5 | 1 | agenda-timeline M, stand-assembly **L**, launch-reveal M, candle-moodboard M, menu-majlis M, stage-lights M |
-| II Creative Production | 1 | 5 | 0 | aperture-gallery M, scrub-reel M, motion-playground S, idea-to-image M, set-model M, rental-catalogue M |
+| II Creative Production | 2 | 4 | 0 | aperture-gallery M, scrub-reel M, motion-playground S, idea-to-image M, set-model M, rental-categories S |
 | III Marketing & Brand | 0 | 6 | 0 | mark-build M, phone-feed M, example-dashboard M, content-calendar M, press-release M, flighting-chart M |
-| IV Production, Print & Gifts | 3 | 3 | 0 | human-scale S, build-layers M, unboxing M, gift-configurator M, reorder-flow S, merch-placement S |
+| IV Production, Print & Gifts | 3 | 3 | 0 | human-scale S, build-layers M, unboxing M, gift-configurator M, print-order S, merch-placement S |
 | V Software & Digital | 2 | 4 | 0 | responsive-frames M, app-screens M, data-flow M, checkout-flow M, fidelity-slider S, ai-sorter S |
-| **Total** | **6** | **23** | **1** | 30 |
+| **Total** | **7** | **22** | **1** | 30 |
 
-In days: about 3 (S) + 23–46 (M) + 3–5 (L), so 30–55 working days for modules, plus the shared page infrastructure (routes, data, index, themes, SEO, menus: about 6–8 days) and per-category theming (1–2 days each).
+In days: about 3.5 (S) + 22–44 (M) + 3–5 (L), so 30–55 working days for modules, plus the shared page infrastructure (routes, data, index, themes, SEO, menus: about 6–8 days) and per-category theming (1–2 days each).
 
 ### Build order (the user's)
 
 1. **Shared infrastructure** (no visible category yet): routes, data model and tests, the module loader, theme tokens, the index and scrollspy, the anchor offset for the chip bar, menu and link updates, SEO and sitemap.
-2. **Events & Hospitality prototype:** theme, hero and all 6 modules. **Then client approval** (checkpoint): theme, skeleton, module quality, Lighthouse.
+2. **Events & Hospitality prototype:** theme, hero and all 6 modules. **Then the user's approval** (CP7): theme, skeleton, module quality, Lighthouse. Rand has delegated design decisions to the user, who may show the prototype to Rand as a courtesy.
 3. **The other four categories**, one at a time, each ending in a checkpoint. Suggested order: Production, Print & Gifts (3 S modules, quick); Software & Digital (strategic priority, brief §7); Marketing & Brand; Creative Production last (it waits on the showreel and real photos).
 
 ### Performance risks (⚠)
