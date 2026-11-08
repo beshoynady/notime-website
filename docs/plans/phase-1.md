@@ -591,6 +591,8 @@ This session has `Canva generate-image` and `Figma generate_image` MCP tools. If
 
 ### Task 16: Final review
 
+> **Moved (2026-11-08, D65):** Step 2 (performance) now runs as phase-2 Task 4.6, before the Software & Digital page is published. The other steps stay here.
+
 - [ ] **Step 1:** Run `design:accessibility-review`, `wcag-audit-patterns` checks and `design:design-critique` against `/en`, `/ar` and `/en/styleguide`. Fix the findings.
 - [ ] **Step 2:** Run mobile Lighthouse for `/en` and `/ar` (3 runs each, median). Targets: Performance ≥ 90, Accessibility ≥ 95, Best Practices ≥ 95, SEO ≥ 95. Save the JSON reports to `docs/checkpoints/lighthouse/`.
   **Input from Checkpoint 3 (trace of a cold mobile load at 4x CPU, 2026-11-07; see D44):** the first frame is painted and committed at ~600 ms but presented only at ~1.4 s. The causes, in order of evidence:

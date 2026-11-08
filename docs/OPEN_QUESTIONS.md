@@ -51,3 +51,6 @@ Items that need an answer from Rand or the user before the related work can be b
 <!-- Category pages replacing per-service pages was approved by the user under Rand's delegation (2026-11-07): DECISIONS D57, no open question. -->
 22. **Rental equipment inventory.** Which cameras, lenses, lighting, sound and stage equipment does NO TIME actually rent out? Until this list arrives, the rental module shows four categories only (Camera, Lighting, Sound, Stage): no models, brands, quantities or prices (CONTENT_CHECKLIST #20).
 23. **Online print store.** Is an online print store live today, or planned? Until a real store exists, the page presents "Order your print online" through the quote form: no cart, no prices (CONTENT_CHECKLIST #21).
+
+## Added with the Software & Digital brief (D65, 2026-11-08)
+24. **Product features.** The QR event check-in and restaurant management cards need 4–6 features each. The drafts in `docs/design/storyboards/software-digital.md` §7 are proposals; an unreleased product's features are claims, so the client confirms each one (or replaces it) before they show. Until then the features render as `TODO` placeholders.
