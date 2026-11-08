@@ -47,7 +47,51 @@ export interface Category {
   image: string;
   /** 16:9 image slot id (category headers). */
   imageWide: string;
+  /** Category page design (D57, docs/design/category-pages.md §5). */
+  theme: CategoryTheme;
+  /** Page intro under the H1 (2–3 sentences). */
+  intro: Localized<string>;
+  /** FAQ (4–6) for the page and its FAQPage JSON-LD. Answers state process, never unconfirmed numbers. */
+  faq: { q: Localized<string>; a: Localized<string> }[];
 }
+
+export type CategoryTheme = "evening" | "studio" | "editorial" | "workshop" | "interface";
+
+/** One signature module per service (docs/design/category-pages.md §6). */
+export type ModuleKey =
+  | "agenda-timeline"
+  | "stand-assembly"
+  | "launch-reveal"
+  | "candle-moodboard"
+  | "menu-majlis"
+  | "stage-lights"
+  | "aperture-gallery"
+  | "scrub-reel"
+  | "motion-playground"
+  | "idea-to-image"
+  | "set-model"
+  | "rental-categories"
+  | "mark-build"
+  | "phone-feed"
+  | "example-dashboard"
+  | "content-calendar"
+  | "press-release"
+  | "flighting-chart"
+  | "human-scale"
+  | "build-layers"
+  | "unboxing"
+  | "gift-configurator"
+  | "print-order"
+  | "merch-placement"
+  | "responsive-frames"
+  | "app-screens"
+  | "data-flow"
+  | "checkout-flow"
+  | "fidelity-slider"
+  | "ai-sorter";
+
+/** Drives the quote form's field set. */
+export type QuoteType = "event" | "production" | "marketing" | "print" | "digital";
 
 export type ServiceStatus = "draft" | "approved";
 
@@ -61,6 +105,18 @@ export interface Service {
   image: string;
   imageAlt: Localized<string>;
   status: ServiceStatus;
+  /**
+   * Section id on the category page (`/services/<category>#<anchor>`): the same in EN and AR,
+   * never renamed after launch. `slug` stays the permanent id and the path of a future
+   * standalone page (D57).
+   */
+  anchor: string;
+  signatureModule: ModuleKey;
+  /** "What we deliver": 4–6 points, the same count in both locales. */
+  points: Localized<string[]>;
+  /** Slugs of real, client-approved work items. Empty until OQ #17 is answered. */
+  relatedWork: string[];
+  quoteType: QuoteType;
 }
 
 export type ProductStatus = "comingSoon" | "live";

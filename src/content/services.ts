@@ -3,24 +3,85 @@
 // Slugs follow the English titles and are the future page addresses; keep them stable.
 import { categories } from "./categories";
 import { imageSlots } from "./images";
-import type { CategorySlug, Localized, Service } from "./types";
+import type { CategorySlug, Localized, ModuleKey, QuoteType, Service } from "./types";
 
 type Row = [slug: string, title: Localized<string>, summary: Localized<string>];
+
+/**
+ * Category-page fields per service (D57): the anchor (docs/content/services-list.md) and the
+ * signature module (docs/design/category-pages.md §6). quoteType defaults to the category's.
+ */
+const PAGE: Record<string, { anchor: string; module: ModuleKey; quoteType?: QuoteType }> = {
+  "conferences-summits": { anchor: "conferences", module: "agenda-timeline" },
+  "exhibitions-booths": { anchor: "exhibitions", module: "stand-assembly" },
+  "product-launches-activations": { anchor: "launches", module: "launch-reveal" },
+  "galas-private-celebrations": { anchor: "celebrations", module: "candle-moodboard" },
+  "catering-heritage-hospitality": { anchor: "hospitality", module: "menu-majlis" },
+  "stage-technical-production": { anchor: "stage", module: "stage-lights" },
+  photography: { anchor: "photography", module: "aperture-gallery" },
+  "video-production": { anchor: "video", module: "scrub-reel" },
+  "motion-graphics": { anchor: "motion", module: "motion-playground" },
+  "ai-content-creation": { anchor: "ai-content", module: "idea-to-image" },
+  "set-stage-design": { anchor: "set-design", module: "set-model" },
+  "equipment-camera-rental": { anchor: "rental", module: "rental-categories" },
+  "branding-identity": { anchor: "branding", module: "mark-build" },
+  "social-media-management": { anchor: "social", module: "phone-feed" },
+  "digital-marketing-seo": { anchor: "digital-marketing", module: "example-dashboard" },
+  "content-strategy": { anchor: "content-strategy", module: "content-calendar" },
+  "public-relations": { anchor: "pr", module: "press-release" },
+  "media-planning": { anchor: "media-planning", module: "flighting-chart" },
+  "large-format-printing": { anchor: "large-format", module: "human-scale" },
+  "stand-fabrication-signage": { anchor: "fabrication", module: "build-layers" },
+  "packaging-design": { anchor: "packaging", module: "unboxing" },
+  "corporate-gifts": { anchor: "gifts", module: "gift-configurator" },
+  "online-print-store": { anchor: "print-store", module: "print-order" },
+  "branded-merchandise": { anchor: "merchandise", module: "merch-placement" },
+  websites: { anchor: "websites", module: "responsive-frames" },
+  "mobile-apps": { anchor: "apps", module: "app-screens" },
+  "custom-systems": { anchor: "systems", module: "data-flow" },
+  "e-commerce": { anchor: "e-commerce", module: "checkout-flow" },
+  "ui-ux-design": { anchor: "ux", module: "fidelity-slider" },
+  "ai-consulting": { anchor: "ai-consulting", module: "ai-sorter" },
+};
+
+const QUOTE_TYPE: Record<CategorySlug, QuoteType> = {
+  "events-hospitality": "event",
+  "creative-production": "production",
+  "marketing-brand": "marketing",
+  "production-print-gifts": "print",
+  "software-digital": "digital",
+};
+
+// TODO: replace placeholder — "what we deliver" points are written per category with its copy
+// deck (phase-2 plan, Task 3.1 and later). Four obvious placeholders until then.
+const placeholderPoints = (): Localized<string[]> => ({
+  en: [1, 2, 3, 4].map((n) => `TODO: what we deliver, point ${n}`),
+  ar: [1, 2, 3, 4].map((n) => `TODO: ما نقدّمه، النقطة ${n}`),
+});
 
 function group(category: CategorySlug, rows: Row[]): Service[] {
   const cat = categories.find((c) => c.slug === category)!;
   const slot = imageSlots.find((s) => s.id === cat.image)!;
-  return rows.map(([slug, title, summary], i) => ({
-    slug,
-    category,
-    order: i + 1,
-    title,
-    summary,
-    // Services share their category image until service-specific images exist.
-    image: cat.image,
-    imageAlt: slot.alt,
-    status: "approved",
-  }));
+  return rows.map(([slug, title, summary], i) => {
+    const page = PAGE[slug];
+    if (!page) throw new Error(`No category-page fields for service ${slug}`);
+    return {
+      slug,
+      category,
+      order: i + 1,
+      title,
+      summary,
+      // Services share their category image until service-specific images exist.
+      image: cat.image,
+      imageAlt: slot.alt,
+      status: "approved",
+      anchor: page.anchor,
+      signatureModule: page.module,
+      points: placeholderPoints(),
+      relatedWork: [],
+      quoteType: page.quoteType ?? QUOTE_TYPE[category],
+    };
+  });
 }
 
 export const services: Service[] = [

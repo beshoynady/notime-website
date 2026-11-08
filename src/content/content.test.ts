@@ -65,19 +65,109 @@ describe("services", () => {
     expect(services.every((s) => s.status === "approved")).toBe(true);
   });
 
-  it("matches the approved list in docs/content/services-list.md (slug, EN and AR titles, order)", () => {
+  it("matches the approved list in docs/content/services-list.md (slug, anchor, EN and AR titles, order)", () => {
     const md = readFileSync(path.join(process.cwd(), "docs/content/services-list.md"), "utf8");
-    const rows = [...md.matchAll(/^\| (\d+) \| ([a-z0-9-]+) \| [a-z0-9-]+ \| (.+?) \| (.+?) \|$/gm)].map((m) => ({
+    const rows = [...md.matchAll(/^\| (\d+) \| ([a-z0-9-]+) \| ([a-z0-9-]+) \| (.+?) \| (.+?) \|$/gm)].map((m) => ({
       n: Number(m[1]),
       slug: m[2],
-      en: m[3],
-      ar: m[4],
+      anchor: m[3],
+      en: m[4],
+      ar: m[5],
     }));
     expect(rows).toHaveLength(30);
     expect(rows.map((r) => r.n)).toEqual(Array.from({ length: 30 }, (_, i) => i + 1));
-    expect(services.map((s) => ({ slug: s.slug, en: s.title.en, ar: s.title.ar }))).toEqual(
-      rows.map(({ slug, en, ar }) => ({ slug, en, ar })),
+    expect(services.map((s) => ({ slug: s.slug, anchor: s.anchor, en: s.title.en, ar: s.title.ar }))).toEqual(
+      rows.map(({ slug, anchor, en, ar }) => ({ slug, anchor, en, ar })),
     );
+  });
+
+  // D57: category pages. Anchors are section ids, the same in EN and AR, never renamed.
+  it("anchors are unique and kebab-case", () => {
+    const anchors = services.map((s) => s.anchor);
+    expect(new Set(anchors).size).toBe(30);
+    for (const a of anchors) expect(a).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);
+  });
+
+  it("every service has 4–6 'what we deliver' points, the same count in EN and AR", () => {
+    for (const s of services) {
+      expect(s.points.en.length, s.slug).toBeGreaterThanOrEqual(4);
+      expect(s.points.en.length, s.slug).toBeLessThanOrEqual(6);
+      expect(s.points.ar.length, s.slug).toBe(s.points.en.length);
+      for (const l of locales) for (const p of s.points[l]) expect(p.trim(), `${s.slug}.points.${l}`).not.toBe("");
+    }
+  });
+
+  it("each service has the signature module from docs/design/category-pages.md §6", () => {
+    expect(Object.fromEntries(services.map((s) => [s.anchor, s.signatureModule]))).toEqual(SIGNATURE_MODULES);
+  });
+
+  it("relatedWork stays empty until the client confirms names (OQ #17)", () => {
+    for (const s of services) expect(s.relatedWork, s.slug).toEqual([]);
+  });
+});
+
+const SIGNATURE_MODULES = {
+  conferences: "agenda-timeline",
+  exhibitions: "stand-assembly",
+  launches: "launch-reveal",
+  celebrations: "candle-moodboard",
+  hospitality: "menu-majlis",
+  stage: "stage-lights",
+  photography: "aperture-gallery",
+  video: "scrub-reel",
+  motion: "motion-playground",
+  "ai-content": "idea-to-image",
+  "set-design": "set-model",
+  rental: "rental-categories",
+  branding: "mark-build",
+  social: "phone-feed",
+  "digital-marketing": "example-dashboard",
+  "content-strategy": "content-calendar",
+  pr: "press-release",
+  "media-planning": "flighting-chart",
+  "large-format": "human-scale",
+  fabrication: "build-layers",
+  packaging: "unboxing",
+  gifts: "gift-configurator",
+  "print-store": "print-order",
+  merchandise: "merch-placement",
+  websites: "responsive-frames",
+  apps: "app-screens",
+  systems: "data-flow",
+  "e-commerce": "checkout-flow",
+  ux: "fidelity-slider",
+  "ai-consulting": "ai-sorter",
+};
+
+describe("category pages (D57)", () => {
+  it("each category has its theme", () => {
+    expect(Object.fromEntries(getCategories().map((c) => [c.slug, c.theme]))).toEqual({
+      "events-hospitality": "evening",
+      "creative-production": "studio",
+      "marketing-brand": "editorial",
+      "production-print-gifts": "workshop",
+      "software-digital": "interface",
+    });
+  });
+
+  it("each category has an intro and 4–6 FAQ entries in both locales", () => {
+    for (const c of getCategories()) {
+      for (const l of locales) expect(c.intro[l].trim(), `${c.slug}.intro.${l}`).not.toBe("");
+      expect(c.faq.length, c.slug).toBeGreaterThanOrEqual(4);
+      expect(c.faq.length, c.slug).toBeLessThanOrEqual(6);
+      for (const f of c.faq) {
+        for (const l of locales) {
+          expect(f.q[l].trim()).not.toBe("");
+          expect(f.a[l].trim()).not.toBe("");
+        }
+      }
+    }
+  });
+
+  it("placeholder copy is marked TODO in both locales or in neither", () => {
+    const texts = getCategories().flatMap((c) => [c.intro, ...c.faq.flatMap((f) => [f.q, f.a])]);
+    const points = getServices().flatMap((s) => s.points.en.map((en, i) => ({ en, ar: s.points.ar[i] })));
+    for (const t of [...texts, ...points]) expect(t.en.startsWith("TODO:"), t.en).toBe(t.ar.startsWith("TODO:"));
   });
 });
 

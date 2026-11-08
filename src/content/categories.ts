@@ -1,7 +1,20 @@
-import type { Category } from "./types";
+import type { Category, Localized } from "./types";
 
-// TODO: replace with approved list — category copy comes from the reference
-// prototype draft until docs/content/services-list.md is approved.
+// Titles and summaries: the reference prototype's copy, kept with the approved services (D56).
+// Theme, intro and FAQ: category pages (D57, docs/design/category-pages.md).
+
+// TODO: replace placeholder — each category's intro and FAQ are written with its copy deck
+// (phase-2 plan, Task 3.1 and later). Obvious placeholders until then.
+const placeholderIntro = (): Localized<string> => ({
+  en: "TODO: category intro, two or three sentences.",
+  ar: "TODO: مقدمة الفئة، جملتان أو ثلاث.",
+});
+const placeholderFaq = (): Category["faq"] =>
+  [1, 2, 3, 4].map((n) => ({
+    q: { en: `TODO: question ${n}`, ar: `TODO: السؤال ${n}` },
+    a: { en: `TODO: answer ${n}`, ar: `TODO: الإجابة ${n}` },
+  }));
+
 export const categories: Category[] = [
   {
     slug: "events-hospitality",
@@ -13,6 +26,9 @@ export const categories: Category[] = [
     },
     image: "cat-events-hospitality-4x5",
     imageWide: "cat-events-hospitality-16x9",
+    theme: "evening",
+    intro: placeholderIntro(),
+    faq: placeholderFaq(),
   },
   {
     slug: "creative-production",
@@ -24,6 +40,9 @@ export const categories: Category[] = [
     },
     image: "cat-creative-production-4x5",
     imageWide: "cat-creative-production-16x9",
+    theme: "studio",
+    intro: placeholderIntro(),
+    faq: placeholderFaq(),
   },
   {
     slug: "marketing-brand",
@@ -35,6 +54,9 @@ export const categories: Category[] = [
     },
     image: "cat-marketing-brand-4x5",
     imageWide: "cat-marketing-brand-16x9",
+    theme: "editorial",
+    intro: placeholderIntro(),
+    faq: placeholderFaq(),
   },
   {
     slug: "production-print-gifts",
@@ -46,6 +68,9 @@ export const categories: Category[] = [
     },
     image: "cat-production-print-gifts-4x5",
     imageWide: "cat-production-print-gifts-16x9",
+    theme: "workshop",
+    intro: placeholderIntro(),
+    faq: placeholderFaq(),
   },
   {
     slug: "software-digital",
@@ -57,5 +82,8 @@ export const categories: Category[] = [
     },
     image: "cat-software-digital-4x5",
     imageWide: "cat-software-digital-16x9",
+    theme: "interface",
+    intro: placeholderIntro(),
+    faq: placeholderFaq(),
   },
 ];

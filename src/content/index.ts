@@ -9,6 +9,7 @@ import { services } from "./services";
 import type { Category, CategorySlug, ImageSlot, Product, Service } from "./types";
 
 export type * from "./types";
+export * from "./links";
 
 export function getCategories(): Category[] {
   return [...categories].sort((a, b) => a.order - b.order);
@@ -41,4 +42,8 @@ export function getImageSlot(id: string): ImageSlot {
   const slot = imageSlots.find((s) => s.id === id);
   if (!slot) throw new Error(`Unknown image slot: ${id}`);
   return slot;
+}
+
+export function getServiceByAnchor(anchor: string): Service | undefined {
+  return services.find((s) => s.anchor === anchor);
 }
