@@ -10,12 +10,12 @@ import { DirectionProvider } from "@/components/providers/direction-provider";
 import { AnchorScroll } from "@/components/providers/anchor-scroll";
 import { LenisProvider } from "@/components/providers/lenis-provider";
 import { ToneController } from "@/components/providers/tone-controller";
-import { dirOf, routing } from "@/i18n/routing";
+import { SITE_URL } from "@/config/site";
+import { dirOf, routing, type AppLocale } from "@/i18n/routing";
 import { FONT_PRELOADS } from "@/lib/fonts";
+import { localeAlternates } from "@/lib/seo";
 import "../fonts.css";
 import "../globals.css";
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 /**
  * Runs before first paint: marks JS as available and records reduced motion, so
@@ -38,13 +38,10 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
   return {
-    metadataBase: new URL(siteUrl),
+    metadataBase: new URL(SITE_URL),
     title: { default: t("title"), template: `%s · ${t("title")}` },
     description: t("description"),
-    alternates: {
-      canonical: `/${locale}`,
-      languages: { en: "/en", ar: "/ar", "x-default": "/en" },
-    },
+    alternates: localeAlternates(locale as AppLocale, ""),
   };
 }
 

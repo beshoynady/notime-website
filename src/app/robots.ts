@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+import { SITE_URL as siteUrl } from "@/config/site";
 
 /**
  * Everything is crawlable. The styleguide is kept out of search with a `noindex` robots

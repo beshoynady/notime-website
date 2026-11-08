@@ -14,3 +14,12 @@ export const serviceHref = (s: Pick<Service, "category" | "anchor">) => `${categ
 /** The category page's quote form, preset to this service (`?service=<anchor>`). */
 export const quoteHref = (s: Pick<Service, "category" | "anchor">) =>
   `${categoryHref(s.category)}?service=${s.anchor}#quote`;
+
+/** Labels for breadcrumbs (visible and JSON-LD). */
+export const BREADCRUMB_LABELS = {
+  home: { en: "Home", ar: "الرئيسية" },
+  services: { en: "Services", ar: "الخدمات" },
+} as const;
+
+/** The organization as JSON-LD names it: name and URL only, nothing unconfirmed. */
+export const ORGANIZATION_NAME = "NO TIME Creative House";

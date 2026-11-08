@@ -1,0 +1,142 @@
+/* Category pages · the shared skeleton (docs/design/category-pages.md §4). Quiet on purpose:
+   each theme (Task 2.5, then per category) dresses it through tokens on main[data-theme].
+   Unlayered: spacing for these classes lives here, not in utilities on the same element. */
+
+/* Hero shell */
+.cat-hero {
+  padding-block: calc(var(--header-h) + clamp(28px, 4vw, 56px)) clamp(48px, 7vw, 96px);
+}
+.crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8rem;
+}
+.crumbs li + li::before {
+  content: "/";
+  margin-inline-end: 10px;
+  opacity: 0.45;
+}
+.crumbs a {
+  text-decoration: none;
+  opacity: 0.75;
+}
+.crumbs a:hover,
+.crumbs a:focus-visible {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.cat-hero-head {
+  display: grid;
+  gap: 24px;
+  margin-block: clamp(40px, 6vw, 80px) clamp(32px, 4vw, 56px);
+}
+.cat-hero-head h1 {
+  margin: 20px 0 0;
+}
+.cat-hero-eyebrow,
+.cat-hero-intro {
+  opacity: 0.85;
+}
+.cat-hero-intro {
+  margin: 0;
+}
+@media (min-width: 900px) {
+  .cat-hero-head {
+    grid-template-columns: 7fr 5fr;
+    align-items: end;
+  }
+  .cat-hero-intro {
+    padding-block-end: 0.5em;
+  }
+}
+.cat-hero-image {
+  border-radius: var(--radius);
+}
+
+/* Body: the service index column (Task 2.3) and the six sections */
+.cat-body {
+  padding-block-end: var(--section-pad);
+}
+@media (min-width: 900px) {
+  .cat-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+    column-gap: 24px;
+  }
+  .cat-sections {
+    grid-column: 2;
+  }
+}
+
+/* Service section */
+.svc {
+  display: grid;
+  gap: 32px;
+  padding-block: clamp(56px, 8vw, 120px);
+  border-block-start: 1px solid var(--border);
+}
+[data-tone="dark"] .svc {
+  border-color: var(--color-line-dark);
+}
+.svc:first-child {
+  border-block-start: 0;
+  padding-block-start: clamp(16px, 3vw, 40px);
+}
+.svc-head {
+  display: grid;
+  gap: 16px;
+}
+.svc-num {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  opacity: 0.7;
+}
+.svc-title {
+  margin: 0;
+  font-size: clamp(1.9rem, 3.6vw, 3rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.svc-title:lang(ar) {
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+.svc-intro {
+  margin: 0;
+  opacity: 0.85;
+}
+.svc-deliver h3 {
+  margin: 0 0 16px;
+  opacity: 0.7;
+}
+.svc-deliver ul {
+  display: grid;
+  gap: 10px 32px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-inline-size: 760px;
+}
+.svc-deliver li {
+  padding-block-start: 10px;
+  border-block-start: 1px solid var(--border);
+  line-height: 1.5;
+}
+[data-tone="dark"] .svc-deliver li {
+  border-color: var(--color-line-dark);
+}
+@media (min-width: 640px) {
+  .svc-deliver ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.svc-quote {
+  justify-self: start;
+}

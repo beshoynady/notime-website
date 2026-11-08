@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getServiceByAnchor } from "./index";
-import { categoryHref, quoteHref, serviceHref } from "./index";
+import { categoryHref, getServiceByAnchor, quoteHref, serviceHref } from "./index";
 
 describe("links (D57)", () => {
   it("builds locale-less hrefs for next-intl's Link", () => {

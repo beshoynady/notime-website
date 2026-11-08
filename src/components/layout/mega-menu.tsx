@@ -7,6 +7,7 @@ import { useMegaMenu } from "@/hooks/use-mega-menu";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { Link } from "@/i18n/navigation";
 import { BrandImage } from "@/components/ui/brand-image";
+import { Numeral } from "@/components/ui/numeral";
 import { ease } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import type { MenuData } from "./menu-data";
@@ -30,18 +31,6 @@ const serviceVariants: Variants = {
   hidden: { y: 10, opacity: 0 },
   shown: { y: 0, opacity: 1, transition: { duration: 0.45, ease: ease.power3Out } },
 };
-
-/**
- * Roman numerals are always set in Montserrat: in Alexandria, Latin I and V look like
- * the Arabic-Indic digits ١ and ٧, so "IV" would read as "١٧".
- */
-export function Numeral({ children, className }: { children: string; className?: string }) {
-  return (
-    <span lang="en" className={cn("font-en tabular", className)}>
-      {children}
-    </span>
-  );
-}
 
 /** Directional arrow that mirrors in RTL. */
 function Arrow({ className }: { className?: string }) {

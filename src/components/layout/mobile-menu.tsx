@@ -10,7 +10,8 @@ import { Link } from "@/i18n/navigation";
 import { ease } from "@/lib/motion";
 import { setOverlayOpen } from "@/lib/overlay";
 import { cn } from "@/lib/utils";
-import { Numeral, ProductStrip } from "./mega-menu";
+import { Numeral } from "@/components/ui/numeral";
+import { ProductStrip } from "./mega-menu";
 import type { MenuData } from "./menu-data";
 import { NAV_LINKS, QUOTE_HREF } from "./nav-links";
 

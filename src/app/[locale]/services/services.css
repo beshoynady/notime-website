@@ -1,0 +1,125 @@
+/* /services overview: a typographic directory. The roman numerals are the categories' real
+   order (I–V, as in the menus and the homepage cards). Unlayered: spacing for these classes
+   lives here, not in utilities on the same element. */
+
+.svx {
+  padding-block: calc(var(--header-h) + clamp(48px, 8vw, 112px)) var(--section-pad);
+}
+.svx-head {
+  display: grid;
+  gap: 24px;
+  margin-block-end: clamp(48px, 7vw, 96px);
+}
+.svx-head h1 {
+  margin: 20px 0 0;
+}
+.svx-head h1 b {
+  display: block;
+}
+.svx-intro {
+  margin: 0;
+  color: var(--color-cocoa);
+}
+@media (min-width: 900px) {
+  .svx-head {
+    grid-template-columns: 7fr 5fr;
+    align-items: end;
+  }
+  .svx-intro {
+    padding-block-end: 0.5em;
+  }
+}
+
+.svx-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-block-end: 1px solid var(--color-line-light);
+}
+.svx-row {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  gap: 16px 0;
+  padding-block: clamp(28px, 4vw, 48px);
+  border-block-start: 1px solid var(--color-line-light);
+}
+.svx-num {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: var(--color-cocoa);
+  padding-block-start: 0.7em;
+}
+.svx-title {
+  margin: 0;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 300;
+  line-height: 1.15;
+}
+.svx-title:lang(ar) {
+  line-height: 1.45;
+}
+/* Inline, not flex: when a title wraps, the arrow follows its last word. */
+.svx-title a {
+  text-decoration: none;
+}
+.svx-arrow {
+  display: inline-block;
+  vertical-align: -0.04em;
+  margin-inline-start: 0.4em;
+  inline-size: 0.7em;
+  block-size: 0.7em;
+  color: var(--color-cocoa);
+  transition: translate 0.5s var(--ease-expo-out);
+}
+.svx-title a:hover .svx-arrow,
+.svx-title a:focus-visible .svx-arrow {
+  translate: 6px 0;
+}
+[dir="rtl"] .svx-title a:hover .svx-arrow,
+[dir="rtl"] .svx-title a:focus-visible .svx-arrow {
+  translate: -6px 0;
+}
+.svx-summary {
+  margin: 12px 0 0;
+  max-inline-size: 44ch;
+  color: var(--color-cocoa);
+  line-height: 1.6;
+}
+.svx-count {
+  margin: 16px 0 0;
+  color: var(--color-cocoa);
+}
+.svx-services {
+  grid-column: 2;
+  display: grid;
+  gap: 12px 32px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.svx-services .text-link {
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+@media (min-width: 640px) {
+  .svx-services {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1100px) {
+  .svx-row {
+    grid-template-columns: 5rem minmax(0, 5fr) minmax(0, 6fr);
+    column-gap: 32px;
+  }
+  .svx-services {
+    grid-column: 3;
+    margin-block-start: 0.6em;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .svx-arrow {
+    transition: none;
+  }
+}

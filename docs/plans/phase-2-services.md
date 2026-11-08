@@ -130,6 +130,8 @@ e2e/category-*.spec.ts, e2e/modules/<key>.spec.ts
 
 ### Task 2.2: Routes, overview page, metadata, sitemap, JSON-LD
 
+> Done 2026-11-08 (D60). Under Cache Components `dynamicParams` does not exist: unknown slugs get a 404 from the proxy. Arabic OG text is pre-shaped for satori.
+
 **Files:**
 - Create: `src/app/[locale]/services/page.tsx`, `src/app/[locale]/services/[category]/page.tsx`, `.../opengraph-image.tsx`, `src/lib/jsonld.ts` and its test.
 - Modify: `src/app/sitemap.ts`, `e2e/overflow.spec.ts` (add the 6 pages).
@@ -138,25 +140,25 @@ e2e/category-*.spec.ts, e2e/modules/<key>.spec.ts
 - `categoryJsonLd(c: Category, services: Service[], locale: Locale, siteUrl: string): object[]` returns `[ItemList, FAQPage, BreadcrumbList]`.
 - `overviewJsonLd(categories: Category[], locale: Locale, siteUrl: string): object[]`.
 
-- [ ] **Step 1:** Write failing tests in `jsonld.test.ts`:
+- [x] **Step 1:** Write failing tests in `jsonld.test.ts`:
   - `ItemList.itemListElement` has 6 entries for events.
   - Entry 1's `item["@id"]` is `"https://x.test/en/services/events-hospitality#conferences"`, and its `provider["@id"]` is `"https://x.test/#organization"`.
   - FAQPage `mainEntity` length equals `faq.length`.
   - Breadcrumb names are `["Home","Services","Events & Hospitality"]` in EN and `["الرئيسية","الخدمات","الفعاليات والضيافة"]` in AR.
   - There is no `aggregateRating` and no `areaServed` key anywhere.
-- [ ] **Step 2:** Run it. Expected: FAIL.
-- [ ] **Step 3:** Implement `jsonld.ts`.
+- [x] **Step 2:** Run it. Expected: FAIL.
+- [x] **Step 3:** Implement `jsonld.ts`.
   - The routes use `generateStaticParams` over the categories; an unknown category calls `notFound()`.
   - `generateMetadata` sets title, description, canonical, and `alternates.languages` (en, ar, x-default).
   - The OG image comes from `ImageResponse` (espresso ground, champagne numeral, ivory title; Alexandria for AR).
   - The overview lists the categories with all services linked by `serviceHref`.
   - Add `"/services"` and the 5 category paths to `PAGES` in `sitemap.ts`.
   - Run `npx next typegen` after adding the routes (`PageProps<"/[locale]/services/[category]">`).
-- [ ] **Step 4:** Check the build and tests.
+- [x] **Step 4:** Check the build and tests.
   - `npm run build`: the 12 new pages prerender static (○).
   - `npx vitest run`: PASS.
   - `/sitemap.xml` has 14 URLs (home plus 6 pages, × 2 locales).
-- [ ] **Step 5:** Commit `feat(services): overview and category routes, metadata, JSON-LD, sitemap`.
+- [x] **Step 5:** Commit `feat(services): overview and category routes, metadata, JSON-LD, sitemap`.
 
 ### Task 2.3: Anchor offsets, the service index and scrollspy
 

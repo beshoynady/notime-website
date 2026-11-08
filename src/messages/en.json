@@ -100,6 +100,36 @@
     "viewServices": "View services",
     "allServices": "See all services"
   },
+  "services": {
+    "meta": {
+      "title": "Services",
+      "description": "Every NO TIME service in one place, across five categories: events and hospitality, creative production, marketing and brand, production, print and gifts, and software and digital."
+    },
+    "eyebrow": "Services",
+    "headingLead": "Everything we make,",
+    "headingKey": "in one place.",
+    "intro": "Five categories, each with its own page. Open a category to see how we work in it, or go straight to a service.",
+    "listLabel": "Service categories"
+  },
+  "category": {
+    "breadcrumb": "Breadcrumb",
+    "indexLabel": "Services in this category",
+    "deliverTitle": "What we deliver",
+    "quoteCta": "Request a quote",
+    "quoteCtaFor": "Request a quote for {service}",
+    "faqEyebrow": "Questions",
+    "faqHeading": "Common questions",
+    "quote": {
+      "eyebrow": "Request a quote",
+      "headingLead": "Tell us what you're planning.",
+      "headingKey": "We'll take it from there.",
+      "body": "The online quote form is on its way. Until then, message us on WhatsApp or by email, and we'll come back to you with the next steps.",
+      "service": "Service: {service}",
+      "whatsapp": "Chat on WhatsApp",
+      "email": "Email us",
+      "contactPending": "Our contact details will appear here soon."
+    }
+  },
   "work": {
     "eyebrow": "Our work",
     "headingLead": "Real projects,",
