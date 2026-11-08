@@ -11,3 +11,14 @@ export function unknownCategoryLocale(pathname: string, slugs: readonly string[]
   if (!m || !(routing.locales as readonly string[]).includes(m[1])) return null;
   return slugs.includes(m[2]) ? null : m[1];
 }
+
+/**
+ * `/<locale>/lab…` that must answer 404 → the locale, else null: every lab path while the lab is
+ * off (NEXT_PUBLIC_ENABLE_LAB), and any path that isn't one of its pages while it's on. Same
+ * reason as above: the lab page's notFound() would stream with a 200.
+ */
+export function closedLabLocale(pathname: string, pages: readonly string[], enabled: boolean): string | null {
+  const m = /^\/([^/]+)\/lab(?:\/(.*?))?\/?$/.exec(pathname);
+  if (!m || !(routing.locales as readonly string[]).includes(m[1])) return null;
+  return enabled && pages.includes(m[2] ?? "") ? null : m[1];
+}

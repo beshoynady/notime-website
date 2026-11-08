@@ -341,6 +341,8 @@ e2e/category-*.spec.ts, e2e/opening.spec.ts, e2e/forms.spec.ts, e2e/software-pag
 
 ### Task 2.7: `<LayeredScene>` and the scene math
 
+**Done (D68).** As built: `src/lib/scene-math.ts` exports `pinLength`, `shotAt`, `layerDrift(depth, push, progress)`, `enterFrom(from, dir)`, `stillState(layer)` and `sceneProblems(scene)` (the limits are checked as data, so a config test lists every problem instead of throwing). `<LayeredScene scene lines variant="live" | "animatic">` with `SceneDirector` (client, GSAP); the still is not a variant: it is the CSS state without JS or under reduced motion. L3 atmosphere is CSS (`fx-shade`, `fx-glow`, `fx-beam`), so there is no `atmosphere.tsx`. The e2e runs on the lab route (Task 2.9), not a styleguide fixture. Shot indexes are 0-based (`data-shot-active="2"` is the third shot).
+
 **Files:**
 - Create: `src/lib/scene-math.ts` (+ test), `src/content/scenes/types.ts`, `src/components/scenes/{layered-scene.tsx,layered-scene.css,atmosphere.tsx}`.
 - Test: `e2e/layered-scene.spec.ts`, run on a styleguide fixture (`/[locale]/styleguide#scene`).
@@ -361,7 +363,7 @@ e2e/category-*.spec.ts, e2e/opening.spec.ts, e2e/forms.spec.ts, e2e/software-pag
   - Shot copy renders as one `<p>` per shot in DOM order. Only the active one is visible, except in the still, which shows them all.
   - Images go through `BrandImage`. `loading` is eager only for shot-1 layers flagged within budget; there's never a `priority`.
 
-- [ ] **Step 1:** Write the unit tests:
+- [x] **Step 1:** Write the unit tests:
   - `layerTransform(0, 1, 1)` is `{x:0, y:0, scale:1}`;
   - `layerTransform(1, 0.5, 1).y` is −7;
   - an `enter.from.x` of 30 gives +30 in EN and −30 in AR;
@@ -374,12 +376,14 @@ e2e/category-*.spec.ts, e2e/opening.spec.ts, e2e/forms.spec.ts, e2e/software-pag
   - motion: after scrolling to the shot-3 range, `[data-shot-active]` is 3;
   - AR: a layer entering from inline-start starts with a positive `translateX` in RTL;
   - the H1 is the LCP element (PerformanceObserver `largest-contentful-paint` entry's element is the `h1`) at 390 and 1440.
-- [ ] **Step 2:** Run. Expected: FAIL.
-- [ ] **Step 3:** Implement.
-- [ ] **Step 4:** Run. Expected: PASS.
-- [ ] **Step 5:** Commit `feat(scenes): LayeredScene with depth parallax, animatic and still variants`.
+- [x] **Step 2:** Run. Expected: FAIL.
+- [x] **Step 3:** Implement.
+- [x] **Step 4:** Run. Expected: PASS.
+- [x] **Step 5:** Commit `feat(scenes): LayeredScene with depth parallax, animatic and still variants`.
 
 ### Task 2.8: The opening shell: index from the first frame, skip control, curtain
+
+**Done (D68).** As built: `CategoryView` (shared by the public page and the lab) renders the opening, then the index on a track over the whole page (`.cat-index-track`, anchor scope on `.cat-page`), then the services. The skip control is a hash link (no JS needed); below 900px it sits at inline-start, clear of the WhatsApp button. Tab order is breadcrumbs → skip → index (the test asserts that sequence rather than "3 stops", since the two breadcrumb links come first). Grain moved to the page box. `Category.imageWide`, the hero and the two cancelled slots are gone.
 
 **Files:**
 - Create: `src/components/category/category-opening.tsx`.
@@ -392,7 +396,7 @@ e2e/category-*.spec.ts, e2e/opening.spec.ts, e2e/forms.spec.ts, e2e/software-pag
 - **Mobile chip bar:** under the header from the first frame.
 - **The skip control hides** (`inert` plus opacity) once the opening has scrolled past.
 
-- [ ] **Step 1:** Write the e2e tests, Events page, EN and AR, desktop and mobile:
+- [x] **Step 1:** Write the e2e tests, Events page, EN and AR, desktop and mobile:
   - At load, the rail (desktop) or the chip bar (mobile) is visible and its first link is reachable with Tab within 3 stops after the header.
   - "Skip to services" with Enter lands `#conferences` within ±4px, H2 focused.
   - Rail VI clicked at 0.5 vh into the opening lands `#stage` within ±4px.
@@ -400,12 +404,14 @@ e2e/category-*.spec.ts, e2e/opening.spec.ts, e2e/forms.spec.ts, e2e/software-pag
   - The measured pin length (pin spacer height minus the viewport) is ≤ 2.0 vh desktop and ≤ 1.2 vh mobile.
   - No horizontal overflow at 360 in the opening.
   - Reduced motion: no pin spacer, the skip control still works.
-- [ ] **Step 2:** Run. Expected: FAIL.
-- [ ] **Step 3:** Implement.
-- [ ] **Step 4:** Run, plus `category-index`, `anchor-scroll`, `category-structure`. Expected: PASS.
-- [ ] **Step 5:** Commit `feat(services): category opening with index from the first frame and skip control`.
+- [x] **Step 2:** Run. Expected: FAIL.
+- [x] **Step 3:** Implement.
+- [x] **Step 4:** Run, plus `category-index`, `anchor-scroll`, `category-structure`. Expected: PASS.
+- [x] **Step 5:** Commit `feat(services): category opening with index from the first frame and skip control`.
 
 ### Task 2.9: Lab route for animatics
+
+**Done (D68).** As built: the proxy answers 404 for the lab while it is off and for unknown ids (`closedLabLocale`, unit-tested); the page keeps `notFound()` as a second guard. The lab also shows the draft scene for a category with no scene yet.
 
 **Files:**
 - Create: `src/app/[locale]/lab/[animatic]/page.tsx`.
@@ -417,11 +423,11 @@ e2e/category-*.spec.ts, e2e/opening.spec.ts, e2e/forms.spec.ts, e2e/software-pag
 - `notFound()` unless `NEXT_PUBLIC_ENABLE_LAB === "1"` at build time.
 - Not in the sitemap, not linked.
 
-- [ ] **Step 1:** Write the tests:
+- [x] **Step 1:** Write the tests:
   - unit: the sitemap has no `/lab/` URL;
   - e2e (built with the flag): the page has `<meta name="robots" content="noindex, nofollow">`, the boxes carry their slot ids, and the index and skip control work.
-- [ ] **Step 2–4:** Fail, implement, pass.
-- [ ] **Step 5:** Commit `feat(lab): hidden animatic route`.
+- [x] **Step 2–4:** Fail, implement, pass.
+- [x] **Step 5:** Commit `feat(lab): hidden animatic route`.
 
 ### Task 2.10: Scene images: slots, grade and export
 
