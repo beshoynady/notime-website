@@ -1,4 +1,4 @@
-import type { Page } from "@playwright/test";
+import { expect, type Page } from "@playwright/test";
 
 /** Navigate and wait until client controllers have hydrated (ToneController marks #page-stage). */
 export async function gotoReady(page: Page, path: string) {
@@ -43,4 +43,49 @@ export async function waitForIntroEnd(page: Page, timeout = 10_000) {
       .catch((e: Error) => ({ evaluateFailed: e.message }));
     throw new Error(`intro did not end within ${timeout} ms: ${JSON.stringify(state)}`, { cause: err });
   }
+}
+
+/** Anchor landings (D53): within ±4px of the lowest covering bar. */
+const TOLERANCE = 4;
+
+/** Target top minus the lowest covering bar's bottom, once the scroll has stopped. */
+export async function landing(page: Page, id: string) {
+  let last = NaN;
+  await expect
+    .poll(
+      async () => {
+        const y = await page.evaluate(() => Math.round(scrollY));
+        const still = y === last;
+        last = y;
+        return still;
+      },
+      { timeout: 8000, intervals: [250] },
+    )
+    .toBe(true);
+  return page.evaluate((id) => {
+    const target = document.getElementById(id)!.getBoundingClientRect().top;
+    const header = document.getElementById("site-header")!.getBoundingClientRect().bottom;
+    const bar = document.querySelector("nav.svc-index")!;
+    const chipBar = matchMedia("(max-width: 899.98px)").matches ? bar.getBoundingClientRect().bottom : 0;
+    return target - Math.max(header, chipBar);
+  }, id);
+}
+
+export async function expectLanded(page: Page, id: string) {
+  const offset = await landing(page, id);
+  expect(Math.abs(offset), `landing offset ${offset}px`).toBeLessThanOrEqual(TOLERANCE);
+  await expect(page.locator(`#${id}-title`)).toBeFocused();
+}
+
+/** The page's LCP entry so far: its element as `TAG#id`, and its url ("" for text). */
+export function lcpEntry(page: Page) {
+  return page.evaluate(
+    () =>
+      new Promise<{ element: string; url: string }>((resolve) => {
+        new PerformanceObserver((list) => {
+          const entry = list.getEntries().at(-1) as PerformanceEntry & { element?: Element; url: string };
+          resolve({ element: `${entry.element?.tagName}#${entry.element?.id}`, url: entry.url });
+        }).observe({ type: "largest-contentful-paint", buffered: true });
+      }),
+  );
 }

@@ -29,8 +29,9 @@ function focusHeading(target: HTMLElement) {
  * Where content starts under the bars that cover the top of the viewport: the lowest bottom of
  * every visible `[data-anchor-offset]` element (the fixed header; the sticky chip bar on mobile
  * category pages). A non-empty attribute value is a media query the element counts under.
- * A sticky bar counts at its stuck position, and only when `target` is inside its container
- * (it scrolls away with that container). Viewport px.
+ * A sticky bar counts at its stuck position, and only when `target` is inside its scope: the
+ * nearest `[data-anchor-scope]` ancestor, else its parent (it scrolls away with that box; the
+ * category index sits in a track beside the content it indexes, so it names its scope). Viewport px.
  */
 export function anchorOffset(target?: Element): number {
   let bottom = 0;
@@ -39,7 +40,8 @@ export function anchorOffset(target?: Element): number {
     if ((media && !matchMedia(media).matches) || !el.checkVisibility()) continue;
     const style = getComputedStyle(el);
     if (style.position === "sticky") {
-      if (target && !el.parentElement?.contains(target)) continue;
+      const scope = el.closest("[data-anchor-scope]") ?? el.parentElement;
+      if (target && !scope?.contains(target)) continue;
       bottom = Math.max(bottom, parseFloat(style.top) + el.offsetHeight);
     } else {
       bottom = Math.max(bottom, el.getBoundingClientRect().bottom);

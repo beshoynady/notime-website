@@ -45,8 +45,6 @@ export interface Category {
   summary: Localized<string>;
   /** 4:5 image slot id (mega menu, cards). */
   image: string;
-  /** 16:9 image slot id (category headers). */
-  imageWide: string;
   /** Category page design (D57, docs/design/category-pages.md §5). */
   theme: CategoryTheme;
   /** Page intro under the H1 (2–3 sentences). */

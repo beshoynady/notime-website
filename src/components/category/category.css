@@ -2,9 +2,23 @@
    each theme (Task 2.5, then per category) dresses it through tokens on main[data-theme].
    Unlayered: spacing for these classes lives here, not in utilities on the same element. */
 
-/* Hero shell */
-.cat-hero {
-  padding-block: calc(var(--header-h) + clamp(28px, 4vw, 56px)) clamp(48px, 7vw, 96px);
+/* Act 1 · the opening (CategoryOpening). Its overlay is a `frame`: at ≥ 900px the content
+   starts at the sections' column and leaves the first column to the rail (the index track). */
+@media (max-width: 899.98px) {
+  .cat-opening {
+    --scene-top-extra: 58px; /* the chip bar under the header, from the first frame */
+  }
+}
+.cat-opening-static {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 16px;
+  min-block-size: min(64svh, 640px);
+  padding-block: calc(var(--header-h) + var(--scene-top-extra, 0px) + 24px) clamp(40px, 6vw, 72px);
+}
+.cat-opening-overlay > .crumbs {
+  margin-block-end: auto;
 }
 .crumbs ol {
   display: flex;
@@ -30,35 +44,91 @@
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-.cat-hero-head {
-  display: grid;
-  gap: 24px;
-  margin-block: clamp(40px, 6vw, 80px) clamp(32px, 4vw, 56px);
+.cat-opening-head h1 {
+  margin: 16px 0 0;
 }
-.cat-hero-head h1 {
-  margin: 20px 0 0;
-}
-.cat-hero-eyebrow,
-.cat-hero-intro {
+.cat-opening-eyebrow,
+.cat-opening-intro {
   opacity: 0.85;
 }
-.cat-hero-intro {
+.cat-opening-intro {
   margin: 0;
+  max-inline-size: 56ch;
+}
+/* "Skip to services": a quiet text control at the opening's bottom, inline-end. Second in the
+   DOM (after the H1), last on screen (order). */
+.cat-skip {
+  order: 1;
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-block-size: 44px;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.3s var(--ease-expo-out);
+}
+.cat-skip:hover,
+.cat-skip:focus-visible {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+/* Below 900px inline-end belongs to the floating WhatsApp button: the skip sits at inline-start. */
+@media (max-width: 899.98px) {
+  .cat-skip {
+    align-self: flex-start;
+  }
 }
 @media (min-width: 900px) {
-  .cat-hero-head {
-    grid-template-columns: 7fr 5fr;
-    align-items: end;
+  .cat-opening-overlay > * {
+    margin-inline-start: calc((100% - 24px) * 0.25 + 24px);
   }
-  .cat-hero-intro {
-    padding-block-end: 0.5em;
-  }
-}
-.cat-hero-image {
-  border-radius: var(--radius);
 }
 
-/* Body: the service index column (Task 2.3) and the six sections */
+/* The index track: spans the opening and the services, so the index shows from the first frame
+   and stays sticky to the end (storyboards README §2). Only the index takes pointer events. */
+.cat-page {
+  position: relative;
+}
+/* The page box carries the grain (CategoryView), so its sections are see-through. Before the
+   tone controller runs (or without JS) the box holds the ground the sections would have held. */
+.cat-page > section[data-tone] {
+  background-color: transparent;
+}
+#page-stage:not([data-tone-ready]) .cat-page[data-tone="dark"] {
+  background-color: var(--color-espresso);
+}
+#page-stage:not([data-tone-ready]) .cat-page[data-tone="light"] {
+  background-color: var(--color-ivory);
+}
+.cat-index-track {
+  --theme-scrim: rgba(245, 233, 211, 0.6);
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+}
+.cat-index-track[data-tone="dark"] {
+  --theme-scrim: rgba(46, 32, 23, 0.55);
+}
+.cat-index-frame {
+  block-size: 100%;
+}
+.cat-index-track .svc-index {
+  pointer-events: auto;
+}
+@media (min-width: 900px) {
+  .cat-index-frame {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+    column-gap: 24px;
+  }
+}
+
+/* Body: the six sections, in the second column (the first is the rail's, on the track) */
 .cat-body {
   padding-block-end: var(--section-pad);
 }
@@ -219,13 +289,15 @@
     top: calc(var(--header-h) + 24px);
     align-self: start;
     margin: 0;
-    padding-block-start: clamp(16px, 3vw, 40px);
+    padding-block: 8px;
     border: 0;
-    background: none;
+    border-radius: var(--radius);
     backdrop-filter: none;
   }
+  /* The rail's scrim, tuned per tone on the track: it keeps the rail legible over the opening. */
+  .svc-index,
   [data-tone="dark"] .svc-index {
-    background: none;
+    background: var(--theme-scrim, none);
   }
   .svc-index ol {
     flex-direction: column;

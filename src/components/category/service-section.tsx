@@ -11,7 +11,7 @@ import { toRoman } from "@/lib/roman";
  * anchor utility focuses the heading on arrival (D53). Its signature module loads into a slot
  * around a static fallback (Task 2.4). The related-work row (real work only, OQ #17) joins later.
  */
-export async function ServiceSection({ service, tone }: { service: Service; tone: "dark" | "light" }) {
+export async function ServiceSection({ service, tone, lab = false }: { service: Service; tone: "dark" | "light"; lab?: boolean }) {
   const locale = (await getLocale()) as Locale;
   const t = await getTranslations("category");
   const title = service.title[locale];
@@ -34,9 +34,16 @@ export async function ServiceSection({ service, tone }: { service: Service; tone
           ))}
         </ul>
       </div>
-      <ModuleSlot moduleKey={service.signatureModule} titleId={titleId} service={service} locale={locale}>
-        <ModulePlaceholder />
-      </ModuleSlot>
+      {lab ? (
+        // The animatic (lab route, never public): a flat box named by its module key.
+        <div className="svc-module module-placeholder" data-module={service.signatureModule}>
+          <p className="text-eyebrow">{service.signatureModule}</p>
+        </div>
+      ) : (
+        <ModuleSlot moduleKey={service.signatureModule} titleId={titleId} service={service} locale={locale}>
+          <ModulePlaceholder />
+        </ModuleSlot>
+      )}
       <ButtonLink
         href={quoteHref(service)}
         variant={tone === "dark" ? "primary" : "dark"}

@@ -20,7 +20,6 @@ describe("categories", () => {
         expect(c.summary[l].trim(), `${c.slug}.summary.${l}`).not.toBe("");
       }
       expect(getImageSlot(c.image).aspect).toBe("4:5");
-      expect(getImageSlot(c.imageWide).aspect).toBe("16:9");
     }
   });
 
@@ -191,9 +190,10 @@ describe("image slots", () => {
   });
 
   // Task 14: every slot has exactly one art-direction entry (`### \`<id>\``) and vice versa.
+  // Entries headed "(cancelled, Dnn)" stay in the doc as a record and have no slot (D67).
   it("matches docs/content/image-prompts.md one to one", () => {
     const doc = readFileSync(path.join(process.cwd(), "docs", "content", "image-prompts.md"), "utf8");
-    const documented = [...doc.matchAll(/^### `([a-z0-9-]+)`/gm)].map((m) => m[1]);
+    const documented = [...doc.matchAll(/^### `([a-z0-9-]+)`(?! \(cancelled)/gm)].map((m) => m[1]);
     expect(new Set(documented).size, "duplicate entries in image-prompts.md").toBe(documented.length);
     expect([...documented].sort()).toEqual(getImageSlots().map((s) => s.id).sort());
     // The documented alt texts are the ones the site renders.

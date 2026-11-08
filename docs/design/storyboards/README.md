@@ -31,7 +31,7 @@ ACT 3  CLOSING      related work (real only) → FAQ → final CTA with a booken
   - **Mobile:** the chip bar sits under the header from the first frame.
   - Choosing a service lands on it through the anchor utility (D53) and leaves the opening in its end state.
 - **"Skip to services" / «انتقل إلى الخدمات»:**
-  - A quiet text button with a down arrow at the opening's bottom, at inline-end.
+  - A quiet text link with a down arrow at the opening's bottom: inline-end on desktop, inline-start on mobile (inline-end there belongs to the floating WhatsApp button). D68.
   - In the DOM it comes right after the H1, so it's the first stop for keyboard users after the header.
   - It lands on the first service's H2.
   - It hides once the opening has scrolled past.

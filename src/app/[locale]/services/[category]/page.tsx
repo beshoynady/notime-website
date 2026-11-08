@@ -1,17 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getTranslations } from "next-intl/server";
-import { CategoryHero } from "@/components/category/category-hero";
-import { ServiceIndex } from "@/components/category/service-index";
-import { ServiceSection } from "@/components/category/service-section";
-import { THEME_TONE } from "@/components/category/theme";
-import { JsonLd } from "@/components/seo/json-ld";
-import { SITE_URL } from "@/config/site";
-import { categoryHref, getCategories, getCategory, getServices, type CategorySlug, type Locale } from "@/content";
+import { CategoryView } from "@/components/category/category-view";
+import { categoryHref, getCategories, getCategory, type CategorySlug, type Locale } from "@/content";
+import { getScene } from "@/content/scenes";
 import { localeAlternates } from "@/lib/seo";
-import { categoryJsonLd } from "@/lib/jsonld";
-import { toRoman } from "@/lib/roman";
-import "@/components/category/category.css";
 
 /**
  * The five category pages (D57), prerendered. Under Cache Components `dynamicParams` is not
@@ -39,25 +31,5 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/services
 
 export default async function CategoryPage({ params }: PageProps<"/[locale]/services/[category]">) {
   const { locale, category } = await resolve(params);
-  const services = getServices(category.slug);
-  const tone = THEME_TONE[category.theme];
-  const t = await getTranslations("category");
-  const index = services.map((s) => ({ anchor: s.anchor, numeral: toRoman(s.order), title: s.title[locale] }));
-  return (
-    <main id="main" data-theme={category.theme}>
-      <JsonLd data={categoryJsonLd(category, services, locale, SITE_URL)} />
-      <CategoryHero category={category} serviceCount={services.length} />
-      <section data-tone={tone} className="cat-body">
-        <div className="cat-layout frame">
-          <ServiceIndex items={index} label={t("indexLabel")} />
-          <div className="cat-sections">
-            {services.map((s) => (
-              <ServiceSection key={s.slug} service={s} tone={tone} />
-            ))}
-          </div>
-        </div>
-      </section>
-      {/* TODO: replace placeholder — FAQ and the quote block (#quote) arrive in Task 2.5. */}
-    </main>
-  );
+  return <CategoryView category={category} locale={locale} scene={getScene(category.slug)} />;
 }

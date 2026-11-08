@@ -94,19 +94,6 @@ export const imageSlots: ImageSlot[] = [
       ar: "مواد هوية على مكتب: عيّنات ورق ودرجات ألوان ودفتر مغلق.",
     },
   },
-  // TODO: swap to real photo after approval (OQ #17; image-prompts.md names the photo).
-  {
-    id: "cat-marketing-brand-16x9",
-    kind: "ai",
-    aspect: "16:9",
-    src: null,
-    paint: "brand",
-    illustrative: false,
-    alt: {
-      en: "A calm studio desk with brand boards pinned to a wall in late-afternoon light.",
-      ar: "مكتب هادئ ولوحات هوية مثبّتة على الجدار في ضوء آخر النهار.",
-    },
-  },
   // TODO: swap to real photo after approval: the UAE Pro League gift photos (uae-pro-league-5; p24-1 gift box once a clean original arrives, OQ #21). OQ #17.
   {
     id: "cat-production-print-gifts-4x5",
@@ -158,19 +145,6 @@ export const imageSlots: ImageSlot[] = [
     alt: {
       en: "A clean workspace at night, a laptop screen glowing softly out of focus.",
       ar: "مساحة عمل مرتّبة ليلًا، وشاشة حاسوب تتوهّج بنعومة خارج التركيز.",
-    },
-  },
-  // TODO: swap to real photo after approval (OQ #17; image-prompts.md names the photo).
-  {
-    id: "cat-software-digital-16x9",
-    kind: "ai",
-    aspect: "16:9",
-    src: null,
-    paint: "code",
-    illustrative: false,
-    alt: {
-      en: "A wide, minimal software workspace with two screens in warm ambient light.",
-      ar: "مساحة عمل برمجية واسعة وبسيطة بشاشتين تحت إضاءة محيطة دافئة.",
     },
   },
 
