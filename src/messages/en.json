@@ -424,5 +424,15 @@
       "s3": "Tables, flowers and candlelight, each in place.",
       "s4": "Every detail, ready before the first guest."
     }
+  },
+  "legal": {
+    "eyebrow": "Legal",
+    "updated": "Last updated:",
+    "contents": "On this page",
+    "description": {
+      "privacy": "What personal data NO TIME Creative House collects through this website, why, who processes it, and your rights.",
+      "terms": "The terms that apply when you use the NO TIME Creative House website.",
+      "cookies": "The cookies and similar storage this website uses, and your choices."
+    }
   }
 }
