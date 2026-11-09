@@ -1,8 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
-import { SERVICES_HREF } from "@/components/layout/nav-links";
 import { BrandImage } from "@/components/ui/brand-image";
-import { getCategories, getServices, type Locale } from "@/content";
+import { categoryHref, getCategories, getServices, type Locale } from "@/content";
 import { Link } from "@/i18n/navigation";
 import { orderNumeral } from "@/lib/roman";
 import { CategoryCardsScroll } from "./category-cards-scroll";
@@ -19,8 +18,7 @@ export async function CategoryCards() {
   return (
     <CategoryCardsScroll>
       {getCategories().map((c, i) => (
-        // TODO: replace placeholder — link to the category page once the Phase 2 routes exist.
-        <Link key={c.slug} href={SERVICES_HREF} className={i === 0 ? "cat is-on" : "cat"}>
+        <Link key={c.slug} href={categoryHref(c.slug)} className={i === 0 ? "cat is-on" : "cat"}>
           <div className="cat-media">
             {/* Open card: about 55% of the 1280px frame (≈ 700px); closed or stacked: full width on phones. */}
             <BrandImage slot={c.image} fill sizes="(min-width: 1280px) 700px, (min-width: 900px) 55vw, 100vw" />

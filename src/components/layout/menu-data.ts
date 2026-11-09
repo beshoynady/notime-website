@@ -1,6 +1,5 @@
-import { getCategories, getProducts, getServiceCount, getServices, type CategorySlug, type Locale } from "@/content";
+import { categoryHref, getCategories, getProducts, getServiceCount, getServices, SERVICES_INDEX_HREF, serviceHref, type CategorySlug, type Locale } from "@/content";
 import { orderNumeral } from "@/lib/roman";
-import { SERVICES_HREF } from "./nav-links";
 
 /** Serializable, localized menu data built on the server and passed to the client menus. */
 export interface MenuCategory {
@@ -19,9 +18,8 @@ export interface MenuData {
   allServicesHref: string;
 }
 
-// TODO: replace placeholder — category, service and product pages arrive in a later phase;
-// until then every menu link points at the homepage services section.
-const DIGITAL_ANCHOR = "/#digital";
+// The products live on the Software & Digital page; its products block (Task 4.3) gets an anchor then.
+const PRODUCTS_HREF = categoryHref("software-digital");
 
 export function getMenuData(locale: Locale): MenuData {
   return {
@@ -31,11 +29,11 @@ export function getMenuData(locale: Locale): MenuData {
       title: c.title[locale],
       summary: c.summary[locale],
       image: c.image,
-      href: SERVICES_HREF,
-      services: getServices(c.slug).map((s) => ({ slug: s.slug, title: s.title[locale], href: SERVICES_HREF })),
+      href: categoryHref(c.slug),
+      services: getServices(c.slug).map((s) => ({ slug: s.slug, title: s.title[locale], href: serviceHref(s) })),
     })),
-    products: getProducts().map((p) => ({ slug: p.slug, name: p.name[locale], href: DIGITAL_ANCHOR })),
+    products: getProducts().map((p) => ({ slug: p.slug, name: p.name[locale], href: PRODUCTS_HREF })),
     serviceCount: getServiceCount(),
-    allServicesHref: SERVICES_HREF,
+    allServicesHref: SERVICES_INDEX_HREF,
   };
 }

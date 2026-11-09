@@ -11,7 +11,7 @@ import { ease } from "@/lib/motion";
 import { setOverlayOpen } from "@/lib/overlay";
 import { cn } from "@/lib/utils";
 import { Numeral } from "@/components/ui/numeral";
-import { ProductStrip } from "./mega-menu";
+import { Arrow, ProductStrip } from "./mega-menu";
 import type { MenuData } from "./menu-data";
 import { NAV_LINKS, QUOTE_HREF } from "./nav-links";
 
@@ -105,6 +105,12 @@ export function MobileMenu({ data }: { data: MenuData }) {
                     </span>
                   </summary>
                   <ul className="m-0 grid list-none p-0 pb-3.5">
+                    <li>
+                      <Link href={c.href} className="flex min-h-11 items-center gap-2 ps-[52px] text-champagne no-underline">
+                        {t("megaMenu.viewCategory")}
+                        <Arrow className="size-3.5" />
+                      </Link>
+                    </li>
                     {c.services.map((s) => (
                       <li key={s.slug}>
                         <Link href={s.href} className="flex min-h-11 items-center ps-[52px] text-ivory/75 no-underline hover:text-champagne">
