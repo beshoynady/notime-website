@@ -27,7 +27,7 @@ Each service has a title and a one-line description in English and Arabic. These
 
 | # | Service | الخدمة | Description | الوصف | |
 |---|---|---|---|---|---|
-| 1 | Conferences & summits | المؤتمرات والقمم | Programme, venue, speakers and the running of the day, planned as one. | البرنامج والمكان والمتحدثون وإدارة اليوم، في خطة واحدة متكاملة. | Unchanged |
+| 1 | Conferences & summits | المؤتمرات والقمم | Programme, venue, speakers and the running of the day, planned as one. | البرنامج والمكان والمتحدثون وإدارة اليوم، في خطة واحدة. | Unchanged |
 | 2 | Exhibitions & booths | المعارض والأجنحة | Stands designed, built and staffed to draw people in. | أجنحة نصمّمها ونبنيها ونديرها لتجذب الزوّار. | Unchanged |
 | 3 | **Product launches & brand activations** | **إطلاق المنتجات وتفعيل العلامات** | Launches and brand activations in malls, venues and exhibitions, including technology and robotics experiences. | إطلاقات وتفعيلات للعلامات في المراكز التجارية والقاعات والمعارض، بما فيها تجارب التقنية والروبوتات. | **Changed:** takes in brand activations |
 | 4 | **Galas & private celebrations** | **الحفلات والاحتفالات الخاصة** | Galas, weddings, baby receptions and intimate gatherings: theming, décor, florals, keepsakes and the full day. | حفلات وأعراس واستقبالات مواليد وتجمّعات عائلية: الفكرة والديكور والزهور والتذكارات، وتنفيذ اليوم كاملًا. | **Changed:** takes in private celebrations |

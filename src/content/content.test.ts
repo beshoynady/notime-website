@@ -1,8 +1,10 @@
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
+import { copyProblems } from "@/lib/copy-rules";
 import { imageSize } from "@/lib/image-size";
 import { getCategories, getCategory, getImageSlot, getImageSlots, getProducts, getServices } from "./index";
+import type { Localized } from "./types";
 
 const locales = ["en", "ar"] as const;
 
@@ -170,6 +172,27 @@ describe("category pages (D57)", () => {
     for (const slug of ["large-format-printing", "corporate-gifts"]) {
       for (const p of points(slug).ar) expect(p.startsWith("TODO:"), p).toBe(false);
     }
+  });
+
+  it("follows the copy rules (copy-rules.ts) in every localized field", () => {
+    const fields = [
+      ...getCategories().flatMap((c) => [
+        [`${c.slug}.title`, c.title],
+        [`${c.slug}.summary`, c.summary],
+        [`${c.slug}.intro`, c.intro],
+        [`${c.slug}.closing`, c.closing],
+        ...c.faq.flatMap((f, i) => [
+          [`${c.slug}.faq.${i}.q`, f.q],
+          [`${c.slug}.faq.${i}.a`, f.a],
+        ]),
+      ]),
+      ...getServices().flatMap((s) => [
+        [`${s.slug}.title`, s.title],
+        [`${s.slug}.summary`, s.summary],
+        ...s.points.en.map((en, i) => [`${s.slug}.points.${i}`, { en, ar: s.points.ar[i] }]),
+      ]),
+    ] as [string, Localized<string>][];
+    expect(fields.flatMap(([k, t]) => [...copyProblems(k, t.en, "en"), ...copyProblems(k, t.ar, "ar")])).toEqual([]);
   });
 
   it("placeholder copy is marked TODO in both locales or in neither", () => {

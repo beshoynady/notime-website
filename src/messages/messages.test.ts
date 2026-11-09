@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs";
+import { copyProblems } from "@/lib/copy-rules";
 import path from "node:path";
 import { createTranslator } from "next-intl";
 import { describe, expect, it } from "vitest";
@@ -82,16 +83,20 @@ describe("messages", () => {
     expect(bad).toEqual([]);
   });
 
-  // Copy deck (Task 13): phrases the brand voice rules out, in both languages.
-  const BANNED = ["elevate", "cutting-edge", "cutting edge", "one-stop", "one stop", "unleash", "الارتقاء بعلامتك", "متطور جدًا", "حلول متكاملة شاملة"];
-
-  it("uses none of the banned phrases", () => {
-    const hits: string[] = [];
-    for (const [k, v] of [...Object.entries(EN), ...Object.entries(AR)]) {
-      const lower = v.toLowerCase();
-      for (const phrase of BANNED) if (lower.includes(phrase)) hits.push(`${k} contains "${phrase}"`);
-    }
+  // Copy decks: phrases the brand voice rules out, and «في الموقع» for on-site (copy-rules.ts).
+  it("follows the copy rules: no banned phrases, no ambiguous «في الموقع»", () => {
+    const hits = [
+      ...Object.entries(EN).flatMap(([k, v]) => copyProblems(k, v, "en")),
+      ...Object.entries(AR).flatMap(([k, v]) => copyProblems(k, v, "ar")),
+    ];
     expect(hits).toEqual([]);
+  });
+
+  it("copy rules catch a banned filler word and an on-site «في الموقع»", () => {
+    expect(copyProblems("x", "في خطة واحدة متكاملة.", "ar")).toHaveLength(1);
+    expect(copyProblems("x", "إدارة العلاقات العامة في الموقع", "ar")).toHaveLength(1);
+    expect(copyProblems("styleguide.closing.body", "كل قسم في الموقع", "ar")).toEqual([]);
+    expect(copyProblems("x", "إدارة العلاقات العامة في أرض الحدث", "ar")).toEqual([]);
   });
 
   it("has every homepage namespace of the copy deck", () => {

@@ -8,10 +8,35 @@ import type { CategorySlug, Localized, ModuleKey, QuoteType, Service } from "./t
 type Row = [slug: string, title: Localized<string>, summary: Localized<string>];
 
 /**
- * Named deliverables the user confirmed (D71), as the service's "what we deliver" points. Every
- * other service keeps the TODO placeholders until its category's copy deck.
+ * "What we deliver" points: the named deliverables the user confirmed (D71), and each category's
+ * points once its copy deck is approved. Every other service keeps the TODO placeholders.
  */
 const NAMED_POINTS: Record<string, Localized<string[]>> = {
+  // Events & Hospitality: copy deck docs/content/category-copy-events.md (approved 2026-11-09).
+  "conferences-summits": {
+    en: ["Programme and running order", "Venue and room layout", "Speaker and guest care", "Event branding on site", "Ceremonies and award nights"],
+    ar: ["البرنامج وتسلسل الفقرات", "المكان وتوزيع القاعة", "استقبال المتحدثين ورعاية الضيوف", "تطبيق هوية الحدث في المكان", "حفلات التكريم وليالي الجوائز"],
+  },
+  "exhibitions-booths": {
+    en: ["Stand concept and design", "Fabrication and installation", "Mall and exhibition stands", "Staffing on the stand", "On-site PR management"],
+    ar: ["فكرة الجناح وتصميمه", "التصنيع والتركيب", "أجنحة المراكز التجارية والمعارض", "فريق عمل الجناح", "إدارة العلاقات العامة في أرض الحدث"],
+  },
+  "product-launches-activations": {
+    en: ["Launch concept and the reveal", "Brand activations in malls and venues", "Technology and robotics experiences", "Sponsor activations", "Branded environments"],
+    ar: ["فكرة الإطلاق ولحظة الكشف", "تفعيل العلامات في المراكز التجارية والقاعات", "تجارب التقنية والروبوتات", "تفعيلات الرعاة", "مساحات بهوية العلامة"],
+  },
+  "galas-private-celebrations": {
+    en: ["Concept decks and theming", "Gala and wedding décor", "Floral design and styling", "Giveaways and keepsakes", "Photobooths and guest moments", "Full on-day production"],
+    ar: ["ملف الفكرة واختيار الطابع", "ديكور الحفلات والأعراس", "تصميم الزهور وتنسيق المكان", "الهدايا والتذكارات", "ركن التصوير ولحظات الضيوف", "تنفيذ اليوم كاملًا"],
+  },
+  "catering-heritage-hospitality": {
+    en: ["Majlis setups and desert tents", "Arabic coffee and welcome ceremonies", "Heritage carts and live stations", "Signature desserts and beverages", "Buffet and table styling", "Private service and boardroom hospitality"],
+    ar: ["تجهيز المجالس والخيام الصحراوية", "القهوة العربية ومراسم الاستقبال", "العربات التراثية ومحطات الطهي الحية", "حلويات ومشروبات مميّزة", "تنسيق البوفيه والطاولات", "الخدمة الخاصة وضيافة الاجتماعات التنفيذية"],
+  },
+  "stage-technical-production": {
+    en: ["Stage design", "Rigging", "Live sound", "Lighting", "Screens", "Technical setup, run by one crew"],
+    ar: ["تصميم المسرح", "تركيب الهياكل وتعليق المعدات", "الصوت المباشر", "الإضاءة", "الشاشات", "تجهيز تقني يديره فريق واحد"],
+  },
   "large-format-printing": {
     en: ["Roll-up banners", "Feather flags", "Business cards", "Brochures"],
     ar: ["لافتات رول أب", "أعلام الريشة", "بطاقات العمل", "البروشورات"],
@@ -106,7 +131,7 @@ export const services: Service[] = [
       { en: "Conferences & summits", ar: "المؤتمرات والقمم" },
       {
         en: "Programme, venue, speakers and the running of the day, planned as one.",
-        ar: "البرنامج والمكان والمتحدثون وإدارة اليوم، في خطة واحدة متكاملة.",
+        ar: "البرنامج والمكان والمتحدثون وإدارة اليوم، في خطة واحدة.",
       },
     ],
     [

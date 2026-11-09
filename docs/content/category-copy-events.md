@@ -1,6 +1,8 @@
 # Events & Hospitality: copy deck (EN / AR)
 
-Status: **draft for the user's review** (Task 3.1, 2026-11-09). On approval it goes into `src/content/categories.ts` (intro, FAQ, closing line), `src/content/services.ts` (points) and `src/messages/{en,ar}.json` (shot lines). Until then the data files keep their `TODO:` placeholders, except the drafts that were already live (the shot lines and the closing line).
+Status: **approved** by the user on 2026-11-09, with the changes below applied (Task 3.1). It is live in `src/content/categories.ts` (intro, FAQ, closing line), `src/content/services.ts` (points, and the Conferences promise) and `src/messages/{en,ar}.json` (shot lines).
+
+**Changes at approval (AR unless noted):** «في الموقع» replaced where it meant on-site (two points, and the homepage's `process.produce.body`); «متكاملة» dropped from the Conferences promise; the rigging point reworded; the intro's «نأخذ … وكل ذلك» became «نتولّى …»; s1 became «تبدأ الحكاية بقاعة فارغة.»; the speaker-care point reworded; FAQ #6 added (EN and AR).
 
 ## Sources and rules
 
@@ -8,7 +10,7 @@ Status: **draft for the user's review** (Task 3.1, 2026-11-09). On approval it g
 - **Not used:** the talent pages (p.30, p.34–37), "DJ" as a booking (p.33 is read as live sound only), the press clippings (OQ #19), named clients (OQ #17).
 - **Voice** (as the homepage deck): calm, exact, short declarative sentences, concrete nouns over adjectives. The Evening's story (an empty room made ready) is told by the opening; this copy states what is delivered.
 - **Arabic:** written natively in Modern Standard Arabic with a light Gulf-friendly register, not translated word for word. Arabic punctuation (، ؟), no Latin words, numbers written as words here (no digits needed). Each Arabic line has a note.
-- **Banned** (tested in messages): `elevate`, `cutting-edge`, `one-stop`, `unleash`, `الارتقاء بعلامتك`, `متطور جدًا`, `حلول متكاملة شاملة`. None appear.
+- **Banned** (tested in messages): `elevate`, `cutting-edge`, `one-stop`, `unleash`, `الارتقاء بعلامتك`, `متطور جدًا`, `حلول متكاملة شاملة`, and «متكامل» as filler. «في الموقع» is not used for on-site: write «في المكان» or «في أرض الحدث» (`src/lib/copy-rules.ts`, tested on messages and content). None appear.
 - **Numerals:** the section numerals are Roman in English and 01–06 in Arabic (D74).
 
 ---
@@ -20,7 +22,7 @@ Shown after the opening, before the services (D73). Two sentences.
 | | Text |
 |---|---|
 | EN | Conferences and summits, exhibitions, launches, galas and heritage hospitality. We take each one from the concept and the décor through production to the guest's experience on the day, under one roof. |
-| AR | مؤتمرات وقمم، ومعارض، وإطلاقات، وحفلات، وضيافة تراثية. نأخذ كل مناسبة من الفكرة والديكور، مرورًا بالإنتاج، حتى تجربة الضيف يوم الحدث، وكل ذلك تحت سقف واحد. |
+| AR | مؤتمرات وقمم، ومعارض، وإطلاقات، وحفلات، وضيافة تراثية. نتولّى كل مناسبة من الفكرة والديكور، مرورًا بالإنتاج، حتى تجربة الضيف يوم الحدث، تحت سقف واحد. |
 
 - **Source:** p.4 "CONCEPT · DÉCOR · PRODUCTION · GUEST EXPERIENCE"; p.3 "under one roof".
 - **AR note:** «تحت سقف واحد» is the natural Arabic idiom for "under one roof". «مناسبة» (occasion) covers both corporate events and private celebrations, where «فعالية» would sound corporate only. «مرورًا بـ» carries the "through" of the English without a list of prepositions.
@@ -31,7 +33,7 @@ Three lines over four shots (D74, P1). Line 2 of the storyboard ("Light first. T
 
 | Key | EN | AR | AR note |
 |---|---|---|---|
-| s1 | It starts with an empty room. | كل شيء يبدأ بقاعة فارغة. | «كل شيء يبدأ» rather than «يبدأ الأمر»: it reads as a statement, not a narration. |
+| s1 | It starts with an empty room. | تبدأ الحكاية بقاعة فارغة. | The user's line: «الحكاية» frames the opening as a story told in shots. One line at 390. |
 | s3 | Tables, flowers and candlelight, each in place. | طاولات وزهور وشموع، كلٌّ في مكانه. | «كلٌّ في مكانه» keeps the English's final beat; «ضوء الشموع» was too long for one line at 390. |
 | s4 | **Every detail, ready before the first guest.** | **كل التفاصيل جاهزة قبل وصول أول ضيف.** | The promise. «قبل وصول أول ضيف» names the moment (arrival), which "before the first guest" implies. |
 
@@ -39,18 +41,18 @@ Three lines over four shots (D74, P1). Line 2 of the storyboard ("Light first. T
 
 ## 3. Service promises and "what we deliver" points
 
-The **promise** under each H2 is the service's approved description (D56), unchanged: this deck proposes no edit to it. The **points** are new: 4–6 per service, the same count in both languages (tested).
+The **promise** under each H2 is the service's approved description (D56). One edit at approval: the Arabic Conferences promise drops «متكاملة». The **points** are new: 4–6 per service, the same count in both languages (tested).
 
 ### I · Conferences & summits (`conferences`)
 
-Promise: *Programme, venue, speakers and the running of the day, planned as one.* / «البرنامج والمكان والمتحدثون وإدارة اليوم، في خطة واحدة متكاملة.»
+Promise: *Programme, venue, speakers and the running of the day, planned as one.* / «البرنامج والمكان والمتحدثون وإدارة اليوم، في خطة واحدة.»
 
 | EN | AR | Source · AR note |
 |---|---|---|
 | Programme and running order | البرنامج وتسلسل الفقرات | D56 description. «تسلسل الفقرات» is the events term for a running order. |
 | Venue and room layout | المكان وتوزيع القاعة | D56 description. |
-| Speaker and guest care | العناية بالمتحدثين والضيوف | D56 ("speakers"), p.4 ("guest experience"). |
-| Event branding on site | هوية الحدث في الموقع | p.5 "tournament branding … on-ground production". |
+| Speaker and guest care | استقبال المتحدثين ورعاية الضيوف | D56 ("speakers"), p.4 ("guest experience"). |
+| Event branding on site | تطبيق هوية الحدث في المكان | p.5 "tournament branding … on-ground production". «في المكان», not «في الموقع», which reads as "on the website". |
 | Ceremonies and award nights | حفلات التكريم وليالي الجوائز | p.6. «ليالي الجوائز» is used in Gulf event listings; «حفلات التكريم» covers ceremonies. |
 
 ### II · Exhibitions & booths (`exhibitions`)
@@ -63,7 +65,7 @@ Promise: *Stands designed, built and staffed to draw people in.* / «أجنحة 
 | Fabrication and installation | التصنيع والتركيب | p.21 "design, fabrication and installation of exhibition stands". |
 | Mall and exhibition stands | أجنحة المراكز التجارية والمعارض | p.8. «المراكز التجارية» rather than «المولات», which is colloquial. |
 | Staffing on the stand | فريق عمل الجناح | D56 description ("staffed"). |
-| On-site PR management | إدارة العلاقات العامة في الموقع | p.19 "on-site PR management". |
+| On-site PR management | إدارة العلاقات العامة في أرض الحدث | p.19 "on-site PR management". «في أرض الحدث» for on-site. |
 
 ### III · Product launches & brand activations (`launches`)
 
@@ -110,7 +112,7 @@ Promise: *Stage, sound, light and screens, rigged and run by one crew.* / «ال
 | EN | AR | Source · AR note |
 |---|---|---|
 | Stage design | تصميم المسرح | p.33. |
-| Rigging | أنظمة التعليق والتثبيت | p.33. No common single Arabic word; this names what rigging is. |
+| Rigging | تركيب الهياكل وتعليق المعدات | p.33. No common single Arabic word; this names what the crew does. |
 | Live sound | الصوت المباشر | p.33 "live sound". DJ booking is talent and is not offered on the site. |
 | Lighting | الإضاءة | D56 description. |
 | Screens | الشاشات | D56 description. Which screens are owned or rented is OQ #22, so no type is named. |
@@ -118,7 +120,7 @@ Promise: *Stage, sound, light and screens, rigged and run by one crew.* / «ال
 
 ## 4. FAQ (`Category.faq`)
 
-Five entries, each answered from the sources. The questions that need the client's facts are **not** answered here; they are listed in CONTENT_CHECKLIST #28.
+Six entries, each answered from the sources or needing no client fact. The questions that need the client's facts are **not** answered here; they are listed in CONTENT_CHECKLIST #28.
 
 | # | EN | AR | Source · AR note |
 |---|---|---|---|
@@ -132,6 +134,8 @@ Five entries, each answered from the sources. The questions that need the client
 | 4 A | We're based in Dubai and work across six markets: the UAE, Saudi Arabia, Qatar, Oman, Kuwait and Egypt. | مقرّنا في دبي، ونعمل في ستة أسواق: الإمارات والسعودية وقطر وعُمان والكويت ومصر. | p.1, p.3, back cover (SA / UAE / EG / QA / OM / KU). The number is written as a word, so no digit choice arises. |
 | 5 Q | Can you photograph and film the event? | هل تصوّرون الفعالية؟ | |
 | 5 A | Yes. Event coverage is part of our Creative Production services: photography and video, from the shoot to the final edit. | نعم. تغطية الفعاليات جزء من خدمات الإنتاج الإبداعي لدينا: التصوير الفوتوغرافي والفيديو، من التصوير حتى المونتاج النهائي. | p.25 "EVENT COVERAGE"; D56 (video: "from script and shoot to the final edit"). «هل تصوّرون» covers photo and video in one verb. |
+| 6 Q | What do you need from me to start? | ماذا تحتاجون مني للبدء؟ | Added at approval. |
+| 6 A | Tell us the date, the type of event, the city and roughly how many guests. We'll come back with a concept and a proposal. | أخبرنا بالموعد ونوع المناسبة والمدينة والعدد التقريبي للضيوف، ونعود إليك بتصوّر وعرض. | No response time is promised. |
 
 ## 5. Closing line (`Category.closing`)
 

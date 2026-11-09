@@ -50,8 +50,15 @@ describe("categoryJsonLd", () => {
     expect(faq.mainEntity).toEqual([
       { "@type": "Question", name: "How do we start?", acceptedAnswer: { "@type": "Answer", text: "With the brief." } },
     ]);
-    // Today every FAQ is a TODO placeholder: no FAQPage at all.
-    expect(byType(categoryJsonLd(events, getServices("events-hospitality"), "en", SITE), "FAQPage")).toBeUndefined();
+    // A category whose FAQ is still all TODO placeholders gets no FAQPage at all.
+    const studio = getCategory("creative-production")!;
+    expect(studio.faq.every((f) => f.q.en.startsWith("TODO:"))).toBe(true);
+    expect(byType(categoryJsonLd(studio, getServices("creative-production"), "en", SITE), "FAQPage")).toBeUndefined();
+    // Events' approved FAQ (copy deck, 2026-11-09) goes in whole, in each language.
+    for (const l of ["en", "ar"] as const) {
+      const entries = byType(categoryJsonLd(events, getServices("events-hospitality"), l, SITE), "FAQPage").mainEntity;
+      expect(entries.map((e: { name: string }) => e.name)).toEqual(events.faq.map((f) => f.q[l]));
+    }
   });
 
   it("claims nothing unconfirmed: no ratings, reviews, area served or prices", () => {

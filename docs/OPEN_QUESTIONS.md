@@ -35,7 +35,8 @@ Items that need an answer from Rand or the user before the related work can be b
     - Smith Gulf
     - Sandoz (A Novartis Division)
     - Emirates Driving Institute (T-shirt mock-up, p23)
-    - ADIB (sponsor, p5)
+
+    Not clients: **brands visible in photos**, such as ADIB as the prize sponsor in the UAE PL photo (p5-4). Such a photo needs its own usage rights (and OQ #18 for any people in it), not a client permission.
 
     Private celebrations and heritage work are shown without client names in any case.
 18. **Rights to photos of identifiable people.** 19 profile photos show identifiable faces: UAE PL winners and prize presentation, UAEAF ceremonies, the athletes in the Oregon 26 key visuals, Ultimate Power Solution stand guests and performers, heritage hosts. Does NO TIME (or the client) hold consent for web use? Until then none is used (`profile-inventory.md`, "Pending rights").
