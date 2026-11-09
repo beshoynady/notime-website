@@ -1,6 +1,8 @@
 import { Plus } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import type { Category, Locale } from "@/content";
+import { SectionRef } from "@/components/review/section-ref";
+import { categoryRef } from "@/lib/review";
 
 /**
  * Act 3 · the FAQ (spec §4, part 4). Native `<details>`: Enter and Space open and close it with
@@ -11,6 +13,7 @@ export async function CategoryFaq({ category, locale, tone }: { category: Catego
   const t = await getTranslations("category");
   return (
     <section className="cat-faq cat-end" data-tone={tone} aria-labelledby="faq-title">
+      <SectionRef id={categoryRef(category.slug, "faq")} />
       <div className="cat-end-grid frame">
         <header className="cat-end-head">
           <p className="text-eyebrow">{t("faqEyebrow")}</p>

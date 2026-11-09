@@ -7,6 +7,8 @@ import type { SceneConfig } from "@/content/scenes";
 import { orderNumeral } from "@/lib/roman";
 import { Breadcrumbs } from "./breadcrumbs";
 import { THEME_TONE } from "./theme";
+import { SectionRef } from "@/components/review/section-ref";
+import { categoryRef } from "@/lib/review";
 
 /**
  * Category page · Act 1, the opening (D64; storyboards README §2): breadcrumbs, eyebrow, the H1
@@ -65,6 +67,7 @@ export async function CategoryOpening({
 
   return (
     <section data-tone={THEME_TONE[category.theme]} data-grain="off" aria-labelledby="category-title" className="cat-opening">
+      <SectionRef id={categoryRef(category.slug, "opening")} />
       {scene ? (
         <LayeredScene
           scene={scene}

@@ -1,6 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import { ScrubColorWords } from "@/components/motion/scrub-color-words";
 import "./about.css";
+import { SectionRef } from "@/components/review/section-ref";
+import { HOME_REF } from "@/lib/review";
 
 const FIGURES = ["markets", "integrated"] as const; // the profile's two figures (copy-deck rules)
 
@@ -13,6 +15,7 @@ export async function About() {
   const t = await getTranslations("about");
   return (
     <section id="about" data-tone="dark" aria-labelledby="about-title" className="section-pad">
+      <SectionRef id={HOME_REF.about} />
       <div className="frame">
         <h2 id="about-title" className="sec-eyebrow text-eyebrow text-champagne">
           {t("eyebrow")}

@@ -1,0 +1,166 @@
+/* Review mode only (v1 plan, Task A1). Nothing here applies without html[data-review]. */
+
+/* A section hosts its reference tag; :where keeps it at zero specificity, so any position a
+   section already sets (sticky, a GSAP pin's inline style) still wins. */
+:where(html[data-review] section:has(> .section-ref), html[data-review] footer:has(> .section-ref)) {
+  position: relative;
+}
+
+.section-ref {
+  position: absolute;
+  z-index: 45;
+  inset-block-start: calc(var(--header-h) + 10px);
+  inset-inline-end: 12px;
+  padding: 4px 7px;
+  border-radius: 3px;
+  background: var(--color-champagne);
+  color: var(--color-espresso);
+  font: 600 11px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.06em;
+  pointer-events: none;
+  box-shadow: 0 0 0 1px rgb(46 32 23 / 0.35);
+}
+
+.review-banner {
+  position: fixed;
+  z-index: 65;
+  inset-inline: 0;
+  inset-block-end: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 4px 16px calc(4px + env(safe-area-inset-bottom, 0px));
+  background: var(--color-champagne);
+  color: var(--color-espresso);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-block-start: 1px dashed var(--color-cocoa);
+}
+.review-banner:lang(ar) {
+  letter-spacing: 0;
+  font-size: 0.8rem;
+  text-transform: none;
+}
+html[data-review] body {
+  padding-block-end: calc(28px + env(safe-area-inset-bottom, 0px));
+}
+html[data-review] .wa-fab {
+  bottom: calc(48px + env(safe-area-inset-bottom, 0px));
+}
+
+/* Example blocks: badged, dashed, unmistakably not real content. */
+.example-badge {
+  display: inline-block;
+  padding: 5px 9px;
+  border: 1px dashed currentColor;
+  border-radius: 3px;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-cocoa);
+  background: rgb(234 212 171 / 0.45);
+}
+[data-tone="dark"] .example-badge {
+  color: var(--color-champagne);
+  background: rgb(234 212 171 / 0.08);
+}
+.example-badge:lang(ar) {
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 0.78rem;
+}
+.example-block .frame {
+  outline: 1px dashed rgb(187 154 121 / 0.55);
+  outline-offset: 18px;
+}
+.example-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  margin-block-end: 32px;
+}
+.example-logos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  color: var(--color-taupe);
+}
+@media (min-width: 900px) {
+  .example-logos {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+.example-logos li {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 3 / 2;
+  border: 1px solid rgb(187 154 121 / 0.3);
+}
+.example-logos svg {
+  width: 40px;
+  height: 40px;
+}
+.example-cards {
+  display: grid;
+  gap: 24px;
+}
+@media (min-width: 900px) {
+  .example-cards {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+}
+.example-cards blockquote {
+  display: grid;
+  gap: 20px;
+  padding: 28px;
+  border: 1px solid rgb(187 154 121 / 0.35);
+}
+.example-cards footer {
+  display: grid;
+  gap: 2px;
+  font-size: 0.9rem;
+}
+.example-person {
+  display: grid;
+  gap: 4px;
+}
+.example-portrait {
+  aspect-ratio: 4 / 5;
+  margin-block-end: 12px;
+  background: repeating-linear-gradient(135deg, rgb(187 154 121 / 0.18) 0 10px, transparent 10px 20px);
+  border: 1px solid rgb(187 154 121 / 0.35);
+}
+.example-stats {
+  display: grid;
+  gap: 24px;
+}
+@media (min-width: 900px) {
+  .example-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.example-stats li {
+  display: grid;
+  gap: 6px;
+}
+.example-figure {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--color-taupe);
+}
+.example-press {
+  display: grid;
+  gap: 18px;
+}
+.example-press li {
+  display: grid;
+  gap: 6px;
+  padding-block-end: 18px;
+  border-block-end: 1px solid rgb(187 154 121 / 0.3);
+}

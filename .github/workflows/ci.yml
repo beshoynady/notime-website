@@ -75,6 +75,10 @@ jobs:
       - name: Build
         run: npm run build
 
+      # The production build carries no review-mode content (v1 plan, Task A1; D78).
+      - name: No review content in production
+        run: npm run check:no-review-leak
+
       # CI uses Playwright's bundled Chromium (local runs use the installed Chrome, D12).
       - name: Playwright version
         id: pw

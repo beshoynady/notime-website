@@ -5,6 +5,8 @@ import { HERO_LINE } from "@/config/hero";
 import { HeroClock } from "./hero-clock";
 import { HeroController } from "./hero-controller";
 import { HeroHud } from "./hero-hud";
+import { SectionRef } from "@/components/review/section-ref";
+import { HOME_REF } from "@/lib/review";
 
 /**
  * Cinematic clock hero (server component). Every layer is server-rendered and visible
@@ -33,6 +35,7 @@ export async function Hero() {
         data-hero-intro=""
         aria-labelledby="hero-title"
       >
+        <SectionRef id={HOME_REF.hero} />
         <HeroController />
         <div className="hero-vignette" aria-hidden="true" />
         <div className="hero-clock-wrap" aria-hidden="true">

@@ -3,7 +3,12 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
+const review = process.env.NEXT_PUBLIC_REVIEW_MODE === "1";
+
 const nextConfig: NextConfig = {
+  // The review build (v1 plan, Task A1) lives in its own folder, so it never overwrites the
+  // production build that e2e and Lighthouse use.
+  distDir: process.env.NEXT_DIST_DIR || ".next",
   // Kept on with next-intl via next/root-params (DECISIONS D13, OPEN_QUESTIONS #9).
   cacheComponents: true,
   partialPrefetching: true,
@@ -15,7 +20,11 @@ const nextConfig: NextConfig = {
   },
   // Self-hosted brand fonts (D45): versioned file names, so they can be cached for good.
   async headers() {
-    return [{ source: "/fonts/:file*", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] }];
+    return [
+      { source: "/fonts/:file*", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] },
+      // The review build is never indexed, wherever it is reachable (the review tunnel).
+      ...(review ? [{ source: "/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] }] : []),
+    ];
   },
   turbopack: {
     rules: {

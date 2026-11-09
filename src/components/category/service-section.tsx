@@ -7,6 +7,8 @@ import { LayeredScene } from "@/components/scenes/layered-scene";
 import { quoteHref, type Locale, type Service } from "@/content";
 import { getSectionScene } from "@/content/scenes";
 import { orderNumeral } from "@/lib/roman";
+import { SectionRef } from "@/components/review/section-ref";
+import { serviceRef } from "@/lib/review";
 
 /**
  * One service on its category page (spec §4, part 3): `section#<anchor>`, named by its H2 so the
@@ -46,6 +48,7 @@ export async function ServiceSection({
       className="svc"
       data-scene-section={scene ? "" : undefined}
     >
+      <SectionRef id={serviceRef(service)} />
       {scene ? (
         <div className="svc-scene">
           <LayeredScene

@@ -7,6 +7,7 @@ import { CustomCursor } from "@/components/layout/custom-cursor";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { WhatsAppButton } from "@/components/layout/whatsapp-button";
+import { ReviewBanner } from "@/components/review/review-banner";
 import { DirectionProvider } from "@/components/providers/direction-provider";
 import { AnchorScroll } from "@/components/providers/anchor-scroll";
 import { LenisProvider } from "@/components/providers/lenis-provider";
@@ -53,7 +54,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
 
   return (
     // suppressHydrationWarning: BOOT_SCRIPT adds data-js / data-reduced before hydration.
-    <html lang={locale} dir={dir} suppressHydrationWarning>
+    <html lang={locale} dir={dir} data-review={process.env.NEXT_PUBLIC_REVIEW_MODE === "1" ? "" : undefined} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: BOOT_SCRIPT }} />
         {FONT_PRELOADS[locale].map((href) => (
@@ -70,6 +71,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
                 <SiteFooter />
               </div>
               <WhatsAppButton />
+              <ReviewBanner />
               <CustomCursor />
               <ToneController />
               {/* Suspense: AnchorScroll reads the search params; the pages stay static. */}

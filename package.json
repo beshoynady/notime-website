@@ -10,7 +10,10 @@
     "typecheck": "next typegen && tsc --noEmit",
     "test": "vitest run",
     "e2e": "playwright test",
-    "prepare": "simple-git-hooks"
+    "prepare": "simple-git-hooks",
+    "review:build": "node scripts/review.mjs build",
+    "review:start": "node scripts/review.mjs start",
+    "check:no-review-leak": "node scripts/check-no-review-leak.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

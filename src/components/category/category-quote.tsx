@@ -2,6 +2,8 @@ import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import type { Category, Locale, Service } from "@/content";
 import { QuoteActions, QuoteActionsView } from "./quote-actions";
+import { SectionRef } from "@/components/review/section-ref";
+import { categoryRef } from "@/lib/review";
 
 /**
  * Act 3 · the closing (spec §4, part 5): `section#quote`, the target of every "Request a quote"
@@ -27,6 +29,7 @@ export async function CategoryQuote({
   const titles = Object.fromEntries(services.map((s) => [s.anchor, s.title[locale]]));
   return (
     <section id="quote" className="cat-quote cat-end" data-tone={tone} aria-labelledby="quote-title">
+      <SectionRef id={categoryRef(category.slug, "quote")} />
       <div className="cat-end-grid frame">
         <p className="text-eyebrow cat-end-head">{t("eyebrow")}</p>
         <div className="cat-quote-body">
