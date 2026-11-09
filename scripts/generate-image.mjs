@@ -14,21 +14,28 @@
  *     through scripts/grade.mjs (the category's grade) into public/images/scenes/<category>;
  *     site slots through scripts/convert-ai.mjs (which converts only slots listed in PASSED).
  *
+ *     Refused while the original carries a C2PA manifest, until the user decides how to handle
+ *     it (D77): conversion re-encodes the file, which drops the manifest. --c2pa-decided unlocks it.
+ *
  *   node scripts/generate-image.mjs --verdict <slot> accepted|rejected "<reason>"
  *     Records the inspection result in the log.
  *
  * Generation is refused unless docs/content/image-generation-log.md carries "Approved budget:
  * USD <n>" (set only after the user's OK) and the logged spend plus this request stays within it.
+ * Every original is checked for AI-provenance markers (C2PA, IPTC "trained algorithmic media")
+ * before anything converts it; the result and the file's SHA-256 go into the log and the sidecar
+ * JSON, and the original bytes are never rewritten (D77).
  * The token is read from REPLICATE_API_TOKEN (environment or .env.local) and never printed.
  */
 import { createRequire } from "node:module";
 import { execFileSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
 process.removeAllListeners("warning");
 process.on("warning", (w) => w.code !== "MODULE_TYPELESS_PACKAGE_JSON" && console.warn(w));
-const { budgetProblem, buildPrompt, deliverySize, findSlot, sceneCategory } = await import("../src/lib/image-gen.ts");
+const { budgetProblem, buildPrompt, deliverySize, findSlot, provenance, sceneCategory } = await import("../src/lib/image-gen.ts");
 const sharp = createRequire(import.meta.url)("sharp");
 
 /** One model for all slots (house-style consistency). Price per output image, USD, from replicate.com (2026-11-09). */
@@ -94,9 +101,13 @@ async function generate(slot) {
   mkdirSync(dir, { recursive: true });
   const file = path.join(dir, `${today()}-${aspect.replace(":", "x")}-${seed}.png`);
   writeFileSync(file, buf);
-  writeFileSync(file.replace(/\.png$/, ".json"), JSON.stringify({ slot, model: MODEL.id, prediction: p.id, input }, null, 2));
+  const marks = provenance(buf);
+  const sha256 = createHash("sha256").update(buf).digest("hex");
+  writeFileSync(file.replace(/\.png$/, ".json"), JSON.stringify({ slot, model: MODEL.id, prediction: p.id, input, provenance: marks, sha256 }, null, 2));
   const { width, height } = await sharp(buf).metadata();
-  logRow([today(), slot, aspect, MODEL.id, `${width}×${height}`, seed, MODEL.costPerImage.toFixed(2), p.id, "generated, to inspect"]);
+  const markText = `C2PA ${marks.c2pa ? "yes" : "no"}, IPTC AI ${marks.iptcAi ? "yes" : "no"}, sha256 ${sha256.slice(0, 12)}`;
+  logRow([today(), slot, aspect, MODEL.id, `${width}×${height}`, seed, MODEL.costPerImage.toFixed(2), p.id, `generated, to inspect (${markText})`]);
+  console.log(markText);
   console.log(`saved ${file} (${width}×${height}); inspect it at full size, then --verdict and --install`);
 }
 
@@ -106,6 +117,8 @@ async function install(slot) {
   if (!aspect || !file) throw new Error("--install needs --aspect and --file");
   const spec = findSlot(slot, read("docs/content/image-prompts.md"), read("docs/design/storyboards/layers.md"), true);
   const { width, height } = deliverySize(aspect);
+  if (provenance(readFileSync(file)).c2pa && !has("--c2pa-decided"))
+    throw new Error(`${file} carries a C2PA manifest; converting drops it. Stopped for the user's decision (D77).`);
   const meta = await sharp(file).metadata();
   if (meta.width < width || meta.height < height) throw new Error(`${file} is ${meta.width}×${meta.height}, smaller than ${width}×${height}: never upscaled (D51)`);
   const stage = path.join(RAW, "masters", spec.kind === "scene" ? sceneCategory(slot) : "site");

@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { budgetProblem, buildPrompt, deliverySize, findSlot, loggedSpend, sceneCategory } from "./image-gen";
+import { budgetProblem, buildPrompt, deliverySize, findSlot, loggedSpend, provenance, sceneCategory } from "./image-gen";
 
 const doc = (p: string) => readFileSync(path.join(process.cwd(), p), "utf8");
 const PROMPTS = doc("docs/content/image-prompts.md");
@@ -74,5 +74,24 @@ describe("budget", () => {
     expect(budgetProblem("Approved budget: none", 0.06)).toMatch(/no approved budget/);
     expect(budgetProblem(log, 0.06)).toBeNull();
     expect(budgetProblem(log.replace("1.50", "0.15"), 0.06)).toMatch(/over the approved budget/);
+  });
+});
+
+describe("provenance (D77: check AI markers before converting)", () => {
+  const bytes = (...parts: string[]) => new TextEncoder().encode(parts.join(""));
+  const PNG = "\x89PNG\r\n\x1a\n";
+
+  it("finds a C2PA manifest in a PNG caBX chunk or a JUMBF box labelled c2pa", () => {
+    expect(provenance(bytes(PNG, "....caBX....jumb....jumd....c2pa....")).c2pa).toBe(true);
+    expect(provenance(bytes("\xff\xd8\xff\xebJP..jumb....jumd....c2pa.manifest")).c2pa).toBe(true);
+  });
+
+  it("finds the IPTC 'trained algorithmic media' source type in XMP", () => {
+    const xmp = '<x:xmpmeta><Iptc4xmpExt:DigitalSourceType>http://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia</Iptc4xmpExt:DigitalSourceType></x:xmpmeta>';
+    expect(provenance(bytes(PNG, "....iTXtXML:com.adobe.xmp", xmp))).toEqual({ c2pa: false, iptcAi: true });
+  });
+
+  it("reports nothing on a plain image, and ignores a stray 'c2pa' outside a JUMBF box", () => {
+    expect(provenance(bytes(PNG, "....IHDR....IDATc2pa....IEND"))).toEqual({ c2pa: false, iptcAi: false });
   });
 });

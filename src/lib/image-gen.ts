@@ -89,3 +89,16 @@ export function budgetProblem(log: string, cost: number): string | null {
   if (spent + cost > budget + 1e-9) return `USD ${(spent + cost).toFixed(2)} would be over the approved budget of USD ${budget.toFixed(2)} (spent ${spent.toFixed(2)})`;
   return null;
 }
+
+/**
+ * AI-provenance markers in a generated file, checked before anything converts it (D77).
+ * c2pa: a C2PA manifest (Content Credentials): a PNG `caBX` chunk, or a JUMBF box (`jumb` →
+ * `jumd`) labelled `c2pa`, as JPEG APP11 carries it. iptcAi: the IPTC digital source type
+ * "trainedAlgorithmicMedia" in XMP. A byte scan, not a validator: c2patool verifies signatures.
+ */
+export function provenance(file: Uint8Array): { c2pa: boolean; iptcAi: boolean } {
+  const text = new TextDecoder("latin1").decode(file);
+  const jumbf = text.indexOf("jumb");
+  const c2pa = text.includes("caBX") || (jumbf >= 0 && /jumd[\s\S]{0,64}c2pa/.test(text.slice(jumbf)));
+  return { c2pa, iptcAi: text.includes("digitalsourcetype/trainedAlgorithmicMedia") };
+}

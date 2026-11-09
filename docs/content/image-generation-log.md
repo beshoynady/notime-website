@@ -2,9 +2,9 @@
 
 Every API request is a row, written by `scripts/generate-image.mjs`; inspection verdicts are rows too. Strategy: **real photos and code first, AI last.** AI fills only layers and slots with no real source (layers.md, image-prompts.md).
 
-Approved budget: none (awaiting the user's OK on the plan below)
+Approved budget: not active yet. The user approved USD 1.50 on 2026-11-09 (D77); the line becomes "Approved budget: USD 1.50" once REPLICATE_API_TOKEN is in .env.local.
 
-## Plan awaiting approval (2026-11-09)
+## Plan (approved 2026-11-09, D77)
 
 - **Provider and model:** Replicate, `black-forest-labs/flux-1.1-pro-ultra`, raw mode, one model for every slot. **USD 0.06 per image** (replicate.com model page, 2026-11-09). Output up to 4 MP; each file is cropped to its aspect and downscaled to the approved delivery size (1680 × 944, 944 × 1680, 1136 × 1408), never upscaled (D51).
 - **Prompt:** the house style + the slot's prompt + the shared negative prompt as an "Avoid:" list (the model takes no negative prompt). All from image-prompts.md and layers.md.
