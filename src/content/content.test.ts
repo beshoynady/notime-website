@@ -89,10 +89,12 @@ describe("services", () => {
     for (const a of anchors) expect(a).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);
   });
 
-  it("every service has 4–6 'what we deliver' points, the same count in EN and AR", () => {
+  it("every service has its category's number of 'what we deliver' points (D65), the same in EN and AR", () => {
     for (const s of services) {
-      expect(s.points.en.length, s.slug).toBeGreaterThanOrEqual(4);
-      expect(s.points.en.length, s.slug).toBeLessThanOrEqual(6);
+      // Software & Digital: 3 deliverables per service (D65); the other categories 4–6.
+      const [min, max] = s.category === "software-digital" ? [3, 3] : [4, 6];
+      expect(s.points.en.length, s.slug).toBeGreaterThanOrEqual(min);
+      expect(s.points.en.length, s.slug).toBeLessThanOrEqual(max);
       expect(s.points.ar.length, s.slug).toBe(s.points.en.length);
       for (const l of locales) for (const p of s.points[l]) expect(p.trim(), `${s.slug}.points.${l}`).not.toBe("");
     }
@@ -126,7 +128,7 @@ const SIGNATURE_MODULES = {
   "content-strategy": "content-calendar",
   pr: "press-release",
   "paid-media": "campaign-funnel",
-  "large-format": "human-scale",
+  printing: "human-scale",
   fabrication: "build-layers",
   packaging: "unboxing",
   gifts: "gift-configurator",
@@ -167,9 +169,9 @@ describe("category pages (D57)", () => {
 
   it("lists the named deliverables the user confirmed (D71) in their services", () => {
     const points = (slug: string) => getServices().find((s) => s.slug === slug)!.points;
-    expect(points("large-format-printing").en).toEqual(["Roll-up banners", "Feather flags", "Business cards", "Brochures"]);
+    expect(points("commercial-large-format-printing").en).toEqual(["Roll-up banners", "Feather flags", "Business cards", "Brochures"]);
     expect(points("corporate-gifts").en).toEqual(["Gift sets", "Branded bottles", "Bags", "Notebooks & pens", "Giveaways"]);
-    for (const slug of ["large-format-printing", "corporate-gifts"]) {
+    for (const slug of ["commercial-large-format-printing", "corporate-gifts"]) {
       for (const p of points(slug).ar) expect(p.startsWith("TODO:"), p).toBe(false);
     }
   });

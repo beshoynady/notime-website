@@ -44,7 +44,7 @@ This file and `src/content/services.ts` must match: `src/content/content.test.ts
 
 | # | Slug | Anchor | EN | AR |
 |---|---|---|---|---|
-| 19 | large-format-printing | large-format | Large-format printing | الطباعة كبيرة الحجم |
+| 19 | commercial-large-format-printing | printing | Commercial & large-format printing | الطباعة التجارية وكبيرة الحجم |
 | 20 | stand-fabrication-signage | fabrication | Stand fabrication & signage | تصنيع الأجنحة واللافتات |
 | 21 | packaging-design | packaging | Packaging design | تصميم التغليف |
 | 22 | corporate-gifts | gifts | Corporate gifts | هدايا الشركات |

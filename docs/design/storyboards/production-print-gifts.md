@@ -83,7 +83,7 @@ The signature (§5.4): every module measures something. Dimension lines appear o
 
 | # | Service | Hero motion (one) | Module | Reading order |
 |---|---|---|---|---|
-| I | Large-format printing | A dimension line extends to the section's full width | `human-scale` | H2 → promise → scale → deliverables → CTA |
+| I | Commercial & large-format printing | A dimension line extends to the section's full width | `human-scale` | H2 → promise → scale → deliverables → CTA |
 | II | Stand fabrication & signage | Registration marks snap to the module's corners | `build-layers` | H2 → promise → layers → deliverables → CTA |
 | III | Packaging design | A crease line draws | `unboxing` | H2 → promise → unboxing → deliverables → CTA |
 | IV | **Corporate gifts** (peak) | The opening's box returns, lid lifting | `gift-configurator` | H2 → promise → configurator → deliverables → CTA |
@@ -103,7 +103,7 @@ The signature (§5.4): every module measures something. Dimension lines appear o
 | Arrival | Shot 1 | 1 |
 | Build | Shots 2–3 | 3 |
 | First peak | Shot 4 | 4 |
-| Calm | I Large-format | 2 |
+| Calm | I Printing | 2 |
 | Build | II Fabrication, III Packaging | 3 |
 | **Peak** | **IV Corporate gifts:** the configurator echoes the opening's box, and the profile shows real gift work (UAE PL gift set, pending OQ #17) | **5** |
 | Calm | V Print store, VI Merchandise | 2 |

@@ -1,6 +1,6 @@
 # Creative Production: copy deck (EN / AR)
 
-Status: **draft for the user's review** (2026-11-09, with the other three decks). On approval it goes into `src/content/categories.ts` (intro, FAQ, closing line), `src/content/services.ts` (points) and `src/messages/{en,ar}.json` (shot lines). Until then the data keeps its `TODO:` placeholders.
+Status: **draft for the user's review** (2026-11-09, with the other three decks). The user's first decisions are applied (D77); the full review is still to come. On approval it goes into `src/content/categories.ts` (intro, FAQ, closing line), `src/content/services.ts` (points) and `src/messages/{en,ar}.json` (shot lines). Until then the data keeps its `TODO:` placeholders.
 
 ## Sources and rules
 
@@ -20,7 +20,7 @@ As the Events deck ([category-copy-events.md](category-copy-events.md)):
 | AR | تصوير فوتوغرافي وفيديو وموشن جرافيك ومحتوى بالذكاء الاصطناعي، ومعها الديكورات والمعدّات اللازمة. نغطّي الفعاليات في أرض الحدث، ونصوّر المنتجات والأطباق، ونتابع كل عمل حتى المونتاج وتصميم الصوت ومرحلة ما بعد الإنتاج. |
 
 - **Source:** p.25 "FOOD STYLING · PRODUCT · EVENT COVERAGE"; p.14 "Editing, sound design & post-production".
-- **Not used:** "the studio" from the category summary: no studio is confirmed (question 1 below).
+- **Removed:** "the studio" is gone from the category summary too (D77): it now reads "with the sets and equipment to make it" / «ومعها الديكورات والمعدّات». It returns only if the client confirms a studio (question 1).
 - **AR note:** «في أرض الحدث» for on the ground, as in the Events copy. «ما بعد الإنتاج» is the standard Arabic term for post-production.
 
 ## 2. Opening shot lines (`scenes.creative.*`)
@@ -132,7 +132,7 @@ Five entries, each answered from the sources.
 
 ## 6. Questions for the client (CONTENT_CHECKLIST #29)
 
-1. **Studio:** the approved category summary says "with the studio and equipment to make it". Does NO TIME have its own studio space? If not, the summary changes to "with the sets and equipment".
+1. **Studio:** does NO TIME have its own studio space? The summary no longer says so (D77); it returns only on the client's confirmation.
 2. **Rental:** which equipment is owned and which is rented in (OQ #22)? Is it rented with or without a crew?
 3. **Showreel:** is there a showreel for the video section (CONTENT_CHECKLIST)? Until then the reel module stays a placeholder (never stock or AI).
 4. **Usage rights:** who owns the footage and the AI outputs after delivery, and under what licence?

@@ -1,6 +1,6 @@
 # Software & Digital: copy deck (EN / AR)
 
-Status: **draft for the user's review** (2026-11-09, with the other three decks). This page is a sales page (D65), so the deck covers more than the other categories: the case study, the event-technology band, the steps, the products and the stack strip. On approval it goes into `src/content/categories.ts`, `services.ts`, `case-studies` data and `src/messages/{en,ar}.json`. Until then the data keeps its `TODO:` placeholders.
+Status: **draft for the user's review** (2026-11-09, with the other three decks). The user's first decisions are applied (D77); the full review is still to come. This page is a sales page (D65), so the deck covers more than the other categories: the case study, the event-technology band, the steps, the products and the stack strip. On approval it goes into `src/content/categories.ts`, `services.ts`, `case-studies` data and `src/messages/{en,ar}.json`. Until then the data keeps its `TODO:` placeholders.
 
 ## Sources and rules
 
@@ -22,7 +22,7 @@ As the Events deck. Facts only from the profile (p.15, p.16, p.18) and D56, D65,
 
 | Key | EN | AR | AR note |
 |---|---|---|---|
-| s1 | It starts with a blinking cursor. | تبدأ الفكرة بمؤشّر يومض. | The storyboard's «كل شيء يبدأ…» is the pattern you changed on Events («تبدأ الحكاية…»); same treatment here. |
+| s1 | Every platform starts with a blinking cursor. | كل منصّة تبدأ بمؤشّر يومض. | The user's wording (D77). One line at 390, measured in the lab scene: EN 347 of 358 px (tight; re-check if the theme changes the size), AR 220 of 358 px. |
 | s2 | Lines become a layout. | تتحوّل الخطوط إلى تصميم. | |
 | s3 | The layout becomes a working product. | ويصير التصميم منتجًا يعمل. | |
 | s4 | **From idea to a live product.** | **من الفكرة إلى منتج يستخدمه الناس.** | The storyboard's «منتج يعمل فعلًا» repeated s3's «يعمل»; "live" is said as "in people's hands". |
@@ -43,7 +43,7 @@ As the Events deck. Facts only from the profile (p.15, p.16, p.18) and D56, D65,
 
 ## 4. Services: promises and deliverables
 
-The promise under each H2 is the approved description (D56). The storyboard's "outcome lines" were proposals for the same spot; they are not used, so each section has one promise, as on Events. **Three deliverables per service (D65).** The content test requires 4–6 points per service today; on approval it allows 3 for this category.
+The promise under each H2 is the approved description (D56). The storyboard's "outcome lines" were proposals for the same spot; they are not used, so each section has one promise, as on Events (confirmed by the user, D77: no result lines without evidence). **Three deliverables per service (D65).** The content test is category-aware: exactly 3 here, 4–6 elsewhere (D77).
 
 | # | Service · promise (D56) | Deliverables EN | Deliverables AR | Source |
 |---|---|---|---|---|
@@ -73,9 +73,9 @@ The promise under each H2 is the approved description (D56). The storyboard's "o
 | Steps | Discover · Design · Build · Launch · Support | نستكشف · نصمّم · نبني · نطلق · ندعم |
 | Note 1 | Bilingual by default | بلغتين من البداية |
 | Note 2 | Performance and SEO built in | الأداء وتحسين الظهور جزء من البناء |
-| Note 3 | Support after launch | دعم بعد الإطلاق |
+| Note 3 | Support & maintenance after launch | الدعم والصيانة بعد الإطلاق |
 
-- **Note 3 and the "Support" step** promise ongoing support. The profile doesn't state it: confirm with the client (question 2), or drop both.
+- **Note 3 and the "Support" step** are included: the user's commercial decision for the digital team (D77). No response time, SLA or support period is stated anywhere.
 
 ## 7. Products (`#products`, Coming soon)
 
@@ -126,7 +126,7 @@ Names stay placeholders (OQ #5). Problem statements are proposals; features are 
 ## 11. Questions for the client (CONTENT_CHECKLIST #32)
 
 1. **Ownership:** who owns the code and the content after launch?
-2. **Support:** is support after launch offered, and on what terms? (The "Support" step and note depend on it.)
+2. **Support:** decided by the user (D77): offered, with no response times or SLAs on the site. Nothing to ask.
 3. **Hosting:** do you host, or deploy to the client's own hosting?
 4. **Timelines:** a typical range for a website or an app, if one can be stated?
 5. **Stack:** confirm the technologies to list (section 8).

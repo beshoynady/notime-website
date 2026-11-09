@@ -408,7 +408,7 @@ Format per module:
 
 ### IV. Production, Print & Gifts ("The Workshop")
 
-**19. Large-format printing** · `#large-format` · `human-scale` · S
+**19. Commercial & large-format printing** · `#printing` · `human-scale` · S
 - **Shows:** a 1.8 m human silhouette beside a backdrop that grows on scroll through 3 sizes (roll-up 0.85 × 2 m, backdrop 3 × 2.4 m, wall 6 × 3 m), with dimension lines and labels.
 - **Owner:** GSAP (scale on scroll).
 - **Reduced:** three sizes side by side.

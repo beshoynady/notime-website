@@ -64,8 +64,8 @@ export const categories: Category[] = [
     order: 2,
     title: { en: "Creative Production", ar: "الإنتاج الإبداعي" },
     summary: {
-      en: "Photo, film, motion and AI content, with the studio and equipment to make it.",
-      ar: "تصوير وأفلام وموشن ومحتوى بالذكاء الاصطناعي، ومعها الاستوديو والمعدّات.",
+      en: "Photo, film, motion and AI content, with the sets and equipment to make it.",
+      ar: "تصوير وأفلام وموشن ومحتوى بالذكاء الاصطناعي، ومعها الديكورات والمعدّات.",
     },
     image: "cat-creative-production-4x5",
     theme: "studio",

@@ -1,6 +1,6 @@
 # Production, Print & Gifts: copy deck (EN / AR)
 
-Status: **draft for the user's review** (2026-11-09, with the other three decks). On approval it goes into `src/content/categories.ts`, `src/content/services.ts` (points) and `src/messages/{en,ar}.json` (shot lines). Until then the data keeps its `TODO:` placeholders, except the named deliverables already approved (D71).
+Status: **draft for the user's review** (2026-11-09, with the other three decks). The user's first decisions are applied (D77); the full review is still to come. On approval it goes into `src/content/categories.ts`, `src/content/services.ts` (points) and `src/messages/{en,ar}.json` (shot lines). Until then the data keeps its `TODO:` placeholders, except the named deliverables already approved (D71).
 
 ## Sources and rules
 
@@ -29,7 +29,7 @@ As the Events deck. Facts only from the profile (p.21, p.22, p.24) and D56, D58,
 
 ## 3. Promises and "what we deliver" points
 
-### I · Large-format printing (`large-format`)
+### I · Commercial & large-format printing (`printing`)
 
 Promise: *Banners, backdrops and wall graphics, printed to scale.* / «لافتات وخلفيات ورسومات جدارية، مطبوعة بالمقاس الكامل.»
 
@@ -39,9 +39,9 @@ Promise: *Banners, backdrops and wall graphics, printed to scale.* / «لافت�
 | Feather flags | أعلام الريشة | D71 (live). |
 | Business cards | بطاقات العمل | D71 (live). |
 | Brochures | البروشورات | D71 (live). |
-| **Proposed:** Backdrops and wall graphics | الخلفيات والرسومات الجدارية | D56 promise. Adds the large-format items the promise names. |
+| Backdrops and wall graphics | الخلفيات والرسومات الجدارية | D56 promise. Approved (D77). |
 
-- **Raised before (D71):** business cards and brochures are small-format items under a "Large-format" title. Options: rename the service "Printing, large and small format" / «الطباعة بأحجامها», or keep the title. Your call.
+- **Renamed (D77):** "Commercial & large-format printing" / «الطباعة التجارية وكبيرة الحجم», slug `commercial-large-format-printing`, anchor `#printing`, so business cards and brochures sit under a title that covers them.
 
 ### II · Stand fabrication & signage (`fabrication`)
 
@@ -77,7 +77,7 @@ Promise: *Gifts chosen, branded and delivered for clients and teams.* / «هدا
 | Bags | الحقائب | D71 (live). |
 | Notebooks & pens | الدفاتر والأقلام | D71 (live). |
 | Giveaways | الهدايا الترويجية | D71 (live). |
-| **Proposed:** Screen printing, UV, foiling, debossing and laser engraving | الطباعة الحريرية، والطباعة بالأشعة فوق البنفسجية، والرقائق المعدنية، والحفر الغائر، والحفر بالليزر | p.22. The methods are the profile's strongest fact for this service. «الطباعة الحريرية» is the Arabic trade term for screen printing; «الحفر الغائر» for debossing (pressed in). |
+| Screen printing, UV, foiling, debossing and laser engraving | الطباعة الحريرية، والطباعة بالأشعة فوق البنفسجية، والرقائق المعدنية، والحفر الغائر، والحفر بالليزر | p.22. The methods are the profile's strongest fact for this service. «الطباعة الحريرية» is the Arabic trade term for screen printing; «الحفر الغائر» for debossing (pressed in). Approved (D77). |
 
 ### V · Online print store (`print-store`)
 
@@ -132,4 +132,4 @@ Promise: *Apparel and objects carrying the brand with restraint.* / «ملابس
 4. **Production:** is printing and fabrication done in house, through partners, or both?
 5. **Sizes:** the largest print size, if one should be stated?
 6. **Materials:** are recycled or sustainable materials offered?
-7. **Large-format title** and the two proposed points (I, IV): approve or drop.
+7. ~~Large-format title and the two proposed points~~: decided by the user (D77).

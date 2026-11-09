@@ -37,7 +37,7 @@ const NAMED_POINTS: Record<string, Localized<string[]>> = {
     en: ["Stage design", "Rigging", "Live sound", "Lighting", "Screens", "Technical setup, run by one crew"],
     ar: ["تصميم المسرح", "تركيب الهياكل وتعليق المعدات", "الصوت المباشر", "الإضاءة", "الشاشات", "تجهيز تقني يديره فريق واحد"],
   },
-  "large-format-printing": {
+  "commercial-large-format-printing": {
     en: ["Roll-up banners", "Feather flags", "Business cards", "Brochures"],
     ar: ["لافتات رول أب", "أعلام الريشة", "بطاقات العمل", "البروشورات"],
   },
@@ -70,7 +70,7 @@ const PAGE: Record<string, { anchor: string; module: ModuleKey; quoteType?: Quot
   "content-strategy": { anchor: "content-strategy", module: "content-calendar" },
   "public-relations": { anchor: "pr", module: "press-release" },
   "paid-media-planning": { anchor: "paid-media", module: "campaign-funnel" },
-  "large-format-printing": { anchor: "large-format", module: "human-scale" },
+  "commercial-large-format-printing": { anchor: "printing", module: "human-scale" },
   "stand-fabrication-signage": { anchor: "fabrication", module: "build-layers" },
   "packaging-design": { anchor: "packaging", module: "unboxing" },
   "corporate-gifts": { anchor: "gifts", module: "gift-configurator" },
@@ -93,11 +93,15 @@ const QUOTE_TYPE: Record<CategorySlug, QuoteType> = {
 };
 
 // TODO: replace placeholder — "what we deliver" points are written per category with its copy
-// deck (phase-2 plan, Task 3.1 and later). Four obvious placeholders until then.
-const placeholderPoints = (): Localized<string[]> => ({
-  en: [1, 2, 3, 4].map((n) => `TODO: what we deliver, point ${n}`),
-  ar: [1, 2, 3, 4].map((n) => `TODO: ما نقدّمه، النقطة ${n}`),
-});
+// deck (phase-2 plan, Task 3.1 and later). Obvious placeholders until then: three for Software &
+// Digital (3 deliverables per service, D65), four elsewhere (4–6).
+const placeholderPoints = (category: CategorySlug): Localized<string[]> => {
+  const n = Array.from({ length: category === "software-digital" ? 3 : 4 }, (_, i) => i + 1);
+  return {
+    en: n.map((i) => `TODO: what we deliver, point ${i}`),
+    ar: n.map((i) => `TODO: ما نقدّمه، النقطة ${i}`),
+  };
+};
 
 function group(category: CategorySlug, rows: Row[]): Service[] {
   const cat = categories.find((c) => c.slug === category)!;
@@ -117,7 +121,7 @@ function group(category: CategorySlug, rows: Row[]): Service[] {
       status: "approved",
       anchor: page.anchor,
       signatureModule: page.module,
-      points: NAMED_POINTS[slug] ?? placeholderPoints(),
+      points: NAMED_POINTS[slug] ?? placeholderPoints(category),
       relatedWork: [],
       quoteType: page.quoteType ?? QUOTE_TYPE[category],
     };
@@ -246,8 +250,8 @@ export const services: Service[] = [
       "digital-marketing-seo",
       { en: "Digital marketing & SEO", ar: "التسويق الرقمي وSEO" },
       {
-        en: "Search, paid media and measurement that show what works.",
-        ar: "محركات البحث والإعلانات المدفوعة والقياس، لتعرف ما الذي ينجح.",
+        en: "Search, site speed and measurement that show what works.",
+        ar: "محركات البحث وسرعة الموقع والقياس، لتعرف ما الذي ينجح.",
       },
     ],
     [
@@ -277,8 +281,8 @@ export const services: Service[] = [
   ]),
   ...group("production-print-gifts", [
     [
-      "large-format-printing",
-      { en: "Large-format printing", ar: "الطباعة كبيرة الحجم" },
+      "commercial-large-format-printing",
+      { en: "Commercial & large-format printing", ar: "الطباعة التجارية وكبيرة الحجم" },
       {
         en: "Banners, backdrops and wall graphics, printed to scale.",
         ar: "لافتات وخلفيات ورسومات جدارية، مطبوعة بالمقاس الكامل.",

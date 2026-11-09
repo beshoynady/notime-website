@@ -45,7 +45,7 @@ The canonical list is [docs/content/services-list.md](../content/services-list.m
 | I Events & Hospitality | Conferences & summits (`conferences`) · Exhibitions & booths (`exhibitions`) · Product launches & brand activations (`launches`) · Galas & private celebrations (`celebrations`) · Catering & heritage hospitality (`hospitality`) · Stage & technical production (`stage`) |
 | II Creative Production | Photography (`photography`) · Video production (`video`) · Motion graphics (`motion`) · AI content creation (`ai-content`) · Set & stage design (`set-design`) · Equipment & camera rental (`rental`) |
 | III Marketing & Brand | Branding & identity (`branding`) · Social media management (`social`) · Digital marketing & SEO (`digital-marketing`) · Content strategy (`content-strategy`) · Public relations (`pr`) · Paid media & media planning (Google & Meta ads) (`paid-media`, D71) |
-| IV Production, Print & Gifts | Large-format printing (`large-format`) · Stand fabrication & signage (`fabrication`) · Packaging design (`packaging`) · Corporate gifts (`gifts`) · Online print store (`print-store`) · Branded merchandise (`merchandise`) |
+| IV Production, Print & Gifts | Commercial & large-format printing (`printing`) · Stand fabrication & signage (`fabrication`) · Packaging design (`packaging`) · Corporate gifts (`gifts`) · Online print store (`print-store`) · Branded merchandise (`merchandise`) |
 | V Software & Digital | Websites (`websites`) · Mobile apps (`apps`) · Custom systems (`systems`) · E-commerce (`e-commerce`) · UI/UX design (`ux`) · AI consulting (`ai-consulting`) |
 
 ## Build order

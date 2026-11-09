@@ -1,6 +1,6 @@
 # Marketing & Brand: copy deck (EN / AR)
 
-Status: **draft for the user's review** (2026-11-09, with the other three decks). On approval it goes into `src/content/categories.ts`, `src/content/services.ts` (points) and `src/messages/{en,ar}.json` (shot lines). Until then the data keeps its `TODO:` placeholders.
+Status: **draft for the user's review** (2026-11-09, with the other three decks). The user's first decisions are applied (D77); the full review is still to come. On approval it goes into `src/content/categories.ts`, `src/content/services.ts` (points) and `src/messages/{en,ar}.json` (shot lines). Until then the data keeps its `TODO:` placeholders.
 
 ## Sources and rules
 
@@ -66,7 +66,7 @@ Promise: *Planned calendars, content and community, week after week.* / «خطط
 
 ### III · Digital marketing & SEO (`digital-marketing`)
 
-Promise: *Search, paid media and measurement that show what works.* / «محركات البحث والإعلانات المدفوعة والقياس، لتعرف ما الذي ينجح.»
+Promise: *Search, site speed and measurement that show what works.* / «محركات البحث وسرعة الموقع والقياس، لتعرف ما الذي ينجح.»
 
 | EN | AR | Source · AR note |
 |---|---|---|
@@ -75,7 +75,7 @@ Promise: *Search, paid media and measurement that show what works.* / «محرك
 | Analytics and reporting | التحليلات والتقارير | p.12. |
 | Measurement across search and ads | قياس النتائج في البحث والإعلانات | D56 "measurement". |
 
-- **Raised before (D71):** the promise still says "paid media", which now overlaps service VI. A possible promise: *Search, site speed and measurement that show what works.* / «محركات البحث وسرعة الموقع والقياس، لتعرف ما الذي ينجح.» Your call; the deck keeps D56 until you decide.
+- **Changed (D77):** the D56 promise said "paid media", which overlapped service VI. The user approved this wording, and it is live in `services.ts`.
 
 ### IV · Content strategy (`content-strategy`)
 
@@ -139,4 +139,4 @@ Promise: *Google and Meta campaigns, with the channels, budgets and timing behin
 3. **Ad accounts:** are campaigns run in the client's own Google and Meta accounts?
 4. **Press:** which outlets actually published NO TIME work (OQ #19)?
 5. **Naming:** does naming include trademark or domain checks, or only the creative work?
-6. **Service III promise:** keep "paid media" in it, or the proposal above (D71)?
+6. ~~Service III promise~~: decided by the user (D77).
