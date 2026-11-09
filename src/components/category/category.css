@@ -414,7 +414,18 @@ html[data-js]:not([data-reduced]) .cat-opening .scene-line:last-child {
     background: var(--color-champagne);
   }
 }
+/* The index steps back while the opening's first shot plays (D74, P3): it stays from the first
+   frame (D64) but at 40%, so the shot reads first. Full again once the opening moves on, or as
+   soon as the visitor points at it, focuses into it or opens it. Motion only (data-js, not
+   reduced): the still and the static opening keep it at full. */
+.svc-index {
+  transition: opacity 0.4s var(--ease-expo-out);
+}
+html[data-js]:not([data-reduced]) .cat-page:has(.cat-opening .scene[data-shot-active="0"]) .svc-index:not(:hover, :focus-within, [data-open]) {
+  opacity: 0.4;
+}
 @media (prefers-reduced-motion: reduce) {
+  .svc-index,
   .svc-index-link {
     transition: none;
   }
@@ -442,9 +453,10 @@ html[data-js]:not([data-reduced]) .cat-opening .scene-line:last-child {
   margin: 0;
 }
 
-/* A section's own scene (the Events majlis, the page's peak): not pinned, but full-bleed and one
-   screen tall, so it outranks the opening's frame instead of reading as one more card (review
-   D73: it covered 52% of the screen in the column). It breaks out of the sections' column to
+/* A section's own scene (the Events majlis, the page's peak): full-bleed and one screen tall, so
+   it outranks the opening's frame instead of reading as one more card (review D73: it covered
+   52% of the screen in the column). It pins briefly under the header on desktop, never on
+   mobile (D74, P2). It breaks out of the sections' column to
    both viewport edges; the numeral, H2 and promise stay on the column's line, over its lower
    third. Sized so that a landing on the section (its top under the header and any sticky bar)
    shows the whole scene with the H2 and the promise above the fold.

@@ -4,7 +4,7 @@ import { SITE_URL } from "@/config/site";
 import { getServices, type Category, type Locale } from "@/content";
 import type { SceneConfig } from "@/content/scenes";
 import { categoryJsonLd } from "@/lib/jsonld";
-import { toRoman } from "@/lib/roman";
+import { orderNumeral } from "@/lib/roman";
 import { CategoryFaq } from "./category-faq";
 import { CategoryOpening } from "./category-opening";
 import { CategoryQuote } from "./category-quote";
@@ -50,7 +50,7 @@ export async function CategoryView({
   const tone = THEME_TONE[category.theme];
   const endTone = END_TONE[category.theme];
   const t = await getTranslations("category");
-  const index = services.map((s) => ({ anchor: s.anchor, numeral: toRoman(s.order), title: s.title[locale] }));
+  const index = services.map((s) => ({ anchor: s.anchor, numeral: orderNumeral(s.order, locale), title: s.title[locale] }));
   return (
     <main id="main" data-theme={category.theme}>
       {!lab && <JsonLd data={categoryJsonLd(category, services, locale, SITE_URL)} />}
@@ -78,7 +78,8 @@ export async function CategoryView({
         </section>
       </div>
       <CategoryFaq category={category} locale={locale} tone={endTone} />
-      <CategoryQuote category={category} services={services} locale={locale} tone={endTone} />
+      {/* Hidden on public pages until the quote form works (D74, P6; Task 4.2); the lab keeps it for review. */}
+      {lab && <CategoryQuote category={category} services={services} locale={locale} tone={endTone} />}
     </main>
   );
 }

@@ -19,3 +19,13 @@ export function toRoman(n: number): string {
   }
   return out;
 }
+
+/**
+ * A category's or service's order numeral, per locale (D74): Roman in English (I, II, III…);
+ * two-digit Western numerals in Arabic (01, 02, 03…), where Latin I and V read as the alef «ا»
+ * and the digit ٧, and a Roman numeral means nothing to most readers. Same range as toRoman.
+ */
+export function orderNumeral(n: number, locale: "en" | "ar"): string {
+  const roman = toRoman(n); // validates n in both locales
+  return locale === "ar" ? String(n).padStart(2, "0") : roman;
+}

@@ -54,7 +54,8 @@ The canonical list is [docs/content/services-list.md](../content/services-list.m
 |---|---|---|
 | 1 | Shared infrastructure (Tasks 2.1–2.10) | — |
 | 2 | Events & Hospitality: animatic → **approval** → images and cutouts → **approval** → full build | **CP7** |
-| 3 | Software & Digital: animatic → **approval** → forms pipeline and page → modules → **performance work (phase-1 Task 16)** → production Lighthouse | **CP8**, then publish |
+| 2b | **Form pipeline (Task 4.2), pulled forward (D74):** right after the full Events build, before the Software animatic | — |
+| 3 | Software & Digital: animatic → **approval** → page → modules → **performance work (phase-1 Task 16)** → production Lighthouse | **CP8**, then publish |
 | 4 | Production, Print & Gifts: animatic → approval → images → build | CP9 |
 | 5 | Marketing & Brand: the same | CP10 |
 | 6 | Creative Production: the same (waits on the showreel, the inventory, photo consent) | CP11 |
@@ -458,7 +459,7 @@ Storyboard: [events-hospitality.md](../design/storyboards/events-hospitality.md)
 
 ### Task 3.0: Events animatic → STOP (stop point 2)
 
-Built (D70). Independent review and rhythm/layout fixes applied (D72, D73; `docs/checkpoints/events-animatic-review/`); awaiting the user's decision on the review's proposals P1–P7 and on the rhythm. As built: `events-hospitality.ts` holds `EVENTS_OPENING` (2.0 / 1.2 vh) and `EVENTS_MAJLIS` (a pass scene in section V); both are lab-only until approved. Shot lines are drafts in `scenes.events.*` (CONTENT_CHECKLIST #26). Tests: `scene-math.test.ts` (pass scenes), `scenes.test.ts` (gating), `e2e/events-animatic.spec.ts`; `layered-scene.spec.ts` now runs on the Studio's draft.
+Built (D70). Independent review and rhythm/layout fixes applied (D72, D73; `docs/checkpoints/events-animatic-review/`). The user decided the review's proposals (D74): three lines on desktop over four shots (P1), a 0.6 vh desktop pin with two beats for the majlis (P2), the index dimmed during shot 1 (P3), 01–06 numerals in Arabic (P4, P5), the quote block hidden on public pages until the form works (P6), and a focus ring after keyboard landings only (P7). All applied. As built: `events-hospitality.ts` holds `EVENTS_OPENING` (2.0 / 1.2 vh) and `EVENTS_MAJLIS` (a pass scene in section V); both are lab-only until approved. Shot lines are drafts in `scenes.events.*` (CONTENT_CHECKLIST #26). Tests: `scene-math.test.ts` (pass scenes), `scenes.test.ts` (gating), `e2e/events-animatic.spec.ts`; `layered-scene.spec.ts` now runs on the Studio's draft.
 
 **Files:** create `src/content/scenes/events-hospitality.ts` (opening and majlis configs, from the storyboard's shot table); add the storyboard's shot lines to the messages as drafts (marked in the copy deck as pending approval).
 
@@ -466,7 +467,7 @@ Built (D70). Independent review and rhythm/layout fixes applied (D72, D73; `docs
 - [x] **Step 2:** Build with `NEXT_PUBLIC_ENABLE_LAB=1`. Run `opening.spec.ts` against `/[locale]/lab/events-animatic`. Expected: PASS.
 - [x] **Step 3:** Record a short screen capture (Playwright video, desktop and mobile) and take screenshots at 1440 and 390, EN and AR: shot by shot, the majlis scene, the index and the skip control.
 - [x] **Step 4:** Commit `feat(lab): Events & Hospitality animatic`.
-- [ ] **Step 5:** Report to the user in Arabic with the recording, the screenshots and the timings table. **Stop** for approval of rhythm and layout.
+- [x] **Step 5:** Report to the user in Arabic with the recording, the screenshots and the timings table. **Stop** for approval of rhythm and layout. (Reviewed; decisions D74.)
 
 ### Task 3.1: Events copy (EN first, AR written natively)
 
@@ -587,6 +588,8 @@ Storyboard: [software-digital.md](../design/storyboards/software-digital.md). De
 - [ ] **Step 5:** Commit `content(services): Software & Digital copy deck and metadata`.
 
 ### Task 4.2: Form pipeline (D66)
+
+**Runs right after Task 3.9 (the full Events build), before the Software animatic (D74, P6).** Until it ships, public category pages hide the quote block and every "Request a quote" link that targets it; the lab route keeps them for review. When the form works, both return on the public pages (`category-view.tsx`, `service-section.tsx`) and the quote form replaces the WhatsApp/email actions. Resend is configured; Turnstile keeps Cloudflare's test keys until the user adds real ones.
 
 **Files:**
 - Create:

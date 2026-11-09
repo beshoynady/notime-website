@@ -4,7 +4,7 @@ import { SERVICES_HREF } from "@/components/layout/nav-links";
 import { BrandImage } from "@/components/ui/brand-image";
 import { getCategories, getServices, type Locale } from "@/content";
 import { Link } from "@/i18n/navigation";
-import { toRoman } from "@/lib/roman";
+import { orderNumeral } from "@/lib/roman";
 import { CategoryCardsScroll } from "./category-cards-scroll";
 import "./categories.css";
 
@@ -27,7 +27,7 @@ export async function CategoryCards() {
           </div>
           <div className="cat-txt">
             <span className="cat-num tabular" aria-hidden="true">
-              {toRoman(c.order)}
+              {orderNumeral(c.order, locale)}
             </span>
             <h3>{c.title[locale]}</h3>
             <div className="cat-fold">

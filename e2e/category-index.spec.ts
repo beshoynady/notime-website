@@ -63,6 +63,36 @@ for (const locale of ["en", "ar"] as const) {
       await expect(indexLink(page, "celebrations")).toHaveAttribute("aria-current", "location");
     });
 
+    // D74, P7: the landed heading shows the focus ring after keyboard navigation only.
+    test("rail: Enter lands with a focus ring on the heading, a click lands with none", async ({ page, isMobile }) => {
+      test.skip(isMobile, "rail: desktop");
+      await gotoReady(page, `/${locale}${PAGE}`);
+      const ring = (id: string) => page.locator(`#${id}-title`).evaluate((h) => getComputedStyle(h).outlineStyle);
+      await indexLink(page, "launches").click();
+      await expectLanded(page, "launches");
+      expect(await ring("launches")).toBe("none");
+      await indexLink(page, "stage").focus();
+      await page.keyboard.press("Enter");
+      await expectLanded(page, "stage");
+      expect(await ring("stage")).toBe("solid");
+    });
+
+    test("a deep link on load lands focused, with no ring (how the visitor arrived is unknown)", async ({ page, isMobile }) => {
+      test.skip(isMobile, "the same at both widths");
+      await gotoReady(page, `/${locale}${PAGE}#launches`);
+      await expectLanded(page, "launches");
+      expect(await page.locator("#launches-title").evaluate((h) => getComputedStyle(h).outlineStyle)).toBe("none");
+    });
+
+    // D74, P4: Roman numerals in English, 01-06 in Arabic (rail, chips, section numerals, eyebrow).
+    test("order numerals follow the locale", async ({ page }) => {
+      await gotoReady(page, `/${locale}${PAGE}`);
+      const expected = locale === "en" ? ["I", "II", "III", "IV", "V", "VI"] : ["01", "02", "03", "04", "05", "06"];
+      await expect(page.locator("nav.svc-index .svc-index-num")).toHaveText(expected);
+      await expect(page.locator(".svc .svc-num")).toHaveText(expected);
+      await expect(page.locator(".cat-opening-eyebrow bdi")).toHaveText(locale === "en" ? "I" : "01");
+    });
+
     test("scrolling into section V makes rail V current", async ({ page, isMobile }) => {
       test.skip(isMobile, "rail: desktop");
       await gotoReady(page, `/${locale}${PAGE}`);

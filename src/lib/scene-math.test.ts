@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { SceneConfig, SceneLayer, SceneShot } from "@/content/scenes/types";
-import { PIN_LIMIT, enterFrom, layerDrift, pinLength, sceneProblems, shotAt, stillState } from "./scene-math";
+import { PIN_LIMIT, SECTION_PIN_LIMIT, enterFrom, layerDrift, lineSpans, pinLength, sceneMode, sceneProblems, shotAt, stillState } from "./scene-math";
 
 const shots: SceneShot[] = [
   { id: "a", copyKey: "a", desktop: [0, 0.45], mobile: [0, 0.35] },
@@ -138,5 +138,68 @@ describe("sceneProblems · pass scenes (not pinned, e.g. the majlis)", () => {
   it("rejects a shot that ends past the crossing", () => {
     const long = crossing.map((s, i) => (i === 2 ? { ...s, mobile: [0.7, 1.4] as [number, number] } : s));
     expect(sceneProblems(scene({ mode: "pass", shots: long }))).toEqual(["mobile shot night ends past the crossing (1.4 > 1)"]);
+  });
+});
+
+describe("lineSpans (D74, P1: three lines over four shots)", () => {
+  it("a line holds until the next line comes in, so a shot without one keeps the previous line", () => {
+    const three = shots.map((s, i) => (i === 1 ? { ...s, copyKey: undefined } : s));
+    expect(lineSpans(three, "desktop")).toEqual([
+      { shot: 0, start: 0, end: 0.95 },
+      { shot: 2, start: 0.95, end: 1.5 },
+      { shot: 3, start: 1.5, end: 2.0 },
+    ]);
+  });
+
+  it("skips shots that don't play at this width; the last line lasts to the pin's end", () => {
+    expect(lineSpans(shots, "mobile")).toEqual([
+      { shot: 0, start: 0, end: 0.35 },
+      { shot: 2, start: 0.35, end: 0.8 },
+      { shot: 3, start: 0.8, end: 1.2 },
+    ]);
+  });
+
+  it("is empty for a scene without lines", () => {
+    expect(lineSpans(shots.map((s) => ({ ...s, copyKey: undefined })), "desktop")).toEqual([]);
+  });
+});
+
+describe("sceneMode", () => {
+  it("is a pin unless the scene says otherwise, at one or both widths", () => {
+    expect(sceneMode(scene(), "desktop")).toBe("pin");
+    expect(sceneMode(scene({ mode: "pass" }), "mobile")).toBe("pass");
+    const mixed = scene({ mode: { desktop: "pin", mobile: "pass" } });
+    expect([sceneMode(mixed, "desktop"), sceneMode(mixed, "mobile")]).toEqual(["pin", "pass"]);
+  });
+});
+
+describe("sceneProblems · a section scene pinned on desktop, passing on mobile (the majlis, D74 P2)", () => {
+  const beats: SceneShot[] = [
+    { id: "dusk", desktop: null, mobile: [0, 0.4] },
+    { id: "pour", desktop: [0, 0.3], mobile: [0.4, 0.7] },
+    { id: "bloom", desktop: [0.3, 0.6], mobile: [0.7, 1] },
+  ];
+  const majlis = (over: Partial<SceneConfig> = {}) => scene({ mode: { desktop: "pin", mobile: "pass" }, shots: beats, ...over });
+
+  it("a section scene pins 0.6 vh at most, and never on mobile", () => {
+    expect(SECTION_PIN_LIMIT).toEqual({ desktop: 0.6, mobile: 0 });
+  });
+
+  it("accepts a short desktop pin with a mobile crossing", () => {
+    expect(sceneProblems(majlis(), SECTION_PIN_LIMIT)).toEqual([]);
+  });
+
+  it("rejects a desktop pin over the section limit", () => {
+    const long = beats.map((s, i) => (i === 2 ? { ...s, desktop: [0.3, 0.7] as [number, number] } : s));
+    expect(sceneProblems(majlis({ shots: long }), SECTION_PIN_LIMIT)).toEqual(["desktop pin 0.7 vh > 0.6 vh"]);
+  });
+
+  it("rejects a pin on mobile", () => {
+    expect(sceneProblems(majlis({ mode: "pin" }), SECTION_PIN_LIMIT)).toContain("mobile pin 1 vh > 0 vh");
+  });
+
+  it("still checks the mobile crossing", () => {
+    const long = beats.map((s, i) => (i === 2 ? { ...s, mobile: [0.7, 1.2] as [number, number] } : s));
+    expect(sceneProblems(majlis({ shots: long }), SECTION_PIN_LIMIT)).toEqual(["mobile shot bloom ends past the crossing (1.2 > 1)"]);
   });
 });

@@ -37,6 +37,11 @@ export function getSectionScene(service: Pick<Service, "slug">, lab: boolean): S
   return SECTION_SCENES[service.slug] ?? (lab ? LAB_SECTION_SCENES[service.slug] : undefined);
 }
 
+/** Every section scene, approved or in review, for the section pin limit (scenes.test.ts). */
+export function allSectionScenes(): SceneConfig[] {
+  return [...new Set([...Object.values(SECTION_SCENES), ...Object.values(LAB_SECTION_SCENES)])];
+}
+
 /** Every scene, once, for the rule and asset checks (scenes.test.ts, images.test.ts). */
 export function allScenes(): SceneConfig[] {
   const all = [DRAFT_SCENE, ...Object.values(SCENES), ...Object.values(LAB_SCENES), ...Object.values(SECTION_SCENES), ...Object.values(LAB_SECTION_SCENES)];

@@ -18,11 +18,24 @@ function headingFor(target: HTMLElement): HTMLElement {
   return byLabel ?? target.querySelector<HTMLElement>("h1, h2, h3") ?? target;
 }
 
-/** Moves focus without scrolling; the heading gets tabindex="-1" (no outline, see globals.css). */
+/**
+ * Whether the visitor has pointed or typed in this document yet. Before that (a deep link on
+ * load) the browser can't tell how they arrived and would show the ring, even after a click on
+ * another page; after it, its focus-visible heuristic knows (D74, P7).
+ */
+let interacted = false;
+if (typeof window !== "undefined") {
+  for (const t of ["pointerdown", "keydown"] as const) addEventListener(t, () => (interacted = true), { capture: true, once: true, passive: true });
+}
+
+/**
+ * Moves focus without scrolling; the heading gets tabindex="-1". The ring shows only after
+ * keyboard navigation (globals.css): a landing on load never shows it.
+ */
 function focusHeading(target: HTMLElement) {
   const h = headingFor(target);
   if (!h.hasAttribute("tabindex")) h.setAttribute("tabindex", "-1");
-  h.focus({ preventScroll: true });
+  h.focus({ preventScroll: true, ...(interacted ? {} : { focusVisible: false }) });
 }
 
 /**

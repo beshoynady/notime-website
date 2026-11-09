@@ -5,7 +5,8 @@ import { GROUND, gotoReady, lcpEntry } from "./helpers";
 
 /**
  * Category pages · structure and themes (Task 2.5), every category in EN and AR: one H1, the six
- * service sections in data order, the FAQ and the quote block, JSON-LD, no overflow, and the
+ * service sections in data order, the FAQ (the quote block is hidden until the form works, D74),
+ * JSON-LD, no overflow, and the
  * header never dark-on-dark (it follows each section's tone) while the page ground is the theme's.
  */
 const overflow = (page: Page) => page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
@@ -59,7 +60,7 @@ for (const category of getCategories()) {
       test.describe("desktop only", () => {
         test.skip(({ isMobile }) => isMobile, "structure is the same at every width");
 
-        test("one H1, six sections in data order, FAQ and quote block", async ({ page }) => {
+        test("one H1, six sections in data order, the FAQ; no quote block or quote links yet (D74, P6)", async ({ page }) => {
           await gotoReady(page, path);
           await expect(page.locator("h1")).toHaveCount(1);
           const ids = await page.locator(".cat-sections > section[id]").evaluateAll((els) => els.map((e) => e.id));
@@ -69,7 +70,8 @@ for (const category of getCategories()) {
           }
           await expect(page.locator("section.cat-faq h2")).toHaveCount(1);
           await expect(page.locator("section.cat-faq details")).toHaveCount(category.faq.length);
-          await expect(page.locator("section#quote h2")).toHaveCount(1);
+          await expect(page.locator("section#quote")).toHaveCount(0);
+          await expect(page.locator('a[href*="#quote"]')).toHaveCount(0);
         });
 
         test("the FAQ opens and closes with Enter", async ({ page }) => {

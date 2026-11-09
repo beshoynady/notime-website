@@ -25,6 +25,7 @@ export function LayeredScene({
   variant,
   label,
   overlayClassName,
+  pinUnderBars,
   children,
 }: {
   scene: SceneConfig;
@@ -35,6 +36,8 @@ export function LayeredScene({
   label?: string;
   /** Sets the overlay's inline box (e.g. `frame`); the overlay itself has no inline padding. */
   overlayClassName?: string;
+  /** Pins under the fixed header (a scene inside a section), not at the viewport's top. */
+  pinUnderBars?: boolean;
   children?: ReactNode;
 }) {
   return (
@@ -58,7 +61,7 @@ export function LayeredScene({
           </div>
         )}
       </div>
-      <SceneDirector scene={scene} />
+      <SceneDirector scene={scene} pinUnderBars={pinUnderBars} />
     </div>
   );
 }

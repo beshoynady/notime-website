@@ -1,5 +1,5 @@
 import { getCategories, getProducts, getServiceCount, getServices, type CategorySlug, type Locale } from "@/content";
-import { toRoman } from "@/lib/roman";
+import { orderNumeral } from "@/lib/roman";
 import { SERVICES_HREF } from "./nav-links";
 
 /** Serializable, localized menu data built on the server and passed to the client menus. */
@@ -27,7 +27,7 @@ export function getMenuData(locale: Locale): MenuData {
   return {
     categories: getCategories().map((c) => ({
       slug: c.slug,
-      numeral: toRoman(c.order),
+      numeral: orderNumeral(c.order, locale),
       title: c.title[locale],
       summary: c.summary[locale],
       image: c.image,

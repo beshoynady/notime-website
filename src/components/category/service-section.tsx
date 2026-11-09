@@ -6,7 +6,7 @@ import { Numeral } from "@/components/ui/numeral";
 import { LayeredScene } from "@/components/scenes/layered-scene";
 import { quoteHref, type Locale, type Service } from "@/content";
 import { getSectionScene } from "@/content/scenes";
-import { toRoman } from "@/lib/roman";
+import { orderNumeral } from "@/lib/roman";
 
 /**
  * One service on its category page (spec §4, part 3): `section#<anchor>`, named by its H2 so the
@@ -32,7 +32,7 @@ export async function ServiceSection({
   const scene = getSectionScene(service, lab);
   const head = (
     <header className="svc-head">
-      <Numeral className="svc-num">{toRoman(service.order)}</Numeral>
+      <Numeral className="svc-num">{orderNumeral(service.order, locale)}</Numeral>
       <h2 id={titleId} className="svc-title">
         {title}
       </h2>
@@ -53,6 +53,7 @@ export async function ServiceSection({
             lines={[]}
             variant={lab ? "animatic" : "live"}
             overlayClassName="svc-scene-overlay"
+            pinUnderBars
           >
             {head}
           </LayeredScene>
@@ -87,15 +88,18 @@ export async function ServiceSection({
           <ModulePlaceholder />
         </ModuleSlot>
       )}
-      <ButtonLink
-        href={quoteHref(service)}
-        variant={tone === "dark" ? "primary" : "dark"}
-        arrow
-        aria-label={t("quoteCtaFor", { service: title })}
-        className="svc-quote"
-      >
-        {t("quoteCta")}
-      </ButtonLink>
+      {/* It targets the quote block, hidden on public pages until the form works (D74, P6). */}
+      {lab && (
+        <ButtonLink
+          href={quoteHref(service)}
+          variant={tone === "dark" ? "primary" : "dark"}
+          arrow
+          aria-label={t("quoteCtaFor", { service: title })}
+          className="svc-quote"
+        >
+          {t("quoteCta")}
+        </ButtonLink>
+      )}
     </section>
   );
 }

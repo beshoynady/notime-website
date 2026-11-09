@@ -4,7 +4,7 @@ import { LayeredScene } from "@/components/scenes/layered-scene";
 import { Numeral } from "@/components/ui/numeral";
 import type { Category, Locale } from "@/content";
 import type { SceneConfig } from "@/content/scenes";
-import { toRoman } from "@/lib/roman";
+import { orderNumeral } from "@/lib/roman";
 import { Breadcrumbs } from "./breadcrumbs";
 import { THEME_TONE } from "./theme";
 
@@ -45,7 +45,7 @@ export async function CategoryOpening({
       <div className="cat-opening-head">
         <p className="sec-eyebrow text-eyebrow cat-opening-eyebrow">
           <span>
-            <Numeral>{toRoman(category.order)}</Numeral>
+            <Numeral>{orderNumeral(category.order, locale)}</Numeral>
             <span aria-hidden="true"> · </span>
             {tm("count", { count: serviceCount })}
           </span>

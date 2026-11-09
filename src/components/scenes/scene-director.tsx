@@ -1,9 +1,10 @@
 "use client";
 
 import { useRef } from "react";
+import { anchorOffset } from "@/components/providers/anchor-scroll";
 import type { SceneConfig, Viewport } from "@/content/scenes";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { enterFrom, layerDrift, pinLength, shotAt } from "@/lib/scene-math";
+import { enterFrom, layerDrift, lineSpans, pinLength, sceneMode, shotAt } from "@/lib/scene-math";
 
 /**
  * Cross-fade of two shot lines, in vh of scroll, centred on the shot boundary: the next line comes
@@ -17,12 +18,16 @@ const LIGHT_EASE = "sine.inOut";
 
 /**
  * Scrubs a LayeredScene (GSAP owns it, CLAUDE.md): pins the scene for its pin length and plays
- * the shots on one timeline whose time is the vh scrolled. A pass scene (`mode: "pass"`) is not
- * pinned: its timeline runs 0–1 while it crosses the viewport. Built per width in gsap.matchMedia;
- * under reduced motion nothing is built and the still stays. `data-shot-active` on the scene
- * follows the shot in play (tests, and a hook for CSS).
+ * the shots on one timeline whose time is the vh scrolled. Where the scene passes (`mode`, per
+ * width) it is not pinned: its timeline runs 0–1 while it crosses the viewport. Built per width
+ * in gsap.matchMedia; under reduced motion nothing is built and the still stays.
+ * `data-shot-active` on the scene follows the shot in play (tests, and CSS: the index dims during
+ * the opening's shot 1, D74).
+ *
+ * `pinUnderBars`: a scene further down the page (the majlis) pins with its top under the fixed
+ * header, where a landing on its section puts it; an opening pins at the viewport's top.
  */
-export function SceneDirector({ scene }: { scene: SceneConfig }) {
+export function SceneDirector({ scene, pinUnderBars = false }: { scene: SceneConfig; pinUnderBars?: boolean }) {
   const ref = useRef<HTMLSpanElement>(null);
 
   useGSAP(() => {
@@ -36,7 +41,7 @@ export function SceneDirector({ scene }: { scene: SceneConfig }) {
       },
       (ctx) => {
         const viewport: Viewport = ctx.conditions?.desktop ? "desktop" : "mobile";
-        const pass = scene.mode === "pass";
+        const pass = sceneMode(scene, viewport) === "pass";
         const pin = pass ? 1 : pinLength(scene.shots, viewport);
         if (pin === 0) return;
         const dir = document.documentElement.dir === "rtl" ? -1 : 1;
@@ -56,13 +61,23 @@ export function SceneDirector({ scene }: { scene: SceneConfig }) {
             trigger: root,
             ...(pass
               ? { start: "top bottom", end: "bottom top" }
-              : { start: "top top", end: () => `+=${pin * innerHeight}`, pin: true }),
+              : {
+                  start: pinUnderBars ? () => `top ${anchorOffset(root)}px` : "top top",
+                  end: () => `+=${pin * innerHeight}`,
+                  pin: true,
+                  // A scene further down the page is held by a transform, never position: fixed:
+                  // Chrome scored the fixed switch mid-page as a layout shift (viewport vs document
+                  // coordinates; CLS 1.85 on desktop, D74). Lenis drives the scroll in the same frame.
+                  ...(pinUnderBars && { pinType: "transform" as const }),
+                }),
             scrub: true,
             invalidateOnRefresh: true,
             // While active, the moving boxes are promoted (data-live, layered-scene.css).
             onToggle: (self) => root.toggleAttribute("data-live", self.isActive),
             onUpdate: (self) => {
-              root.dataset.shotActive = String(shotAt(self.progress * pin, scene.shots, viewport));
+              const shot = String(shotAt(self.progress * pin, scene.shots, viewport));
+              // Written only on a change: a page-level :has() rule reads it (the index dims, D74).
+              if (root.dataset.shotActive !== shot) root.dataset.shotActive = shot;
             },
           },
         });
@@ -88,25 +103,24 @@ export function SceneDirector({ scene }: { scene: SceneConfig }) {
           }
         }
 
-        const lineOf = (i: number) => root.querySelector<HTMLElement>(`.scene-line[data-shot="${i}"]`);
-        const playing = scene.shots.map((_, i) => shotRange(i)).filter((r) => r !== null);
-        let shown = 0;
-        scene.shots.forEach((_, i) => {
-          const line = lineOf(i);
-          const r = shotRange(i);
+        // A line holds until the next one comes in (lineSpans); lines of shots that don't play here stay hidden.
+        const lines = root.querySelectorAll<HTMLElement>(".scene-line");
+        gsap.set(lines, { autoAlpha: 0 });
+        const spans = lineSpans(scene.shots, viewport);
+        spans.forEach(({ shot, start, end }, k) => {
+          const line = root.querySelector<HTMLElement>(`.scene-line[data-shot="${shot}"]`);
           if (!line) return;
-          if (!r) return void gsap.set(line, { autoAlpha: 0 });
-          const first = shown === 0;
-          const last = shown === playing.length - 1;
-          shown++;
-          if (first) gsap.set(line, { autoAlpha: 1 });
-          else tl.fromTo(line, { autoAlpha: 0 }, { autoAlpha: 1, duration: LINE_XFADE }, r[0] - LINE_XFADE / 2);
-          if (!last) tl.to(line, { autoAlpha: 0, duration: LINE_XFADE }, r[1] - LINE_XFADE / 2);
+          if (k === 0) gsap.set(line, { autoAlpha: 1 });
+          else tl.fromTo(line, { autoAlpha: 0 }, { autoAlpha: 1, duration: LINE_XFADE }, start - LINE_XFADE / 2);
+          if (k < spans.length - 1) tl.to(line, { autoAlpha: 0, duration: LINE_XFADE }, end - LINE_XFADE / 2);
         });
 
         root.dataset.motion = viewport;
+        // A transform pin moves the whole scene every frame: promoted while live (layered-scene.css).
+        root.toggleAttribute("data-pin-transform", !pass && pinUnderBars);
         return () => {
           delete root.dataset.motion;
+          root.removeAttribute("data-pin-transform");
           root.removeAttribute("data-live");
           root.dataset.shotActive = "0";
         };

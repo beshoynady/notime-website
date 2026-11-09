@@ -354,10 +354,11 @@
 html {
   scroll-padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px));
 }
-/* Headings focused by the anchor utility (tabindex="-1"): focus moves, no outline appears. */
-h1[tabindex="-1"]:focus,
-h2[tabindex="-1"]:focus,
-h3[tabindex="-1"]:focus {
+/* Headings focused by the anchor utility (tabindex="-1"): the ring shows only where the browser
+   judges focus-visible, i.e. after keyboard navigation (D74, P7); a pointer click lands with none. */
+h1[tabindex="-1"]:focus:not(:focus-visible),
+h2[tabindex="-1"]:focus:not(:focus-visible),
+h3[tabindex="-1"]:focus:not(:focus-visible) {
   outline: none;
 }
 a,

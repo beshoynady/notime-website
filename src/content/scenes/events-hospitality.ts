@@ -4,17 +4,20 @@ import type { SceneConfig } from "./types";
  * I · Events & Hospitality, "The Evening" (docs/design/storyboards/events-hospitality.md).
  * In review: lab route only until the animatic is approved (Task 3.0, stop point 2).
  *
- * Opening, desktop: four shots on a 2.0 vh pin (empty room → lights up → dressed → ready).
+ * Opening, desktop: four shots on a 2.0 vh pin (empty room → lights up → dressed → ready) and
+ * three lines (D74, P1): shot 2 has none, so the first line holds while the lights come up. The
+ * shots are timed for the lines (about 1 s each at a normal scroll): the dressing gets the second
+ * line, and the promise lands with the last light key.
  * Mobile: three shots on 1.2 vh. Shot 2's lights hand their cues to shot 3, which merges lights
  * and dressing (storyboard, "Mobile"); the table and the florals are the only cutouts there.
  */
 export const EVENTS_OPENING: SceneConfig = {
   id: "events-opening",
   shots: [
-    { id: "empty-room", copyKey: "events.s1", desktop: [0, 0.45], mobile: [0, 0.35] },
-    { id: "lights-up", copyKey: "events.s2", desktop: [0.45, 0.95], mobile: null },
-    { id: "dressed", copyKey: "events.s3", desktop: [0.95, 1.5], mobile: [0.35, 1.0] },
-    { id: "ready", copyKey: "events.s4", desktop: [1.5, 2.0], mobile: [1.0, 1.2] },
+    { id: "empty-room", copyKey: "events.s1", desktop: [0, 0.4], mobile: [0, 0.35] },
+    { id: "lights-up", desktop: [0.4, 0.83], mobile: null },
+    { id: "dressed", copyKey: "events.s3", desktop: [0.83, 1.8], mobile: [0.35, 1.0] },
+    { id: "ready", copyKey: "events.s4", desktop: [1.8, 2.0], mobile: [1.0, 1.2] },
   ],
   layers: [
     // L0: the empty hall. Push-in 1.00 → 1.04 over the act (1.02 by the end of shot 2).
@@ -40,28 +43,33 @@ export const EVENTS_OPENING: SceneConfig = {
 };
 
 /**
- * Section V's majlis (hospitality): not pinned, it plays while it crosses the viewport. Dusk over
- * sand, the lit tent, a brass dallah pouring into a cup (the pour is an SVG stroke, drawn from 40%
- * to 70% of the crossing), and the sky deepening to night. No lines: the section's H2 and promise
- * sit over its lower third, which the layers leave clear. Mobile: the plate, the tent and the dallah (the cup merges into it).
+ * Section V's majlis (hospitality), the page's peak (D74, P2). Desktop: a short pin (0.6 vh) with
+ * two beats, the coffee pour, then the light blooming in the tent as the sky deepens; it scrolls
+ * in at dusk, the scene's resting frame. Mobile: no pin, it plays while it crosses the viewport
+ * (dusk, pour, night). Reduced motion: the end frame (poured, lit, night).
+ * Dusk over sand, the lit tent, a brass dallah pouring into a cup (the pour is an SVG stroke in
+ * the live build). No lines: the section's H2 and promise sit over its lower third, which the
+ * layers leave clear. Mobile: the plate, the tent and the dallah (the cup merges into it).
  */
 export const EVENTS_MAJLIS: SceneConfig = {
   id: "events-majlis",
-  mode: "pass",
+  mode: { desktop: "pin", mobile: "pass" },
   shots: [
-    { id: "dusk", desktop: [0, 0.4], mobile: [0, 0.4] },
-    { id: "pour", desktop: [0.4, 0.7], mobile: [0.4, 0.7] },
-    { id: "night", desktop: [0.7, 1], mobile: [0.7, 1] },
+    { id: "dusk", desktop: null, mobile: [0, 0.4] },
+    { id: "pour", desktop: [0, 0.3], mobile: [0.4, 0.7] },
+    { id: "bloom", desktop: [0.3, 0.6], mobile: [0.7, 1] },
   ],
   layers: [
     { id: "sand", level: 0, slot: "ev-majlis-dusk", depth: 0.15, push: 0.03, mobile: true, box: { block: "0", inline: "0" } },
     // L3: the sky deepens from dusk to night.
     { id: "night-sky", level: 3, fx: "shade", depth: 0, mobile: true, box: { block: "0 45%", inline: "0" }, style: { opacity: 0 }, keys: [{ shot: 2, to: { opacity: 0.55 } }] },
     { id: "tent", level: 1, slot: "ev-majlis-tent", depth: 0.5, mobile: true, box: { block: "16% 42%", inline: "8% 46%" } },
+    // L3: the tent's light blooms (beat 2): one glow behind and around it.
+    { id: "tent-bloom", level: 3, fx: "glow", depth: 0.5, mobile: true, box: { block: "8% 36%", inline: "0 38%" }, style: { opacity: 0 }, keys: [{ shot: 2, to: { opacity: 1, scale: 1.15 } }] },
     // L2: the dallah at inline-end pours toward inline-start (mirrors in AR).
     { id: "dallah", level: 2, slot: "ev-majlis-dallah", depth: 1.0, mobile: true, box: { block: "8% 38%", inline: "66% 6%" } },
     { id: "cup", level: 2, slot: "ev-majlis-cup", depth: 1.1, mobile: false, box: { block: "46% 38%", inline: "50% 38%" } },
-    // L3: the pour (SVG stroke in the live build) and three wisps of steam.
+    // L3: the pour (beat 1; an SVG stroke in the live build) and three wisps of steam.
     { id: "pour", level: 3, depth: 1.05, mobile: true, box: { block: "22% 54%", inline: "56% 34%" }, style: { opacity: 0 }, keys: [{ shot: 1, to: { opacity: 1 } }] },
     { id: "steam", level: 3, depth: 1.1, mobile: true, box: { block: "34% 54%", inline: "50% 40%" }, style: { opacity: 0 }, keys: [{ shot: 2, to: { opacity: 0.8 } }] },
   ],

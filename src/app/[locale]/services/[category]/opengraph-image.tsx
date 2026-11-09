@@ -4,7 +4,7 @@ import { ImageResponse } from "next/og";
 import type { CSSProperties } from "react";
 import { ORGANIZATION_NAME, getCategory, type CategorySlug, type Locale } from "@/content";
 import { visualArabicWord } from "@/lib/arabic-shape";
-import { toRoman } from "@/lib/roman";
+import { orderNumeral } from "@/lib/roman";
 
 /**
  * Category page share image (D57): espresso ground, champagne numeral, ivory title; Alexandria
@@ -83,7 +83,7 @@ export default async function Image({ params }: { params: Params }) {
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: ar ? "flex-end" : "flex-start" }}>
           <div style={{ display: "flex", fontFamily: "Montserrat", fontWeight: 500, fontSize: 28, letterSpacing: 4, color: "#EAD4AB" }}>
-            {toRoman(c.order)}
+            {orderNumeral(c.order, locale)}
           </div>
           <Words
             text={c.title[locale]}

@@ -421,7 +421,6 @@
     },
     "events": {
       "s1": "It starts with an empty room.",
-      "s2": "Light first. Then everything else.",
       "s3": "Tables, flowers and candlelight, each in place.",
       "s4": "Every detail, ready before the first guest."
     }

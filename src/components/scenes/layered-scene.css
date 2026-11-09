@@ -94,6 +94,10 @@ html[data-js]:not([data-reduced]) .scene-line:not(:first-child) {
 .scene[data-live] .scene-light[data-keys] {
   will-change: opacity, transform;
 }
+/* A scene held by a transform pin (the majlis on desktop, D74) moves as a whole every frame. */
+.scene[data-live][data-pin-transform] {
+  will-change: transform;
+}
 
 /* L3 atmosphere: code only (storyboards README §3). Opacity and scale move; never a filter. */
 .fx-shade {

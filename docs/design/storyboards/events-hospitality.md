@@ -18,18 +18,20 @@
 │     ····· stage ····│ │     ··(  glow  )····│ │     ▁▁▁ table ▁▁▁▁  │ │     ▁▁▁ table ▁▁▁▁  │
 │ I · 6 SERVICES      │ │ I · 6 SERVICES      │ │ I · 6 SERVICES      │ │ I · 6 SERVICES      │
 │ EVENTS & HOSPITALITY│ │ EVENTS & HOSPITALITY│ │ EVENTS & HOSPITALITY│ │ EVENTS & HOSPITALITY│
-│ It starts with an … │ │ Light first. Then … │ │ Tables, flowers …   │ │ Every detail, ready…│
+│ It starts with an … │ │ (line 1 holds)      │ │ Tables, flowers …   │ │ Every detail, ready…│
 │              skip ↓ │ │              skip ↓ │ │   (glasses, blur)   │ │              skip ↓ │
 └─────────────────────┘ └─────────────────────┘ └─────────────────────┘ └─────────────────────┘
    L0 + haze              + L3 glow, beams        + L1 table, L2 ×3       all settled, flicker
 ```
 Mobile (9:16): the chip bar sits under the header; the H1 sits at the bottom third; one line at a time above it.
 
+**Three lines over four shots (D74, P1).** Shot 2 has no line: the first line holds while the lights come up, so each of the three lines reads for about a second at a normal scroll. The shots are timed for the lines (desktop 0 → 0.4 → 0.83 → 1.8 → 2.0 vh): the dressing gets the second line, and the promise lands with the last light key. During shot 1 the service index sits at 40% and comes back on hover, focus or the next shot (D74, P3). In Arabic the eyebrow reads «01 · 6 خدمات» (D74, P4).
+
 ### Shot 1 · The empty room
 
 | | |
 |---|---|
-| **Scroll** | Desktop 0 → 0.45 vh · mobile 0 → 0.35 vh |
+| **Scroll** | Desktop 0 → 0.4 vh (its line holds to 0.83) · mobile 0 → 0.35 vh |
 | **Frame** | A dark, empty hall seen from the back. Lights off, only a faint wash at the stage end. The H1 sits low at inline-start, in Montserrat 200; the eyebrow "I · 6 services" sits above it. The rail sits at inline-start (desktop); the chip bar sits under the header (mobile). |
 | **Layers** | L0 `ev-open-hall` (overlay at 70%: dusk) · L3 haze (one radial gradient at 4% alpha) |
 | **Motion** | L0 scale 1.00 → 1.02; nothing else moves. The page is still on arrival. |
@@ -54,11 +56,11 @@ Mobile (9:16): the chip bar sits under the header; the H1 sits at the bottom thi
 
 | | |
 |---|---|
-| **Scroll** | Desktop 0.45 → 0.95 vh · mobile: none, merged into shot 3 (D70, approved D72) |
+| **Scroll** | Desktop 0.4 → 0.83 vh · mobile: none, merged into shot 3 (D70, approved D72) |
 | **Frame** | The stage wash comes up first, then the pendant lights, layer by layer. The far end of the hall reads as a stage. |
 | **Layers** | L0 `ev-open-hall` (overlay 70% → 40%) · L3 stage glow (champagne radial at 12%, scale 0.6 → 1) · L3 two light beams (CSS gradients, opacity 0 → 0.5, staggered) |
 | **Motion** | Glow scale and opacity; beams opacity; L0 scale 1.02 → 1.04 (push-in begins). |
-| **Copy** | "Light first. Then everything else." / «الضوء أولًا، ثم يأتي كل شيء.» |
+| **Copy** | None: shot 1's line holds (D74, P1; the line "Light first. Then everything else." was dropped). |
 | **Understands** | They handle the production, not only the decoration. |
 | **Transition** | Push-in into the room. |
 
@@ -66,7 +68,7 @@ Mobile (9:16): the chip bar sits under the header; the H1 sits at the bottom thi
 
 | | |
 |---|---|
-| **Scroll** | Desktop 0.95 → 1.5 vh · mobile 0.35 → 1.0 vh (lights and dressing in one shot, with this shot's line; D70, approved D72) |
+| **Scroll** | Desktop 0.83 → 1.8 vh · mobile 0.35 → 1.0 vh (lights and dressing in one shot, with this shot's line; D70, approved D72) |
 | **Frame** | A long dressed table rises into the midground. Florals drift in from the inline-start edge, candles from the inline-end edge, and crystal glasses pass close to the lens, out of focus. |
 | **Layers** | L1 `ev-open-table` (rises 8 vh → 0, opacity 0 → 1) · L2 `ev-open-florals` (from −30% inline, depth 1.2) · L2 `ev-open-candles` (from +30% inline, depth 1.0) · L2 `ev-open-glasses` (desktop only, depth 1.3, passes through the bottom corner) |
 | **Motion** | Translate and opacity only; each layer's speed comes from its depth. Inline offsets mirror in AR. |
@@ -78,7 +80,7 @@ Mobile (9:16): the chip bar sits under the header; the H1 sits at the bottom thi
 
 | | |
 |---|---|
-| **Scroll** | Desktop 1.5 → 2.0 vh · mobile 1.0 → 1.2 vh |
+| **Scroll** | Desktop 1.8 → 2.0 vh, and the promise stays on screen while the scene scrolls away · mobile 1.0 → 1.2 vh |
 | **Frame** | The full room in warm light. Every layer has settled. The H1 remains; the promise line is set larger. |
 | **Layers** | All layers at rest · L0 overlay 25% · L3 candle points (6–10 small glows, a slow flicker that stops when the act ends) |
 | **Copy** | **"Every detail, ready before the first guest."** / **«كل التفاصيل جاهزة قبل وصول أول ضيف.»** |
@@ -87,11 +89,11 @@ Mobile (9:16): the chip bar sits under the header; the H1 sits at the bottom thi
 
 **Mobile:** three shots. Shot 1 is as above; shot 2 merges lights and dressing (the table and one florals cutout, no glasses); shot 3 is "Ready". It uses 3 image layers.
 
-**Reduced-motion still:** the shot-4 frame (room lit, overlay 25%, all layers in place, no candle flicker). Under the H1 all four lines read as one short paragraph:
+**Reduced-motion still:** the shot-4 frame (room lit, overlay 25%, all layers in place, no candle flicker). Under the H1 the three lines read as one short paragraph:
 
-> It starts with an empty room. Light first. Then everything else. Tables, flowers and candlelight, each in place. Every detail, ready before the first guest.
+> It starts with an empty room. Tables, flowers and candlelight, each in place. Every detail, ready before the first guest.
 
-The Arabic still reads the same way, with its four lines.
+The Arabic still reads the same way, with its three lines.
 
 **Budget (mobile):** `ev-open-hall` 9:16 ~140 KB + `ev-open-table` ~90 KB + `ev-open-florals` ~70 KB = **~300 KB** (estimate; measured at build). Shot-1 eager: the L0 plate only (~140 KB); the others load as the opening starts to scroll.
 
@@ -110,16 +112,16 @@ Every section follows README §6. Below: the one hero motion, the composite or m
 | V | **Catering & heritage hospitality** (peak) | **The majlis scene** (below) | Majlis scene, then `menu-majlis` | H2 → promise → scene → menu card → deliverables → CTA |
 | VI | Stage & technical production | One spot turns on over the H2 | `stage-lights`: four groups and a cue | H2 → promise → stage → deliverables → CTA |
 
-### The majlis scene (section V, not pinned, ~1.2 vh of scroll-through parallax)
+### The majlis scene (section V; desktop: a 0.6 vh pin with two beats; mobile: not pinned; D74, P2)
 
 | | |
 |---|---|
 | **Frame** | Dusk over open sand; a lit tent at mid-distance; in the foreground, a brass dallah pours Arabic coffee into a small cup. |
-| **Layers** | L0 `ev-majlis-dusk` (AI plate: dusk desert, depth 0.15) · L1 `ev-majlis-tent` (real: the desert tent at night, cut out, depth 0.5) · L2 `ev-majlis-dallah` (real: brass dallah, cut out, depth 1.0) · L2 `ev-majlis-cup` (real: the coffee service, cup cut out, depth 1.1) · L3 the pour (an SVG stroke from spout to cup, drawn by scroll) · L3 steam (3 soft wisps, opacity only) · L3 dusk gradient |
-| **Motion** | GSAP scrub while the scene crosses the viewport. The pour draws from 40% to 70% of the crossing. The sky's gradient deepens from dusk to night. |
+| **Layers** | L0 `ev-majlis-dusk` (AI plate: dusk desert, depth 0.15) · L1 `ev-majlis-tent` (real: the desert tent at night, cut out, depth 0.5) · L3 the tent's bloom (a champagne glow behind the tent, opacity and scale) · L2 `ev-majlis-dallah` (real: brass dallah, cut out, depth 1.0) · L2 `ev-majlis-cup` (real: the coffee service, cup cut out, depth 1.1) · L3 the pour (an SVG stroke from spout to cup, drawn by scroll) · L3 steam (3 soft wisps, opacity only) · L3 dusk gradient |
+| **Motion** | **Desktop:** the scene scrolls in at dusk, then pins for 0.6 vh under the header with two beats: the coffee pour (0 → 0.3 vh), then the light blooming in the tent as the sky deepens (0.3 → 0.6 vh). **Mobile:** no pin; GSAP scrubs while the scene crosses the viewport: dusk, the pour from 40% to 70% of the crossing, then night and the bloom. |
 | **Copy** | Only the section's H2 and promise sit over the scene's lower third. |
 | **Understands** | Heritage hospitality is a real speciality, rooted in the region. |
-| **Reduced** | The composed still: the pour drawn, the steam static, night sky. |
+| **Reduced** | The final composed frame: the pour drawn, the tent lit, the steam static, night sky. |
 | **RTL** | The dallah sits at inline-end and pours toward inline-start; the composition mirrors. |
 | **Budget** | Lazy (loads one viewport ahead). Mobile ~280 KB: plate 9:16 + tent + dallah; the cup merges into the dallah cutout on mobile. |
 

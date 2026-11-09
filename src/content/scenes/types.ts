@@ -8,6 +8,7 @@ import type { Grade } from "../../lib/grade";
 import type { CategorySlug, Localized } from "../types";
 
 export type Viewport = "desktop" | "mobile";
+export type SceneMode = "pin" | "pass";
 
 /** A shot's scroll range, `[start, end]`: vh of pinned scroll (a pinned scene) or fractions of the
  * crossing (a pass scene, 0–1). Null when it doesn't play at that width. */
@@ -64,11 +65,12 @@ export interface SceneLayer {
 export interface SceneConfig {
   id: string;
   /**
-   * "pin" (default): an opening, pinned while its shots play (ranges in vh, PIN_LIMIT).
-   * "pass": a scene inside a section, never pinned; it plays while it crosses the viewport, from
-   * its top entering (0) to its bottom leaving (1), e.g. the Events majlis.
+   * "pin" (default): pinned while its shots play (ranges in vh; an opening's PIN_LIMIT, a section
+   * scene's SECTION_PIN_LIMIT). "pass": never pinned; it plays while it crosses the viewport, from
+   * its top entering (0) to its bottom leaving (1). Per width when they differ: the Events majlis
+   * pins briefly on desktop and passes on mobile (D74, P2).
    */
-  mode?: "pin" | "pass";
+  mode?: SceneMode | Record<Viewport, SceneMode>;
   shots: SceneShot[];
   layers: SceneLayer[];
 }

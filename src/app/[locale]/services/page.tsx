@@ -7,7 +7,7 @@ import { SITE_URL } from "@/config/site";
 import { categoryHref, getCategories, getServices, SERVICES_INDEX_HREF, serviceHref, type Locale } from "@/content";
 import { Link } from "@/i18n/navigation";
 import { overviewJsonLd } from "@/lib/jsonld";
-import { toRoman } from "@/lib/roman";
+import { orderNumeral } from "@/lib/roman";
 import { localeAlternates } from "@/lib/seo";
 import "./services.css";
 
@@ -50,7 +50,7 @@ export default async function ServicesPage() {
               const titleId = `svx-${c.slug}`;
               return (
                 <li key={c.slug} className="svx-row">
-                  <Numeral className="svx-num">{toRoman(c.order)}</Numeral>
+                  <Numeral className="svx-num">{orderNumeral(c.order, locale)}</Numeral>
                   <div className="svx-cat">
                     <h2 id={titleId} className="svx-title">
                       <Link href={categoryHref(c.slug)}>
