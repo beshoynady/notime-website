@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { budgetProblem, buildPrompt, deliverySize, findSlot, loggedSpend, provenance, sceneCategory } from "./image-gen";
+import { budgetProblem, buildPrompt, centreCrop, deliverySize, findSlot, inboxTarget, loggedSpend, provenance, sceneCategory } from "./image-gen";
 
 const doc = (p: string) => readFileSync(path.join(process.cwd(), p), "utf8");
 const PROMPTS = doc("docs/content/image-prompts.md");
@@ -93,5 +93,43 @@ describe("provenance (D77: check AI markers before converting)", () => {
 
   it("reports nothing on a plain image, and ignores a stray 'c2pa' outside a JUMBF box", () => {
     expect(provenance(bytes(PNG, "....IHDR....IDATc2pa....IEND"))).toEqual({ c2pa: false, iptcAi: false });
+  });
+});
+
+describe("inboxTarget (D79: a file in assets-inbox/ names its slot)", () => {
+  it("matches a site slot by its full id", () => {
+    expect(inboxTarget("hero-fallback-16x9.png", PROMPTS, LAYERS)).toEqual({ slot: "hero-fallback-16x9", kind: "site", aspect: "16:9", cutout: false, master: "hero-fallback-16x9" });
+  });
+
+  it("matches a scene plate and its aspect from the suffix; the 9:16 master keeps the suffix", () => {
+    expect(inboxTarget("ev-open-hall-16x9.png", PROMPTS, LAYERS)).toMatchObject({ slot: "ev-open-hall", kind: "scene", aspect: "16:9", cutout: false, master: "ev-open-hall" });
+    expect(inboxTarget("ev-majlis-dusk-9x16.jpg", PROMPTS, LAYERS)).toMatchObject({ slot: "ev-majlis-dusk", aspect: "9:16", master: "ev-majlis-dusk-9x16" });
+  });
+
+  it("treats a real-source layer's AI fallback as a cutout", () => {
+    expect(inboxTarget("ev-open-candles-4x5.png", PROMPTS, LAYERS)).toMatchObject({ slot: "ev-open-candles", aspect: "4:5", cutout: true });
+  });
+
+  it("refuses an unknown slot, an aspect the slot doesn't have, or a name without an aspect", () => {
+    expect(() => inboxTarget("ev-open-hall-4x5.png", PROMPTS, LAYERS)).toThrow(/aspect/);
+    expect(() => inboxTarget("nope-16x9.png", PROMPTS, LAYERS)).toThrow(/not found/);
+    expect(() => inboxTarget("ev-open-hall.png", PROMPTS, LAYERS)).toThrow(/aspect/);
+  });
+});
+
+describe("centreCrop (D51: the largest centred crop at the aspect, never enlarged)", () => {
+  it("crops ChatGPT's 1536 × 1024 landscape to 1536 × 864 for 16:9", () => {
+    expect(centreCrop(1536, 1024, "16:9")).toEqual({ left: 0, top: 80, width: 1536, height: 864 });
+  });
+
+  it("crops the 1024 × 1536 portrait to 864 × 1536 for 9:16", () => {
+    expect(centreCrop(1024, 1536, "9:16")).toEqual({ left: 80, top: 0, width: 864, height: 1536 });
+  });
+
+  it("keeps even dimensions inside the source", () => {
+    const c = centreCrop(1023, 1023, "4:5");
+    expect(c.width / c.height).toBeCloseTo(0.8, 2);
+    expect(c.left + c.width).toBeLessThanOrEqual(1023);
+    expect(c.width % 2 + (c.height % 2)).toBe(0);
   });
 });

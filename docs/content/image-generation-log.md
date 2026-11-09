@@ -1,10 +1,10 @@
-# AI image generation log (D76)
+# AI image generation log (D76, D79)
 
-Every API request is a row, written by `scripts/generate-image.mjs`; inspection verdicts are rows too. Strategy: **real photos and code first, AI last.** AI fills only layers and slots with no real source (layers.md, image-prompts.md).
+Every image is a row: since D79 the images are made by hand in ChatGPT (free tier) and `scripts/ingest-images.mjs` writes the rows (received, verdict, installed), with the size and SHA-256 of the original. Inspection verdicts are rows too. Strategy: **real photos and code first, AI last.** AI fills only layers and slots with no real source (layers.md, image-prompts.md).
 
-Approved budget: not active yet. The user approved USD 1.50 on 2026-11-09 (D77); the line becomes "Approved budget: USD 1.50" once REPLICATE_API_TOKEN is in .env.local.
+Approved budget: none. No paid image API is used (D79); the Replicate plan below is kept for the record only. The Est. USD column stays 0.00, and the Model column names the tool.
 
-## Plan (approved 2026-11-09, D77)
+## Plan (approved 2026-11-09, D77; provider superseded by D79, the slot list stands)
 
 - **Provider and model:** Replicate, `black-forest-labs/flux-1.1-pro-ultra`, raw mode, one model for every slot. **USD 0.06 per image** (replicate.com model page, 2026-11-09). Output up to 4 MP; each file is cropped to its aspect and downscaled to the approved delivery size (1680 × 944, 944 × 1680, 1136 × 1408), never upscaled (D51).
 - **Prompt:** the house style + the slot's prompt + the shared negative prompt as an "Avoid:" list (the model takes no negative prompt). All from image-prompts.md and layers.md.

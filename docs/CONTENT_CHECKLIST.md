@@ -1,6 +1,6 @@
 # Content Checklist — Material needed from Rand
 
-Status values: **Missing** · **Requested** · **Received** · **Approved**
+Status values: **Missing** · **Requested** · **Received** · **Approved** · **Filled (draft)** (honest general content is live until the real material arrives) · **Hidden until real** (the element doesn't render until the material arrives). D78.
 
 | # | Item | Notes | Status |
 |---|---|---|---|
@@ -36,3 +36,6 @@ Status values: **Missing** · **Requested** · **Received** · **Approved**
 | 30 | Marketing & Brand facts (copy deck) | Reporting frequency and form; minimum term for social media management; whether ads run in the client's own Google and Meta accounts; outlets that published NO TIME work (OQ #19); whether naming includes trademark or domain checks. See `docs/content/category-copy-marketing.md` §6. | Missing |
 | 31 | Production, Print & Gifts facts (copy deck) | Minimum quantities; lead times; delivery area and terms (the gifts promise says "delivered"); in-house or partner production; largest print size; sustainable materials. See `docs/content/category-copy-print.md` §6. | Missing |
 | 32 | Software & Digital facts (copy deck) | Ownership of code and content; support after launch and its terms; hosting; typical timelines; the stack to list; AI consulting scope; payment gateways; product names and features (OQ #5, #24); the case study's starting point and results. See `docs/content/category-copy-software.md` §11. | Missing |
+| 33 | Product-name trademark search (launch blocker) | Before launch, search the UAE Ministry of Economy trademark register for "Minute Zero" / «الدقيقة صفر» and "Peak Hour" / «ساعة الذروة» in the software classes (D78 review). The quick clash search done so far is not a trademark search. | Missing |
+| 34 | Anonymised work: photos without client branding | An anonymised case ("A national airline", "A national sports federation", …) never shows a photo with the client's branding: logos, crests, sponsor backdrops, branded products or screenshots. Audit 2026-11-09: every current photo of the 3 anonymised cases (uae-pro-league-1…5, uae-athletics-federation-1…3, egyptair-pavilion-1) shows branding, so these cases need neutral real photos from NO TIME, a labelled AI stand-in ("Illustrative" / «صورة توضيحية»), or no image. Re-check every photo added later. | Hidden until real |
+| 35 | OpenAI terms for the ChatGPT images (D79) | Open OpenAI's Terms of Use (Rest of World) in a browser and record the effective date and the "Ownership of content" wording, including anything specific to the free tier. The automated fetch was refused (HTTP 403), so D79 rests on openai.com's search snippet. | Missing |

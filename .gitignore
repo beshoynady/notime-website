@@ -55,3 +55,6 @@ public/images/work/raw/
 
 # AI image generation through an API (D76): originals, never committed
 raw/
+
+# Hand-generated AI images waiting for ingest (D79): originals, never committed
+assets-inbox/

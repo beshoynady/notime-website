@@ -102,3 +102,57 @@ export function provenance(file: Uint8Array): { c2pa: boolean; iptcAi: boolean }
   const c2pa = text.includes("caBX") || (jumbf >= 0 && /jumd[\s\S]{0,64}c2pa/.test(text.slice(jumbf)));
   return { c2pa, iptcAi: text.includes("digitalsourcetype/trainedAlgorithmicMedia") };
 }
+
+const ASPECT_SUFFIX = /-(\d+)x(\d+)$/;
+
+/**
+ * Which slot a file dropped in assets-inbox/ is for (D79). Site slots are named by their full
+ * id (`hero-fallback-16x9.png`); scene layers by id plus aspect (`ev-open-hall-9x16.png`). A layer
+ * is a cutout when its "BG removal" column in layers.md isn't "none"; a real-source layer's AI
+ * fallback is always a cutout. `master` is the graded file's name (a plate's 9:16 keeps the suffix).
+ */
+export function inboxTarget(
+  filename: string,
+  promptsDoc: string,
+  layersDoc: string,
+): { slot: string; kind: "site" | "scene"; aspect: Aspect; cutout: boolean; master: string } {
+  const base = filename.replace(/\.[a-z0-9]+$/i, "");
+  const m = base.match(ASPECT_SUFFIX);
+  if (!m) throw new Error(`${filename}: the name must end with its aspect, e.g. -16x9`);
+  const aspect = `${m[1]}:${m[2]}` as Aspect;
+  const isSite = promptsDoc.split(/^### /m).some((e) => e.startsWith(`\`${base}\``));
+  if (isSite) {
+    findSlot(base, promptsDoc, layersDoc);
+    return { slot: base, kind: "site", aspect, cutout: false, master: base };
+  }
+  const id = base.replace(ASPECT_SUFFIX, "");
+  let spec: SlotSpec;
+  let fallback = false;
+  try {
+    spec = findSlot(id, promptsDoc, layersDoc);
+  } catch (e) {
+    if (!/real source/.test((e as Error).message)) throw e;
+    spec = findSlot(id, promptsDoc, layersDoc, true);
+    fallback = true;
+  }
+  if (!spec.aspects.includes(aspect)) throw new Error(`${filename}: ${id} has no ${aspect} aspect (${spec.aspects.join(", ")})`);
+  const row = layersDoc.split("\n").find((l) => l.startsWith("| `") && l.split("|")[1].includes(`\`${id}\``))!;
+  const cutout = fallback || !/^none\b/i.test(row.split("|")[6].trim());
+  const master = aspect === "16:9" || spec.aspects.length === 1 ? id : `${id}-${m[1]}x${m[2]}`;
+  return { slot: id, kind: "scene", aspect, cutout, master };
+}
+
+/** The largest centred crop of a w × h image at the aspect, even-sized, never enlarged (D51). */
+export function centreCrop(w: number, h: number, aspect: Aspect): { left: number; top: number; width: number; height: number } {
+  const [aw, ah] = aspect.split(":").map(Number);
+  const even = (n: number) => n - (n % 2);
+  let width = w;
+  let height = Math.round((w * ah) / aw);
+  if (height > h) {
+    height = h;
+    width = Math.round((h * aw) / ah);
+  }
+  width = even(width);
+  height = even(height);
+  return { left: Math.floor((w - width) / 2), top: Math.floor((h - height) / 2), width, height };
+}
