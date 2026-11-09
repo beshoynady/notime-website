@@ -3,10 +3,30 @@
 # pressure on the dev machine can be told apart from a real failure.
 name: CI
 
+# Docs-only changes don't run CI (D75): docs/** and every .md are skipped, except the docs the
+# unit tests read (`git grep -n readFileSync -- 'src/**/*.test.ts'`). `paths` with negations, not
+# `paths-ignore`, because only `paths` can re-include a file: a later pattern wins.
+# Keep both lists in step with the tests.
 on:
   push:
     branches: ["**"]
+    paths:
+      - "**"
+      - "!docs/**"
+      - "!**/*.md"
+      - "docs/CONTENT_CHECKLIST.md" # src/messages/messages.test.ts
+      - "docs/content/services-list.md" # src/content/content.test.ts
+      - "docs/content/image-prompts.md" # src/content/content.test.ts
+      - "docs/design/storyboards/layers.md" # src/content/scenes/images.test.ts
   pull_request:
+    paths: # the same list
+      - "**"
+      - "!docs/**"
+      - "!**/*.md"
+      - "docs/CONTENT_CHECKLIST.md" # src/messages/messages.test.ts
+      - "docs/content/services-list.md" # src/content/content.test.ts
+      - "docs/content/image-prompts.md" # src/content/content.test.ts
+      - "docs/design/storyboards/layers.md" # src/content/scenes/images.test.ts
 
 # A push to a branch with an open PR fires both events: one group per branch, so the newer
 # run cancels the older one instead of both running.
