@@ -57,6 +57,7 @@ NEXT_PUBLIC_ENABLE_LAB=1 npm run start -- -p 3100
    - line 1 is 0.67–0.82 s on the approved D72 ranges;
    - a rebalance (for example 0 → 0.45 → 1.05 → 1.2 vh) is a proposal, not applied.
 3. **Majlis frames:** about 4.5% over 18 ms at 4× CPU on desktop (2.0% before the pin). The live build (Task 3.2) should re-measure with real images.
+3a. **Anchor-landing flake: fixed** (`6fc15df`, `docs/e2e-flakes.md`). The helpers now wait for the heading's focus (the landing's end) before measuring. A future landing helper should do the same, never rely on scroll stillness alone.
 4. **Next:**
    - 3.1 approval → 3.1b images (stop point 3) → 3.2 live build → 3.3–3.9;
    - then **Task 4.2, the form pipeline** (pulled forward, D74);
