@@ -31,7 +31,7 @@ Mobile (9:16): the chip bar sits under the header; the H1 sits at the bottom thi
 
 | | |
 |---|---|
-| **Scroll** | Desktop 0 → 0.4 vh (its line holds to 0.83) · mobile 0 → 0.45 vh (rebalanced within the approved 1.2 vh so the first line holds ≥ 1 s; D75) |
+| **Scroll** | Desktop 0 → 0.4 vh (its line holds to 0.83) · mobile 0 → 0.5 vh (rebalanced within the approved 1.2 vh so the first line holds ≥ 1 s; D75, D77) |
 | **Frame** | A dark, empty hall seen from the back. Lights off, only a faint wash at the stage end. The H1 sits low at inline-start, in Montserrat 200; the eyebrow "I · 6 services" sits above it. The rail sits at inline-start (desktop); the chip bar sits under the header (mobile). |
 | **Layers** | L0 `ev-open-hall` (overlay at 70%: dusk) · L3 haze (one radial gradient at 4% alpha) |
 | **Motion** | L0 scale 1.00 → 1.02; nothing else moves. The page is still on arrival. |
@@ -68,7 +68,7 @@ Mobile (9:16): the chip bar sits under the header; the H1 sits at the bottom thi
 
 | | |
 |---|---|
-| **Scroll** | Desktop 0.83 → 1.8 vh · mobile 0.45 → 1.05 vh (lights and dressing in one shot, with this shot's line; D70, approved D72) |
+| **Scroll** | Desktop 0.83 → 1.8 vh · mobile 0.5 → 1.05 vh (lights and dressing in one shot, with this shot's line; D70, approved D72) |
 | **Frame** | A long dressed table rises into the midground. Florals drift in from the inline-start edge, candles from the inline-end edge, and crystal glasses pass close to the lens, out of focus. |
 | **Layers** | L1 `ev-open-table` (rises 8 vh → 0, opacity 0 → 1) · L2 `ev-open-florals` (from −30% inline, depth 1.2) · L2 `ev-open-candles` (from +30% inline, depth 1.0) · L2 `ev-open-glasses` (desktop only, depth 1.3, passes through the bottom corner) |
 | **Motion** | Translate and opacity only; each layer's speed comes from its depth. Inline offsets mirror in AR. |

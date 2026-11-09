@@ -14,9 +14,9 @@ import type { SceneConfig } from "./types";
 export const EVENTS_OPENING: SceneConfig = {
   id: "events-opening",
   shots: [
-    { id: "empty-room", copyKey: "events.s1", desktop: [0, 0.4], mobile: [0, 0.45] },
+    { id: "empty-room", copyKey: "events.s1", desktop: [0, 0.4], mobile: [0, 0.5] },
     { id: "lights-up", desktop: [0.4, 0.83], mobile: null },
-    { id: "dressed", copyKey: "events.s3", desktop: [0.83, 1.8], mobile: [0.45, 1.05] },
+    { id: "dressed", copyKey: "events.s3", desktop: [0.83, 1.8], mobile: [0.5, 1.05] },
     { id: "ready", copyKey: "events.s4", desktop: [1.8, 2.0], mobile: [1.05, 1.2] },
   ],
   layers: [
