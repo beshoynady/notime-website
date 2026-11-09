@@ -469,18 +469,18 @@ Built (D70). Independent review and rhythm/layout fixes applied (D72, D73; `docs
 - [x] **Step 4:** Commit `feat(lab): Events & Hospitality animatic`.
 - [x] **Step 5:** Report to the user in Arabic with the recording, the screenshots and the timings table. **Stop** for approval of rhythm and layout. (Reviewed; decisions D74.)
 
-### Task 3.1: Events copy (EN first, AR written natively)
+### Task 3.1: Events copy (EN first, AR written natively): done, approved 2026-11-09 (D75)
 
 **Files:**
 - Modify: `src/content/categories.ts`, `services.ts` (events entries), `messages` (shot lines).
 - Create: `docs/content/category-copy-events.md` (a copy deck in the established format: key, EN, AR, a note on the AR phrasing).
 - Modify: `docs/CONTENT_CHECKLIST.md`.
 
-- [ ] **Step 1:** Write the category intro (2–3 sentences), the one-line promise and 4–6 points per service, 5 FAQ entries, and the approved shot lines.
+- [x] **Step 1:** Write the category intro (2–3 sentences), the one-line promise and 4–6 points per service, 5 FAQ entries, and the approved shot lines. (Approved with 6 FAQ entries and the user's Arabic changes; copy rules in `src/lib/copy-rules.ts`.)
   - Use the 2026 profile (`profile-copy.md`) and `services-proposal.md` only.
   - Questions needing client facts (lead times, coverage area, minimum guest counts) become `TODO:` keys in CONTENT_CHECKLIST, not answers.
-- [ ] **Step 2:** Run `npx vitest run src/content src/messages`. Expected: PASS (counts, banned phrases, Arabic punctuation, Western digits).
-- [ ] **Step 3:** Commit `content(services): Events & Hospitality copy deck`.
+- [x] **Step 2:** Run `npx vitest run src/content src/messages`. Expected: PASS (counts, banned phrases, Arabic punctuation, Western digits).
+- [x] **Step 3:** Commit `content(services): Events & Hospitality copy deck`.
 
 ### Task 3.1b: Events images and cutouts → STOP (stop point 3)
 
@@ -510,7 +510,8 @@ Only after the animatic is approved.
 - [ ] **Step 2:** Run them. Expected: FAIL.
 - [ ] **Step 3:** Implement as storyboard and spec §5.1 (transform and opacity only).
 - [ ] **Step 4:** Run them. Expected: PASS.
-- [ ] **Step 5:** Commit `feat(services): The Evening theme, opening and majlis scene`.
+- [ ] **Step 5:** Re-measure frames through the majlis at 4× CPU with the real images: target **≤ 3%** of frames over 18 ms on desktop (4.5% on the animatic, accepted for now, D75).
+- [ ] **Step 6:** Commit `feat(services): The Evening theme, opening and majlis scene`.
 
 ### Tasks 3.3–3.8: Events modules (one task each, in this order)
 
