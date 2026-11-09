@@ -34,9 +34,23 @@ Written 2026-11-09, after the review decisions (D74), their Git follow-up and th
   - no «في الموقع» for on-site; write «في المكان» or «في أرض الحدث». Two styleguide keys mean the website and are allowed.
 - **Client questions** for more FAQ entries: CONTENT_CHECKLIST #28.
 
-## Task 3.1b (Events images): next, stop point
+## Waiting on the user (2026-11-09)
 
-- **Step 1 is the credit count.** Report it to the user and **stop before spending any credit**.
+1. **Image generation plan (D76):**
+   - provider Replicate, model `flux-1.1-pro-ultra`;
+   - 6 images (+2 conditional), proposed budget USD 1.50;
+   - details in `docs/content/image-generation-log.md`.
+
+   **Nothing runs until the user approves** and writes the budget line. `REPLICATE_API_TOKEN` is not yet in `.env.local`. After the OK: generate `hero-fallback-16x9` and `ev-open-hall` 16:9 only, then stop with a contact sheet beside the 7 approved Canva images.
+2. **Four copy decks** for one review: `docs/content/category-copy-{creative,marketing,print,software}.md`, with client questions in CONTENT_CHECKLIST #29–#32. On approval:
+   - apply them as the Events copy was;
+   - Software takes 3 deliverables per service (D65), so the 4–6 points test needs a per-category minimum.
+
+## Next (user's order, 2026-11-09)
+
+1. **Task 4.2, the form pipeline** (D66): needs no images.
+2. **Events final build (3.2)** as soon as the layers are ready (real cutouts + AI gaps through the API).
+3. **Then each remaining category's animatic**, with its approved copy.
 
 ## How to run the lab
 
