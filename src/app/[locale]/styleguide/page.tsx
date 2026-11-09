@@ -2,16 +2,21 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 import { Marquee } from "@/components/motion/marquee";
+import { GeometricPattern } from "@/components/ornaments/geometric-pattern";
+import { LightLeak } from "@/components/ornaments/light-leak";
+import { MarqueeDivider } from "@/components/ornaments/marquee-divider";
+import { TickMarker } from "@/components/ornaments/tick-marker";
 import { ScrubColorWords } from "@/components/motion/scrub-color-words";
 import { CategoryCards } from "@/components/sections/categories/category-cards";
 import { ContrastPairs } from "@/components/styleguide/contrast-pairs";
 import { ComponentsDemo } from "@/components/styleguide/components-demo";
 import { MotionDemos } from "@/components/styleguide/motion-demos";
+import { PatternsDemo } from "@/components/styleguide/patterns-demo";
 import { ShapeSpaceGrid } from "@/components/styleguide/shape-space-grid";
 import { Swatches } from "@/components/styleguide/swatches";
 import { TypeScale } from "@/components/styleguide/type-scale";
 import { BrandImage } from "@/components/ui/brand-image";
-import { getServices, type Locale } from "@/content";
+import { getCategories, getServices, type Locale } from "@/content";
 import { motionTokens, stagger } from "@/lib/motion";
 import "./styleguide.css";
 
@@ -116,7 +121,21 @@ export default async function StyleguidePage({ params }: PageProps<"/[locale]/st
         </div>
       </section>
 
+      <section data-tone="light" className="sg-band">
+        <div className="frame">
+          <SecHead id="patterns" eyebrow={t("patterns.eyebrow")} lead={t("patterns.headingLead")} accent={t("patterns.headingKey")} tick />
+          <p className="text-lead m-0 mb-12 max-w-[52ch] text-cocoa">{t("patterns.lead")}</p>
+          <PatternsDemo
+            pushMedia={<BrandImage slot="cat-events-hospitality-16x9" fill sizes="(min-width: 900px) 30vw, 90vw" />}
+            sweepMedia={<BrandImage slot="cat-production-print-gifts-16x9" fill sizes="(min-width: 900px) 30vw, 90vw" />}
+          />
+        </div>
+        <MarqueeDivider items={getCategories().map((c) => c.title[locale])} className="mt-20" />
+      </section>
+
       <section data-tone="dark" className="sg-band sg-closing">
+        <GeometricPattern />
+        <LightLeak position="end-top" />
         <div className="frame">
           <h2 className="text-h1 m-0 max-w-[16ch]">
             {t("closing.headingLead")} <b>{t("closing.headingKey")}</b>
@@ -132,10 +151,13 @@ export default async function StyleguidePage({ params }: PageProps<"/[locale]/st
   );
 }
 
-function SecHead({ id, eyebrow, lead, accent }: { id: string; eyebrow: ReactNode; lead: ReactNode; accent: ReactNode }) {
+function SecHead({ id, eyebrow, lead, accent, tick = false }: { id: string; eyebrow: ReactNode; lead: ReactNode; accent: ReactNode; tick?: boolean }) {
   return (
     <div className="sg-sec-head">
-      <p className="sec-eyebrow text-eyebrow">{eyebrow}</p>
+      <p className="sec-eyebrow text-eyebrow">
+        {tick && <TickMarker />}
+        {eyebrow}
+      </p>
       <h2 id={id} className="text-h1 m-0 scroll-mt-24">
         {lead} <b>{accent}</b>
       </h2>

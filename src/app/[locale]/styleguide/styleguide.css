@@ -449,3 +449,73 @@
     transition: none;
   }
 }
+
+/* Patterns (v1 plan, Task A4): one specimen per ornament, with its do and don't. */
+.sg-patterns {
+  display: grid;
+  gap: 40px 16px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sg-pat {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+}
+.sg-pat-stage {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px solid var(--color-line-light);
+  border-radius: var(--radius);
+}
+.sg-pat-rules {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+.sg-pat-rules div {
+  display: grid;
+  grid-template-columns: 4.5em 1fr;
+  gap: 8px;
+}
+.sg-pat-rules dt {
+  color: var(--color-cocoa);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  line-height: 2.2;
+  text-transform: uppercase;
+}
+.sg-pat-rules dt:lang(ar) {
+  font-size: 0.85rem;
+  letter-spacing: 0;
+  line-height: 1.8;
+}
+.sg-pat-rules dd {
+  margin: 0;
+}
+.sg-pat-hint {
+  margin: 0;
+  color: var(--color-cocoa);
+  font-size: 0.8rem;
+}
+@media (hover: none), (pointer: coarse) {
+  .sg-pat-hint {
+    display: none;
+  }
+}
+.sg-closing {
+  position: relative;
+  overflow: hidden;
+}
+.sg-closing > .frame {
+  position: relative;
+}
+/* The leak is sized for a full section; in a specimen box it shrinks to the box so it shows. */
+.sg-pat-stage .light-leak {
+  inline-size: 110%;
+}

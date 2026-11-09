@@ -1,0 +1,173 @@
+/* Ornament kit (v1 plan, Task A4). Quiet supporting details: each has one job, none is the
+   signature. Logical properties only; documented with do and don't on /styleguide. */
+
+/* Hairline: a 1px rule at a quarter of the text colour. */
+.hairline {
+  display: block;
+  position: relative;
+  block-size: 1px;
+  background: currentColor;
+  opacity: 0.25;
+}
+.hairline-mark {
+  opacity: 1;
+  background: linear-gradient(currentColor, currentColor) center / 100% 1px no-repeat;
+  background-color: transparent;
+  color: color-mix(in srgb, currentColor 25%, transparent);
+}
+.hairline-mark::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: -3.5px;
+  inline-size: 8px;
+  block-size: 8px;
+  background: var(--color-taupe);
+  transform: rotate(45deg);
+}
+
+/* Frame corners: crop marks on a stage plan. */
+.frame-corners {
+  position: absolute;
+  inset: var(--fc-inset);
+  pointer-events: none;
+  z-index: 2;
+}
+.fc-sm {
+  --fc-inset: 12px;
+  --fc-size: 14px;
+}
+.fc-md {
+  --fc-inset: 24px;
+  --fc-size: 22px;
+}
+/* Outside the box, like crop marks on a print: reads on any photo. */
+.fc-out {
+  --fc-inset: -10px;
+  --fc-size: 16px;
+}
+.fc-champagne {
+  --fc-color: color-mix(in srgb, var(--color-champagne) 80%, transparent);
+}
+.fc-espresso {
+  --fc-color: color-mix(in srgb, var(--color-espresso) 60%, transparent);
+}
+.fc-corner {
+  position: absolute;
+  inline-size: var(--fc-size);
+  block-size: var(--fc-size);
+  border: 0 solid var(--fc-color);
+}
+.fc-corner[data-corner="start-start"] {
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  border-block-start-width: 1px;
+  border-inline-start-width: 1px;
+}
+.fc-corner[data-corner="start-end"] {
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  border-block-start-width: 1px;
+  border-inline-end-width: 1px;
+}
+.fc-corner[data-corner="end-start"] {
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  border-block-end-width: 1px;
+  border-inline-start-width: 1px;
+}
+.fc-corner[data-corner="end-end"] {
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  border-block-end-width: 1px;
+  border-inline-end-width: 1px;
+}
+
+/* Gulf 8-fold tile: two squares make the star; lines join it to the next tile. */
+.geo-pattern {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--geo-opacity, 0.04);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' fill='none' stroke='%23ead4ab' stroke-width='1'%3E%3Cpath d='M18 18h28v28H18zM32 12.2 51.8 32 32 51.8 12.2 32zM18 18 0 0M46 18 64 0M46 46l18 18M18 46 0 64M32 12.2V0M51.8 32H64M32 51.8V64M12.2 32H0'/%3E%3C/svg%3E");
+  background-size: 64px 64px;
+}
+
+/* Light leak: warm spill at one corner. */
+.light-leak {
+  position: absolute;
+  inline-size: min(70vw, 720px);
+  aspect-ratio: 1;
+  pointer-events: none;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--color-champagne) 22%, transparent), color-mix(in srgb, var(--color-taupe) 8%, transparent) 55%, transparent);
+  filter: blur(24px);
+}
+.light-leak[data-position="start-top"] {
+  inset-block-start: -30%;
+  inset-inline-start: -20%;
+}
+.light-leak[data-position="end-top"] {
+  inset-block-start: -30%;
+  inset-inline-end: -20%;
+}
+.light-leak[data-position="start-bottom"] {
+  inset-block-end: -30%;
+  inset-inline-start: -20%;
+}
+.light-leak[data-position="end-bottom"] {
+  inset-block-end: -30%;
+  inset-inline-end: -20%;
+}
+
+/* Clock ticks: a 12-tick dial for an eyebrow. */
+.tick-marker {
+  flex: none;
+  inline-size: 2em;
+  block-size: 2em;
+  overflow: visible;
+}
+.tick-marker .tick {
+  stroke: currentColor;
+  stroke-width: 1.2;
+  opacity: 0.45;
+}
+.tick-marker .tick-hand {
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+.tick-marker .tick-pin {
+  fill: var(--color-taupe);
+}
+
+/* Marquee divider: the marquee, slim. */
+.marquee-divider {
+  padding-block: 14px;
+}
+.marquee-divider .marquee-list li {
+  gap: 28px;
+  padding-inline-end: 28px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+.marquee-divider .marquee-list li:lang(ar) {
+  font-size: 0.9rem;
+  letter-spacing: 0;
+}
+.marquee-divider .marquee-list li::after {
+  width: 5px;
+  height: 5px;
+}
+
+/* Hover sweep sheen (Motion moves it; this only draws it). */
+.hover-sweep-sheen {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 60%;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(100deg, transparent 20%, color-mix(in srgb, var(--color-ivory) 16%, transparent) 50%, transparent 80%);
+}

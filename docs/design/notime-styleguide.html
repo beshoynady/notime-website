@@ -566,6 +566,28 @@ html[dir="rtl"] .wa{inset-inline-end:calc(20px + env(safe-area-inset-left,0px))}
     </div>
   </section>
 
+  <!-- PATTERNS (v1 plan, Task A4). Reference only, English; the live, bilingual version with the real components is /styleguide#patterns. -->
+  <section class="band tone-light" id="patterns" data-tone="light">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="idx eyebrow"><span>Patterns</span></div>
+        <h2 class="h1">Quiet <b>details.</b></h2>
+      </div>
+      <p class="small" style="color:var(--cocoa);max-width:60ch;margin:0 0 32px">Small marks that hold the pages together. Each has one job, and none of them is the point. Live specimens: <code>/styleguide#patterns</code>. Code: <code>src/components/ornaments/</code>, <code>src/components/motion/ken-burns.tsx</code>, <code>hover-sweep.tsx</code>, <code>duotone.css</code>.</p>
+      <div class="comp-grid">
+        <div class="panel"><h3>Hairline</h3><p class="small">1px, text colour at 25%; optional taupe diamond at the reading start.<br><b>Do</b> divide lists and close section heads. <b>Don't</b> box content in, or stack two rules.</p></div>
+        <div class="panel"><h3>Frame corners</h3><p class="small">Crop marks, 1px, inset 12 / 24px or 10px outside the box; logical, so they mirror in Arabic.<br><b>Do</b> mark one featured image per section. <b>Don't</b> frame every card, or put them around text.</p></div>
+        <div class="panel"><h3>Gulf pattern</h3><p class="small">8-fold khatam tile, 64px, champagne line, 4% on dark sections.<br><b>Do</b> texture a dark section, behind everything. <b>Don't</b> use it on light sections or raise it until it reads as a picture.</p></div>
+        <div class="panel"><h3>Light leak</h3><p class="small">Static radial bloom, champagne 22% to taupe 8%, blurred; one corner, logical.<br><b>Do</b> warm one corner of a dark section. <b>Don't</b> use two per section, or put it behind body text.</p></div>
+        <div class="panel"><h3>Clock ticks</h3><p class="small">12-tick dial before an eyebrow; the hand points at the section's place on the page (30° per section) and steps once when it scrolls in (GSAP · base). Reduced motion: drawn in place.<br><b>Do</b> lead a section eyebrow. <b>Don't</b> use it as a loader, or twice in one section.</p></div>
+        <div class="panel"><h3>Slow push-in (Ken Burns)</h3><p class="small">Scale 1 → 1.08, scrubbed while the frame crosses the viewport (GSAP); origin follows the reading direction. Reduced motion: no transform.<br><b>Do</b> move slowly into a still. <b>Don't</b> combine it with parallax on one image.</p></div>
+        <div class="panel"><h3>Hover sweep</h3><p class="small">Ivory 16% sheen crosses the media once, 0.9s expo-out, in the reading direction (Motion). Fine pointers only; not rendered on touch.<br><b>Do</b> use it on card media. <b>Don't</b> loop it.</p></div>
+        <div class="panel"><h3>Duotone</h3><p class="small">Greyscale image, champagne multiply + espresso lighten; the colour returns on card hover or focus (CSS, fine pointers).<br><b>Do</b> unify Work card images. <b>Don't</b> use it on the hero or on product screenshots.</p></div>
+        <div class="panel"><h3>Marquee divider</h3><p class="small">The marquee, slim: 0.72rem caps, 5px diamonds, 60s; reverses in Arabic, still under reduced motion, hidden from screen readers.<br><b>Do</b> join two sections with words already on the page. <b>Don't</b> put new information in it.</p></div>
+      </div>
+    </div>
+  </section>
+
   <!-- COMPONENTS -->
   <section class="band tone-light" id="components" data-tone="light">
     <div class="wrap">

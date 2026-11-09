@@ -401,6 +401,62 @@
       "categories": "Category cards",
       "categoriesNote": "On a computer, a card opens when you hover over it or tab to it. On a phone, the card in view opens as you scroll."
     },
+    "patterns": {
+      "eyebrow": "Patterns",
+      "headingLead": "Quiet",
+      "headingKey": "details",
+      "lead": "Small marks that hold the pages together. Each has one job, and none of them is the point.",
+      "do": "Do",
+      "dont": "Don't",
+      "hoverHint": "Hover the image (mouse only).",
+      "items": {
+        "hairline": {
+          "name": "Hairline",
+          "do": "Divide lists and close section heads.",
+          "dont": "Box content in, or stack two rules."
+        },
+        "corners": {
+          "name": "Frame corners",
+          "do": "Mark one featured image per section, like a crop mark.",
+          "dont": "Frame every card, or put them around text."
+        },
+        "geometric": {
+          "name": "Gulf pattern",
+          "do": "Texture a dark section at 4%, behind everything.",
+          "dont": "Use it on light sections, or raise it until it reads as a picture."
+        },
+        "leak": {
+          "name": "Light leak",
+          "do": "Warm one corner of a dark section.",
+          "dont": "Use more than one per section, or put it behind body text."
+        },
+        "tick": {
+          "name": "Clock ticks",
+          "do": "Lead a section eyebrow. The hand points at the section's place on the page.",
+          "dont": "Use it as a loader, or twice in one section."
+        },
+        "kenBurns": {
+          "name": "Slow push-in",
+          "do": "Move slowly into a still while it crosses the screen.",
+          "dont": "Combine it with parallax on the same image."
+        },
+        "sweep": {
+          "name": "Hover sweep",
+          "do": "Cross a card's image once when the mouse arrives.",
+          "dont": "Loop it, or show it on touch screens."
+        },
+        "duotone": {
+          "name": "Duotone",
+          "do": "Unify Work card images. The colour returns on hover.",
+          "dont": "Use it on the hero or on product screenshots."
+        },
+        "divider": {
+          "name": "Marquee divider",
+          "do": "Join two sections with words already on the page.",
+          "dont": "Put new information in it: screen readers skip it."
+        }
+      }
+    },
     "closing": {
       "headingLead": "Approve the foundations,",
       "headingKey": "then we build.",

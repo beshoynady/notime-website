@@ -1,0 +1,49 @@
+/* Duotone for Work card media (v1 plan, Task A4): the photo's shadows go to espresso and its
+   highlights to champagne, so mixed sources (stock, AI, real) read as one set. Two overlay
+   layers over a greyscale image; on a fine pointer, hovering or focusing the card fades them and
+   the photo's own colour comes back (CSS only: no transform, nothing shared with GSAP or Motion).
+   Reduced motion keeps the swap and drops the fade. */
+.duotone {
+  position: relative;
+  isolation: isolate;
+}
+.duotone img {
+  filter: grayscale(1) contrast(1.2) brightness(1.05);
+  transition: filter 0.6s var(--ease-power3-out);
+}
+.duotone::before,
+.duotone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 0.6s var(--ease-power3-out);
+}
+.duotone::before {
+  background: var(--color-champagne);
+  mix-blend-mode: multiply; /* white → champagne */
+}
+.duotone::after {
+  background: var(--color-espresso);
+  mix-blend-mode: lighten; /* black → espresso */
+}
+@media (hover: hover) and (pointer: fine) {
+  .duotone:hover img,
+  :where(a, [data-card]):is(:hover, :focus-visible) .duotone img {
+    filter: none;
+  }
+  .duotone:hover::before,
+  .duotone:hover::after,
+  :where(a, [data-card]):is(:hover, :focus-visible) .duotone::before,
+  :where(a, [data-card]):is(:hover, :focus-visible) .duotone::after {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .duotone img,
+  .duotone::before,
+  .duotone::after {
+    transition: none;
+  }
+}
