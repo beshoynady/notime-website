@@ -52,3 +52,6 @@ docs/checkpoints/**/*.webp
 # Raw company-profile extraction (scripts/extract-profile.mjs, D47): includes stock, AI and
 # unapproved photos of people, so it never ships. Curated images go to public/images/work/<slug>/.
 public/images/work/raw/
+
+# AI image generation through an API (D76): originals, never committed
+raw/
