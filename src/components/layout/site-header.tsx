@@ -6,7 +6,8 @@ import { Logo } from "./logo";
 import { MegaMenu } from "./mega-menu";
 import { MobileMenu } from "./mobile-menu";
 import { getMenuData } from "./menu-data";
-import { NAV_LINKS, QUOTE_HREF } from "./nav-links";
+import { liveLinks } from "@/lib/content-status";
+import { NAV_LINKS, QUOTE_LINK } from "./nav-links";
 import type { Locale } from "@/content";
 
 /**
@@ -33,7 +34,7 @@ export function SiteHeader() {
           <Logo />
           <nav aria-label={t("nav.label")} className="hidden items-center gap-[30px] text-[0.78rem] tracking-[0.16em] uppercase min-[900px]:flex lang-ar:text-[0.9rem] lang-ar:tracking-normal lang-ar:normal-case">
             <MegaMenu data={menu} />
-            {NAV_LINKS.map((l) => (
+            {liveLinks(NAV_LINKS).map((l) => (
               <Link key={l.key} href={l.href} className="nav-link no-underline">
                 {t(`nav.${l.key}`)}
               </Link>
@@ -41,9 +42,11 @@ export function SiteHeader() {
           </nav>
           <div className="flex items-center gap-3">
             <LangToggle />
-            <ButtonLink href={QUOTE_HREF} size="sm" className="hidden min-[1100px]:inline-flex">
-              {t("header.quote")}
-            </ButtonLink>
+            {QUOTE_LINK.live && (
+              <ButtonLink href={QUOTE_LINK.href} size="sm" className="hidden min-[1100px]:inline-flex">
+                {t("header.quote")}
+              </ButtonLink>
+            )}
             <MobileMenu data={menu} />
           </div>
         </div>

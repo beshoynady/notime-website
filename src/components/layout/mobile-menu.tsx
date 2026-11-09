@@ -13,7 +13,8 @@ import { cn } from "@/lib/utils";
 import { Numeral } from "@/components/ui/numeral";
 import { Arrow, ProductStrip } from "./mega-menu";
 import type { MenuData } from "./menu-data";
-import { NAV_LINKS, QUOTE_HREF } from "./nav-links";
+import { liveLinks } from "@/lib/content-status";
+import { NAV_LINKS, QUOTE_LINK } from "./nav-links";
 
 const listVariants: Variants = { hidden: {}, shown: { transition: { staggerChildren: 0.045, delayChildren: 0.1 } } };
 const itemVariants: Variants = {
@@ -121,7 +122,7 @@ export function MobileMenu({ data }: { data: MenuData }) {
                   </ul>
                 </motion.details>
               ))}
-              {NAV_LINKS.map((l) => (
+              {liveLinks(NAV_LINKS).map((l) => (
                 <motion.div key={l.key} variants={itemVariants}>
                   <Link href={l.href} className="block border-b border-line-dark py-5 text-[1.7rem] font-light no-underline">
                     {t(`nav.${l.key}`)}
@@ -131,11 +132,13 @@ export function MobileMenu({ data }: { data: MenuData }) {
               <motion.div variants={itemVariants}>
                 <ProductStrip products={data.products} className="mt-7 mb-6" />
               </motion.div>
-              <motion.div variants={itemVariants}>
-                <ButtonLink href={QUOTE_HREF} arrow className={cn("w-full")}>
-                  {t("header.quote")}
-                </ButtonLink>
-              </motion.div>
+              {QUOTE_LINK.live && (
+                <motion.div variants={itemVariants}>
+                  <ButtonLink href={QUOTE_LINK.href} arrow className={cn("w-full")}>
+                    {t("header.quote")}
+                  </ButtonLink>
+                </motion.div>
+              )}
             </motion.nav>
           </motion.div>
         )}

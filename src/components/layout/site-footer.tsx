@@ -1,4 +1,3 @@
-import { getTranslations } from "next-intl/server";
 import { CopyrightYear } from "./copyright-year";
 import { Logo } from "./logo";
 import { SectionRef } from "@/components/review/section-ref";
@@ -15,7 +14,6 @@ async function copyrightYear() {
  * so the header switches to its dark tone over it.
  */
 export async function SiteFooter() {
-  const t = await getTranslations("footer");
   const year = await copyrightYear();
   return (
     <footer>
@@ -25,8 +23,6 @@ export async function SiteFooter() {
           <Logo tone="dark" />
           <div className="grid gap-1.5 text-[0.85rem] text-ivory/70">
             <CopyrightYear buildYear={year} />
-            {/* TODO: replace placeholder — full footer (links, contact, socials) in a later phase */}
-            <p className="text-ivory/50">{t("stub")}</p>
           </div>
         </div>
       </section>
