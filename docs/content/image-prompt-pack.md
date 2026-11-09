@@ -1,6 +1,6 @@
 # Image prompt pack: ChatGPT (free tier), D79
 
-For the user, who generates the six AI-gap images by hand in ChatGPT: one tool for all, for a consistent style. Each block is self-contained: copy the prompt, generate, check, then save the file **with the exact filename** into `assets-inbox/` (gitignored). `node scripts/ingest-images.mjs` does the rest (D79).
+For the user, who generates the six AI-gap images by hand in ChatGPT: one tool for all, for a consistent style. Each block is self-contained: copy the prompt, generate, check, then save the file **with the exact filename** into `assets-inbox/` (gitignored), and add its row to `assets-inbox/credits.csv`: `<filename>,chatgpt,,` (the ingest refuses a file with no row, D80). `node scripts/ingest-images.mjs` does the rest (D79). Stock photos from Pexels or Unsplash have their own list: `stock-shot-list.md`.
 
 **Priority order:** 1 → 6. The first two go to the contact sheet before the rest.
 

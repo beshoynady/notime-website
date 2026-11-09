@@ -296,6 +296,34 @@ Native sizes as in the delivery spec: 4:5 → 1136 × 1408, 16:9 → 1680 × 944
 
 **Module visuals total:** 12 new slots (1 + 2 + 3 + 6), plus the 2 rejected heroes to regenerate.
 
+## Work cards: anonymised cases, 16:9 (v1 plan A3; D80)
+
+Anonymised cases never show a photo with client branding (D78 review; CONTENT_CHECKLIST #34), and every current photo of these three cases shows it. Each card therefore gets a neutral image: licensed stock first (Pexels or Unsplash, downloaded by hand), else ChatGPT (D79). On a Work card it always carries "Illustrative" / «صورة توضيحية». The **Prompt** line here describes the picture for either source; the search queries are in `stock-shot-list.md`.
+
+### `work-sports-league-16x9`
+
+- **Page · section:** Home › Our Work; Work index · **Aspect:** 16:9
+- **Prompt:** House style. An empty football stadium at night under warm floodlights, seen from high in the stands, the pitch soft and out of focus, haze in the light. No people in focus, no advertising boards, no logos, no scoreboard text.
+- **Alt EN:** An empty stadium under warm floodlights at night.
+- **Alt AR:** ملعب خالٍ تحت أضواء كاشفة دافئة ليلًا.
+- **Real alternative:** none without branding (uae-pro-league-1…5 all show it).
+
+### `work-sports-federation-16x9`
+
+- **Page · section:** Home › Our Work; Work index; Software › case study · **Aspect:** 16:9
+- **Prompt:** House style. An empty athletics running track at dusk, lane lines curving away in low warm light, long shadows, nobody on the track. No numbers legible on the lanes, no logos, no sponsor boards.
+- **Alt EN:** An empty running track at dusk.
+- **Alt AR:** مضمار جري خالٍ عند الغسق.
+- **Real alternative:** none without branding (uae-athletics-federation-1…3 are branded screenshots and a sponsor backdrop).
+
+### `work-airline-pavilion-16x9`
+
+- **Page · section:** Home › Our Work; Work index · **Aspect:** 16:9
+- **Prompt:** House style. Inside an exhibition hall after hours, a pavilion's curved timber and fabric structure lit warmly, the aisle empty, soft haze. No signage, no screens with content, no logos, no aircraft liveries.
+- **Alt EN:** A warmly lit exhibition pavilion in an empty hall.
+- **Alt AR:** جناح معرض مضاء بدفء في قاعة خالية.
+- **Real alternative:** none without branding (egyptair-pavilion-1 shows it).
+
 ---
 
 ## Summary

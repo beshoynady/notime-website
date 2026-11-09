@@ -244,7 +244,8 @@
       "cookies": "Cookie Policy"
     },
     "licence": "TODO: trade licence number · legal entity · issuing authority",
-    "backToTop": "Back to top"
+    "backToTop": "Back to top",
+    "credits": "Image credits"
   },
   "styleguide": {
     "meta": {
@@ -434,5 +435,13 @@
       "terms": "The terms that apply when you use the NO TIME Creative House website.",
       "cookies": "The cookies and similar storage this website uses, and your choices."
     }
+  },
+  "credits": {
+    "eyebrow": "Credits",
+    "title": "Image credits",
+    "description": "The photographers whose licensed images appear on the NO TIME Creative House website.",
+    "intro": "Some photographs on this site are used under the Pexels and Unsplash licences. They are graded and cropped to the site's palette. Thank you to the photographers below.",
+    "on": "on {source}",
+    "aiNote": "Some images on this site are AI-generated illustrations."
   }
 }

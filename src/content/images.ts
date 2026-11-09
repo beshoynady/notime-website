@@ -279,4 +279,34 @@ export const imageSlots: ImageSlot[] = [
       ar: "منضدة تقديم في مطعم وقت الخدمة، أضواء دافئة وأطباق في تركيز ناعم.",
     },
   },
+  // Work cards (v1 plan A3, D80): anonymised cases, never the client's own branded photos. Stock
+  // (Pexels/Unsplash, credited) or ChatGPT; either way they stand in for a real project, so they
+  // carry the "Illustrative" label.
+  {
+    id: "work-sports-league-16x9",
+    kind: "ai",
+    aspect: "16:9",
+    src: null,
+    paint: "event",
+    illustrative: true,
+    alt: { en: "An empty stadium under warm floodlights at night.", ar: "ملعب خالٍ تحت أضواء كاشفة دافئة ليلًا." },
+  },
+  {
+    id: "work-sports-federation-16x9",
+    kind: "ai",
+    aspect: "16:9",
+    src: null,
+    paint: "code",
+    illustrative: true,
+    alt: { en: "An empty running track at dusk.", ar: "مضمار جري خالٍ عند الغسق." },
+  },
+  {
+    id: "work-airline-pavilion-16x9",
+    kind: "ai",
+    aspect: "16:9",
+    src: null,
+    paint: "event",
+    illustrative: true,
+    alt: { en: "A warmly lit exhibition pavilion in an empty hall.", ar: "جناح معرض مضاء بدفء في قاعة خالية." },
+  },
 ];

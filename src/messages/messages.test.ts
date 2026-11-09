@@ -28,6 +28,8 @@ const AR_LATIN_ALLOW = [
   "CREATIVE HOUSE",
   "English", // endonym on the language toggle: each language is named in its own script
   "WhatsApp",
+  "Pexels", // image sources, named on the credits page (D80)
+  "Unsplash",
   "iOS",
   "Android",
   // Library names on the styleguide's motion tokens (proper nouns, like WhatsApp).
