@@ -28,10 +28,11 @@ async function landing(page: Page, id: string) {
   }, id);
 }
 
+/** Focus first: it marks the end of the landing (see expectLanded in helpers.ts). */
 async function expectLanded(page: Page, id: string, heading: string) {
+  await expect(page.locator(`#${heading}`)).toBeFocused({ timeout: 10_000 });
   const offset = await landing(page, id);
   expect(Math.abs(offset), `landing offset ${offset}px`).toBeLessThanOrEqual(TOLERANCE);
-  await expect(page.locator(`#${heading}`)).toBeFocused();
   await expect(page).toHaveURL(new RegExp(`#${id}$`));
 }
 

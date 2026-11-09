@@ -72,10 +72,15 @@ export async function landing(page: Page, id: string) {
   }, id);
 }
 
+/**
+ * The landing focuses its heading when the scroll completes (scrollToAnchor's onComplete), so that
+ * is awaited first: a still scrollY alone can't tell "landed" from "not started yet" (a busy first
+ * load on CI started the scroll after two equal polls, offset 3166px) or from a pause mid-flight.
+ */
 export async function expectLanded(page: Page, id: string) {
+  await expect(page.locator(`#${id}-title`)).toBeFocused({ timeout: 10_000 });
   const offset = await landing(page, id);
   expect(Math.abs(offset), `landing offset ${offset}px`).toBeLessThanOrEqual(TOLERANCE);
-  await expect(page.locator(`#${id}-title`)).toBeFocused();
 }
 
 /** The page's LCP entry so far: its element as `TAG#id`, and its url ("" for text). */
