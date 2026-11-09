@@ -60,3 +60,25 @@ Lab route `/[locale]/lab/events-animatic`, production build with `NEXT_PUBLIC_EN
 - `02-majlis-peak-desktop-en.png`: the majlis as a card in the column → full bleed, landed from the index.
 - `03-mobile-index-en.png`: chip bar with Catering off screen → the toggle open with all six.
 - `04-opening-promise-desktop-en.png`: end of the pin → the promise set larger, the intro out of the frame.
+
+## After the user's decisions (D74, 2026-11-09)
+
+Same scripts and machine; medians of 3 runs (frames and LCP: 5, with one server running). "Before" is `187a65c` (D73), built in a separate worktree and measured the same way.
+
+| Measure | D73 | D74 |
+|---|---|---|
+| Opening lines (desktop) | 4 lines over 4 shots | 3 lines over 4 shots; shots 0 → 0.4 → 0.83 → 1.8 → 2.0 vh |
+| Line dwell, normal pace, desktop | 0.52–0.62 s | EN 1.02–1.06 s · AR 1.02–1.05 s (target ≥ 1.0 s) |
+| Line dwell, slow pace, desktop | 1.25–1.38 s | 2.27–2.62 s |
+| Pin with no fully legible line (desktop) | ≈ 9% | ≈ 6.6% (118 of 1800 px, inside the cross-fades) |
+| Line dwell, normal pace, mobile (unchanged ranges) | — | 0.67–0.82 s · 0.97–1.38 s · 1.3–2.0 s |
+| Majlis | crossing, not pinned | desktop: 0.6 vh transform pin under the header, pour then bloom · mobile: crossing |
+| V → VI heading, normal pace | desktop 2.25 s · mobile 2.1–3.4 s | desktop 2.43 s · mobile 2.2–2.6 s (target < 5 s) |
+| CLS, full scroll (desktop EN / AR / mobile EN / AR) | 0.0005 / 0.0012 / 0 / 0 | 0.0005 / 0.0011 / 0 / 0 (with a fixed pin: 1.85 on desktop, hence the transform pin) |
+| LCP element | H1 everywhere | H1 everywhere; desktop EN 0.50 s, AR 1.32 s (5 runs; in D73's range on this machine) |
+| Frames > 18 ms at 4× CPU, opening desktop / mobile | 3.7% / 3.2% | 6.4% / 3.9% (ranges overlap: 1–10.8 vs 2–9.7; noise) |
+| Frames > 18 ms at 4× CPU, majlis desktop / mobile | 2.0% / 3.3% | 4.5% / 4.5% (p95 17.2 ms; the cost of the pin) |
+| Index during shot 1 | full | 40%, full on hover, focus, an open list, or the next shot |
+| Reduced motion | still, 4 lines | still, 3 lines, no pin, index full, majlis end frame (bloom lit) |
+
+The D73 frame figures in the table above (1.0%) came from a quieter machine; these runs had about 1.7 GB of 8 GB free, so both columns here were measured back to back.
