@@ -124,8 +124,10 @@ export type ProductStatus = "comingSoon" | "live";
 export interface Product {
   slug: "qr-check-in" | "restaurant-system";
   status: ProductStatus;
-  /** Working name; the final product names are TBD (OPEN_QUESTIONS #5). */
+  /** The short name (D78), used inside the pages. */
   name: Localized<string>;
+  /** What it does, shown with the name in the lockup (titles, metadata, schema, menus). */
+  descriptor: Localized<string>;
   summary: Localized<string>;
   image: string;
 }

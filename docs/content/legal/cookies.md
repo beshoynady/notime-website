@@ -1,5 +1,7 @@
 # Cookie Policy: draft (EN + AR)
 
+**Live text:** the site renders this policy from `src/content/legal.ts`; this file is the review draft. Change both together.
+
 Status: **draft, not legal advice. A legal review is required before launch** (CONTENT_CHECKLIST #24). Checked against the production build on 2026-11-09: the site sets one cookie, `NEXT_LOCALE` (first party, `Path=/`, `SameSite=Lax`, no expiry, so it ends with the browser session), and one `sessionStorage` key, `nt-intro`. No analytics or advertising cookies. **This page must be updated before any new cookie or tracker ships** (analytics is deferred and needs consent first, P18).
 
 **Open for the review:** whether Cloudflare Turnstile stores anything on the device in our configuration. The draft doesn't claim either way and points to Cloudflare's own policy; check it in the browser once the real site key is in.

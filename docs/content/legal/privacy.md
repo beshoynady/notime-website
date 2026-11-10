@@ -1,8 +1,10 @@
 # Privacy Policy: draft (EN + AR)
 
+**Live text:** the site renders this policy from `src/content/legal.ts`; this file is the review draft. Change both together.
+
 Status: **draft, not legal advice.** Written with the UAE Personal Data Protection Law (Federal Decree-Law No. 45 of 2021, "PDPL") in mind; **a legal review is required before launch** (CONTENT_CHECKLIST #24). Facts checked against the site on 2026-11-09: the processors in use, no analytics, no database for form submissions, one cookie (`NEXT_LOCALE`).
 
-**Config values** (`src/config/legal.ts`, to be created): `legalName`, `address`, `dataRequestContact`. A line that needs one of them is **hidden** until it's set (D78). In the text: `{{legalName}}`, `{{address}}`, `{{dataRequestContact}}`.
+**Config values** (`src/config/legal.ts`): `legalName`, `address`, `dataRequestContact`. A line that needs one of them is **hidden** until it's set (D78). In the text: `{{legalName}}`, `{{address}}`, `{{dataRequestContact}}`.
 
 **Open for the user / the legal review:**
 1. **Retention:** the draft says enquiries are kept for up to 24 months after the last contact. Confirm or change.

@@ -747,6 +747,17 @@ html[data-overlay-open] #site-header .logo-on-light {
   background: currentColor;
   opacity: 0.25;
 }
+/* Footer links: quiet until hovered; the global focus ring shows for keyboard users. */
+.footer-link {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 4px;
+  transition: color 0.3s var(--ease-power3-out), text-decoration-color 0.3s var(--ease-power3-out);
+}
+.footer-link:hover {
+  color: var(--color-ivory);
+  text-decoration-color: var(--color-taupe);
+}
 .text-link {
   display: inline-flex;
   align-items: center;

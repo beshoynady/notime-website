@@ -50,7 +50,6 @@ export default async function Page({ params }: PageProps<"/[locale]/credits">) {
               </li>
             ))}
           </ul>
-          <p className="mt-10 max-w-[60ch] text-[0.95rem] text-cocoa">{t("aiNote")}</p>
         </div>
       </section>
     </main>

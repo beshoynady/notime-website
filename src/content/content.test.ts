@@ -3,7 +3,7 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { copyProblems } from "@/lib/copy-rules";
 import { imageSize } from "@/lib/image-size";
-import { getCategories, getCategory, getImageSlot, getImageSlots, getProducts, getServices } from "./index";
+import { getCategories, getCategory, getImageSlot, getImageSlots, getProducts, getServices, productLockup } from "./index";
 import type { Localized } from "./types";
 
 const locales = ["en", "ar"] as const;
@@ -153,11 +153,11 @@ describe("category pages (D57)", () => {
     });
   });
 
-  it("each category has an intro and 4–6 FAQ entries in both locales", () => {
+  it("each category has an intro and 4–8 FAQ entries in both locales (cap raised to 8, D78)", () => {
     for (const c of getCategories()) {
       for (const l of locales) expect(c.intro[l].trim(), `${c.slug}.intro.${l}`).not.toBe("");
       expect(c.faq.length, c.slug).toBeGreaterThanOrEqual(4);
-      expect(c.faq.length, c.slug).toBeLessThanOrEqual(6);
+      expect(c.faq.length, c.slug).toBeLessThanOrEqual(8);
       for (const f of c.faq) {
         for (const l of locales) {
           expect(f.q[l].trim()).not.toBe("");
@@ -165,6 +165,15 @@ describe("category pages (D57)", () => {
         }
       }
     }
+  });
+
+  it("Events answers booking time and guest count, and invites other locations (D78 fills, #28)", () => {
+    const faq = getCategories().find((c) => c.slug === "events-hospitality")!.faq;
+    expect(faq).toHaveLength(8);
+    const q = faq.map((f) => f.q.en);
+    expect(q).toContain("How far ahead should I book?");
+    expect(q).toContain("How many guests can you host?");
+    expect(faq.find((f) => f.q.en === "Where do you work?")!.a.ar).toMatch(/ولأي مكان آخر، اسألنا\.$/);
   });
 
   it("lists the named deliverables the user confirmed (D71) in their services", () => {
@@ -210,6 +219,14 @@ describe("products", () => {
     expect(products.map((p) => p.slug)).toEqual(["qr-check-in", "restaurant-system"]);
     expect(products.every((p) => p.status === "comingSoon")).toBe(true);
     for (const p of products) expect(() => getImageSlot(p.image)).not.toThrow();
+  });
+
+  it("carries the approved names, with a lockup that says what each one does (D78)", () => {
+    const [qr, rs] = getProducts();
+    expect(qr.name).toEqual({ en: "Minute Zero", ar: "الدقيقة صفر" });
+    expect(rs.name).toEqual({ en: "Peak Hour", ar: "ساعة الذروة" });
+    expect(productLockup(qr, "en")).toBe("Minute Zero · QR event check-in");
+    expect(productLockup(rs, "ar")).toBe("ساعة الذروة · نظام إدارة المطاعم");
   });
 });
 

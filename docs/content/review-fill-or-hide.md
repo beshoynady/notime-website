@@ -1,6 +1,6 @@
 # Fill or hide: items for the user's review (D78)
 
-Status: **for one review** (2026-11-09). Under the "fill or hide" policy (D78), each block below is either filled with honest content now or hidden until the real data exists. Nothing here goes into the data files until the user approves it. Arabic is written natively, with Western digits (D50). The copy rules (`src/lib/copy-rules.ts`) apply.
+Status: **approved by the user (2026-11-09)** and moved into the data (v1 plan, Task A5, 2026-11-10): names and lockups in `src/content/products.ts`, bands in `src/content/forms.ts`, the Events FAQ in `src/content/categories.ts` (the other categories' fills go in with their copy decks), principles in `src/content/principles.ts`, work in `src/content/work.ts` with flags in `src/config/work.ts` (the airline is "A national airline"; Arabian Travel Market kept). The text below is the record of what was proposed. Under the "fill or hide" policy (D78), each block below is either filled with honest content now or hidden until the real data exists. Nothing here goes into the data files until the user approves it. Arabic is written natively, with Western digits (D50). The copy rules (`src/lib/copy-rules.ts`) apply.
 
 Contents: 1. Form pipeline: what D66 leaves open · 2. Product names (A2) · 3. Budget bands (A3) · 4. FAQ fills (A1) · 5. How we work (A6) · 6. Anonymised work (A9) · 7. Legal drafts (A4, separate files)
 

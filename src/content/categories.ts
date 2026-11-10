@@ -46,7 +46,16 @@ export const categories: Category[] = [
       },
       {
         q: { en: "Where do you work?", ar: "أين تعملون؟" },
-        a: { en: "We're based in Dubai and work across six markets: the UAE, Saudi Arabia, Qatar, Oman, Kuwait and Egypt.", ar: "مقرّنا في دبي، ونعمل في ستة أسواق: الإمارات والسعودية وقطر وعُمان والكويت ومصر." },
+        a: { en: "We're based in Dubai and work across six markets: the UAE, Saudi Arabia, Qatar, Oman, Kuwait and Egypt. For other locations, ask us.", ar: "مقرّنا في دبي، ونعمل في ستة أسواق: الإمارات والسعودية وقطر وعُمان والكويت ومصر. ولأي مكان آخر، اسألنا." },
+      },
+      // D78 fills (#28), approved 2026-11-09: general but true, no numbers or promised times.
+      {
+        q: { en: "How many guests can you host?", ar: "كم ضيفًا يمكنكم استقبالُه؟" },
+        a: { en: "From intimate gatherings to award nights and large corporate and government events. Tell us your guest count and we'll plan around it.", ar: "من اللقاءات العائلية الخاصة إلى ليالي الجوائز والفعاليات الكبرى للشركات والجهات الحكومية. أخبرنا بعدد ضيوفك، ونخطّط على أساسه." },
+      },
+      {
+        q: { en: "How far ahead should I book?", ar: "قبل كم من الوقت ينبغي أن أحجز؟" },
+        a: { en: "It depends on the scale of the event. Share your date and we'll confirm availability.", ar: "يعتمد ذلك على حجم المناسبة. شاركنا الموعد، ونؤكّد لك مدى توفّرنا." },
       },
       {
         q: { en: "Can you photograph and film the event?", ar: "هل تصوّرون الفعالية؟" },

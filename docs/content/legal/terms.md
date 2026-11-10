@@ -1,5 +1,7 @@
 # Terms of Use: draft (EN + AR)
 
+**Live text:** the site renders this policy from `src/content/legal.ts`; this file is the review draft. Change both together.
+
 Status: **draft, not legal advice. A legal review is required before launch** (CONTENT_CHECKLIST #24). Config values as in the privacy draft (`legalName`, `address`, `dataRequestContact`): a line that needs one stays hidden until it's set (D78).
 
 **Open for the user / the legal review:**

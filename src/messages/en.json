@@ -229,7 +229,6 @@
   },
   "footer": {
     "rights": "© {year} NO TIME Creative House.",
-    "stub": "The full footer arrives in a later phase.",
     "tagline": "Events · Marketing · PR · Production",
     "columns": {
       "services": "Services",
@@ -243,9 +242,10 @@
       "terms": "Terms of Use",
       "cookies": "Cookie Policy"
     },
-    "licence": "TODO: trade licence number · legal entity · issuing authority",
     "backToTop": "Back to top",
-    "credits": "Image credits"
+    "credits": "Image credits",
+    "disclosure": "Some images on this site are AI-generated illustrations.",
+    "legalNav": "Legal"
   },
   "styleguide": {
     "meta": {
@@ -497,7 +497,6 @@
     "title": "Image credits",
     "description": "The photographers whose licensed images appear on the NO TIME Creative House website.",
     "intro": "Some photographs on this site are used under the Pexels and Unsplash licences. They are graded and cropped to the site's palette. Thank you to the photographers below.",
-    "on": "on {source}",
-    "aiNote": "Some images on this site are AI-generated illustrations."
+    "on": "on {source}"
   }
 }

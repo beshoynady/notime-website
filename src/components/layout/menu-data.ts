@@ -1,4 +1,4 @@
-import { categoryHref, getCategories, getProducts, getServiceCount, getServices, SERVICES_INDEX_HREF, serviceHref, type CategorySlug, type Locale } from "@/content";
+import { categoryHref, getCategories, getProducts, getServiceCount, productLockup, getServices, SERVICES_INDEX_HREF, serviceHref, type CategorySlug, type Locale } from "@/content";
 import { orderNumeral } from "@/lib/roman";
 
 /** Serializable, localized menu data built on the server and passed to the client menus. */
@@ -32,7 +32,7 @@ export function getMenuData(locale: Locale): MenuData {
       href: categoryHref(c.slug),
       services: getServices(c.slug).map((s) => ({ slug: s.slug, title: s.title[locale], href: serviceHref(s) })),
     })),
-    products: getProducts().map((p) => ({ slug: p.slug, name: p.name[locale], href: PRODUCTS_HREF })),
+    products: getProducts().map((p) => ({ slug: p.slug, name: productLockup(p, locale), href: PRODUCTS_HREF })),
     serviceCount: getServiceCount(),
     allServicesHref: SERVICES_INDEX_HREF,
   };
