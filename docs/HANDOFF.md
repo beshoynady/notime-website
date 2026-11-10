@@ -4,7 +4,12 @@ Updated 2026-11-10, after the recovery from an interrupted session. Read `CLAUDE
 
 ## Branches and remote
 
-- **Working branch: `phase-2-services`** at `1394b36`, pushed. Never commit this work to `main`.
+- **Working branch: `phase-2-services`** (see `git log -1`; Marketing merged at `a47e0ac`). Never commit this work to `main`.
+
+## Current step (M1)
+
+- Done: step 1 (Marketing merged; build OK; `/en`, `/ar`, both Marketing pages open with no console errors) and step 2 (the three worktrees, their branches and `wip/marketing-merge` deleted; only `main` and `phase-2-services` remain locally; the remote `origin/worktree-agent-ae348246b0fe141aa` is kept, deleting it is the user's call).
+- **Now: M1.1, full-homepage screenshots** with `node scripts/fullpage.mjs m1` against `npx next start -p 3100` (production build in `.next`). Then the quality gate, `node scripts/anchor-shift.mjs` for the anchor shift, CI `workflow_dispatch`, review build + tunnel, report.
 - **`main`** is the last approved state; it changes only through a PR at the end of a phase. The `pre-push` guard refuses pushes to `main` (D74). No force-pushes.
 - **Usage rules (user, 2026-11-10):** at most 2 parallel agents, and native work for anything touching shared code. Commit at the end of every step, push in batches, and keep this file current.
 
@@ -24,16 +29,9 @@ Updated 2026-11-10, after the recovery from an interrupted session. Read `CLAUDE
 - Review docs: `docs/review/tunnel.md`, `hosting-note-ar.md`, `rand-guide-ar.md`. `cloudflared` 2026.10.7 is installed (user scope, winget).
 - Unit tests: 341 passing with Marketing merged (328 without).
 
-## Recovery table (worktrees and branches)
+## Worktrees and branches
 
-| Worktree / branch | Task | Last commit | Uncommitted | Merged into `phase-2-services` | Pushed |
-|---|---|---|---|---|---|
-| `.claude/worktrees/agent-ad26390d43b6f8788` · `worktree-agent-ad26390d43b6f8788` | Creative Production | `7e2aa88` | none | yes (`a727cf4`) | no (merged, so `phase-2-services` carries it) |
-| `.claude/worktrees/agent-a83e066404d21af9f` · `worktree-agent-a83e066404d21af9f` | Production, Print & Gifts | `b1119d4` | none | yes (`cd4f190`) | no (merged, as above) |
-| `.claude/worktrees/agent-ae348246b0fe141aa` · `worktree-agent-ae348246b0fe141aa` | Marketing & Brand | `59fe8e2` (WIP: the opening, theme and two modules; the agent stopped before its render check; lint, typecheck and unit tests pass) | none | **no** | **yes** |
-| `wip/marketing-merge` (local only) | A trial merge of Marketing made before the user said not to merge (`a906c88`, with the `scenes.test.ts` conflict already resolved). Kept so nothing is lost; `phase-2-services` was moved back to `1394b36`. | `a906c88` | — | no | no |
-
-No worktree or branch has been deleted.
+No worktrees besides the main checkout. Local branches: `main`, `phase-2-services`. Creative (`a727cf4`), Print (`cd4f190`) and Marketing (`a47e0ac`) are merged into `phase-2-services`.
 
 ## Open points
 
