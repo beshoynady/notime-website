@@ -1,76 +1,54 @@
-# Session handoff: Phase 2, Events copy live, images next (Task 3.1b)
+# Session handoff: v1 for Rand, speed mode, M1 next
 
-Written 2026-11-09, after the review decisions (D74), their Git follow-up and the approved Events copy (D75). Read `CLAUDE.md` and `AGENTS.md` first; they hold the permanent rules. Decisions are in `docs/DECISIONS.md` (latest: D72–D75), the plan in `docs/plans/phase-2-services.md`.
+Updated 2026-11-10, after the recovery from an interrupted session. Read `CLAUDE.md` and `AGENTS.md` first (permanent rules, including speed mode and batched testing, D82). Decisions are in `docs/DECISIONS.md` (latest D81–D84), the plan in `docs/plans/v1-review.md`, and the judgment calls awaiting the user in `docs/review/decisions-to-confirm.md`.
 
-## Branches and remote (D72, D74, D75)
+## Branches and remote
 
-- **Working branch: `phase-2-services`.** All Phase 2 work is committed and pushed there. Never commit Phase 2 work to `main`.
-- **`main` = the last approved state:** `6d40ede` (the user's own push, with the D67 storyboard decisions) plus the CI tooling cherry-picked on top (`3987ed3` workflow, `0c7d67f` `next typegen` typecheck). CI passed on it.
-- **Merging:** `phase-2-services` reaches `main` through a PR at the end of the phase (finishing-a-development-branch). No direct pushes to `main`, and no force pushes. The one force push that restored `main` was approved by the user (D74).
-- **`pre-push` guard** (`scripts/pre-push.mjs`, simple-git-hooks): refuses any push or deletion of `main`. The repo stays private, with no GitHub Pro, so there is no server-side protection. Bypass with `git push --no-verify` **only** for an end-of-phase merge the user has approved.
-- **GitHub's default branch is `main`.** `phase-1-foundations` was deleted from the remote; it was fully contained in `main`.
-- **CI** (`.github/workflows/ci.yml`): lint, typecheck, unit, build with the lab flag, full e2e on every push and PR, about 4–8 billable minutes per run. Docs-only pushes are skipped, except the four docs the unit tests read; `src/lib/ci-paths.test.ts` keeps that list honest. A newer push on the same branch cancels the older run.
+- **Working branch: `phase-2-services`** at `1394b36`, pushed. Never commit this work to `main`.
+- **`main`** is the last approved state; it changes only through a PR at the end of a phase. The `pre-push` guard refuses pushes to `main` (D74). No force-pushes.
+- **Usage rules (user, 2026-11-10):** at most 2 parallel agents, and native work for anything touching shared code. Commit at the end of every step, push in batches, and keep this file current.
 
-## State of Task 3.0 (Events animatic): approved with D74
+## What changed since the last handoff (three stale points fixed)
 
-- **P1:** three lines over four shots on desktop (shots 0 → 0.4 → 0.83 → 1.8 → 2.0 vh). Each line holds at least 1.0 s at normal pace.
-- **P2:** the majlis pins 0.6 vh on desktop (transform pin), with two beats: pour, then bloom. On mobile it passes.
-- **P3:** the index is at 40% during shot 1.
-- **P4, P5:** numerals 01–06 in Arabic.
-- **P6:** the quote block is hidden on public pages.
-- **P7:** focus ring only after keyboard navigation.
-- Both scenes are **still lab-only** (`LAB_SCENES`, `LAB_SECTION_SCENES`). They move to `SCENES` / `SECTION_SCENES` when the live build (Task 3.2) is approved.
-- **Numbers:** `docs/checkpoints/events-animatic-review/README.md`, section "After the user's decisions".
+1. **CI (D82):** a push runs only lint, typecheck and unit tests. The build, the review-leak scan and the full e2e run only on a manual `workflow_dispatch` (at each milestone) and on PRs to `main`. Pre-commit is lint-staged (ESLint on staged files, one typecheck when TypeScript is staged); unit tests are no longer in the hook.
+2. **Images:** the Replicate plan (D76, D77 §1) is superseded. AI images are made by hand in ChatGPT's free tier (D79); stock comes from Pexels and Unsplash, downloaded by hand, with an Image credits page (D80). There is no paid image API and no budget line.
+3. **The four copy decks** (Creative, Marketing, Print, Software) are in the data as drafts for Rand's review (commit `051eefb`), with the user's decisions applied (D81).
 
-## Task 3.1 (Events copy): approved and live (D75)
+## Done in the last sessions (all on `phase-2-services`)
 
-- **Deck:** `docs/content/category-copy-events.md` (approved, with the user's changes listed at the top).
-- **Live in:**
-  - `categories.ts`: intro and 6 FAQ entries;
-  - `services.ts`: the six services' points, and the Conferences promise without «متكاملة»;
-  - `ar.json`: s1.
-- **Copy rules** (`src/lib/copy-rules.ts`, tested on messages and content):
-  - the banned phrases, now including «متكامل»;
-  - no «في الموقع» for on-site; write «في المكان» or «في أرض الحدث». Two styleguide keys mean the website and are allowed.
-- **Client questions** for more FAQ entries: CONTENT_CHECKLIST #28.
+- D81: the ten deck decisions and the Arabic calque review of the D56 promises.
+- D82: speed mode and batched testing (CLAUDE.md updated).
+- D83: the scaffold for the parallel category builds (theme files, scene stubs, six module stubs).
+- D84: every Phase B homepage section: Work with the showreel dialog, the services marquee, Digital, How we work, the Six markets clocks, the final CTA, the footer columns, and the review-only trust blocks. **None of it has been seen in a browser yet** (memory was short while the agents ran).
+- Creative Production and Production, Print & Gifts built from the template and merged (opening scene, theme, two modules each).
+- Review docs: `docs/review/tunnel.md`, `hosting-note-ar.md`, `rand-guide-ar.md`. `cloudflared` 2026.10.7 is installed (user scope, winget).
+- Unit tests: 341 passing with Marketing merged (328 without).
 
-## Waiting on the user (2026-11-09)
+## Recovery table (worktrees and branches)
 
-1. **Image generation plan (D76):**
-   - provider Replicate, model `flux-1.1-pro-ultra`;
-   - 6 images (+2 conditional), proposed budget USD 1.50;
-   - details in `docs/content/image-generation-log.md`.
+| Worktree / branch | Task | Last commit | Uncommitted | Merged into `phase-2-services` | Pushed |
+|---|---|---|---|---|---|
+| `.claude/worktrees/agent-ad26390d43b6f8788` · `worktree-agent-ad26390d43b6f8788` | Creative Production | `7e2aa88` | none | yes (`a727cf4`) | no (merged, so `phase-2-services` carries it) |
+| `.claude/worktrees/agent-a83e066404d21af9f` · `worktree-agent-a83e066404d21af9f` | Production, Print & Gifts | `b1119d4` | none | yes (`cd4f190`) | no (merged, as above) |
+| `.claude/worktrees/agent-ae348246b0fe141aa` · `worktree-agent-ae348246b0fe141aa` | Marketing & Brand | `59fe8e2` (WIP: the opening, theme and two modules; the agent stopped before its render check; lint, typecheck and unit tests pass) | none | **no** | **yes** |
+| `wip/marketing-merge` (local only) | A trial merge of Marketing made before the user said not to merge (`a906c88`, with the `scenes.test.ts` conflict already resolved). Kept so nothing is lost; `phase-2-services` was moved back to `1394b36`. | `a906c88` | — | no | no |
 
-   **Nothing runs until the user approves** and writes the budget line. `REPLICATE_API_TOKEN` is not yet in `.env.local`. After the OK: generate `hero-fallback-16x9` and `ev-open-hall` 16:9 only, then stop with a contact sheet beside the 7 approved Canva images.
-2. **Four copy decks** for one review: `docs/content/category-copy-{creative,marketing,print,software}.md`, with client questions in CONTENT_CHECKLIST #29–#32. On approval:
-   - apply them as the Events copy was;
-   - Software takes 3 deliverables per service (D65), so the 4–6 points test needs a per-category minimum.
+No worktree or branch has been deleted.
 
-## Next (user's order, 2026-11-09)
+## Open points
 
-1. **Task 4.2, the form pipeline** (D66): needs no images.
-2. **Events final build (3.2)** as soon as the layers are ready (real cutouts + AI gaps through the API).
-3. **Then each remaining category's animatic**, with its approved copy.
+- **Anchor-landing shift:** in production a module slot renders nothing until its module loads, so landing directly on a section (`#printing` …) may shift the content below (reported by the Print agent). Measure it at M1; if it shifts, reserve module space in the shared code (`min-height` or `aspect-ratio` per module).
+- **Decisions to confirm:** 9 items in `docs/review/decisions-to-confirm.md`.
+- The Events scenes are still lab-only (`LAB_SCENES`) until Phase C.
 
-## How to run the lab
+## Next steps (approved by the user, 2026-11-10)
 
-```bash
-NEXT_PUBLIC_ENABLE_LAB=1 npm run build
-NEXT_PUBLIC_ENABLE_LAB=1 npm run start -- -p 3100
-# http://localhost:3100/en/lab/events-animatic
-```
-
-- **Before rebuilding,** stop whatever holds 3100. Stopping the background shell does not always stop the node child:
-  `Get-NetTCPConnection -LocalPort 3100 -State Listen | % { Stop-Process -Id $_.OwningProcess -Force }`
-- **Measurement scripts** (dwell, next service, CLS, LCP, frames) live outside the repo, in the session scratchpad. They are not needed to continue.
-
-## Open items
-
-1. **Branch protection:** decided (local pre-push guard, D74).
-2. **Mobile line dwell:** rebalanced to 0 → 0.45 → 1.05 → 1.2 vh (D75). Line 1 now holds 0.92–1.20 s, and ≥ 1.0 s in 3 of 6 runs.
-3. **Majlis frames:** 4.5% over 18 ms at 4× CPU on desktop, accepted for now. Task 3.2 re-measures with the real images; the target is **≤ 3%** (D75).
-3a. **Anchor-landing flake: fixed** (`6fc15df`, `docs/e2e-flakes.md`). The helpers now wait for the heading's focus (the landing's end) before measuring. A future landing helper should do the same, never rely on scroll stillness alone.
-4. **Next:**
-   - 3.1b images (credit count first, stop point 3) → 3.2 live build → 3.3–3.9;
-   - then **Task 4.2, the form pipeline** (pulled forward, D74);
-   - then Software & Digital.
+1. **Merge Marketing** into `phase-2-services`, combining the scene lists in `scenes.test.ts` (or fast-forward to `wip/marketing-merge`, which already has that resolution). Quick check only: it builds, and the page opens in EN and AR with no console errors. The full visual review moves to M2.
+2. **Delete the merged worktrees** (Creative, Print), then Marketing's after its merge, then the merged local branches (and `wip/marketing-merge`). Confirm `git worktree list` and the merge status first.
+3. **M1, with no parallel agents:**
+   1. production build, then screenshots at 1440 and 390, EN and AR;
+   2. fresh-subagent quality gate (design critique, accessibility, copy); fix High and Medium;
+   3. measure the anchor-landing shift and reserve module space if needed, then re-measure;
+   4. trigger the full CI manually (`workflow_dispatch`); it must be green;
+   5. the review build and the tunnel (`docs/review/tunnel.md`), with the link and the Arabic guide ready for Rand;
+   6. a one-screen M1 report (in Arabic).
