@@ -1,0 +1,8 @@
+/* Home · Services marquee (H-05): on the dark ground the rules take the dark line colour. */
+.services-marquee {
+  border-color: var(--color-line-dark);
+  padding-block: clamp(22px, 3vw, 34px);
+}
+.services-marquee li {
+  color: var(--color-ivory);
+}

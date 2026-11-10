@@ -137,20 +137,21 @@
     "eyebrow": "Our work",
     "headingLead": "Real projects,",
     "headingKey": "start to finish.",
-    "intro": "Each project is told the way it was built: the challenge, the idea, the execution and the result.",
+    "intro": "Work for national organisations, from the exhibition stand to the screen.",
     "labels": {
       "challenge": "Challenge",
       "idea": "Idea",
       "execution": "Execution",
       "result": "Result"
     },
-    "illustrativeNote": "Images marked “Illustrative” are AI visuals. They stand in for project photos we can't show yet.",
+    "illustrativeNote": "Some images here are illustrative: they stand in for project photos we can't show yet.",
     "viewProject": "View project",
     "allWork": "All work",
     "todo": {
       "title": "TODO: project title, pending client approval",
       "summary": "TODO: one-line project summary from docs/content/case-studies.md"
-    }
+    },
+    "spansLabel": "Services in this project"
   },
   "marquee": {
     "label": "All our services"
@@ -159,7 +160,7 @@
     "eyebrow": "Beyond events",
     "headingLead": "Digital solutions,",
     "headingKey": "built to keep working.",
-    "intro": "End-to-end digital builds, from UX and design systems to development, content management and analytics, delivered bilingual and performance-ready.",
+    "intro": "End-to-end digital builds, from UX and design systems to development, content management and analytics, in Arabic and English and built to load fast.",
     "capabilities": {
       "websites": {
         "title": "Websites",
@@ -182,7 +183,8 @@
     "productsIntro": "Two products of our own, in development now.",
     "registerInterest": "Register interest",
     "requestDemo": "Request a demo",
-    "viewProduct": "View product"
+    "viewProduct": "View product",
+    "explore": "Explore Software & Digital"
   },
   "process": {
     "eyebrow": "How we work",
@@ -218,7 +220,9 @@
       "qa": "Qatar",
       "om": "Oman",
       "kw": "Kuwait"
-    }
+    },
+    "base": "Our base",
+    "localTime": "Local time"
   },
   "cta": {
     "headingLead": "Have a date in mind?",
@@ -522,5 +526,16 @@
     "description": "The photographers whose licensed images appear on the NO TIME Creative House website.",
     "intro": "Some photographs on this site are used under the Pexels and Unsplash licences. They are graded and cropped to the site's palette. Thank you to the photographers below.",
     "on": "on {source}"
+  },
+  "reel": {
+    "open": "Watch the reel",
+    "title": "Showreel",
+    "description": "Photographs from our events, one after another: dressed tables, florals, hospitality and a heritage setting.",
+    "close": "Close the reel",
+    "pause": "Pause the reel",
+    "play": "Play the reel",
+    "previous": "Previous",
+    "next": "Next",
+    "frame": "{n} / {total}"
   }
 }

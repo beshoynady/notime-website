@@ -754,6 +754,36 @@ html[data-overlay-open] #site-header .logo-on-light {
   text-underline-offset: 4px;
   transition: color 0.3s var(--ease-power3-out), text-decoration-color 0.3s var(--ease-power3-out);
 }
+
+/* Footer columns (H-11). */
+.footer-top {
+  display: grid;
+  gap: 40px;
+}
+.footer-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 32px 24px;
+}
+.footer-cols ul {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.92rem;
+  color: color-mix(in srgb, var(--color-ivory) 78%, transparent);
+}
+.footer-col-title {
+  margin: 0 0 16px;
+  color: var(--color-taupe);
+}
+@media (min-width: 900px) {
+  .footer-top {
+    grid-template-columns: 4fr 8fr;
+    align-items: start;
+  }
+}
 .footer-link:hover {
   color: var(--color-ivory);
   text-decoration-color: var(--color-taupe);

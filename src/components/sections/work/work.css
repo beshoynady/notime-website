@@ -1,0 +1,96 @@
+/* Home · Our work (H-04). Unlayered, like the other sections: spacing lives here. */
+.work-head {
+  display: grid;
+  gap: 24px;
+  margin-block-end: clamp(40px, 6vw, 72px);
+}
+.work-head h2 {
+  margin: 20px 0 0;
+}
+.work-head h2 b {
+  display: block;
+}
+.work-aside {
+  display: grid;
+  justify-items: start;
+  gap: 20px;
+}
+.work-intro {
+  margin: 0;
+  color: color-mix(in srgb, var(--color-ivory) 72%, transparent);
+}
+
+.work-grid {
+  display: grid;
+  gap: clamp(32px, 4vw, 48px) 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.work-card {
+  display: grid;
+  gap: 20px;
+  align-content: start;
+}
+.work-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius);
+  background: var(--color-espresso-2);
+}
+.work-body {
+  display: grid;
+  gap: 10px;
+}
+.work-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--color-taupe);
+}
+.work-meta li + li::before {
+  content: "·";
+  margin-inline-end: 14px;
+  opacity: 0.6;
+}
+.work-title {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.2vw, 1.9rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.work-summary {
+  margin: 0;
+  max-inline-size: 58ch;
+  color: color-mix(in srgb, var(--color-ivory) 74%, transparent);
+  line-height: 1.6;
+}
+.work-note {
+  margin-block: 32px 0;
+  font-size: 0.85rem;
+  color: color-mix(in srgb, var(--color-ivory) 60%, transparent);
+}
+
+@media (min-width: 900px) {
+  .work-head {
+    grid-template-columns: 7fr 5fr;
+    align-items: end;
+  }
+  .work-aside {
+    padding-block-end: 0.5em;
+  }
+  /* The lead case takes the wider column and both rows; the other two stack beside it. */
+  .work-grid {
+    grid-template-columns: 7fr 5fr;
+  }
+  .work-card[data-lead] {
+    grid-row: span 2;
+  }
+  .work-card[data-lead] .work-media {
+    aspect-ratio: 4 / 3;
+  }
+}

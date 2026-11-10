@@ -1,0 +1,157 @@
+/* Home · Digital (H-06): the Interface theme's ground and UI type (category-pages.md §5.5). */
+.digital {
+  position: relative;
+  isolation: isolate;
+}
+/* The 8px grid, taupe at 10%, fading out towards the section's edges. */
+.digital::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--color-taupe) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-taupe) 10%, transparent) 1px, transparent 1px);
+  background-size: 8px 8px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, #000 40%, transparent 100%);
+  pointer-events: none;
+}
+
+.digital-head {
+  display: grid;
+  gap: 24px;
+  margin-block-end: clamp(40px, 6vw, 64px);
+}
+.digital-head h2 {
+  margin: 20px 0 0;
+  font-weight: 500; /* the Interface's headings */
+}
+.digital-head h2 b {
+  display: block;
+}
+.digital-intro {
+  margin: 0;
+  color: var(--color-cocoa);
+}
+
+/* Capabilities: four panels, each a UI card with an "active" champagne rule on hover/focus-within. */
+.digital-caps {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.digital-cap {
+  position: relative;
+  padding: 22px 22px 24px;
+  border: 1px solid var(--color-line-light);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--color-ivory) 88%, transparent);
+}
+.digital-cap::before {
+  content: "";
+  position: absolute;
+  inset-block-start: -1px;
+  inset-inline: 22px;
+  block-size: 2px;
+  background: var(--color-champagne);
+}
+.digital-cap-title {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+.digital-cap p {
+  margin: 0;
+  color: var(--color-cocoa);
+  line-height: 1.55;
+}
+
+/* Products: espresso cards, set apart from the capabilities. */
+.digital-products {
+  display: grid;
+  gap: 20px;
+  margin-block-start: clamp(48px, 7vw, 88px);
+}
+.digital-products-head {
+  display: grid;
+  gap: 8px;
+}
+.digital-products-head h3,
+.digital-products-head p {
+  margin: 0;
+}
+.digital-products-head p {
+  color: var(--color-cocoa);
+}
+.digital-product-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.digital-product {
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+  padding: 26px;
+  border-radius: var(--radius);
+  background: var(--color-espresso);
+  color: var(--color-ivory);
+}
+.digital-product-name {
+  margin: 10px 0 0;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.digital-product-desc {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-champagne);
+}
+:lang(ar) .digital-product-desc {
+  letter-spacing: 0;
+}
+.digital-product-summary {
+  margin: 6px 0 0;
+  max-inline-size: 46ch;
+  color: color-mix(in srgb, var(--color-ivory) 76%, transparent);
+  line-height: 1.6;
+}
+
+.digital-foot {
+  display: flex;
+  justify-content: flex-end;
+  margin-block-start: 28px;
+}
+
+@media (min-width: 900px) {
+  .digital-head {
+    grid-template-columns: 7fr 5fr;
+    align-items: end;
+  }
+  .digital-intro {
+    padding-block-end: 0.5em;
+  }
+  .digital-caps {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .digital-products {
+    grid-template-columns: 4fr 8fr;
+    align-items: start;
+  }
+  .digital-product-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 600px) and (max-width: 899.98px) {
+  .digital-caps {
+    grid-template-columns: 1fr 1fr;
+  }
+}
