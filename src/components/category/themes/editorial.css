@@ -1,3 +1,944 @@
 /* Marketing & Brand, "The Editorial" (docs/design/storyboards/marketing-brand.md; category-pages.md §5).
    Scope every rule under main[data-theme="editorial"]; the opening's L3 effects are `.fx-<name>`
-   classes (a layer's `fx`), defined here. Logical properties only. Owned by the marketing-brand build (D83). */
+   classes (a layer's `fx`), defined here. Logical properties only. Owned by the marketing-brand build (D83).
+
+   Ivory ground, espresso type, cocoa rules and folios, a champagne highlight band. The risk
+   (§5.3): every service opens like a magazine spread, in three grid patterns on a fixed rotation. */
+
+/* ==========================================================================
+   Act 1 · the opening (EDITORIAL_OPENING). Every layer is drawn here, so the scene reads with
+   no image: gradients and pseudo-elements only, no url() (a full-frame image could become the
+   LCP; the H1 must stay it), no filter. Only the layers' own boxes move (SceneDirector).
+   ========================================================================== */
+
+/* The spread's grid, shared by the layer boxes (marketing-brand.ts `cols`): column insets, the
+   column's width, the spread's top rule and foot (from the bottom), and the band behind the last
+   line. Below 900px the grid sits between the gutters; at ≥ 900px on the sections' column,
+   beside the rail (the same terms as `.cat-opening-overlay > *`). */
+main[data-theme="editorial"] .scene[data-scene="editorial-opening"] {
+  --ed-cs: var(--gutter-start);
+  --ed-ce: var(--gutter-end);
+  --ed-cw: calc(100% - var(--ed-cs) - var(--ed-ce));
+  --ed-top: max(25%, 200px);
+  --ed-base: max(42%, 330px);
+  --ed-band-end: 98px;
+  /* Background positions and turns that mirror in Arabic. */
+  --ed-x: 0%;
+  --ed-x-end: 100%;
+  --ed-turn: 1;
+  --ed-rule: color-mix(in srgb, var(--color-cocoa) 26%, transparent);
+}
+[dir="rtl"] main[data-theme="editorial"] .scene[data-scene="editorial-opening"] {
+  --ed-x: 100%;
+  --ed-x-end: 0%;
+  --ed-turn: -1;
+}
+@media (min-width: 900px) {
+  main[data-theme="editorial"] .scene[data-scene="editorial-opening"] {
+    --ed-frame: min(100%, var(--frame));
+    --ed-cs: calc((100% - var(--ed-frame)) / 2 + var(--gutter-start) + (var(--ed-frame) - var(--gutter-start) - var(--gutter-end) - var(--rail-gap)) / 4 + var(--rail-gap));
+    --ed-ce: calc((100% - var(--ed-frame)) / 2 + var(--gutter-end));
+    --ed-top: 17%;
+    --ed-base: max(44%, 430px);
+    --ed-band-end: 110px;
+  }
+  /* The Arabic H1 sets taller (line-height 1.28): the spread's foot rises to clear it. */
+  [dir="rtl"] main[data-theme="editorial"] .scene[data-scene="editorial-opening"] {
+    --ed-base: max(48%, 470px);
+  }
+}
+/* The band sits under the H1, behind the copy. In the still (no JS, reduced motion) the copy is
+   one paragraph of any length, so the band covers its last lines, the promise; in motion the
+   last line has a fixed two-line cell (category.css), so the band fills the space to the H1. */
+main[data-theme="editorial"] .scene[data-scene="editorial-opening"] {
+  --ed-band-top: calc(100% - 150px);
+}
+html[data-js]:not([data-reduced]) main[data-theme="editorial"] .scene[data-scene="editorial-opening"] {
+  --ed-band-top: calc(100% - 170px);
+}
+@media (min-width: 900px) {
+  main[data-theme="editorial"] .scene[data-scene="editorial-opening"] {
+    --ed-band-top: calc(100% - 166px);
+  }
+  html[data-js]:not([data-reduced]) main[data-theme="editorial"] .scene[data-scene="editorial-opening"] {
+    --ed-band-top: calc(100% - 196px);
+  }
+}
+
+/* Layers that draw on (the column lines, the rules, the band): the layer box clips its entrance,
+   so a slide reads as a stroke growing from the folio down or from inline-start across. */
+main[data-theme="editorial"] .scene [data-layer="grid"],
+main[data-theme="editorial"] .scene [data-layer="baselines"],
+main[data-theme="editorial"] .scene [data-layer="band"] {
+  overflow: hidden;
+}
+
+/* L0 · the page: ivory with a soft light where the spread sits and the faint laid lines of cotton
+   paper. The plate's image (mb-open-paper) covers it once its file exists. */
+main[data-theme="editorial"] .fx-paper {
+  background:
+    radial-gradient(90% 70% at 50% 36%, rgb(255 250 240 / 0.6), rgb(255 250 240 / 0) 70%),
+    radial-gradient(140% 120% at 50% 45%, rgb(187 154 121 / 0) 55%, rgb(187 154 121 / 0.18) 100%),
+    repeating-linear-gradient(to bottom, rgb(99 71 49 / 0.022) 0 1px, transparent 1px 6px),
+    var(--color-ivory);
+}
+
+/* L3 · the folio: a heavy short bar at inline-start and a page mark at inline-end, over the
+   page's top rule. */
+main[data-theme="editorial"] .fx-folio {
+  background:
+    linear-gradient(var(--color-espresso), var(--color-espresso)) var(--ed-x) 4px / 32px 4px no-repeat,
+    linear-gradient(var(--color-cocoa), var(--color-cocoa)) var(--ed-x-end) 5px / 12px 2px no-repeat,
+    linear-gradient(var(--color-cocoa), var(--color-cocoa)) 0 100% / 100% 1px no-repeat;
+}
+
+/* L3 · the grid: twelve columns (six below 900px), thin cocoa strokes fading toward the foot so
+   the H1 reads clean. */
+main[data-theme="editorial"] .fx-grid {
+  --ed-cols: 6;
+  background-image: linear-gradient(to right, var(--ed-rule) 1px, transparent 1px);
+  background-size: calc((100% - 1px) / var(--ed-cols)) 100%;
+  border-inline-end: 1px solid var(--ed-rule);
+  mask-image: linear-gradient(to bottom, #000 0 55%, rgb(0 0 0 / 0.35) 100%);
+}
+@media (min-width: 900px) {
+  main[data-theme="editorial"] .fx-grid {
+    --ed-cols: 12;
+  }
+}
+
+/* L3 · two baseline rules: the headline's, a third of the way down, and the spread's foot. */
+main[data-theme="editorial"] .fx-baselines {
+  background:
+    linear-gradient(var(--color-cocoa), var(--color-cocoa)) 0 34% / 100% 1px no-repeat,
+    linear-gradient(var(--color-espresso), var(--color-espresso)) 0 100% / 100% 2px no-repeat;
+}
+
+/* L1 · the image cell: an art-directed colour plate (a champagne sun over a taupe horizon on
+   cocoa, inside a fine ivory frame) until the board image (mb-open-board) arrives. */
+main[data-theme="editorial"] .fx-board {
+  --ed-sun: 66%;
+  background:
+    radial-gradient(circle at var(--ed-sun) 42%, var(--color-champagne) 0 16%, rgb(234 212 171 / 0) 16.4%),
+    linear-gradient(to top, var(--color-taupe) 0 30%, rgb(187 154 121 / 0) 30%),
+    linear-gradient(165deg, color-mix(in srgb, var(--color-cocoa) 80%, var(--color-taupe)), var(--color-cocoa) 55%, color-mix(in srgb, var(--color-cocoa) 70%, var(--color-espresso)));
+  outline: 1px solid rgb(245 233 211 / 0.4);
+  outline-offset: -10px;
+  box-shadow: 0 22px 44px -28px rgb(46 32 23 / 0.55);
+}
+[dir="rtl"] main[data-theme="editorial"] .fx-board {
+  --ed-sun: 34%;
+}
+main[data-theme="editorial"] .fx-board:has(img) {
+  background: none;
+  outline: 0;
+}
+
+/* L3 · set type: a heavy headline (the key), a lighter second line (the lead), a rule, then
+   greeked text lines. */
+main[data-theme="editorial"] .fx-heads {
+  background:
+    linear-gradient(var(--color-espresso), var(--color-espresso)) var(--ed-x) 0 / 100% 11% no-repeat,
+    linear-gradient(var(--color-espresso), var(--color-espresso)) var(--ed-x) 15% / 72% 11% no-repeat,
+    linear-gradient(var(--color-cocoa), var(--color-cocoa)) var(--ed-x) 31% / 54% 5% no-repeat,
+    linear-gradient(var(--color-cocoa), var(--color-cocoa)) var(--ed-x) 42% / 100% 1px no-repeat,
+    repeating-linear-gradient(to bottom, rgb(187 154 121 / 0.75) 0 3px, transparent 3px 11px) var(--ed-x) 100% / 100% 50% no-repeat;
+}
+
+/* L2 · a fan of two swatch strips, on the desk at inline-start (desktop only). Drawn in its
+   pseudo-elements, so its turn never meets the layer's own transforms. */
+main[data-theme="editorial"] .fx-swatches::before,
+main[data-theme="editorial"] .fx-swatches::after {
+  content: "";
+  position: absolute;
+  inset-block: 6% 16%;
+  inset-inline: 32% 30%;
+  border-radius: 3px;
+  transform-origin: 50% 92%;
+  box-shadow: 0 12px 26px -16px rgb(46 32 23 / 0.6);
+}
+main[data-theme="editorial"] .fx-swatches::before {
+  background: linear-gradient(to bottom, var(--color-espresso) 0 30%, var(--color-cocoa) 30% 58%, var(--color-taupe) 58% 84%, var(--color-ivory) 84%);
+  transform: rotate(calc(-16deg * var(--ed-turn)));
+}
+main[data-theme="editorial"] .fx-swatches::after {
+  background: linear-gradient(to bottom, var(--color-champagne) 0 30%, var(--color-taupe) 30% 58%, var(--color-ivory) 58% 84%, var(--color-champagne) 84%);
+  transform: rotate(calc(9deg * var(--ed-turn)));
+}
+
+/* L2 · a brass pen lying across the desk at inline-end, nib toward the spread (desktop only). */
+main[data-theme="editorial"] .fx-pen::before {
+  content: "";
+  position: absolute;
+  inset-inline: 6%;
+  inset-block-start: 46%;
+  block-size: 10px;
+  border-radius: 0 5px 5px 0;
+  background: linear-gradient(
+    to right,
+    var(--color-espresso) 0 8%,
+    var(--color-taupe) 8% 12%,
+    var(--color-champagne) 12% 60%,
+    var(--color-taupe) 60% 64%,
+    var(--color-champagne) 64% 86%,
+    var(--color-cocoa) 86%
+  );
+  clip-path: polygon(0 50%, 7% 0, 100% 0, 100% 100%, 7% 100%);
+  transform: rotate(-22deg);
+}
+[dir="rtl"] main[data-theme="editorial"] .fx-pen::before {
+  transform: scaleX(-1) rotate(-22deg);
+}
+/* Its shadow on the paper. */
+main[data-theme="editorial"] .fx-pen::after {
+  content: "";
+  position: absolute;
+  inset-inline: 12%;
+  inset-block: 54% 30%;
+  background: radial-gradient(closest-side, rgb(46 32 23 / 0.16), rgb(46 32 23 / 0));
+  transform: rotate(calc(-22deg * var(--ed-turn)));
+}
+main[data-theme="editorial"] .fx-swatches:has(img)::before,
+main[data-theme="editorial"] .fx-swatches:has(img)::after,
+main[data-theme="editorial"] .fx-pen:has(img)::before,
+main[data-theme="editorial"] .fx-pen:has(img)::after {
+  content: none;
+}
+
+/* L3 · the highlight band, full-bleed behind the last line, with a cocoa rule on its head. */
+main[data-theme="editorial"] .fx-band {
+  background: var(--color-champagne);
+  box-shadow: inset 0 1px 0 var(--ed-rule);
+}
+
+/* L3 · the seal: a neutral stand-in for the mark until the logo SVG arrives (CONTENT_CHECKLIST
+   #14): an ivory disc in an espresso ring, half filled (the storyboard's ◐), with a fine outer
+   ring. Not the logo. */
+main[data-theme="editorial"] .fx-seal {
+  border: 1.5px solid var(--color-espresso);
+  border-radius: 50%;
+  background: var(--color-ivory);
+  outline: 1px solid var(--color-cocoa);
+  outline-offset: 3px;
+  box-shadow: 0 10px 22px -14px rgb(46 32 23 / 0.6);
+}
+main[data-theme="editorial"] .fx-seal::before {
+  content: "";
+  position: absolute;
+  inset: 24%;
+  border-radius: 50%;
+  border: 1px solid var(--color-espresso);
+  background: linear-gradient(to right, var(--color-espresso) 50%, transparent 50%);
+}
+
+/* The opening's type: the H1 is the key, set heavy and large across the grid; the shot lines
+   are the lead, light. The eyebrow reads as the issue line, in cocoa. */
+main[data-theme="editorial"] .cat-opening h1 {
+  font-weight: 800;
+  font-size: clamp(2.4rem, 5.6vw, 5.2rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+main[data-theme="editorial"] .cat-opening h1:lang(ar) {
+  font-size: clamp(2.2rem, 4.6vw, 4.4rem);
+  font-weight: 700;
+  line-height: 1.28;
+  letter-spacing: 0;
+}
+main[data-theme="editorial"] .cat-opening-eyebrow {
+  color: var(--color-cocoa);
+  opacity: 1;
+}
+main[data-theme="editorial"] .cat-opening .scene-line {
+  font-weight: 300;
+}
+
+/* ==========================================================================
+   The index: a table of contents. Numeral, title, then a dotted leader to the column's end
+   (desktop); the active entry is set bold with a stroke, so its width (and the rail's wrap)
+   never changes as the spy moves.
+   ========================================================================== */
+@media (min-width: 900px) {
+  main[data-theme="editorial"] .svc-index-link {
+    grid-template-columns: 2.4rem minmax(0, max-content) minmax(12px, 1fr);
+  }
+  main[data-theme="editorial"] .svc-index-link::after {
+    content: "";
+    align-self: end;
+    margin-block-end: 0.4em;
+    margin-inline-start: 8px;
+    border-block-end: 1px dotted currentColor;
+    opacity: 0.45;
+  }
+  main[data-theme="editorial"] .svc-index-link[aria-current="location"] .svc-index-title {
+    -webkit-text-stroke: 0.55px currentColor;
+  }
+}
+
+/* ==========================================================================
+   Act 2 · each service opens like a magazine spread (§5.3): a folio, the H2 as the key (800)
+   against the promise as the lead (300), and one of three grid patterns in a fixed rotation:
+   A (I, IV) the title across two thirds with the promise beside it; B (II, V) the promise as a
+   pull quote on a champagne band; C (III, VI) three columns.
+   ========================================================================== */
+main[data-theme="editorial"] .svc-num {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--color-cocoa);
+  opacity: 1;
+}
+main[data-theme="editorial"] .svc-num::after {
+  content: "";
+  flex: 1 1 auto;
+  block-size: 1px;
+  background: currentColor;
+  opacity: 0.4;
+}
+main[data-theme="editorial"] .svc-title {
+  font-weight: 800;
+  font-size: clamp(2rem, 4.2vw, 3.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}
+main[data-theme="editorial"] .svc-title:lang(ar) {
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+main[data-theme="editorial"] .svc-intro {
+  font-weight: 300;
+  font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+  line-height: 1.5;
+  opacity: 1;
+}
+main[data-theme="editorial"] .svc-deliver h3 {
+  color: var(--color-cocoa);
+  opacity: 1;
+}
+main[data-theme="editorial"] .svc-deliver li {
+  border-color: color-mix(in srgb, var(--color-cocoa) 30%, transparent);
+}
+
+/* B · the pull quote: 2.4rem / 300 (§5.3) on a champagne band that bleeds to the page's
+   inline-end edge (clip-path is physical: swapped for Arabic). */
+main[data-theme="editorial"] .cat-sections > .svc:nth-child(3n + 2) .svc-intro {
+  max-inline-size: 24ch;
+  margin-block: 8px;
+  padding-block: 28px;
+  font-size: clamp(1.5rem, 2.6vw, 2.4rem);
+  line-height: 1.25;
+  background: var(--color-champagne);
+  box-shadow: 0 0 0 100vmax var(--color-champagne);
+  clip-path: inset(0 -100vmax 0 -16px);
+}
+[dir="rtl"] main[data-theme="editorial"] .cat-sections > .svc:nth-child(3n + 2) .svc-intro {
+  clip-path: inset(0 -16px 0 -100vmax);
+}
+main[data-theme="editorial"] .cat-sections > .svc:nth-child(3n + 2) .svc-intro:lang(ar) {
+  line-height: 1.55;
+}
+
+@media (min-width: 900px) {
+  /* A · the title across seven columns, the promise in the last five, on the title's foot. */
+  main[data-theme="editorial"] .cat-sections > .svc:nth-child(3n + 1) .svc-head {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 24px;
+  }
+  main[data-theme="editorial"] .cat-sections > .svc:nth-child(3n + 1) .svc-num {
+    grid-column: 1 / -1;
+  }
+  main[data-theme="editorial"] .cat-sections > .svc:nth-child(3n + 1) .svc-title {
+    grid-column: 1 / 8;
+  }
+  main[data-theme="editorial"] .cat-sections > .svc:nth-child(3n + 1) .svc-intro {
+    grid-column: 8 / -1;
+    align-self: end;
+  }
+
+  /* C · three columns: the title and promise, then the points across two. */
+  main[data-theme="editorial"] .cat-sections > .svc:nth-child(3n) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 24px;
+  }
+  main[data-theme="editorial"] .cat-sections > .svc:nth-child(3n) > * {
+    grid-column: 1 / -1;
+  }
+  main[data-theme="editorial"] .cat-sections > .svc:nth-child(3n) > .svc-head {
+    grid-column: 1;
+    align-self: start;
+  }
+  main[data-theme="editorial"] .cat-sections > .svc:nth-child(3n) > .svc-deliver {
+    grid-column: 2 / -1;
+    padding-block-start: 30px; /* on the line under the folio */
+  }
+  main[data-theme="editorial"] .cat-sections > .svc:nth-child(3n) .svc-title {
+    font-size: clamp(1.8rem, 2.6vw, 2.5rem);
+  }
+}
+
+/* Act 3 · the bookend (storyboard): the blank page returns with its grid drawn faintly. */
+main[data-theme="editorial"] .cat-faq {
+  background-image: linear-gradient(to right, color-mix(in srgb, var(--color-cocoa) 7%, transparent) 1px, transparent 1px);
+  background-size: calc(100% / 12) 100%;
+}
+
+/* ==========================================================================
+   Signature modules (D83). Styled here, not in the modules' chunks, so a module that mounts
+   late never paints unstyled. Each slot reserves a lower bound of its module's height (the
+   production fallback is empty, D78), so a module mounting above a deep-linked section moves
+   it as little as possible; the module itself is never shorter than its reservation.
+   ========================================================================== */
+main[data-theme="editorial"] .svc-module[data-module="content-calendar"]:not(.module-placeholder) {
+  min-block-size: 900px;
+}
+main[data-theme="editorial"] .svc-module[data-module="press-release"]:not(.module-placeholder) {
+  min-block-size: 1100px;
+}
+@media (min-width: 900px) {
+  main[data-theme="editorial"] .svc-module[data-module="content-calendar"]:not(.module-placeholder) {
+    min-block-size: 880px;
+  }
+  main[data-theme="editorial"] .svc-module[data-module="press-release"]:not(.module-placeholder) {
+    min-block-size: 850px;
+  }
+}
+/* Shared: the module head (Example label, title, note), rules and small caps. */
+main[data-theme="editorial"] :is(.cal, .pr) {
+  --mod-rule: color-mix(in srgb, var(--color-cocoa) 28%, transparent);
+  --mod-o-start: 0 0;
+  display: grid;
+  gap: 20px;
+}
+[dir="rtl"] main[data-theme="editorial"] :is(.cal, .pr) {
+  --mod-o-start: 100% 0;
+}
+main[data-theme="editorial"] :is(.cal-top, .pr-top) {
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+}
+main[data-theme="editorial"] :is(.cal-title, .pr-title) {
+  margin: 0;
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.25;
+}
+main[data-theme="editorial"] :is(.cal-note, .pr-hint) {
+  margin: 0;
+  max-inline-size: 62ch;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+/* Small caps labels: tracked in English; Arabic is never tracked or uppercased. */
+main[data-theme="editorial"] :is(.cal-filter-label, .cal-detail-date, .cal-detail-meta dt, .cal-table th, .cal-entry-ch, .pr-kicker, .pr-dateline, .pr-small-title) {
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-cocoa);
+}
+main[data-theme="editorial"] :is(.cal-filter-label, .cal-detail-date, .cal-detail-meta dt, .cal-table th, .cal-entry-ch, .pr-kicker, .pr-dateline, .pr-small-title):lang(ar) {
+  font-size: 0.78rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+main[data-theme="editorial"] :is(.cal-chip, .cal-entry, .pr-pin):focus-visible {
+  outline: 2px solid var(--color-espresso);
+  outline-offset: 2px;
+}
+
+/* --- IV · content-calendar -------------------------------------------------------------- */
+main[data-theme="editorial"] .cal {
+  --cal-row: 54px;
+  --cal-head: 30px;
+}
+@media (min-width: 640px) {
+  main[data-theme="editorial"] .cal {
+    --cal-row: 80px;
+  }
+}
+main[data-theme="editorial"] .cal-filters {
+  display: grid;
+  gap: 10px;
+}
+/* Below 640px each filter is one row that scrolls sideways inside itself (never the page). */
+main[data-theme="editorial"] .cal-filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  margin-inline: calc(-1 * var(--gutter-start)) calc(-1 * var(--gutter-end));
+  padding-inline: var(--gutter-start) var(--gutter-end);
+}
+main[data-theme="editorial"] .cal-filter::-webkit-scrollbar {
+  display: none;
+}
+@media (min-width: 640px) {
+  main[data-theme="editorial"] .cal-filter {
+    flex-wrap: wrap;
+    overflow: visible;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+}
+main[data-theme="editorial"] .cal-filter-label {
+  flex: none;
+  min-inline-size: 5.5rem;
+}
+main[data-theme="editorial"] .cal-chip {
+  position: relative;
+  isolation: isolate;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-block-size: 44px;
+  padding: 8px 14px;
+  border: 1px solid var(--mod-rule);
+  border-radius: var(--radius);
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    border-color 0.3s var(--ease-expo-out),
+    color 0.3s var(--ease-expo-out);
+}
+main[data-theme="editorial"] .cal-chip:hover {
+  border-color: var(--color-cocoa);
+}
+main[data-theme="editorial"] .cal-chip[aria-pressed="true"] {
+  border-color: var(--color-espresso);
+  color: var(--color-ivory);
+}
+main[data-theme="editorial"] .cal-chip-mark {
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--color-espresso);
+}
+main[data-theme="editorial"] .cal-chip[aria-pressed="true"] .cal-swatch {
+  box-shadow: 0 0 0 1px var(--color-ivory);
+}
+
+/* The pillars: tone, pattern and shape, so no pillar depends on colour alone. */
+main[data-theme="editorial"] .cal-swatch {
+  flex: none;
+  display: inline-block;
+  inline-size: 12px;
+  block-size: 12px;
+  border-radius: 2px;
+  vertical-align: middle;
+}
+main[data-theme="editorial"] .cal-swatch[data-pillar="launch"] {
+  background: var(--color-espresso);
+}
+main[data-theme="editorial"] .cal-swatch[data-pillar="craft"] {
+  border: 1px solid var(--color-cocoa);
+  background: repeating-linear-gradient(45deg, var(--color-cocoa) 0 2px, transparent 2px 4px);
+}
+main[data-theme="editorial"] .cal-swatch[data-pillar="guide"] {
+  border-radius: 50%;
+  background: var(--color-taupe);
+}
+main[data-theme="editorial"] .cal-swatch[data-pillar="community"] {
+  border: 2px solid var(--color-espresso);
+  border-radius: 50%;
+  background: var(--color-champagne);
+}
+
+main[data-theme="editorial"] .cal-month {
+  margin: 4px 0 0;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+main[data-theme="editorial"] .cal-month:lang(ar) {
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+main[data-theme="editorial"] .cal-grid {
+  position: relative;
+  margin-block-start: -8px;
+}
+main[data-theme="editorial"] .cal-table {
+  inline-size: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+main[data-theme="editorial"] .cal-table th {
+  block-size: var(--cal-head);
+  padding: 0 6px;
+  text-align: start;
+  vertical-align: middle;
+  letter-spacing: 0.08em;
+}
+main[data-theme="editorial"] .cal-wd-narrow {
+  display: none;
+}
+@media (max-width: 639.98px) {
+  main[data-theme="editorial"] .cal-wd-short {
+    display: none;
+  }
+  main[data-theme="editorial"] .cal-wd-narrow {
+    display: inline;
+  }
+}
+main[data-theme="editorial"] .cal-table td {
+  padding: 0;
+  vertical-align: top;
+}
+main[data-theme="editorial"] .cal-cell {
+  position: relative;
+  block-size: var(--cal-row);
+  overflow: hidden;
+  padding: 5px 6px;
+}
+main[data-theme="editorial"] .cal-table td[data-out] .cal-cell {
+  background: repeating-linear-gradient(135deg, rgb(99 71 49 / 0.06) 0 1px, transparent 1px 7px);
+}
+main[data-theme="editorial"] .cal-day {
+  font-size: 0.72rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.7;
+}
+/* A post fills its day's cell: the whole cell is the button (44px+ on touch). */
+main[data-theme="editorial"] .cal-entry {
+  position: absolute;
+  inset: 1px 1px 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-content: end;
+  align-items: center;
+  justify-items: start;
+  gap: 4px 6px;
+  padding: 22px 6px 6px;
+  border: 0;
+  border-radius: 0;
+  background: rgb(234 212 171 / 0);
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: background-color 0.3s var(--ease-expo-out);
+}
+main[data-theme="editorial"] .cal-entry:hover {
+  background: rgb(234 212 171 / 0.45);
+}
+main[data-theme="editorial"] .cal-entry[aria-pressed="true"] {
+  background: var(--color-champagne);
+  box-shadow: inset 0 0 0 1.5px var(--color-espresso);
+}
+main[data-theme="editorial"] .cal .cal-entry-ch {
+  display: flex;
+  gap: 6px;
+  min-inline-size: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+}
+main[data-theme="editorial"] .cal-entry-lang {
+  opacity: 0.75;
+}
+main[data-theme="editorial"] .cal-entry-topic {
+  grid-column: 1 / -1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-size: 0.74rem;
+  line-height: 1.3;
+}
+/* Below 640px a post is its day and its pillar's mark; the detail panel carries the rest. */
+@media (max-width: 639.98px) {
+  main[data-theme="editorial"] .cal-entry {
+    padding: 6px;
+    justify-items: center;
+  }
+  main[data-theme="editorial"] .cal .cal-entry-ch,
+  main[data-theme="editorial"] .cal-entry-topic {
+    display: none;
+  }
+}
+/* The grid's rules: two layers GSAP draws on entry (horizontals from inline-start, verticals
+   from the top), aligned to the fixed row height. */
+main[data-theme="editorial"] .cal-rules {
+  position: absolute;
+  inset-block: var(--cal-head) 0;
+  inset-inline: 0;
+  pointer-events: none;
+}
+main[data-theme="editorial"] .cal-rules-h,
+main[data-theme="editorial"] .cal-rules-v {
+  position: absolute;
+  inset: 0;
+}
+main[data-theme="editorial"] .cal-rules-h {
+  background: repeating-linear-gradient(to bottom, var(--mod-rule) 0 1px, transparent 1px var(--cal-row));
+  border-block-end: 1px solid var(--mod-rule);
+  transform-origin: var(--mod-o-start);
+}
+main[data-theme="editorial"] .cal-rules-v {
+  background: linear-gradient(to right, var(--mod-rule) 1px, transparent 1px) 0 0 / calc(100% / 7) 100%;
+  border-inline-end: 1px solid var(--mod-rule);
+  transform-origin: 50% 0;
+}
+main[data-theme="editorial"] .cal-detail {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  min-block-size: 132px;
+  padding-block: 16px 4px;
+  border-block-start: 2px solid var(--color-espresso);
+}
+main[data-theme="editorial"] .cal-detail p {
+  margin: 0;
+}
+main[data-theme="editorial"] .cal-detail .cal-detail-topic {
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  font-weight: 700;
+  line-height: 1.3;
+}
+main[data-theme="editorial"] .cal-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  margin: 6px 0 0;
+}
+main[data-theme="editorial"] .cal-detail-meta dd {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 2px 0 0;
+  font-size: 0.9rem;
+}
+
+/* --- V · press-release ------------------------------------------------------------------ */
+main[data-theme="editorial"] .pr-layout {
+  display: grid;
+  gap: 24px;
+}
+@media (min-width: 900px) {
+  main[data-theme="editorial"] .pr-layout {
+    grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+    align-items: start;
+    column-gap: 32px;
+  }
+}
+/* The page: a lighter sheet on the ivory ground, with a pin column at inline-start. */
+main[data-theme="editorial"] .pr-sheet {
+  display: grid;
+  gap: 20px;
+  padding-block: 32px;
+  padding-inline: 58px 22px;
+  border: 1px solid var(--mod-rule);
+  background: color-mix(in srgb, var(--color-ivory) 55%, white);
+  box-shadow: 0 34px 60px -44px rgb(46 32 23 / 0.5);
+}
+@media (min-width: 900px) {
+  main[data-theme="editorial"] .pr-sheet {
+    padding-block: 44px;
+    padding-inline: 72px 44px;
+  }
+}
+main[data-theme="editorial"] .pr-sheet p {
+  margin: 0;
+}
+main[data-theme="editorial"] .pr-part {
+  position: relative;
+  isolation: isolate;
+}
+main[data-theme="editorial"] .pr-hl {
+  position: absolute;
+  inset-block: -8px;
+  inset-inline: -12px;
+  z-index: -1;
+  border-radius: 2px;
+  background: var(--color-champagne);
+  transform-origin: var(--mod-o-start);
+}
+main[data-theme="editorial"] .pr-pin {
+  position: absolute;
+  inset-block-start: -10px;
+  inset-inline-start: -54px;
+  display: grid;
+  place-items: center;
+  inline-size: 44px;
+  block-size: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--color-espresso);
+  font: inherit;
+  cursor: pointer;
+}
+@media (min-width: 900px) {
+  main[data-theme="editorial"] .pr-pin {
+    inset-inline-start: -62px;
+  }
+}
+main[data-theme="editorial"] .pr-pin > span[aria-hidden],
+main[data-theme="editorial"] .pr-note-n {
+  display: grid;
+  place-items: center;
+  inline-size: 24px;
+  block-size: 24px;
+  border: 1px solid var(--color-cocoa);
+  border-radius: 50%;
+  font-size: 0.68rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  transition:
+    background-color 0.3s var(--ease-expo-out),
+    color 0.3s var(--ease-expo-out);
+}
+main[data-theme="editorial"] .pr-pin:hover > span[aria-hidden] {
+  background: var(--color-champagne);
+}
+main[data-theme="editorial"] .pr-pin[aria-pressed="true"] > span[aria-hidden],
+main[data-theme="editorial"] .pr-note[data-active] .pr-note-n {
+  border-color: var(--color-espresso);
+  background: var(--color-espresso);
+  color: var(--color-ivory);
+}
+main[data-theme="editorial"] .pr-sheet .pr-kicker {
+  margin-block-end: 14px;
+  padding-block-end: 10px;
+  border-block-end: 3px double var(--color-cocoa);
+}
+main[data-theme="editorial"] .pr-headline {
+  font-size: clamp(1.45rem, 2.5vw, 2.2rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+main[data-theme="editorial"] .pr-headline:lang(ar) {
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+main[data-theme="editorial"] .pr-sheet .pr-standfirst {
+  margin-block-start: 10px;
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.5;
+}
+main[data-theme="editorial"] .pr-sheet .pr-dateline {
+  font-weight: 700;
+  color: var(--color-espresso);
+}
+main[data-theme="editorial"] :is(.pr-lead, .pr-body) {
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+main[data-theme="editorial"] .pr-sheet .pr-body {
+  margin-block-start: 10px;
+}
+/* A drop cap in English only: Arabic letters must stay joined. */
+main[data-theme="editorial"] .pr-lead:lang(en)::first-letter {
+  float: inline-start;
+  margin-block-start: 4px;
+  margin-inline-end: 8px;
+  font-size: 3.2em;
+  font-weight: 800;
+  line-height: 0.85;
+}
+main[data-theme="editorial"] .pr-quote {
+  padding-inline-start: 16px;
+  border-inline-start: 3px solid var(--color-cocoa);
+  font-size: 1.15rem;
+  font-weight: 300;
+  line-height: 1.5;
+}
+main[data-theme="editorial"] .pr-end {
+  text-align: center;
+  font-size: 0.8rem;
+  letter-spacing: 0.4em;
+  color: var(--color-cocoa);
+}
+main[data-theme="editorial"] .pr-part[data-part="boilerplate"] {
+  padding-block-start: 16px;
+  border-block-start: 1px solid var(--mod-rule);
+}
+main[data-theme="editorial"] .pr-sheet .pr-small-title {
+  margin-block-end: 4px;
+}
+main[data-theme="editorial"] :is(.pr-about, .pr-contact) {
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+/* The notes: margin notes beside the page at ≥ 900px (all listed, the active one in full and
+   the rest dimmed by Motion), held in view while the page scrolls. */
+main[data-theme="editorial"] .pr-notes {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+main[data-theme="editorial"] .pr-note {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 12px;
+  padding-block: 12px;
+  border-block-start: 1px solid var(--mod-rule);
+}
+main[data-theme="editorial"] .pr-note[data-active] {
+  border-block-start-color: var(--color-espresso);
+}
+main[data-theme="editorial"] .pr-note p {
+  margin: 0;
+}
+main[data-theme="editorial"] .pr-note-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+main[data-theme="editorial"] .pr-note .pr-note-text {
+  margin-block-start: 2px;
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+@media (min-width: 900px) {
+  main[data-theme="editorial"] .pr-notes {
+    position: sticky;
+    inset-block-start: calc(var(--header-h) + 24px);
+  }
+}
+/* Below 900px: one note, the active part's, as a dark caption held at the bottom of the screen
+   while the page is in view, so a tap always shows its note. Under reduced motion every note
+   is listed after the page instead (the spec's reduced state: all annotations visible). */
+@media (max-width: 899.98px) {
+  html:not([data-reduced]) main[data-theme="editorial"] .pr-notes {
+    position: sticky;
+    inset-block-end: 12px;
+    z-index: 1;
+    padding: 4px 16px;
+    border-radius: var(--radius);
+    background: var(--color-espresso);
+    color: var(--color-ivory);
+    box-shadow: 0 18px 40px -20px rgb(13 8 5 / 0.6);
+  }
+  html:not([data-reduced]) main[data-theme="editorial"] .pr-note {
+    border: 0;
+  }
+  html:not([data-reduced]) main[data-theme="editorial"] .pr-note:not([data-active]) {
+    display: none;
+  }
+  html:not([data-reduced]) main[data-theme="editorial"] .pr-note[data-active] .pr-note-n {
+    border-color: var(--color-champagne);
+    background: var(--color-champagne);
+    color: var(--color-espresso);
+  }
+}

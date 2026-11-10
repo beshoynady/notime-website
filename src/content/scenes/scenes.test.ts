@@ -48,7 +48,7 @@ describe("scenes in review (lab only until approved)", () => {
   });
 
   it("every scene is listed once for the rule checks", () => {
-    expect(scenes.map((s) => s.id).sort()).toEqual(["draft", "events-majlis", "events-opening", "studio-opening", "workshop-opening"]);
+    expect(scenes.map((s) => s.id).sort()).toEqual(["draft", "editorial-opening", "events-majlis", "events-opening", "studio-opening", "workshop-opening"]);
   });
 });
 
