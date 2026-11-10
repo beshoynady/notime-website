@@ -111,9 +111,9 @@ export const STUDIO_OPENING: SceneConfig = {
       ],
     },
     // L2 (drawn): the slate, "II · CP · TAKE 1", with its stick open, then snapped shut.
-    { id: "slate", level: 2, fx: "slate", depth: 1.0, mobile: true, box: STAGE, ...between(S.cut1, S.cut2) },
-    { id: "stick-open", level: 2, fx: "stick-open", depth: 1.0, mobile: true, box: STAGE, ...between(S.cut1, S.snap) },
-    { id: "stick-shut", level: 2, fx: "stick-shut", depth: 1.0, mobile: true, box: STAGE, ...between(S.snap, S.cut2) },
+    { id: "slate", level: 2, fx: "slate", depth: 0.6, mobile: true, box: STAGE, ...between(S.cut1, S.cut2) },
+    { id: "stick-open", level: 2, fx: "stick-open", depth: 0.6, mobile: true, box: STAGE, ...between(S.cut1, S.snap) },
+    { id: "stick-shut", level: 2, fx: "stick-shut", depth: 0.6, mobile: true, box: STAGE, ...between(S.snap, S.cut2) },
     // L3: the letterbox bars (2.39:1). They open by scaling out past the stage's edges.
     { id: "letterbox", level: 3, fx: "letterbox", depth: 0, mobile: true, box: STAGE, keys: [{ shot: S.open, to: { scale: 2.8 } }] },
     // L3: the timecode, one reading per shot (decorative; technical numerals stay Latin, D50).

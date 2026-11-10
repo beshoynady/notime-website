@@ -15,11 +15,11 @@
 main[data-theme="studio"] .cat-opening .scene {
   /* The frame inside the bars: 2.39:1 of the width, never so tall that the bars vanish. */
   --lb-h: min(41.84vw, 100% - 160px);
-  /* The slate: a board at inline-end, centred a little above the frame's middle (the H1 and
-     the shot line hold the lower part of the frame at inline-start). */
-  --slate-w: clamp(200px, 24vw, 340px);
+  /* The slate: a board at inline-end, above the frame's middle (the H1 and the shot line hold
+     the lower part of the frame at inline-start). */
+  --slate-w: clamp(200px, 22vw, 310px);
   --slate-end: 9%;
-  --slate-top: calc(50% - var(--slate-w) * 0.42);
+  --slate-top: calc(50% - var(--slate-w) * 0.5);
   --stick-h: calc(var(--slate-w) * 0.13);
   /* The timecode: the frame's top inline-end corner, like a monitor's readout. */
   --tc-top: calc((100% - var(--lb-h)) / 2 + 14px);
@@ -28,9 +28,10 @@ main[data-theme="studio"] .cat-opening .scene {
   main[data-theme="studio"] .cat-opening .scene {
     /* Portrait: a 2.39:1 strip would be a sliver, so the frame keeps at least 44% of the height. */
     --lb-h: max(41.84vw, 44%);
+    /* Centred in the frame, under the timecode's corner. */
     --slate-w: min(46vw, 220px);
-    --slate-end: var(--gutter-end);
-    --slate-top: calc((100% - var(--lb-h)) / 2 + var(--stick-h) + 20px);
+    --slate-end: calc(50% - var(--slate-w) / 2);
+    --slate-top: calc((100% - var(--lb-h)) / 2 + var(--stick-h) + 48px);
   }
 }
 
@@ -66,10 +67,10 @@ main[data-theme="studio"] .fx-pool::after {
 
 /* L3 · the single warm key (the "Studio" grade: night blacks, one warm key), from the inline-start side. */
 main[data-theme="studio"] .fx-key {
-  background: radial-gradient(55% 75% at 24% 34%, color-mix(in srgb, var(--color-champagne) 22%, transparent), transparent 72%);
+  background: radial-gradient(55% 75% at 24% 34%, color-mix(in srgb, var(--color-champagne) 28%, transparent), transparent 72%);
 }
 html[dir="rtl"] main[data-theme="studio"] .fx-key {
-  background: radial-gradient(55% 75% at 76% 34%, color-mix(in srgb, var(--color-champagne) 22%, transparent), transparent 72%);
+  background: radial-gradient(55% 75% at 76% 34%, color-mix(in srgb, var(--color-champagne) 28%, transparent), transparent 72%);
 }
 
 /* L3 · the develop wash: a dark amber state over the frame that falls away (opacity only). */
@@ -140,21 +141,24 @@ main[data-theme="studio"] .fx-slate::after {
   /* The label is a technical value, Latin in both locales; the order numeral follows D74. */
   content: "II · CP\A TAKE 1";
   inset-block-start: calc(var(--slate-top) + var(--slate-w) * 0.72 * 0.18);
-  padding-inline: 8%;
-  direction: ltr;
+  box-sizing: border-box;
+  padding-inline: calc(var(--slate-w) * 0.08);
+  /* No `direction: ltr` here: logical insets follow the box's own direction, so it would pin the
+     label to the wrong side in Arabic. The runs are Latin, so they read left to right anyway. */
   unicode-bidi: isolate;
   text-align: start;
   white-space: pre;
   font-family: var(--font-en);
   font-weight: 300;
-  font-size: calc(var(--slate-w) * 0.1);
+  font-size: calc(var(--slate-w) * 0.085);
   line-height: 1.55;
   letter-spacing: 0.14em;
   font-variant-numeric: tabular-nums;
   color: var(--color-ivory);
 }
 main[data-theme="studio"] .fx-slate:lang(ar)::after {
-  content: "02 · CP\A TAKE 1";
+  /* A left-to-right mark first: a leading "02" would otherwise run to the far side of "CP". */
+  content: "\200E 02 · CP\A TAKE 1";
 }
 main[data-theme="studio"] .fx-stick-open::before,
 main[data-theme="studio"] .fx-stick-shut::before {
@@ -166,14 +170,14 @@ main[data-theme="studio"] .fx-stick-shut::before {
   transform-origin: 0 100%;
 }
 main[data-theme="studio"] .fx-stick-open::before {
-  transform: rotate(-16deg);
+  transform: rotate(-12deg);
 }
 html[dir="rtl"] main[data-theme="studio"] .fx-stick-open::before,
 html[dir="rtl"] main[data-theme="studio"] .fx-stick-shut::before {
   transform-origin: 100% 100%;
 }
 html[dir="rtl"] main[data-theme="studio"] .fx-stick-open::before {
-  transform: rotate(16deg);
+  transform: rotate(12deg);
 }
 
 /* L3 · the letterbox bars, night (the token's own job), with a taupe hairline on the frame's
@@ -193,7 +197,6 @@ main[data-theme="studio"] :is(.fx-tc-0, .fx-tc-1, .fx-tc-2, .fx-tc-3)::after {
   position: absolute;
   inset-block-start: var(--tc-top);
   inset-inline-end: var(--gutter-end);
-  direction: ltr;
   unicode-bidi: isolate;
   font-family: var(--font-en);
   font-weight: 500;
@@ -287,7 +290,6 @@ main[data-theme="studio"] .svc:first-child {
     grid-column: 2;
     justify-self: start;
     margin-block-start: 3px;
-    direction: ltr;
     font-family: var(--font-en);
     font-size: 0.6rem;
     font-weight: 500;
