@@ -23,8 +23,8 @@ Updated 2026-11-10. Read `CLAUDE.md` and `AGENTS.md` first (permanent rules; spe
 
 ## Current step
 
-- **M1 closed** (2026-11-10): full CI 42900663990 green on `0bd0043`; screenshots retaken in `docs/checkpoints/m1/`; the review build is served on port 3100 through a Cloudflare quick tunnel (the link changes on every restart; `docs/review/tunnel.md`); the forms contract is frozen (D92, `4593f13`).
-- **Now: step 2, Events ‖ Software,** two background agents in worktrees (branches from `4593f13`); their notes land in `docs/review/batch2-{events,software}.md` on their branches. When both report: merge into `phase-2-services`, resolve the `categories.ts`/`registry.tsx`/`category.css`/`scenes/index.ts` conflicts, run lint + typecheck + unit, move their decision lines into DECISIONS and decisions-to-confirm, delete the worktrees, commit and push, then a 5-line note.
+- **M1 closed** (2026-11-10): full CI 42900663990 green on `0bd0043`; screenshots retaken in `docs/checkpoints/m1/`; the review build is served on port 3100 through a Cloudflare quick tunnel (the link changes on every restart; `docs/review/tunnel.md`; current link 2026-11-11: https://voices-cylinder-evolution-vids.trycloudflare.com/ar); the forms contract is frozen (D92, `4593f13`).
+- **Now: step 2, Events ‖ Software,** two background agents in worktrees (branches from `4593f13`; both hit the usage limit at the start and were resumed 2026-11-11); their notes land in `docs/review/batch2-{events,software}.md` on their branches. When both report: merge into `phase-2-services`, resolve the `categories.ts`/`registry.tsx`/`category.css`/`scenes/index.ts` conflicts, run lint + typecheck + unit, move their decision lines into DECISIONS and decisions-to-confirm, delete the worktrees, commit and push, then a 5-line note.
 - **Next:** step 3 (Marketing/Creative/Print visual completion ‖ Work index + case template + 3 cases), step 4 (About ‖ Products), step 5 (Contact + the pipeline delivery ‖ legal, credits, 404, SEO), step 6 (the M3 gate, CI, every-page screenshots; the only stop).
 
 ## Machine notes
