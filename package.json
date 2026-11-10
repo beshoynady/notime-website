@@ -47,6 +47,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.5",
+    "esm-potrace-wasm": "^0.5.1",
     "lint-staged": "^16.4.0",
     "simple-git-hooks": "^2.14.0",
     "tailwindcss": "^4",

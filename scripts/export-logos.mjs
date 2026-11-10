@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 /**
+ * The site itself uses the SVGs from vectorise-logos.mjs; these PNGs are for email and other
+ * non-web uses.
+ *
  * Trim and export the supplied logo PNGs (docs/brand/logo-source, untouched) to
  * public/images/brand/logo/. Pixels are only cropped and resampled: never recoloured,
  * redrawn or distorted (aspect ratio is preserved).
