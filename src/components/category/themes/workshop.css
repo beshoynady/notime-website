@@ -1,0 +1,3 @@
+/* Production, Print & Gifts, "The Workshop" (docs/design/storyboards/production-print-gifts.md; category-pages.md §5).
+   Scope every rule under main[data-theme="workshop"]; the opening's L3 effects are `.fx-<name>`
+   classes (a layer's `fx`), defined here. Logical properties only. Owned by the production-print-gifts build (D83). */

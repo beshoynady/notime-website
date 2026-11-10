@@ -1,0 +1,3 @@
+/* Creative Production, "The Studio" (docs/design/storyboards/creative-production.md; category-pages.md §5).
+   Scope every rule under main[data-theme="studio"]; the opening's L3 effects are `.fx-<name>`
+   classes (a layer's `fx`), defined here. Logical properties only. Owned by the creative-production build (D83). */

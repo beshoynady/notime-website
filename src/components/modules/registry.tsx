@@ -44,4 +44,11 @@ const load = (importer: () => Promise<{ default: ComponentType<ModuleProps> }>) 
 export const MODULES: Partial<Record<ModuleKey, LazyExoticComponent<ComponentType<ModuleProps>>>> = {
   // TODO: replace placeholder — a stub that proves the slot (Task 2.4); the module itself is Task 3.3.
   "agenda-timeline": load(() => import("./agenda-timeline/agenda-timeline")),
+  // Batch 1 (D83): the template-built categories' modules.
+  "rental-categories": load(() => import("./rental-categories/rental-categories")),
+  "motion-playground": load(() => import("./motion-playground/motion-playground")),
+  "press-release": load(() => import("./press-release/press-release")),
+  "content-calendar": load(() => import("./content-calendar/content-calendar")),
+  "print-order": load(() => import("./print-order/print-order")),
+  "human-scale": load(() => import("./human-scale/human-scale")),
 };

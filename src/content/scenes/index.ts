@@ -1,5 +1,8 @@
 import type { CategorySlug, Service } from "../types";
+import { STUDIO_OPENING } from "./creative-production";
 import { EVENTS_MAJLIS, EVENTS_OPENING } from "./events-hospitality";
+import { EDITORIAL_OPENING } from "./marketing-brand";
+import { WORKSHOP_OPENING } from "./production-print-gifts";
 import type { SceneConfig } from "./types";
 
 export type * from "./types";
@@ -8,7 +11,16 @@ export type * from "./types";
  * The opening scene of each category, once its animatic is approved (Task 3.0 and later).
  * A category without one renders a static opening (H1, intro, skip control) and no pin.
  */
-const SCENES: Partial<Record<CategorySlug, SceneConfig>> = {};
+const SCENES: Partial<Record<CategorySlug, SceneConfig>> = definedOnly({
+  // Built from the storyboards with no animatic (D82, D83).
+  "creative-production": STUDIO_OPENING,
+  "marketing-brand": EDITORIAL_OPENING,
+  "production-print-gifts": WORKSHOP_OPENING,
+});
+
+function definedOnly<K extends string>(m: Record<K, SceneConfig | undefined>): Partial<Record<K, SceneConfig>> {
+  return Object.fromEntries(Object.entries(m).filter(([, v]) => v)) as Partial<Record<K, SceneConfig>>;
+}
 
 export function getScene(slug: CategorySlug): SceneConfig | undefined {
   return SCENES[slug];

@@ -12,6 +12,9 @@ import { ServiceIndex } from "./service-index";
 import { ServiceSection } from "./service-section";
 import { END_TONE, THEME_TONE } from "./theme";
 import "./category.css";
+import "./themes/studio.css";
+import "./themes/editorial.css";
+import "./themes/workshop.css";
 
 /**
  * A category page (D57, D64): the opening, then the six services, with the service index on a
