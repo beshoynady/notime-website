@@ -154,13 +154,15 @@
     "spansLabel": "Services in this project"
   },
   "marquee": {
-    "label": "All our services"
+    "label": "All our services",
+    "pause": "Pause the services list",
+    "play": "Play the services list"
   },
   "digital": {
     "eyebrow": "Beyond events",
     "headingLead": "Digital solutions,",
     "headingKey": "built to keep working.",
-    "intro": "End-to-end digital builds, from UX and design systems to development, content management and analytics, in Arabic and English and built to load fast.",
+    "intro": "End-to-end digital builds, from UX and design systems to development, content management and analytics, in Arabic and English, built to load fast.",
     "capabilities": {
       "websites": {
         "title": "Websites",
@@ -229,7 +231,8 @@
     "headingKey": "Let's plan every second of it.",
     "body": "Tell us what you're planning, and we'll come back to you with the next steps.",
     "primary": "Request a quote",
-    "secondary": "Chat on WhatsApp"
+    "secondary": "Chat on WhatsApp",
+    "bodyInterim": "Start with what you need. Each craft has its own page, with every service inside it."
   },
   "footer": {
     "rights": "© {year} NO TIME Creative House.",

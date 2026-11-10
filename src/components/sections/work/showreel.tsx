@@ -3,6 +3,7 @@
 import { Pause, Play, X } from "lucide-react";
 import { getImageProps } from "next/image";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useLenis } from "@/components/providers/lenis-provider";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { REEL_FRAME_SECONDS, reelFrames } from "@/content/showreel";
 import { capSrcSet } from "@/lib/srcset";
@@ -35,6 +36,19 @@ export function Showreel({ labels }: { labels: Labels }) {
   const [playing, setPlaying] = useState(true);
   const [index, setIndex] = useState(0);
   const auto = open && playing && !reduced;
+  const lenis = useLenis();
+
+  // The page stays put behind the open dialog (a native modal doesn't stop wheel scrolling, and
+  // Lenis listens on window), as the mobile menu does (M1 gate).
+  useEffect(() => {
+    if (!open) return;
+    document.documentElement.style.overflow = "hidden";
+    lenis.stop();
+    return () => {
+      document.documentElement.style.overflow = "";
+      lenis.start();
+    };
+  }, [open, lenis]);
 
   useEffect(() => {
     if (!auto) return;

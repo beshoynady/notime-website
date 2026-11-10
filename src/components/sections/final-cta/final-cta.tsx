@@ -1,9 +1,10 @@
 import { getTranslations } from "next-intl/server";
-import { QUOTE_LINK, SERVICES_HREF } from "@/components/layout/nav-links";
+import { QUOTE_LINK } from "@/components/layout/nav-links";
 import { LightLeak } from "@/components/ornaments/light-leak";
 import { SectionRef } from "@/components/review/section-ref";
 import { ButtonLink } from "@/components/ui/button";
 import { contact } from "@/config/contact";
+import { SERVICES_INDEX_HREF } from "@/content";
 import { contactStatus } from "@/lib/content-status";
 import { HOME_REF } from "@/lib/review";
 import { whatsappHref } from "@/lib/whatsapp";
@@ -12,7 +13,7 @@ import "./final-cta.css";
 /**
  * Home · Final CTA (H-10, dark): the page's last line, answering the hero ("It's time …").
  * Fill or hide (D78): "Request a quote" goes to /contact once it exists (Task F3); until then the
- * one action is "Explore our services", so the section never offers a dead end. WhatsApp shows
+ * one action is "Explore our services" (the /services index, not back up this page), so the section never offers a dead end. WhatsApp shows
  * only with a number in config/contact.ts.
  */
 export async function FinalCta() {
@@ -26,14 +27,15 @@ export async function FinalCta() {
         <h2 id="cta-title" className="final-cta-title text-display">
           {t("headingLead")} <b>{t("headingKey")}</b>
         </h2>
-        <p className="final-cta-body text-lead">{t("body")}</p>
+        {/* "We'll come back to you" only once there is a way to reach us (M1 gate). */}
+        <p className="final-cta-body text-lead">{QUOTE_LINK.live || wa ? t("body") : t("bodyInterim")}</p>
         <div className="final-cta-actions">
           {QUOTE_LINK.live ? (
             <ButtonLink href={QUOTE_LINK.href} variant="primary" arrow>
               {t("primary")}
             </ButtonLink>
           ) : (
-            <ButtonLink href={SERVICES_HREF} variant="primary" arrow>
+            <ButtonLink href={SERVICES_INDEX_HREF} variant="primary" arrow>
               {th("cta")}
             </ButtonLink>
           )}

@@ -51,10 +51,19 @@
   list-style: none;
   color: var(--color-taupe);
 }
-.work-meta li + li::before {
+.work-meta li:not(:last-child)::after {
   content: "·";
-  margin-inline-end: 14px;
+  margin-inline-start: 14px;
   opacity: 0.6;
+}
+@media (max-width: 899.98px) {
+  .work-meta {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .work-meta li::after {
+    content: none !important;
+  }
 }
 .work-title {
   margin: 0;

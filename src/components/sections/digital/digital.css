@@ -94,6 +94,7 @@
 }
 .digital-product {
   display: grid;
+  align-content: start;
   justify-items: start;
   gap: 8px;
   padding: 26px;

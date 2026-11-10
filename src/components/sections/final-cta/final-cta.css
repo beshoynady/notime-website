@@ -12,7 +12,9 @@
 }
 .final-cta-title {
   margin: 0;
-  max-inline-size: 16ch;
+  max-inline-size: 18ch;
+  /* Bounded by height too, so the heading, body and action fit 1440 × 900 (M1 gate). */
+  font-size: clamp(3rem, min(9vw, 15svh), 9rem);
   font-weight: 200;
 }
 .final-cta-title b {
@@ -22,6 +24,7 @@
 }
 .final-cta-body {
   margin: 0;
+  text-wrap: pretty;
   max-inline-size: 44ch;
   color: color-mix(in srgb, var(--color-ivory) 76%, transparent);
 }

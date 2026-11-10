@@ -186,11 +186,14 @@
     background: var(--color-champagne);
     color: var(--color-espresso);
   }
+  /* Espresso on light grounds (13.1:1), champagne on dark ones (10.9:1); taupe on ivory was
+     2.18:1 (M1 gate, WCAG 1.4.11). The header isn't a tone section, so it follows its own tone. */
   :focus-visible {
-    outline: 2px solid var(--color-taupe);
+    outline: 2px solid var(--color-espresso);
     outline-offset: 3px;
   }
-  [data-tone="dark"] :focus-visible {
+  [data-tone="dark"] :focus-visible,
+  #site-header:is([data-header-tone="hero"], [data-header-tone="dark"]) :focus-visible {
     outline-color: var(--color-champagne);
   }
   a {
@@ -254,7 +257,7 @@
   line-height: 1.04;
   letter-spacing: -0.015em;
   &:lang(ar) {
-    line-height: 1.3;
+    line-height: 1.4;
     letter-spacing: 0;
   }
   & b,
@@ -477,6 +480,7 @@ html[data-js]:not([data-reduced]) .scene-pin {
 #page-stage[data-ground="light"] section[data-zone][data-tone="dark"]:not([data-bg="own"]):not(:focus-within),
 #page-stage[data-ground="dark"] section[data-zone][data-tone="light"]:not([data-bg="own"]):not(:focus-within) {
   opacity: 0;
+  pointer-events: none;
 }
 @media (prefers-reduced-motion: reduce) {
   #page-stage[data-tone-ready] section[data-zone] {
@@ -500,8 +504,35 @@ html[data-js]:not([data-reduced]) .scene-pin {
 [dir="rtl"] .marquee-track {
   animation-name: mq-rtl;
 }
-.marquee:hover .marquee-track {
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track,
+.marquee[data-paused] .marquee-track {
   animation-play-state: paused;
+}
+.marquee:has(.marquee-toggle) {
+  position: relative;
+}
+/* Pause/play (WCAG 2.2.2, M1 gate): a 44px round control at the band's reading end. */
+.marquee-toggle {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: 16px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  inline-size: 44px;
+  block-size: 44px;
+  translate: 0 -50%;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--tone-ground);
+  color: inherit;
+  cursor: pointer;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-toggle {
+    display: none; /* nothing moves, so nothing to pause */
+  }
 }
 .marquee-list {
   display: flex;
@@ -784,10 +815,18 @@ html[data-overlay-open] #site-header .logo-on-light {
 }
 /* Footer links: quiet until hovered; the global focus ring shows for keyboard users. */
 .footer-link {
+  position: relative;
   text-decoration: underline;
   text-decoration-color: transparent;
   text-underline-offset: 4px;
   transition: color 0.3s var(--ease-power3-out), text-decoration-color 0.3s var(--ease-power3-out);
+}
+
+/* Hit area: the 10px gap shared out above and below (≥ 32px per link, WCAG 2.5.8). */
+.footer-link::after {
+  content: "";
+  position: absolute;
+  inset: -5px 0;
 }
 
 /* Footer columns (H-11). */
@@ -824,6 +863,7 @@ html[data-overlay-open] #site-header .logo-on-light {
   text-decoration-color: var(--color-taupe);
 }
 .text-link {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -837,6 +877,12 @@ html[data-overlay-open] #site-header .logo-on-light {
 }
 [dir="rtl"] .text-link {
   background-position: 100% 100%;
+}
+/* Hit area 44px tall around a ~20px line (M1 gate, target size at 390). */
+.text-link::after {
+  content: "";
+  position: absolute;
+  inset: -12px -4px;
 }
 .text-link:hover,
 .text-link:focus-visible {

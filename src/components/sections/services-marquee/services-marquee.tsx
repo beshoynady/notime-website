@@ -16,7 +16,7 @@ export async function ServicesMarquee() {
   return (
     <section data-tone="dark" className="relative">
       <SectionRef id={HOME_REF.marquee} />
-      <Marquee items={items} label={t("label")} durationSec={90} className="services-marquee" />
+      <Marquee items={items} label={t("label")} durationSec={90} className="services-marquee" controls={{ pause: t("pause"), play: t("play") }} />
     </section>
   );
 }
