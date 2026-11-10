@@ -9,7 +9,8 @@ Updated 2026-11-10, after the recovery from an interrupted session. Read `CLAUDE
 ## Current step (M1)
 
 - Done: step 1 (Marketing merged; build OK; `/en`, `/ar`, both Marketing pages open with no console errors) and step 2 (the three worktrees, their branches and `wip/marketing-merge` deleted; only `main` and `phase-2-services` remain locally; the remote `origin/worktree-agent-ae348246b0fe141aa` is kept, deleting it is the user's call).
-- **Now: M1.1, full-homepage screenshots** with `node scripts/fullpage.mjs m1` against `npx next start -p 3100` (production build in `.next`). Then the quality gate, `node scripts/anchor-shift.mjs` for the anchor shift, CI `workflow_dispatch`, review build + tunnel, report.
+- Done in M1 so far (`c47275f`, pushed): screenshots taken once (`docs/checkpoints/m1/`, before the fixes); the anchor shift measured (landing on `#printing` moved 1800 px, CLS 1.07: the pins' spacers and modules growing) and fixed (pin reservations on server-rendered spacers, module height reservations); the off-tone text at each tone switch fixed (zones fade, header follows the ground).
+- **Now:** the fresh-subagent quality gate is running (design, a11y, copy). Next: fix its High/Medium, rebuild (`npm run build`, stop the 3100 server first), retake `node scripts/fullpage.mjs m1`, re-measure `node scripts/anchor-shift.mjs` (1440 and `--width=390`), run the e2e specs for header tone (`e2e/hero-intro.spec.ts`, `e2e/category-structure.spec.ts`), log D85, then CI `workflow_dispatch`, review build + tunnel, report.
 - **`main`** is the last approved state; it changes only through a PR at the end of a phase. The `pre-push` guard refuses pushes to `main` (D74). No force-pushes.
 - **Usage rules (user, 2026-11-10):** at most 2 parallel agents, and native work for anything touching shared code. Commit at the end of every step, push in batches, and keep this file current.
 
