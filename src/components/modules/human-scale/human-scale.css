@@ -1,0 +1,192 @@
+/* Human scale (spec §6, IV.19), on the Workshop's champagne stock. Logical properties only;
+   the drawing is a fixed-ratio SVG, so the module's height is known before it paints. */
+.hs {
+  --hs-rule: color-mix(in srgb, var(--color-taupe) 80%, transparent);
+  display: grid;
+  gap: 20px;
+  min-inline-size: 0;
+}
+.hs-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+.hs-title {
+  margin: 0;
+  color: var(--color-cocoa);
+}
+.hs-choose {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-inline-size: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+/* Each choice is a small job ticket: a native radio under a label (arrow keys move the choice). */
+.hs-chip {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 44px;
+  padding-inline: 14px;
+  border: 1px solid var(--hs-rule);
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--color-ivory) 40%, transparent);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 0.3s var(--ease-expo-out),
+    color 0.3s var(--ease-expo-out),
+    border-color 0.3s var(--ease-expo-out);
+}
+.hs-chip:hover {
+  background: var(--color-ivory);
+}
+.hs-chip[data-on] {
+  border-color: var(--color-espresso);
+  background: var(--color-espresso);
+  color: var(--color-ivory);
+}
+.hs-chip:has(input:focus-visible) {
+  outline: 2px solid var(--color-cocoa);
+  outline-offset: 2px;
+}
+
+.hs-stage {
+  position: relative;
+  inline-size: 100%;
+}
+.hs-svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+}
+/* The drawing holds shapes only, so Arabic mirrors it whole: the figure stands at inline-start. */
+html[dir="rtl"] .hs-svg {
+  transform: scaleX(-1);
+}
+.hs-svg path,
+.hs-svg rect,
+.hs-svg circle {
+  vector-effect: non-scaling-stroke;
+}
+.hs-line {
+  fill: none;
+  stroke: var(--color-cocoa);
+  stroke-width: 1.25;
+}
+.hs-tick {
+  fill: none;
+  stroke: var(--hs-rule);
+  stroke-width: 1;
+}
+.hs-figure {
+  fill: var(--color-taupe);
+}
+.hs-fmt {
+  fill: color-mix(in srgb, var(--color-ivory) 85%, transparent);
+  stroke: var(--hs-rule);
+  stroke-width: 1;
+  transition:
+    fill 0.5s var(--ease-expo-out),
+    stroke 0.5s var(--ease-expo-out);
+}
+.hs-fmt[data-on] {
+  fill: var(--color-cocoa);
+  stroke: var(--color-espresso);
+}
+.hs-detail {
+  fill: none;
+  stroke: var(--hs-rule);
+  stroke-width: 1;
+}
+.hs-fmt[data-on] ~ .hs-detail {
+  stroke: color-mix(in srgb, var(--color-champagne) 45%, transparent);
+}
+.hs-base {
+  fill: var(--color-taupe);
+}
+.hs-dim path,
+.hs-crop {
+  fill: none;
+  stroke: var(--color-cocoa);
+  stroke-width: 1;
+}
+.hs-lens {
+  fill: var(--color-ivory);
+  stroke: var(--color-cocoa);
+  stroke-width: 1.25;
+}
+
+/* Labels: a zero-size anchor at a drawing point, its text centred on it (in both directions). */
+.hs-at {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 0;
+  block-size: 0;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.hs-at > span {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-cocoa);
+}
+.hs-at:lang(ar) > span {
+  letter-spacing: 0;
+}
+.hs-size > span {
+  padding: 2px 6px;
+  background: var(--color-champagne);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-espresso);
+}
+.hs-readout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 16px;
+  margin: 0;
+  padding-block-start: 12px;
+  border-block-start: 1px solid var(--hs-rule);
+  font-variant-numeric: tabular-nums;
+}
+.hs-readout-name {
+  font-weight: 600;
+  color: var(--color-espresso);
+}
+.hs-readout-basis {
+  opacity: 0.85;
+}
+.hs-note {
+  margin: 0;
+  max-inline-size: 60ch;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+@media (max-width: 639.98px) {
+  .hs-at > span {
+    font-size: 0.625rem;
+  }
+  .hs-size > span {
+    font-size: 0.6875rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hs-chip,
+  .hs-fmt {
+    transition: none;
+  }
+}
