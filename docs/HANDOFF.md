@@ -8,27 +8,10 @@ Updated 2026-11-10, after the recovery from an interrupted session. Read `CLAUDE
 
 ## Current step (M1)
 
-- Done: step 1 (Marketing merged; build OK; `/en`, `/ar`, both Marketing pages open with no console errors) and step 2 (the three worktrees, their branches and `wip/marketing-merge` deleted; only `main` and `phase-2-services` remain locally; the remote `origin/worktree-agent-ae348246b0fe141aa` is kept, deleting it is the user's call).
-- Done in M1 so far (`c47275f`, pushed): screenshots taken once (`docs/checkpoints/m1/`, before the fixes); the anchor shift measured (landing on `#printing` moved 1800 px, CLS 1.07: the pins' spacers and modules growing) and fixed (pin reservations on server-rendered spacers, module height reservations); the off-tone text at each tone switch fixed (zones fade, header follows the ground).
-- **Now:** the fresh-subagent quality gate is running (design, a11y, copy). Next: fix its High/Medium, rebuild (`npm run build`, stop the 3100 server first), retake `node scripts/fullpage.mjs m1`, re-measure `node scripts/anchor-shift.mjs` (1440 and `--width=390`), run the e2e specs for header tone (`e2e/hero-intro.spec.ts`, `e2e/category-structure.spec.ts`), log D85, then CI `workflow_dispatch`, review build + tunnel, report.
-- **`main`** is the last approved state; it changes only through a PR at the end of a phase. The `pre-push` guard refuses pushes to `main` (D74). No force-pushes.
-- **Usage rules (user, 2026-11-10):** at most 2 parallel agents, and native work for anything touching shared code. Commit at the end of every step, push in batches, and keep this file current.
-
-## What changed since the last handoff (three stale points fixed)
-
-1. **CI (D82):** a push runs only lint, typecheck and unit tests. The build, the review-leak scan and the full e2e run only on a manual `workflow_dispatch` (at each milestone) and on PRs to `main`. Pre-commit is lint-staged (ESLint on staged files, one typecheck when TypeScript is staged); unit tests are no longer in the hook.
-2. **Images:** the Replicate plan (D76, D77 §1) is superseded. AI images are made by hand in ChatGPT's free tier (D79); stock comes from Pexels and Unsplash, downloaded by hand, with an Image credits page (D80). There is no paid image API and no budget line.
-3. **The four copy decks** (Creative, Marketing, Print, Software) are in the data as drafts for Rand's review (commit `051eefb`), with the user's decisions applied (D81).
-
-## Done in the last sessions (all on `phase-2-services`)
-
-- D81: the ten deck decisions and the Arabic calque review of the D56 promises.
-- D82: speed mode and batched testing (CLAUDE.md updated).
-- D83: the scaffold for the parallel category builds (theme files, scene stubs, six module stubs).
-- D84: every Phase B homepage section: Work with the showreel dialog, the services marquee, Digital, How we work, the Six markets clocks, the final CTA, the footer columns, and the review-only trust blocks. **None of it has been seen in a browser yet** (memory was short while the agents ran).
-- Creative Production and Production, Print & Gifts built from the template and merged (opening scene, theme, two modules each).
-- Review docs: `docs/review/tunnel.md`, `hosting-note-ar.md`, `rand-guide-ar.md`. `cloudflared` 2026.10.7 is installed (user scope, winget).
-- Unit tests: 341 passing with Marketing merged (328 without).
+- Done: Marketing merged (`a47e0ac`); merged worktrees and branches deleted (the remote `origin/worktree-agent-ae348246b0fe141aa` kept: the user's call); screenshots in `docs/checkpoints/m1/` (`full-*` stitched, `sec-*` per section); the fresh-subagent gate's High and Medium fixed (D85); anchor landing fixed (pins and modules reserve space; CLS ≤ 0.03 on every anchor, was ~1.0) (D85); the first full CI run (42883051338) was red with 11 failures, repaired in D87; CLAUDE.md workflow updated to the user's speed-mode summary (D86).
+- **Now:** full CI re-run on the D87 commit; local production build to confirm the deep-link scroll jump is gone (`node scripts/anchor-shift.mjs`, plus the trace in the M1 notes). Then the review build (`npm run review:build`, `npm run review:start -- 3100`) and the tunnel (`docs/review/tunnel.md`), then the Arabic one-screen M1 report.
+- Open decisions: `docs/review/decisions-to-confirm.md` #1–#12 (new at M1: #10–#12).
+- Machine note: stopping a background `next start`/`next build` task leaves its node process running; kill the leftover `next` processes before rebuilding.
 
 ## Worktrees and branches
 

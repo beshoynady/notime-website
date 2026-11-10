@@ -87,14 +87,17 @@ for (const category of getCategories()) {
 
         test("grain only on dark grounds: none over a light section, never the LCP", async ({ page }) => {
           await gotoReady(page, path);
-          // For each visible section in main: does it or any ancestor paint the grain tile?
+          // For each visible section in main: does it or any ancestor paint the film grain (the
+          // screen-blended noise of dark grounds, D69)? The Workshop's static paper tile on its
+          // champagne ground is approved (category-pages §5.4, D72) and isn't the grain.
           const sections = await page.locator("main section[data-tone]").evaluateAll((els) =>
             els
               .filter((e) => e.checkVisibility())
               .map((e) => {
                 let grained = false;
                 for (let a: Element | null = e; a; a = a.parentElement) {
-                  if (getComputedStyle(a, "::before").backgroundImage.includes("feTurbulence")) grained = true;
+                  const before = getComputedStyle(a, "::before");
+                  if (before.backgroundImage.includes("feTurbulence") && before.mixBlendMode === "screen") grained = true;
                 }
                 return { tone: (e as HTMLElement).dataset.tone, grained };
               }),

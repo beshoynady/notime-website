@@ -93,9 +93,25 @@ export const LAB_IDS = {
   studio: "creative-production",
 } as const satisfies Record<string, CategorySlug>;
 
+/**
+ * The draft template's own route, `/[locale]/lab/draft-animatic`, on the Studio page: the
+ * LayeredScene engine fixture (e2e/layered-scene.spec.ts). Every category has its own opening
+ * since D83, so no category route shows the draft any more (M1).
+ */
+export const DRAFT_LAB_ID = "draft";
+const DRAFT_LAB_CATEGORY: CategorySlug = "creative-production";
+
 export function labCategory(param: string): CategorySlug | undefined {
   const m = /^([a-z]+)-animatic$/.exec(param);
+  if (m?.[1] === DRAFT_LAB_ID) return DRAFT_LAB_CATEGORY;
   return m && Object.hasOwn(LAB_IDS, m[1]) ? LAB_IDS[m[1] as keyof typeof LAB_IDS] : undefined;
+}
+
+/** The scene a lab route shows: the draft on its own route, else the category's lab scene. */
+export function labScene(param: string): SceneConfig | undefined {
+  const slug = labCategory(param);
+  if (!slug) return undefined;
+  return param === `${DRAFT_LAB_ID}-animatic` ? DRAFT_SCENE : getLabScene(slug);
 }
 
 export { getSceneImage, SCENE_IMAGES } from "./images";

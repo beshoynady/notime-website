@@ -17,18 +17,25 @@ This is Next.js 16. Its APIs differ from older versions. Before using any Next.j
 - **Before any architectural choice** (routing, data shape, state, i18n strategy, CMS, form pipeline): invoke `superpowers:brainstorming`.
 - **Pure logic** (scroll math, count-up, data transforms, validation schemas): use `superpowers:test-driven-development`.
 - **After each section:** run `superpowers:verification-before-completion` with the local checks below; the browser check in both locales at both widths happens at the milestone.
-- **Speed mode (D82, 2026-11-10):**
-  - **Decide, log, continue.** Make judgment calls on the established criteria (technical, marketing, UI/UX, the company's nature, honesty), log each in `docs/DECISIONS.md` with a one-line reason and in `docs/review/decisions-to-confirm.md`.
-  - **Stop only at the milestones:** M1 homepage complete (then start the tunnel review build), M2 all five category pages, M3 the full v1. Stop earlier only for anything irreversible, anything that costs money, new accounts or keys, a security issue, or a change to an approved concept.
-  - **Parallel work:** independent pages run as subagents in git worktrees, at most 3 at once. Shared code (tokens, primitives, LayeredScene, content-status, ornaments) is frozen during a batch; agents report needed changes to the lead, who applies them once and integrates the branches into `phase-2-services`.
+- **Speed mode for the rest of v1 (D82, D86; the user's summary of 2026-11-10 is authoritative):**
+  - **Decide, log, continue.** Make judgment calls on our criteria: technical quality, marketing impact, UI/UX, the company's nature (a premium Dubai creative house, Gulf market) and honesty (no fabricated facts, fill-or-hide D78). Log each in `docs/DECISIONS.md` with a one-line reason and in `docs/review/decisions-to-confirm.md`; the user confirms them in batches.
+  - **Stop only at the milestones:** **M1** the homepage complete plus the review tunnel for Rand; **M2** all five category pages complete; **M3** the full v1 (Work, About, Products, Contact and forms, legal, 404, SEO). Stop earlier only for anything irreversible, anything that costs money, new accounts or keys, a security issue, or a change to an approved concept.
+- **Parallel work, used carefully:**
+  - M1: no parallel agents. After M1: **at most 2 agents at once** (8 GB RAM, and agents multiply usage), each in its own git worktree, on independent pages only.
+  - Shared code (tokens, primitives, LayeredScene, content-status, the decorative patterns) is frozen during a parallel batch; the lead applies any shared change once, alone.
+  - The lead briefs each agent with the full context, integrates the branches into `phase-2-services`, resolves conflicts and deletes merged worktrees.
+  - Batches after M1: Events full ‖ Software full → **M2** (Marketing, Creative, Print are built; reviewed at M2) · Work index + case-study template ‖ About + Products · Contact + forms (Task 4.2) ‖ legal + 404 + SEO → **M3**.
 - **Testing in batches (D82):**
-  - **Pre-commit:** lint-staged (ESLint on the staged files, one typecheck when TypeScript is staged). No unit tests in the hook.
-  - **Locally while working:** lint, typecheck, unit tests when logic changed. No e2e, except one spec when changing exactly that behaviour.
-  - **Commit freely, push in batches** (every few completed steps or at the end of a work block).
-  - **CI:** a push runs lint, typecheck and unit tests. The build, the leak scan and the full e2e run on a manual `workflow_dispatch` (at each milestone) and on PRs to `main`. A red run blocks the milestone report.
-  - **New tests only for high-risk logic:** forms and validation, navigation and anchors, the content-status hide rules, RTL mirroring, numerals. None for purely visual tweaks.
-  - **Milestones only:** the full e2e in CI, screenshots (1440/390, EN/AR), measurements (CLS, frames, dwell), and a fresh-subagent quality gate (`design:design-critique`, `design:accessibility-review`, a copy check). Fix High and Medium findings before reporting.
-  - **Milestone report:** one screen: done, screenshot links, CI status, numbered decisions to confirm with a recommendation, next.
+  - **Pre-commit:** lint and typecheck on staged files only (lint-staged: ESLint on the staged files, one project typecheck when TypeScript is staged). No unit tests in the hook.
+  - **Locally while working:** lint, typecheck, unit tests when logic changed. No local e2e, except a single spec when changing exactly that behaviour.
+  - **Commit freely, push in batches,** and always before a long step.
+  - **CI:** a push runs fast checks only (lint, typecheck, unit tests). The build, the leak scan and the full e2e run on a manual `workflow_dispatch` at each milestone and on PRs to `main`. A red run blocks the milestone report.
+  - **New tests only for high-risk logic:** forms and validation, navigation and anchors, the content-status hide rules, RTL mirroring, numerals. None for visual tweaks.
+  - **Screenshots (1440/390, EN/AR) and measurements (CLS, frames, dwell): at milestones only.**
+- **Lighter process:** no animatics for the remaining categories (build from the template, the storyboard and the approved copy); missing images never block (designed placeholders until the stock or ChatGPT files arrive in `assets-inbox/`); performance work (Task 16) after M3, without regressing meanwhile: LCP is always text, and no layout shift.
+- **Quality gate per milestone:** before each milestone report, a fresh subagent that didn't build the work runs `design:design-critique`, `design:accessibility-review` and a copy check (native Arabic, the banned list, unsupported claims). Fix High and Medium, then report.
+- **Usage-limit safety:** after every completed step, commit and update `docs/HANDOFF.md` (branch, last commit, current step, next action, open decisions). Keep reports to one screen, read only the sections needed, and `/compact` when the context grows.
+- **Milestone report (Arabic, one screen):** what's done, screenshot links, CI status, numbered decisions to confirm (each with a recommendation), what's next.
 - **Final pass:** `superpowers:requesting-code-review`.
 - If a request is ambiguous or needs material from the client, add it to `docs/OPEN_QUESTIONS.md` instead of guessing.
 

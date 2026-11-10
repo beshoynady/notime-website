@@ -4,7 +4,7 @@ import ar from "@/messages/ar.json";
 import { SECTION_PIN_LIMIT, sceneProblems } from "@/lib/scene-math";
 import { getCategories, getServices } from "..";
 import { EVENTS_OPENING } from "./events-hospitality";
-import { allScenes, allSectionScenes, DRAFT_SCENE, getLabScene, getScene, getSectionScene, LAB_IDS, labCategory } from ".";
+import { allScenes, allSectionScenes, DRAFT_LAB_ID, DRAFT_SCENE, getLabScene, getScene, getSectionScene, LAB_IDS, labCategory, labScene } from ".";
 
 const scenes = allScenes();
 const sectionScenes = new Set(allSectionScenes());
@@ -64,5 +64,12 @@ describe("lab ids", () => {
     expect(labCategory("software-animatic")).toBe("software-digital");
     expect(labCategory("events")).toBeUndefined();
     expect(labCategory("constructor-animatic")).toBeUndefined();
+  });
+
+  it("keep the draft template on its own route, the engine fixture (e2e/layered-scene.spec.ts)", () => {
+    expect(labCategory(`${DRAFT_LAB_ID}-animatic`)).toBe("creative-production");
+    expect(labScene(`${DRAFT_LAB_ID}-animatic`)).toBe(DRAFT_SCENE);
+    expect(labScene("studio-animatic")).toBe(getLabScene("creative-production"));
+    expect(labScene("nope-animatic")).toBeUndefined();
   });
 });

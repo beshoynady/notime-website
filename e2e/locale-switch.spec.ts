@@ -18,9 +18,11 @@ test.describe("locale switch", () => {
     // ToneController (D40): wait for the controller's own marker, not only the layout's.
     await controllerReady(page);
 
-    expect(await page.locator(".pin-spacer").count()).toBe(1);
-    // The pin uses the server-rendered wrapper as its spacer, so the hero is never moved in the DOM (D43).
-    expect(await page.locator(".pin-spacer").evaluate((el) => el.classList.contains("hero-pin"))).toBe(true);
+    // One spacer around the hero (other pins, How we work since D84, have their own). It is the
+    // server-rendered wrapper, so the hero is never moved in the DOM (D43).
+    const heroSpacer = page.locator(".pin-spacer:has(> #hero)");
+    expect(await heroSpacer.count()).toBe(1);
+    expect(await heroSpacer.evaluate((el) => el.classList.contains("hero-pin"))).toBe(true);
     const title = await page.locator("#hero-title").evaluate((el) => ({
       text: el.textContent ?? "",
       label: el.getAttribute("aria-label") ?? "",

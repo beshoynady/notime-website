@@ -96,6 +96,11 @@ function settleOn(lenis: LenisControls, id: string): () => void {
       focused = true;
     });
   };
+  // While settling, this re-landing is what keeps the target in place: Chrome's scroll anchoring
+  // would also react to the pin spacers being re-measured and pull the page back by a pin's
+  // length for a few frames (M1: 1260 px on /en#digital, 1800 px on Marketing). Off until stop.
+  const root = document.documentElement;
+  root.style.overflowAnchor = "none";
   const ro = new ResizeObserver(land);
   ro.observe(document.body);
   ScrollTrigger.addEventListener("refresh", land);
@@ -104,6 +109,7 @@ function settleOn(lenis: LenisControls, id: string): () => void {
 
   const passive: AddEventListenerOptions = { passive: true };
   const stop = () => {
+    root.style.overflowAnchor = "";
     cancelAnimationFrame(raf);
     ro.disconnect();
     ScrollTrigger.removeEventListener("refresh", land);
