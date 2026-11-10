@@ -103,7 +103,7 @@ Layout:
 
 - alternating start/end on desktop (mirrored in RTL), stacked on mobile;
 - one featured service, Event tech, gets a wider, darker block;
-- hover or focus plays the visual's state change, and nothing moves under reduced motion (the addendum was cut off here; decisions-to-confirm #19).
+- **hover/focus (the user's line, 2026-11-11):** the visual animates, a light sweeps across, and the deliverables reveal, on desktop only (on mobile they're always visible). Under reduced motion there's no animation and no sweep, and the deliverables are always visible.
 
 ## Images: professional and honest
 
