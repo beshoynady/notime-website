@@ -112,7 +112,7 @@ Promise: *Apparel and objects carrying the brand with restraint.* / «ملابس
 | 2 Q | Do you install the stands you build? | هل تركّبون الأجنحة التي تصنعونها؟ | |
 | 2 A | Yes. We design, fabricate and install exhibition stands, activations and branded spaces. | نعم. نصمّم أجنحة المعارض ومساحات التفعيل والمساحات بهوية العلامة، ونصنّعها ونركّبها. | p.21. |
 | 3 Q | Can I order prints online? | هل يمكنني طلب المطبوعات عبر الإنترنت؟ | |
-| 3 A | Yes. Send your order through the form on this page, and we'll confirm the details and the proof with you before printing. | نعم. أرسل طلبك عبر النموذج في هذه الصفحة، ونؤكّد معك التفاصيل والنسخة التجريبية قبل التنفيذ. | D58. No cart or store is implied. |
+| 3 A | Yes. Tell us the item and the quantity, send your artwork, and we'll confirm the details and the proof with you before printing. | نعم. أخبرنا بالمنتج والكمية وأرسل التصميم، ونؤكّد معك التفاصيل والنسخة التجريبية قبل التنفيذ. | D58. No cart or store is implied; no form named while it is hidden (D85). |
 | 4 Q | Do you make packaging for gifts and awards? | هل تصمّمون تغليفًا للهدايا والجوائز؟ | |
 | 4 A | Yes: custom boxes and wraps for gift sets and awards. | نعم: علب وتغليف حسب الطلب لأطقم الهدايا والجوائز. | p.24. |
 | 5 Q | What do you need from me to start? | ماذا تحتاجون مني للبدء؟ | |

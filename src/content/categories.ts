@@ -171,7 +171,7 @@ export const categories: Category[] = [
       },
       {
         q: { en: "Can I order prints online?", ar: "هل يمكنني طلب المطبوعات عبر الإنترنت؟" },
-        a: { en: "Yes. Send your order through the form on this page, and we'll confirm the details and the proof with you before printing.", ar: "نعم. أرسل طلبك عبر النموذج في هذه الصفحة، ونؤكّد معك التفاصيل والنسخة التجريبية قبل التنفيذ." },
+        a: { en: "Yes. Tell us the item and the quantity, send your artwork, and we'll confirm the details and the proof with you before printing.", ar: "نعم. أخبرنا بالمنتج والكمية وأرسل التصميم، ونؤكّد معك التفاصيل والنسخة التجريبية قبل التنفيذ." },
       },
       {
         q: { en: "Do you make packaging for gifts and awards?", ar: "هل تصمّمون تغليفًا للهدايا والجوائز؟" },
