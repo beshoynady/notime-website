@@ -1,3 +1,318 @@
 /* Production, Print & Gifts, "The Workshop" (docs/design/storyboards/production-print-gifts.md; category-pages.md §5).
    Scope every rule under main[data-theme="workshop"]; the opening's L3 effects are `.fx-<name>`
-   classes (a layer's `fx`), defined here. Logical properties only. Owned by the production-print-gifts build (D83). */
+   classes (a layer's `fx`), defined here. Logical properties only. Owned by the production-print-gifts build (D83).
+
+   The theme (§5.4): champagne paper stock with a static paper texture (D72), cocoa ink, espresso
+   headings in Montserrat / Alexandria 600, taupe for technical lines. Print structure is used as
+   structure: the opening is a press sheet (crop marks, registration targets, a ruler, a colour
+   bar, a slug line), section dividers carry a registration target, and the index is a set of job
+   tickets. Dimension lines appear only in the opening's drawing and in the modules, never in text. */
+
+main[data-theme="workshop"] {
+  /* The opening's drawings (SVG, code only: storyboards README §3, L3). One shared viewBox per rig,
+     so layers that must line up do at any aspect: the board rig (board, dieline, dimensions, ink)
+     is "-44 -44 488 408", the box rig (fold, base, lid, ribbon) "0 0 400 400". Generated once
+     from the brand palette; contain-fitted and centred in each layer's box. */
+  --ws-svg-board: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-44 -44 488 408'%3E%3Crect x='-27' y='-25' width='468' height='384' fill='%232E2017' opacity='.1'/%3E%3Crect x='-34' y='-34' width='468' height='384' fill='%23BB9A79'/%3E%3Cpath d='M-34 36H434M-34 152H434M-34 270H434' stroke='%23F5E9D3' stroke-opacity='.14' stroke-width='1' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  --ws-svg-net: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-44 -44 488 408'%3E%3Cpath d='M80 0H320V80L334 62H386L400 80V240L386 258H334L320 240V320H80V240L66 258H14L0 240V80L14 62H66L80 80Z' fill='%23BB9A79' stroke='%23634731' stroke-width='1.25' stroke-linejoin='round' vector-effect='non-scaling-stroke'/%3E%3Cpath d='M80 80H320M80 240H320M80 80V240M320 80V240M320 80H400M320 240H400M0 80H80M0 240H80' fill='none' stroke='%23634731' stroke-width='1' stroke-dasharray='5 4' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  --ws-svg-ink: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-44 -44 488 408'%3E%3Cpath d='M80 0H320V80L334 62H386L400 80V240L386 258H334L320 240V320H80V240L66 258H14L0 240V80L14 62H66L80 80Z' fill='%232E2017' stroke='%232E2017' stroke-width='1.25' stroke-linejoin='round' vector-effect='non-scaling-stroke'/%3E%3Cpath d='M80 80H320M80 240H320M80 80V240M320 80V240M320 80H400M320 240H400M0 80H80M0 240H80' fill='none' stroke='%23EAD4AB' stroke-opacity='.35' stroke-width='1' stroke-dasharray='5 4' vector-effect='non-scaling-stroke'/%3E%3Cg fill='none' stroke='%23EAD4AB' stroke-opacity='.7' stroke-width='1' vector-effect='non-scaling-stroke'%3E%3Crect x='94' y='94' width='212' height='132'/%3E%3Ccircle cx='200' cy='160' r='18'/%3E%3Cpath d='M100 40H300M100 280H300'/%3E%3C/g%3E%3C/svg%3E");
+  --ws-svg-dims: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-44 -44 488 408'%3E%3Cg fill='none' stroke='%23634731' stroke-width='1' vector-effect='non-scaling-stroke'%3E%3Cpath d='M80 -6V-34M320 -6V-34M80 -24H176M224 -24H320M74 -18L86 -30M314 -18L326 -30'/%3E%3Cpath d='M404 80H434M404 240H434M424 80V138M424 182V240M418 86L430 74M418 246L430 234'/%3E%3C/g%3E%3C/svg%3E");
+  --ws-svg-dims-rtl: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-44 -44 488 408'%3E%3Cg transform='matrix(-1 0 0 1 400 0)'%3E%3Cg fill='none' stroke='%23634731' stroke-width='1' vector-effect='non-scaling-stroke'%3E%3Cpath d='M80 -6V-34M320 -6V-34M80 -24H176M224 -24H320M74 -18L86 -30M314 -18L326 -30'/%3E%3Cpath d='M404 80H434M404 240H434M424 80V138M424 182V240M418 86L430 74M418 246L430 234'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  --ws-svg-paper: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 240'%3E%3Cg transform='rotate(-6 150 120)'%3E%3Crect x='57' y='52' width='196' height='144' fill='%232E2017' opacity='.1'/%3E%3Crect x='52' y='46' width='196' height='144' fill='%23F5E9D3' stroke='%23BB9A79' stroke-width='1' vector-effect='non-scaling-stroke'/%3E%3C/g%3E%3Cg transform='rotate(3 150 120)'%3E%3Crect x='57' y='52' width='196' height='144' fill='%232E2017' opacity='.1'/%3E%3Crect x='52' y='46' width='196' height='144' fill='%23F5E9D3' stroke='%23BB9A79' stroke-width='1' vector-effect='non-scaling-stroke'/%3E%3C/g%3E%3Cg transform='rotate(-1 150 120)'%3E%3Crect x='57' y='52' width='196' height='144' fill='%232E2017' opacity='.1'/%3E%3Crect x='52' y='46' width='196' height='144' fill='%23F5E9D3' stroke='%23BB9A79' stroke-width='1' vector-effect='non-scaling-stroke'/%3E%3C/g%3E%3Cg transform='rotate(8 185 172)'%3E%3Crect x='153' y='154' width='70' height='44' fill='%232E2017' opacity='.12'/%3E%3Crect x='150' y='150' width='70' height='44' fill='%23F5E9D3' stroke='%23BB9A79' stroke-width='1' vector-effect='non-scaling-stroke'/%3E%3C/g%3E%3Cg transform='rotate(-4 195 162)'%3E%3Crect x='163' y='144' width='70' height='44' fill='%232E2017' opacity='.12'/%3E%3Crect x='160' y='140' width='70' height='44' fill='%23F5E9D3' stroke='%23BB9A79' stroke-width='1' vector-effect='non-scaling-stroke'/%3E%3C/g%3E%3C/svg%3E");
+  --ws-svg-spool: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='106' cy='107' r='82' fill='%232E2017' opacity='.1'/%3E%3Ccircle cx='100' cy='100' r='82' fill='%23BB9A79' stroke='%23634731' stroke-width='1' vector-effect='non-scaling-stroke'/%3E%3Ccircle cx='100' cy='100' r='66' fill='%23EAD4AB'/%3E%3Cg fill='none' stroke='%23BB9A79' stroke-width='1' vector-effect='non-scaling-stroke'%3E%3Ccircle cx='100' cy='100' r='58'/%3E%3Ccircle cx='100' cy='100' r='50'/%3E%3Ccircle cx='100' cy='100' r='42'/%3E%3C/g%3E%3Ccircle cx='100' cy='100' r='26' fill='%23634731'/%3E%3Ccircle cx='100' cy='100' r='9' fill='%23EAD4AB'/%3E%3Cpath d='M51 141L12 200H34L63 151Z' fill='%23EAD4AB' stroke='%23BB9A79' stroke-width='1' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  --ws-svg-fold: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cg fill='none' stroke='%23634731' stroke-width='1.25' stroke-linejoin='round' vector-effect='non-scaling-stroke'%3E%3Cpath d='M56 230H344V326H56Z'/%3E%3Cpath d='M56 230L70 163H330L344 230'/%3E%3Cpath d='M70 163V198H330V163'/%3E%3C/g%3E%3Cpath d='M56 326H344' fill='none' stroke='%23634731' stroke-width='1' stroke-dasharray='5 4' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  --ws-svg-box: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cellipse cx='200' cy='330' rx='178' ry='12' fill='%232E2017' opacity='.18'/%3E%3Cpolygon points='70,163 330,163 344,230 56,230' fill='%23BB9A79'/%3E%3Cpolygon points='70,163 330,163 330,197 70,197' fill='%23EAD4AB'/%3E%3Crect x='56' y='230' width='288' height='96' fill='%232E2017'/%3E%3Cpath d='M56 230.5H344' stroke='%23EAD4AB' stroke-opacity='.35' stroke-width='1' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  --ws-svg-lid: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cpolygon points='64,145 336,145 350,214 50,214' fill='%233A2A1F'/%3E%3Crect x='50' y='214' width='300' height='32' fill='%232E2017'/%3E%3Cpath d='M50 214.5H350' stroke='%23EAD4AB' stroke-opacity='.35' stroke-width='1' vector-effect='non-scaling-stroke'/%3E%3Cpath d='M64 145.5H336' stroke='%23EAD4AB' stroke-opacity='.2' stroke-width='1' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  --ws-svg-ribbon: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cg fill='%23EAD4AB' stroke='%23BB9A79' stroke-width='1' stroke-linejoin='round' vector-effect='non-scaling-stroke'%3E%3Cpolygon points='193,145 207,145 210,214 190,214'/%3E%3Cpolygon points='58,177 342,177 344,187 56,187'/%3E%3Crect x='190' y='214' width='20' height='32'/%3E%3Cpath d='M198 184L182 212L191 214L201 188Z'/%3E%3Cpath d='M202 184L218 212L209 214L199 188Z'/%3E%3Cpath d='M200 182C182 158 150 160 157 177C161 189 186 189 200 182Z'/%3E%3Cpath d='M200 182C218 158 250 160 243 177C239 189 214 189 200 182Z'/%3E%3Crect x='194' y='176' width='12' height='11' rx='2'/%3E%3C/g%3E%3C/svg%3E");
+  /* Crop marks, one per corner (symmetric, so they need no mirroring), and the registration target. */
+  --ws-svg-crop-tl: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M0 16H12M16 0V12' stroke='%23634731' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+  --ws-svg-crop-tr: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 16H24M8 0V12' stroke='%23634731' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+  --ws-svg-crop-bl: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M0 8H12M16 12V24' stroke='%23634731' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+  --ws-svg-crop-br: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 8H24M8 12V24' stroke='%23634731' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+  --ws-svg-reg: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Cg stroke='%23634731' stroke-width='1' fill='none'%3E%3Ccircle cx='13' cy='13' r='6'/%3E%3Cpath d='M13 0V26M0 13H26'/%3E%3C/g%3E%3Cpath d='M13 7A6 6 0 0 1 19 13H13Z' fill='%23634731'/%3E%3C/svg%3E");
+  /* Paper stock: a static noise tile in cocoa at low alpha (D72: static, CSS only, subtle). */
+  --ws-svg-paper-tile: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .39 0 0 0 0 .28 0 0 0 0 .19 0 0 0 -1.4 .9'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23p)'/%3E%3C/svg%3E");
+  /* Technical lines in taupe (§5.4). Text never uses taupe on champagne (1.6:1). */
+  --ws-rule: color-mix(in srgb, var(--color-taupe) 70%, transparent);
+}
+main[data-theme="workshop"] [data-tone="light"] {
+  --theme-line: var(--ws-rule);
+}
+
+/* ---------------------------------------------------------------------------------------------
+   Paper stock. One static texture on the page box (it spans more than the viewport, so it stays
+   out of LCP, as the dark grain does) and one on each Act 3 band. Never animated.
+   --------------------------------------------------------------------------------------------- */
+main[data-theme="workshop"] .cat-page,
+main[data-theme="workshop"] > section[data-tone="light"] {
+  position: relative;
+  isolation: isolate;
+}
+main[data-theme="workshop"] .cat-page::before,
+main[data-theme="workshop"] > section[data-tone="light"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.22;
+  background-image: var(--ws-svg-paper-tile);
+}
+
+/* ---------------------------------------------------------------------------------------------
+   Type: Montserrat / Alexandria 600 for headings, espresso; specs in tabular numerals.
+   --------------------------------------------------------------------------------------------- */
+main[data-theme="workshop"] :is(#category-title, .svc-title, .cat-faq-title, .cat-quote-title) {
+  font-weight: 600;
+  color: var(--color-espresso);
+  letter-spacing: -0.02em;
+}
+main[data-theme="workshop"] :is(#category-title, .svc-title, .cat-faq-title, .cat-quote-title):lang(ar) {
+  letter-spacing: 0;
+}
+main[data-theme="workshop"] .svc-num {
+  opacity: 1;
+  color: var(--color-cocoa);
+}
+main[data-theme="workshop"] .svc-deliver li {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------------------------------------------
+   Section dividers: the rule in taupe, with a registration target where it starts.
+   --------------------------------------------------------------------------------------------- */
+main[data-theme="workshop"] .svc {
+  position: relative;
+  border-color: var(--ws-rule);
+}
+main[data-theme="workshop"] .svc + .svc::before {
+  content: "";
+  position: absolute;
+  inset-block-start: -9px;
+  inset-inline-start: 0;
+  inline-size: 18px;
+  block-size: 18px;
+  background: var(--ws-svg-reg) center / contain no-repeat;
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------------------------------------
+   The index as job tickets (§5.4), on the desktop rail: each link sits on a ticket with a cut
+   edge at inline-end; the active ticket is pulled forward. The ticket is a pseudo-element under
+   the link's text and Motion's indicator, so neither the focus ring nor the indicator is clipped,
+   and the link itself never moves (Motion measures it).
+   --------------------------------------------------------------------------------------------- */
+@media (min-width: 900px) {
+  main[data-theme="workshop"] .svc-index-link::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background: color-mix(in srgb, var(--color-ivory) 45%, transparent);
+    clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 50%, 100% 100%, 0 100%);
+    transition:
+      translate 0.6s var(--ease-expo-out),
+      background-color 0.6s var(--ease-expo-out);
+  }
+  html[dir="rtl"] main[data-theme="workshop"] .svc-index-link::before {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 8px 50%);
+  }
+  main[data-theme="workshop"] .svc-index-link[aria-current="location"]::before {
+    background: var(--color-ivory);
+    translate: 8px 0;
+  }
+  html[dir="rtl"] main[data-theme="workshop"] .svc-index-link[aria-current="location"]::before {
+    translate: -8px 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  main[data-theme="workshop"] .svc-index-link::before {
+    transition: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------------------------
+   Act 1 · the opening, a press sheet (scenes/production-print-gifts.ts). Each rig's box reads
+   `--ws-<rig>-b` / `--ws-<rig>-i` (inset-block, inset-inline) and falls back to its desktop place;
+   below 900px the rigs stack into the space between the chip bar and the H1.
+   --------------------------------------------------------------------------------------------- */
+@media (max-width: 899.98px) {
+  main[data-theme="workshop"] .scene {
+    --ws-top: calc(var(--header-h) + var(--scene-top-extra, 0px));
+    --ws-sheet-b: calc(var(--ws-top) + 14px) max(44%, 312px);
+    --ws-sheet-i: 4% 4%;
+    --ws-board-b: calc(var(--ws-top) + 44px) max(47%, 334px);
+    --ws-board-i: 9% 9%;
+    --ws-paper-b: calc(var(--ws-top) + 30px) max(62%, 430px);
+    --ws-paper-i: 6% 50%;
+    --ws-spool-b: calc(var(--ws-top) + 120px) max(47%, 334px);
+    --ws-spool-i: 62% 7%;
+    --ws-box-b: calc(var(--ws-top) + 26px) max(45%, 320px);
+    --ws-box-i: 14% 14%;
+  }
+}
+/* Short desktop screens: the work area keeps clear of the H1 and the promise above it. */
+@media (min-width: 900px) {
+  main[data-theme="workshop"] .scene {
+    --ws-sheet-b: 14% max(46%, 384px);
+    --ws-board-b: 17% max(49%, 410px);
+    --ws-paper-b: 31% max(50%, 418px);
+    --ws-spool-b: 21% max(60%, 470px);
+    --ws-box-b: 15% max(47%, 394px);
+  }
+}
+
+/* Every drawing is contain-fitted and centred in its layer's box. */
+main[data-theme="workshop"] .scene-light:is(.fx-ws-board, .fx-ws-net, .fx-ws-dims, .fx-ws-ink, .fx-ws-paper, .fx-ws-spool, .fx-ws-fold, .fx-ws-box, .fx-ws-lid, .fx-ws-ribbon) {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+main[data-theme="workshop"] .fx-ws-board {
+  background-image: var(--ws-svg-board);
+}
+main[data-theme="workshop"] .fx-ws-net {
+  background-image: var(--ws-svg-net);
+}
+main[data-theme="workshop"] .fx-ws-ink {
+  background-image: var(--ws-svg-ink);
+}
+main[data-theme="workshop"] .fx-ws-paper {
+  background-image: var(--ws-svg-paper);
+}
+main[data-theme="workshop"] .fx-ws-spool {
+  background-image: var(--ws-svg-spool);
+}
+main[data-theme="workshop"] .fx-ws-fold {
+  background-image: var(--ws-svg-fold);
+}
+main[data-theme="workshop"] .fx-ws-box {
+  background-image: var(--ws-svg-box);
+}
+main[data-theme="workshop"] .fx-ws-lid {
+  background-image: var(--ws-svg-lid);
+}
+main[data-theme="workshop"] .fx-ws-ribbon {
+  background-image: var(--ws-svg-ribbon);
+}
+
+/* Dimension lines on the board: 240 along the top, 160 down the inline-end side. The drawing
+   mirrors in Arabic (dims-rtl), so the side figure stays at inline-end. The figures are placed
+   in the drawing's own units: s is the contain scale (px per viewBox unit, 488 × 408), and a
+   point (x, y) of the drawing sits at 50% + (x − 200)·s, 50% + (y − 160)·s from the box's centre. */
+main[data-theme="workshop"] .fx-ws-dims {
+  --s: min(100cqw / 488, 100cqh / 408);
+  container-type: size;
+  background-image: var(--ws-svg-dims);
+}
+html[dir="rtl"] main[data-theme="workshop"] .fx-ws-dims {
+  background-image: var(--ws-svg-dims-rtl);
+}
+main[data-theme="workshop"] .fx-ws-dims::before,
+main[data-theme="workshop"] .fx-ws-dims::after {
+  position: absolute;
+  inline-size: 4em;
+  margin-inline-start: -2em;
+  margin-block-start: -0.6em;
+  font-family: var(--font-en);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  color: var(--color-cocoa);
+}
+main[data-theme="workshop"] .fx-ws-dims::before {
+  content: "240";
+  inset-block-start: calc(50% - 184 * var(--s));
+  inset-inline-start: 50%;
+}
+main[data-theme="workshop"] .fx-ws-dims::after {
+  content: "160";
+  inset-block-start: 50%;
+  inset-inline-start: calc(50% + 224 * var(--s));
+}
+
+/* The press sheet: crop marks at the four corners, registration targets at both sides, a ruler
+   along the top, and in the bottom margin a colour bar (the brand's five inks) and the slug line,
+   which names the example job. The slug is decorative text in the drawing (the layer is
+   aria-hidden); the shot lines carry the meaning. */
+main[data-theme="workshop"] .fx-ws-sheet {
+  --ws-ink-line: color-mix(in srgb, var(--color-cocoa) 55%, transparent);
+  background:
+    var(--ws-svg-crop-tl) left top / 24px 24px no-repeat,
+    var(--ws-svg-crop-tr) right top / 24px 24px no-repeat,
+    var(--ws-svg-crop-bl) left bottom / 24px 24px no-repeat,
+    var(--ws-svg-crop-br) right bottom / 24px 24px no-repeat,
+    var(--ws-svg-reg) left center / 22px 22px no-repeat,
+    var(--ws-svg-reg) right center / 22px 22px no-repeat,
+    repeating-linear-gradient(to right, var(--ws-ink-line) 0 1px, transparent 1px 40px) center 6px / calc(100% - 72px) 11px no-repeat,
+    repeating-linear-gradient(to right, var(--ws-ink-line) 0 1px, transparent 1px 8px) center 6px / calc(100% - 72px) 6px no-repeat;
+}
+main[data-theme="workshop"] .fx-ws-sheet::before {
+  content: "";
+  position: absolute;
+  inset-block-end: 8px;
+  inset-inline-start: 36px;
+  inline-size: 132px;
+  block-size: 9px;
+  outline: 1px solid color-mix(in srgb, var(--color-espresso) 25%, transparent);
+  background: linear-gradient(
+    to right,
+    var(--color-espresso) 0 20%,
+    var(--color-cocoa) 20% 40%,
+    var(--color-taupe) 40% 60%,
+    var(--color-champagne) 60% 80%,
+    var(--color-ivory) 80% 100%
+  );
+}
+html[dir="rtl"] main[data-theme="workshop"] .fx-ws-sheet::before {
+  background: linear-gradient(
+    to left,
+    var(--color-espresso) 0 20%,
+    var(--color-cocoa) 20% 40%,
+    var(--color-taupe) 40% 60%,
+    var(--color-champagne) 60% 80%,
+    var(--color-ivory) 80% 100%
+  );
+}
+main[data-theme="workshop"] .fx-ws-sheet::after {
+  content: "Example · 240 × 160 × 80 mm";
+  position: absolute;
+  inset-block-end: 5px;
+  inset-inline-end: 36px;
+  font-size: 0.625rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--color-cocoa);
+}
+/* «مثال» (the Example label, common.example); the figures stay Western and in one isolated run. */
+main[data-theme="workshop"] .fx-ws-sheet:lang(ar)::after {
+  content: "مثال · \2066 240 × 160 × 80\2069  مم";
+  font-size: 0.6875rem;
+  letter-spacing: 0;
+}
+@media (max-width: 899.98px) {
+  main[data-theme="workshop"] .fx-ws-sheet::before {
+    inset-inline-start: 30px;
+    inline-size: 70px;
+    block-size: 7px;
+  }
+  main[data-theme="workshop"] .fx-ws-sheet::after {
+    inset-inline-end: 30px;
+    letter-spacing: 0.1em;
+  }
+}
+
+/* A warm light from block-start, inline-end: the bench's only atmosphere. */
+main[data-theme="workshop"] .fx-ws-light {
+  background: radial-gradient(60% 70% at 85% 0%, color-mix(in srgb, var(--color-ivory) 60%, transparent), transparent 72%);
+}
+html[dir="rtl"] main[data-theme="workshop"] .fx-ws-light {
+  background: radial-gradient(60% 70% at 15% 0%, color-mix(in srgb, var(--color-ivory) 60%, transparent), transparent 72%);
+}
