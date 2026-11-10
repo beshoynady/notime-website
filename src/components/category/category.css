@@ -436,6 +436,86 @@ html[data-js]:not([data-reduced]) .cat-page:has(.cat-opening .scene[data-shot-ac
 .svc-module {
   min-inline-size: 0;
 }
+
+/* Signature module reservations (M1). The production fallback is empty (D78), so each built
+   module's slot reserves its height from the server render; a module mounting above a
+   deep-linked section then moves it by a few pixels at most. Measured per locale on the
+   production build at 390 and 1440 (scripts/anchor-shift.mjs, M1), minus 4 px so a module is
+   never shorter than its slot at those widths. Re-measure when a module's layout changes. */
+html[lang="en"] .svc-module[data-module="motion-playground"] {
+  min-block-size: 584px;
+}
+html[lang="ar"] .svc-module[data-module="motion-playground"] {
+  min-block-size: 590px;
+}
+html[lang="en"] .svc-module[data-module="rental-categories"] {
+  min-block-size: 431px;
+}
+html[lang="ar"] .svc-module[data-module="rental-categories"] {
+  min-block-size: 464px;
+}
+html[lang="en"] .svc-module[data-module="content-calendar"] {
+  min-block-size: 866px;
+}
+html[lang="ar"] .svc-module[data-module="content-calendar"] {
+  min-block-size: 861px;
+}
+html[lang="en"] .svc-module[data-module="press-release"] {
+  min-block-size: 1323px;
+}
+html[lang="ar"] .svc-module[data-module="press-release"] {
+  min-block-size: 1225px;
+}
+html[lang="en"] .svc-module[data-module="human-scale"] {
+  min-block-size: 462px;
+}
+html[lang="ar"] .svc-module[data-module="human-scale"] {
+  min-block-size: 468px;
+}
+html[lang="en"] .svc-module[data-module="print-order"] {
+  min-block-size: 589px;
+}
+html[lang="ar"] .svc-module[data-module="print-order"] {
+  min-block-size: 525px;
+}
+@media (min-width: 900px) {
+  html[lang="en"] .svc-module[data-module="motion-playground"] {
+    min-block-size: 590px;
+  }
+  html[lang="ar"] .svc-module[data-module="motion-playground"] {
+    min-block-size: 594px;
+  }
+  html[lang="en"] .svc-module[data-module="rental-categories"] {
+    min-block-size: 256px;
+  }
+  html[lang="ar"] .svc-module[data-module="rental-categories"] {
+    min-block-size: 239px;
+  }
+  html[lang="en"] .svc-module[data-module="content-calendar"] {
+    min-block-size: 976px;
+  }
+  html[lang="ar"] .svc-module[data-module="content-calendar"] {
+    min-block-size: 969px;
+  }
+  html[lang="en"] .svc-module[data-module="press-release"] {
+    min-block-size: 1036px;
+  }
+  html[lang="ar"] .svc-module[data-module="press-release"] {
+    min-block-size: 1025px;
+  }
+  html[lang="en"] .svc-module[data-module="human-scale"] {
+    min-block-size: 599px;
+  }
+  html[lang="ar"] .svc-module[data-module="human-scale"] {
+    min-block-size: 579px;
+  }
+  html[lang="en"] .svc-module[data-module="print-order"] {
+    min-block-size: 312px;
+  }
+  html[lang="ar"] .svc-module[data-module="print-order"] {
+    min-block-size: 293px;
+  }
+}
 .module-placeholder {
   display: grid;
   place-items: center;

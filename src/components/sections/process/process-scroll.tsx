@@ -21,7 +21,15 @@ export function ProcessScroll({ children }: { children: ReactNode }) {
       mm.add(DESKTOP, () => {
         const root = ref.current!;
         const tl = gsap.timeline({
-          scrollTrigger: { trigger: root, start: "top top", end: "+=100%", pin: true, scrub: 0.6 },
+          scrollTrigger: {
+            trigger: root,
+            start: "top top",
+            end: "+=100%",
+            pin: true,
+            // The server-rendered wrapper below holds the reserved distance (globals.css).
+            pinSpacer: root.parentElement ?? undefined,
+            scrub: 0.6,
+          },
         });
         tl.fromTo(root.querySelector(".process-rail-fill"), { scaleX: 0 }, { scaleX: 1, ease: "none", duration: 4 }, 0);
         root.querySelectorAll(".process-step").forEach((step, i) => {
@@ -42,8 +50,10 @@ export function ProcessScroll({ children }: { children: ReactNode }) {
     { scope: ref },
   );
   return (
-    <div ref={ref} className="process-stage">
-      {children}
+    <div className="process-pin">
+      <div ref={ref} className="process-stage">
+        {children}
+      </div>
     </div>
   );
 }

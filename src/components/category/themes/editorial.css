@@ -385,24 +385,8 @@ main[data-theme="editorial"] .cat-faq {
 
 /* ==========================================================================
    Signature modules (D83). Styled here, not in the modules' chunks, so a module that mounts
-   late never paints unstyled. Each slot reserves a lower bound of its module's height (the
-   production fallback is empty, D78), so a module mounting above a deep-linked section moves
-   it as little as possible; the module itself is never shorter than its reservation.
+   late never paints unstyled. The slots' height reservations are shared (category.css, M1).
    ========================================================================== */
-main[data-theme="editorial"] .svc-module[data-module="content-calendar"]:not(.module-placeholder) {
-  min-block-size: 900px;
-}
-main[data-theme="editorial"] .svc-module[data-module="press-release"]:not(.module-placeholder) {
-  min-block-size: 1100px;
-}
-@media (min-width: 900px) {
-  main[data-theme="editorial"] .svc-module[data-module="content-calendar"]:not(.module-placeholder) {
-    min-block-size: 880px;
-  }
-  main[data-theme="editorial"] .svc-module[data-module="press-release"]:not(.module-placeholder) {
-    min-block-size: 850px;
-  }
-}
 /* Shared: the module head (Example label, title, note), rules and small caps. */
 main[data-theme="editorial"] :is(.cal, .pr) {
   --mod-rule: color-mix(in srgb, var(--color-cocoa) 28%, transparent);

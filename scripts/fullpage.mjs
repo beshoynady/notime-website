@@ -4,7 +4,7 @@
  *   node scripts/fullpage.mjs <label> [--path=/] [--base=http://localhost:3100]
  * Writes docs/checkpoints/<label>/:
  *   full-{locale}-{width}.png       the whole page in reduced motion (every section in its final
- *                                   state, no pins), so the layout reads top to bottom;
+ *                                   state, no pins), stitched from viewport tiles;
  *   sec-{locale}-{width}-{nn}-{id}.png  each top-level section of <main> in the viewport with
  *                                   motion on, scrolled to it step by step so its reveals ran.
  * Uses the installed Chrome (channel: "chrome"), like shots.mjs.
@@ -12,6 +12,7 @@
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
 import { chromium } from "@playwright/test";
+import sharp from "sharp";
 
 const args = process.argv.slice(2);
 const label = args.find((a) => !a.startsWith("--")) ?? "latest";
@@ -65,13 +66,27 @@ async function walk(page) {
 
 for (const s of sizes) {
   for (const locale of ["en", "ar"]) {
-    // 1. Whole page, reduced motion.
+    // 1. Whole page, reduced motion, stitched from viewport tiles: the page ground is a fixed
+    //    stage whose tone follows the scroll (ToneController), so a single fullPage capture
+    //    would paint every section in the hero's tone.
     {
       const { ctx, page, errors } = await open(s, locale, true);
       await walk(page);
-      await page.evaluate(() => window.scrollTo(0, 0));
-      await page.waitForTimeout(600);
-      await page.screenshot({ path: path.join(out, `full-${locale}-${s.width}.png`), fullPage: true });
+      const total = await page.evaluate(() => document.documentElement.scrollHeight);
+      const tiles = [];
+      for (let y = 0; ; y += s.height) {
+        await page.evaluate((y) => window.scrollTo(0, y), y);
+        await page.waitForTimeout(450);
+        const at = await page.evaluate(() => scrollY);
+        tiles.push({ top: at, buf: await page.screenshot() });
+        // The fixed header belongs to the first tile only.
+        if (tiles.length === 1) await page.addStyleTag({ content: "body header:not(main header){visibility:hidden!important}" });
+        if (at + s.height >= total) break;
+      }
+      await sharp({ create: { width: s.width, height: total, channels: 3, background: "#000" } })
+        .composite(tiles.map((t) => ({ input: t.buf, top: t.top, left: 0 })))
+        .png()
+        .toFile(path.join(out, `full-${locale}-${s.width}.png`));
       console.log("✓ full", locale, s.width, errors.length ? `console errors: ${errors.join(" | ")}` : "no console errors");
       await ctx.close();
     }

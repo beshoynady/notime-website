@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import type { SceneConfig, SceneLayer } from "@/content/scenes";
-import { stillState } from "@/lib/scene-math";
+import { pinLength, sceneMode, stillState } from "@/lib/scene-math";
 import { cn } from "@/lib/utils";
 import { SceneDirector } from "./scene-director";
 import { SceneImage } from "./scene-image";
@@ -40,28 +40,34 @@ export function LayeredScene({
   pinUnderBars?: boolean;
   children?: ReactNode;
 }) {
+  // The pin's scroll distance per width, reserved from the server render (globals.css, "Pin
+  // reservations"): ScrollTrigger adopts this wrapper as its spacer, so its spacing replaces the
+  // reservation in the same task and a landing on a section below never moves (M1).
+  const reserve = (v: "desktop" | "mobile") => (sceneMode(scene, v) === "pass" ? 0 : pinLength(scene.shots, v));
   return (
-    <div className="scene" data-scene={scene.id} data-variant={variant} data-shot-active="0" role={label ? "region" : undefined} aria-label={label}>
-      <div className="scene-layers" aria-hidden="true">
-        {scene.layers.map((layer) => (
-          <Layer key={layer.id} layer={layer} variant={variant} />
-        ))}
+    <div className="scene-pin" style={{ "--pin-d": reserve("desktop"), "--pin-m": reserve("mobile") } as CSSProperties}>
+      <div className="scene" data-scene={scene.id} data-variant={variant} data-shot-active="0" role={label ? "region" : undefined} aria-label={label}>
+        <div className="scene-layers" aria-hidden="true">
+          {scene.layers.map((layer) => (
+            <Layer key={layer.id} layer={layer} variant={variant} />
+          ))}
+        </div>
+        <div className={cn("scene-overlay", overlayClassName)}>
+          {children}
+          {lines.some(Boolean) && (
+            <div className="scene-copy">
+              {scene.shots.map((shot, i) =>
+                lines[i] ? (
+                  <p key={shot.id} className="scene-line" data-shot={i} data-desktop={shot.desktop ? "" : undefined} data-mobile={shot.mobile ? "" : undefined}>
+                    {lines[i]}
+                  </p>
+                ) : null,
+              )}
+            </div>
+          )}
+        </div>
+        <SceneDirector scene={scene} pinUnderBars={pinUnderBars} />
       </div>
-      <div className={cn("scene-overlay", overlayClassName)}>
-        {children}
-        {lines.some(Boolean) && (
-          <div className="scene-copy">
-            {scene.shots.map((shot, i) =>
-              lines[i] ? (
-                <p key={shot.id} className="scene-line" data-shot={i} data-desktop={shot.desktop ? "" : undefined} data-mobile={shot.mobile ? "" : undefined}>
-                  {lines[i]}
-                </p>
-              ) : null,
-            )}
-          </div>
-        )}
-      </div>
-      <SceneDirector scene={scene} pinUnderBars={pinUnderBars} />
     </div>
   );
 }

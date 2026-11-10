@@ -448,6 +448,41 @@ section[data-tone] {
 #page-stage[data-tone-ready] section[data-tone]:not([data-bg="own"]) {
   background-color: transparent;
 }
+/* Pin reservations (M1, anchor landing). A pinned block's scroll distance is reserved on its
+   server-rendered spacer from the first paint, wherever JS will pin it (data-js, set before paint;
+   no pin under reduced motion). ScrollTrigger adopts the spacer (pinSpacer) and writes the same
+   distance inline, so nothing below moves when the pin is built: a landing on #printing moved
+   1800 px before this. Heights in svh, as innerHeight on load. */
+html[data-js]:not([data-reduced]) .hero-pin {
+  padding-block-end: 140svh; /* hero-controller: end "+=140%" at every width */
+}
+html[data-js]:not([data-reduced]) .scene-pin {
+  padding-block-end: calc(var(--pin-m, 0) * 100svh);
+}
+@media (min-width: 900px) {
+  html[data-js]:not([data-reduced]) .process-pin {
+    padding-block-end: 100svh; /* process-scroll: end "+=100%", desktop only */
+  }
+  html[data-js]:not([data-reduced]) .scene-pin {
+    padding-block-end: calc(var(--pin-d, 0) * 100svh);
+  }
+}
+
+/* A zone on the other tone's ground fades out (ToneController, M1): the tail of the section going
+   out and the head of the one coming in would otherwise be dark text on espresso or ivory text on
+   ivory. Focus brings it back, so a keyboard user never lands on hidden text. */
+#page-stage[data-tone-ready] section[data-zone]:not([data-bg="own"]) {
+  transition: opacity 0.45s ease;
+}
+#page-stage[data-ground="light"] section[data-zone][data-tone="dark"]:not([data-bg="own"]):not(:focus-within),
+#page-stage[data-ground="dark"] section[data-zone][data-tone="light"]:not([data-bg="own"]):not(:focus-within) {
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  #page-stage[data-tone-ready] section[data-zone] {
+    transition: none;
+  }
+}
 
 /* ==========================================================================
    Marquee (CSS-driven; reverses in RTL; pauses on hover; still when reduced)

@@ -65,6 +65,8 @@ export function SceneDirector({ scene, pinUnderBars = false }: { scene: SceneCon
                   start: pinUnderBars ? () => `top ${anchorOffset(root)}px` : "top top",
                   end: () => `+=${pin * innerHeight}`,
                   pin: true,
+                  // The server-rendered wrapper holds the reserved distance (LayeredScene).
+                  pinSpacer: root.parentElement?.classList.contains("scene-pin") ? root.parentElement : undefined,
                   // A scene further down the page is held by a transform, never position: fixed:
                   // Chrome scored the fixed switch mid-page as a layout shift (viewport vs document
                   // coordinates; CLS 1.85 on desktop, D74). Lenis drives the scroll in the same frame.
