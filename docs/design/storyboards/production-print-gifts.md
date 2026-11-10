@@ -75,6 +75,14 @@
 
 **Budget (mobile):** plate ~140 KB + base ~70 KB + lid ~60 KB = **~270 KB**.
 
+### As built (D83, batch 1, no animatic)
+
+- **Scene:** `src/content/scenes/production-print-gifts.ts` (`WORKSHOP_OPENING`); drawings in `src/components/category/themes/workshop.css` (`fx-ws-*`).
+- **With no image file** the frame is a press sheet on the champagne stock: crop marks, two registration targets, a ruler, a colour bar of the five brand inks and a slug line «Example · 240 × 160 × 80 mm». Every object is a code-drawn SVG: the paper stack with two cards, the board, the spool, the dieline (cut lines, dashed folds), its dimension lines (240, 160), the ink pass, the open box in line, the espresso box, its lid and the ribbon with a bow.
+- **Desktop:** shot 1 materials; shot 2 dieline and dimensions on the board, paper and spool clear; shot 3 the board falls away, the ink sweeps across the net from inline-start, the open box rises in line where the spool was; shot 4 the solid box replaces the outline (the match cut), the lid and ribbon lower about 12 vh, the net stays at 30%.
+- **Mobile:** shot 3 has no range, so the print pass and the line drawing are desktop only; the board's fall hands over to shot 4. Lines: s1, s2, s4.
+- **Drawn, not stroked:** the dieline appears by opacity rather than drawing its stroke, because scene layers are childless boxes (no stroke-dashoffset per layer). The image layers are in the config, above their code twins, and render nothing until their files exist.
+
 ---
 
 ## Act 2 · Service scenes
