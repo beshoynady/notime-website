@@ -1,0 +1,214 @@
+/* Motion graphics · motion playground (category-pages.md §6 II.9). The Studio's dark ground:
+   ivory text, taupe technical labels, champagne for the active choice. Logical properties only. */
+.mp {
+  display: grid;
+  gap: 20px;
+}
+
+/* The title card: a 2.39:1 frame with registration marks (spec §5.2), clipped so the line enters from its edge. */
+.mp-card {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 12px;
+  aspect-ratio: 2.39 / 1;
+  min-block-size: 200px;
+  padding: clamp(24px, 3.2vw, 36px);
+  border: 1px solid var(--theme-line);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--color-espresso) 40%, var(--color-night));
+}
+@media (max-width: 639.98px) {
+  .mp-card {
+    aspect-ratio: 4 / 3;
+  }
+}
+.mp-label,
+.mp-legend {
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-taupe);
+}
+.mp-label:lang(ar),
+.mp-legend:lang(ar) {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.mp-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0;
+}
+.mp-label-value {
+  color: var(--color-champagne);
+}
+.mp-title-box {
+  align-self: center;
+}
+.mp-title {
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  margin: 0;
+  font-size: clamp(1.4rem, 3.4vw, 2.6rem);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.mp-title:lang(ar) {
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+
+/* The playhead: a champagne diamond crossing a hairline track. */
+.mp-track {
+  position: relative;
+  block-size: 12px;
+  background: linear-gradient(var(--theme-line), var(--theme-line)) 0 50% / 100% 1px no-repeat;
+}
+.mp-run {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: calc(100% - 12px);
+  display: block;
+}
+.mp-head {
+  position: absolute;
+  inset-block-start: 1px;
+  inset-inline-start: 1px;
+  inline-size: 10px;
+  block-size: 10px;
+  background: var(--color-champagne);
+  transform: rotate(45deg);
+}
+
+/* Controls: the choices and their description at inline-start, the curve and Play at inline-end. */
+.mp-controls {
+  display: grid;
+  gap: 16px 32px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+}
+.mp-choices,
+.mp-desc,
+.mp-note {
+  grid-column: 1;
+}
+.mp-curve-box {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+}
+@media (max-width: 639.98px) {
+  .mp-controls {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .mp-curve-box {
+    grid-column: 1;
+    grid-row: auto;
+    grid-template-columns: auto auto;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
+.mp-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-inline-size: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.mp-legend {
+  margin-block-end: 10px;
+  padding: 0;
+}
+.mp-choice {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 44px;
+  padding-inline: 16px;
+  border: 1px solid var(--theme-line);
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition:
+    background-color 0.3s var(--ease-expo-out),
+    border-color 0.3s var(--ease-expo-out),
+    color 0.3s var(--ease-expo-out);
+}
+.mp-choice:hover {
+  border-color: color-mix(in srgb, var(--color-champagne) 60%, transparent);
+}
+/* The native radio stays in the accessibility tree and takes the keyboard (arrows move the choice). */
+.mp-choice input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.mp-choice:has(input:checked) {
+  border-color: var(--color-champagne);
+  background: var(--color-champagne);
+  color: var(--color-espresso);
+}
+.mp-choice:has(input:focus-visible) {
+  outline: 2px solid var(--color-champagne);
+  outline-offset: 3px;
+}
+
+.mp-desc {
+  margin: 0;
+  max-inline-size: 52ch;
+  /* Two lines reserved: switching curves never moves what sits below. */
+  min-block-size: 3.3em;
+  line-height: 1.65;
+  opacity: 0.85;
+}
+.mp-note {
+  margin: 0;
+  max-inline-size: 52ch;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-taupe);
+}
+
+/* The curve: time along the inline axis (mirrored in RTL by a class), value up. */
+.mp-curve {
+  inline-size: 112px;
+  overflow: visible;
+}
+.mp-axis {
+  stroke: var(--theme-line);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.mp-axis-target {
+  stroke-dasharray: 3 3;
+}
+.mp-path {
+  fill: none;
+  stroke: var(--color-champagne);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+.mp-dot {
+  fill: var(--color-ivory);
+}
+.mp-play-icon {
+  inline-size: 8px;
+  block-size: 10px;
+  fill: currentColor;
+}

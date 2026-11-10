@@ -113,3 +113,14 @@ The signature (§5.2): each eyebrow is its timecode in (`TC 00:01:00:00` …), a
 | **Peak** | **IV AI content creation:** NO TIME's AI production is real (profile p14, p17), and the before/after slider is the most distinctive module | **5** |
 | Calm | V Set design, VI Rental | 2 |
 | CTA | Bookend | 3 |
+
+## Build notes (D83, batch 1, 2026-11-10)
+
+Built from this storyboard with no animatic (D82). Scene: `src/content/scenes/creative-production.ts` (`STUDIO_OPENING`); dressing and the code-drawn layers: `src/components/category/themes/studio.css`.
+
+- **Cuts:** a key always plays over 80% of its shot, so each cut is two very short shots with no line (flash on, flash off: 0.025 vh each on desktop, 0.015 vh on mobile). Everything that changes at a cut is keyed to its "on" shot. The stick's snap works the same way: two drawn sticks swap in one step (keys move opacity and scale, never rotation).
+- **Desktop timing (2.0 vh):** black box 0 → 0.43 · cut · slate 0.48 → 0.88 (snap at 0.68) · cut · push-in 0.93 → 1.43 · cut · the frame 1.48 → 1.8 · bars open 1.8 → 2.0. **Mobile (1.2 vh):** black box 0 → 0.3 · cut · slate 0.33 → 0.6 (snap at 0.46) · cut · the frame 0.63 → 1.0 · bars open 1.0 → 1.2.
+- **Without images:** the night ground; the letterbox (2.39:1, and at least 44% of the height on a portrait screen); a drawn seamless backdrop with one work light (cone and pool); the slate "II · CP · TAKE 1" (Arabic «02 · CP · TAKE 1», D74); the camera's frame lines, which scale by 1.3 to meet the frame's edges (the match cut); one timecode reading per shot (`TC 00:00:00:00`, `04:12`, `09:02`, `12:04`); an amber develop wash that falls away under a single warm key; the ivory flash at each cut.
+- **Slate drawn, not cut out** (the layers.md fallback for simple shapes): `cp-open-slate` and `cp-open-slate-stick` stay in `images.ts`, but no layer uses them. The plate, the camera and the real frame keep their slots and appear when their files arrive.
+- **Timecode:** stepped per shot, not running. The opening's keys move only opacity and scale, and a running counter would need a pause control (WCAG 2.2.2).
+- **Act 2:** each section's numeral carries its timecode in (`TC 00:0N:00:00`, from CSS counters, hidden from assistive tech). The desktop rail adds the same timecode under each title (the edit decision list); the active row is lit and its timecode turns champagne. Dividers are a film-edge strip. Modules: `motion-playground` (III) and `rental-categories` (VI).

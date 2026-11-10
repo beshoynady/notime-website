@@ -1,0 +1,102 @@
+/* Equipment & camera rental · the four categories (category-pages.md §6 II.12). The Studio's
+   dark ground; champagne marks what is chosen (the active take). Logical properties only. */
+.rc {
+  display: grid;
+  gap: 20px;
+  justify-items: start;
+}
+.rc-summary {
+  margin: 0;
+  min-block-size: 1.6em;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-taupe);
+}
+.rc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  inline-size: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 1100px) {
+  .rc-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+.rc-grid > li {
+  display: grid;
+}
+
+.rc-card {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  inline-size: 100%;
+  min-block-size: 44px;
+  padding: clamp(20px, 2.4vw, 28px) clamp(16px, 2vw, 24px);
+  border: 1px solid var(--theme-line);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--color-espresso) 40%, var(--color-night));
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: border-color 0.3s var(--ease-expo-out);
+}
+.rc-card:hover {
+  border-color: color-mix(in srgb, var(--color-champagne) 50%, transparent);
+}
+.rc-card:focus-visible {
+  outline: 2px solid var(--color-champagne);
+  outline-offset: 3px;
+}
+.rc-card[aria-pressed="true"] {
+  border-color: var(--color-champagne);
+}
+/* The registration marks show on the chosen card only. */
+.rc-corners {
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-expo-out);
+}
+.rc-card[aria-pressed="true"] .rc-corners {
+  opacity: 1;
+}
+
+.rc-drawing {
+  inline-size: 72px;
+  block-size: 45px;
+  margin-block-end: 8px;
+  color: var(--color-taupe);
+  transition: color 0.3s var(--ease-expo-out);
+}
+.rc-card[aria-pressed="true"] .rc-drawing {
+  color: var(--color-champagne);
+}
+.rc-name {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.rc-name:lang(ar) {
+  font-size: 0.95rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+/* Hidden lines keep their space (opacity only), so a reveal moves nothing. */
+.rc-line {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: color-mix(in srgb, currentColor 85%, transparent); /* Motion owns this element's opacity */
+}
+@media (prefers-reduced-motion: reduce) {
+  .rc-card,
+  .rc-corners,
+  .rc-drawing {
+    transition: none;
+  }
+}
