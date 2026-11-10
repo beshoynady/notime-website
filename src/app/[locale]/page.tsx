@@ -20,8 +20,10 @@ export default function HomePage() {
     <main id="main">
       <Hero />
       <About />
+      {/* Trust blocks (B8): hidden in production until the real material exists (D78); badged
+          examples in review mode, where the benchmarks put them. */}
+      <ExampleBlock kind="stats" refId={HOME_REF.stats} tone="dark" />
       <Categories />
-      {/* Hidden in production until the real material exists (D78); badged examples in review mode. */}
       <ExampleBlock kind="logos" refId={HOME_REF.logos} />
       <Work />
       <ServicesMarquee />

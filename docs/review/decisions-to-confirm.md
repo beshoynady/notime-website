@@ -9,3 +9,7 @@ Judgment calls made in speed mode (D82). Each one is already applied and logged 
 | 3 | Creative s1 EN stays "A black box. Nothing in frame yet.": a black box is the studio's own word for the space, and it pairs with «مساحة سوداء». | D81 (6) | Keep. |
 | 4 | The three template-built categories (Creative, Marketing, Print) ship in v1 with their opening scene, theme and two no-photo modules each; their other 12 modules follow after v1 and stay hidden meanwhile. | D83 | Keep: the pages are complete without them, and they need photographs we don't have yet. |
 | 5 | Module copy lives in `src/content/modules/<key>.ts` (localized fields) instead of the messages JSON. | D83 (3) | Keep: CMS-ready and conflict-free in parallel work. |
+| 6 | How we work on the homepage is the brief's four steps (Plan, Build, Produce, Launch); the four principles go to the About page. | D84 (1) | Keep: the brief asks for the steps; the principles suit About. |
+| 7 | Six markets shows each market's live local time, Dubai marked as the base. | D84 (2) | Keep: it is the homepage's signature, ties to the brand's name, and states only facts. |
+| 8 | Until the contact page exists, the final CTA's one button is "Explore our services". | D84 (5) | Keep: no dead end; it switches by itself when the page is live. |
+| 9 | The showreel is built in code from 10 real event photos with no people, until a real video arrives. | D84 (4) | Keep, and send a real reel when one exists (CONTENT_CHECKLIST #1). |
