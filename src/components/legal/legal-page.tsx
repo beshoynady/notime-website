@@ -19,12 +19,13 @@ export function legalValues(locale: Locale): LegalValues {
     address: legal.address[locale],
     dataRequestContact: legal.dataRequestContact,
     whatsapp: contact.whatsapp,
+    analytics: legal.analytics,
     courts: legal.courts[locale],
     prevailingLanguage: LANGUAGE_NAME[locale][legal.prevailingLanguage],
   };
 }
 
-/** Noindex until the legal review (`legal.reviewed`, CONTENT_CHECKLIST #24). */
+/** Noindex until the owner's final read (`legal.reviewed`, CONTENT_CHECKLIST #24, D89). */
 export async function legalMetadata(slug: LegalDoc["slug"], locale: Locale): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: "legal" });
   return {

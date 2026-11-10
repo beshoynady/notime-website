@@ -240,6 +240,8 @@ Phase-2 Tasks 3.1b → 3.9, as written there. Differences:
 
 ## Phase R: Review deployment (after B, C, D)
 
+> **Superseded (D89):** review runs on the Cloudflare tunnel (`docs/review/tunnel.md`), and production on Hostinger (`docs/launch/hostinger-deploy.md`). There is no Vercel; R1–R2 below are kept as history.
+
 - [ ] R1 (the user):
   - Vercel Pro account;
   - import the private GitHub repo;
@@ -275,7 +277,7 @@ Each one:
 
 | Task | Page | Key points |
 |---|---|---|
-| F1 | Work index `/work` + case template `/work/[slug]` | **Index:** filter chips by category × city, with counts and an empty state (filter state in the URL, so it can be shared and works without JS as links). **Case:** key facts → Challenge → Idea → Execution → Result (qualitative unless verified) → scope block linking the service anchors → next case + CTA; breadcrumb; sticky section menu from 4 sections. Anonymised by default; "Illustrative" on stock or AI; JSON-LD `CreativeWork`; refs WK. |
+| F1 | Work index `/work` + case template `/work/[slug]` | **Index:** filter chips by service category × market (D88), with counts and an empty state (filter state in the URL, so it can be shared and works without JS as links). **Case:** key facts → Challenge → Idea → Execution → Result (qualitative unless verified) → scope block linking the service anchors → next case + CTA; breadcrumb; sticky section menu from 4 sections. Anonymised by default; "Illustrative" on stock or AI; JSON-LD `CreativeWork`; refs WK. |
 | F2 | About `/about` | Story drafted from the profile (facts listed for Rand); the 4 principles; markets; team as `ExampleBlock` in review only. |
 | F3 | Contact `/contact` | A qualifying brief (Task 4.2): service dropdown preset from `?service=<anchor>` (every category quote block and service section links with it), city/country, timing, budget band, contact details. General FAQ (benchmark topics 1, 3, 6, 8, 10, 12, up to 8). Contact lines from config, hidden when empty; copy-email button; WhatsApp fallback. |
 | F4 | Products `/products/minute-zero`, `/products/peak-hour` | Problem, 4–6 features, concept screens labelled "Preview", "Register interest" form (same pipeline, `intent: "interest"`); `status: "comingSoon"`. |

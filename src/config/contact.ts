@@ -11,7 +11,7 @@ export interface ContactConfig {
 }
 
 export const contact: ContactConfig = {
-  email: "", // TODO: replace placeholder — CONTENT_CHECKLIST #7
+  email: "info@notimehub.com", // the company inbox (D89)
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "", // TODO: replace placeholder — CONTENT_CHECKLIST #7
   instagram: "", // TODO: replace placeholder — CONTENT_CHECKLIST #7
   facebook: "", // TODO: replace placeholder — CONTENT_CHECKLIST #7

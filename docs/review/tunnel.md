@@ -37,5 +37,5 @@ Rand reviews the **review build** (`NEXT_PUBLIC_REVIEW_MODE=1`) through a free C
 ## Notes
 
 - Run nothing heavy (a second Next server, e2e, Lighthouse) while Rand is reviewing: the review server shares this machine's memory.
-- Quick tunnels are for testing: no uptime guarantee, and a limit on concurrent requests. That's fine for one reviewer. The launch goes to Vercel on NO TIME's own account ([hosting-note-ar.md](hosting-note-ar.md)); nothing is deployed to Vercel until that account exists.
+- Quick tunnels are for testing: no uptime guarantee, and a limit on concurrent requests. That's fine for one reviewer. The launch goes to Hostinger on NO TIME's own account ([hosting-note-ar.md](hosting-note-ar.md), [../launch/hostinger-deploy.md](../launch/hostinger-deploy.md)); nothing is deployed there before the phase PR is merged.
 - The production build never contains review content (`npm run check:no-review-leak` in CI).

@@ -2,15 +2,15 @@
 
 **Live text:** the site renders this policy from `src/content/legal.ts`; this file is the review draft. Change both together.
 
-Status: **draft, not legal advice.** Written with the UAE Personal Data Protection Law (Federal Decree-Law No. 45 of 2021, "PDPL") in mind; **a legal review is required before launch** (CONTENT_CHECKLIST #24). Facts checked against the site on 2026-11-09: the processors in use, no analytics, no database for form submissions, one cookie (`NEXT_LOCALE`).
+Status: **draft, not legal advice.** Written with the UAE Personal Data Protection Law (Federal Decree-Law No. 45 of 2021, "PDPL") in mind; **no lawyer for now: the owner gives the pages a final read before launch** (D89, CONTENT_CHECKLIST #24). The notes for a reviewer stay in this file, never on the public page. Facts checked against the site on 2026-11-09, host updated 2026-11-10 (D89): the processors in use, no analytics yet, no database for form submissions, one cookie (`NEXT_LOCALE`).
 
 **Config values** (`src/config/legal.ts`): `legalName`, `address`, `dataRequestContact`. A line that needs one of them is **hidden** until it's set (D78). In the text: `{{legalName}}`, `{{address}}`, `{{dataRequestContact}}`.
 
-**Open for the user / the legal review:**
-1. **Retention:** the draft says enquiries are kept for up to 24 months after the last contact. Confirm or change.
+**Open for the owner's final read (and a lawyer, if one is engaged later):**
+1. **Retention:** 12 months after the last contact for an enquiry that doesn't become a project (the default, D89); agreement records as long as the law requires.
 2. **Lawful basis:** the PDPL's grounds are narrower than the GDPR's; the reviewer confirms the wording in §4.
 3. **Cross-border transfers (§6):** the reviewer confirms the wording against the PDPL's transfer rules and the providers' terms.
-4. **Analytics:** none today (D-P18, deferred). If added, this policy and the cookie policy change first, and tracking waits for consent.
+4. **Analytics:** none today. At launch, Cloudflare Web Analytics only: cookieless, no consent banner (D88, D89). The page text switches when `legal.analytics` is set.
 
 ---
 
@@ -32,7 +32,11 @@ This policy explains what personal data we collect through this website, why, wh
 
 **Your language choice.** One cookie remembers whether you're reading in English or Arabic. See the [Cookie Policy](/cookies).
 
-**What we don't do.** We don't use analytics or advertising trackers, and we don't sell or rent your data. If we ever add analytics, we'll update this policy first and ask for your consent before any tracking starts.
+**What we don't do.** We don't use analytics or advertising trackers, and we don't sell or rent your data. If we ever add analytics, we'll update this policy first.
+
+> **At launch (D88):** analytics is cookieless only (Cloudflare Web Analytics, D89), no GA4, no consent banner. When `legal.analytics` is set, the line above becomes "What we don't do. We don't use advertising trackers, and we don't sell or rent your data.", the processor list gains "{analytics} counts visits in totals, without cookies.", and this paragraph is added:
+>
+> **Visit statistics.** We count visits with {analytics}, a service that uses no cookies. It records totals such as pages viewed, the site a visit came from, the country and the type of device, without building a profile of you or following you to other sites, so we don't ask for consent. *(Note for a reviewer, not on the page: cookieless analytics is treated as needing no consent; confirm if a lawyer is engaged.)*
 
 ### 4. Why we use it
 - **To answer your request:** to reply, to understand what you need, and to prepare a proposal. We use your data because you asked us to, as a step before a possible agreement with you.
@@ -42,7 +46,7 @@ We don't use your data for marketing, and we don't make decisions about you by a
 
 ### 5. Who processes it for us
 We use a small number of service providers, who process data only to provide their service to us:
-- **Vercel** hosts the website.
+- **Hostinger** hosts the website.
 - **Cloudflare** (Turnstile) checks form submissions for automated abuse.
 - **Resend** delivers form submissions to our inbox and, where it applies, a confirmation to you.
 
@@ -52,7 +56,7 @@ We may also disclose data where the law requires it.
 These providers may process data outside the United Arab Emirates, including in the United States. We rely on their contractual and technical safeguards for personal data, and we use only what each service needs.
 
 ### 7. How long we keep it
-We don't keep a database of form submissions on this website: a submission reaches us as an email. We keep enquiry emails for as long as we need them to respond and follow up, and for **up to 24 months after our last contact with you**, unless an agreement with you or the law requires longer. Then we delete them.
+We don't keep a database of form submissions on this website: a submission reaches us as an email. If an enquiry doesn't become a project, we delete it within **12 months of our last contact with you**. If it does, we keep the records of our agreement for as long as the applicable law requires.
 
 ### 8. Your rights
 Under the PDPL you can ask us to:
@@ -103,7 +107,7 @@ We may update this policy. The date at the top shows the latest version.
 
 ### 5. من يعالج بياناتك نيابةً عنّا
 نستعين بعدد محدود من مزوّدي الخدمات، ولا يعالج أيٌّ منهم البيانات إلا لتقديم خدمته لنا:
-- **Vercel** لاستضافة الموقع.
+- **Hostinger** لاستضافة الموقع.
 - **Cloudflare** (خدمة Turnstile) لفحص النماذج المُرسلة والتصدّي لإساءة الاستخدام الآلية.
 - **Resend** لإيصال النماذج المُرسلة إلى بريدنا، وإرسال رسالة تأكيد إليك حين ينطبق ذلك.
 
@@ -113,7 +117,7 @@ We may update this policy. The date at the top shows the latest version.
 قد يعالج هؤلاء المزوّدون البيانات خارج دولة الإمارات العربية المتحدة، ومن ذلك الولايات المتحدة. ونعتمد على ضماناتهم التعاقدية والتقنية لحماية البيانات الشخصية، ولا نستخدم إلا ما تحتاجه كل خدمة.
 
 ### 7. مدة الاحتفاظ بالبيانات
-لا نحتفظ في هذا الموقع بقاعدة بيانات للنماذج المُرسلة، فكل نموذج يصلنا رسالةً بالبريد الإلكتروني. ونحتفظ برسائل الاستفسار ما دمنا نحتاج إليها للردّ والمتابعة، **ولمدة أقصاها 24 شهرًا من آخر تواصل بيننا**، ما لم يتطلّب اتفاق بيننا أو القانون مدة أطول، ثم نحذفها.
+لا نحتفظ في هذا الموقع بقاعدة بيانات للنماذج المُرسلة، فكل نموذج يصلنا رسالةً بالبريد الإلكتروني. وإذا لم يتحوّل الاستفسار إلى مشروع، نحذفه خلال **12 شهرًا من آخر تواصل بيننا**. وإذا تحوّل إلى مشروع، نحتفظ بسجلات الاتفاق للمدة التي يفرضها القانون المعمول به.
 
 ### 8. حقوقك
 بموجب قانون حماية البيانات الشخصية، يحقّ لك أن تطلب منّا:

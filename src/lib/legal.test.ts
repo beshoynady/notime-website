@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { legalDocs } from "@/content/legal";
 import { resolveLegal, type LegalDoc, type LegalValues } from "./legal";
 
-const EMPTY: LegalValues = { legalName: "", address: "", dataRequestContact: "", whatsapp: "", courts: "the courts of Dubai", prevailingLanguage: "Arabic" };
+const EMPTY: LegalValues = { legalName: "", address: "", dataRequestContact: "", whatsapp: "", analytics: "", courts: "the courts of Dubai", prevailingLanguage: "Arabic" };
 const doc: LegalDoc = {
   slug: "terms",
   title: { en: "T", ar: "ش" },
@@ -13,7 +13,7 @@ const doc: LegalDoc = {
       blocks: [
         { p: { en: "Run by NO TIME Creative House.", ar: "يديره NO TIME Creative House." } },
         { p: { en: "The legal entity is {legalName}, {address}.", ar: "الكيان القانوني {legalName}، {address}." }, needs: ["legalName", "address"] },
-        { list: [{ text: { en: "Vercel", ar: "Vercel" } }, { text: { en: "WhatsApp (Meta)", ar: "واتساب (Meta)" }, needs: ["whatsapp"] }] },
+        { list: [{ text: { en: "Hostinger", ar: "Hostinger" } }, { text: { en: "WhatsApp (Meta)", ar: "واتساب (Meta)" }, needs: ["whatsapp"] }] },
       ],
     },
     { heading: { en: "Contact", ar: "تواصل" }, blocks: [{ p: { en: "Write to {dataRequestContact}.", ar: "راسلنا عبر {dataRequestContact}." }, needs: ["dataRequestContact"] }] },
@@ -35,6 +35,27 @@ describe("resolveLegal (fill or hide, D78)", () => {
     expect(resolveLegal(doc, EMPTY, "ar").sections.map((s) => s.id)).toEqual(["one", "law"]);
   });
 
+  it("shows an `absent` block only while its value is unset, so a line never contradicts the config (analytics, D88)", () => {
+    const gated: LegalDoc = {
+      ...doc,
+      sections: [
+        {
+          heading: { en: "Data", ar: "بيانات" },
+          blocks: [
+            { p: { en: "We don't use analytics.", ar: "x" }, absent: ["analytics"] },
+            { p: { en: "We count visits with {analytics}.", ar: "x" }, needs: ["analytics"] },
+          ],
+        },
+      ],
+    };
+    const none = JSON.stringify(resolveLegal(gated, EMPTY, "en"));
+    expect(none).toContain("We don't use analytics.");
+    expect(none).not.toContain("count visits");
+    const on = JSON.stringify(resolveLegal(gated, { ...EMPTY, analytics: "Cloudflare Web Analytics" }, "en"));
+    expect(on).not.toContain("We don't use analytics.");
+    expect(on).toContain("We count visits with Cloudflare Web Analytics.");
+  });
+
   it("drops a section left with no blocks", () => {
     expect(resolveLegal(doc, EMPTY, "en").sections.map((s) => s.heading)).toEqual(["One", "Law"]);
   });
@@ -52,7 +73,7 @@ describe("resolveLegal (fill or hide, D78)", () => {
 describe("the legal pages' content (src/content/legal.ts)", () => {
   it("has the three documents, each with sections in both locales and no unfilled token once every value is set", () => {
     expect(legalDocs.map((d) => d.slug)).toEqual(["privacy", "terms", "cookies"]);
-    const all = { legalName: "L", address: "A", dataRequestContact: "C", whatsapp: "W", courts: "X", prevailingLanguage: "Y" };
+    const all = { legalName: "L", address: "A", dataRequestContact: "C", whatsapp: "W", analytics: "N", courts: "X", prevailingLanguage: "Y" };
     for (const d of legalDocs) {
       for (const l of ["en", "ar"] as const) {
         const text = JSON.stringify(resolveLegal(d, all, l));

@@ -56,5 +56,8 @@
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged",
     "pre-push": "node scripts/pre-push.mjs"
+  },
+  "engines": {
+    "node": ">=22 <23"
   }
 }

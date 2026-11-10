@@ -2,9 +2,9 @@
 
 **Live text:** the site renders this policy from `src/content/legal.ts`; this file is the review draft. Change both together.
 
-Status: **draft, not legal advice. A legal review is required before launch** (CONTENT_CHECKLIST #24). Config values as in the privacy draft (`legalName`, `address`, `dataRequestContact`): a line that needs one stays hidden until it's set (D78).
+Status: **draft, not legal advice. No lawyer for now: the owner gives it a final read before launch** (D89, CONTENT_CHECKLIST #24). Defaults: Arabic prevails, Dubai courts. Config values as in the privacy draft (`legalName`, `address`, `dataRequestContact`): a line that needs one stays hidden until it's set (D78).
 
-**Open for the user / the legal review:**
+**Open for the owner's final read (and a lawyer, if one is engaged later):**
 1. **Governing law and courts (§9):** the draft says UAE federal law and the courts of Dubai. That fits a mainland Dubai licence; it changes if the company is licensed in a free zone with its own courts (e.g. DIFC). Confirm with the trade licence (CONTENT_CHECKLIST #8).
 2. **Liability (§8):** the reviewer sets the final wording.
 

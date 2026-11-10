@@ -5,10 +5,12 @@
  */
 import type { Locale, Localized } from "@/content/types";
 
-export type LegalNeed = "legalName" | "address" | "dataRequestContact" | "whatsapp";
+export type LegalNeed = "legalName" | "address" | "dataRequestContact" | "whatsapp" | "analytics";
 export type LegalValues = Record<LegalNeed | "courts" | "prevailingLanguage", string>;
 
-type Gate = { needs?: LegalNeed[] };
+/** `needs`: shown once every value is set. `absent`: shown only while every value is unset (the
+ *  line that a filled value replaces, e.g. "no analytics" until the analytics provider is set). */
+type Gate = { needs?: LegalNeed[]; absent?: LegalNeed[] };
 export type LegalBlock =
   | ({ p: Localized<string> } & Gate)
   | ({ list: ({ text: Localized<string> } & Gate)[] } & Gate)
@@ -28,7 +30,8 @@ export type ResolvedDoc = { title: string; updated: string; sections: { id: stri
 /** A section's anchor: from its English heading, so it is the same in EN and AR. */
 const anchorOf = (en: string) => en.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
-const shown = (g: Gate, v: LegalValues) => (g.needs ?? []).every((k) => v[k].trim() !== "");
+const shown = (g: Gate, v: LegalValues) =>
+  (g.needs ?? []).every((k) => v[k].trim() !== "") && (g.absent ?? []).every((k) => v[k].trim() === "");
 const fill = (s: string, v: LegalValues) => s.replace(/\{(\w+)\}/g, (m, k: string) => (k in v ? v[k as keyof LegalValues] : m));
 
 export function resolveLegal(doc: LegalDoc, v: LegalValues, locale: Locale): ResolvedDoc {

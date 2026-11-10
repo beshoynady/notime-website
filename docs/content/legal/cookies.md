@@ -2,7 +2,7 @@
 
 **Live text:** the site renders this policy from `src/content/legal.ts`; this file is the review draft. Change both together.
 
-Status: **draft, not legal advice. A legal review is required before launch** (CONTENT_CHECKLIST #24). Checked against the production build on 2026-11-09: the site sets one cookie, `NEXT_LOCALE` (first party, `Path=/`, `SameSite=Lax`, no expiry, so it ends with the browser session), and one `sessionStorage` key, `nt-intro`. No analytics or advertising cookies. **This page must be updated before any new cookie or tracker ships** (analytics is deferred and needs consent first, P18).
+Status: **draft, not legal advice. No lawyer for now: the owner gives it a final read before launch** (D89, CONTENT_CHECKLIST #24). Checked against the production build on 2026-11-09: the site sets one cookie, `NEXT_LOCALE` (first party, `Path=/`, `SameSite=Lax`, no expiry, so it ends with the browser session), and one `sessionStorage` key, `nt-intro`. No analytics or advertising cookies. **This page must be updated before any new cookie or tracker ships.** Analytics at launch is cookieless only (D88, D89: Cloudflare Web Analytics, a JavaScript beacon that sets no cookies; no GA4, no consent banner). Setting `legal.analytics` switches the "What we use" line to: "We use only what the site needs to work, and no analytics, advertising or social media cookies. Our visit statistics ({analytics}) use no cookies at all."
 
 **Open for the review:** whether Cloudflare Turnstile stores anything on the device in our configuration. The draft doesn't claim either way and points to Cloudflare's own policy; check it in the browser once the real site key is in.
 
@@ -29,7 +29,7 @@ We use only what the site needs to work. We don't use analytics, advertising or 
 ### 3. Your choices
 These items are needed for the site to work as designed, so we don't ask for consent to use them. You can block or delete cookies in your browser settings. The site still works without them, but it may not remember your language.
 
-If we ever add analytics or other optional cookies, we'll ask for your consent first and update this policy.
+If we ever add optional cookies, we'll ask for your consent first and update this policy.
 
 ### 4. More information
 See our [Privacy Policy](/privacy) for how we handle personal data.

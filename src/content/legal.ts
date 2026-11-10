@@ -1,10 +1,11 @@
 // The Privacy Policy, Terms of Use and Cookie Policy (D78), from the drafts approved on 2026-11-09
-// (docs/content/legal/). Not legal advice: a legal review is required before launch
-// (CONTENT_CHECKLIST #24; `legal.reviewed` in src/config/legal.ts). Lines that need a config value
+// (docs/content/legal/). Not legal advice: no lawyer for now; the owner accepts the drafts and gives
+// them a final read before launch (D89; CONTENT_CHECKLIST #24; `legal.reviewed` in src/config/legal.ts). Lines that need a config value
 // (`needs`) stay hidden until it's set. The company is "NO TIME Creative House" in Latin in both
 // languages (brand-name rule); the registered legal name comes only from config.
-// Facts checked on the production build, 2026-11-09: processors Vercel, Cloudflare Turnstile and
-// Resend; no analytics; no database for form submissions; one cookie (NEXT_LOCALE).
+// Facts checked on the production build, 2026-11-09 (host changed to Hostinger, D89): processors Hostinger, Cloudflare Turnstile and
+// Resend; no analytics; no database for form submissions; one cookie (NEXT_LOCALE). Analytics at
+// launch is cookieless only (D88): the lines naming it show once `legal.analytics` is set.
 import type { LegalDoc } from "@/lib/legal";
 
 const UPDATED = "2026-11-09";
@@ -61,9 +62,24 @@ const privacy: LegalDoc = {
         },
         {
           p: {
-            en: "What we don't do. We don't use analytics or advertising trackers, and we don't sell or rent your data. If we ever add analytics, we'll update this policy first and ask for your consent before any tracking starts.",
-            ar: "ما لا نفعله. لا نستخدم أدوات تحليل أو تتبّع إعلاني، ولا نبيع بياناتك ولا نؤجّرها. وإذا أضفنا أدوات تحليل يومًا ما، فسنحدّث هذه السياسة أولًا، ونطلب موافقتك قبل بدء أي تتبّع.",
+            en: "Visit statistics. We count visits with {analytics}, a service that uses no cookies. It records totals such as pages viewed, the site a visit came from, the country and the type of device, without building a profile of you or following you to other sites, so we don't ask for consent.",
+            ar: "إحصاءات الزيارات. نحصي الزيارات عبر {analytics}، وهي خدمة لا تستخدم ملفات تعريف الارتباط. تسجّل أرقامًا إجمالية مثل الصفحات التي شوهدت، والموقع الذي جاءت منه الزيارة، والبلد، ونوع الجهاز، دون أن تكوّن ملفًا عنك أو تتبعك إلى مواقع أخرى، لذلك لا نطلب موافقتك.",
           },
+          needs: ["analytics"],
+        },
+        {
+          p: {
+            en: "What we don't do. We don't use analytics or advertising trackers, and we don't sell or rent your data. If we ever add analytics, we'll update this policy first.",
+            ar: "ما لا نفعله. لا نستخدم أدوات تحليل أو تتبّع إعلاني، ولا نبيع بياناتك ولا نؤجّرها. وإذا أضفنا أدوات تحليل يومًا ما، فسنحدّث هذه السياسة أولًا.",
+          },
+          absent: ["analytics"],
+        },
+        {
+          p: {
+            en: "What we don't do. We don't use advertising trackers, and we don't sell or rent your data.",
+            ar: "ما لا نفعله. لا نستخدم أدوات تتبّع إعلاني، ولا نبيع بياناتك ولا نؤجّرها.",
+          },
+          needs: ["analytics"],
         },
       ],
     },
@@ -100,7 +116,8 @@ const privacy: LegalDoc = {
         },
         {
           list: [
-            { text: { en: "Vercel hosts the website.", ar: "Vercel لاستضافة الموقع." } },
+            { text: { en: "Hostinger hosts the website.", ar: "Hostinger لاستضافة الموقع." } },
+            { text: { en: "{analytics} counts visits in totals, without cookies.", ar: "{analytics} لإحصاء الزيارات إجمالًا، دون ملفات تعريف ارتباط." }, needs: ["analytics"] },
             { text: { en: "Cloudflare (Turnstile) checks form submissions for automated abuse.", ar: "Cloudflare (خدمة Turnstile) لفحص النماذج المُرسلة والتصدّي لإساءة الاستخدام الآلية." } },
             { text: { en: "Resend delivers form submissions to our inbox and, where it applies, a confirmation to you.", ar: "Resend لإيصال النماذج المُرسلة إلى بريدنا، وإرسال رسالة تأكيد إليك حين ينطبق ذلك." } },
             // D78: listed before the WhatsApp button can render (both gate on contact.whatsapp).
@@ -345,6 +362,14 @@ const cookies: LegalDoc = {
             en: "We use only what the site needs to work. We don't use analytics, advertising or social media cookies.",
             ar: "لا نستخدم إلا ما يحتاجه الموقع ليعمل، ولا نستخدم ملفات تعريف ارتباط للتحليل أو الإعلانات أو وسائل التواصل الاجتماعي.",
           },
+          absent: ["analytics"],
+        },
+        {
+          p: {
+            en: "We use only what the site needs to work, and no analytics, advertising or social media cookies. Our visit statistics ({analytics}) use no cookies at all.",
+            ar: "لا نستخدم إلا ما يحتاجه الموقع ليعمل، ولا نستخدم ملفات تعريف ارتباط للتحليل أو الإعلانات أو وسائل التواصل الاجتماعي. أما إحصاءات الزيارات لدينا ({analytics}) فلا تستخدم أي ملفات تعريف ارتباط.",
+          },
+          needs: ["analytics"],
         },
         {
           table: {
@@ -380,8 +405,8 @@ const cookies: LegalDoc = {
         },
         {
           p: {
-            en: "If we ever add analytics or other optional cookies, we'll ask for your consent first and update this policy.",
-            ar: "وإذا أضفنا يومًا أدوات تحليل أو ملفات تعريف ارتباط اختيارية، فسنطلب موافقتك أولًا ونحدّث هذه السياسة.",
+            en: "If we ever add optional cookies, we'll ask for your consent first and update this policy.",
+            ar: "وإذا أضفنا يومًا ملفات تعريف ارتباط اختيارية، فسنطلب موافقتك أولًا ونحدّث هذه السياسة.",
           },
         },
       ],
