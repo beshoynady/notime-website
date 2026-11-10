@@ -1,3 +1,304 @@
-/* Creative Production, "The Studio" (docs/design/storyboards/creative-production.md; category-pages.md §5).
+/* Creative Production, "The Studio" (docs/design/storyboards/creative-production.md; category-pages.md §5.2).
    Scope every rule under main[data-theme="studio"]; the opening's L3 effects are `.fx-<name>`
-   classes (a layer's `fx`), defined here. Logical properties only. Owned by the creative-production build (D83). */
+   classes (a layer's `fx`), defined here. Logical properties only. Owned by the creative-production build (D83).
+
+   A black box: night ground, ivory text, taupe for technical labels (timecodes, captions), and
+   champagne only for the active take. The signature is the timecode as navigation (§5.2): each
+   section's eyebrow is its timecode in, and the rail reads as an edit decision list. Everything
+   else stays quiet: film-edge dividers, one warm key. Timecodes are decorative CSS text (Latin,
+   Western digits in both locales, D50; hidden from assistive tech with `/ ""`). */
+
+/* ==========================================================================
+   Act 1 · the opening (STUDIO_OPENING, src/content/scenes/creative-production.ts)
+   Every code-drawn layer fills the stage; what it draws is placed here against the letterbox.
+   ========================================================================== */
+main[data-theme="studio"] .cat-opening .scene {
+  /* The frame inside the bars: 2.39:1 of the width, never so tall that the bars vanish. */
+  --lb-h: min(41.84vw, 100% - 160px);
+  /* The slate: a board at inline-end, centred a little above the frame's middle (the H1 and
+     the shot line hold the lower part of the frame at inline-start). */
+  --slate-w: clamp(200px, 24vw, 340px);
+  --slate-end: 9%;
+  --slate-top: calc(50% - var(--slate-w) * 0.42);
+  --stick-h: calc(var(--slate-w) * 0.13);
+  /* The timecode: the frame's top inline-end corner, like a monitor's readout. */
+  --tc-top: calc((100% - var(--lb-h)) / 2 + 14px);
+}
+@media (max-width: 899.98px) {
+  main[data-theme="studio"] .cat-opening .scene {
+    /* Portrait: a 2.39:1 strip would be a sliver, so the frame keeps at least 44% of the height. */
+    --lb-h: max(41.84vw, 44%);
+    --slate-w: min(46vw, 220px);
+    --slate-end: var(--gutter-end);
+    --slate-top: calc((100% - var(--lb-h)) / 2 + var(--stick-h) + 20px);
+  }
+}
+
+/* L0 · the seamless backdrop: a dark wall sweeping into the floor (the cyc), lit from nowhere yet. */
+main[data-theme="studio"] .fx-cyc {
+  background:
+    radial-gradient(120% 34% at 50% 64%, color-mix(in srgb, var(--color-taupe) 9%, transparent), transparent 70%),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color-espresso) 45%, var(--color-night)) 0%,
+      color-mix(in srgb, var(--color-espresso) 70%, var(--color-night)) 58%,
+      color-mix(in srgb, var(--color-espresso) 85%, var(--color-night)) 64%,
+      color-mix(in srgb, var(--color-espresso) 40%, var(--color-night)) 100%
+    );
+}
+
+/* L3 · one work light: a soft cone from above and its pool on the floor. */
+main[data-theme="studio"] .fx-pool::before,
+main[data-theme="studio"] .fx-pool::after {
+  content: "";
+  position: absolute;
+  inset-inline: 27%;
+}
+main[data-theme="studio"] .fx-pool::before {
+  inset-block: calc((100% - var(--lb-h)) / 2) calc((100% - var(--lb-h)) / 2 + var(--lb-h) * 0.16);
+  clip-path: polygon(46% 0, 54% 0, 100% 100%, 0 100%);
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--color-champagne) 9%, transparent), color-mix(in srgb, var(--color-champagne) 2%, transparent));
+}
+main[data-theme="studio"] .fx-pool::after {
+  inset-block: calc(50% + var(--lb-h) * 0.22) calc((100% - var(--lb-h)) / 2 + var(--lb-h) * 0.08);
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--color-champagne) 20%, transparent), transparent);
+}
+
+/* L3 · the single warm key (the "Studio" grade: night blacks, one warm key), from the inline-start side. */
+main[data-theme="studio"] .fx-key {
+  background: radial-gradient(55% 75% at 24% 34%, color-mix(in srgb, var(--color-champagne) 22%, transparent), transparent 72%);
+}
+html[dir="rtl"] main[data-theme="studio"] .fx-key {
+  background: radial-gradient(55% 75% at 76% 34%, color-mix(in srgb, var(--color-champagne) 22%, transparent), transparent 72%);
+}
+
+/* L3 · the develop wash: a dark amber state over the frame that falls away (opacity only). */
+main[data-theme="studio"] .fx-develop {
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--color-cocoa) 55%, var(--color-night)),
+    color-mix(in srgb, var(--color-cocoa) 30%, var(--color-night))
+  );
+}
+
+/* L3 · the camera's frame lines: corner brackets, thirds and a centre cross, at 1/1.3 of the
+   letterbox frame. The push-in scales them by 1.3 from the stage's centre, so they land on the
+   frame's edges: the match cut into shot 4. */
+main[data-theme="studio"] .fx-framelines::before {
+  --fl: color-mix(in srgb, var(--color-ivory) 70%, transparent);
+  --fl-faint: color-mix(in srgb, var(--color-ivory) 12%, transparent);
+  --arm: 28px;
+  content: "";
+  position: absolute;
+  inset-inline: calc(50% - 50% / 1.3);
+  inset-block: calc(50% - var(--lb-h) / 2.6);
+  background:
+    /* corner brackets */
+    linear-gradient(var(--fl), var(--fl)) 0 0 / var(--arm) 1px,
+    linear-gradient(var(--fl), var(--fl)) 0 0 / 1px var(--arm),
+    linear-gradient(var(--fl), var(--fl)) 100% 0 / var(--arm) 1px,
+    linear-gradient(var(--fl), var(--fl)) 100% 0 / 1px var(--arm),
+    linear-gradient(var(--fl), var(--fl)) 0 100% / var(--arm) 1px,
+    linear-gradient(var(--fl), var(--fl)) 0 100% / 1px var(--arm),
+    linear-gradient(var(--fl), var(--fl)) 100% 100% / var(--arm) 1px,
+    linear-gradient(var(--fl), var(--fl)) 100% 100% / 1px var(--arm),
+    /* centre cross */
+    linear-gradient(var(--fl), var(--fl)) 50% 50% / 18px 1px,
+    linear-gradient(var(--fl), var(--fl)) 50% 50% / 1px 18px,
+    /* thirds */
+    linear-gradient(var(--fl-faint), var(--fl-faint)) 33.33% 0 / 1px 100%,
+    linear-gradient(var(--fl-faint), var(--fl-faint)) 66.67% 0 / 1px 100%,
+    linear-gradient(var(--fl-faint), var(--fl-faint)) 0 33.33% / 100% 1px,
+    linear-gradient(var(--fl-faint), var(--fl-faint)) 0 66.67% / 100% 1px;
+  background-repeat: no-repeat;
+}
+
+/* L2 (drawn) · the slate: a board with the hinge band, chalk rules and its label, and a stick
+   drawn twice (open, shut) so the snap is a one-step swap. The hinge is at inline-start. */
+main[data-theme="studio"] .fx-slate::before,
+main[data-theme="studio"] .fx-slate::after,
+main[data-theme="studio"] .fx-stick-open::before,
+main[data-theme="studio"] .fx-stick-shut::before {
+  content: "";
+  position: absolute;
+  inset-inline-end: var(--slate-end);
+  inline-size: var(--slate-w);
+}
+main[data-theme="studio"] .fx-slate::before {
+  --chalk: color-mix(in srgb, var(--color-ivory) 22%, transparent);
+  inset-block-start: var(--slate-top);
+  block-size: calc(var(--slate-w) * 0.72);
+  border: 1px solid color-mix(in srgb, var(--color-ivory) 55%, transparent);
+  border-radius: 3px;
+  background:
+    linear-gradient(var(--chalk), var(--chalk)) 0 66% / 100% 1px no-repeat,
+    linear-gradient(var(--chalk), var(--chalk)) 50% 100% / 1px 34% no-repeat,
+    repeating-linear-gradient(-45deg, var(--color-ivory) 0 10px, var(--color-night) 10px 20px) 0 0 / 100% 16% no-repeat,
+    color-mix(in srgb, var(--color-espresso) 55%, var(--color-night));
+}
+main[data-theme="studio"] .fx-slate::after {
+  /* The label is a technical value, Latin in both locales; the order numeral follows D74. */
+  content: "II · CP\A TAKE 1";
+  inset-block-start: calc(var(--slate-top) + var(--slate-w) * 0.72 * 0.18);
+  padding-inline: 8%;
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: start;
+  white-space: pre;
+  font-family: var(--font-en);
+  font-weight: 300;
+  font-size: calc(var(--slate-w) * 0.1);
+  line-height: 1.55;
+  letter-spacing: 0.14em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ivory);
+}
+main[data-theme="studio"] .fx-slate:lang(ar)::after {
+  content: "02 · CP\A TAKE 1";
+}
+main[data-theme="studio"] .fx-stick-open::before,
+main[data-theme="studio"] .fx-stick-shut::before {
+  inset-block-start: calc(var(--slate-top) - var(--stick-h) - 2px);
+  block-size: var(--stick-h);
+  border: 1px solid color-mix(in srgb, var(--color-ivory) 55%, transparent);
+  border-radius: 2px;
+  background: repeating-linear-gradient(45deg, var(--color-ivory) 0 10px, var(--color-night) 10px 20px);
+  transform-origin: 0 100%;
+}
+main[data-theme="studio"] .fx-stick-open::before {
+  transform: rotate(-16deg);
+}
+html[dir="rtl"] main[data-theme="studio"] .fx-stick-open::before,
+html[dir="rtl"] main[data-theme="studio"] .fx-stick-shut::before {
+  transform-origin: 100% 100%;
+}
+html[dir="rtl"] main[data-theme="studio"] .fx-stick-open::before {
+  transform: rotate(16deg);
+}
+
+/* L3 · the letterbox bars, night (the token's own job), with a taupe hairline on the frame's
+   edges. They open by scaling out from the stage's centre (a key: scale 2.8). */
+main[data-theme="studio"] .fx-letterbox {
+  --bar: calc((100% - var(--lb-h)) / 2);
+  --edge: color-mix(in srgb, var(--color-taupe) 28%, transparent);
+  background:
+    linear-gradient(var(--edge), var(--edge)) 0 calc(var(--bar) - 1px) / 100% 1px no-repeat,
+    linear-gradient(var(--edge), var(--edge)) 0 calc(100% - var(--bar) + 1px) / 100% 1px no-repeat,
+    linear-gradient(var(--color-night), var(--color-night)) 0 0 / 100% var(--bar) no-repeat,
+    linear-gradient(var(--color-night), var(--color-night)) 0 100% / 100% var(--bar) no-repeat;
+}
+
+/* L3 · the timecode, one reading per shot (the storyboard's strip). Taupe, tabular, Latin. */
+main[data-theme="studio"] :is(.fx-tc-0, .fx-tc-1, .fx-tc-2, .fx-tc-3)::after {
+  position: absolute;
+  inset-block-start: var(--tc-top);
+  inset-inline-end: var(--gutter-end);
+  direction: ltr;
+  unicode-bidi: isolate;
+  font-family: var(--font-en);
+  font-weight: 500;
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-taupe);
+}
+main[data-theme="studio"] .fx-tc-0::after {
+  content: "TC 00:00:00:00";
+}
+main[data-theme="studio"] .fx-tc-1::after {
+  content: "TC 00:00:04:12";
+}
+main[data-theme="studio"] .fx-tc-2::after {
+  content: "TC 00:00:09:02";
+}
+main[data-theme="studio"] .fx-tc-3::after {
+  content: "TC 00:00:12:04";
+}
+
+/* L3 · the cut's ivory flash: a 2px line across the frame's middle and a faint lift of the whole frame. */
+main[data-theme="studio"] .fx-flash {
+  background:
+    linear-gradient(to bottom, transparent calc(50% - 1px), var(--color-ivory) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)),
+    color-mix(in srgb, var(--color-ivory) 6%, transparent);
+}
+
+/* The opening's eyebrow is a technical label. */
+main[data-theme="studio"] .cat-opening-eyebrow {
+  color: var(--color-taupe);
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Act 2 · the service sections
+   ========================================================================== */
+/* Technical labels: uppercase 0.66rem, tracked 0.2em, tabular (§5.2). Arabic: Alexandria 400, no tracking. */
+main[data-theme="studio"] .svc-num,
+main[data-theme="studio"] .svc-deliver h3 {
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-taupe);
+  opacity: 1;
+}
+main[data-theme="studio"] .svc-deliver h3:lang(ar) {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* The signature: each eyebrow carries its timecode in, one minute per section. */
+main[data-theme="studio"] .cat-sections {
+  counter-reset: studio-tc;
+}
+main[data-theme="studio"] .svc {
+  counter-increment: studio-tc;
+}
+main[data-theme="studio"] .svc-num::after {
+  content: "TC 00:0" counter(studio-tc) ":00:00" / "";
+  margin-inline-start: 1.4em;
+  color: color-mix(in srgb, var(--color-taupe) 80%, transparent);
+}
+
+/* Section dividers: a film-edge strip (two rules and a row of perforations) instead of a rule. */
+main[data-theme="studio"] .svc {
+  --perf: color-mix(in srgb, var(--color-ivory) 12%, transparent);
+  border-block-start: 0;
+  background:
+    linear-gradient(var(--theme-line), var(--theme-line)) 0 0 / 100% 1px no-repeat,
+    repeating-linear-gradient(90deg, var(--perf) 0 9px, transparent 9px 21px) 0 5px / 100% 5px no-repeat,
+    linear-gradient(var(--theme-line), var(--theme-line)) 0 15px / 100% 1px no-repeat;
+}
+main[data-theme="studio"] .svc:first-child {
+  background: none;
+}
+
+/* The rail as an edit decision list (desktop): numeral, take title, timecode in; the active
+   row is lit like a selected clip, and only its timecode turns champagne. */
+@media (min-width: 900px) {
+  main[data-theme="studio"] .svc-index ol {
+    counter-reset: studio-edl;
+  }
+  main[data-theme="studio"] .svc-index li {
+    counter-increment: studio-edl;
+  }
+  main[data-theme="studio"] .svc-index-link::after {
+    content: "TC 00:0" counter(studio-edl) ":00:00" / "";
+    grid-column: 2;
+    justify-self: start;
+    margin-block-start: 3px;
+    direction: ltr;
+    font-family: var(--font-en);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-taupe);
+  }
+  main[data-theme="studio"] .svc-index-link[aria-current="location"] {
+    background: color-mix(in srgb, var(--color-champagne) 8%, transparent);
+  }
+  main[data-theme="studio"] .svc-index-link[aria-current="location"]::after {
+    color: var(--color-champagne);
+  }
+}

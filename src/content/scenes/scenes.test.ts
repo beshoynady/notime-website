@@ -28,7 +28,7 @@ describe("scenes in review (lab only until approved)", () => {
   });
 
   it("a category with no scene yet shows the draft template on the lab route", () => {
-    expect(getLabScene("creative-production")).toBe(DRAFT_SCENE);
+    expect(getLabScene("software-digital")).toBe(DRAFT_SCENE);
   });
 
   it("the majlis plays in section V (hospitality), on the lab route only: pinned on desktop, passing on mobile (D74)", () => {
@@ -48,7 +48,7 @@ describe("scenes in review (lab only until approved)", () => {
   });
 
   it("every scene is listed once for the rule checks", () => {
-    expect(scenes.map((s) => s.id).sort()).toEqual(["draft", "events-majlis", "events-opening"]);
+    expect(scenes.map((s) => s.id).sort()).toEqual(["draft", "events-majlis", "events-opening", "studio-opening"]);
   });
 });
 
