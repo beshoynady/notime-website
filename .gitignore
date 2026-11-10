@@ -60,3 +60,7 @@ raw/
 
 # Hand-generated AI images waiting for ingest (D79): originals, never committed
 assets-inbox/
+
+# Agent worktrees (D82)
+.claude/worktrees/
+.worktrees/
