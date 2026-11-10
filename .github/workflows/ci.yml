@@ -1,6 +1,9 @@
-# Lint, typecheck, unit tests and the full e2e suite on every branch push and on PRs (D72).
-# The e2e suite runs here on a clean ubuntu runner, so a local flake caused by memory
-# pressure on the dev machine can be told apart from a real failure.
+# Two jobs (D82):
+#   checks: lint, typecheck and unit tests, on every push and PR (fast).
+#   full:   production build, the review-leak scan and the full e2e suite, only on a manual run
+#           (workflow_dispatch, triggered at milestones) and on PRs to main.
+# The e2e suite runs on a clean ubuntu runner, so a local flake caused by memory pressure on the
+# dev machine can be told apart from a real failure (D72).
 name: CI
 
 # Docs-only changes don't run CI (D75): docs/** and every .md are skipped, except the docs the
@@ -19,6 +22,7 @@ on:
       - "docs/content/image-prompts.md" # src/content/content.test.ts
       - "docs/design/storyboards/layers.md" # src/content/scenes/images.test.ts
   pull_request:
+    branches: [main]
     paths: # the same list
       - "**"
       - "!docs/**"
@@ -27,11 +31,12 @@ on:
       - "docs/content/services-list.md" # src/content/content.test.ts
       - "docs/content/image-prompts.md" # src/content/content.test.ts
       - "docs/design/storyboards/layers.md" # src/content/scenes/images.test.ts
+  workflow_dispatch:
 
-# A push to a branch with an open PR fires both events: one group per branch, so the newer
-# run cancels the older one instead of both running.
+# One group per branch and event: a newer push cancels the older push run, but a push never
+# cancels a manual full run (or the PR run) in progress.
 concurrency:
-  group: ci-${{ github.head_ref || github.ref_name }}
+  group: ci-${{ github.event_name }}-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 
 permissions:
@@ -40,10 +45,8 @@ permissions:
 jobs:
   checks:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 15
     env:
-      # The lab route is built in, so the animatic specs run instead of skipping.
-      NEXT_PUBLIC_ENABLE_LAB: "1"
       NEXT_TELEMETRY_DISABLED: "1"
     steps:
       - uses: actions/checkout@v4
@@ -64,6 +67,26 @@ jobs:
 
       - name: Unit tests
         run: npm test
+
+  full:
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
+    needs: checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      # The lab route is built in, so the animatic specs run instead of skipping.
+      NEXT_PUBLIC_ENABLE_LAB: "1"
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install
+        run: npm ci
 
       - name: Next.js build cache
         uses: actions/cache@v4

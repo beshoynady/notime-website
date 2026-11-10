@@ -16,7 +16,19 @@ This is Next.js 16. Its APIs differ from older versions. Before using any Next.j
 - **Before building any component:** invoke the `frontend-design` skill.
 - **Before any architectural choice** (routing, data shape, state, i18n strategy, CMS, form pipeline): invoke `superpowers:brainstorming`.
 - **Pure logic** (scroll math, count-up, data transforms, validation schemas): use `superpowers:test-driven-development`.
-- **After each section:** run `superpowers:verification-before-completion`, including a live check in the browser (both `/en` and `/ar`, desktop and mobile width).
+- **After each section:** run `superpowers:verification-before-completion` with the local checks below; the browser check in both locales at both widths happens at the milestone.
+- **Speed mode (D82, 2026-11-10):**
+  - **Decide, log, continue.** Make judgment calls on the established criteria (technical, marketing, UI/UX, the company's nature, honesty), log each in `docs/DECISIONS.md` with a one-line reason and in `docs/review/decisions-to-confirm.md`.
+  - **Stop only at the milestones:** M1 homepage complete (then start the tunnel review build), M2 all five category pages, M3 the full v1. Stop earlier only for anything irreversible, anything that costs money, new accounts or keys, a security issue, or a change to an approved concept.
+  - **Parallel work:** independent pages run as subagents in git worktrees, at most 3 at once. Shared code (tokens, primitives, LayeredScene, content-status, ornaments) is frozen during a batch; agents report needed changes to the lead, who applies them once and integrates the branches into `phase-2-services`.
+- **Testing in batches (D82):**
+  - **Pre-commit:** lint-staged (ESLint on the staged files, one typecheck when TypeScript is staged). No unit tests in the hook.
+  - **Locally while working:** lint, typecheck, unit tests when logic changed. No e2e, except one spec when changing exactly that behaviour.
+  - **Commit freely, push in batches** (every few completed steps or at the end of a work block).
+  - **CI:** a push runs lint, typecheck and unit tests. The build, the leak scan and the full e2e run on a manual `workflow_dispatch` (at each milestone) and on PRs to `main`. A red run blocks the milestone report.
+  - **New tests only for high-risk logic:** forms and validation, navigation and anchors, the content-status hide rules, RTL mirroring, numerals. None for purely visual tweaks.
+  - **Milestones only:** the full e2e in CI, screenshots (1440/390, EN/AR), measurements (CLS, frames, dwell), and a fresh-subagent quality gate (`design:design-critique`, `design:accessibility-review`, a copy check). Fix High and Medium findings before reporting.
+  - **Milestone report:** one screen: done, screenshot links, CI status, numbered decisions to confirm with a recommendation, next.
 - **Final pass:** `superpowers:requesting-code-review`.
 - If a request is ambiguous or needs material from the client, add it to `docs/OPEN_QUESTIONS.md` instead of guessing.
 
@@ -116,5 +128,5 @@ docs/
 ## Commands
 
 - `npm run dev`: development server
-- `npm run build`: production build (must pass before every commit)
+- `npm run build`: production build (runs in the full CI job, and locally before each milestone's screenshots; D82)
 - `npm run lint`: ESLint
