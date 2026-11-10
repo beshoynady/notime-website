@@ -22,7 +22,7 @@ As the Events deck. Facts only from the profile (p.12, p.13, p.16, p.17, p.19) a
 
 | Key | EN | AR | AR note |
 |---|---|---|---|
-| s1 | Every brand starts as a blank page. | كل علامة تبدأ بصفحة بيضاء. | |
+| s1 | Every brand starts on a blank page. | تبدأ العلامة من صفحة بيضاء. | |
 | s2 | First, the grid. | أولًا، شبكة التصميم. | The storyboard's «الشبكة» alone reads as "the network"; «شبكة التصميم» names the layout grid. |
 | s3 | Then words and images find their place. | ثم تجد الكلمات والصور مكانها. | |
 | s4 | **And the brand comes alive.** | **وتنبض العلامة بالحياة.** | |
@@ -73,7 +73,7 @@ Promise: *Search, site speed and measurement that show what works.* / «محرك
 | Search engine optimisation | تحسين الظهور في محركات البحث | D56 "Search". |
 | Site speed and Core Web Vitals | سرعة الموقع ومؤشرات أداء الويب الأساسية | p.15 "SEO & PERFORMANCE — Core Web Vitals". |
 | Analytics and reporting | التحليلات والتقارير | p.12. |
-| Measurement across search and ads | قياس النتائج في البحث والإعلانات | D56 "measurement". |
+| Measurement across search and your site | قياس النتائج في البحث وعلى موقعك | D56 "measurement"; D81 (no overlap with paid media). |
 
 - **Changed (D77):** the D56 promise said "paid media", which overlapped service VI. The user approved this wording, and it is live in `services.ts`.
 
@@ -90,7 +90,7 @@ Promise: *What to say, where and when, written down and agreed.* / «ماذا ن
 
 ### V · Public relations (`pr`)
 
-Promise: *Press, media relations and announcements, handled with care.* / «الصحافة والعلاقات الإعلامية والإعلانات الرسمية، بعناية.»
+Promise: *Press, media relations and announcements, handled with care.* / «الصحافة والعلاقات الإعلامية والبيانات الرسمية، نتولّاها بعناية.»
 
 | EN | AR | Source · AR note |
 |---|---|---|
@@ -101,7 +101,7 @@ Promise: *Press, media relations and announcements, handled with care.* / «ال
 
 ### VI · Paid media & media planning (Google & Meta ads) (`paid-media`)
 
-Promise: *Google and Meta campaigns, with the channels, budgets and timing behind them matched to the audience.* / «حملات Google وMeta، ومعها القنوات والميزانيات والتوقيت بما يناسب الجمهور.»
+Promise: *Google and Meta campaigns, with the channels, budgets and timing behind them matched to the audience.* / «حملات Google وMeta، نخطّط لقنواتها وميزانياتها وتوقيتها بما يناسب الجمهور.»
 
 | EN | AR | Source · AR note |
 |---|---|---|

@@ -29,7 +29,7 @@ From the storyboard. Four lines over four shots; whether the desktop keeps four 
 
 | Key | EN | AR | AR note |
 |---|---|---|---|
-| s1 | A black box. Nothing in frame yet. | صندوق أسود، ولا شيء في الكادر بعد. | «الكادر» is the usual Arabic film term for the frame. |
+| s1 | A black box. Nothing in frame yet. | مساحة سوداء، ولا شيء في الكادر بعد. | «الكادر» is the usual Arabic film term for the frame. |
 | s2 | Take one. | اللقطة الأولى. | |
 | s3 | Every frame is planned before we roll. | كل كادر نخطّط له قبل أن نبدأ التصوير. | Changed from the storyboard's «ندوّر الكاميرا», which is spoken dialect. |
 | s4 | **Then, the final frame.** | **ثم يأتي الكادر الأخير.** | |
@@ -64,7 +64,7 @@ Promise: *From script and shoot to the final edit and colour.* / «من النص
 
 ### III · Motion graphics (`motion`)
 
-Promise: *Titles, explainers and screen content that move with purpose.* / «عناوين وفيديوهات شرح ومحتوى للشاشات، بحركة لها هدف.»
+Promise: *Titles, explainers and screen content that move with purpose.* / «عناوين وفيديوهات شرح ومحتوى للشاشات، بحركة هادفة.»
 
 | EN | AR | Source · AR note |
 |---|---|---|
@@ -102,10 +102,10 @@ Promise: *Cameras, lenses and lighting, ready for your production.* / «كامي
 
 | EN | AR | Source · AR note |
 |---|---|---|
-| Cameras and lenses | الكاميرات والعدسات | D56. |
+| Cameras | الكاميرات | D56. |
+| Lenses | العدسات | D56. Split from cameras (D81). |
 | Lighting | الإضاءة | D56. |
-| Sound | الصوت | D58 (the four rental categories). |
-| Stage equipment | معدّات المسرح | D58. No model, brand or quantity is named: the inventory is OQ #22. |
+| Audio | الصوت | D58; D81: cameras, lenses, lighting and audio only. |
 
 ## 4. FAQ
 

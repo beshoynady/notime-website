@@ -31,7 +31,7 @@ As the Events deck. Facts only from the profile (p.21, p.22, p.24) and D56, D58,
 
 ### I · Commercial & large-format printing (`printing`)
 
-Promise: *Banners, backdrops and wall graphics, printed to scale.* / «لافتات وخلفيات ورسومات جدارية، مطبوعة بالمقاس الكامل.»
+Promise: *From business cards and brochures to banners, backdrops and wall graphics, printed to scale.* / «من بطاقات العمل والبروشورات إلى اللافتات والخلفيات والرسومات الجدارية، مطبوعة بالمقاس المطلوب.» (D81)
 
 | EN | AR | Source · AR note |
 |---|---|---|
@@ -45,7 +45,7 @@ Promise: *Banners, backdrops and wall graphics, printed to scale.* / «لافت�
 
 ### II · Stand fabrication & signage (`fabrication`)
 
-Promise: *Exhibition stands, activations and branded spaces, designed, fabricated and installed, with the signage that guides guests.* / «أجنحة معارض ومساحات تفعيل وبيئات تحمل هوية العلامة، نصمّمها ونصنّعها ونركّبها، مع لافتات ترشد الضيوف.»
+Promise: *Exhibition stands, activations and branded spaces, designed, fabricated and installed, with the signage that guides guests.* / «أجنحة معارض ومساحات تفعيل ومساحات تحمل هوية العلامة، نصمّمها ونصنّعها ونركّبها، مع لافتات ترشد الضيوف.»
 
 | EN | AR | Source · AR note |
 |---|---|---|
@@ -68,12 +68,12 @@ Promise: *Boxes and wraps that open like part of the brand.* / «علب وتغل
 
 ### IV · Corporate gifts (`gifts`, the peak)
 
-Promise: *Gifts chosen, branded and delivered for clients and teams.* / «هدايا نختارها ونضع عليها هويتك ونوصلها لعملائك وفريقك.»
+Promise: *Gifts chosen, branded and delivered for clients and teams.* / «هدايا نختارها ونضع عليها هويتك ونوصلها إلى عملائك وفريقك.»
 
 | EN | AR | Source · AR note |
 |---|---|---|
 | Gift sets | أطقم الهدايا | D71 (live). |
-| Branded bottles | قوارير بهوية العلامة | D71 (live). |
+| Branded bottles | زجاجات بهوية العلامة | D71 (live). |
 | Bags | الحقائب | D71 (live). |
 | Notebooks & pens | الدفاتر والأقلام | D71 (live). |
 | Giveaways | الهدايا الترويجية | D71 (live). |

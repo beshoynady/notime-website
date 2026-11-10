@@ -40,7 +40,7 @@ Each service has a title and a one-line description in English and Arabic. These
 |---|---|---|---|---|---|
 | 7 | Photography | التصوير الفوتوغرافي | Event, product and portrait photography, lit with intent. | تصوير الفعاليات والمنتجات والبورتريه، بإضاءة مدروسة. | Unchanged |
 | 8 | Video production | إنتاج الفيديو | From script and shoot to the final edit and colour. | من النص والتصوير حتى المونتاج النهائي وتصحيح الألوان. | Unchanged |
-| 9 | Motion graphics | الموشن جرافيك | Titles, explainers and screen content that move with purpose. | عناوين وفيديوهات شرح ومحتوى للشاشات، بحركة لها هدف. | Unchanged |
+| 9 | Motion graphics | الموشن جرافيك | Titles, explainers and screen content that move with purpose. | عناوين وفيديوهات شرح ومحتوى للشاشات، بحركة هادفة. | Unchanged |
 | 10 | AI content creation | صناعة المحتوى بالذكاء الاصطناعي | AI-assisted imagery and video, art-directed to the brand. | صور وفيديو بمساعدة الذكاء الاصطناعي، بتوجيه فني يناسب العلامة. | Unchanged |
 | 11 | Set & stage design | تصميم الديكور والمسرح | Sets and stages drawn, modelled and built for the camera and the room. | ديكورات ومسارح نرسمها ونجسّمها ونبنيها للكاميرا وللمكان. | Unchanged |
 | 12 | Equipment & camera rental | تأجير المعدّات والكاميرات | Cameras, lenses and lighting, ready for your production. | كاميرات وعدسات وإضاءة، جاهزة لإنتاجك. | Unchanged |
@@ -53,7 +53,7 @@ Each service has a title and a one-line description in English and Arabic. These
 | 14 | Social media management | إدارة وسائل التواصل الاجتماعي | Planned calendars, content and community, week after week. | خطط نشر ومحتوى وتفاعل مع الجمهور، أسبوعًا بعد أسبوع. | Unchanged |
 | 15 | Digital marketing & SEO | التسويق الرقمي وSEO | Search, paid media and measurement that show what works. | محركات البحث والإعلانات المدفوعة والقياس، لتعرف ما الذي ينجح. | Unchanged |
 | 16 | Content strategy | استراتيجية المحتوى | What to say, where and when, written down and agreed. | ماذا نقول، وأين، ومتى، في خطة مكتوبة ومتفق عليها. | Unchanged |
-| 17 | Public relations | العلاقات العامة | Press, media relations and announcements, handled with care. | الصحافة والعلاقات الإعلامية والإعلانات الرسمية، بعناية. | Unchanged |
+| 17 | Public relations | العلاقات العامة | Press, media relations and announcements, handled with care. | الصحافة والعلاقات الإعلامية والبيانات الرسمية، نتولّاها بعناية. | Unchanged |
 | 18 | Media planning | تخطيط الإعلام | Channels, budgets and timing matched to the audience. | القنوات والميزانيات والتوقيت، بما يناسب الجمهور. | Unchanged |
 
 ## 4. Production, Print & Gifts · الإنتاج والطباعة والهدايا
@@ -61,9 +61,9 @@ Each service has a title and a one-line description in English and Arabic. These
 | # | Service | الخدمة | Description | الوصف | |
 |---|---|---|---|---|---|
 | 19 | Large-format printing | الطباعة كبيرة الحجم | Banners, backdrops and wall graphics, printed to scale. | لافتات وخلفيات ورسومات جدارية، مطبوعة بالمقاس الكامل. | Unchanged |
-| 20 | **Stand fabrication & signage** | **تصنيع الأجنحة واللافتات** | Exhibition stands, activations and branded spaces, designed, fabricated and installed, with the signage that guides guests. | أجنحة معارض ومساحات تفعيل وبيئات تحمل هوية العلامة، نصمّمها ونصنّعها ونركّبها، مع لافتات ترشد الضيوف. | **Changed:** takes in fabrication (replaces "Event signage") |
+| 20 | **Stand fabrication & signage** | **تصنيع الأجنحة واللافتات** | Exhibition stands, activations and branded spaces, designed, fabricated and installed, with the signage that guides guests. | أجنحة معارض ومساحات تفعيل ومساحات تحمل هوية العلامة، نصمّمها ونصنّعها ونركّبها، مع لافتات ترشد الضيوف. | **Changed:** takes in fabrication (replaces "Event signage") |
 | 21 | Packaging design | تصميم التغليف | Boxes and wraps that open like part of the brand. | علب وتغليف تُفتح كأنها جزء من العلامة. | Unchanged |
-| 22 | Corporate gifts | هدايا الشركات | Gifts chosen, branded and delivered for clients and teams. | هدايا نختارها ونضع عليها هويتك ونوصلها لعملائك وفريقك. | Unchanged |
+| 22 | Corporate gifts | هدايا الشركات | Gifts chosen, branded and delivered for clients and teams. | هدايا نختارها ونضع عليها هويتك ونوصلها إلى عملائك وفريقك. | Unchanged |
 | 23 | Online print store | متجر الطباعة الإلكتروني | Order approved print items online, on brand every time. | اطلب مطبوعاتك المعتمدة عبر الإنترنت، بهوية ثابتة في كل مرة. | Unchanged |
 | 24 | Branded merchandise | منتجات بهوية العلامة | Apparel and objects carrying the brand with restraint. | ملابس وقطع تحمل العلامة بأناقة وهدوء. | Unchanged |
 
@@ -72,10 +72,10 @@ Each service has a title and a one-line description in English and Arabic. These
 | # | Service | الخدمة | Description | الوصف | |
 |---|---|---|---|---|---|
 | 25 | Websites | المواقع الإلكترونية | Fast, bilingual websites that are easy to keep up to date. | مواقع سريعة بلغتين، يسهل تحديثها. | Unchanged |
-| 26 | Mobile apps | تطبيقات الجوّال | iOS and Android apps designed around how people use them. | تطبيقات iOS وAndroid مصمّمة حول طريقة استخدام الناس لها. | Unchanged |
-| 27 | Custom systems | أنظمة مخصّصة | Internal tools and systems built for the way your team works. | أدوات وأنظمة داخلية مبنية على طريقة عمل فريقك. | Unchanged |
-| 28 | E-commerce | المتاجر الإلكترونية | Online stores with clear checkout and simple management. | متاجر إلكترونية بدفع واضح وإدارة بسيطة. | Unchanged |
-| 29 | UI/UX design | تصميم الواجهات وتجربة المستخدم | Interfaces researched, prototyped and tested before they are built. | واجهات نبحثها ونجرّب نماذجها ونختبرها قبل بنائها. | Unchanged |
+| 26 | Mobile apps | تطبيقات الجوّال | iOS and Android apps designed around how people use them. | تطبيقات iOS وAndroid مصمّمة وفق طريقة استخدام الناس لها. | Unchanged |
+| 27 | Custom systems | أنظمة مخصّصة | Internal tools and systems built for the way your team works. | أدوات وأنظمة داخلية نبنيها وفق طريقة عمل فريقك. | Unchanged |
+| 28 | E-commerce | المتاجر الإلكترونية | Online stores with clear checkout and simple management. | متاجر إلكترونية بخطوات شراء واضحة وإدارة بسيطة. | Unchanged |
+| 29 | UI/UX design | تصميم الواجهات وتجربة المستخدم | Interfaces researched, prototyped and tested before they are built. | واجهات ندرس مستخدميها ونجرّب نماذجها ونختبرها قبل بنائها. | Unchanged |
 | 30 | AI consulting | استشارات الذكاء الاصطناعي | Where AI helps your work, where it does not, and how to start. | أين يفيد الذكاء الاصطناعي عملك، وأين لا يفيد، وكيف تبدأ. | Unchanged |
 
 ---

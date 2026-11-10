@@ -87,7 +87,7 @@ export const categories: Category[] = [
       },
       {
         q: { en: "Can I rent equipment?", ar: "هل يمكنني استئجار المعدّات؟" },
-        a: { en: "Yes: cameras, lenses, lighting and sound. Tell us what you need and your dates, and we'll confirm availability.", ar: "نعم: الكاميرات والعدسات والإضاءة والصوت. أخبرنا بما تحتاجه وبالمواعيد، ونؤكّد لك التوفّر." },
+        a: { en: "Yes: cameras, lenses, lighting and audio. Tell us what you need and your dates, and we'll confirm availability.", ar: "نعم: الكاميرات والعدسات والإضاءة والصوت. أخبرنا بما تحتاجه وبالمواعيد، ونؤكّد لك التوفّر." },
       },
       {
         q: { en: "Who owns the photos and videos after delivery?", ar: "لمن تعود ملكية الصور والفيديوهات بعد التسليم؟" },
@@ -210,8 +210,8 @@ export const categories: Category[] = [
     // Copy deck draft for Rand's review (v1 decks task) + the D78 FAQ fills; clear fixes applied.
     faq: [
       {
-        q: { en: "How long does a website take?", ar: "كم يستغرق بناء موقع إلكتروني؟" },
-        a: { en: "It depends on the scope. After the intro call we send a plan with the steps and the dates for your project.", ar: "يعتمد ذلك على حجم المشروع. بعد مكالمة التعارف نرسل لك خطة بالمراحل والمواعيد الخاصة بمشروعك." },
+        q: { en: "How long does a project take?", ar: "كم يستغرق المشروع؟" },
+        a: { en: "It depends on the scope. After the intro call we send a plan with the steps and the dates for your project, and you see progress at every stage.", ar: "يعتمد ذلك على حجم المشروع. بعد مكالمة التعارف نرسل لك خطة بالمراحل والمواعيد الخاصة بمشروعك، وترى التقدّم في كل مرحلة." },
       },
       {
         q: { en: "Is the Arabic as good as the English?", ar: "هل تكون النسخة العربية بجودة الإنجليزية نفسها؟" },
@@ -230,10 +230,6 @@ export const categories: Category[] = [
         a: { en: "Yes. Support and maintenance after launch are part of how we work, and their scope is agreed in the proposal.", ar: "نعم. الدعم والصيانة بعد الإطلاق جزء من طريقة عملنا، ونتّفق على نطاقهما في العرض." },
       },
       {
-        q: { en: "How long does a project take?", ar: "كم يستغرق المشروع؟" },
-        a: { en: "It depends on the scope. We share a timeline with the proposal, and you see progress at every stage.", ar: "يعتمد ذلك على نطاق العمل. نرسل الجدول الزمني مع العرض، وترى التقدّم في كل مرحلة." },
-      },
-      {
         q: { en: "Who owns the code and the content?", ar: "لمن تعود ملكية الكود والمحتوى؟" },
         a: { en: "Ownership and licensing are set out in each proposal, before work starts.", ar: "تُحدَّد الملكية والترخيص في كل عرض، قبل بدء العمل." },
       },
@@ -242,6 +238,6 @@ export const categories: Category[] = [
         a: { en: "A few lines on what you want to build and who it's for. Book a free 30-min intro call, and we'll take it from there.", ar: "بضعة أسطر عمّا تريد بناءه ولمن. احجز مكالمة تعارف مجانية (30 دقيقة)، ونتابع معك الخطوات التالية." },
       },
     ],
-    closing: { en: "Your idea is the next blinking cursor.", ar: "فكرتك هي المؤشّر الذي يومض الآن." },
+    closing: { en: "Your idea is the next line.", ar: "فكرتك هي السطر التالي." },
   },
 ];

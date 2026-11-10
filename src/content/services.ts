@@ -43,7 +43,7 @@ const POINTS: Record<string, Localized<string[]>> = {
   },
   "corporate-gifts": {
     en: ["Gift sets", "Branded bottles", "Bags", "Notebooks & pens", "Giveaways", "Screen printing, UV, foiling, debossing and laser engraving"],
-    ar: ["أطقم الهدايا", "قوارير بهوية العلامة", "الحقائب", "الدفاتر والأقلام", "الهدايا الترويجية", "الطباعة الحريرية، والطباعة بالأشعة فوق البنفسجية، والطباعة بالرقائق المعدنية، والكبس الغائر، والحفر بالليزر"],
+    ar: ["أطقم الهدايا", "زجاجات بهوية العلامة", "الحقائب", "الدفاتر والأقلام", "الهدايا الترويجية", "الطباعة الحريرية، والطباعة بالأشعة فوق البنفسجية، والطباعة بالرقائق المعدنية، والكبس الغائر، والحفر بالليزر"],
   },
   // Creative Production: copy deck docs/content/category-copy-creative.md (draft for Rand's
   // review; v1 decks task, with the clear fixes from deck-review-2026-11-09.md).
@@ -68,8 +68,8 @@ const POINTS: Record<string, Localized<string[]>> = {
     ar: ["فكرة الديكور والمسرح", "الرسومات والنماذج ثلاثية الأبعاد", "ديكورات مبنية للكاميرا", "مسارح مبنية للقاعة"],
   },
   "equipment-camera-rental": {
-    en: ["Cameras and lenses", "Lighting", "Sound", "Stage equipment"],
-    ar: ["الكاميرات والعدسات", "الإضاءة", "الصوت", "معدّات المسرح"],
+    en: ["Cameras", "Lenses", "Lighting", "Audio"],
+    ar: ["الكاميرات", "العدسات", "الإضاءة", "الصوت"],
   },
   // Marketing & Brand: copy deck docs/content/category-copy-marketing.md (draft, as above).
   "branding-identity": {
@@ -81,8 +81,8 @@ const POINTS: Record<string, Localized<string[]>> = {
     ar: ["استراتيجية المحتوى وخطة نشر شهرية", "نشر يومي بالعربية والإنجليزية", "التصميم والموشن جرافيك والمقاطع القصيرة", "التغطية من أرض الحدث", "إدارة التفاعل مع الجمهور", "حملات مدفوعة ونمو الحسابات"],
   },
   "digital-marketing-seo": {
-    en: ["Search engine optimisation", "Site speed and Core Web Vitals", "Analytics and reporting", "Measurement across search and ads"],
-    ar: ["تحسين الظهور في محركات البحث", "سرعة الموقع ومؤشرات أداء الويب الأساسية", "التحليلات والتقارير", "قياس النتائج في البحث والإعلانات"],
+    en: ["Search engine optimisation", "Site speed and Core Web Vitals", "Analytics and reporting", "Measurement across search and your site"],
+    ar: ["تحسين الظهور في محركات البحث", "سرعة الموقع ومؤشرات أداء الويب الأساسية", "التحليلات والتقارير", "قياس النتائج في البحث وعلى موقعك"],
   },
   "content-strategy": {
     en: ["Messages and topics per channel", "A monthly content calendar", "Arabic and English content", "Content systems and templates"],
@@ -285,7 +285,7 @@ export const services: Service[] = [
       { en: "Motion graphics", ar: "الموشن جرافيك" },
       {
         en: "Titles, explainers and screen content that move with purpose.",
-        ar: "عناوين وفيديوهات شرح ومحتوى للشاشات، بحركة لها هدف.",
+        ar: "عناوين وفيديوهات شرح ومحتوى للشاشات، بحركة هادفة.",
       },
     ],
     [
@@ -351,7 +351,7 @@ export const services: Service[] = [
       { en: "Public relations", ar: "العلاقات العامة" },
       {
         en: "Press, media relations and announcements, handled with care.",
-        ar: "الصحافة والعلاقات الإعلامية والإعلانات الرسمية، بعناية.",
+        ar: "الصحافة والعلاقات الإعلامية والبيانات الرسمية، نتولّاها بعناية.",
       },
     ],
     [
@@ -359,7 +359,7 @@ export const services: Service[] = [
       { en: "Paid media & media planning (Google & Meta ads)", ar: "الإعلانات المدفوعة وتخطيط الإعلام (Google وMeta)" },
       {
         en: "Google and Meta campaigns, with the channels, budgets and timing behind them matched to the audience.",
-        ar: "حملات Google وMeta، ومعها القنوات والميزانيات والتوقيت بما يناسب الجمهور.",
+        ar: "حملات Google وMeta، نخطّط لقنواتها وميزانياتها وتوقيتها بما يناسب الجمهور.",
       },
     ],
   ]),
@@ -368,8 +368,8 @@ export const services: Service[] = [
       "commercial-large-format-printing",
       { en: "Commercial & large-format printing", ar: "الطباعة التجارية وكبيرة الحجم" },
       {
-        en: "Banners, backdrops and wall graphics, printed to scale.",
-        ar: "لافتات وخلفيات ورسومات جدارية، مطبوعة بالمقاس الكامل.",
+        en: "From business cards and brochures to banners, backdrops and wall graphics, printed to scale.",
+        ar: "من بطاقات العمل والبروشورات إلى اللافتات والخلفيات والرسومات الجدارية، مطبوعة بالمقاس المطلوب.",
       },
     ],
     [
@@ -377,7 +377,7 @@ export const services: Service[] = [
       { en: "Stand fabrication & signage", ar: "تصنيع الأجنحة واللافتات" },
       {
         en: "Exhibition stands, activations and branded spaces, designed, fabricated and installed, with the signage that guides guests.",
-        ar: "أجنحة معارض ومساحات تفعيل وبيئات تحمل هوية العلامة، نصمّمها ونصنّعها ونركّبها، مع لافتات ترشد الضيوف.",
+        ar: "أجنحة معارض ومساحات تفعيل ومساحات تحمل هوية العلامة، نصمّمها ونصنّعها ونركّبها، مع لافتات ترشد الضيوف.",
       },
     ],
     [
@@ -393,7 +393,7 @@ export const services: Service[] = [
       { en: "Corporate gifts", ar: "هدايا الشركات" },
       {
         en: "Gifts chosen, branded and delivered for clients and teams.",
-        ar: "هدايا نختارها ونضع عليها هويتك ونوصلها لعملائك وفريقك.",
+        ar: "هدايا نختارها ونضع عليها هويتك ونوصلها إلى عملائك وفريقك.",
       },
     ],
     [
@@ -427,7 +427,7 @@ export const services: Service[] = [
       { en: "Mobile apps", ar: "تطبيقات الجوّال" },
       {
         en: "iOS and Android apps designed around how people use them.",
-        ar: "تطبيقات iOS وAndroid مصمّمة حول طريقة استخدام الناس لها.",
+        ar: "تطبيقات iOS وAndroid مصمّمة وفق طريقة استخدام الناس لها.",
       },
     ],
     [
@@ -435,7 +435,7 @@ export const services: Service[] = [
       { en: "Custom systems", ar: "أنظمة مخصّصة" },
       {
         en: "Internal tools and systems built for the way your team works.",
-        ar: "أدوات وأنظمة داخلية مبنية على طريقة عمل فريقك.",
+        ar: "أدوات وأنظمة داخلية نبنيها وفق طريقة عمل فريقك.",
       },
     ],
     [
@@ -443,7 +443,7 @@ export const services: Service[] = [
       { en: "E-commerce", ar: "المتاجر الإلكترونية" },
       {
         en: "Online stores with clear checkout and simple management.",
-        ar: "متاجر إلكترونية بدفع واضح وإدارة بسيطة.",
+        ar: "متاجر إلكترونية بخطوات شراء واضحة وإدارة بسيطة.",
       },
     ],
     [
@@ -451,7 +451,7 @@ export const services: Service[] = [
       { en: "UI/UX design", ar: "تصميم الواجهات وتجربة المستخدم" },
       {
         en: "Interfaces researched, prototyped and tested before they are built.",
-        ar: "واجهات نبحثها ونجرّب نماذجها ونختبرها قبل بنائها.",
+        ar: "واجهات ندرس مستخدميها ونجرّب نماذجها ونختبرها قبل بنائها.",
       },
     ],
     [

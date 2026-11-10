@@ -84,7 +84,7 @@ Each answer is general but true: no numbers, no promised times, and nothing the 
 
 | Q EN | Q AR | A EN | A AR |
 |---|---|---|---|
-| Can I rent equipment? | هل يمكنني استئجار المعدّات؟ | Yes: cameras, lenses, lighting, audio, and stage and screen equipment. Tell us what you need and your dates, and we'll confirm availability. | نعم: الكاميرات والعدسات والإضاءة والصوت ومعدّات المسرح والشاشات. أخبرنا بما تحتاجه وبالمواعيد، ونؤكّد لك التوفّر. |
+| Can I rent equipment? | هل يمكنني استئجار المعدّات؟ | Yes: cameras, lenses, lighting and audio. Tell us what you need and your dates, and we'll confirm availability. (D81) | نعم: الكاميرات والعدسات والإضاءة والصوت. أخبرنا بما تحتاجه وبالمواعيد، ونؤكّد لك التوفّر. |
 | Who owns the photos and videos after delivery? | لمن تعود ملكية الصور والفيديوهات بعد التسليم؟ | Usage rights are agreed in each proposal, before the shoot starts. | نتّفق على حقوق الاستخدام في كل عرض، قبل بدء التصوير. |
 | How long does editing take? | كم يستغرق المونتاج؟ | It depends on the length and the kind of edit. We agree the schedule with you in the proposal. | يعتمد ذلك على مدة العمل ونوع المونتاج، ونتّفق معك على الجدول الزمني في العرض. |
 

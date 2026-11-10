@@ -48,10 +48,10 @@ The promise under each H2 is the approved description (D56). The storyboard's "o
 | # | Service · promise (D56) | Deliverables EN | Deliverables AR | Source |
 |---|---|---|---|---|
 | I | Websites · *Fast, bilingual websites that are easy to keep up to date.* / «مواقع سريعة بلغتين، يسهل تحديثها.» | Arabic and English, with full right-to-left layouts · A content system your team runs · SEO and speed from day one | العربية والإنجليزية، مع دعم كامل للاتجاه من اليمين إلى اليسار · نظام لإدارة المحتوى يديره فريقك · الظهور في محركات البحث والسرعة من اليوم الأول | p.15 |
-| II | Mobile apps · *iOS and Android apps designed around how people use them.* / «تطبيقات iOS وAndroid مصمّمة حول طريقة استخدام الناس لها.» | iOS and Android · Connected to your website · Arabic and English | iOS وAndroid · مرتبط بموقعك الإلكتروني · بالعربية والإنجليزية | p.15 "iOS & Android, connected to the web". The storyboard's "release and updates" is dropped: support terms are a client question. |
-| III | Custom systems · *Internal tools and systems built for the way your team works.* / «أدوات وأنظمة داخلية مبنية على طريقة عمل فريقك.» | Admin dashboards and analytics · Roles and permissions · Integrations with your tools | لوحات إدارة وتحليلات · أدوار وصلاحيات لفريقك · الربط بأدواتك وأنظمتك | p.15 "CMS & DASHBOARDS", "INTEGRATIONS & APIS"; roles: what a system delivers |
-| IV | E-commerce · *Online stores with clear checkout and simple management.* / «متاجر إلكترونية بدفع واضح وإدارة بسيطة.» | Catalogue management · Checkout and payment integration · An orders dashboard | إدارة المنتجات · إتمام الشراء وربط بوابات الدفع · لوحة لمتابعة الطلبات | D56 (a client-approved service the profile doesn't list) |
-| V | UI/UX design · *Interfaces researched, prototyped and tested before they are built.* / «واجهات نبحثها ونجرّب نماذجها ونختبرها قبل بنائها.» | User research and flows · Clickable prototypes · A design system | بحث المستخدمين ومسارات الاستخدام · نماذج تفاعلية للتجربة · نظام تصميم | p.15 "Research, flows & design systems"; D56 |
+| II | Mobile apps · *iOS and Android apps designed around how people use them.* / «تطبيقات iOS وAndroid مصمّمة وفق طريقة استخدام الناس لها.» | iOS and Android · Connected to your website · Arabic and English | iOS وAndroid · مرتبط بموقعك الإلكتروني · بالعربية والإنجليزية | p.15 "iOS & Android, connected to the web". The storyboard's "release and updates" is dropped: support terms are a client question. |
+| III | Custom systems · *Internal tools and systems built for the way your team works.* / «أدوات وأنظمة داخلية نبنيها وفق طريقة عمل فريقك.» | Admin dashboards and analytics · Roles and permissions · Integrations with your tools | لوحات إدارة وتحليلات · أدوار وصلاحيات لفريقك · الربط بأدواتك وأنظمتك | p.15 "CMS & DASHBOARDS", "INTEGRATIONS & APIS"; roles: what a system delivers |
+| IV | E-commerce · *Online stores with clear checkout and simple management.* / «متاجر إلكترونية بخطوات شراء واضحة وإدارة بسيطة.» | Catalogue management · Checkout and payment integration · An orders dashboard | إدارة المنتجات · إتمام الشراء وربط بوابات الدفع · لوحة لمتابعة الطلبات | D56 (a client-approved service the profile doesn't list) |
+| V | UI/UX design · *Interfaces researched, prototyped and tested before they are built.* / «واجهات ندرس مستخدميها ونجرّب نماذجها ونختبرها قبل بنائها.» | User research and flows · Clickable prototypes · A design system | بحث المستخدمين ومسارات الاستخدام · نماذج تفاعلية للتجربة · نظام تصميم | p.15 "Research, flows & design systems"; D56 |
 | VI | AI consulting · *Where AI helps your work, where it does not, and how to start.* / «أين يفيد الذكاء الاصطناعي عملك، وأين لا يفيد، وكيف تبدأ.» | A review of where AI fits your work · A pilot plan · Getting your team started | مراجعة لمواضع فائدة الذكاء الاصطناعي في عملك · خطة لتجربة أولى · تهيئة فريقك للبدء | D56 (client-approved; scope is a client question) |
 
 - **Quote CTA per service (D65, closed):** "Book a free 30-min intro call" / «احجز مكالمة تعارف مجانية (30 دقيقة)».
@@ -62,7 +62,7 @@ The promise under each H2 is the approved description (D56). The storyboard's "o
 |---|---|---|---|
 | Eyebrow | Event technology | تقنيات الفعاليات | D65 |
 | Heading | Built by people who run events. | تبنيها فرقٌ تدير الفعاليات بنفسها. | Storyboard. |
-| 1 | **Registration and check-in.** QR check-in is coming soon. | **التسجيل وتسجيل الحضور.** وقريبًا: تسجيل الحضور برمز QR. | D65; the product is Coming soon. "QR" stays Latin (a code type). |
+| 1 | **Registration and check-in.** Minute Zero by NO TIME · Coming soon | **التسجيل وتسجيل الحضور.** الدقيقة صفر من NO TIME · قريبًا | D65; D81: the product is named, with no nested quotation marks. |
 | 2 | **Event apps and websites.** The agenda, the speakers and live updates. | **تطبيقات ومواقع للفعاليات.** البرنامج والمتحدثون والتحديثات المباشرة. | D65. |
 | 3 | **Live results and screens.** Championships, results and live coverage, as on a national federation's platform. | **النتائج المباشرة والشاشات.** بطولات ونتائج وتغطية مباشرة، كما في منصة اتحاد وطني. | p.18, anonymised (D67). |
 
@@ -103,8 +103,8 @@ Names approved (D78): Minute Zero / «الدقيقة صفر» and Peak Hour / «
 
 | # | EN | AR | Source · AR note |
 |---|---|---|---|
-| 1 Q | How long does a website take? | كم يستغرق بناء موقع إلكتروني؟ | |
-| 1 A | It depends on the scope. After the intro call we send a plan with the steps and the dates for your project. | يعتمد ذلك على حجم المشروع. بعد مكالمة التعارف نرسل لك خطة بالمراحل والمواعيد الخاصة بمشروعك. | Process only, no promised dates. |
+| 1 Q | How long does a project take? | كم يستغرق المشروع؟ | D81: the two duration questions merged into one (Software has 7). |
+| 1 A | It depends on the scope. After the intro call we send a plan with the steps and the dates for your project, and you see progress at every stage. | يعتمد ذلك على حجم المشروع. بعد مكالمة التعارف نرسل لك خطة بالمراحل والمواعيد الخاصة بمشروعك، وترى التقدّم في كل مرحلة. | Process only, no promised dates. |
 | 2 Q | Is the Arabic as good as the English? | هل تكون النسخة العربية بجودة الإنجليزية نفسها؟ | |
 | 2 A | Yes. We design and build in both languages from the start, with full right-to-left layouts, not a translation added at the end. | نعم. نصمّم ونبني باللغتين من البداية، مع دعم كامل للاتجاه من اليمين إلى اليسار، لا بترجمة تُضاف في النهاية. | p.15 "Full bilingual RTL–LTR builds". |
 | 3 Q | Can you connect to the systems we already use? | هل يمكنكم الربط بالأنظمة التي نستخدمها؟ | |
@@ -120,7 +120,7 @@ Names approved (D78): Minute Zero / «الدقيقة صفر» and Peak Hour / «
 |---|---|---|---|
 | CTA button (closed) | Book a free 30-min intro call | احجز مكالمة تعارف مجانية (30 دقيقة) | D65 |
 | Microcopy (closed) | No obligation. We'll reply within one working day. | دون أي التزام. نرد خلال يوم عمل. | D65 (the user's commercial decision) |
-| Closing line (`Category.closing`) | Your idea is the next blinking cursor. | فكرتك هي المؤشّر الذي يومض الآن. | Storyboard; answers s1. |
+| Closing line (`Category.closing`) | Your idea is the next line. | فكرتك هي السطر التالي. | Storyboard; answers s1. |
 | First field | What do you want to build? | ماذا تريد أن تبني؟ | Storyboard. The rest of the form's copy is written with Task 4.2. |
 
 ## 11. Questions for the client (CONTENT_CHECKLIST #32)
