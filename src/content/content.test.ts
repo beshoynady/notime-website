@@ -178,8 +178,9 @@ describe("category pages (D57)", () => {
 
   it("lists the named deliverables the user confirmed (D71) in their services", () => {
     const points = (slug: string) => getServices().find((s) => s.slug === slug)!.points;
-    expect(points("commercial-large-format-printing").en).toEqual(["Roll-up banners", "Feather flags", "Business cards", "Brochures"]);
-    expect(points("corporate-gifts").en).toEqual(["Gift sets", "Branded bottles", "Bags", "Notebooks & pens", "Giveaways"]);
+    // The D71 points lead each list; the copy deck adds its own after them.
+    expect(points("commercial-large-format-printing").en.slice(0, 4)).toEqual(["Roll-up banners", "Feather flags", "Business cards", "Brochures"]);
+    expect(points("corporate-gifts").en.slice(0, 5)).toEqual(["Gift sets", "Branded bottles", "Bags", "Notebooks & pens", "Giveaways"]);
     for (const slug of ["commercial-large-format-printing", "corporate-gifts"]) {
       for (const p of points(slug).ar) expect(p.startsWith("TODO:"), p).toBe(false);
     }

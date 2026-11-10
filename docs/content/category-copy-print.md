@@ -1,6 +1,6 @@
 # Production, Print & Gifts: copy deck (EN / AR)
 
-Status: **draft for the user's review** (2026-11-09, with the other three decks). The user's first decisions are applied (D77); the full review is still to come. On approval it goes into `src/content/categories.ts`, `src/content/services.ts` (points) and `src/messages/{en,ar}.json` (shot lines). Until then the data keeps its `TODO:` placeholders, except the named deliverables already approved (D71).
+Status: **moved into the data as a draft for Rand's review** (v1 plan, decks task, 2026-11-10), with the clear fixes from [deck-review-2026-11-09.md](deck-review-2026-11-09.md) applied here and in the data. The judgment calls in that review wait for the user; the fact checks are in `docs/review/fact-check.md`. In review mode every block carries its section number.
 
 ## Sources and rules
 
@@ -12,8 +12,8 @@ As the Events deck. Facts only from the profile (p.21, p.22, p.24) and D56, D58,
 
 | | Text |
 |---|---|
-| EN | Stands and signage, large-format print, packaging, corporate gifts and merchandise, produced to brand standard. We design, fabricate and install, and finish each gift with the branding method that suits it. |
-| AR | أجنحة ولافتات، وطباعة كبيرة الحجم، وتغليف، وهدايا للشركات، ومنتجات بهوية العلامة، تُنتَج بمعايير علامتك. نصمّم ونصنّع ونركّب، ونختار لكل هدية طريقة الطباعة أو الحفر التي تليق بها. |
+| EN | Stands and signage, commercial and large-format print, packaging, corporate gifts and merchandise, produced to brand standard. We design, fabricate and install, and finish each gift with the branding method that suits it. |
+| AR | أجنحة ولافتات، وطباعة تجارية وكبيرة الحجم، وتغليف، وهدايا للشركات، ومنتجات بهوية العلامة، تُنتَج بمعايير علامتك. نصمّم ونصنّع ونركّب، ونختار لكل هدية طريقة الطباعة أو الحفر التي تليق بها. |
 
 - **Source:** p.21 "design, fabrication and installation"; p.22 "produced to brand standard — screen printing, UV, foiling, debossing and laser engraving".
 - **AR note:** «بمعايير علامتك» for "to brand standard": the standard is the client's brand.
@@ -77,7 +77,7 @@ Promise: *Gifts chosen, branded and delivered for clients and teams.* / «هدا
 | Bags | الحقائب | D71 (live). |
 | Notebooks & pens | الدفاتر والأقلام | D71 (live). |
 | Giveaways | الهدايا الترويجية | D71 (live). |
-| Screen printing, UV, foiling, debossing and laser engraving | الطباعة الحريرية، والطباعة بالأشعة فوق البنفسجية، والرقائق المعدنية، والحفر الغائر، والحفر بالليزر | p.22. The methods are the profile's strongest fact for this service. «الطباعة الحريرية» is the Arabic trade term for screen printing; «الحفر الغائر» for debossing (pressed in). Approved (D77). |
+| Screen printing, UV, foiling, debossing and laser engraving | الطباعة الحريرية، والطباعة بالأشعة فوق البنفسجية، والطباعة بالرقائق المعدنية، والكبس الغائر، والحفر بالليزر | p.22. The methods are the profile's strongest fact for this service. «الطباعة الحريرية» is the Arabic trade term for screen printing; «الحفر الغائر» for debossing (pressed in). Approved (D77). |
 
 ### V · Online print store (`print-store`)
 
@@ -89,7 +89,7 @@ The storyboard gives this section three steps and no deliverables list. The poin
 |---|---|---|
 | Choose the item and the quantity | اختر المنتج والكمية | D58. |
 | Send your artwork, or ask for a reprint | أرسل التصميم، أو اطلب إعادة طباعة | D58. Says nothing about stored files. |
-| Approve the proof before printing | اعتمد نموذج الطباعة قبل التنفيذ | D58. «نموذج الطباعة» rather than the borrowed «بروفة». |
+| Approve the proof before printing | اعتمد النسخة التجريبية قبل التنفيذ | D58. «النسخة التجريبية» rather than the borrowed «بروفة» (and not «نموذج الطباعة», which reads as a print template). |
 | Printed to brand standard | طباعة بمعايير علامتك | p.22 "to brand standard". |
 
 ### VI · Branded merchandise (`merchandise`)
@@ -108,11 +108,11 @@ Promise: *Apparel and objects carrying the brand with restraint.* / «ملابس
 | # | EN | AR | Source · AR note |
 |---|---|---|---|
 | 1 Q | Which branding methods do you use? | ما طرق الطباعة والحفر التي تستخدمونها؟ | |
-| 1 A | Screen printing, UV printing, foiling, debossing and laser engraving, chosen to suit each item. | الطباعة الحريرية، والطباعة بالأشعة فوق البنفسجية، والرقائق المعدنية، والحفر الغائر، والحفر بالليزر، ونختار منها ما يناسب كل قطعة. | p.22. |
+| 1 A | Screen printing, UV printing, foiling, debossing and laser engraving, chosen to suit each item. | الطباعة الحريرية، والطباعة بالأشعة فوق البنفسجية، والطباعة بالرقائق المعدنية، والكبس الغائر، والحفر بالليزر، ونختار منها ما يناسب كل قطعة. | p.22. |
 | 2 Q | Do you install the stands you build? | هل تركّبون الأجنحة التي تصنعونها؟ | |
 | 2 A | Yes. We design, fabricate and install exhibition stands, activations and branded spaces. | نعم. نصمّم أجنحة المعارض ومساحات التفعيل والمساحات بهوية العلامة، ونصنّعها ونركّبها. | p.21. |
 | 3 Q | Can I order prints online? | هل يمكنني طلب المطبوعات عبر الإنترنت؟ | |
-| 3 A | Yes. Send your order through the form on this page, and we confirm the details and the proof with you before printing. | نعم. أرسل طلبك عبر النموذج في هذه الصفحة، ونؤكّد معك التفاصيل ونموذج الطباعة قبل التنفيذ. | D58. No cart or store is implied. |
+| 3 A | Yes. Send your order through the form on this page, and we'll confirm the details and the proof with you before printing. | نعم. أرسل طلبك عبر النموذج في هذه الصفحة، ونؤكّد معك التفاصيل والنسخة التجريبية قبل التنفيذ. | D58. No cart or store is implied. |
 | 4 Q | Do you make packaging for gifts and awards? | هل تصمّمون تغليفًا للهدايا والجوائز؟ | |
 | 4 A | Yes: custom boxes and wraps for gift sets and awards. | نعم: علب وتغليف حسب الطلب لأطقم الهدايا والجوائز. | p.24. |
 | 5 Q | What do you need from me to start? | ماذا تحتاجون مني للبدء؟ | |

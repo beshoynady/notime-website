@@ -1,5 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
-import { gotoReady } from "./helpers";
+import { expectLanded as expectLandedOnCategory, gotoReady } from "./helpers";
 
 /**
  * Anchor landing (D53): every route to an anchor puts the target's top at the header's bottom
@@ -57,25 +57,29 @@ for (const locale of ["en", "ar"] as const) {
       expect(await page.locator("[data-header-shell]").evaluate((el) => getComputedStyle(el).opacity)).toBe("1");
     });
 
-    test("mega-menu service link lands #services and closes the panel", async ({ page, isMobile }) => {
+    // Since the menus link the category pages (6530abf, D57), a service link opens its category
+    // page at the service's anchor; the menu closes and the landing is the same rule.
+    test("mega-menu service link lands its section on the category page and closes the panel", async ({ page, isMobile }) => {
       test.skip(isMobile, "desktop mega menu");
       await skipIntro(page);
       await gotoReady(page, `/${locale}`);
       await page.locator("button[aria-controls=mega-panel]").click();
-      await page.locator('#mega-panel a[href$="#services"]').first().click();
+      await page.locator('#mega-panel a[href$="/services/events-hospitality#conferences"]').first().click();
       await expect(page.locator("#mega-panel")).toBeHidden();
-      await expectLanded(page, "services", "services-title");
+      await expect(page).toHaveURL(new RegExp(`/${locale}/services/events-hospitality#conferences$`));
+      await expectLandedOnCategory(page, "conferences");
     });
 
-    test("mobile-menu service link lands #services after the menu closes", async ({ page, isMobile }) => {
+    test("mobile-menu service link lands its section on the category page after the menu closes", async ({ page, isMobile }) => {
       test.skip(!isMobile, "mobile menu");
       await skipIntro(page);
       await gotoReady(page, `/${locale}`);
       await page.locator("button[aria-controls=mobile-nav]").click();
       await page.locator("#mobile-nav summary").first().click();
-      await page.locator('#mobile-nav a[href$="#services"]').first().click();
+      await page.locator('#mobile-nav a[href$="/services/events-hospitality#conferences"]').first().click();
       await expect(page.locator("#mobile-nav")).toBeHidden();
-      await expectLanded(page, "services", "services-title");
+      await expect(page).toHaveURL(new RegExp(`/${locale}/services/events-hospitality#conferences$`));
+      await expectLandedOnCategory(page, "conferences");
     });
   });
 }

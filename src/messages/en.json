@@ -480,6 +480,30 @@
       "s1": "It starts with an empty room.",
       "s3": "Tables, flowers and candlelight, each in place.",
       "s4": "Every detail, ready before the first guest."
+    },
+    "creative": {
+      "s1": "A black box. Nothing in frame yet.",
+      "s2": "Take one.",
+      "s3": "Every frame is planned before we roll.",
+      "s4": "Then, the final frame."
+    },
+    "marketing": {
+      "s1": "Every brand starts as a blank page.",
+      "s2": "First, the grid.",
+      "s3": "Then words and images find their place.",
+      "s4": "And the brand comes alive."
+    },
+    "print": {
+      "s1": "Paper, board, ribbon.",
+      "s2": "Measured, then cut.",
+      "s3": "Printed, then folded into shape.",
+      "s4": "Closed, wrapped, ready to give."
+    },
+    "software": {
+      "s1": "Every platform starts with a cursor.",
+      "s2": "Lines become a layout.",
+      "s3": "The layout becomes a working product.",
+      "s4": "From idea to a live product."
     }
   },
   "legal": {

@@ -1,6 +1,6 @@
 # Creative Production: copy deck (EN / AR)
 
-Status: **draft for the user's review** (2026-11-09, with the other three decks). The user's first decisions are applied (D77); the full review is still to come. On approval it goes into `src/content/categories.ts` (intro, FAQ, closing line), `src/content/services.ts` (points) and `src/messages/{en,ar}.json` (shot lines). Until then the data keeps its `TODO:` placeholders.
+Status: **moved into the data as a draft for Rand's review** (v1 plan, decks task, 2026-11-10), with the clear fixes from [deck-review-2026-11-09.md](deck-review-2026-11-09.md) applied here and in the data. The judgment calls in that review wait for the user; the fact checks are in `docs/review/fact-check.md`. In review mode every block carries its section number.
 
 ## Sources and rules
 
@@ -70,7 +70,7 @@ Promise: *Titles, explainers and screen content that move with purpose.* / «ع�
 |---|---|---|
 | Motion graphics and logo animation | موشن جرافيك وتحريك الشعارات | p.14. |
 | Titles and explainers | العناوين وفيديوهات الشرح | D56. |
-| Short videos and motion for social media | مقاطع قصيرة وحركة لمنصات التواصل | p.14, p.17 "reels". «مقاطع قصيرة» rather than the Latin "reels". |
+| Short videos and motion for social media | مقاطع قصيرة وموشن جرافيك لمنصات التواصل | p.14, p.17 "reels". «مقاطع قصيرة» rather than the Latin "reels". |
 | Screen content for events and stages | محتوى الشاشات للفعاليات والمسارح | D56 "screen content". |
 
 ### IV · AI content creation (`ai-content`, the peak)
@@ -82,7 +82,7 @@ Promise: *AI-assisted imagery and video, art-directed to the brand.* / «صور 
 | AI video ads and short videos | إعلانات فيديو ومقاطع قصيرة بالذكاء الاصطناعي | p.14 "AI-generated video ads & reels". |
 | Cinematic AI video | فيديو سينمائي بالذكاء الاصطناعي | p.14. |
 | AI imagery and campaign key visuals | صور بالذكاء الاصطناعي ومرئيات رئيسية للحملات | p.14. «المرئيات الرئيسية» for key visuals. |
-| Art direction to your brand | توجيه فني يلتزم بهويتك | D56. |
+| Art direction true to your brand | توجيه فني يلتزم بهويتك | D56. |
 | Editing, sound and finishing | المونتاج والصوت واللمسات الأخيرة | p.14. |
 
 ### V · Set & stage design (`set-design`)
@@ -113,12 +113,12 @@ Five entries, each answered from the sources.
 
 | # | EN | AR | Source · AR note |
 |---|---|---|---|
-| 1 Q | Do you cover events with photo and video? | هل تغطّون الفعاليات بالتصوير والفيديو؟ | |
-| 1 A | Yes. We photograph and film on the ground, then edit the material for your channels. | نعم. نصوّر في أرض الحدث بالكاميرا والفيديو، ثم نجهّز المادة بالمونتاج لتناسب قنواتك. | p.25, p.17. |
+| 1 Q | Do you cover events with photo and video? | هل تغطّون الفعاليات بالصور والفيديو؟ | |
+| 1 A | Yes. We photograph and film on the ground, then edit the material for your channels. | نعم. نصوّر الفعالية صورًا وفيديو في أرض الحدث، ثم نجهّز المادة بالمونتاج لتناسب قنواتك. | p.25, p.17. |
 | 2 Q | Do you make images and video with AI? | هل تصنعون الصور والفيديو بالذكاء الاصطناعي؟ | |
 | 2 A | Yes: AI video ads and short videos, cinematic AI video, and AI imagery and key visuals for campaigns, art-directed to your brand. | نعم: إعلانات فيديو ومقاطع قصيرة، وفيديو سينمائي، وصور ومرئيات رئيسية للحملات، كلها بالذكاء الاصطناعي وبتوجيه فني يلتزم بهويتك. | p.14; D56. |
 | 3 Q | Do you style and shoot food and products? | هل تنسّقون الأطباق وتصوّرون المنتجات؟ | |
-| 3 A | Yes: food styling, product photography and cinematic product films. | نعم: تنسيق الأطباق وتصويرها، وتصوير المنتجات، وأفلام سينمائية لها. | p.25, p.14. |
+| 3 A | Yes: food styling, product photography and cinematic product films. | نعم: تنسيق الأطباق وتصويرها، وتصوير المنتجات، وأفلام سينمائية للمنتجات. | p.25, p.14. |
 | 4 Q | Do you handle editing and sound? | هل تتولّون المونتاج والصوت؟ | |
 | 4 A | Yes. We take each video from the script and the shoot to the final edit, colour and sound. | نعم. نتابع كل فيديو من النص والتصوير حتى المونتاج النهائي وتصحيح الألوان والصوت. | D56; p.14. |
 | 5 Q | What do you need from me to start? | ماذا تحتاجون مني للبدء؟ | Same pattern as the Events FAQ #6. |
@@ -128,7 +128,7 @@ Five entries, each answered from the sources.
 
 | EN | AR | AR note |
 |---|---|---|
-| Your take one starts here. | لقطتك الأولى تبدأ من هنا. | Answers s2 («اللقطة الأولى»). Hidden on public pages with the quote block until the form works (D74, P6). |
+| Your first take starts here. | لقطتك الأولى تبدأ من هنا. | Answers s2 («اللقطة الأولى»). Hidden on public pages with the quote block until the form works (D74, P6). |
 
 ## 6. Questions for the client (CONTENT_CHECKLIST #29)
 

@@ -1,6 +1,6 @@
 # Marketing & Brand: copy deck (EN / AR)
 
-Status: **draft for the user's review** (2026-11-09, with the other three decks). The user's first decisions are applied (D77); the full review is still to come. On approval it goes into `src/content/categories.ts`, `src/content/services.ts` (points) and `src/messages/{en,ar}.json` (shot lines). Until then the data keeps its `TODO:` placeholders.
+Status: **moved into the data as a draft for Rand's review** (v1 plan, decks task, 2026-11-10), with the clear fixes from [deck-review-2026-11-09.md](deck-review-2026-11-09.md) applied here and in the data. The judgment calls in that review wait for the user; the fact checks are in `docs/review/fact-check.md`. In review mode every block carries its section number.
 
 ## Sources and rules
 
@@ -13,7 +13,7 @@ As the Events deck. Facts only from the profile (p.12, p.13, p.16, p.17, p.19) a
 | | Text |
 |---|---|
 | EN | Brand strategy and identity, social media, search, PR and paid media, planned together so the brand speaks with one voice. We publish in Arabic and English, measure what runs, and report on it. |
-| AR | استراتيجية العلامة وهويتها، ووسائل التواصل الاجتماعي، ومحركات البحث، والعلاقات العامة، والإعلانات المدفوعة، في خطة واحدة تمنح العلامة صوتًا واحدًا. ننشر بالعربية والإنجليزية، ونقيس ما يُنشر، ونرفع عنه تقارير واضحة. |
+| AR | استراتيجية العلامة وهويتها، ووسائل التواصل الاجتماعي، ومحركات البحث، والعلاقات العامة، والإعلانات المدفوعة، في خطة واحدة تمنح العلامة صوتًا واحدًا. ننشر بالعربية والإنجليزية، ونقيس ما يُنشر، ونرفع عنه التقارير. |
 
 - **Source:** p.12 "Brand & campaign strategy · Performance & paid media · Analytics & reporting"; p.17 "Daily publishing in Arabic & English".
 - **AR note:** «تمنح العلامة صوتًا واحدًا» carries "speaks with one voice" as an Arabic image, not a calque.
@@ -36,7 +36,7 @@ Promise: *Name, mark, voice and system, built to hold together.* / «الاسم 
 | EN | AR | Source · AR note |
 |---|---|---|
 | Brand strategy | استراتيجية العلامة | p.12. |
-| Naming | اختيار الاسم | D56 "Name". |
+| Naming | ابتكار الاسم | D56 "Name". |
 | Logo and visual identity | الشعار والهوية البصرية | D56 "mark", "system". |
 | Tone of voice | نبرة الخطاب | D56 "voice". «نبرة الخطاب» is the usual Arabic for tone of voice. |
 | Brand guidelines | دليل الهوية | D56 "system". |
@@ -49,7 +49,7 @@ Promise: *Planned calendars, content and community, week after week.* / «خطط
 |---|---|---|
 | Content strategy and a monthly calendar | استراتيجية المحتوى وخطة نشر شهرية | p.17. |
 | Daily publishing in Arabic and English | نشر يومي بالعربية والإنجليزية | p.17. |
-| Design, motion and short videos | التصميم والموشن والمقاطع القصيرة | p.13 "DESIGN"; p.17 "Motion graphics, reels & AI video". |
+| Design, motion and short videos | التصميم والموشن جرافيك والمقاطع القصيرة | p.13 "DESIGN"; p.17 "Motion graphics, reels & AI video". |
 | On-ground coverage | التغطية من أرض الحدث | p.17. |
 | Community management | إدارة التفاعل مع الجمهور | p.13 "COMMUNITY". |
 | Paid campaigns and growth | حملات مدفوعة ونمو الحسابات | p.17 "Paid campaigns & community growth". |
@@ -96,7 +96,7 @@ Promise: *Press, media relations and announcements, handled with care.* / «ال
 |---|---|---|
 | Press releases and announcements | البيانات الصحفية والإعلانات الرسمية | D56. |
 | Media relations | العلاقات الإعلامية | D56. |
-| On-site PR at exhibitions and events | العلاقات العامة في أرض الحدث بالمعارض والفعاليات | p.19 "on-site PR management". |
+| On-site PR at exhibitions and events | العلاقات العامة في أرض المعارض والفعاليات | p.19 "on-site PR management". |
 | Media coverage after the event | التغطية الإعلامية بعد الحدث | p.19 "and the media coverage that follows". No outlet named (OQ #19). |
 
 ### VI · Paid media & media planning (Google & Meta ads) (`paid-media`)
@@ -116,9 +116,9 @@ Promise: *Google and Meta campaigns, with the channels, budgets and timing behin
 | # | EN | AR | Source · AR note |
 |---|---|---|---|
 | 1 Q | Do you publish in Arabic and English? | هل تنشرون بالعربية والإنجليزية؟ | |
-| 1 A | Yes. We write and publish in both languages every day, and each language is written natively, not translated word for word. | نعم. نكتب وننشر باللغتين يوميًا، ونكتب كل لغة بأسلوبها، لا بترجمة حرفية. | p.17; the brief (P3). |
+| 1 A | Yes. We write and publish in both languages, and each language is written natively, not translated word for word. | نعم. نكتب وننشر باللغتين، ونكتب كل لغة بأسلوبها، لا بترجمة حرفية. | p.17; the brief (P3). |
 | 2 Q | Do you run Google and Meta ads? | هل تديرون إعلانات Google وMeta؟ | |
-| 2 A | Yes. We plan the channels, the budget and the timing, run the campaigns, and report on how they performed. | نعم. نخطّط القنوات والميزانية والتوقيت، وندير الحملات، ونرفع تقارير عن أدائها. | D71; p.12. |
+| 2 A | Yes. We plan the channels, the budget and the timing, run the campaigns, and report on how they performed. | نعم. نخطّط للقنوات والميزانية والتوقيت، وندير الحملات، ونرفع تقارير عن أدائها. | D71; p.12. |
 | 3 Q | Can one team handle the identity, the content and the ads? | هل يتولى فريق واحد الهوية والمحتوى والإعلانات؟ | |
 | 3 A | Yes. Strategy, identity, content, social media, PR and paid media sit under one roof and follow one plan. | نعم. الاستراتيجية والهوية والمحتوى ووسائل التواصل والعلاقات العامة والإعلانات المدفوعة عندنا تحت سقف واحد، وتسير وفق خطة واحدة. | p.3, p.12. |
 | 4 Q | How do you report results? | كيف تعرضون النتائج؟ | |

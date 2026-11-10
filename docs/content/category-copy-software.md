@@ -1,6 +1,6 @@
 # Software & Digital: copy deck (EN / AR)
 
-Status: **draft for the user's review** (2026-11-09, with the other three decks). The user's first decisions are applied (D77); the full review is still to come. This page is a sales page (D65), so the deck covers more than the other categories: the case study, the event-technology band, the steps, the products and the stack strip. On approval it goes into `src/content/categories.ts`, `services.ts`, `case-studies` data and `src/messages/{en,ar}.json`. Until then the data keeps its `TODO:` placeholders.
+Status: **moved into the data as a draft for Rand's review** (v1 plan, decks task, 2026-11-10), with the clear fixes from [deck-review-2026-11-09.md](deck-review-2026-11-09.md) applied here and in the data. The judgment calls in that review wait for the user; the fact checks are in `docs/review/fact-check.md`. In review mode every block carries its section number.
 
 ## Sources and rules
 
@@ -12,18 +12,18 @@ As the Events deck. Facts only from the profile (p.15, p.16, p.18) and D56, D65,
 
 | | Text |
 |---|---|
-| EN | Websites, mobile apps, custom systems and online stores, designed and built in Arabic and English. End to end, from UX and design systems to development, content management and analytics, delivered bilingual and fast. |
-| AR | مواقع إلكترونية وتطبيقات جوّال وأنظمة مخصّصة ومتاجر إلكترونية، نصمّمها ونبنيها بالعربية والإنجليزية. من تجربة المستخدم وأنظمة التصميم إلى البرمجة وإدارة المحتوى والتحليلات، نسلّمها بلغتين وبأداء سريع. |
+| EN | Websites, mobile apps, custom systems and online stores, designed and built in Arabic and English. We take each one end to end, from UX and design systems to development, content management and analytics, and build it to load fast. |
+| AR | مواقع إلكترونية وتطبيقات جوّال وأنظمة مخصّصة ومتاجر إلكترونية، نصمّمها ونبنيها بالعربية والإنجليزية. نتولّى كلًّا منها من البداية إلى النهاية: من تجربة المستخدم وأنظمة التصميم إلى البرمجة وإدارة المحتوى والتحليلات، ونبنيها لتعمل بسرعة. |
 
 - **Source:** p.15, nearly verbatim ("End-to-end digital builds — from UX and design systems to development, content management and analytics, delivered bilingual and performance-ready").
-- **AR note:** "performance-ready" has no natural Arabic calque; «بأداء سريع» says what it means.
+- **AR note:** "performance-ready" has no natural Arabic calque; «ونبنيها لتعمل بسرعة» says what it means without promising a delivery time.
 
 ## 2. Opening shot lines (`scenes.software.*`)
 
 | Key | EN | AR | AR note |
 |---|---|---|---|
-| s1 | Every platform starts with a blinking cursor. | كل منصّة تبدأ بمؤشّر يومض. | The user's wording (D77). One line at 390, measured in the lab scene: EN 347 of 358 px (tight; re-check if the theme changes the size), AR 220 of 358 px. |
-| s2 | Lines become a layout. | تتحوّل الخطوط إلى تصميم. | |
+| s1 | Every platform starts with a cursor. | كل منصّة تبدأ بمؤشّر. | Shortened by the user (D77): one line at 390 with room to spare. |
+| s2 | Lines become a layout. | تتحوّل السطور إلى تصميم. | «السطور», not «الخطوط» (which also means fonts). |
 | s3 | The layout becomes a working product. | ويصير التصميم منتجًا يعمل. | |
 | s4 | **From idea to a live product.** | **من الفكرة إلى منتج يستخدمه الناس.** | The storyboard's «منتج يعمل فعلًا» repeated s3's «يعمل»; "live" is said as "in people's hands". |
 
@@ -47,10 +47,10 @@ The promise under each H2 is the approved description (D56). The storyboard's "o
 
 | # | Service · promise (D56) | Deliverables EN | Deliverables AR | Source |
 |---|---|---|---|---|
-| I | Websites · *Fast, bilingual websites that are easy to keep up to date.* / «مواقع سريعة بلغتين، يسهل تحديثها.» | Arabic and English, fully right to left · A content system your team runs · SEO and speed from day one | العربية والإنجليزية، مع اتجاه كامل من اليمين إلى اليسار · نظام لإدارة المحتوى يديره فريقك · تحسين الظهور والسرعة من اليوم الأول | p.15 |
+| I | Websites · *Fast, bilingual websites that are easy to keep up to date.* / «مواقع سريعة بلغتين، يسهل تحديثها.» | Arabic and English, with full right-to-left layouts · A content system your team runs · SEO and speed from day one | العربية والإنجليزية، مع دعم كامل للاتجاه من اليمين إلى اليسار · نظام لإدارة المحتوى يديره فريقك · الظهور في محركات البحث والسرعة من اليوم الأول | p.15 |
 | II | Mobile apps · *iOS and Android apps designed around how people use them.* / «تطبيقات iOS وAndroid مصمّمة حول طريقة استخدام الناس لها.» | iOS and Android · Connected to your website · Arabic and English | iOS وAndroid · مرتبط بموقعك الإلكتروني · بالعربية والإنجليزية | p.15 "iOS & Android, connected to the web". The storyboard's "release and updates" is dropped: support terms are a client question. |
-| III | Custom systems · *Internal tools and systems built for the way your team works.* / «أدوات وأنظمة داخلية مبنية على طريقة عمل فريقك.» | Admin dashboards and analytics · Roles and permissions · Integrations with your tools | لوحات إدارة وتحليلات · أدوار وصلاحيات لفريقك · ربط مع أدواتك وأنظمتك | p.15 "CMS & DASHBOARDS", "INTEGRATIONS & APIS"; roles: what a system delivers |
-| IV | E-commerce · *Online stores with clear checkout and simple management.* / «متاجر إلكترونية بدفع واضح وإدارة بسيطة.» | Catalogue management · Checkout and payment integration · An orders dashboard | إدارة المنتجات · الدفع وربط بوابات الدفع · لوحة لمتابعة الطلبات | D56 (a client-approved service the profile doesn't list) |
+| III | Custom systems · *Internal tools and systems built for the way your team works.* / «أدوات وأنظمة داخلية مبنية على طريقة عمل فريقك.» | Admin dashboards and analytics · Roles and permissions · Integrations with your tools | لوحات إدارة وتحليلات · أدوار وصلاحيات لفريقك · الربط بأدواتك وأنظمتك | p.15 "CMS & DASHBOARDS", "INTEGRATIONS & APIS"; roles: what a system delivers |
+| IV | E-commerce · *Online stores with clear checkout and simple management.* / «متاجر إلكترونية بدفع واضح وإدارة بسيطة.» | Catalogue management · Checkout and payment integration · An orders dashboard | إدارة المنتجات · إتمام الشراء وربط بوابات الدفع · لوحة لمتابعة الطلبات | D56 (a client-approved service the profile doesn't list) |
 | V | UI/UX design · *Interfaces researched, prototyped and tested before they are built.* / «واجهات نبحثها ونجرّب نماذجها ونختبرها قبل بنائها.» | User research and flows · Clickable prototypes · A design system | بحث المستخدمين ومسارات الاستخدام · نماذج تفاعلية للتجربة · نظام تصميم | p.15 "Research, flows & design systems"; D56 |
 | VI | AI consulting · *Where AI helps your work, where it does not, and how to start.* / «أين يفيد الذكاء الاصطناعي عملك، وأين لا يفيد، وكيف تبدأ.» | A review of where AI fits your work · A pilot plan · Getting your team started | مراجعة لمواضع فائدة الذكاء الاصطناعي في عملك · خطة لتجربة أولى · تهيئة فريقك للبدء | D56 (client-approved; scope is a client question) |
 
@@ -62,7 +62,7 @@ The promise under each H2 is the approved description (D56). The storyboard's "o
 |---|---|---|---|
 | Eyebrow | Event technology | تقنيات الفعاليات | D65 |
 | Heading | Built by people who run events. | تبنيها فرقٌ تدير الفعاليات بنفسها. | Storyboard. |
-| 1 | **Registration and check-in.** QR check-in is coming soon. | **التسجيل وتسجيل الحضور.** تسجيل الحضور برمز QR قريبًا. | D65; the product is Coming soon. "QR" stays Latin (a code type). |
+| 1 | **Registration and check-in.** QR check-in is coming soon. | **التسجيل وتسجيل الحضور.** وقريبًا: تسجيل الحضور برمز QR. | D65; the product is Coming soon. "QR" stays Latin (a code type). |
 | 2 | **Event apps and websites.** The agenda, the speakers and live updates. | **تطبيقات ومواقع للفعاليات.** البرنامج والمتحدثون والتحديثات المباشرة. | D65. |
 | 3 | **Live results and screens.** Championships, results and live coverage, as on a national federation's platform. | **النتائج المباشرة والشاشات.** بطولات ونتائج وتغطية مباشرة، كما في منصة اتحاد وطني. | p.18, anonymised (D67). |
 
@@ -72,19 +72,19 @@ The promise under each H2 is the approved description (D56). The storyboard's "o
 |---|---|---|
 | Steps | Discover · Design · Build · Launch · Support | نستكشف · نصمّم · نبني · نطلق · ندعم |
 | Note 1 | Bilingual by default | بلغتين من البداية |
-| Note 2 | Performance and SEO built in | الأداء وتحسين الظهور جزء من البناء |
+| Note 2 | Performance and SEO built in | الأداء والظهور في محركات البحث جزء من البناء |
 | Note 3 | Support & maintenance after launch | الدعم والصيانة بعد الإطلاق |
 
 - **Note 3 and the "Support" step** are included: the user's commercial decision for the digital team (D77). No response time, SLA or support period is stated anywhere.
 
 ## 7. Products (`#products`, Coming soon)
 
-Names stay placeholders (OQ #5). Problem statements are proposals; features are drafts the client must confirm (OQ #24). The concept screens carry "Preview" / «معاينة».
+Names approved (D78): Minute Zero / «الدقيقة صفر» and Peak Hour / «ساعة الذروة». Problem statements are proposals; features are drafts the client must confirm (OQ #24). The concept screens carry "Preview" / «معاينة».
 
 | Part | QR event check-in | Restaurant management |
 |---|---|---|
 | Problem EN | Queues at the door, and no clear picture of who has arrived. | Orders, tables and the kitchen, out of step at the busiest hour. |
-| Problem AR | طوابير عند الباب، ولا صورة واضحة لمن وصل. | الطلبات والطاولات والمطبخ، كلٌّ في وادٍ في ساعة الذروة. |
+| Problem AR | طوابير عند الباب، ولا صورة واضحة لمن وصل. | الطلبات والطاولات والمطبخ، كلٌّ في وادٍ ساعةَ الذروة. |
 | Features EN (draft) | QR invitations · check-in at the door from a phone · live arrivals for the team · guest list import · bilingual | Table and order management · kitchen display · menu management · end-of-day summary · bilingual |
 | Features AR (draft) | دعوات برمز QR · تسجيل الحضور عند الباب من الهاتف · متابعة الوصول لحظة بلحظة لفريقك · استيراد قائمة الضيوف · بلغتين | إدارة الطاولات والطلبات · شاشة للمطبخ · إدارة قائمة الطعام · ملخص نهاية اليوم · بلغتين |
 
@@ -106,13 +106,13 @@ Names stay placeholders (OQ #5). Problem statements are proposals; features are 
 | 1 Q | How long does a website take? | كم يستغرق بناء موقع إلكتروني؟ | |
 | 1 A | It depends on the scope. After the intro call we send a plan with the steps and the dates for your project. | يعتمد ذلك على حجم المشروع. بعد مكالمة التعارف نرسل لك خطة بالمراحل والمواعيد الخاصة بمشروعك. | Process only, no promised dates. |
 | 2 Q | Is the Arabic as good as the English? | هل تكون النسخة العربية بجودة الإنجليزية نفسها؟ | |
-| 2 A | Yes. We design and build in both languages from the start, with full right-to-left layouts, not a translation added at the end. | نعم. نصمّم ونبني باللغتين من البداية، مع اتجاه كامل من اليمين إلى اليسار، لا بترجمة تُضاف في النهاية. | p.15 "Full bilingual RTL–LTR builds". |
-| 3 Q | Can you connect to the systems we already use? | هل يمكنكم الربط مع الأنظمة التي نستخدمها؟ | |
-| 3 A | Yes. We integrate with your tools through APIs and data feeds. | نعم. نربط مع أدواتك عبر الواجهات البرمجية وتغذيات البيانات. | p.15 "INTEGRATIONS & APIS". «الواجهات البرمجية» rather than the Latin "API". |
+| 2 A | Yes. We design and build in both languages from the start, with full right-to-left layouts, not a translation added at the end. | نعم. نصمّم ونبني باللغتين من البداية، مع دعم كامل للاتجاه من اليمين إلى اليسار، لا بترجمة تُضاف في النهاية. | p.15 "Full bilingual RTL–LTR builds". |
+| 3 Q | Can you connect to the systems we already use? | هل يمكنكم الربط بالأنظمة التي نستخدمها؟ | |
+| 3 A | Yes. We integrate with your tools through APIs and data feeds. | نعم. نربط المنصّة بأدواتك عبر الواجهات البرمجية وتبادل البيانات. | p.15 "INTEGRATIONS & APIS". «الواجهات البرمجية» rather than the Latin "API". |
 | 4 Q | Do you build technology for events? | هل تبنون تقنيات للفعاليات؟ | |
-| 4 A | Yes: event apps and websites, and live results and screens. Our QR check-in product is coming soon. | نعم: تطبيقات ومواقع للفعاليات، ونتائج مباشرة وشاشات. ومنتجنا لتسجيل الحضور برمز QR قريبًا. | D65; p.18. |
+| 4 A | Yes: event apps and websites, and live results and screens. Our QR check-in product is coming soon. | نعم: تطبيقات ومواقع للفعاليات، ونتائج مباشرة وشاشات. ويصدر قريبًا منتجنا لتسجيل الحضور برمز QR. | D65; p.18. |
 | 5 Q | What do you need from me to start? | ماذا تحتاجون مني للبدء؟ | |
-| 5 A | A few lines on what you want to build and who it's for. Book a free 30-min intro call, and we'll take it from there. | بضعة أسطر عمّا تريد بناءه ولمن. احجز مكالمة تعارف مجانية (30 دقيقة)، ونكمل من هناك. | The CTA wording is D65's, unchanged. |
+| 5 A | A few lines on what you want to build and who it's for. Book a free 30-min intro call, and we'll take it from there. | بضعة أسطر عمّا تريد بناءه ولمن. احجز مكالمة تعارف مجانية (30 دقيقة)، ونتابع معك الخطوات التالية. | The CTA wording is D65's, unchanged. |
 
 ## 10. CTA, closing line and form bookend
 
@@ -125,12 +125,12 @@ Names stay placeholders (OQ #5). Problem statements are proposals; features are 
 
 ## 11. Questions for the client (CONTENT_CHECKLIST #32)
 
-1. **Ownership:** who owns the code and the content after launch?
+1. **Ownership:** who owns the code and the content after launch? (The FAQ says it is set in each proposal, D78.)
 2. **Support:** decided by the user (D77): offered, with no response times or SLAs on the site. Nothing to ask.
 3. **Hosting:** do you host, or deploy to the client's own hosting?
-4. **Timelines:** a typical range for a website or an app, if one can be stated?
+4. ~~Timelines~~: answered in general terms (D78 FAQ fill); a typical range only if the client wants one stated.
 5. **Stack:** confirm the technologies to list (section 8).
 6. **AI consulting:** what does an engagement include?
 7. **E-commerce:** which payment gateways have you integrated?
-8. **Products:** names (OQ #5) and features (OQ #24).
+8. **Products:** names decided (D78); features still to confirm (OQ #24).
 9. **Case study:** the starting point and any platform results (TODO in section 3).

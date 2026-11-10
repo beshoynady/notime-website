@@ -8,10 +8,10 @@ import type { CategorySlug, Localized, ModuleKey, QuoteType, Service } from "./t
 type Row = [slug: string, title: Localized<string>, summary: Localized<string>];
 
 /**
- * "What we deliver" points: the named deliverables the user confirmed (D71), and each category's
- * points once its copy deck is approved. Every other service keeps the TODO placeholders.
+ * "What we deliver" points per service: the named deliverables the user confirmed (D71) and each
+ * category's copy deck (Events approved; the other four are drafts for Rand's review).
  */
-const NAMED_POINTS: Record<string, Localized<string[]>> = {
+const POINTS: Record<string, Localized<string[]>> = {
   // Events & Hospitality: copy deck docs/content/category-copy-events.md (approved 2026-11-09).
   "conferences-summits": {
     en: ["Programme and running order", "Venue and room layout", "Speaker and guest care", "Event branding on site", "Ceremonies and award nights"],
@@ -38,12 +38,107 @@ const NAMED_POINTS: Record<string, Localized<string[]>> = {
     ar: ["تصميم المسرح", "تركيب الهياكل وتعليق المعدات", "الصوت المباشر", "الإضاءة", "الشاشات", "تجهيز تقني يديره فريق واحد"],
   },
   "commercial-large-format-printing": {
-    en: ["Roll-up banners", "Feather flags", "Business cards", "Brochures"],
-    ar: ["لافتات رول أب", "أعلام الريشة", "بطاقات العمل", "البروشورات"],
+    en: ["Roll-up banners", "Feather flags", "Business cards", "Brochures", "Backdrops and wall graphics"],
+    ar: ["لافتات رول أب", "أعلام الريشة", "بطاقات العمل", "البروشورات", "الخلفيات والرسومات الجدارية"],
   },
   "corporate-gifts": {
-    en: ["Gift sets", "Branded bottles", "Bags", "Notebooks & pens", "Giveaways"],
-    ar: ["أطقم الهدايا", "قوارير بهوية العلامة", "الحقائب", "الدفاتر والأقلام", "الهدايا الترويجية"],
+    en: ["Gift sets", "Branded bottles", "Bags", "Notebooks & pens", "Giveaways", "Screen printing, UV, foiling, debossing and laser engraving"],
+    ar: ["أطقم الهدايا", "قوارير بهوية العلامة", "الحقائب", "الدفاتر والأقلام", "الهدايا الترويجية", "الطباعة الحريرية، والطباعة بالأشعة فوق البنفسجية، والطباعة بالرقائق المعدنية، والكبس الغائر، والحفر بالليزر"],
+  },
+  // Creative Production: copy deck docs/content/category-copy-creative.md (draft for Rand's
+  // review; v1 decks task, with the clear fixes from deck-review-2026-11-09.md).
+  photography: {
+    en: ["Event coverage", "Product photography", "Food styling and photography", "Portraits", "Light planned for each shot"],
+    ar: ["تغطية الفعاليات", "تصوير المنتجات", "تنسيق الأطباق وتصويرها", "البورتريه", "إضاءة مدروسة لكل لقطة"],
+  },
+  "video-production": {
+    en: ["Script and shoot", "Cinematic product and brand films", "Event films and coverage", "Editing and colour", "Sound design and post-production"],
+    ar: ["النص والتصوير", "أفلام سينمائية للمنتجات والعلامات", "أفلام الفعاليات وتغطيتها", "المونتاج وتصحيح الألوان", "تصميم الصوت ومرحلة ما بعد الإنتاج"],
+  },
+  "motion-graphics": {
+    en: ["Motion graphics and logo animation", "Titles and explainers", "Short videos and motion for social media", "Screen content for events and stages"],
+    ar: ["موشن جرافيك وتحريك الشعارات", "العناوين وفيديوهات الشرح", "مقاطع قصيرة وموشن جرافيك لمنصات التواصل", "محتوى الشاشات للفعاليات والمسارح"],
+  },
+  "ai-content-creation": {
+    en: ["AI video ads and short videos", "Cinematic AI video", "AI imagery and campaign key visuals", "Art direction true to your brand", "Editing, sound and finishing"],
+    ar: ["إعلانات فيديو ومقاطع قصيرة بالذكاء الاصطناعي", "فيديو سينمائي بالذكاء الاصطناعي", "صور بالذكاء الاصطناعي ومرئيات رئيسية للحملات", "توجيه فني يلتزم بهويتك", "المونتاج والصوت واللمسات الأخيرة"],
+  },
+  "set-stage-design": {
+    en: ["Set and stage concepts", "Drawings and 3D models", "Sets built for the camera", "Stages built for the room"],
+    ar: ["فكرة الديكور والمسرح", "الرسومات والنماذج ثلاثية الأبعاد", "ديكورات مبنية للكاميرا", "مسارح مبنية للقاعة"],
+  },
+  "equipment-camera-rental": {
+    en: ["Cameras and lenses", "Lighting", "Sound", "Stage equipment"],
+    ar: ["الكاميرات والعدسات", "الإضاءة", "الصوت", "معدّات المسرح"],
+  },
+  // Marketing & Brand: copy deck docs/content/category-copy-marketing.md (draft, as above).
+  "branding-identity": {
+    en: ["Brand strategy", "Naming", "Logo and visual identity", "Tone of voice", "Brand guidelines"],
+    ar: ["استراتيجية العلامة", "ابتكار الاسم", "الشعار والهوية البصرية", "نبرة الخطاب", "دليل الهوية"],
+  },
+  "social-media-management": {
+    en: ["Content strategy and a monthly calendar", "Daily publishing in Arabic and English", "Design, motion and short videos", "On-ground coverage", "Community management", "Paid campaigns and growth"],
+    ar: ["استراتيجية المحتوى وخطة نشر شهرية", "نشر يومي بالعربية والإنجليزية", "التصميم والموشن جرافيك والمقاطع القصيرة", "التغطية من أرض الحدث", "إدارة التفاعل مع الجمهور", "حملات مدفوعة ونمو الحسابات"],
+  },
+  "digital-marketing-seo": {
+    en: ["Search engine optimisation", "Site speed and Core Web Vitals", "Analytics and reporting", "Measurement across search and ads"],
+    ar: ["تحسين الظهور في محركات البحث", "سرعة الموقع ومؤشرات أداء الويب الأساسية", "التحليلات والتقارير", "قياس النتائج في البحث والإعلانات"],
+  },
+  "content-strategy": {
+    en: ["Messages and topics per channel", "A monthly content calendar", "Arabic and English content", "Content systems and templates"],
+    ar: ["الرسائل والمواضيع لكل قناة", "خطة محتوى شهرية", "محتوى بالعربية والإنجليزية", "أنظمة المحتوى وقوالبه"],
+  },
+  "public-relations": {
+    en: ["Press releases and announcements", "Media relations", "On-site PR at exhibitions and events", "Media coverage after the event"],
+    ar: ["البيانات الصحفية والإعلانات الرسمية", "العلاقات الإعلامية", "العلاقات العامة في أرض المعارض والفعاليات", "التغطية الإعلامية بعد الحدث"],
+  },
+  "paid-media-planning": {
+    en: ["Google Ads campaigns", "Meta campaigns on Facebook and Instagram", "Channel and budget planning", "Campaign timing and flighting", "Performance reporting"],
+    ar: ["حملات Google", "حملات Meta على فيسبوك وإنستغرام", "تخطيط القنوات والميزانيات", "توقيت الحملات وجدولتها", "تقارير الأداء"],
+  },
+  // Production, Print & Gifts: copy deck docs/content/category-copy-print.md (draft, as above;
+  // printing and gifts keep the D71 points and add the deck's).
+  "stand-fabrication-signage": {
+    en: ["Stand design", "Fabrication", "Installation on site", "Activations and branded spaces", "Wayfinding signage"],
+    ar: ["تصميم الأجنحة", "التصنيع", "التركيب في أرض الحدث", "مساحات التفعيل والمساحات بهوية العلامة", "لافتات إرشادية للضيوف"],
+  },
+  "packaging-design": {
+    en: ["Custom boxes and wraps", "Packaging for awards and gift sets", "Structure and dielines", "Print-ready artwork"],
+    ar: ["علب وتغليف حسب الطلب", "تغليف للجوائز وأطقم الهدايا", "الهيكل وقوالب القصّ", "ملفات جاهزة للطباعة"],
+  },
+  "online-print-store": {
+    en: ["Choose the item and the quantity", "Send your artwork, or ask for a reprint", "Approve the proof before printing", "Printed to brand standard"],
+    ar: ["اختر المنتج والكمية", "أرسل التصميم، أو اطلب إعادة طباعة", "اعتمد النسخة التجريبية قبل التنفيذ", "طباعة بمعايير علامتك"],
+  },
+  "branded-merchandise": {
+    en: ["Apparel", "Bags and totes", "Desk and everyday objects", "Printed or engraved, to suit the material"],
+    ar: ["الملابس", "الحقائب وحقائب القماش", "أدوات المكتب والاستخدام اليومي", "طباعة أو حفر بما يناسب الخامة"],
+  },
+  // Software & Digital: copy deck docs/content/category-copy-software.md (draft, as above;
+  // exactly 3 deliverables per service, D65).
+  websites: {
+    en: ["Arabic and English, with full right-to-left layouts", "A content system your team runs", "SEO and speed from day one"],
+    ar: ["العربية والإنجليزية، مع دعم كامل للاتجاه من اليمين إلى اليسار", "نظام لإدارة المحتوى يديره فريقك", "الظهور في محركات البحث والسرعة من اليوم الأول"],
+  },
+  "mobile-apps": {
+    en: ["iOS and Android", "Connected to your website", "Arabic and English"],
+    ar: ["iOS وAndroid", "مرتبط بموقعك الإلكتروني", "بالعربية والإنجليزية"],
+  },
+  "custom-systems": {
+    en: ["Admin dashboards and analytics", "Roles and permissions", "Integrations with your tools"],
+    ar: ["لوحات إدارة وتحليلات", "أدوار وصلاحيات لفريقك", "الربط بأدواتك وأنظمتك"],
+  },
+  "e-commerce": {
+    en: ["Catalogue management", "Checkout and payment integration", "An orders dashboard"],
+    ar: ["إدارة المنتجات", "إتمام الشراء وربط بوابات الدفع", "لوحة لمتابعة الطلبات"],
+  },
+  "ui-ux-design": {
+    en: ["User research and flows", "Clickable prototypes", "A design system"],
+    ar: ["بحث المستخدمين ومسارات الاستخدام", "نماذج تفاعلية للتجربة", "نظام تصميم"],
+  },
+  "ai-consulting": {
+    en: ["A review of where AI fits your work", "A pilot plan", "Getting your team started"],
+    ar: ["مراجعة لمواضع فائدة الذكاء الاصطناعي في عملك", "خطة لتجربة أولى", "تهيئة فريقك للبدء"],
   },
 };
 
@@ -92,17 +187,6 @@ const QUOTE_TYPE: Record<CategorySlug, QuoteType> = {
   "software-digital": "digital",
 };
 
-// TODO: replace placeholder — "what we deliver" points are written per category with its copy
-// deck (phase-2 plan, Task 3.1 and later). Obvious placeholders until then: three for Software &
-// Digital (3 deliverables per service, D65), four elsewhere (4–6).
-const placeholderPoints = (category: CategorySlug): Localized<string[]> => {
-  const n = Array.from({ length: category === "software-digital" ? 3 : 4 }, (_, i) => i + 1);
-  return {
-    en: n.map((i) => `TODO: what we deliver, point ${i}`),
-    ar: n.map((i) => `TODO: ما نقدّمه، النقطة ${i}`),
-  };
-};
-
 function group(category: CategorySlug, rows: Row[]): Service[] {
   const cat = categories.find((c) => c.slug === category)!;
   const slot = imageSlots.find((s) => s.id === cat.image)!;
@@ -121,7 +205,7 @@ function group(category: CategorySlug, rows: Row[]): Service[] {
       status: "approved",
       anchor: page.anchor,
       signatureModule: page.module,
-      points: NAMED_POINTS[slug] ?? placeholderPoints(category),
+      points: POINTS[slug],
       relatedWork: [],
       quoteType: page.quoteType ?? QUOTE_TYPE[category],
     };

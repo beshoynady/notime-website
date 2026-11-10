@@ -51,8 +51,7 @@ describe("categoryJsonLd", () => {
       { "@type": "Question", name: "How do we start?", acceptedAnswer: { "@type": "Answer", text: "With the brief." } },
     ]);
     // A category whose FAQ is still all TODO placeholders gets no FAQPage at all.
-    const studio = getCategory("creative-production")!;
-    expect(studio.faq.every((f) => f.q.en.startsWith("TODO:"))).toBe(true);
+    const studio: Category = { ...getCategory("creative-production")!, faq: [written.faq[1]] };
     expect(byType(categoryJsonLd(studio, getServices("creative-production"), "en", SITE), "FAQPage")).toBeUndefined();
     // Events' approved FAQ (copy deck, 2026-11-09) goes in whole, in each language.
     for (const l of ["en", "ar"] as const) {
