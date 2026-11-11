@@ -1,6 +1,6 @@
 # Session handoff: v1 for Rand, full speed to M3
 
-Updated 2026-11-10. Read `CLAUDE.md` and `AGENTS.md` first (permanent rules; speed mode D82/D86). Decisions: `docs/DECISIONS.md` (latest D85–D90). Plan: `docs/plans/v1-review.md` (phases C–G) and `docs/plans/phase-2-services.md` (Events 3.2–3.9, Software 4.1–4.5, the form pipeline 4.2). Judgment calls awaiting the user: `docs/review/decisions-to-confirm.md` (#1–#18).
+Updated 2026-11-11. Read `CLAUDE.md` and `AGENTS.md` first (permanent rules; speed mode D82/D86). Decisions: `docs/DECISIONS.md` (latest D85–D90). Plan: `docs/plans/v1-review.md` (phases C–G) and `docs/plans/phase-2-services.md` (Events 3.2–3.9, Software 4.1–4.5, the form pipeline 4.2). Judgment calls awaiting the user: `docs/review/decisions-to-confirm.md` (#1–#18).
 
 ## The user's priority (2026-11-10, latest message, authoritative)
 
@@ -24,7 +24,8 @@ Updated 2026-11-10. Read `CLAUDE.md` and `AGENTS.md` first (permanent rules; spe
 ## Current step
 
 - **M1 closed** (2026-11-10): full CI 42900663990 green on `0bd0043`; screenshots retaken in `docs/checkpoints/m1/`; the review build is served on port 3100 through a Cloudflare quick tunnel (the link changes on every restart; `docs/review/tunnel.md`; current link 2026-11-11: https://voices-cylinder-evolution-vids.trycloudflare.com/ar); the forms contract is frozen (D92, `4593f13`).
-- **Now: step 2, sequential (D93):** Software agent running in its worktree; Events agent **paused** (`worktree-agent-a8f48549d1aade62f`, 4 uncommitted files), resumed after Software merges. Originally two background agents in worktrees (branches from `4593f13`; both hit the usage limit at the start and were resumed 2026-11-11); their notes land in `docs/review/batch2-{events,software}.md` on their branches. When both report: merge into `phase-2-services`, resolve the `categories.ts`/`registry.tsx`/`category.css`/`scenes/index.ts` conflicts, run lint + typecheck + unit, move their decision lines into DECISIONS and decisions-to-confirm, delete the worktrees, commit and push, then a 5-line note.
+- **Final push (2026-11-11, user, authoritative):** §1 hero fit done (D94, `a6945f9`); §2–§3 native Arabic rewrite + sharper copy, page by page, logged in `docs/content/copy-ar-rewrite.md`: **homepage done** (D95, `72edc41`; decisions-to-confirm #21). Then Software → Events → the other categories, menus, footer, forms, FAQ, legal.
+- **Now: step 2, sequential (D93):** Software agent finishing in its worktree (`agent-a0db117a116600633`); merge it, then resume the Events agent (`worktree-agent-a8f48549d1aade62f`, paused, 4 uncommitted files) with the copy standard and the hover spec (#19).
 - **Next:** step 3 (Marketing/Creative/Print visual completion ‖ Work index + case template + 3 cases), step 4 (About ‖ Products), step 5 (Contact + the pipeline delivery ‖ legal, credits, 404, SEO), step 6 (the M3 gate, CI, every-page screenshots; the only stop).
 
 ## Machine notes
