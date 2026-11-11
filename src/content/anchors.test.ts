@@ -12,6 +12,8 @@ const ON_CATEGORY_PAGE = [
   "components/category/",
   "components/modules/",
   "components/ui/",
+  "components/software/",
+  "components/forms/",
 ];
 
 /** Every literal id (id="…" in JSX) in what renders on a category page. */
