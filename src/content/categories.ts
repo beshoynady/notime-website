@@ -62,7 +62,7 @@ export const categories: Category[] = [
     title: { en: "Creative Production", ar: "الإنتاج الإبداعي" },
     summary: {
       en: "Photo, film, motion and AI content, with the sets and equipment to make it.",
-      ar: "تصوير وأفلام وموشن ومحتوى بالذكاء الاصطناعي، ومعها الديكورات والمعدّات.",
+      ar: "صورة وفيلم وموشن ومحتوى بالذكاء الاصطناعي، ومعها الديكور والمعدّات التي تصنعها.",
     },
     image: "cat-creative-production-4x5",
     theme: "studio",
@@ -153,8 +153,8 @@ export const categories: Category[] = [
     order: 4,
     title: { en: "Production, Print & Gifts", ar: "الإنتاج والطباعة والهدايا" },
     summary: {
-      en: "Signage, large-format print, packaging and gifts, produced to the brand standard.",
-      ar: "لافتات وطباعة كبيرة وتغليف وهدايا، تُنفَّذ وفق معايير العلامة.",
+      en: "Stands, print, packaging and gifts, finished in foil, UV, deboss or laser.",
+      ar: "أجنحة وطباعة وتغليف وهدايا، بلمسات الرقائق المعدنية وUV والحفر والليزر.",
     },
     image: "cat-production-print-gifts-4x5",
     theme: "workshop",
@@ -202,7 +202,7 @@ export const categories: Category[] = [
     title: { en: "Software & Digital", ar: "البرمجيات والحلول الرقمية" },
     summary: {
       en: "Websites, apps and custom systems that keep working long after launch day.",
-      ar: "مواقع وتطبيقات وأنظمة مخصّصة، تواصل عملها بعد يوم الإطلاق بوقت طويل.",
+      ar: "مواقع وتطبيقات وأنظمة تُبنى على مقاسك، وتبقى تعمل بعد الإطلاق بزمن طويل.",
     },
     image: "cat-software-digital-4x5",
     theme: "interface",

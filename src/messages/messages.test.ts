@@ -134,11 +134,12 @@ describe("messages", () => {
     expect(EN["hero.lead"]).toBe(
       "Events, creative production, marketing and digital solutions, planned and delivered by one house.",
     );
-    expect(AR["hero.lead"]).toBe("فعاليات، إنتاج إبداعي، تسويق وحلول رقمية، نخطط لها وننفذها تحت سقف واحد.");
+    // AR anchors rewritten natively (D95): the old lead was a comma list without «و», and «حِرَف» reads as handicraft.
+    expect(AR["hero.lead"]).toBe("فعاليات ومحتوى وحملات ومنصّات رقمية، يخطّط لها بيت واحد ويبنيها ويُطلقها.");
     expect(EN["hero.beatLead"] + " " + EN["hero.beatKey"]).toBe("Every second is planned.");
     expect(AR["hero.beatLead"] + " " + AR["hero.beatKey"]).toBe("كل ثانية محسوبة.");
     expect(EN["megaMenu.headingLead"] + " " + EN["megaMenu.headingKey"]).toBe("One house. Five crafts.");
-    expect(AR["megaMenu.headingLead"] + " " + AR["megaMenu.headingKey"]).toBe("بيت واحد. خمس حِرَف.");
+    expect(AR["megaMenu.headingLead"] + " " + AR["megaMenu.headingKey"]).toBe("بيت واحد. خمسة مجالات.");
   });
 });
 
