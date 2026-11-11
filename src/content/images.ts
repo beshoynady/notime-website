@@ -317,7 +317,7 @@ export const imageSlots: ImageSlot[] = [
     src: "/images/work/notime-website/notime-website-home-en.webp",
     width: 1440,
     height: 810,
-    blurDataURL: "data:image/webp;base64,UklGRjYAAABXRUJQVlA4ICoAAADQAQCdASoKAAYAA4BaJZQCdAEO94pfwAD9U/6YlXcyXFFyi8Y9Zd0gAAA=",
+    blurDataURL: "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAADQAQCdASoKAAYAA4BaJYwCdAELU0VvAAD+8aZ6X9WmV3eDsM6908SgyH7HlIAA",
     paint: "code",
     illustrative: false,
     alt: {
@@ -333,7 +333,7 @@ export const imageSlots: ImageSlot[] = [
     src: "/images/work/notime-website/notime-website-home-ar.webp",
     width: 1440,
     height: 810,
-    blurDataURL: "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAADQAQCdASoKAAYAA4BaJYwCdAEO/FbgAAD+9BTr7wPOxe0kSKog8CVS7xgik0mGAAA=",
+    blurDataURL: "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAADQAQCdASoKAAYAA4BaJYwCdAEfaUH2AAD+8aXewNinnYoDu7fKii+3lL3wXhUAAAA=",
     paint: "code",
     illustrative: false,
     alt: {
@@ -349,7 +349,7 @@ export const imageSlots: ImageSlot[] = [
     src: "/images/work/notime-website/notime-website-category-en.webp",
     width: 780,
     height: 1386,
-    blurDataURL: "data:image/webp;base64,UklGRjIAAABXRUJQVlA4ICYAAACwAgCdASoKABIAPu1iqU2ppaOiMAgBMB2JaQAAeyAA/vDfLgAAAA==",
+    blurDataURL: "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAABQAwCdASoKABIAPu1iqU2ppaOiMAgBMB2JZwCdACB7JAvJyAD+5diCZrm6Rts18sSWWgpNSc0j5rbNTH8AAA==",
     paint: "code",
     illustrative: false,
     alt: {
@@ -365,7 +365,7 @@ export const imageSlots: ImageSlot[] = [
     src: "/images/work/notime-website/notime-website-category-ar.webp",
     width: 780,
     height: 1386,
-    blurDataURL: "data:image/webp;base64,UklGRjIAAABXRUJQVlA4ICYAAACwAgCdASoKABIAPu1iqU2ppaOiMAgBMB2JaQAAeyAA/vDfLgAAAA==",
+    blurDataURL: "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAABwAwCdASoKABIAPu1iqU2ppaOiMAgBMB2JZwCdACHElCvRigAA/uPY3lTMhNwXR4k1iHlK1AbEtZ25GekaT+PAAAA=",
     paint: "code",
     illustrative: false,
     alt: {

@@ -19,7 +19,12 @@ Branch `worktree-agent-a0db117a116600633`, built on `phase-2-services` 4593f13. 
 13. **The named case study stays off** (it follows `WORK_NAMED.uaeaf`, OQ #17). Off, the devices show abstract redraws with no client name. Confirm.
 14. **Label-only eyebrows removed** per the hook standard; they stay only where they carry information (Case study, Our products · Coming soon, Event technology). Confirm.
 15. **The sticky mobile bar** shows after the opening, hides over `#consult` and `#website-review` and while a text field has focus, and hides the WhatsApp button while it shows (WhatsApp is unconfigured anyway, D78). Confirm.
-16. **Dev server in worktrees runs with `--webpack`**: Turbopack can't resolve `next` through the node_modules junction. Tooling note only.
+16. **Tooling (no decision):** in a worktree with a junctioned node_modules, Turbopack needs `turbopack.root` set to the main checkout (a local, uncommitted edit). `--webpack` is not an alternative: Tailwind runs only through the Turbopack loader, so webpack serves the page unstyled.
+
+## Found outside my area (shared code, not changed)
+
+- **`components/layout/custom-cursor.tsx` adds 37 px of horizontal scroll in Arabic** once the mouse moves (its dot is `start-0`, so in RTL it starts at the right edge and is then translated by the pointer's x). Seen on this page at 1440 and 390 in AR; reduced motion hides it. Fix: position it with `left-0` on purpose (pointer coordinates are physical) or `inset-inline-start` with a mirrored x. Lead to apply.
+- **Dev-only console errors on every category page** (not new): "Next.js encountered URL data during prerendering" from `resolve()` in the category route, and a hydration attribute mismatch above the page. Both also appear on /services/creative-production.
 
 ## Proposed contract change (D92, lead to decide)
 

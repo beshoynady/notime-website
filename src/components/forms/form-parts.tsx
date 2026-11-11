@@ -255,8 +255,13 @@ export function FormNotice({ state, locale }: { state: FormState; locale: Locale
         : s === "failed"
           ? formCopy.states.failed[locale]
           : null;
+  // A failed send disables the button while pending, which drops focus to <body>: bring it here (WCAG 2.4.3).
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (message) ref.current?.focus();
+  }, [state, message]);
   return (
-    <div className="form-notice" role="alert" hidden={!message}>
+    <div ref={ref} tabIndex={-1} className="form-notice" role="alert" hidden={!message}>
       {message && <EmailSentence text={fill(message, { minutes: Math.max(1, Math.ceil((state.retryAfter ?? 60) / 60)) })} />}
     </div>
   );

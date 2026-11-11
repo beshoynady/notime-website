@@ -32,6 +32,8 @@ export function useContractForm({
   const form = useForm<Values>({
     resolver: zodResolver(schema as never) as unknown as Resolver<Values>,
     mode: "onTouched",
+    // The error summary takes focus (its links reach each field); RHF would move it to the first field after.
+    shouldFocusError: false,
     defaultValues: defaults,
   });
   const formRef = useRef<HTMLFormElement>(null);
