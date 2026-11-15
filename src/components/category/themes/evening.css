@@ -149,7 +149,7 @@ html[data-js]:not([data-reduced]) main[data-theme="evening"] .mj-art[data-motion
 }
 
 /* ==========================================================================
-   Act 2 · each section's own light (EveningLights)
+   Act 2 · each section's own light (EveningDirector)
    ========================================================================== */
 main[data-theme="evening"] .svc {
   position: relative;
@@ -171,6 +171,79 @@ main[data-theme="evening"] .cat-body {
 html[data-js]:not([data-reduced]) main[data-theme="evening"] .svc-light:not([data-lit]) {
   opacity: 0;
   transform: scale(0.6);
+}
+
+/* Hover (spec #19, 2026-11-11): "the visual animates, a light sweep, and the deliverables reveal
+   on desktop only (always visible on mobile)". As on the Software page: a section plays it on
+   hover, on keyboard focus inside it, or while it crosses the viewport's middle (data-active,
+   EveningDirector), so a visitor who never hovers still sees it. Desktop with a pointer only;
+   touch, narrow screens, no script and reduced motion keep every deliverable shown and still.
+   - the visual: the section's light swells (a second glow on the pseudo-element; GSAP owns the
+     light element's own opacity and transform);
+   - the light sweep: a champagne line draws along the deliverables from inline-start;
+   - the deliverables rise in, staggered. */
+main[data-theme="evening"] .svc-deliver {
+  position: relative;
+}
+main[data-theme="evening"] .svc-light::after {
+  content: "";
+  position: absolute;
+  inset: -18%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--color-champagne) 9%, transparent), transparent);
+  opacity: 0;
+}
+@media (hover: hover) and (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+  html[data-js]:not([data-reduced]) main[data-theme="evening"] .svc-light::after {
+    transition: opacity 0.9s var(--ease-expo-out);
+  }
+  html[data-js]:not([data-reduced]) main[data-theme="evening"] .svc:is(:hover, :focus-within, [data-active]) .svc-light::after {
+    opacity: 1;
+  }
+  html[data-js]:not([data-reduced]) main[data-theme="evening"] .svc-deliver::before {
+    content: "";
+    position: absolute;
+    inset-block-start: -12px;
+    inset-inline: 0;
+    max-inline-size: 760px;
+    block-size: 1px;
+    background: linear-gradient(to right, transparent, var(--color-champagne) 70%, color-mix(in srgb, var(--color-champagne) 0%, transparent));
+    box-shadow: 0 0 10px 1px color-mix(in srgb, var(--color-champagne) 35%, transparent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    opacity: 0;
+    transition:
+      transform 0.9s var(--ease-expo-out),
+      opacity 0.9s var(--ease-expo-out);
+  }
+  html[dir="rtl"][data-js]:not([data-reduced]) main[data-theme="evening"] .svc-deliver::before {
+    background: linear-gradient(to left, transparent, var(--color-champagne) 70%, color-mix(in srgb, var(--color-champagne) 0%, transparent));
+    transform-origin: right center;
+  }
+  html[data-js]:not([data-reduced]) main[data-theme="evening"] .svc:is(:hover, :focus-within, [data-active]) .svc-deliver::before {
+    transform: scaleX(1);
+    opacity: 0.8;
+  }
+  html[data-js]:not([data-reduced]) main[data-theme="evening"] .svc-deliver li {
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity 0.45s var(--ease-expo-out),
+      transform 0.45s var(--ease-expo-out);
+  }
+  html[data-js]:not([data-reduced]) main[data-theme="evening"] .svc-deliver li:nth-child(2) {
+    transition-delay: 0.06s;
+  }
+  html[data-js]:not([data-reduced]) main[data-theme="evening"] .svc-deliver li:nth-child(3) {
+    transition-delay: 0.12s;
+  }
+  html[data-js]:not([data-reduced]) main[data-theme="evening"] .svc-deliver li:nth-child(n + 4) {
+    transition-delay: 0.18s;
+  }
+  html[data-js]:not([data-reduced]) main[data-theme="evening"] .svc:is(:hover, :focus-within, [data-active]) .svc-deliver li {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* The rail's active numeral is a lit candle point (§5.1): Motion's indicator, drawn as a 6px

@@ -212,6 +212,17 @@ html[data-js]:not([data-reduced]) .cat-opening .scene-line:last-child {
   margin: 0;
   opacity: 0.85;
 }
+/* The section's one-line hook (service-hooks.ts), between the H2 and the promise. */
+.svc-hook {
+  margin: 0;
+  max-inline-size: 46ch;
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  line-height: 1.5;
+  color: var(--theme-accent, currentColor);
+}
+.svc-hook:lang(ar) {
+  line-height: 1.75;
+}
 .svc-deliver h3 {
   margin: 0 0 16px;
   opacity: 0.7;
@@ -514,6 +525,76 @@ html[lang="ar"] .svc-module[data-module="print-order"] {
   }
   html[lang="ar"] .svc-module[data-module="print-order"] {
     min-block-size: 293px;
+  }
+}
+/* The Events & Hospitality modules (batch 2). Their static fallback is server-rendered in the same
+   box, so these only guard the first paint. ESTIMATES from the CSS boxes at 390 and 1440, kept
+   below the expected height (a short slot grows, it never leaves a gap); re-measure at M3 with
+   scripts/anchor-shift.mjs and replace them. */
+html[lang="en"] .svc-module[data-module="agenda-timeline"] {
+  min-block-size: 680px;
+}
+html[lang="ar"] .svc-module[data-module="agenda-timeline"] {
+  min-block-size: 700px;
+}
+html[lang="en"] .svc-module[data-module="stage-lights"] {
+  min-block-size: 440px;
+}
+html[lang="ar"] .svc-module[data-module="stage-lights"] {
+  min-block-size: 450px;
+}
+html[lang="en"] .svc-module[data-module="launch-reveal"] {
+  min-block-size: 640px;
+}
+html[lang="ar"] .svc-module[data-module="launch-reveal"] {
+  min-block-size: 650px;
+}
+html[lang="en"] .svc-module[data-module="candle-moodboard"] {
+  min-block-size: 560px;
+}
+html[lang="ar"] .svc-module[data-module="candle-moodboard"] {
+  min-block-size: 570px;
+}
+html[lang="en"] .svc-module[data-module="menu-majlis"] {
+  min-block-size: 760px;
+}
+html[lang="ar"] .svc-module[data-module="menu-majlis"] {
+  min-block-size: 780px;
+}
+html[lang="en"] .svc-module[data-module="stand-assembly"] {
+  min-block-size: 680px;
+}
+html[lang="ar"] .svc-module[data-module="stand-assembly"] {
+  min-block-size: 690px;
+}
+@media (min-width: 900px) {
+  html[lang="en"] .svc-module[data-module="agenda-timeline"] {
+    min-block-size: 460px;
+  }
+  html[lang="ar"] .svc-module[data-module="agenda-timeline"] {
+    min-block-size: 480px;
+  }
+  html[lang="en"] .svc-module[data-module="stage-lights"],
+  html[lang="ar"] .svc-module[data-module="stage-lights"] {
+    min-block-size: 640px;
+  }
+  html[lang="en"] .svc-module[data-module="launch-reveal"],
+  html[lang="ar"] .svc-module[data-module="launch-reveal"] {
+    min-block-size: 660px;
+  }
+  html[lang="en"] .svc-module[data-module="candle-moodboard"],
+  html[lang="ar"] .svc-module[data-module="candle-moodboard"] {
+    min-block-size: 520px;
+  }
+  html[lang="en"] .svc-module[data-module="menu-majlis"] {
+    min-block-size: 520px;
+  }
+  html[lang="ar"] .svc-module[data-module="menu-majlis"] {
+    min-block-size: 540px;
+  }
+  html[lang="en"] .svc-module[data-module="stand-assembly"],
+  html[lang="ar"] .svc-module[data-module="stand-assembly"] {
+    min-block-size: 520px;
   }
 }
 .module-placeholder {
