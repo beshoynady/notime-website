@@ -461,3 +461,16 @@ Written natively from the idea; Western digits; «في أرض الحدث» for o
 | `aboutPage.principlesEyebrow` / `principlesTitle` | كيف نعمل / ما لا يتغيّر في أي مشروع. | Unnumbered principles; the title says why there are four. |
 | `aboutPage.metaTitle` / `metaDescription` | من نحن / NO TIME بيت للفعاليات والتسويق والعلاقات العامة والإنتاج، مقرّه دبي. فريق واحد يحمل كل فكرة عبر الاستراتيجية والإبداع والإنتاج حتى التنفيذ، في ستة أسواق. | Only the profile's facts (Dubai, six markets). |
 | `principles.ts` one-roof title | تحت سقف واحد → بيت واحد | The old title was the calque D95 removed from the hero; «بيت واحد» matches the menu heading «بيت واحد. خمسة مجالات.». The line beneath already says «فريق واحد». |
+
+## Product pages (batch 3, F4: new lines)
+
+| Key | Line | Note |
+|---|---|---|
+| `productPage.hookMinuteZero` | الدقيقة الأولى عند الباب تحدّد إيقاع الأمسية كلها. | Plays on the name «الدقيقة صفر» without a pun that needs explaining. |
+| `productPage.hookPeakHour` | صُمّم للساعة التي تمتلئ فيها الطاولات ولا يحتمل المطبخ فيها الانتظار. | The name's moment, from the floor and the kitchen. |
+| `productPage.problemTitle` / `featuresTitle` | المشكلة / ماذا يقدّم | «ماذا يقدّم» reads naturally for a product; «الميزات» stays on the Software page. |
+| `productPage.screensNote` | شاشات تصوّرية ببيانات توضيحية. المنتج قيد التطوير، وقد تتغيّر بعض التفاصيل. | Honest status beside the "Preview" tag. |
+| `productPage.registerTitle` / `registerBody` / `registerCta` | كن أول من يعرف حين يصبح {product} جاهزًا. / نطوّره من خبرتنا في الفعاليات والضيافة. اترك بياناتك، وسنكتب لك حين يصبح جاهزًا. / سجّل اهتمامك | No date, no scarcity. |
+| `productPage.otherProduct` / `softwareLink` / `inDevelopment` | قيد التطوير أيضًا / تعرّف على خدماتنا البرمجية / قيد التطوير | — |
+| `product-pages.ts` Minute Zero | القوائم الورقية والازدحام عند الباب يحوّلان الانطباع الأول إلى انتظار. · دعوات برمز QR — يصل كل ضيف رمزه الخاص مع الدعوة. · تسجيل الحضور عند الباب من الهاتف — يمسح فريق الاستقبال كل رمز بالهاتف. · متابعة الوصول لحظة بلحظة — من وصل ومن لم يصل بعد، لحظة بلحظة. · قائمة ضيوف واحدة — قائمة يمكن البحث فيها، فلا يتعطّل الطابور عند اسم. · بالعربية والإنجليزية — الدعوات والشاشات باللغتين. | Features follow the concept screens; drafts for the client (OQ #24). |
+| `product-pages.ts` Peak Hour | حين يعمل فريق الصالة والمطبخ من أوراق متفرقة، تفلت الأمور في أكثر الساعات ازدحامًا. · إدارة الطاولات والطلبات — كل طاولة وطلبها على شاشة واحدة. · شاشة للمطبخ — تصل الطلبات إلى المطبخ بالتسلسل، وعلى كلٍّ منها حالته: قيد التحضير أو جاهز. · ملخص نهاية اليوم — عدد الضيوف والطلبات وساعة الذروة، جاهزة عند الإغلاق. · بالعربية والإنجليزية — لفريق الصالة وفريق المطبخ، بأيّ من اللغتين. | «الصالة» is the Gulf restaurant term for the floor. |

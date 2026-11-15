@@ -15,6 +15,8 @@ const ROUTES = [
   "/work",
   ...workItems.map((w) => `/work/${w.slug}`),
   "/about",
+  "/products/minute-zero",
+  "/products/peak-hour",
   "/privacy",
   "/terms",
   "/cookies",
