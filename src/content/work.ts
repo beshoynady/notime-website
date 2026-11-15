@@ -31,8 +31,8 @@ export const workItems: WorkItem[] = [
     anonymous: {
       label: { en: "A national sports federation", ar: "اتحاد رياضي وطني" },
       summary: {
-        en: "Its digital and media partner: a full rebuild of the bilingual website and the connected mobile app, plus daily social media in Arabic and English. First week of one championship campaign: 487K views, +37.6K new followers, 271K reach.",
-        ar: "شريكه الرقمي والإعلامي: إعادة بناء كاملة للموقع الإلكتروني ثنائي اللغة وتطبيق الجوّال المرتبط به، مع إدارة يومية لوسائل التواصل بالعربية والإنجليزية. في الأسبوع الأول من إحدى حملات البطولات: 487 ألف مشاهدة، و‎+37.6 ألف متابع جديد، ووصول بلغ 271 ألفًا.",
+        en: "Its digital and media partner: we rebuilt the bilingual website and its connected app, and publish to its channels every day in Arabic and English. One championship campaign, first week: 487K views, +37.6K new followers, 271K reach.",
+        ar: "شريكه الرقمي والإعلامي: أعدنا بناء موقعه بلغتين وتطبيق الجوّال المتصل به، وننشر على منصّاته كل يوم بالعربية والإنجليزية. وفي الأسبوع الأول من إحدى حملات البطولات: 487 ألف مشاهدة، و‎+37.6 ألف متابع جديد، ووصول إلى 271 ألفًا.",
       },
       image: "work-sports-federation-16x9",
     },
@@ -52,7 +52,7 @@ export const workItems: WorkItem[] = [
       label: { en: "A national airline", ar: "شركة طيران وطنية" },
       summary: {
         en: "Stand design, build and on-site PR at the Dubai Airshow and Arabian Travel Market.",
-        ar: "تصميم الجناح وبناؤه وإدارة العلاقات العامة في أرض الحدث، في معرض دبي للطيران وسوق السفر العربي.",
+        ar: "صمّمنا الجناح وبنيناه، وأدرنا علاقاته العامة في أرض الحدث، في معرض دبي للطيران وسوق السفر العربي.",
       },
       image: "work-airline-pavilion-16x9",
     },
@@ -72,7 +72,7 @@ export const workItems: WorkItem[] = [
       label: { en: "A national football league", ar: "دوري كرة قدم وطني" },
       summary: {
         en: "Tournament branding, on-ground production, award ceremonies and sponsor activations, with the league's social content, award packaging and gift sets.",
-        ar: "هوية البطولات، والإنتاج في أرض الحدث، وحفلات التكريم، وتفعيلات الرعاة، إلى جانب محتوى الدوري على وسائل التواصل، وتغليف الجوائز، وأطقم الهدايا.",
+        ar: "هوية البطولات، والإنتاج في أرض الحدث، وحفلات التكريم، وتفعيلات الرعاة، ومعها محتوى الدوري على منصّاته، وتغليف الجوائز، وأطقم الهدايا.",
       },
       image: "work-sports-league-16x9",
     },

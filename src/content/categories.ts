@@ -62,7 +62,7 @@ export const categories: Category[] = [
     title: { en: "Creative Production", ar: "الإنتاج الإبداعي" },
     summary: {
       en: "Photo, film, motion and AI content, with the sets and equipment to make it.",
-      ar: "تصوير وأفلام وموشن ومحتوى بالذكاء الاصطناعي، ومعها الديكورات والمعدّات.",
+      ar: "صورة وفيلم وموشن ومحتوى بالذكاء الاصطناعي، ومعها الديكور والمعدّات التي تصنعها.",
     },
     image: "cat-creative-production-4x5",
     theme: "studio",
@@ -153,8 +153,8 @@ export const categories: Category[] = [
     order: 4,
     title: { en: "Production, Print & Gifts", ar: "الإنتاج والطباعة والهدايا" },
     summary: {
-      en: "Signage, large-format print, packaging and gifts, produced to the brand standard.",
-      ar: "لافتات وطباعة كبيرة وتغليف وهدايا، تُنفَّذ وفق معايير العلامة.",
+      en: "Stands, print, packaging and gifts, finished in foil, UV, deboss or laser.",
+      ar: "أجنحة وطباعة وتغليف وهدايا، بلمسات الرقائق المعدنية وUV والحفر والليزر.",
     },
     image: "cat-production-print-gifts-4x5",
     theme: "workshop",
@@ -202,7 +202,7 @@ export const categories: Category[] = [
     title: { en: "Software & Digital", ar: "البرمجيات والحلول الرقمية" },
     summary: {
       en: "Websites, apps and custom systems that keep working long after launch day.",
-      ar: "مواقع وتطبيقات وأنظمة مخصّصة، تواصل عملها بعد يوم الإطلاق بوقت طويل.",
+      ar: "مواقع وتطبيقات وأنظمة تُبنى على مقاسك، وتبقى تعمل بعد الإطلاق بزمن طويل.",
     },
     image: "cat-software-digital-4x5",
     theme: "interface",
@@ -213,17 +213,19 @@ export const categories: Category[] = [
         q: { en: "How long does a project take?", ar: "كم يستغرق المشروع؟" },
         a: { en: "It depends on the scope. After the intro call we send a plan with the steps and the dates for your project, and you see progress at every stage.", ar: "يعتمد ذلك على حجم المشروع. بعد مكالمة التعارف نرسل لك خطة بالمراحل والمواعيد الخاصة بمشروعك، وترى التقدّم في كل مرحلة." },
       },
+      // Software brief (D91): the FAQ answers cost and "can we update it ourselves?"; integrations
+      // and event tech moved to the page's own blocks (services, Grow tier, the event-tech band).
+      {
+        q: { en: "How much does a website or an app cost?", ar: "كم تكلفة الموقع أو التطبيق؟" },
+        a: { en: "It depends on the scope, so we don't publish prices. After the intro call we send a proposal with the scope, the stages and the cost, and work starts only when you agree to it.", ar: "تعتمد على حجم المشروع، لذلك لا ننشر أسعارًا. بعد مكالمة التعارف نرسل لك عرضًا بالنطاق والمراحل والتكلفة، ولا يبدأ العمل إلا بعد موافقتك." },
+      },
       {
         q: { en: "Is the Arabic as good as the English?", ar: "هل تكون النسخة العربية بجودة الإنجليزية نفسها؟" },
         a: { en: "Yes. We design and build in both languages from the start, with full right-to-left layouts, not a translation added at the end.", ar: "نعم. نصمّم ونبني باللغتين من البداية، مع دعم كامل للاتجاه من اليمين إلى اليسار، لا بترجمة تُضاف في النهاية." },
       },
       {
-        q: { en: "Can you connect to the systems we already use?", ar: "هل يمكنكم الربط بالأنظمة التي نستخدمها؟" },
-        a: { en: "Yes. We integrate with your tools through APIs and data feeds.", ar: "نعم. نربط المنصّة بأدواتك عبر الواجهات البرمجية وتبادل البيانات." },
-      },
-      {
-        q: { en: "Do you build technology for events?", ar: "هل تبنون تقنيات للفعاليات؟" },
-        a: { en: "Yes: event apps and websites, and live results and screens. Our QR check-in product is coming soon.", ar: "نعم: تطبيقات ومواقع للفعاليات، ونتائج مباشرة وشاشات. ويصدر قريبًا منتجنا لتسجيل الحضور برمز QR." },
+        q: { en: "Will we be able to update the site ourselves?", ar: "هل سنتمكّن من تحديث الموقع بأنفسنا؟" },
+        a: { en: "Yes. We set up a content system in both languages and show your team how to use it at handover.", ar: "نعم. نجهّز نظامًا لإدارة المحتوى باللغتين، ونعرّف فريقك على استخدامه عند التسليم." },
       },
       {
         q: { en: "Do you support the product after launch?", ar: "هل تقدّمون الدعم بعد الإطلاق؟" },

@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "NO TIME Creative House",
-    "description": "A Dubai creative house for events, creative production, marketing and digital solutions."
+    "description": "A Dubai creative house for events, creative production, marketing and digital. One team takes an idea from the first sketch to the day it goes live, across six markets."
   },
   "brand": {
     "name": "NO TIME",
@@ -69,7 +69,7 @@
       }
     },
     "lead": "Events, creative production, marketing and digital solutions, planned and delivered by one house.",
-    "cta": "Explore our services",
+    "cta": "See what we make",
     "beatLead": "Every second",
     "beatKey": "is planned."
   },
@@ -82,7 +82,7 @@
   "about": {
     "eyebrow": "About NO TIME",
     "statement": "A creative house for events, brands and the ideas in between. One team plans it, builds it, prints it and launches it.",
-    "body": "Based in Dubai, we deliver events, marketing and PR for clients across local, regional and global markets. We build each idea where the brand meets its audience, then carry it all the way through: strategy, creative, production and delivery, under one roof.",
+    "body": "Our base is Dubai, and our work runs across six markets, from Saudi Arabia to Egypt: an airline's pavilion at the Dubai Airshow, a majlis dressed for a heritage welcome, a bilingual app for a national sports federation. Each idea starts where the brand meets its audience, and one team carries it through strategy, creative, production and delivery.",
     "stats": {
       "markets": {
         "value": "6",
@@ -98,8 +98,8 @@
     "eyebrow": "What we do",
     "headingLead": "Five crafts,",
     "headingKey": "one team behind them.",
-    "intro": "Each craft stands on its own. Together they carry an event or a brand from the first idea to the last detail.",
-    "viewServices": "View services",
+    "intro": "Book one, or hand us the whole brief. A launch can need a stage, a film, a campaign and a gift box, and here the same people plan all four.",
+    "viewServices": "See the services",
     "allServices": "See all services"
   },
   "services": {
@@ -137,7 +137,7 @@
     "eyebrow": "Our work",
     "headingLead": "Real projects,",
     "headingKey": "start to finish.",
-    "intro": "Work for national organisations, from the exhibition stand to the screen.",
+    "intro": "An airline's pavilion, a football league's award nights, a federation's app. The names stay private until each client says yes.",
     "labels": {
       "challenge": "Challenge",
       "idea": "Idea",
@@ -160,13 +160,13 @@
   },
   "digital": {
     "eyebrow": "Beyond events",
-    "headingLead": "Digital solutions,",
-    "headingKey": "built to keep working.",
-    "intro": "End-to-end digital builds, from UX and design systems to development, content management and analytics, in Arabic and English, built to load fast.",
+    "headingLead": "The team behind your event",
+    "headingKey": "builds your platform too.",
+    "intro": "Websites, apps and dashboards, designed in Arabic and English from the first sketch and built to load fast on a phone. Your team updates the content itself.",
     "capabilities": {
       "websites": {
         "title": "Websites",
-        "body": "Bilingual sites with a content system your team can run."
+        "body": "Bilingual sites with a content system your team runs."
       },
       "apps": {
         "title": "Mobile apps",
@@ -182,7 +182,7 @@
       }
     },
     "productsEyebrow": "Our products",
-    "productsIntro": "Two products of our own, in development now.",
+    "productsIntro": "Two products of our own: check-in for events, and a system for restaurants at their busiest. Both in development.",
     "registerInterest": "Register interest",
     "requestDemo": "Request a demo",
     "viewProduct": "View product",
@@ -229,7 +229,7 @@
   "cta": {
     "headingLead": "Have a date in mind?",
     "headingKey": "Let's plan every second of it.",
-    "body": "Tell us what you're planning, and we'll come back to you with the next steps.",
+    "body": "Tell us the date and the idea, and we'll come back with the next steps.",
     "primary": "Request a quote",
     "secondary": "Chat on WhatsApp",
     "bodyInterim": "Start with what you need. Each craft has its own page, with every service inside it."

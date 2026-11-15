@@ -324,6 +324,38 @@ Anonymised cases never show a photo with client branding (D78 review; CONTENT_CH
 - **Alt AR:** جناح معرض مضاء بدفء في قاعة خالية.
 - **Real alternative:** none without branding (egyptair-pavilion-1 shows it).
 
+## This website: real screenshots (Software & Digital proof)
+
+Captured from this site with Playwright (Chrome, reduced motion, review banner off) and saved through sharp as AVIF and WebP. Real NO TIME work, not AI, shown in code-drawn laptop and phone frames on /services/software-digital.
+
+### `notime-website-home-en`
+
+- **Page · section:** Software & Digital › Proof · **Aspect:** 16:9
+- **Source:** a screenshot of this site (home page, 1440 × 810); no prompt.
+- **Alt EN:** The NO TIME homepage in English, on a laptop screen.
+- **Alt AR:** الصفحة الرئيسية لموقع NO TIME بالإنجليزية على شاشة حاسوب محمول.
+
+### `notime-website-home-ar`
+
+- **Page · section:** Software & Digital › Proof · **Aspect:** 16:9
+- **Source:** a screenshot of this site (home page, 1440 × 810); no prompt.
+- **Alt EN:** The NO TIME homepage in Arabic, laid out right to left.
+- **Alt AR:** الصفحة الرئيسية لموقع NO TIME بالعربية، بتخطيط من اليمين إلى اليسار.
+
+### `notime-website-category-en`
+
+- **Page · section:** Software & Digital › Proof · **Aspect:** 9:16
+- **Source:** a screenshot of this site (Creative Production page at 390 px, 2×); no prompt.
+- **Alt EN:** A NO TIME service page in English, on a phone.
+- **Alt AR:** صفحة خدمات من موقع NO TIME بالإنجليزية على شاشة هاتف.
+
+### `notime-website-category-ar`
+
+- **Page · section:** Software & Digital › Proof · **Aspect:** 9:16
+- **Source:** a screenshot of this site (Creative Production page at 390 px, 2×); no prompt.
+- **Alt EN:** A NO TIME service page in Arabic, on a phone.
+- **Alt AR:** صفحة خدمات من موقع NO TIME بالعربية على شاشة هاتف.
+
 ---
 
 ## Summary

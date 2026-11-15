@@ -7,6 +7,8 @@
 .hero {
   --lb-top: calc(var(--header-h) + 8px + env(safe-area-inset-top, 0px));
   --lb-bottom: clamp(44px, 8svh, 84px);
+  /* Room between the letterbox and the content for the HUD lines (D94). */
+  --hud-clear: 16px;
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -21,6 +23,11 @@
     radial-gradient(ellipse 95% 80% at 50% 42%, #5c412b 0%, #2e2017 42%, #120c07 100%),
     #1a110b;
 }
+@media (min-width: 900px) {
+  .hero {
+    --hud-clear: 44px;
+  }
+}
 html[data-js]:not([data-reduced]) .hero {
   grid-template-rows: none;
   /* Vertical centring only: the column stretches, so .hero-content is the full frame width
@@ -29,8 +36,10 @@ html[data-js]:not([data-reduced]) .hero {
      fallback face in the loaded webfont) moved the whole block: measured CLS 0.073 (D43). */
   align-content: center;
   height: 100svh;
-  min-height: 620px;
-  padding-block: calc(var(--lb-top) + 16px) calc(var(--lb-bottom) + 16px);
+  /* 520, not 620: a laptop window is often 590–660px tall, and a hero taller than the viewport
+     pushed the CTA into the bottom letterbox (D94). */
+  min-height: 520px;
+  padding-block: calc(var(--lb-top) + var(--hud-clear)) calc(var(--lb-bottom) + var(--hud-clear));
 }
 
 /* 1 · Canvas (HeroScene) */
@@ -121,14 +130,20 @@ html[data-js]:not([data-reduced]) .hero-clock-wrap {
   text-align: center;
 }
 .hero-title {
+  /* Capped by height as well as width (D94): the frame between the letterboxes, less the HUD
+     clearance and the lead + CTA (~190px), shared by the two lines (EN 2 × 0.9em + masks;
+     AR 2 × 1.18em + masks). Width-only sizing let the block overflow short laptop windows:
+     the title rose under the header and the CTA dipped into the letterbox. */
+  --fit: calc((100svh - var(--lb-top) - var(--lb-bottom) - 2 * var(--hud-clear) - 190px) / 1.95);
   margin: 0;
-  font-size: clamp(3.2rem, 12.5vw, 11.5rem);
+  font-size: clamp(3.2rem, min(12.5vw, var(--fit)), 11.5rem);
   font-weight: 200;
   line-height: 0.9;
   text-shadow: 0 4px 40px rgba(13, 8, 5, 0.55);
   text-wrap: nowrap;
 }
 .hero-title:lang(ar) {
+  --fit: calc((100svh - var(--lb-top) - var(--lb-bottom) - 2 * var(--hud-clear) - 190px) / 2.5);
   line-height: 1.18;
 }
 .hero-line {

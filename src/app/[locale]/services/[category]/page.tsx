@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { CategoryView } from "@/components/category/category-view";
 import { categoryHref, getCategories, getCategory, type CategorySlug, type Locale } from "@/content";
 import { getScene } from "@/content/scenes";
+import { seo as softwareSeo } from "@/content/software/page";
 import { localeAlternates } from "@/lib/seo";
 
 /**
@@ -26,9 +27,11 @@ async function resolve(params: PageProps<"/[locale]/services/[category]">["param
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/services/[category]">): Promise<Metadata> {
   const { locale, category } = await resolve(params);
+  // Software & Digital targets its search intents (D91 brief, SEO): its own title and description.
+  const seo = category.slug === "software-digital" ? softwareSeo : null;
   return {
-    title: category.title[locale],
-    description: category.summary[locale],
+    title: seo ? { absolute: seo.title[locale] } : category.title[locale],
+    description: (seo?.description ?? category.summary)[locale],
     alternates: localeAlternates(locale, categoryHref(category.slug)),
   };
 }

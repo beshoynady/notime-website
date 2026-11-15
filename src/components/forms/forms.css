@@ -1,0 +1,375 @@
+/* Lead forms (src/components/forms). Built on the shared underlined `.field` (globals.css);
+   chips, groups, the summary and the states are drawn here. Light grounds. */
+
+.form {
+  display: grid;
+  gap: 28px;
+}
+.form-compact {
+  gap: 22px;
+}
+.form-group {
+  display: grid;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-inline-size: 0;
+}
+.form-group-title {
+  margin-block-end: 4px;
+  padding: 0;
+  font-family: var(--font-mono-ui, ui-monospace, "Cascadia Mono", "SFMono-Regular", Consolas, monospace);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-cocoa);
+}
+.form-group-title:lang(ar) {
+  font-family: inherit;
+  font-size: 0.9rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.form-row {
+  display: grid;
+  gap: 24px;
+}
+@media (min-width: 700px) {
+  .form-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.form-field {
+  min-inline-size: 0;
+}
+.form-control {
+  font-size: 1rem;
+}
+textarea.form-control {
+  resize: vertical;
+  min-block-size: 5.5rem;
+}
+.form-ltr {
+  text-align: start;
+}
+html[dir="rtl"] .form-ltr {
+  text-align: end;
+}
+.form-select {
+  appearance: none;
+  padding-inline-end: 28px;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position:
+    calc(100% - 12px) 55%,
+    calc(100% - 7px) 55%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+html[dir="rtl"] .form-select {
+  background-position:
+    12px 55%,
+    7px 55%;
+}
+.form-optional {
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  color: var(--color-cocoa);
+  opacity: 0.85;
+}
+
+/* Chips: a radio group drawn as an interface's segmented choices, with a visible state. */
+.form-chips {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: grid;
+  gap: 12px;
+}
+.form-legend {
+  padding: 0;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-cocoa);
+}
+.form-legend:lang(ar) {
+  font-size: 0.85rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.form-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.form-chip {
+  position: relative;
+  display: inline-flex;
+}
+.form-chip input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+}
+.form-chip-face {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-block-size: 44px;
+  padding-block: 10px;
+  padding-inline: 14px;
+  border: 1px solid var(--color-line-light);
+  border-radius: var(--radius-tag);
+  background: rgba(245, 233, 211, 0.6);
+  font-size: 0.9rem;
+  line-height: 1.3;
+  transition:
+    background-color 0.3s var(--ease-expo-out),
+    border-color 0.3s var(--ease-expo-out);
+}
+.form-chip-tick {
+  display: none;
+}
+.form-chip:hover .form-chip-face {
+  border-color: var(--color-cocoa);
+}
+.form-chip input:checked + .form-chip-face {
+  border-color: var(--color-espresso);
+  background: var(--color-champagne);
+}
+.form-chip input:checked + .form-chip-face .form-chip-tick {
+  display: inline-block;
+}
+.form-chip input:focus-visible + .form-chip-face {
+  outline: 2px solid var(--color-espresso);
+  outline-offset: 2px;
+}
+.field-error .form-chip-face {
+  border-color: rgba(155, 59, 42, 0.55);
+}
+
+/* The bookend: the opening's caret blinks three times after the first field's question. */
+.form-caret .form-legend::after,
+.form-caret > label::after {
+  content: "";
+  display: inline-block;
+  inline-size: 2px;
+  block-size: 1.05em;
+  margin-inline-start: 6px;
+  vertical-align: -0.15em;
+  background: var(--color-espresso);
+  animation: form-caret 1.06s steps(1) 3;
+}
+.form-caret:has(input:checked) .form-legend::after {
+  display: none;
+}
+@keyframes form-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+.form-prefilled {
+  margin-block-start: -12px;
+  font-size: 0.85rem;
+  color: var(--color-cocoa);
+}
+
+/* Inline errors and the summary (WCAG 3.3.1, 3.3.3). */
+.form-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--color-error);
+}
+.form-error svg {
+  margin-block-start: 1px;
+}
+.form-summary {
+  padding: 18px 20px;
+  border: 1px solid var(--color-error);
+  border-inline-start-width: 4px;
+  border-radius: var(--radius-tag);
+  background: rgba(155, 59, 42, 0.06);
+}
+.form-summary:focus-visible,
+.form-summary:focus {
+  outline: 2px solid var(--color-error);
+  outline-offset: 3px;
+}
+.form-summary-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px;
+  font-weight: 600;
+  color: var(--color-error);
+}
+.form-summary ul {
+  margin: 0;
+  padding-inline-start: 20px;
+  display: grid;
+  gap: 4px;
+}
+.form-summary a {
+  color: var(--color-espresso);
+  text-underline-offset: 3px;
+}
+.form-summary b {
+  font-weight: 600;
+}
+
+.form-notice:not([hidden]) {
+  padding: 14px 18px;
+  border-inline-start: 3px solid var(--color-error);
+  background: rgba(155, 59, 42, 0.06);
+}
+.form-notice p {
+  margin: 0;
+}
+.form-mail {
+  font-weight: 600;
+  unicode-bidi: isolate;
+}
+
+/* Submit: espresso on light, champagne fill rising on hover (the site's button language). */
+.form-actions {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+.form-submit {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 52px;
+  padding-block: 15px;
+  padding-inline: 28px;
+  border: 1px solid var(--color-espresso);
+  border-radius: var(--radius);
+  background: var(--color-espresso);
+  color: var(--color-ivory);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.3s var(--ease-expo-out);
+}
+.form-submit:lang(ar) {
+  font-size: 0.95rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.form-submit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--color-cocoa);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.5s var(--ease-expo-out);
+}
+.form-submit:hover::before,
+.form-submit:focus-visible::before {
+  transform: scaleY(1);
+}
+.form-submit:disabled {
+  cursor: progress;
+  opacity: 0.7;
+}
+@media (max-width: 599.98px) {
+  .form-actions,
+  .form-submit {
+    inline-size: 100%;
+  }
+}
+.form-micro {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-cocoa);
+}
+.form-privacy {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: var(--color-cocoa);
+  max-inline-size: 62ch;
+}
+.form-privacy-link {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+
+/* Hidden from people: off-canvas, no size, out of the tab order (tabIndex -1) and the a11y tree. */
+.form-hp {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.form-success {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+  padding: 28px;
+  border: 1px solid var(--color-espresso);
+  border-radius: var(--radius);
+  background: var(--color-champagne);
+  color: var(--color-espresso);
+}
+.form-success:focus {
+  outline: 2px solid var(--color-espresso);
+  outline-offset: 3px;
+}
+.form-success-mark {
+  display: grid;
+  place-items: center;
+  inline-size: 40px;
+  block-size: 40px;
+  border-radius: 999px;
+  background: var(--color-espresso);
+  color: var(--color-champagne);
+}
+.form-success-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+.form-success-body {
+  margin: 0;
+}
+.form-again {
+  margin-block-start: 6px;
+  min-block-size: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form-caret .form-legend::after,
+  .form-caret > label::after {
+    animation: none;
+  }
+}

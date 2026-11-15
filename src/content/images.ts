@@ -309,4 +309,68 @@ export const imageSlots: ImageSlot[] = [
     illustrative: true,
     alt: { en: "A warmly lit exhibition pavilion in an empty hall.", ar: "جناح معرض مضاء بدفء في قاعة خالية." },
   },
+  // Real screenshot of this site (Software & Digital proof strip): NO TIME's own work, no client.
+  {
+    id: "notime-website-home-en",
+    kind: "real",
+    aspect: "16:9",
+    src: "/images/work/notime-website/notime-website-home-en.webp",
+    width: 1440,
+    height: 810,
+    blurDataURL: "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAADQAQCdASoKAAYAA4BaJYwCdAELU0VvAAD+8aZ6X9WmV3eDsM6908SgyH7HlIAA",
+    paint: "code",
+    illustrative: false,
+    alt: {
+      en: "The NO TIME homepage in English, on a laptop screen.",
+      ar: "الصفحة الرئيسية لموقع NO TIME بالإنجليزية على شاشة حاسوب محمول.",
+    },
+  },
+  // Real screenshot of this site (Software & Digital proof strip): NO TIME's own work, no client.
+  {
+    id: "notime-website-home-ar",
+    kind: "real",
+    aspect: "16:9",
+    src: "/images/work/notime-website/notime-website-home-ar.webp",
+    width: 1440,
+    height: 810,
+    blurDataURL: "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAADQAQCdASoKAAYAA4BaJYwCdAEfaUH2AAD+8aXewNinnYoDu7fKii+3lL3wXhUAAAA=",
+    paint: "code",
+    illustrative: false,
+    alt: {
+      en: "The NO TIME homepage in Arabic, laid out right to left.",
+      ar: "الصفحة الرئيسية لموقع NO TIME بالعربية، بتخطيط من اليمين إلى اليسار.",
+    },
+  },
+  // Real screenshot of this site (Software & Digital proof strip): NO TIME's own work, no client.
+  {
+    id: "notime-website-category-en",
+    kind: "real",
+    aspect: "9:16",
+    src: "/images/work/notime-website/notime-website-category-en.webp",
+    width: 780,
+    height: 1386,
+    blurDataURL: "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAABQAwCdASoKABIAPu1iqU2ppaOiMAgBMB2JZwCdACB7JAvJyAD+5diCZrm6Rts18sSWWgpNSc0j5rbNTH8AAA==",
+    paint: "code",
+    illustrative: false,
+    alt: {
+      en: "A NO TIME service page in English, on a phone.",
+      ar: "صفحة خدمات من موقع NO TIME بالإنجليزية على شاشة هاتف.",
+    },
+  },
+  // Real screenshot of this site (Software & Digital proof strip): NO TIME's own work, no client.
+  {
+    id: "notime-website-category-ar",
+    kind: "real",
+    aspect: "9:16",
+    src: "/images/work/notime-website/notime-website-category-ar.webp",
+    width: 780,
+    height: 1386,
+    blurDataURL: "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAABwAwCdASoKABIAPu1iqU2ppaOiMAgBMB2JZwCdACHElCvRigAA/uPY3lTMhNwXR4k1iHlK1AbEtZ25GekaT+PAAAA=",
+    paint: "code",
+    illustrative: false,
+    alt: {
+      en: "A NO TIME service page in Arabic, on a phone.",
+      ar: "صفحة خدمات من موقع NO TIME بالعربية على شاشة هاتف.",
+    },
+  },
 ];
