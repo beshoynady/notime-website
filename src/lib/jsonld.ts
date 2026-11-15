@@ -89,3 +89,35 @@ export function overviewJsonLd(categories: Category[], locale: Locale, siteUrl: 
     ]),
   ];
 }
+
+/** A page trail as JSON-LD (the visible breadcrumbs use the same labels). Paths are locale-less. */
+export function trailJsonLd(trail: { name: string; path: string }[], locale: Locale, siteUrl: string): object {
+  return breadcrumb([
+    { name: BREADCRUMB_LABELS.home[locale], url: `${siteUrl}/${locale}` },
+    ...trail.map((t) => ({ name: t.name, url: `${siteUrl}/${locale}${t.path}` })),
+  ]);
+}
+
+/**
+ * A case study (F1) as a CreativeWork: the label and summary the page shows (the anonymous version
+ * until the client approves its name), the categories as genres, the house as creator. No client
+ * name, image, date or figure beyond what the page itself states.
+ */
+export function workCaseJsonLd(
+  work: { label: string; summary: string; path: string; genres: string[] },
+  locale: Locale,
+  siteUrl: string,
+): object {
+  const url = `${siteUrl}/${locale}${work.path}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "@id": url,
+    url,
+    name: work.label,
+    description: work.summary,
+    genre: work.genres,
+    inLanguage: locale,
+    creator: organization(siteUrl),
+  };
+}

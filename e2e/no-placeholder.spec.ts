@@ -1,5 +1,6 @@
 import { expect, test, type APIRequestContext } from "@playwright/test";
 import { getCategories } from "../src/content";
+import { workItems } from "../src/content/work";
 import { gotoReady } from "./helpers";
 
 /**
@@ -7,7 +8,17 @@ import { gotoReady } from "./helpers";
  * unfilled {token} or a link that goes nowhere. Designed image placeholders are allowed (they show
  * no "placeholder" text). Runs on the production build; review mode has its own spec.
  */
-const ROUTES = ["", "/services", ...getCategories().map((c) => `/services/${c.slug}`), "/privacy", "/terms", "/cookies"];
+const ROUTES = [
+  "",
+  "/services",
+  ...getCategories().map((c) => `/services/${c.slug}`),
+  "/work",
+  ...workItems.map((w) => `/work/${w.slug}`),
+  "/about",
+  "/privacy",
+  "/terms",
+  "/cookies",
+];
 const BANNED_TEXT = /TODO|placeholder|lorem ipsum|\{[a-zA-Z]+\}|pending|later phase|will appear here soon/i;
 
 const exists = new Map<string, Promise<string | null>>();

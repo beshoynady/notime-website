@@ -2,7 +2,8 @@ import { FrameCorners } from "@/components/ornaments/frame-corners";
 import { SectionRef } from "@/components/review/section-ref";
 import { AiPlaceholder } from "@/components/ui/ai-placeholder";
 import { BrandImage } from "@/components/ui/brand-image";
-import { getCategory, getImageSlot, type CategorySlug, type Locale } from "@/content";
+import { getCategory, getImageSlot, workHref, type CategorySlug, type Locale } from "@/content";
+import { Link } from "@/i18n/navigation";
 import { RELATED_WORK_COPY as T, relatedWork } from "@/content/related-work";
 import { categoryRef } from "@/lib/review";
 import "./related-work.css";
@@ -14,7 +15,8 @@ import "./related-work.css";
  *
  * Media: the case's stand-in slot (a named case's own photos join with the /work template, F1); it carries
  * "Illustrative" through BrandImage once it has a file. A slot with no file yet shows the designed
- * ground with no tag and no claim, as on the homepage (D84). No links until /work exists (F1).
+ * ground with no tag and no claim, as on the homepage (D84). Each card opens its case page (F1):
+ * the name is the link; the media repeats it for pointers only (out of the tab order).
  */
 export function RelatedWork({ category, locale, tone }: { category: CategorySlug; locale: Locale; tone: "dark" | "light" }) {
   const cases = relatedWork(category);
@@ -36,21 +38,25 @@ export function RelatedWork({ category, locale, tone }: { category: CategorySlug
               const slot = c.image ? getImageSlot(c.image) : undefined;
               return (
                 <li key={c.key} className="rw-card">
-                  <div className="rw-media">
+                  <Link href={workHref(c.slug)} tabIndex={-1} aria-hidden="true" className="rw-media">
                     {slot?.src ? (
                       <BrandImage slot={slot.id} sizes="(min-width: 900px) 34vw, 100vw" fill decorative />
                     ) : (
                       <AiPlaceholder paint={slot?.paint ?? "event"} showTag={false} />
                     )}
                     <FrameCorners inset="md" />
-                  </div>
+                  </Link>
                   <ul className="rw-meta text-eyebrow">
                     {/* The other categories the case spans; this page's own is implied. */}
                     {also.map((cat) => (
                       <li key={cat}>{getCategory(cat)?.title[locale]}</li>
                     ))}
                   </ul>
-                  <h3 className="rw-name">{c.label[locale]}</h3>
+                  <h3 className="rw-name">
+                    <Link href={workHref(c.slug)} className="rw-link">
+                      {c.label[locale]}
+                    </Link>
+                  </h3>
                   <p className="rw-summary">{c.summary[locale]}</p>
                 </li>
               );

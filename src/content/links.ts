@@ -15,10 +15,23 @@ export const serviceHref = (s: Pick<Service, "category" | "anchor">) => `${categ
 export const quoteHref = (s: Pick<Service, "category" | "anchor">) =>
   `${categoryHref(s.category)}?service=${s.anchor}#quote`;
 
+/** The Work index (v1 plan F1); filtered views live under it (`src/lib/work-filter.ts`). */
+export const WORK_INDEX_HREF = "/work";
+
+/** A case study. Slugs are stable and anonymous (work.ts), so they survive a switch to the named version. */
+export const workHref = (slug: string) => `${WORK_INDEX_HREF}/${slug}`;
+
+export const ABOUT_HREF = "/about";
+
+/** A product page (F4), by the product's id in the forms contract ("minute-zero", "peak-hour"). */
+export const productHref = (id: string) => `/products/${id}`;
+
 /** Labels for breadcrumbs (visible and JSON-LD). */
 export const BREADCRUMB_LABELS = {
   home: { en: "Home", ar: "الرئيسية" },
   services: { en: "Services", ar: "الخدمات" },
+  work: { en: "Work", ar: "أعمالنا" },
+  about: { en: "About", ar: "من نحن" },
 } as const;
 
 /** The organization as JSON-LD names it: name and URL only, nothing unconfirmed. */

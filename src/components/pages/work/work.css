@@ -1,0 +1,574 @@
+/* Work (F1): the index /work and the case template /work/[slug]. Dark grounds carry the work (as
+   on the homepage), light grounds carry the reading. Unlayered; logical properties only. */
+
+/* ------------------------------------------------------------------ index · head */
+.wk-head-grid {
+  display: grid;
+  gap: 24px;
+}
+.wk-title {
+  margin: 20px 0 0;
+}
+.wk-title b {
+  display: block;
+}
+.wk-intro {
+  margin: 0;
+  color: color-mix(in srgb, var(--color-ivory) 72%, transparent);
+}
+@media (min-width: 900px) {
+  .wk-head-grid {
+    grid-template-columns: 7fr 5fr;
+    align-items: end;
+  }
+  .wk-intro {
+    padding-block-end: 0.5em;
+  }
+}
+
+/* ------------------------------------------------------------------ index · filters */
+.wk-browse {
+  padding-block: 0 var(--section-pad);
+}
+.wk-filters {
+  position: relative;
+  display: grid;
+  gap: 18px;
+  padding-block: 28px;
+  border-block: 1px solid var(--color-line-dark);
+  scroll-margin-block-start: calc(var(--header-h) + 16px);
+}
+.wk-facet {
+  display: grid;
+  gap: 10px;
+  align-items: center;
+}
+@media (min-width: 760px) {
+  .wk-facet {
+    grid-template-columns: 9rem minmax(0, 1fr);
+  }
+}
+.wk-facet-label {
+  margin: 0;
+  color: var(--color-taupe);
+}
+.wk-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.wk-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-block-size: 44px;
+  padding-inline: 16px 12px;
+  border: 1px solid var(--color-line-dark);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  line-height: 1.2;
+  text-decoration: none;
+  color: inherit;
+  transition:
+    border-color 0.3s var(--ease-expo-out),
+    background-color 0.3s var(--ease-expo-out),
+    color 0.3s var(--ease-expo-out);
+}
+a.wk-chip:hover,
+a.wk-chip:focus-visible {
+  border-color: var(--color-champagne);
+}
+.wk-chip[aria-current="page"] {
+  border-color: var(--color-champagne);
+  background: var(--color-champagne);
+  color: var(--color-espresso);
+}
+.wk-chip[aria-disabled="true"] {
+  opacity: 0.45;
+}
+.wk-chip-count {
+  min-inline-size: 1.6em;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, currentColor 12%, transparent);
+  font-family: var(--font-en);
+  font-size: 0.72rem;
+  text-align: center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .wk-chip {
+    transition: none;
+  }
+}
+
+.wk-count {
+  margin: 28px 0 clamp(28px, 4vw, 44px);
+  color: var(--color-taupe);
+}
+
+/* ------------------------------------------------------------------ index · the case ledger */
+.wk-list {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.wk-case + .wk-case {
+  border-block-start: 1px solid var(--color-line-dark);
+}
+.wk-case-grid {
+  position: relative;
+  display: grid;
+  gap: 22px;
+  padding-block: clamp(28px, 4vw, 48px);
+}
+@media (min-width: 900px) {
+  .wk-case-grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 48px;
+    align-items: center;
+  }
+}
+.wk-media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius);
+  background: var(--color-espresso-2);
+}
+.wk-body {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+}
+.wk-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--color-taupe);
+}
+.wk-meta li:not(:last-child)::after {
+  content: "·";
+  margin-inline-start: 14px;
+  opacity: 0.6;
+}
+.wk-name {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.wk-name:lang(ar) {
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+.wk-link {
+  color: inherit;
+  text-decoration: none;
+}
+/* The whole row opens the case: the title's link stretches over it (one tab stop, one name). */
+.wk-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+}
+.wk-link:focus-visible {
+  outline: none;
+}
+.wk-case-grid:has(.wk-link:focus-visible) {
+  outline: 2px solid var(--color-champagne);
+  outline-offset: 6px;
+  border-radius: var(--radius);
+}
+.wk-summary {
+  margin: 0;
+  max-inline-size: 52ch;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--color-ivory) 74%, transparent);
+}
+.wk-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0 0;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-champagne);
+}
+.wk-more:lang(ar) {
+  font-size: 0.95rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.wk-arrow {
+  inline-size: 16px;
+  block-size: 16px;
+  transition: translate 0.5s var(--ease-expo-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .wk-case-grid:hover .wk-arrow {
+    translate: 5px 0;
+  }
+  [dir="rtl"] .wk-case-grid:hover .wk-arrow {
+    translate: -5px 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wk-arrow {
+    transition: none;
+  }
+}
+
+.wk-note,
+.wk-reset {
+  margin: 28px 0 0;
+  font-size: 0.85rem;
+  color: color-mix(in srgb, var(--color-ivory) 60%, transparent);
+}
+.wk-reset {
+  margin-block-start: 12px;
+}
+
+/* The empty state: a direction, not a mood. */
+.wk-empty {
+  display: grid;
+  gap: 16px;
+  justify-items: start;
+  padding-block: clamp(32px, 5vw, 64px);
+}
+.wk-empty h2,
+.wk-empty p {
+  margin: 0;
+}
+.wk-empty p {
+  color: color-mix(in srgb, var(--color-ivory) 72%, transparent);
+}
+.wk-empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 28px;
+  margin-block-start: 8px;
+}
+
+/* ------------------------------------------------------------------ case · opening */
+.wc-eyebrow {
+  margin: 0 0 18px;
+  color: var(--color-taupe);
+}
+.wc-title {
+  margin: 0;
+  max-inline-size: 18ch;
+}
+.wc-summary {
+  margin: 20px 0 0;
+  color: color-mix(in srgb, var(--color-ivory) 76%, transparent);
+}
+.wc-media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  margin-block-start: clamp(32px, 5vw, 56px);
+  border-radius: var(--radius);
+  background: var(--color-espresso-2);
+}
+@media (min-width: 900px) {
+  .wc-media {
+    aspect-ratio: 21 / 9;
+  }
+}
+
+/* Key facts: the case file's header, one hairline-ruled row. */
+.wc-facts {
+  display: grid;
+  gap: 0;
+  margin: clamp(28px, 4vw, 44px) 0 0;
+  border-block-start: 1px solid var(--color-line-dark);
+}
+.wc-fact {
+  display: grid;
+  gap: 6px;
+  padding-block: 16px;
+  border-block-end: 1px solid var(--color-line-dark);
+}
+@media (min-width: 760px) {
+  .wc-facts {
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    column-gap: 32px;
+    border-block-end: 1px solid var(--color-line-dark);
+  }
+  .wc-fact {
+    border-block-end: 0;
+  }
+}
+.wc-fact dt {
+  color: var(--color-taupe);
+}
+.wc-fact dd {
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* "On this page" (only with 4+ sections, F1). */
+.wc-toc {
+  position: sticky;
+  inset-block-start: var(--header-h);
+  z-index: 5;
+  border-block-end: 1px solid var(--color-line-light);
+  background: var(--color-ivory);
+  color: var(--color-espresso);
+}
+.wc-toc ul {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  margin: 0;
+  padding-block: 0;
+  list-style: none;
+}
+.wc-toc a {
+  display: inline-block;
+  padding-block: 14px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.wc-toc a:hover,
+.wc-toc a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ------------------------------------------------------------------ case · story sections */
+.wc-sec {
+  padding-block: clamp(64px, 9vw, 128px);
+  scroll-margin-block-start: var(--header-h);
+}
+.wc-sec + .wc-sec[data-tone="light"] {
+  padding-block-start: 0;
+}
+.wc-grid {
+  display: grid;
+  gap: 20px 48px;
+}
+@media (min-width: 900px) {
+  .wc-grid {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  }
+}
+.wc-label {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-cocoa);
+}
+.wc-label:lang(ar) {
+  font-size: 0.95rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+[data-tone="dark"] .wc-label {
+  color: var(--color-taupe);
+}
+.wc-lead {
+  margin: 0;
+  max-inline-size: 34ch;
+  font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+  font-weight: 300;
+  line-height: 1.3;
+}
+.wc-lead:lang(ar) {
+  line-height: 1.6;
+}
+.wc-points {
+  display: grid;
+  gap: 0 32px;
+  margin: clamp(28px, 4vw, 40px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 760px) {
+  .wc-points {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.wc-points li {
+  padding-block: 14px;
+  border-block-start: 1px solid var(--color-line-light);
+  line-height: 1.55;
+}
+
+/* Result: the verified figures, always with their scope underneath. */
+.wc-figures {
+  display: grid;
+  gap: 24px;
+  margin: clamp(28px, 4vw, 40px) 0 0;
+}
+@media (min-width: 640px) {
+  .wc-figures {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.wc-figure {
+  display: grid;
+  gap: 4px;
+  padding-block-start: 16px;
+  border-block-start: 1px solid var(--color-line-dark);
+}
+.wc-figure dd {
+  order: -1;
+  margin: 0;
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+  font-weight: 200;
+  line-height: 1.05;
+  color: var(--color-champagne);
+}
+.wc-figure dt {
+  color: color-mix(in srgb, var(--color-ivory) 72%, transparent);
+}
+.wc-scope-note {
+  margin: 20px 0 0;
+  font-size: 0.85rem;
+  color: color-mix(in srgb, var(--color-ivory) 60%, transparent);
+}
+
+/* Scope: the services, each opening its section on its category page. */
+.wc-scope-intro {
+  margin: 12px 0 0;
+  color: var(--color-cocoa);
+}
+.wc-services {
+  display: grid;
+  margin: clamp(24px, 3vw, 36px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 760px) {
+  .wc-services {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 32px;
+  }
+}
+.wc-service {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-block-size: 64px;
+  padding-block: 12px;
+  border-block-start: 1px solid var(--color-line-light);
+  text-decoration: none;
+  color: inherit;
+}
+.wc-service small {
+  display: block;
+  margin-block-start: 2px;
+  font-size: 0.75rem;
+  color: var(--color-cocoa);
+}
+.wc-service svg {
+  flex: none;
+  inline-size: 18px;
+  block-size: 18px;
+  transition: translate 0.5s var(--ease-expo-out);
+}
+.wc-service:hover strong,
+.wc-service:focus-visible strong {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .wc-service:hover svg {
+    translate: 5px 0;
+  }
+  [dir="rtl"] .wc-service:hover svg {
+    translate: -5px 0;
+  }
+}
+.wc-service strong {
+  font-weight: 500;
+}
+
+/* Next case + CTA. */
+.wc-end {
+  display: grid;
+  gap: clamp(40px, 6vw, 72px);
+}
+@media (min-width: 900px) {
+  .wc-end {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: end;
+  }
+}
+.wc-next {
+  position: relative;
+  display: grid;
+  gap: 12px;
+}
+.wc-next-link {
+  color: inherit;
+  text-decoration: none;
+}
+.wc-next-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.wc-next-name {
+  margin: 0;
+  font-size: clamp(1.8rem, 3.6vw, 3rem);
+  font-weight: 300;
+  line-height: 1.1;
+}
+.wc-next-name:lang(ar) {
+  line-height: 1.45;
+}
+.wc-next:hover .wc-next-name,
+.wc-next:has(:focus-visible) .wc-next-name {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 8px;
+}
+.wc-next p {
+  margin: 0;
+  max-inline-size: 52ch;
+  color: color-mix(in srgb, var(--color-ivory) 70%, transparent);
+}
+.wc-cta {
+  display: grid;
+  gap: 16px;
+  justify-items: start;
+  padding: clamp(24px, 3vw, 36px);
+  border: 1px solid var(--color-line-dark);
+  border-radius: var(--radius);
+}
+.wc-cta h2,
+.wc-cta p {
+  margin: 0;
+}
+.wc-cta p {
+  color: color-mix(in srgb, var(--color-ivory) 72%, transparent);
+}
+.wc-note {
+  margin: clamp(32px, 5vw, 56px) 0 0;
+  font-size: 0.85rem;
+  color: color-mix(in srgb, var(--color-ivory) 60%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .wc-service svg {
+    transition: none;
+  }
+}

@@ -424,3 +424,26 @@ Kept as approved (native already): the category title, FAQ 1 q, 2 q, 4, 5, 7, 8,
 | `categories.ts` | في خطة واحدة تمنح العلامة صوتًا واحدًا. ننشر بالعربية والإنجليزية، ونقيس ما يُنشر، ونرفع عنه التقارير. | في خطة واحدة تتحدث فيها العلامة بصوت واحد. ننشر بالعربية والإنجليزية، ونقيس أداء كل ما يُنشر، ونقدّم عنه تقارير واضحة. | «نرفع عنه التقارير» is a calque of "report on it"; «نقيس أداء… ونقدّم تقارير واضحة» is the Gulf business phrasing. |
 | `categories.ts` | أجنحة وطباعة وتغليف وهدايا، بلمسات الرقائق المعدنية وUV والحفر والليزر. | أجنحة وطباعة وتغليف وهدايا، بلمسات نهائية من الرقائق المعدنية وUV والكبس والحفر بالليزر. | «الحفر والليزر» split one method in two and dropped debossing; now the four finishes match the EN. |
 | `service-hooks.ts` (18 new) | (none) | One hook per service, written natively in Arabic from the idea (see the file) | The final push §3: an outcome-first line under each H2, as Events has. No figures, no time promises, no client names. |
+
+## Work index and case pages (batch 3, F1: new lines)
+
+Written natively from the idea; Western digits; «في أرض الحدث» for on-site.
+
+| Key | Line | Note |
+|---|---|---|
+| `workIndex.headingLead` / `headingKey` | أعمال لجهات وطنية، / مشروعًا بعد مشروع. | Says who the work was for without naming them; «مشروعًا بعد مشروع» carries the ledger idea. |
+| `workIndex.intro` | جناح في معرض دبي للطيران، وليالي تكريم لدوري كرة قدم، وموقع اتحاد رياضي وتطبيقه ومنصّاته اليومية. يظهر اسم كل عميل حين يوافق على ذكره. | Concrete nouns first; the permission line is a plain statement, not an apology. |
+| `workIndex.metaDescription` | مشاريع مختارة من NO TIME Creative House: جناح لشركة طيران وطنية في المعارض، وبطولات دوري كرة قدم وليالي تكريمه، وموقع اتحاد رياضي وتطبيقه ومنصّاته اليومية. | Same three cases, anonymous. |
+| `workIndex.filterLabel`, `serviceFacet`, `marketFacet`, `allServices`, `allMarkets` | تصفية الأعمال · الخدمة · السوق · كل الخدمات · كل الأسواق | Standard UI terms. |
+| `workIndex.count` | لا مشاريع / مشروع واحد / مشروعان / {count} مشاريع / {count} مشروعًا / {count} مشروع | Full Arabic plural set, Western digits, as `megaMenu.count`. |
+| `workIndex.emptyTitle` / `emptyBody` | لا مشروع نعرضه هنا بعد. / لا ننشر إلا عملًا نملك حقائقه، لذلك تكبر هذه الصفحة مشروعًا بعد مشروع. أزل أحد عوامل التصفية، أو تعرّف على ما نقدّمه في هذا المجال. | The empty state explains the honesty rule and gives a direction. |
+| `workIndex.showAll` / `exploreServices` | اعرض كل الأعمال / تصفّح خدماتنا | Imperatives that name the result. |
+| `workCase.factsLabel`, `client`, `market`, `services`, `onThisPage` | أبرز المعلومات · العميل · السوق · الخدمات · في هذه الصفحة | «أبرز المعلومات» rather than a calque of "key facts". |
+| `workCase.scopeTitle` / `scopeIntro` | الخدمات التي قام عليها المشروع / لكل خدمة قسمها الخاص، وفيه ما نقدّمه. | «قام عليها» is the natural verb for what a project rests on. |
+| `workCase.next` | المشروع التالي | — |
+| `workCase.ctaTitle` / `ctaBody` | تخطّط لمشروع كهذا؟ / ابدأ بالخدمات التي قام عليها هذا المشروع. في كل صفحة ما نقدّمه، وطريقة التواصل معنا. | A question the reader answers with yes; no promise of a reply time beyond D91. |
+| `workCase.ctaQuote` / `ctaCategory` | اطلب عرض سعر / تصفّح {category} | Matches `cta.primary`. |
+| `work.ts` story facts (3 cases) | دورنا · المنصّة · المعارض · المناسبات; الشريك الرقمي والإعلامي المعتمد; الموقع والتطبيق متاحان للجمهور; تصميم الجناح وبناؤه وعلاقاته العامة; معرض دبي للطيران · سوق السفر العربي; تنفيذ الفعاليات والمحتوى والهدايا; البطولات وليالي التكريم | From case-studies.md, no names. |
+| `work.ts` execution leads | نتولّى حضور الاتحاد على الإنترنت كاملًا: المنصّة التي ينشر عليها، والقنوات التي يخاطب بها جمهوره، كل يوم وباللغتين. · من أول رسم حتى أرض المعرض: صمّمنا الجناح، وبنيناه، وأدرنا علاقاته العامة طوال أيام الحدث. · أيام الدوري الكبرى في يد فريق واحد، من هوية البطولة حتى العلب التي تصل فيها الجوائز. | Each lead opens on the outcome, then the span of the work. |
+| `work.ts` execution points (15) | e.g. «إعادة بناء كاملة للموقع بلغتين، بنظام لإدارة المحتوى وتطبيق جوّال متصل به» · «العلاقات العامة في أرض الحدث» · «الإنتاج في أرض الحدث، ومنه مراسم ما قبل المباراة» | Profile p5, p13, p16–19, p23–24; verbal nouns kept short. |
+| `work.ts` result (sports federation) | الموقع والتطبيق متاحان للجمهور اليوم. وعلى المنصّات، حققت إحدى حملات البطولات في أسبوعها الأول: 487 ألف مشاهدة · ‎+37.6 ألف متابع جديد · 271 ألف وصول للحملة. / حملة بطولة واحدة، في أسبوعها الأول فقط. | The figures never appear without their scope (D67). |
