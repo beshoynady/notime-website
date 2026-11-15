@@ -12,6 +12,8 @@ export type * from "./types";
  * A category without one renders a static opening (H1, intro, skip control) and no pin.
  */
 const SCENES: Partial<Record<CategorySlug, SceneConfig>> = definedOnly({
+  // The full Events build (batch 2): the animatic, approved with D74's changes.
+  "events-hospitality": EVENTS_OPENING,
   // Built from the storyboards with no animatic (D82, D83).
   "creative-production": STUDIO_OPENING,
   "marketing-brand": EDITORIAL_OPENING,
@@ -30,14 +32,12 @@ export function getScene(slug: CategorySlug): SceneConfig | undefined {
  * Scenes in review: their animatic shows on the lab route only. On approval a scene moves to
  * SCENES (the opening) or SECTION_SCENES (a section's scene) and the public page shows it.
  */
-const LAB_SCENES: Partial<Record<CategorySlug, SceneConfig>> = {
-  "events-hospitality": EVENTS_OPENING, // Task 3.0, awaiting approval
-};
+const LAB_SCENES: Partial<Record<CategorySlug, SceneConfig>> = {};
 /** Scenes inside a service section, by service slug: public once approved, and those in review. */
-const SECTION_SCENES: Record<string, SceneConfig> = {};
-const LAB_SECTION_SCENES: Record<string, SceneConfig> = {
-  "catering-heritage-hospitality": EVENTS_MAJLIS, // the majlis (Task 3.0, awaiting approval)
+const SECTION_SCENES: Record<string, SceneConfig> = {
+  "catering-heritage-hospitality": EVENTS_MAJLIS, // the majlis (D74, P2), public with the full Events build
 };
+const LAB_SECTION_SCENES: Record<string, SceneConfig> = {};
 
 /** The opening the lab route shows: the approved scene, else the one in review, else the draft. */
 export function getLabScene(slug: CategorySlug): SceneConfig {

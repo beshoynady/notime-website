@@ -20,6 +20,16 @@ const BY_CATEGORY: { category: CategorySlug; grade: SceneImageSlot["grade"]; slo
     grade: "evening",
     slots: [
       plate("ev-open-hall"),
+      // The room, dressed (batch 2): a real photo as a plate, graded with scripts/grade.mjs. It
+      // fades in over the drawn hall on the same vanishing point (scenes/events-hospitality.ts).
+      {
+        id: "ev-open-room",
+        source: { kind: "real", from: "private-celebrations-1" },
+        src: "/images/scenes/events-hospitality/ev-open-room.webp",
+        width: 1600,
+        height: 900,
+        mobile: { src: "/images/scenes/events-hospitality/ev-open-room-9x16.webp", width: 600, height: 1066 },
+      },
       real("ev-open-table", "catering-2"),
       real("ev-open-florals", "private-celebrations-2"),
       real("ev-open-candles", "private-celebrations-4"),
