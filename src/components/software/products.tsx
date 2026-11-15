@@ -1,4 +1,5 @@
-import { getProducts, type Locale } from "@/content";
+import { getProducts, productHref, type Locale } from "@/content";
+import { Link } from "@/i18n/navigation";
 import { fill } from "@/content/form-copy";
 import { hero, productsCopy as p } from "@/content/software/page";
 import { InterestDisclosure } from "./interest-disclosure";
@@ -56,6 +57,9 @@ export function Products({ locale }: { locale: Locale }) {
                       ))}
                     </ul>
                   </div>
+                  <Link href={productHref(id)} className="sw-link">
+                    {fill(p.more[locale], { product: name })}
+                  </Link>
                   <InterestDisclosure
                     locale={locale}
                     product={id}

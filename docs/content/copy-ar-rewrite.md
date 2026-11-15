@@ -474,3 +474,9 @@ Written natively from the idea; Western digits; «في أرض الحدث» for o
 | `productPage.otherProduct` / `softwareLink` / `inDevelopment` | قيد التطوير أيضًا / تعرّف على خدماتنا البرمجية / قيد التطوير | — |
 | `product-pages.ts` Minute Zero | القوائم الورقية والازدحام عند الباب يحوّلان الانطباع الأول إلى انتظار. · دعوات برمز QR — يصل كل ضيف رمزه الخاص مع الدعوة. · تسجيل الحضور عند الباب من الهاتف — يمسح فريق الاستقبال كل رمز بالهاتف. · متابعة الوصول لحظة بلحظة — من وصل ومن لم يصل بعد، لحظة بلحظة. · قائمة ضيوف واحدة — قائمة يمكن البحث فيها، فلا يتعطّل الطابور عند اسم. · بالعربية والإنجليزية — الدعوات والشاشات باللغتين. | Features follow the concept screens; drafts for the client (OQ #24). |
 | `product-pages.ts` Peak Hour | حين يعمل فريق الصالة والمطبخ من أوراق متفرقة، تفلت الأمور في أكثر الساعات ازدحامًا. · إدارة الطاولات والطلبات — كل طاولة وطلبها على شاشة واحدة. · شاشة للمطبخ — تصل الطلبات إلى المطبخ بالتسلسل، وعلى كلٍّ منها حالته: قيد التحضير أو جاهز. · ملخص نهاية اليوم — عدد الضيوف والطلبات وساعة الذروة، جاهزة عند الإغلاق. · بالعربية والإنجليزية — لفريق الصالة وفريق المطبخ، بأيّ من اللغتين. | «الصالة» is the Gulf restaurant term for the floor. |
+
+## Software page, products block (lead, step 3b)
+
+| Key | Old | New | Why |
+|---|---|---|---|
+| `productsCopy.more` | (none) | تعرّف على ما سيقدّمه {product} | The link to the new product page; «تعرّف على» is the natural invitation, and «سيقدّمه» keeps the Coming soon status honest. |

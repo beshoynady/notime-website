@@ -417,6 +417,7 @@ export const productsCopy = {
   register: l("Register interest", "سجّل اهتمامك"),
   registerFor: l("Register interest in {product}", "سجّل اهتمامك بـ{product}"),
   close: l("Close the form", "أغلق النموذج"),
+  more: l("See what {product} will do", "تعرّف على ما سيقدّمه {product}"),
   items: {
     "minute-zero": {
       slug: "qr-check-in",
