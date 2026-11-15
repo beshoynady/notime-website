@@ -1,14 +1,14 @@
-import { categoryHref } from "@/content/links";
+import { ABOUT_HREF, categoryHref, WORK_INDEX_HREF } from "@/content/links";
 
 /**
  * Header and mobile-menu links. A link shows only once its page exists (`live`, fill or hide,
- * D78): Work arrives with the Work index (v1 plan F1) and Contact with the contact page and its
- * form (Task 4.2). About points at the homepage statement until the About page exists (F2).
+ * D78): Work and About have their pages (v1 plan F1, F2); Contact arrives with the contact page
+ * and its form (Task 4.2).
  */
 export const NAV_LINKS = [
-  { key: "work", href: "/work", live: false },
+  { key: "work", href: WORK_INDEX_HREF, live: true },
   { key: "digital", href: categoryHref("software-digital"), live: true },
-  { key: "about", href: "/#about", live: true },
+  { key: "about", href: ABOUT_HREF, live: true },
   { key: "contact", href: "/contact", live: false },
 ] as const;
 

@@ -48,6 +48,30 @@ export const HOME_REF = {
   stats: "H-14",
 } as const satisfies Record<string, SectionRefId>;
 
+/** Work (F1), About (F2) and the product pages (F4). The two product pages share their numbers. */
+export const PAGE_REF = {
+  workHead: "WK-01",
+  workFilters: "WK-02",
+  workList: "WK-03",
+  caseOpening: "WK-11",
+  caseChallenge: "WK-12",
+  caseIdea: "WK-13",
+  caseExecution: "WK-14",
+  caseResult: "WK-15",
+  caseScope: "WK-16",
+  caseNext: "WK-17",
+  aboutStory: "AB-01",
+  aboutPrinciples: "AB-02",
+  aboutMarkets: "AB-03",
+  aboutCta: "AB-04",
+  productHero: "PR-01",
+  productProblem: "PR-02",
+  productFeatures: "PR-03",
+  productScreens: "PR-04",
+  productInterest: "PR-05",
+  productOther: "PR-06",
+} as const satisfies Record<string, SectionRefId>;
+
 const CATEGORY_PART = { opening: 1, related: 9, faq: 10, quote: 11 } as const;
 
 export const categoryRef = (slug: CategorySlug, part: keyof typeof CATEGORY_PART): SectionRefId =>
@@ -58,7 +82,7 @@ export const serviceRef = (s: Pick<Service, "category" | "order">): SectionRefId
 
 /** Every reference the site uses; the unit test keeps them unique. */
 export function allSectionRefs(): SectionRefId[] {
-  const refs: SectionRefId[] = Object.values(HOME_REF);
+  const refs: SectionRefId[] = [...Object.values(HOME_REF), ...Object.values(PAGE_REF)];
   for (const c of getCategories()) {
     for (const part of Object.keys(CATEGORY_PART) as (keyof typeof CATEGORY_PART)[]) refs.push(categoryRef(c.slug, part));
     for (const s of getServices(c.slug)) refs.push(serviceRef(s));

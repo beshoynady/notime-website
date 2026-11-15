@@ -26,8 +26,8 @@ describe("contactStatus", () => {
 describe("navigation links", () => {
   it("shows only links whose page exists", () => {
     const shown = liveLinks(NAV_LINKS).map((l) => l.key);
-    expect(shown).toContain("digital");
-    expect(shown).not.toContain("work"); // /work arrives in Phase F (F1)
+    expect(shown).toEqual(["work", "digital", "about"]); // Work and About live with F1/F2; Contact with Task 4.2
+    expect(NAV_LINKS.find((l) => l.key === "about")!.href).toBe("/about");
     for (const l of liveLinks(NAV_LINKS)) expect(l.href).not.toMatch(/^\/#(work|digital|contact)$/);
   });
 

@@ -1,0 +1,224 @@
+/* Product pages (F4), inside the Software page's Interface theme (.sw-page): ivory ground, the
+   theme's mono labels and visible state tags; the concept screens sit in an espresso device
+   panel, as on the Software page. Unlayered; logical properties only. */
+
+.pp-hero-grid {
+  display: grid;
+  gap: clamp(32px, 5vw, 64px);
+}
+@media (min-width: 960px) {
+  .pp-hero-grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: center;
+  }
+}
+.pp-hero-text {
+  display: grid;
+  gap: 18px;
+  justify-items: start;
+}
+.pp-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  margin: 0;
+}
+.pp-title {
+  margin: 0;
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.pp-title:lang(ar) {
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+.pp-hook {
+  margin: 0;
+  max-inline-size: 28ch;
+  font-size: clamp(1.25rem, 2.1vw, 1.6rem);
+  font-weight: 400;
+  line-height: 1.35;
+}
+.pp-hook:lang(ar) {
+  line-height: 1.6;
+}
+.pp-hero-text .sw-lead {
+  margin: 0;
+}
+.pp-cta {
+  margin-block-start: 8px;
+}
+
+.pp-visual {
+  position: relative;
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: clamp(16px, 3vw, 32px);
+  border-radius: 8px;
+  background: var(--color-espresso);
+  color: var(--color-ivory);
+}
+.pp-visual-note {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--color-ivory) 70%, transparent);
+}
+
+/* The problem and the features: a label in the narrow column, the content in the wide one. */
+.pp-split {
+  display: grid;
+  gap: 16px 48px;
+}
+@media (min-width: 900px) {
+  .pp-split {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+  }
+}
+.pp-problem {
+  border-block-start: 1px solid var(--color-line-light);
+}
+.pp-problem-line {
+  max-inline-size: 30ch;
+}
+.pp-problem-detail {
+  margin-block-start: 18px;
+}
+.pp-problem + .pp-features {
+  padding-block-start: 0;
+}
+.pp-feature-list {
+  display: grid;
+  gap: 0 32px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 700px) {
+  .pp-feature-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.pp-feature {
+  display: grid;
+  gap: 6px;
+  padding-block: 20px;
+  border-block-start: 1px solid var(--color-line-light);
+}
+.pp-feature-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+.pp-feature-line {
+  margin: 0;
+  line-height: 1.6;
+  color: var(--sw-ink-2);
+}
+
+/* Register interest: the form on a champagne-washed panel (the forms are drawn for light grounds). */
+.pp-register-grid {
+  display: grid;
+  gap: clamp(28px, 4vw, 56px);
+  padding: clamp(24px, 4vw, 56px);
+  border: 1px solid var(--color-line-light);
+  border-radius: 8px;
+  background: var(--sw-panel);
+}
+@media (min-width: 900px) {
+  .pp-register-grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: start;
+  }
+}
+.pp-register-head {
+  display: grid;
+  gap: 16px;
+  justify-items: start;
+}
+.pp-register-head .sw-h2,
+.pp-register-head .sw-lead {
+  margin: 0;
+}
+.pp-register {
+  scroll-margin-block-start: var(--header-h);
+}
+
+/* The other product. */
+.pp-other {
+  padding-block-start: 0;
+}
+.pp-other-grid {
+  display: grid;
+  gap: 24px;
+  justify-items: start;
+}
+.pp-other-card {
+  position: relative;
+  display: grid;
+  gap: 8px;
+  inline-size: 100%;
+  padding: clamp(20px, 3vw, 32px);
+  padding-inline-end: 64px;
+  border: 1px solid var(--color-line-light);
+  border-radius: 8px;
+}
+.pp-other-name {
+  margin: 0;
+  font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+  font-weight: 400;
+}
+.pp-other-link {
+  color: inherit;
+  text-decoration: none;
+}
+.pp-other-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+}
+.pp-other-link:focus-visible {
+  outline: none;
+}
+.pp-other-card:has(.pp-other-link:focus-visible) {
+  outline: 2px solid var(--color-espresso);
+  outline-offset: 4px;
+}
+.pp-other-desc {
+  font-size: 0.95rem;
+  color: var(--color-cocoa);
+}
+.pp-other-summary {
+  margin: 0;
+  max-inline-size: 60ch;
+  color: var(--sw-ink-2);
+}
+.pp-other-arrow {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: 24px;
+  inline-size: 22px;
+  block-size: 22px;
+  translate: 0 -50%;
+  transition: inset-inline-end 0.5s var(--ease-expo-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .pp-other-card:hover .pp-other-arrow {
+    inset-inline-end: 18px;
+  }
+  .pp-other-card:hover .pp-other-name {
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 1px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pp-other-arrow {
+    transition: none;
+  }
+}

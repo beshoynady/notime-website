@@ -1,4 +1,5 @@
-import { categoryHref, getCategories, getProducts, getServiceCount, productLockup, getServices, SERVICES_INDEX_HREF, serviceHref, type CategorySlug, type Locale } from "@/content";
+import { categoryHref, getCategories, getProducts, getServiceCount, productHref, productLockup, getServices, SERVICES_INDEX_HREF, serviceHref, type CategorySlug, type Locale } from "@/content";
+import { productsCopy } from "@/content/software/page";
 import { orderNumeral } from "@/lib/roman";
 
 /** Serializable, localized menu data built on the server and passed to the client menus. */
@@ -18,8 +19,8 @@ export interface MenuData {
   allServicesHref: string;
 }
 
-// The products live on the Software & Digital page; its products block (Task 4.3) gets an anchor then.
-const PRODUCTS_HREF = categoryHref("software-digital");
+// Each product has its own page (F4), keyed by its id in the forms contract.
+const PRODUCT_ID_BY_SLUG = Object.fromEntries(Object.entries(productsCopy.items).map(([id, item]) => [item.slug, id]));
 
 export function getMenuData(locale: Locale): MenuData {
   return {
@@ -32,7 +33,7 @@ export function getMenuData(locale: Locale): MenuData {
       href: categoryHref(c.slug),
       services: getServices(c.slug).map((s) => ({ slug: s.slug, title: s.title[locale], href: serviceHref(s) })),
     })),
-    products: getProducts().map((p) => ({ slug: p.slug, name: productLockup(p, locale), href: PRODUCTS_HREF })),
+    products: getProducts().map((p) => ({ slug: p.slug, name: productLockup(p, locale), href: productHref(PRODUCT_ID_BY_SLUG[p.slug]) })),
     serviceCount: getServiceCount(),
     allServicesHref: SERVICES_INDEX_HREF,
   };

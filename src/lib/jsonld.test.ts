@@ -74,3 +74,15 @@ describe("overviewJsonLd", () => {
     );
   });
 });
+
+describe("work and page trails (F1)", () => {
+  it("describes a case as a CreativeWork by the house, with no client field", async () => {
+    const { workCaseJsonLd, trailJsonLd } = await import("./jsonld");
+    const node = workCaseJsonLd({ label: "A national airline", summary: "Stand design.", path: "/work/airline-exhibition-pavilion", genres: ["Events"] }, "en", "https://x.test") as Record<string, unknown>;
+    expect(node).toMatchObject({ "@type": "CreativeWork", url: "https://x.test/en/work/airline-exhibition-pavilion", name: "A national airline" });
+    expect(node).not.toHaveProperty("sponsor");
+    expect(node).not.toHaveProperty("funder");
+    const trail = trailJsonLd([{ name: "Work", path: "/work" }], "ar", "https://x.test") as { itemListElement: { item: string }[] };
+    expect(trail.itemListElement.map((i) => i.item)).toEqual(["https://x.test/ar", "https://x.test/ar/work"]);
+  });
+});

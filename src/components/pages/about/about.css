@@ -1,0 +1,154 @@
+/* About (F2). The opening carries the profile's own line as the page's thesis; the principles sit
+   on ivory as four statements, unnumbered; the markets reuse the homepage clock board. Unlayered;
+   logical properties only. */
+
+.ab-title {
+  margin: 20px 0 0;
+  max-inline-size: 16ch;
+  font-size: clamp(2.6rem, 6.6vw, 5.8rem);
+  font-weight: 200;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+.ab-title:lang(ar) {
+  max-inline-size: 14ch;
+  font-weight: 300;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+.ab-story-grid {
+  display: grid;
+  gap: clamp(40px, 6vw, 72px);
+  margin-block-start: clamp(40px, 6vw, 80px);
+  padding-block-start: clamp(28px, 4vw, 40px);
+  border-block-start: 1px solid var(--color-line-dark);
+}
+@media (min-width: 900px) {
+  .ab-story-grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: start;
+  }
+}
+.ab-story {
+  display: grid;
+  gap: 18px;
+  justify-items: start;
+}
+.ab-story p {
+  margin: 0;
+}
+.ab-story-lead {
+  color: var(--color-ivory);
+}
+.ab-story-p {
+  max-inline-size: 60ch;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--color-ivory) 74%, transparent);
+}
+.ab-story .text-link {
+  margin-block-start: 8px;
+}
+
+/* The two verified figures (6 markets, 360°): value above its label visually, dt first for AT. */
+.ab-figures {
+  display: flex;
+  gap: clamp(32px, 6vw, 72px);
+  margin: 0;
+}
+.ab-figures > div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 6px;
+}
+.ab-figures dt {
+  color: color-mix(in srgb, var(--color-ivory) 60%, transparent);
+}
+.ab-figures dd {
+  margin: 0;
+  font-family: var(--font-en);
+  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--color-champagne);
+}
+@media (min-width: 900px) {
+  .ab-figures {
+    justify-content: flex-end;
+  }
+}
+
+/* Principles. */
+.ab-head {
+  margin-block-end: clamp(40px, 6vw, 72px);
+}
+.ab-h2 {
+  margin: 20px 0 0;
+  max-inline-size: 18ch;
+}
+.ab-principle-list {
+  display: grid;
+  gap: 0 clamp(32px, 5vw, 72px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 760px) {
+  .ab-principle-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.ab-principle {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding-block: clamp(24px, 3vw, 36px);
+  border-block-start: 1px solid var(--color-line-light);
+}
+.ab-principle-title {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.ab-principle-title:lang(ar) {
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+.ab-principle-line {
+  margin: 0;
+  max-inline-size: 44ch;
+  line-height: 1.65;
+  color: color-mix(in srgb, var(--color-espresso) 78%, transparent);
+}
+
+.ab-principles + .ab-markets {
+  padding-block-start: 0;
+}
+
+/* Closing. */
+.ab-cta-frame {
+  position: relative;
+  display: grid;
+  gap: 24px;
+  justify-items: start;
+}
+.ab-cta-title {
+  margin: 0;
+  max-inline-size: 20ch;
+}
+.ab-cta-title b {
+  display: block;
+}
+.ab-cta-body {
+  margin: 0;
+  color: color-mix(in srgb, var(--color-ivory) 74%, transparent);
+}
+.ab-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 32px;
+}

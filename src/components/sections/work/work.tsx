@@ -4,7 +4,8 @@ import { FrameCorners } from "@/components/ornaments/frame-corners";
 import { SectionRef } from "@/components/review/section-ref";
 import { AiPlaceholder } from "@/components/ui/ai-placeholder";
 import { BrandImage } from "@/components/ui/brand-image";
-import { getCategory, getImageSlot, type Locale } from "@/content";
+import { getCategory, getImageSlot, workHref, WORK_INDEX_HREF, type Locale } from "@/content";
+import { Link } from "@/i18n/navigation";
 import { workItems, workView } from "@/content/work";
 import { HOME_REF } from "@/lib/review";
 import { Showreel } from "./showreel";
@@ -18,7 +19,8 @@ import "./work.css";
  * Media: a case's own photos once named; until then its stand-in slot (stock or ChatGPT, D80),
  * which carries "Illustrative" through BrandImage. A slot with no file yet shows the designed
  * ground with no tag and no claim. Duotone → colour on hover applies to real files only.
- * No links while /work is unbuilt (fill or hide, D78); the cards become links with Task F1.
+ * Each card opens its case page (F1): the title is the link; the media repeats it for pointers only
+ * (out of the tab order and hidden from assistive tech, so each case is one stop and one name).
  * "Watch the reel" opens the showreel (H-09) from the header: the reel as the first proof, never
  * autoplaying (benchmarks).
  */
@@ -52,6 +54,9 @@ export async function Work() {
                 frame: tr.raw("frame") as string,
               }}
             />
+            <Link href={WORK_INDEX_HREF} className="text-link">
+              {t("allWork")}
+            </Link>
           </div>
         </header>
         <ul className="work-grid">
@@ -60,23 +65,29 @@ export async function Work() {
             const media = view.named ? undefined : slot;
             return (
               <li key={view.key} className="work-card" data-lead={i === 0 ? "" : undefined}>
-                <HoverSweep className="work-media">
-                  {media?.src ? (
-                    <div className="duotone absolute inset-0">
-                      <BrandImage slot={media.id} sizes={i === 0 ? "(min-width: 900px) 58vw, 100vw" : "(min-width: 900px) 40vw, 100vw"} fill />
-                    </div>
-                  ) : (
-                    <AiPlaceholder paint={media?.paint ?? "event"} showTag={false} />
-                  )}
-                  <FrameCorners inset="md" />
-                </HoverSweep>
+                <Link href={workHref(view.slug)} tabIndex={-1} aria-hidden="true" className="work-media-link">
+                  <HoverSweep className="work-media">
+                    {media?.src ? (
+                      <div className="duotone absolute inset-0">
+                        <BrandImage slot={media.id} sizes={i === 0 ? "(min-width: 900px) 58vw, 100vw" : "(min-width: 900px) 40vw, 100vw"} fill />
+                      </div>
+                    ) : (
+                      <AiPlaceholder paint={media?.paint ?? "event"} showTag={false} />
+                    )}
+                    <FrameCorners inset="md" />
+                  </HoverSweep>
+                </Link>
                 <div className="work-body">
                   <ul className="work-meta text-eyebrow" aria-label={t("spansLabel")}>
                     {item.categories.map((c) => (
                       <li key={c}>{getCategory(c)?.title[locale]}</li>
                     ))}
                   </ul>
-                  <h3 className="work-title">{view.label[locale]}</h3>
+                  <h3 className="work-title">
+                    <Link href={workHref(view.slug)} className="work-link">
+                      {view.label[locale]}
+                    </Link>
+                  </h3>
                   <p className="work-summary">{view.summary[locale]}</p>
                 </div>
               </li>

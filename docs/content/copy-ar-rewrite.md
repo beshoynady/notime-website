@@ -424,3 +424,53 @@ Kept as approved (native already): the category title, FAQ 1 q, 2 q, 4, 5, 7, 8,
 | `categories.ts` | في خطة واحدة تمنح العلامة صوتًا واحدًا. ننشر بالعربية والإنجليزية، ونقيس ما يُنشر، ونرفع عنه التقارير. | في خطة واحدة تتحدث فيها العلامة بصوت واحد. ننشر بالعربية والإنجليزية، ونقيس أداء كل ما يُنشر، ونقدّم عنه تقارير واضحة. | «نرفع عنه التقارير» is a calque of "report on it"; «نقيس أداء… ونقدّم تقارير واضحة» is the Gulf business phrasing. |
 | `categories.ts` | أجنحة وطباعة وتغليف وهدايا، بلمسات الرقائق المعدنية وUV والحفر والليزر. | أجنحة وطباعة وتغليف وهدايا، بلمسات نهائية من الرقائق المعدنية وUV والكبس والحفر بالليزر. | «الحفر والليزر» split one method in two and dropped debossing; now the four finishes match the EN. |
 | `service-hooks.ts` (18 new) | (none) | One hook per service, written natively in Arabic from the idea (see the file) | The final push §3: an outcome-first line under each H2, as Events has. No figures, no time promises, no client names. |
+
+## Work index and case pages (batch 3, F1: new lines)
+
+Written natively from the idea; Western digits; «في أرض الحدث» for on-site.
+
+| Key | Line | Note |
+|---|---|---|
+| `workIndex.headingLead` / `headingKey` | أعمال لجهات وطنية، / مشروعًا بعد مشروع. | Says who the work was for without naming them; «مشروعًا بعد مشروع» carries the ledger idea. |
+| `workIndex.intro` | جناح في معرض دبي للطيران، وليالي تكريم لدوري كرة قدم، وموقع اتحاد رياضي وتطبيقه ومنصّاته اليومية. يظهر اسم كل عميل حين يوافق على ذكره. | Concrete nouns first; the permission line is a plain statement, not an apology. |
+| `workIndex.metaDescription` | مشاريع مختارة من NO TIME Creative House: جناح لشركة طيران وطنية في المعارض، وبطولات دوري كرة قدم وليالي تكريمه، وموقع اتحاد رياضي وتطبيقه ومنصّاته اليومية. | Same three cases, anonymous. |
+| `workIndex.filterLabel`, `serviceFacet`, `marketFacet`, `allServices`, `allMarkets` | تصفية الأعمال · الخدمة · السوق · كل الخدمات · كل الأسواق | Standard UI terms. |
+| `workIndex.count` | لا مشاريع / مشروع واحد / مشروعان / {count} مشاريع / {count} مشروعًا / {count} مشروع | Full Arabic plural set, Western digits, as `megaMenu.count`. |
+| `workIndex.emptyTitle` / `emptyBody` | لا مشروع نعرضه هنا بعد. / لا ننشر إلا عملًا نملك حقائقه، لذلك تكبر هذه الصفحة مشروعًا بعد مشروع. أزل أحد عوامل التصفية، أو تعرّف على ما نقدّمه في هذا المجال. | The empty state explains the honesty rule and gives a direction. |
+| `workIndex.showAll` / `exploreServices` | اعرض كل الأعمال / تصفّح خدماتنا | Imperatives that name the result. |
+| `workCase.factsLabel`, `client`, `market`, `services`, `onThisPage` | أبرز المعلومات · العميل · السوق · الخدمات · في هذه الصفحة | «أبرز المعلومات» rather than a calque of "key facts". |
+| `workCase.scopeTitle` / `scopeIntro` | الخدمات التي قام عليها المشروع / لكل خدمة قسمها الخاص، وفيه ما نقدّمه. | «قام عليها» is the natural verb for what a project rests on. |
+| `workCase.next` | المشروع التالي | — |
+| `workCase.ctaTitle` / `ctaBody` | تخطّط لمشروع كهذا؟ / ابدأ بالخدمات التي قام عليها هذا المشروع. في كل صفحة ما نقدّمه، وطريقة التواصل معنا. | A question the reader answers with yes; no promise of a reply time beyond D91. |
+| `workCase.ctaQuote` / `ctaCategory` | اطلب عرض سعر / تصفّح {category} | Matches `cta.primary`. |
+| `work.ts` story facts (3 cases) | دورنا · المنصّة · المعارض · المناسبات; الشريك الرقمي والإعلامي المعتمد; الموقع والتطبيق متاحان للجمهور; تصميم الجناح وبناؤه وعلاقاته العامة; معرض دبي للطيران · سوق السفر العربي; تنفيذ الفعاليات والمحتوى والهدايا; البطولات وليالي التكريم | From case-studies.md, no names. |
+| `work.ts` execution leads | نتولّى حضور الاتحاد على الإنترنت كاملًا: المنصّة التي ينشر عليها، والقنوات التي يخاطب بها جمهوره، كل يوم وباللغتين. · من أول رسم حتى أرض المعرض: صمّمنا الجناح، وبنيناه، وأدرنا علاقاته العامة طوال أيام الحدث. · أيام الدوري الكبرى في يد فريق واحد، من هوية البطولة حتى العلب التي تصل فيها الجوائز. | Each lead opens on the outcome, then the span of the work. |
+| `work.ts` execution points (15) | e.g. «إعادة بناء كاملة للموقع بلغتين، بنظام لإدارة المحتوى وتطبيق جوّال متصل به» · «العلاقات العامة في أرض الحدث» · «الإنتاج في أرض الحدث، ومنه مراسم ما قبل المباراة» | Profile p5, p13, p16–19, p23–24; verbal nouns kept short. |
+| `work.ts` result (sports federation) | الموقع والتطبيق متاحان للجمهور اليوم. وعلى المنصّات، حققت إحدى حملات البطولات في أسبوعها الأول: 487 ألف مشاهدة · ‎+37.6 ألف متابع جديد · 271 ألف وصول للحملة. / حملة بطولة واحدة، في أسبوعها الأول فقط. | The figures never appear without their scope (D67). |
+
+## About (batch 3, F2: new lines)
+
+| Key | Line | Note |
+|---|---|---|
+| `aboutPage.title` | أفكار تُبنى حيث تلتقي العلامة بجمهورها. | The profile's p3 thesis, said as one clean sentence. |
+| `aboutPage.story1` | NO TIME بيت للفعاليات والتسويق والعلاقات العامة، مقرّه دبي، ويعمل لعملاء في أسواق محلية وإقليمية وعالمية. | p3 verbatim in meaning; «بيت» keeps the house idea from D95. |
+| `aboutPage.story2` | نبدأ من النقطة التي تلتقي فيها العلامة بجمهورها، ثم نمضي بالفكرة حتى آخرها: الاستراتيجية والإبداع والإنتاج والتنفيذ، بفريق واحد. | «بفريق واحد» replaces the calque «تحت سقف واحد» (D95). |
+| `aboutPage.story3` | ولهذا يتّسع عملنا لكل هذا: جناح لشركة طيران في معرض دبي للطيران، ومجلس تراثي يستقبل الضيوف، وليالي تكريم لدوري كرة قدم، وتطبيق بلغتين لاتحاد رياضي وطني. | Real, anonymous examples (work.ts, profile p31–32). |
+| `aboutPage.story4` | ومع اسمنا عبارة نلتزم بها: حان وقت البداية. | Echoes the approved hero anchor «حان وقت / البداية.». |
+| `aboutPage.seeWork` | شاهد أعمالنا | — |
+| `aboutPage.principlesEyebrow` / `principlesTitle` | كيف نعمل / ما لا يتغيّر في أي مشروع. | Unnumbered principles; the title says why there are four. |
+| `aboutPage.metaTitle` / `metaDescription` | من نحن / NO TIME بيت للفعاليات والتسويق والعلاقات العامة والإنتاج، مقرّه دبي. فريق واحد يحمل كل فكرة عبر الاستراتيجية والإبداع والإنتاج حتى التنفيذ، في ستة أسواق. | Only the profile's facts (Dubai, six markets). |
+| `principles.ts` one-roof title | تحت سقف واحد → بيت واحد | The old title was the calque D95 removed from the hero; «بيت واحد» matches the menu heading «بيت واحد. خمسة مجالات.». The line beneath already says «فريق واحد». |
+
+## Product pages (batch 3, F4: new lines)
+
+| Key | Line | Note |
+|---|---|---|
+| `productPage.hookMinuteZero` | الدقيقة الأولى عند الباب تحدّد إيقاع الأمسية كلها. | Plays on the name «الدقيقة صفر» without a pun that needs explaining. |
+| `productPage.hookPeakHour` | صُمّم للساعة التي تمتلئ فيها الطاولات ولا يحتمل المطبخ فيها الانتظار. | The name's moment, from the floor and the kitchen. |
+| `productPage.problemTitle` / `featuresTitle` | المشكلة / ماذا يقدّم | «ماذا يقدّم» reads naturally for a product; «الميزات» stays on the Software page. |
+| `productPage.screensNote` | شاشات تصوّرية ببيانات توضيحية. المنتج قيد التطوير، وقد تتغيّر بعض التفاصيل. | Honest status beside the "Preview" tag. |
+| `productPage.registerTitle` / `registerBody` / `registerCta` | كن أول من يعرف حين يصبح {product} جاهزًا. / نطوّره من خبرتنا في الفعاليات والضيافة. اترك بياناتك، وسنكتب لك حين يصبح جاهزًا. / سجّل اهتمامك | No date, no scarcity. |
+| `productPage.otherProduct` / `softwareLink` / `inDevelopment` | قيد التطوير أيضًا / تعرّف على خدماتنا البرمجية / قيد التطوير | — |
+| `product-pages.ts` Minute Zero | القوائم الورقية والازدحام عند الباب يحوّلان الانطباع الأول إلى انتظار. · دعوات برمز QR — يصل كل ضيف رمزه الخاص مع الدعوة. · تسجيل الحضور عند الباب من الهاتف — يمسح فريق الاستقبال كل رمز بالهاتف. · متابعة الوصول لحظة بلحظة — من وصل ومن لم يصل بعد، لحظة بلحظة. · قائمة ضيوف واحدة — قائمة يمكن البحث فيها، فلا يتعطّل الطابور عند اسم. · بالعربية والإنجليزية — الدعوات والشاشات باللغتين. | Features follow the concept screens; drafts for the client (OQ #24). |
+| `product-pages.ts` Peak Hour | حين يعمل فريق الصالة والمطبخ من أوراق متفرقة، تفلت الأمور في أكثر الساعات ازدحامًا. · إدارة الطاولات والطلبات — كل طاولة وطلبها على شاشة واحدة. · شاشة للمطبخ — تصل الطلبات إلى المطبخ بالتسلسل، وعلى كلٍّ منها حالته: قيد التحضير أو جاهز. · ملخص نهاية اليوم — عدد الضيوف والطلبات وساعة الذروة، جاهزة عند الإغلاق. · بالعربية والإنجليزية — لفريق الصالة وفريق المطبخ، بأيّ من اللغتين. | «الصالة» is the Gulf restaurant term for the floor. |
