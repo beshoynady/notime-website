@@ -6,6 +6,7 @@ import type { SceneConfig } from "@/content/scenes";
 import { categoryJsonLd } from "@/lib/jsonld";
 import { orderNumeral } from "@/lib/roman";
 import { CategoryFaq } from "./category-faq";
+import { SoftwarePage } from "@/components/software/software-page";
 import { CategoryOpening } from "./category-opening";
 import { CategoryQuote } from "./category-quote";
 import { ServiceIndex } from "./service-index";
@@ -49,6 +50,8 @@ export async function CategoryView({
   scene?: SceneConfig;
   lab?: boolean;
 }) {
+  // Software & Digital renders its own sales sequence (D91); the lab keeps the shared template.
+  if (category.slug === "software-digital" && !lab) return <SoftwarePage category={category} locale={locale} />;
   const services = getServices(category.slug);
   const tone = THEME_TONE[category.theme];
   const endTone = END_TONE[category.theme];

@@ -1,0 +1,136 @@
+/**
+ * The forms' words (D92: the contract returns codes, the UI owns the sentences). EN first, the
+ * Arabic written natively. Shared by the consultation, website-review and interest forms, so the
+ * Contact page (Task 4.2) reuses them. Errors say what to do, never only what went wrong.
+ * `{email}` is filled from src/config/contact.ts, never typed here.
+ */
+import type { FieldErrorCode } from "@/lib/forms/schemas";
+import type { Localized } from "./types";
+
+type L = Localized<string>;
+const l = (en: string, ar: string): L => ({ en, ar });
+
+/** One message per error code; a field may override `required` with a more specific line. */
+export const errorMessages: Record<FieldErrorCode, L> = {
+  required: l("Fill in this field.", "املأ هذا الحقل."),
+  email: l("Enter an email address like name@company.com.", "اكتب بريدًا إلكترونيًا بهذا الشكل: name@company.com"),
+  url: l("Enter a website address like yourcompany.ae.", "اكتب عنوان موقع بهذا الشكل: yourcompany.ae"),
+  phone: l("Enter the number with digits, spaces or a leading +.", "اكتب الرقم بالأرقام، ويمكنك استخدام المسافات أو علامة + في أوله."),
+  contact: l("Enter an email address or a phone number.", "اكتب بريدًا إلكترونيًا أو رقم هاتف."),
+  tooLong: l("This is too long. Shorten it a little.", "النص أطول من المسموح، اختصره قليلًا."),
+  invalid: l("Check this field and try again.", "راجع هذا الحقل وحاول مجددًا."),
+};
+
+/** Field-specific "required" lines (by field name), clearer than the generic one. */
+export const requiredMessages: Record<string, L> = {
+  name: l("Enter your name.", "اكتب اسمك."),
+  email: l("Enter your email address.", "اكتب بريدك الإلكتروني."),
+  build: l("Choose what you want to build.", "اختر ما تريد بناءه."),
+  timeline: l("Choose when you want to start.", "اختر متى تريد أن تبدأ."),
+  websiteUrl: l("Enter your website address.", "اكتب عنوان موقعك."),
+  contact: l("Enter an email address or a WhatsApp number.", "اكتب بريدًا إلكترونيًا أو رقم واتساب."),
+  goal: l("Choose the main goal.", "اختر هدفك الأساسي."),
+};
+
+export const formCopy = {
+  optional: l("optional", "اختياري"),
+  sending: l("Sending…", "جارٍ الإرسال…"),
+  summaryTitle: l("Check these before sending:", "راجع ما يلي قبل الإرسال:"),
+  states: {
+    rateLimited: l(
+      "Too many attempts from this connection. Try again in {minutes} min, or email us at {email}.",
+      "محاولات كثيرة من هذا الاتصال. حاول مجددًا بعد {minutes} دقيقة، أو راسلنا على {email}.",
+    ),
+    blocked: l(
+      "We couldn't confirm the request came from a person. Try again, or email us at {email}.",
+      "لم نتمكّن من التأكد من أن الطلب مُرسَل من شخص. حاول مجددًا، أو راسلنا على {email}.",
+    ),
+    failed: l(
+      "Your request didn't send because of a problem on our side. Try again, or email us at {email}.",
+      "لم يُرسَل طلبك بسبب خلل لدينا. حاول مجددًا، أو راسلنا على {email}.",
+    ),
+    another: l("Send another request", "أرسل طلبًا آخر"),
+  },
+  privacy: {
+    text: l(
+      "We use these details only to reply to you. Resend delivers our email and Cloudflare protects this form from spam.",
+      "نستخدم هذه البيانات للرد عليك فقط. توصل خدمة Resend رسائلنا، وتحمي Cloudflare هذا النموذج من الرسائل المزعجة.",
+    ),
+    link: l("Privacy Policy", "سياسة الخصوصية"),
+  },
+  /** The honeypot's label, read only by bots (the field is hidden from people and assistive tech). */
+  honeypot: l("Leave this field empty", "اترك هذا الحقل فارغًا"),
+
+  fields: {
+    name: l("Your name", "اسمك"),
+    email: l("Email", "البريد الإلكتروني"),
+    phone: l("Phone or WhatsApp", "الهاتف أو واتساب"),
+    company: l("Company", "الشركة"),
+    websiteUrl: l("Current website", "موقعك الحالي"),
+    websiteUrlHint: l("For example, yourcompany.ae", "مثال: yourcompany.ae"),
+  },
+
+  consultation: {
+    project: l("Your project", "مشروعك"),
+    you: l("About you", "عنك"),
+    build: l("What do you want to build?", "ماذا تريد أن تبني؟"),
+    buildOptions: {
+      websites: l("A website", "موقع إلكتروني"),
+      apps: l("A mobile app", "تطبيق جوّال"),
+      systems: l("A custom system or dashboard", "نظام مخصّص أو لوحة إدارة"),
+      "e-commerce": l("An online store", "متجر إلكتروني"),
+      ux: l("UI/UX design", "تصميم الواجهات وتجربة المستخدم"),
+      "ai-consulting": l("AI consulting", "استشارات الذكاء الاصطناعي"),
+      "event-tech": l("Event technology", "تقنيات الفعاليات"),
+      other: l("Something else", "شيء آخر"),
+    },
+    tier: l("Engagement level", "مستوى التعاون"),
+    tierNone: l("Not sure yet", "لم أحدّد بعد"),
+    timeline: l("When do you want to start?", "متى تريد أن تبدأ؟"),
+    timelineOptions: {
+      flexible: l("I'm flexible", "الموعد مرن"),
+      "within-3-months": l("Within 3 months", "خلال 3 أشهر"),
+      urgent: l("As soon as possible", "في أقرب وقت ممكن"),
+    },
+    budget: l("Budget range", "الميزانية التقريبية"),
+    budgetNone: l("Choose a range", "اختر نطاقًا"),
+    budgetHint: l("It helps us suggest the right scope. It's never a price.", "تساعدنا على اقتراح النطاق المناسب، وليست سعرًا."),
+    message: l("Tell us a little more", "أخبرنا بالمزيد"),
+    messageHint: l("Who it's for, what it must do, any date that matters.", "لمن هو، وما الذي يجب أن يفعله، وأي موعد يهمّك."),
+    submit: l("Book a free 30-min intro call", "احجز مكالمة تعارف مجانية (30 دقيقة)"),
+    micro: l("No obligation. We reply within one working day.", "دون أي التزام. نرد خلال يوم عمل."),
+    successTitle: l("Thanks, {name}. Your request is in.", "شكرًا، {name}. وصلنا طلبك."),
+    successBody: l("We reply within one working day to set a time for the call.", "نرد خلال يوم عمل لنحدّد موعد المكالمة."),
+    prefilled: l("We've filled in: {choice}. Change it if you like.", "اخترنا لك: {choice}. يمكنك تغييره."),
+  },
+
+  review: {
+    websiteUrl: l("Your website address", "عنوان موقعك"),
+    contact: l("Email or WhatsApp number", "البريد الإلكتروني أو رقم واتساب"),
+    goal: l("What's the main goal?", "ما هدفك الأساسي؟"),
+    goalOptions: {
+      "more-enquiries": l("More enquiries", "طلبات أكثر"),
+      "arabic-version": l("An Arabic version", "نسخة عربية"),
+      speed: l("A faster site", "موقع أسرع"),
+      "easier-updates": l("Easier updates", "تحديث أسهل"),
+      other: l("Something else", "شيء آخر"),
+    },
+    message: l("Anything we should know?", "هل هناك ما يجب أن نعرفه؟"),
+    submit: l("Send my site for review", "أرسل موقعي للمراجعة"),
+    successTitle: l("Thanks, {name}. Your site is with us.", "شكرًا، {name}. وصلنا موقعك."),
+    successBody: l(
+      "Within 3 working days we'll reply with 5 concrete improvements, free.",
+      "خلال 3 أيام عمل نرد عليك بخمسة تحسينات عملية، مجانًا.",
+    ),
+  },
+
+  interest: {
+    message: l("What would you use it for?", "فيمَ ستستخدمه؟"),
+    submit: l("Register interest", "سجّل اهتمامك"),
+    successTitle: l("Thanks, {name}. You're on the list for {product}.", "شكرًا، {name}. سجّلنا اهتمامك بـ{product}."),
+    successBody: l("We'll write to you when it's ready.", "سنكتب لك حين يصبح جاهزًا."),
+  },
+};
+
+/** Fills `{key}` placeholders. */
+export const fill = (s: string, vars: Record<string, string | number>) => s.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? String(vars[k]) : m));

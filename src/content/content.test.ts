@@ -268,6 +268,10 @@ describe("image slots", () => {
         "process-build-4x5",
         "process-produce-4x5",
         "process-launch-4x5",
+        "notime-website-home-en",
+        "notime-website-home-ar",
+        "notime-website-category-en",
+        "notime-website-category-ar",
       ].sort(),
     );
     for (const s of real) {
