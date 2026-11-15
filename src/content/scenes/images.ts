@@ -59,10 +59,18 @@ const BY_CATEGORY: { category: CategorySlug; grade: SceneImageSlot["grade"]; slo
       ai("cp-open-slate-stick"),
       ai("cp-open-camera", "cat-creative-production-4x5"),
       // Real work shown as evidence, so it has alt text (layers.md).
-      real("cp-open-frame", "catering-4", {
-        en: "Dessert boards styled and photographed for an event.",
-        ar: "ألواح حلويات منسّقة ومصوّرة لإحدى الفعاليات.",
-      }),
+      // Graded from catering-4 (step 3): the frame that develops in shot 4.
+      {
+        id: "cp-open-frame",
+        source: { kind: "real", from: "catering-4" },
+        src: "/images/scenes/creative-production/cp-open-frame.webp",
+        width: 1187,
+        height: 668,
+        alt: {
+          en: "Dessert boards styled and photographed for an event.",
+          ar: "ألواح حلويات منسّقة ومصوّرة لإحدى الفعاليات.",
+        },
+      },
     ],
   },
 ];

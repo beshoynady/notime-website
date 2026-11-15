@@ -285,7 +285,7 @@ export const services: Service[] = [
       { en: "Motion graphics", ar: "الموشن جرافيك" },
       {
         en: "Titles, explainers and screen content that move with purpose.",
-        ar: "عناوين وفيديوهات شرح ومحتوى للشاشات، بحركة هادفة.",
+        ar: "عناوين وفيديوهات شرح ومحتوى للشاشات، لكل حركة فيها سبب.",
       },
     ],
     [
@@ -319,7 +319,7 @@ export const services: Service[] = [
       { en: "Branding & identity", ar: "الهوية التجارية" },
       {
         en: "Name, mark, voice and system, built to hold together.",
-        ar: "الاسم والشعار والنبرة والنظام البصري، متماسكة معًا.",
+        ar: "الاسم والشعار ونبرة الخطاب والنظام البصري، في هوية واحدة متماسكة.",
       },
     ],
     [
@@ -351,7 +351,7 @@ export const services: Service[] = [
       { en: "Public relations", ar: "العلاقات العامة" },
       {
         en: "Press, media relations and announcements, handled with care.",
-        ar: "الصحافة والعلاقات الإعلامية والبيانات الرسمية، نتولّاها بعناية.",
+        ar: "البيانات الصحفية والعلاقات الإعلامية والإعلانات الرسمية، من الصياغة حتى النشر.",
       },
     ],
     [

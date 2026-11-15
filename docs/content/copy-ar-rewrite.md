@@ -414,3 +414,13 @@ Batch 2, 2026-11-15. The deck approved on 2026-11-09 (docs/content/category-copy
 | `related-work.title` (new) | — | أعمال نفّذناها لجهات وطنية | Says who the work was for without naming them (D78). |
 
 Kept as approved (native already): the category title, FAQ 1 q, 2 q, 4, 5, 7, 8, the closing «أخبرنا بالموعد، ونجهّز لك القاعة.», scenes s1 and s3, the other service summaries and points.
+## Marketing, Creative, Print (step 3: native fixes and the section hooks)
+
+| Key | Old | New | Why |
+|---|---|---|---|
+| `services.ts` | عناوين وفيديوهات شرح ومحتوى للشاشات، بحركة هادفة. | عناوين وفيديوهات شرح ومحتوى للشاشات، لكل حركة فيها سبب. | «بحركة هادفة» is a calque of "move with purpose"; the new line says it plainly. |
+| `services.ts` | الاسم والشعار والنبرة والنظام البصري، متماسكة معًا. | الاسم والشعار ونبرة الخطاب والنظام البصري، في هوية واحدة متماسكة. | The old line ended on a dangling «متماسكة معًا»; the new one names what holds together. |
+| `services.ts` | الصحافة والعلاقات الإعلامية والبيانات الرسمية، نتولّاها بعناية. | البيانات الصحفية والعلاقات الإعلامية والإعلانات الرسمية، من الصياغة حتى النشر. | «نتولّاها بعناية» translates "handled with care" and says nothing; the new line gives the span of the work. |
+| `categories.ts` | في خطة واحدة تمنح العلامة صوتًا واحدًا. ننشر بالعربية والإنجليزية، ونقيس ما يُنشر، ونرفع عنه التقارير. | في خطة واحدة تتحدث فيها العلامة بصوت واحد. ننشر بالعربية والإنجليزية، ونقيس أداء كل ما يُنشر، ونقدّم عنه تقارير واضحة. | «نرفع عنه التقارير» is a calque of "report on it"; «نقيس أداء… ونقدّم تقارير واضحة» is the Gulf business phrasing. |
+| `categories.ts` | أجنحة وطباعة وتغليف وهدايا، بلمسات الرقائق المعدنية وUV والحفر والليزر. | أجنحة وطباعة وتغليف وهدايا، بلمسات نهائية من الرقائق المعدنية وUV والكبس والحفر بالليزر. | «الحفر والليزر» split one method in two and dropped debossing; now the four finishes match the EN. |
+| `service-hooks.ts` (18 new) | (none) | One hook per service, written natively in Arabic from the idea (see the file) | The final push §3: an outcome-first line under each H2, as Events has. No figures, no time promises, no client names. |

@@ -114,7 +114,7 @@ export const categories: Category[] = [
     },
     image: "cat-marketing-brand-4x5",
     theme: "editorial",
-    intro: { en: "Brand strategy and identity, social media, search, PR and paid media, planned together so the brand speaks with one voice. We publish in Arabic and English, measure what runs, and report on it.", ar: "استراتيجية العلامة وهويتها، ووسائل التواصل الاجتماعي، ومحركات البحث، والعلاقات العامة، والإعلانات المدفوعة، في خطة واحدة تمنح العلامة صوتًا واحدًا. ننشر بالعربية والإنجليزية، ونقيس ما يُنشر، ونرفع عنه التقارير." },
+    intro: { en: "Brand strategy and identity, social media, search, PR and paid media, planned together so the brand speaks with one voice. We publish in Arabic and English, measure what runs, and report on it.", ar: "استراتيجية العلامة وهويتها، ووسائل التواصل الاجتماعي، ومحركات البحث، والعلاقات العامة، والإعلانات المدفوعة، في خطة واحدة تتحدث فيها العلامة بصوت واحد. ننشر بالعربية والإنجليزية، ونقيس أداء كل ما يُنشر، ونقدّم عنه تقارير واضحة." },
     // Copy deck draft for Rand's review (v1 decks task) + the D78 FAQ fills; clear fixes applied.
     faq: [
       {
@@ -154,7 +154,7 @@ export const categories: Category[] = [
     title: { en: "Production, Print & Gifts", ar: "الإنتاج والطباعة والهدايا" },
     summary: {
       en: "Stands, print, packaging and gifts, finished in foil, UV, deboss or laser.",
-      ar: "أجنحة وطباعة وتغليف وهدايا، بلمسات الرقائق المعدنية وUV والحفر والليزر.",
+      ar: "أجنحة وطباعة وتغليف وهدايا، بلمسات نهائية من الرقائق المعدنية وUV والكبس والحفر بالليزر.",
     },
     image: "cat-production-print-gifts-4x5",
     theme: "workshop",
