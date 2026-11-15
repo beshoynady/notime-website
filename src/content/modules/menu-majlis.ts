@@ -50,7 +50,7 @@ export const MENU = {
       items: [
         { en: "Buffet and table styling", ar: "تنسيق البوفيه والطاولات" },
         { en: "Private service", ar: "الخدمة الخاصة" },
-        { en: "Boardroom hospitality", ar: "ضيافة الاجتماعات التنفيذية" },
+        { en: "Boardroom hospitality", ar: "ضيافة مجالس الإدارة" },
       ],
     },
   ] satisfies MenuSection[],

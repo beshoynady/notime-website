@@ -12,7 +12,7 @@ export const STAGE_LIGHTS = {
   title: { en: "Light the stage", ar: "أضئ المسرح" },
   note: {
     en: "An example rig in four groups. Switch each one, or run the cues as the crew would on the night.",
-    ar: "منظومة إضاءة نموذجية من أربع مجموعات. شغّل كل مجموعة بنفسك، أو شغّل الإشارات كما يفعل الفريق ليلة الحدث.",
+    ar: "منظومة إضاءة نموذجية من أربع مجموعات. تحكّم في كل مجموعة بنفسك، أو شغّل الإشارات كما يفعل الفريق ليلة الحدث.",
   },
   groupsLabel: { en: "Light groups", ar: "مجموعات الإضاءة" },
   groups: [

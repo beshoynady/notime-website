@@ -385,3 +385,32 @@ Every Arabic line on the page and in the three forms is new, written from the id
 | `forms.requiredMessages.websiteUrl` | Enter your website address. | اكتب عنوان موقعك. |
 | `forms.requiredMessages.contact` | Enter an email address or a WhatsApp number. | اكتب بريدًا إلكترونيًا أو رقم واتساب. |
 | `forms.requiredMessages.goal` | Choose the main goal. | اختر هدفك الأساسي. |
+
+## Events & Hospitality
+
+Batch 2, 2026-11-15. The deck approved on 2026-11-09 (docs/content/category-copy-events.md) already read natively in most lines; those are kept. Changed only where a line was a calque, stiff or leaned on a cliché. EN changes in the same pass: the intro now leads with the outcome ("One team takes your event…") and drops "under one roof" (also in FAQ 2), as on the homepage. New lines (hooks, modules, related work) were written in Arabic from the idea, not from the English.
+
+| Key | Old | New | Why |
+|---|---|---|---|
+| `categories.events.summary` | مؤتمرات ومعارض وإطلاقات واحتفالات، من أول فكرة حتى آخر ضيف. | مؤتمرات ومعارض وحفلات إطلاق ومناسبات خاصة، من أول فكرة حتى يغادر آخر ضيف. | «إطلاقات» is a calque plural; «حتى يغادر آخر ضيف» gives "the last guest" a moment. |
+| `categories.events.intro` | مؤتمرات وقمم، ومعارض، وإطلاقات، وحفلات، وضيافة تراثية. نتولّى كل مناسبة من الفكرة والديكور، مرورًا بالإنتاج، حتى تجربة الضيف يوم الحدث، تحت سقف واحد. | فريق واحد يحمل مناسبتك من الفكرة والديكور، مرورًا بالإنتاج، حتى تجربة الضيف يوم الحدث: مؤتمرات وقمم، ومعارض، وحفلات إطلاق، وحفلات رسمية، وضيافة تراثية. | Outcome first (matches the new EN); «تحت سقف واحد» retired as on the homepage. |
+| `categories.events.faq[0].a` | المؤتمرات والقمم، والمعارض، وإطلاق المنتجات وتفعيل العلامات، والحفلات والأعراس والاحتفالات الخاصة، وحفلات التكريم وليالي الجوائز، للشركات والجهات الحكومية والأفراد. | مؤتمرات وقمم، ومعارض، وإطلاق منتجات وتفعيل علامات تجارية، وحفلات رسمية وأعراس ومناسبات خاصة، وحفلات تكريم وليالي جوائز. نعمل للشركات والجهات الحكومية والأفراد. | Indefinite list reads lighter; the clients get their own sentence. |
+| `categories.events.faq[1].a` | نعم. الفكرة والديكور والإنتاج وتجربة الضيف عندنا تحت سقف واحد، فيعمل فريق الديكور وفريق الضيافة والفريق التقني وفق خطة واحدة. | نعم. الفكرة والديكور والإنتاج وتجربة الضيف كلها عند فريق واحد، فيعمل فريق الديكور وفريق الضيافة والفريق التقني على خطة واحدة. | Says "one team" instead of the cliché; «على خطة» is more natural than «وفق». |
+| `categories.events.faq[2].a` | نعم: تجهيز المجالس والخيام الصحراوية، وتقديم القهوة العربية، والعربات التراثية، ومحطات الطهي الحية، ومراسم الاستقبال. | نعم: نجهّز المجالس والخيام الصحراوية، ونقدّم القهوة العربية، ومعها العربات التراثية، ومحطات طهي أمام الضيوف، ومراسم الاستقبال. | Verbs instead of a chain of verbal nouns; «الحية» was a calque of "live". |
+| `categories.events.faq[5].q` | قبل كم من الوقت ينبغي أن أحجز؟ | متى ينبغي أن أحجز؟ | «قبل كم من الوقت» is a calque of "how far ahead". |
+| `categories.events.faq[5].a` | يعتمد ذلك على حجم المناسبة. شاركنا الموعد، ونؤكّد لك مدى توفّرنا. | يتوقّف ذلك على حجم المناسبة. أرسل لنا الموعد، ونؤكّد لك إن كان متاحًا. | «مدى توفّرنا» was stiff; a plain yes or no is what the reader wants. |
+| `services.conferences-summits.summary` | البرنامج والمكان والمتحدثون وإدارة اليوم، في خطة واحدة. | البرنامج والمكان والمتحدثون وسير اليوم، في خطة واحدة. | «سير اليوم» is the running of the day; «إدارة» reads as administration. |
+| `services.conferences-summits.points[1]` | المكان وتوزيع القاعة | اختيار المكان وتوزيع القاعة | A verbal noun says what we do with the venue. |
+| `services.conferences-summits.points[3]` | تطبيق هوية الحدث في المكان | هوية الحدث في أرجاء المكان | «تطبيق» was a calque of "applying"; «في أرجاء» says it is everywhere. |
+| `services.galas-private-celebrations.summary` | حفلات وأعراس واستقبالات مواليد وتجمّعات عائلية: … | حفلات رسمية وأعراس واستقبال مواليد ولقاءات عائلية خاصة: … | "Galas" are «حفلات رسمية»; «تجمّعات» sounds like a crowd, not an intimate gathering. |
+| `services.catering-heritage-hospitality.summary` | ضيافة للمناسبات الخاصة والشركات، وحلويات ومشروبات مميّزة، ومجالس وخيام صحراوية وتقديم القهوة العربية. | ضيافة للمناسبات الخاصة وللشركات، وحلويات ومشروبات بتوقيعنا، ومجالس وخيام صحراوية تُقدَّم فيها القهوة العربية. | «بتوقيعنا» is the Gulf hospitality term for "signature"; «مميّزة» is filler. |
+| `services.catering-heritage-hospitality.points[2]` | العربات التراثية ومحطات الطهي الحية | العربات التراثية ومحطات الطهي أمام الضيوف | As FAQ 3. |
+| `services.catering-heritage-hospitality.points[3]` | حلويات ومشروبات مميّزة | حلويات ومشروبات بتوقيعنا | As the summary. |
+| `services.catering-heritage-hospitality.points[5]` | الخدمة الخاصة وضيافة الاجتماعات التنفيذية | الخدمة الخاصة وضيافة مجالس الإدارة | "Boardroom" is «مجلس الإدارة»; «التنفيذية» was a calque. Same change in the menu module. |
+| `scenes.events.s4` | كل التفاصيل جاهزة قبل وصول أول ضيف. | كل تفصيل جاهز قبل أن يصل أول ضيف. | The singular is crisper; the verb carries the arrival. |
+| `service-hooks` (6, new) | — | e.g. «لحظة الكشف ثوانٍ معدودة، ونحن نبني كل ما يسبقها.» · «قهوة تُصبّ كما يعرفها ضيوفك، في مجلس جاهز قبل وصولهم.» | One hook per section, written from the idea; sources in service-hooks.ts. |
+| `modules.*` (6, new) | — | e.g. «يوم المؤتمر، فقرة بعد فقرة» · «أضئ المسرح» · «جناح يُبنى في ست خطوات» | Module copy in src/content/modules/*.ts; «أمام الضيوف» for "live", never «على الهواء». |
+| `modules.stage-lights.note` (new) | شغّل كل مجموعة بنفسك، أو شغّل الإشارات … | تحكّم في كل مجموعة بنفسك، أو شغّل الإشارات … | No repeated verb; «شغّل الإشارات» stays matched to the button. |
+| `related-work.title` (new) | — | أعمال نفّذناها لجهات وطنية | Says who the work was for without naming them (D78). |
+
+Kept as approved (native already): the category title, FAQ 1 q, 2 q, 4, 5, 7, 8, the closing «أخبرنا بالموعد، ونجهّز لك القاعة.», scenes s1 and s3, the other service summaries and points.
