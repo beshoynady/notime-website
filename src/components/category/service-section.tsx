@@ -3,6 +3,8 @@ import { ModulePlaceholder } from "@/components/modules/module-placeholder";
 import { ModuleSlot } from "@/components/modules/module-slot";
 import { STATIC_FALLBACKS } from "@/components/modules/static-fallbacks";
 import { MajlisArt } from "./majlis-art";
+import { ServiceVisual } from "./service-visual";
+import { serviceVisual } from "@/content/service-visuals";
 import { ButtonLink } from "@/components/ui/button";
 import { Numeral } from "@/components/ui/numeral";
 import { LayeredScene } from "@/components/scenes/layered-scene";
@@ -43,6 +45,8 @@ export async function ServiceSection({
   const titleId = `${service.anchor}-title`;
   const scene = getSectionScene(service, lab);
   const Static = lab ? undefined : STATIC_FALLBACKS[service.signatureModule];
+  // A section whose module waits for v1.1 shows a lightweight visual instead (D100).
+  const visual = lab || Static ? undefined : serviceVisual(service.slug);
   const head = (
     <header className="svc-head">
       <Numeral className="svc-num">{orderNumeral(service.order, locale)}</Numeral>
@@ -96,6 +100,8 @@ export async function ServiceSection({
         >
           <p className="text-eyebrow">{service.signatureModule}</p>
         </div>
+      ) : visual ? (
+        <ServiceVisual visual={visual} locale={locale} />
       ) : (
         <ModuleSlot
           moduleKey={service.signatureModule}
