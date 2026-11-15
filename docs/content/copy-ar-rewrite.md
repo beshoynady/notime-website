@@ -447,3 +447,17 @@ Written natively from the idea; Western digits; «في أرض الحدث» for o
 | `work.ts` execution leads | نتولّى حضور الاتحاد على الإنترنت كاملًا: المنصّة التي ينشر عليها، والقنوات التي يخاطب بها جمهوره، كل يوم وباللغتين. · من أول رسم حتى أرض المعرض: صمّمنا الجناح، وبنيناه، وأدرنا علاقاته العامة طوال أيام الحدث. · أيام الدوري الكبرى في يد فريق واحد، من هوية البطولة حتى العلب التي تصل فيها الجوائز. | Each lead opens on the outcome, then the span of the work. |
 | `work.ts` execution points (15) | e.g. «إعادة بناء كاملة للموقع بلغتين، بنظام لإدارة المحتوى وتطبيق جوّال متصل به» · «العلاقات العامة في أرض الحدث» · «الإنتاج في أرض الحدث، ومنه مراسم ما قبل المباراة» | Profile p5, p13, p16–19, p23–24; verbal nouns kept short. |
 | `work.ts` result (sports federation) | الموقع والتطبيق متاحان للجمهور اليوم. وعلى المنصّات، حققت إحدى حملات البطولات في أسبوعها الأول: 487 ألف مشاهدة · ‎+37.6 ألف متابع جديد · 271 ألف وصول للحملة. / حملة بطولة واحدة، في أسبوعها الأول فقط. | The figures never appear without their scope (D67). |
+
+## About (batch 3, F2: new lines)
+
+| Key | Line | Note |
+|---|---|---|
+| `aboutPage.title` | أفكار تُبنى حيث تلتقي العلامة بجمهورها. | The profile's p3 thesis, said as one clean sentence. |
+| `aboutPage.story1` | NO TIME بيت للفعاليات والتسويق والعلاقات العامة، مقرّه دبي، ويعمل لعملاء في أسواق محلية وإقليمية وعالمية. | p3 verbatim in meaning; «بيت» keeps the house idea from D95. |
+| `aboutPage.story2` | نبدأ من النقطة التي تلتقي فيها العلامة بجمهورها، ثم نمضي بالفكرة حتى آخرها: الاستراتيجية والإبداع والإنتاج والتنفيذ، بفريق واحد. | «بفريق واحد» replaces the calque «تحت سقف واحد» (D95). |
+| `aboutPage.story3` | ولهذا يتّسع عملنا لكل هذا: جناح لشركة طيران في معرض دبي للطيران، ومجلس تراثي يستقبل الضيوف، وليالي تكريم لدوري كرة قدم، وتطبيق بلغتين لاتحاد رياضي وطني. | Real, anonymous examples (work.ts, profile p31–32). |
+| `aboutPage.story4` | ومع اسمنا عبارة نلتزم بها: حان وقت البداية. | Echoes the approved hero anchor «حان وقت / البداية.». |
+| `aboutPage.seeWork` | شاهد أعمالنا | — |
+| `aboutPage.principlesEyebrow` / `principlesTitle` | كيف نعمل / ما لا يتغيّر في أي مشروع. | Unnumbered principles; the title says why there are four. |
+| `aboutPage.metaTitle` / `metaDescription` | من نحن / NO TIME بيت للفعاليات والتسويق والعلاقات العامة والإنتاج، مقرّه دبي. فريق واحد يحمل كل فكرة عبر الاستراتيجية والإبداع والإنتاج حتى التنفيذ، في ستة أسواق. | Only the profile's facts (Dubai, six markets). |
+| `principles.ts` one-roof title | تحت سقف واحد → بيت واحد | The old title was the calque D95 removed from the hero; «بيت واحد» matches the menu heading «بيت واحد. خمسة مجالات.». The line beneath already says «فريق واحد». |
