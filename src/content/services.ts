@@ -15,7 +15,7 @@ const POINTS: Record<string, Localized<string[]>> = {
   // Events & Hospitality: copy deck docs/content/category-copy-events.md (approved 2026-11-09).
   "conferences-summits": {
     en: ["Programme and running order", "Venue and room layout", "Speaker and guest care", "Event branding on site", "Ceremonies and award nights"],
-    ar: ["البرنامج وتسلسل الفقرات", "المكان وتوزيع القاعة", "استقبال المتحدثين ورعاية الضيوف", "تطبيق هوية الحدث في المكان", "حفلات التكريم وليالي الجوائز"],
+    ar: ["البرنامج وتسلسل الفقرات", "اختيار المكان وتوزيع القاعة", "استقبال المتحدثين ورعاية الضيوف", "هوية الحدث في أرجاء المكان", "حفلات التكريم وليالي الجوائز"],
   },
   "exhibitions-booths": {
     en: ["Stand concept and design", "Fabrication and installation", "Mall and exhibition stands", "Staffing on the stand", "On-site PR management"],
@@ -31,7 +31,7 @@ const POINTS: Record<string, Localized<string[]>> = {
   },
   "catering-heritage-hospitality": {
     en: ["Majlis setups and desert tents", "Arabic coffee and welcome ceremonies", "Heritage carts and live stations", "Signature desserts and beverages", "Buffet and table styling", "Private service and boardroom hospitality"],
-    ar: ["تجهيز المجالس والخيام الصحراوية", "القهوة العربية ومراسم الاستقبال", "العربات التراثية ومحطات الطهي الحية", "حلويات ومشروبات مميّزة", "تنسيق البوفيه والطاولات", "الخدمة الخاصة وضيافة الاجتماعات التنفيذية"],
+    ar: ["تجهيز المجالس والخيام الصحراوية", "القهوة العربية ومراسم الاستقبال", "العربات التراثية ومحطات الطهي أمام الضيوف", "حلويات ومشروبات بتوقيعنا", "تنسيق البوفيه والطاولات", "الخدمة الخاصة وضيافة مجالس الإدارة"],
   },
   "stage-technical-production": {
     en: ["Stage design", "Rigging", "Live sound", "Lighting", "Screens", "Technical setup, run by one crew"],
@@ -219,7 +219,7 @@ export const services: Service[] = [
       { en: "Conferences & summits", ar: "المؤتمرات والقمم" },
       {
         en: "Programme, venue, speakers and the running of the day, planned as one.",
-        ar: "البرنامج والمكان والمتحدثون وإدارة اليوم، في خطة واحدة.",
+        ar: "البرنامج والمكان والمتحدثون وسير اليوم، في خطة واحدة.",
       },
     ],
     [
@@ -243,7 +243,7 @@ export const services: Service[] = [
       { en: "Galas & private celebrations", ar: "الحفلات والاحتفالات الخاصة" },
       {
         en: "Galas, weddings, baby receptions and intimate gatherings: theming, décor, florals, keepsakes and the full day.",
-        ar: "حفلات وأعراس واستقبالات مواليد وتجمّعات عائلية: الفكرة والديكور والزهور والتذكارات، وتنفيذ اليوم كاملًا.",
+        ar: "حفلات رسمية وأعراس واستقبال مواليد ولقاءات عائلية خاصة: الفكرة والديكور والزهور والتذكارات، وتنفيذ اليوم كاملًا.",
       },
     ],
     [
@@ -251,7 +251,7 @@ export const services: Service[] = [
       { en: "Catering & heritage hospitality", ar: "الضيافة والمجالس التراثية" },
       {
         en: "Private and corporate catering, signature desserts and beverages, majlis setups, desert tents and Arabic coffee service.",
-        ar: "ضيافة للمناسبات الخاصة والشركات، وحلويات ومشروبات مميّزة، ومجالس وخيام صحراوية وتقديم القهوة العربية.",
+        ar: "ضيافة للمناسبات الخاصة وللشركات، وحلويات ومشروبات بتوقيعنا، ومجالس وخيام صحراوية تُقدَّم فيها القهوة العربية.",
       },
     ],
     [

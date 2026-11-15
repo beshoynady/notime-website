@@ -1,0 +1,72 @@
+/* Related work (RelatedWork): shared by every category page, before the FAQ. Inherits the end
+   band's grid (.cat-end-grid): the label in the rail's column, the cards in the sections' column.
+   Tone-aware through the theme tokens; logical properties only. */
+.rw + .cat-faq {
+  padding-block-start: 0;
+}
+.rw-title {
+  margin: 0;
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  font-weight: 300;
+  line-height: 1.15;
+}
+.rw-title:lang(ar) {
+  line-height: 1.45;
+}
+.rw-body {
+  display: grid;
+  gap: 16px;
+}
+.rw-list {
+  display: grid;
+  gap: 32px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 760px) {
+  .rw-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.rw-card {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+.rw-media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  margin-block-end: 6px;
+  border-radius: var(--radius);
+}
+.rw-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--theme-accent);
+}
+.rw-meta:empty {
+  display: none;
+}
+.rw-name {
+  margin: 0;
+  font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+  font-weight: 500;
+  line-height: 1.35;
+}
+.rw-summary,
+.rw-note {
+  margin: 0;
+  max-inline-size: 60ch;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+.rw-note {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}

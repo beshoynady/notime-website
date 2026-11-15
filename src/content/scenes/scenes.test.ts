@@ -21,9 +21,9 @@ describe("scene configs", () => {
   });
 });
 
-describe("scenes in review (lab only until approved)", () => {
-  it("Events' opening shows on the lab route; the public page keeps its static opening", () => {
-    expect(getScene("events-hospitality")).toBeUndefined();
+describe("scenes, public and in review", () => {
+  it("Events' opening is public (the full Events build), and the lab route shows the same scene", () => {
+    expect(getScene("events-hospitality")?.id).toBe("events-opening");
     expect(getLabScene("events-hospitality").id).toBe("events-opening");
   });
 
@@ -31,11 +31,11 @@ describe("scenes in review (lab only until approved)", () => {
     expect(getLabScene("software-digital")).toBe(DRAFT_SCENE);
   });
 
-  it("the majlis plays in section V (hospitality), on the lab route only: pinned on desktop, passing on mobile (D74)", () => {
+  it("the majlis plays in section V (hospitality), public and on the lab route: pinned on desktop, passing on mobile (D74)", () => {
     const hospitality = getServices("events-hospitality").find((s) => s.anchor === "hospitality")!;
     expect(getSectionScene(hospitality, true)?.id).toBe("events-majlis");
     expect(getSectionScene(hospitality, true)?.mode).toEqual({ desktop: "pin", mobile: "pass" });
-    expect(getSectionScene(hospitality, false)).toBeUndefined();
+    expect(getSectionScene(hospitality, false)?.id).toBe("events-majlis");
     const others = getCategories().flatMap((c) => getServices(c.slug)).filter((s) => s !== hospitality);
     expect(others.filter((s) => getSectionScene(s, true))).toEqual([]);
   });

@@ -4,12 +4,11 @@ import { expectLanded, gotoReady, lcpEntry } from "./helpers";
 /**
  * Category pages · the opening shell (Task 2.8; storyboards README §2): the service index shows
  * from the first frame, the skip control is the first Tab stop after the breadcrumbs and lands
- * the first service, and landings hold. Public pages have a static opening until a category's
- * scene is approved; the pinned cases run on the lab animatic (build with
- * NEXT_PUBLIC_ENABLE_LAB=1, skipped otherwise).
+ * the first service, and landings hold. The Events opening is a public pinned scene (batch 2), so
+ * the pinned cases run on the public page.
  */
 const PAGE = "/services/events-hospitality";
-const LAB = "/lab/events-animatic";
+const LAB = PAGE; // the pinned opening: public since batch 2
 
 const skip = (page: Page) => page.locator("a.cat-skip");
 const indexLink = (page: Page, id: string) => page.locator(`nav.svc-index a[href="#${id}"]`);
@@ -60,19 +59,14 @@ for (const locale of ["en", "ar"] as const) {
       expect(await overflow(page)).toBeLessThanOrEqual(0);
     });
 
-    // The brief's rule: LCP is text. On a static opening at 390 the first service's intro can
-    // outsize the H1, which is fine; a scene's opening fills the screen and its H1 is the LCP
-    // (layered-scene.spec.ts).
+    // The brief's rule: LCP is text. The scene's opening fills the screen and its H1 is the LCP
+    // (layered-scene.spec.ts); the room photo fades in under it, never the largest paint.
     test("LCP is text, never an image", async ({ page }) => {
       await gotoReady(page, `/${locale}${PAGE}`);
       expect((await lcpEntry(page)).url).toBe("");
     });
 
-    test.describe("pinned (lab)", () => {
-      test.beforeEach(async ({ request }) => {
-        test.skip((await request.get(`/en${LAB}`)).status() !== 200, "lab is off: build with NEXT_PUBLIC_ENABLE_LAB=1");
-      });
-
+    test.describe("pinned", () => {
       test("index VI chosen half a screen into the opening lands #stage", async ({ page }) => {
         await gotoReady(page, `/${locale}${LAB}`);
         await page.locator(".cat-opening .scene[data-motion]").waitFor({ state: "attached" });

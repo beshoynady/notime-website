@@ -1,0 +1,38 @@
+import { STAGE_LIGHTS as D } from "@/content/modules/stage-lights";
+import { ExampleLabel } from "../example-label";
+import type { ModuleProps } from "../types";
+import { StageSvg } from "./stage-svg";
+import "../events-modules.css";
+
+/**
+ * Server fallback: the full rig, all four groups on, with the switches drawn in place (they work
+ * once the module mounts, about a viewport before it shows).
+ */
+export function StageLightsStatic({ locale }: ModuleProps) {
+  return (
+    <div className="evm" data-evm="stage">
+      <div className="evm-head">
+        <h3 className="evm-title">{D.title[locale]}</h3>
+        {D.example && <ExampleLabel kind="example" />}
+      </div>
+      <p className="evm-note">{D.note[locale]}</p>
+      <div className="st-frame">
+        <StageSvg group={(id, children) => <g key={id}>{children}</g>} />
+      </div>
+      <div className="st-controls">
+        <div className="evm-row" role="group" aria-label={D.groupsLabel[locale]}>
+          {D.groups.map((g) => (
+            <button key={g.id} type="button" className="evm-chip" aria-pressed="true" disabled>
+              <span className="st-switch-dot" aria-hidden="true" />
+              {g.label[locale]}
+            </button>
+          ))}
+        </div>
+        <button type="button" className="evm-btn" disabled>
+          {D.run[locale]}
+        </button>
+      </div>
+      <p className="evm-live" />
+    </div>
+  );
+}

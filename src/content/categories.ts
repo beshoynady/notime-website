@@ -10,27 +10,27 @@ export const categories: Category[] = [
     title: { en: "Events & Hospitality", ar: "الفعاليات والضيافة" },
     summary: {
       en: "Conferences, exhibitions, launches and celebrations, from the first concept to the last guest.",
-      ar: "مؤتمرات ومعارض وإطلاقات واحتفالات، من أول فكرة حتى آخر ضيف.",
+      ar: "مؤتمرات ومعارض وحفلات إطلاق ومناسبات خاصة، من أول فكرة حتى يغادر آخر ضيف.",
     },
     image: "cat-events-hospitality-4x5",
     theme: "evening",
     // Copy deck docs/content/category-copy-events.md (approved 2026-11-09).
     intro: {
-      en: "Conferences and summits, exhibitions, launches, galas and heritage hospitality. We take each one from the concept and the décor through production to the guest's experience on the day, under one roof.",
-      ar: "مؤتمرات وقمم، ومعارض، وإطلاقات، وحفلات، وضيافة تراثية. نتولّى كل مناسبة من الفكرة والديكور، مرورًا بالإنتاج، حتى تجربة الضيف يوم الحدث، تحت سقف واحد.",
+      en: "One team takes your event from the concept and the décor through production to the guest's experience on the day: conferences and summits, exhibitions, launches, galas and heritage hospitality.",
+      ar: "فريق واحد يحمل مناسبتك من الفكرة والديكور، مرورًا بالإنتاج، حتى تجربة الضيف يوم الحدث: مؤتمرات وقمم، ومعارض، وحفلات إطلاق، وحفلات رسمية، وضيافة تراثية.",
     },
     faq: [
       {
         q: { en: "Which events do you run?", ar: "ما أنواع الفعاليات التي تنظّمونها؟" },
-        a: { en: "Conferences and summits, exhibitions, product launches and brand activations, galas, weddings and private celebrations, and ceremonies and award nights, for companies, government entities and private clients.", ar: "المؤتمرات والقمم، والمعارض، وإطلاق المنتجات وتفعيل العلامات، والحفلات والأعراس والاحتفالات الخاصة، وحفلات التكريم وليالي الجوائز، للشركات والجهات الحكومية والأفراد." },
+        a: { en: "Conferences and summits, exhibitions, product launches and brand activations, galas, weddings and private celebrations, and ceremonies and award nights, for companies, government entities and private clients.", ar: "مؤتمرات وقمم، ومعارض، وإطلاق منتجات وتفعيل علامات تجارية، وحفلات رسمية وأعراس ومناسبات خاصة، وحفلات تكريم وليالي جوائز. نعمل للشركات والجهات الحكومية والأفراد." },
       },
       {
         q: { en: "Can one team handle the décor, the catering and the stage?", ar: "هل يتولى فريق واحد الديكور والضيافة والمسرح؟" },
-        a: { en: "Yes. Concept, décor, production and guest experience sit under one roof, so the décor, the hospitality and the technical crew work to one plan.", ar: "نعم. الفكرة والديكور والإنتاج وتجربة الضيف عندنا تحت سقف واحد، فيعمل فريق الديكور وفريق الضيافة والفريق التقني وفق خطة واحدة." },
+        a: { en: "Yes. Concept, décor, production and guest experience sit with one team, so the décor, the hospitality and the technical crew work to one plan.", ar: "نعم. الفكرة والديكور والإنتاج وتجربة الضيف كلها عند فريق واحد، فيعمل فريق الديكور وفريق الضيافة والفريق التقني على خطة واحدة." },
       },
       {
         q: { en: "Do you offer heritage hospitality?", ar: "هل تقدّمون الضيافة التراثية؟" },
-        a: { en: "Yes: majlis setups, desert tents, Arabic coffee service, heritage carts, live stations and welcome ceremonies.", ar: "نعم: تجهيز المجالس والخيام الصحراوية، وتقديم القهوة العربية، والعربات التراثية، ومحطات الطهي الحية، ومراسم الاستقبال." },
+        a: { en: "Yes: majlis setups, desert tents, Arabic coffee service, heritage carts, live stations and welcome ceremonies.", ar: "نعم: نجهّز المجالس والخيام الصحراوية، ونقدّم القهوة العربية، ومعها العربات التراثية، ومحطات طهي أمام الضيوف، ومراسم الاستقبال." },
       },
       {
         q: { en: "Where do you work?", ar: "أين تعملون؟" },
@@ -42,8 +42,8 @@ export const categories: Category[] = [
         a: { en: "From intimate gatherings to award nights and large corporate and government events. Tell us your guest count and we'll plan around it.", ar: "من اللقاءات العائلية الخاصة إلى ليالي الجوائز والفعاليات الكبرى للشركات والجهات الحكومية. أخبرنا بعدد ضيوفك، ونخطّط على أساسه." },
       },
       {
-        q: { en: "How far ahead should I book?", ar: "قبل كم من الوقت ينبغي أن أحجز؟" },
-        a: { en: "It depends on the scale of the event. Share your date and we'll confirm availability.", ar: "يعتمد ذلك على حجم المناسبة. شاركنا الموعد، ونؤكّد لك مدى توفّرنا." },
+        q: { en: "How far ahead should I book?", ar: "متى ينبغي أن أحجز؟" },
+        a: { en: "It depends on the scale of the event. Share your date and we'll confirm availability.", ar: "يتوقّف ذلك على حجم المناسبة. أرسل لنا الموعد، ونؤكّد لك إن كان متاحًا." },
       },
       {
         q: { en: "Can you photograph and film the event?", ar: "هل تصوّرون الفعالية؟" },

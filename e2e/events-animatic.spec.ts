@@ -4,22 +4,19 @@ import { lineSpans } from "../src/lib/scene-math";
 import { GROUND, gotoReady } from "./helpers";
 
 /**
- * The Events & Hospitality animatic (Task 3.0) on the hidden lab route: the opening's four shots
- * (three on mobile) and three lines on the pin, the index dimmed during shot 1, and the majlis in
- * section V: a 0.6 vh pin with two beats on desktop, a crossing on mobile (D74). In review, so the
- * public page keeps its static opening. Needs a build with NEXT_PUBLIC_ENABLE_LAB=1; skipped otherwise.
+ * The Events & Hospitality scenes (Task 3.0, public with the full Events build): the opening's
+ * four shots (three on mobile) and three lines on the pin, the index dimmed during shot 1, and the
+ * majlis in section V: a 0.6 vh pin with two beats on desktop, a crossing on mobile (D74). The
+ * scenes left the lab with batch 2, so these run on the public page (the name is kept for history).
  */
-const LAB = (locale: "en" | "ar") => `/${locale}/lab/events-animatic`;
+const LAB = (locale: "en" | "ar") => `/${locale}/services/events-hospitality`;
 const majlis = (page: Page) => page.locator('#hospitality .scene[data-scene="events-majlis"]');
 
-test.beforeEach(async ({ request }) => {
-  test.skip((await request.get(LAB("en"))).status() !== 200, "lab is off: build with NEXT_PUBLIC_ENABLE_LAB=1");
-});
-
-test("the public page keeps its static opening while the scene is in review", async ({ page }) => {
-  await gotoReady(page, "/en/services/events-hospitality");
-  await expect(page.locator(".scene")).toHaveCount(0);
-  await expect(page.locator(".pin-spacer")).toHaveCount(0);
+test("the public page plays both scenes", async ({ page }) => {
+  await gotoReady(page, LAB("en"));
+  await expect(page.locator('.cat-opening .scene[data-scene="events-opening"]')).toHaveCount(1);
+  await expect(majlis(page)).toHaveCount(1);
+  await expect(majlis(page).locator(".mj-art")).toHaveCount(1); // the drawn dallah and its pour
 });
 
 for (const locale of ["en", "ar"] as const) {
@@ -139,7 +136,9 @@ test("reduced motion: both scenes show their still, nothing pinned, the index at
   await expect(page.locator(".pin-spacer")).toHaveCount(0);
   await expect(page.locator(".cat-opening .scene-line")).toHaveCount(EVENTS_OPENING.shots.filter((s) => s.copyKey).length);
   for (const line of await page.locator(".cat-opening .scene-line").all()) await expect(line).toBeVisible();
-  // The majlis' end frame: poured, lit, night.
-  for (const layer of ["pour", "tent-bloom"]) await expect(majlis(page).locator(`[data-layer="${layer}"] .scene-light`)).toHaveCSS("opacity", "1");
+  // The majlis' end frame: poured, steaming, lit, night.
+  await expect(majlis(page).locator('[data-layer="tent-bloom"] .scene-light')).toHaveCSS("opacity", "1");
+  await expect(majlis(page).locator(".mj-art")).not.toHaveAttribute("data-motion");
+  await expect(majlis(page).locator(".mj-pour")).toHaveCSS("stroke-dashoffset", "0px");
   await expect(page.locator("nav.svc-index")).toHaveCSS("opacity", "1");
 });

@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/seo/json-ld";
 import { SITE_URL } from "@/config/site";
 import { getServices, type Category, type Locale } from "@/content";
+import { serviceHook } from "@/content/service-hooks";
 import type { SceneConfig } from "@/content/scenes";
 import { categoryJsonLd } from "@/lib/jsonld";
 import { orderNumeral } from "@/lib/roman";
@@ -9,6 +10,8 @@ import { CategoryFaq } from "./category-faq";
 import { SoftwarePage } from "@/components/software/software-page";
 import { CategoryOpening } from "./category-opening";
 import { CategoryQuote } from "./category-quote";
+import { EveningDirector } from "./evening-director";
+import { RelatedWork } from "./related-work";
 import { ServiceIndex } from "./service-index";
 import { ServiceSection } from "./service-section";
 import { END_TONE, THEME_TONE } from "./theme";
@@ -16,6 +19,7 @@ import "./category.css";
 import "./themes/studio.css";
 import "./themes/editorial.css";
 import "./themes/workshop.css";
+import "./themes/evening.css";
 
 /**
  * A category page (D57, D64): the opening, then the six services, with the service index on a
@@ -26,7 +30,7 @@ import "./themes/workshop.css";
  * the index's anchor scope (`data-anchor-scope` on the page box), so landings still count the
  * chip bar although it isn't the sections' sibling.
  *
- * Act 3 (the FAQ and the quote block) sits after the page box, so the index ends with the
+ * Act 3 (related work, the FAQ and the quote block) sits after the page box, so the index ends with the
  * services; its tone is the theme's END_TONE (the Evening ends light). When that tone differs, the
  * track releases the index early (`data-release="early"`), so the rail never sits on the new ground.
  *
@@ -77,15 +81,18 @@ export async function CategoryView({
           <div className="cat-layout frame">
             <div className="cat-sections">
               {services.map((s) => (
-                <ServiceSection key={s.slug} service={s} tone={tone} lab={lab} />
+                <ServiceSection key={s.slug} service={s} tone={tone} lab={lab} hook={serviceHook(s.slug)} light={category.theme === "evening"} />
               ))}
             </div>
           </div>
         </section>
       </div>
+      {/* The category's delivered cases (EV-09 etc.); hidden when it has none. */}
+      {!lab && <RelatedWork category={category.slug} locale={locale} tone={endTone} />}
       <CategoryFaq category={category} locale={locale} tone={endTone} />
       {/* Hidden on public pages until the quote form works (D74, P6; Task 4.2); the lab keeps it for review. */}
       {lab && <CategoryQuote category={category} services={services} locale={locale} tone={endTone} />}
+      {category.theme === "evening" && !lab && <EveningDirector />}
     </main>
   );
 }
