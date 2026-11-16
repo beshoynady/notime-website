@@ -1,0 +1,107 @@
+/* Contact (F3, D102). The opening is the About page's register; the brief sits on ivory with the
+   direct lines beside it (below it on phones); the FAQ reuses the category FAQ. Unlayered;
+   logical properties only. */
+
+.ct-title {
+  margin: 20px 0 0;
+  max-inline-size: 14ch;
+  font-size: clamp(2.6rem, 6.6vw, 5.8rem);
+  font-weight: 200;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+.ct-title:lang(ar) {
+  font-weight: 300;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+.ct-lead {
+  margin: clamp(20px, 3vw, 32px) 0 0;
+  max-inline-size: 52ch;
+  color: var(--color-ivory);
+}
+
+.ct-grid {
+  display: grid;
+  gap: clamp(48px, 6vw, 80px);
+}
+@media (min-width: 900px) {
+  .ct-grid {
+    grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+    align-items: start;
+  }
+  .ct-direct {
+    position: sticky;
+    top: calc(var(--header-h) + 32px);
+  }
+}
+.ct-h2 {
+  margin: 0 0 clamp(24px, 3vw, 36px);
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  font-weight: 300;
+  line-height: 1.15;
+}
+
+.ct-direct {
+  display: grid;
+  gap: 20px;
+  padding-block-start: 20px;
+  border-block-start: 1px solid var(--border);
+}
+.ct-direct-title {
+  margin: 0;
+}
+.ct-line {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+}
+.ct-line-label,
+.ct-base {
+  margin: 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-cocoa);
+}
+.ct-email {
+  font-size: 1.15rem;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  overflow-wrap: anywhere;
+}
+.ct-copy,
+.ct-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-block-size: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.ct-copy:hover span,
+.ct-wa:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.ct-copy:focus-visible,
+.ct-wa:focus-visible,
+.ct-email:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* The opening's light leak stays inside it (it would widen the page otherwise). It's at least
+   62% of the viewport tall: the ToneController hands the ground to the next section at 55%, so a
+   shorter opening would lose its own ground at scroll 0 on a phone. */
+.ct-open {
+  position: relative;
+  overflow-x: clip;
+  min-block-size: 62svh;
+}

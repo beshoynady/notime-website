@@ -23,6 +23,10 @@ export const workHref = (slug: string) => `${WORK_INDEX_HREF}/${slug}`;
 
 export const ABOUT_HREF = "/about";
 
+/** The brief (F3, D102); `contactHref("apps")` presets the service. */
+export const CONTACT_HREF = "/contact";
+export const contactHref = (anchor?: string) => (anchor ? `${CONTACT_HREF}?service=${anchor}` : CONTACT_HREF);
+
 /** A product page (F4), by the product's id in the forms contract ("minute-zero", "peak-hour"). */
 export const productHref = (id: string) => `/products/${id}`;
 
@@ -32,6 +36,7 @@ export const BREADCRUMB_LABELS = {
   services: { en: "Services", ar: "الخدمات" },
   work: { en: "Work", ar: "أعمالنا" },
   about: { en: "About", ar: "من نحن" },
+  contact: { en: "Contact", ar: "تواصل معنا" },
 } as const;
 
 /** The organization as JSON-LD names it: name and URL only, nothing unconfirmed. */

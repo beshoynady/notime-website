@@ -123,12 +123,13 @@
     "faqHeading": "Common questions",
     "quote": {
       "eyebrow": "Request a quote",
-      "body": "The online quote form is on its way. Until then, message us on WhatsApp or by email, and we'll come back to you with the next steps.",
+      "body": "Tell us the date, the place and what you need. One team picks it up and replies within one working day.",
       "service": "Service: {service}",
       "whatsapp": "Chat on WhatsApp",
       "email": "Email us",
       "contactPending": "Our contact details will appear here soon.",
-      "prefill": "Hello NO TIME, I'd like a quote for {service}."
+      "prefill": "Hello NO TIME, I'd like a quote for {service}.",
+      "brief": "Send a brief"
     },
     "modulePending": "Interactive preview in design",
     "skip": "Skip to services"
@@ -599,5 +600,33 @@
     "registerCta": "Register interest",
     "otherProduct": "Also in development",
     "softwareLink": "See our software services"
+  },
+  "contactPage": {
+    "metaTitle": "Contact: send us a brief",
+    "metaDescription": "Tell us about your event, campaign, production or platform. One team picks it up and replies within one working day.",
+    "eyebrow": "Contact",
+    "title": "Tell us what you're planning.",
+    "lead": "A few lines are enough to start: the occasion, the date and what you need. One team picks it up and replies within one working day.",
+    "formTitle": "Send us a brief",
+    "directTitle": "Prefer to write directly?",
+    "emailLabel": "Email",
+    "copy": "Copy the address",
+    "copied": "Copied",
+    "whatsapp": "Message us on WhatsApp",
+    "base": "Based in Dubai",
+    "faqEyebrow": "Before you write",
+    "faqTitle": "Questions we're asked first",
+    "faq": {
+      "q1": "Do you work outside the UAE?",
+      "a1": "Yes. We're based in Dubai and work across the markets on our About page. Put the city in your brief and we'll plan around it.",
+      "q2": "How quickly do you reply, and can you work to a tight date?",
+      "a2": "We reply within one working day. Put your date in the brief, and we'll tell you honestly what can be done by then.",
+      "q3": "Can one team handle it from strategy to delivery?",
+      "a3": "Yes, that's how we work: one team carries the idea through strategy, creative, production and delivery, so nothing is lost between suppliers.",
+      "q4": "What do you need from us to prepare a proposal?",
+      "a4": "The occasion or goal, the date, the place, the audience, and a budget range if you have one. We ask the rest on a short call. Every project is scoped and quoted individually.",
+      "q5": "Do you work in Arabic and English?",
+      "a5": "Yes. We write, design and publish in both, and each language is written natively, not translated word for word."
+    }
   }
 }

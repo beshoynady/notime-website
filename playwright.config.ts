@@ -42,5 +42,7 @@ export default defineConfig({
         url: `http://localhost:${PORT}/en`,
         reuseExistingServer: true,
         timeout: 300_000,
+        // Forms (D102): Turnstile's test keys and the file sink (test-results/mail/), never a real send.
+        env: { NEXT_PUBLIC_TURNSTILE_SITE_KEY: "1x00000000000000000000AA", TURNSTILE_SECRET_KEY: "1x0000000000000000000000000000000AA", MAIL_SINK: "file", MAIL_FROM: "website@example.com" },
       },
 });

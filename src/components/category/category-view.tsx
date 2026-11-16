@@ -55,15 +55,22 @@ export async function CategoryView({
   lab?: boolean;
 }) {
   // Software & Digital renders its own sales sequence (D91); the lab keeps the shared template.
-  if (category.slug === "software-digital" && !lab) return <SoftwarePage category={category} locale={locale} />;
+  if (category.slug === "software-digital" && !lab)
+    return <SoftwarePage category={category} locale={locale} />;
   const services = getServices(category.slug);
   const tone = THEME_TONE[category.theme];
   const endTone = END_TONE[category.theme];
   const t = await getTranslations("category");
-  const index = services.map((s) => ({ anchor: s.anchor, numeral: orderNumeral(s.order, locale), title: s.title[locale] }));
+  const index = services.map((s) => ({
+    anchor: s.anchor,
+    numeral: orderNumeral(s.order, locale),
+    title: s.title[locale],
+  }));
   return (
     <main id="main" data-theme={category.theme}>
-      {!lab && <JsonLd data={categoryJsonLd(category, services, locale, SITE_URL)} />}
+      {!lab && (
+        <JsonLd data={categoryJsonLd(category, services, locale, SITE_URL)} />
+      )}
       <div className="cat-page" data-anchor-scope="" data-tone={tone}>
         <CategoryOpening
           category={category}
@@ -72,7 +79,12 @@ export async function CategoryView({
           scene={scene}
           variant={lab ? "animatic" : "live"}
         />
-        <div className="cat-index-track" data-tone={tone} data-grain="off" data-release={endTone !== tone ? "early" : undefined}>
+        <div
+          className="cat-index-track"
+          data-tone={tone}
+          data-grain="off"
+          data-release={endTone !== tone ? "early" : undefined}
+        >
           <div className="cat-index-frame frame">
             <ServiceIndex items={index} label={t("indexLabel")} />
           </div>
@@ -81,17 +93,26 @@ export async function CategoryView({
           <div className="cat-layout frame">
             <div className="cat-sections">
               {services.map((s) => (
-                <ServiceSection key={s.slug} service={s} tone={tone} lab={lab} hook={serviceHook(s.slug)} light={category.theme === "evening"} />
+                <ServiceSection
+                  key={s.slug}
+                  service={s}
+                  tone={tone}
+                  lab={lab}
+                  hook={serviceHook(s.slug)}
+                  light={category.theme === "evening"}
+                />
               ))}
             </div>
           </div>
         </section>
       </div>
       {/* The category's delivered cases (EV-09 etc.); hidden when it has none. */}
-      {!lab && <RelatedWork category={category.slug} locale={locale} tone={endTone} />}
+      {!lab && (
+        <RelatedWork category={category.slug} locale={locale} tone={endTone} />
+      )}
       <CategoryFaq category={category} locale={locale} tone={endTone} />
-      {/* Hidden on public pages until the quote form works (D74, P6; Task 4.2); the lab keeps it for review. */}
-      {lab && <CategoryQuote category={category} services={services} locale={locale} tone={endTone} />}
+      {/* Public since the brief on /contact works (D102; it was lab-only until then, D74 P6). */}
+      <CategoryQuote category={category} services={services} locale={locale} tone={endTone} />
       {category.theme === "evening" && !lab && <EveningDirector />}
     </main>
   );

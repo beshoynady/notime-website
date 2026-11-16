@@ -62,7 +62,7 @@ function Inner({ locale, source, onAgain }: { locale: Locale; source: string; on
         code={codeOf("goal")}
       />
       <TextField prefix={PREFIX} name="message" label={r.message[locale]} multiline optional locale={locale} register={reg} code={codeOf("message")} />
-      <TurnstileSlot />
+      <TurnstileSlot state={state} locale={locale} />
       <FormNotice state={state} locale={locale} />
       <div className="form-actions">
         <SubmitButton label={r.submit[locale]} pending={pending} locale={locale} />

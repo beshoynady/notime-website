@@ -1,13 +1,15 @@
 "use client";
 
 import { AlertCircle, Check } from "lucide-react";
-import { useEffect, useRef, type HTMLInputTypeAttribute, type ReactNode, type RefObject } from "react";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
+import { useEffect, useRef, useState, type HTMLInputTypeAttribute, type ReactNode, type RefObject } from "react";
 import type { UseFormRegister } from "react-hook-form";
 import { contact } from "@/config/contact";
 import { errorMessages, fill, formCopy, requiredMessages } from "@/content/form-copy";
 import type { Locale } from "@/content/types";
 import { Link } from "@/i18n/navigation";
 import { HONEYPOT, TURNSTILE_FIELD, type FieldErrorCode, type FormState } from "@/lib/forms/schemas";
+import { turnstileSiteKey } from "@/lib/forms/turnstile-config";
 import { cn } from "@/lib/utils";
 import type { SummaryItem } from "./use-contract-form";
 import "./forms.css";
@@ -310,11 +312,38 @@ export function SharedFields({ locale, source }: { locale: Locale; source: strin
 }
 
 /**
- * TODO: replace placeholder — step 5 (Task 4.2) renders Cloudflare's Turnstile widget here; it
- * posts its token as `TURNSTILE_FIELD`. Nothing renders until then.
+ * Cloudflare Turnstile (D102): it posts its token as `TURNSTILE_FIELD`. The widget (and its
+ * script) mounts only once the form nears the viewport, so no page loads it up front; it stays
+ * invisible unless Cloudflare needs an interaction. A token works once, so the widget resets after
+ * every answer that isn't a success. No site key (a production build without real keys): nothing
+ * renders, and the server refuses the submission with the email fallback (fail closed).
  */
-export function TurnstileSlot() {
-  return <div className="form-turnstile" data-turnstile-slot={TURNSTILE_FIELD} hidden />;
+export function TurnstileSlot({ state, locale }: { state: FormState; locale: Locale }) {
+  const slot = useRef<HTMLDivElement>(null);
+  const widget = useRef<TurnstileInstance>(null);
+  const [near, setNear] = useState(false);
+  useEffect(() => {
+    const el = slot.current;
+    if (!el || near || !turnstileSiteKey) return;
+    const io = new IntersectionObserver(([e]) => e.isIntersecting && setNear(true), { rootMargin: "400px 0px" });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [near]);
+  useEffect(() => {
+    if (state.status !== "idle" && state.status !== "success") widget.current?.reset();
+  }, [state]);
+  if (!turnstileSiteKey) return null;
+  return (
+    <div ref={slot} className="form-turnstile">
+      {near && (
+        <Turnstile
+          ref={widget}
+          siteKey={turnstileSiteKey}
+          options={{ language: locale, appearance: "interaction-only", size: "flexible", theme: "auto", responseFieldName: TURNSTILE_FIELD }}
+        />
+      )}
+    </div>
+  );
 }
 
 export function SubmitButton({ label, pending, locale }: { label: string; pending: boolean; locale: Locale }) {

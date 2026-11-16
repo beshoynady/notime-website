@@ -34,3 +34,25 @@ describe("handleSubmission", () => {
     expect(r).toMatchObject({ status: "failed", fields: { name: "Lina" } });
   });
 });
+
+describe("handleSubmission · Turnstile (D102)", () => {
+  it("blocks without a verified token, keeps the input, and never delivers", async () => {
+    let delivered = 0;
+    const r = await handleSubmission(interestSchema, fd(ok), { ip: "2.2.2.1", verify: async () => false, deliver: async () => (delivered++, "success") });
+    expect(r.status).toBe("blocked");
+    expect(r.fields?.name).toBe("Lina");
+    expect(delivered).toBe(0);
+  });
+  it("doesn't spend the token on an invalid form", async () => {
+    let checked = 0;
+    const r = await handleSubmission(interestSchema, fd({ ...ok, email: "x" }), { ip: "2.2.2.2", verify: async () => (checked++, true) });
+    expect(r.status).toBe("invalid");
+    expect(checked).toBe(0);
+  });
+  it("passes the posted token and delivers once verified", async () => {
+    let token = "";
+    const r = await handleSubmission(interestSchema, fd({ ...ok, "cf-turnstile-response": "tok" }), { ip: "2.2.2.3", verify: async (t) => ((token = t), true), deliver: async () => "success" });
+    expect(r.status).toBe("success");
+    expect(token).toBe("tok");
+  });
+});

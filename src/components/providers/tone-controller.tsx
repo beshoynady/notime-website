@@ -65,6 +65,17 @@ export function ToneController() {
         setHeader();
       };
 
+      // Initial state: the first section, set BEFORE the zones exist. A zone already active at
+      // load (a short opening on a phone puts the next section's zone at scroll 0) toggles on as
+      // it's created and must have the last word; set after, this used to reset the tone to the
+      // first section while the ground had already turned, leaving the active section hidden.
+      const first = sections[0];
+      if (first) {
+        gsap.set(stage, { "--page-bg": groundOf(first) });
+        underHeader = first;
+        setGround(first);
+      }
+
       sections.forEach((section, i) => {
         section.dataset.zone = "";
         const ground = groundOf(section);
@@ -99,13 +110,6 @@ export function ToneController() {
         }
       });
 
-      // Initial state for the first section (before any toggle fires).
-      const first = sections[0];
-      if (first) {
-        gsap.set(stage, { "--page-bg": groundOf(first) });
-        underHeader = first;
-        setGround(first);
-      }
       stage.dataset.toneReady = "";
       ScrollTrigger.refresh();
 

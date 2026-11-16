@@ -8,7 +8,13 @@ import { serviceVisual } from "@/content/service-visuals";
 import { ButtonLink } from "@/components/ui/button";
 import { Numeral } from "@/components/ui/numeral";
 import { LayeredScene } from "@/components/scenes/layered-scene";
-import { quoteHref, type Locale, type Localized, type Service } from "@/content";
+import {
+  contactHref,
+  quoteHref,
+  type Locale,
+  type Localized,
+  type Service,
+} from "@/content";
 import { getSectionScene } from "@/content/scenes";
 import { orderNumeral } from "@/lib/roman";
 import { SectionRef } from "@/components/review/section-ref";
@@ -49,7 +55,9 @@ export async function ServiceSection({
   const visual = lab || Static ? undefined : serviceVisual(service.slug);
   const head = (
     <header className="svc-head">
-      <Numeral className="svc-num">{orderNumeral(service.order, locale)}</Numeral>
+      <Numeral className="svc-num">
+        {orderNumeral(service.order, locale)}
+      </Numeral>
       <h2 id={titleId} className="svc-title">
         {title}
       </h2>
@@ -76,7 +84,9 @@ export async function ServiceSection({
             pinUnderBars
           >
             {/* The majlis's drawn foreground (the dallah's pour) rides the scene's own range. */}
-            {scene.id === "events-majlis" && !lab && <MajlisArt scene={scene} />}
+            {scene.id === "events-majlis" && !lab && (
+              <MajlisArt scene={scene} />
+            )}
             {head}
           </LayeredScene>
         </div>
@@ -109,21 +119,24 @@ export async function ServiceSection({
           service={service}
           locale={locale}
         >
-          {Static ? <Static service={service} locale={locale} /> : <ModulePlaceholder />}
+          {Static ? (
+            <Static service={service} locale={locale} />
+          ) : (
+            <ModulePlaceholder />
+          )}
         </ModuleSlot>
       )}
-      {/* It targets the quote block, hidden on public pages until the form works (D74, P6). */}
-      {lab && (
-        <ButtonLink
-          href={quoteHref(service)}
-          variant={tone === "dark" ? "primary" : "dark"}
-          arrow
-          aria-label={t("quoteCtaFor", { service: title })}
-          className="svc-quote"
-        >
-          {t("quoteCta")}
-        </ButtonLink>
-      )}
+      {/* Public pages go straight to the brief with this service preset (D102); the lab keeps the
+          quote block as its target. */}
+      <ButtonLink
+        href={lab ? quoteHref(service) : contactHref(service.anchor)}
+        variant={tone === "dark" ? "primary" : "dark"}
+        arrow
+        aria-label={t("quoteCtaFor", { service: title })}
+        className="svc-quote"
+      >
+        {t("quoteCta")}
+      </ButtonLink>
     </section>
   );
 }

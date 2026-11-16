@@ -480,3 +480,17 @@ Written natively from the idea; Western digits; «في أرض الحدث» for o
 | Key | Old | New | Why |
 |---|---|---|---|
 | `productsCopy.more` | (none) | تعرّف على ما سيقدّمه {product} | The link to the new product page; «تعرّف على» is the natural invitation, and «سيقدّمه» keeps the Coming soon status honest. |
+
+## Contact page, forms and emails (lead, step 4)
+
+All new, written natively from the idea (no old line). Keys in `contactPage.*` (messages), `formCopy.contact`, `formCopy.interest.type*` and `src/emails/copy.ts`.
+
+| Key | Line | Note |
+|---|---|---|
+| `contactPage.title` | أخبرنا بما تخطّط له. | An invitation in the imperative, as Gulf business copy addresses the reader. |
+| `contactPage.lead` | بضعة أسطر تكفي للبداية: المناسبة والموعد وما تحتاجه. يتسلّم طلبك فريق واحد، ويرد عليك خلال يوم عمل. | Carries the approved promise «نرد خلال يوم عمل». |
+| `contactPage.faq.*` | (five Q/A) | Process only, no figures; «نحدّد نطاق كل مشروع ونسعّره على حدة» is the approved line. |
+| `category.quote.body` | أخبرنا بالموعد والمكان وما تحتاجه، ويتسلّم طلبك فريق واحد يرد عليك خلال يوم عمل. | Replaces the "form is on its way" interim line. |
+| `category.quote.brief` / `formCopy.contact.submit` | أرسل طلبك | «طلب» rather than «ملخّص» or «بريف»: what a Gulf client calls it. |
+| `formCopy.contact.messageHint` | المناسبة أو الهدف، والجمهور، وما تقرّر حتى الآن. تكفي بضعة أسطر. | Lowers the bar to write. |
+| `autoReplyCopy.*` | (four bodies) | Only the approved promises (one working day; 3 working days, 5 improvements). |

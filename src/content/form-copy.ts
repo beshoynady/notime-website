@@ -30,6 +30,8 @@ export const requiredMessages: Record<string, L> = {
   websiteUrl: l("Enter your website address.", "اكتب عنوان موقعك."),
   contact: l("Enter an email address or a WhatsApp number.", "اكتب بريدًا إلكترونيًا أو رقم واتساب."),
   goal: l("Choose the main goal.", "اختر هدفك الأساسي."),
+  // Required only on the brief (/contact); optional everywhere else.
+  message: l("Tell us a little about the project.", "اكتب لنا بضعة أسطر عن مشروعك."),
 };
 
 export const formCopy = {
@@ -129,6 +131,36 @@ export const formCopy = {
     submit: l("Register interest", "سجّل اهتمامك"),
     successTitle: l("Thanks, {name}. You're on the list for {product}.", "شكرًا، {name}. سجّلنا اهتمامك بـ{product}."),
     successBody: l("We'll write to you when it's ready.", "سنكتب لك حين يصبح جاهزًا."),
+    type: l("What do you run?", "ما الذي تديره؟"),
+    typeOptions: {
+      event: l("Events", "فعاليات"),
+      restaurant: l("A restaurant or café", "مطعم أو مقهى"),
+      other: l("Something else", "شيء آخر"),
+    },
+  },
+
+  /** The brief on /contact (D102). The project first, then the person. */
+  contact: {
+    project: l("Your project", "مشروعك"),
+    you: l("How we reach you", "كيف نتواصل معك"),
+    service: l("What do you need?", "ما الذي تحتاجه؟"),
+    serviceNone: l("Not sure yet, or several things", "لم أحدّد بعد، أو أكثر من خدمة"),
+    prefilled: l("Selected: {choice}. Change it if you need something else.", "اخترنا لك: {choice}. غيّره إن كنت تحتاج شيئًا آخر."),
+    timeline: l("When is it?", "متى موعده؟"),
+    city: l("City or country", "المدينة أو الدولة"),
+    cityHint: l("Where the event or the work takes place.", "حيث تُقام الفعالية أو يُنفَّذ العمل."),
+    message: l("Tell us about it", "حدّثنا عنه"),
+    messageHint: l(
+      "The occasion or goal, the audience, and anything already decided. A few lines are enough.",
+      "المناسبة أو الهدف، والجمهور، وما تقرّر حتى الآن. تكفي بضعة أسطر.",
+    ),
+    submit: l("Send the brief", "أرسل الطلب"),
+    micro: l("We reply within one working day.", "نرد خلال يوم عمل."),
+    successTitle: l("Thanks, {name}. Your brief is with us.", "شكرًا، {name}. وصلنا طلبك."),
+    successBody: l(
+      "We reply within one working day, with the questions we need answered or a time to talk.",
+      "نرد خلال يوم عمل، بما نحتاج إلى معرفته أو بموعد للحديث.",
+    ),
   },
 };
 

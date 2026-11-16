@@ -150,7 +150,7 @@ function Inner({ locale, source, tierLabels, onAgain }: { locale: Locale; source
         </div>
       </fieldset>
 
-      <TurnstileSlot />
+      <TurnstileSlot state={state} locale={locale} />
       <FormNotice state={state} locale={locale} />
       <div className="form-actions">
         <SubmitButton label={c.submit[locale]} pending={pending} locale={locale} />

@@ -100,8 +100,12 @@ export type WebsiteReview = z.output<typeof websiteReviewSchema>;
 
 export const PRODUCTS = ["minute-zero", "peak-hour"] as const;
 
+/** What the visitor runs (the storyboard's question; optional, D102). */
+export const INTEREST_TYPES = ["event", "restaurant", "other"] as const;
+
 export const interestSchema = z.object({
   product: z.enum(PRODUCTS, { error: "invalid" }),
+  type: z.enum(INTEREST_TYPES).or(z.literal("")).optional().default(""),
   name: req(100),
   email,
   company: opt(120),
@@ -109,6 +113,28 @@ export const interestSchema = z.object({
 });
 export type InterestInput = z.input<typeof interestSchema>;
 export type Interest = z.output<typeof interestSchema>;
+
+// ---------------------------------------------------------------- the brief (Contact page, D102)
+
+/** Event budget bands (src/content/forms.ts `budgetBands.events`). */
+export const EVENT_BUDGETS = ["ev-under-50k", "ev-50k-150k", "ev-150k-500k", "ev-500k-1m", "ev-over-1m", "prefer-not"] as const;
+/** Any band: the form shows the software bands for a software service, the event bands otherwise. */
+export const CONTACT_BUDGETS = [...new Set([...EVENT_BUDGETS, ...SOFTWARE_BUDGETS])] as [string, ...string[]];
+
+export const contactSchema = z.object({
+  /** A service anchor (`?service=` preset); the server keeps it only if it names a real service. */
+  service: z.string().trim().max(60).optional().default(""),
+  timeline: z.enum(TIMELINES).or(z.literal("")).optional().default(""),
+  budget: z.enum(CONTACT_BUDGETS).or(z.literal("")).optional().default(""),
+  city: opt(80),
+  name: req(100),
+  email,
+  phone: phoneOpt,
+  company: opt(120),
+  message: req(3000),
+});
+export type ContactInput = z.input<typeof contactSchema>;
+export type Contact = z.output<typeof contactSchema>;
 
 // ---------------------------------------------------------------- the action result
 

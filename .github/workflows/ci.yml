@@ -77,6 +77,12 @@ jobs:
       # The lab route is built in, so the animatic specs run instead of skipping.
       NEXT_PUBLIC_ENABLE_LAB: "1"
       NEXT_TELEMETRY_DISABLED: "1"
+      # Forms (D102): Cloudflare's published always-pass Turnstile test keys (not secrets), and
+      # the file sink, so the form specs submit for real and no email is ever sent.
+      NEXT_PUBLIC_TURNSTILE_SITE_KEY: "1x00000000000000000000AA"
+      TURNSTILE_SECRET_KEY: "1x0000000000000000000000000000000AA"
+      MAIL_SINK: "file"
+      MAIL_FROM: "website@example.com"
     steps:
       - uses: actions/checkout@v4
 

@@ -152,3 +152,9 @@
   align-items: center;
   gap: 16px 32px;
 }
+
+/* The closing's light leak stays inside it (it widened the page by 288 px at 1440). */
+.ab-cta {
+  position: relative;
+  overflow-x: clip;
+}

@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { NAV_LINKS, QUOTE_LINK } from "@/components/layout/nav-links";
 import { contactStatus, isFilled, liveLinks } from "./content-status";
@@ -31,8 +32,9 @@ describe("navigation links", () => {
     for (const l of liveLinks(NAV_LINKS)) expect(l.href).not.toMatch(/^\/#(work|digital|contact)$/);
   });
 
-  it("keeps the quote button hidden until /contact exists", () => {
+  it("shows the quote button now that /contact exists (D102)", () => {
     expect(QUOTE_LINK.href).toBe("/contact");
-    expect(liveLinks([QUOTE_LINK])).toEqual([]);
+    expect(existsSync("src/app/[locale]/contact/page.tsx")).toBe(true);
+    expect(liveLinks([QUOTE_LINK])).toEqual([QUOTE_LINK]);
   });
 });

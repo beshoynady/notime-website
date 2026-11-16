@@ -8,8 +8,8 @@ import { categoryRef } from "@/lib/review";
 /**
  * Act 3 · the closing (spec §4, part 5): `section#quote`, the target of every "Request a quote"
  * link (`?service=<anchor>#quote`). Its H2 is the category's closing line, which answers the
- * opening (storyboards, Act 3). Until the quote form exists (Phase 4) it offers WhatsApp and
- * email, each only once it is set in src/config/contact.ts.
+ * opening (storyboards, Act 3). It sends the visitor to the brief on /contact with the service
+ * preset (D102), with WhatsApp and email beside it once each is set in src/config/contact.ts.
  *
  * The service named in the link is read on the client (`useSearchParams`), so the page stays
  * prerendered; the shell renders the same actions without it.
@@ -36,7 +36,6 @@ export async function CategoryQuote({
           <h2 id="quote-title" className="cat-quote-title">
             {category.closing[locale]}
           </h2>
-          {/* TODO: replace placeholder — the quote form (Phase 4) replaces this note and the direct actions. */}
           <p className="cat-quote-note">{t("body")}</p>
           <Suspense fallback={<QuoteActionsView tone={tone} />}>
             <QuoteActions titles={titles} tone={tone} />

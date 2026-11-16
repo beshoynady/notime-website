@@ -60,7 +60,7 @@ for (const category of getCategories()) {
       test.describe("desktop only", () => {
         test.skip(({ isMobile }) => isMobile, "structure is the same at every width");
 
-        test("one H1, six sections in data order, the FAQ; no quote block or quote links yet (D74, P6)", async ({ page }) => {
+        test("one H1, six sections in data order, the FAQ, the quote block; service CTAs go to the brief (D102)", async ({ page }) => {
           await gotoReady(page, path);
           await expect(page.locator("h1")).toHaveCount(1);
           const ids = await page.locator(".cat-sections > section[id]").evaluateAll((els) => els.map((e) => e.id));
@@ -70,8 +70,11 @@ for (const category of getCategories()) {
           }
           await expect(page.locator("section.cat-faq h2")).toHaveCount(1);
           await expect(page.locator("section.cat-faq details")).toHaveCount(category.faq.length);
-          await expect(page.locator("section#quote")).toHaveCount(0);
-          await expect(page.locator('a[href*="#quote"]')).toHaveCount(0);
+          await expect(page.locator("section#quote")).toHaveCount(1);
+          for (const s of services) {
+            await expect(page.locator(`#${s.anchor} a.svc-quote`)).toHaveAttribute("href", new RegExp(`/contact\\?service=${s.anchor}$`));
+          }
+          await expect(page.locator('section#quote a[href*="/contact"]')).toHaveCount(1);
         });
 
         test("the FAQ opens and closes with Enter", async ({ page }) => {
