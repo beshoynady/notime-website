@@ -17,7 +17,7 @@ export const categories: Category[] = [
     // Copy deck docs/content/category-copy-events.md (approved 2026-11-09).
     intro: {
       en: "One team takes your event from the concept and the décor through production to the guest's experience on the day: conferences and summits, exhibitions, launches, galas and heritage hospitality.",
-      ar: "فريق واحد يحمل مناسبتك من الفكرة والديكور، مرورًا بالإنتاج، حتى تجربة الضيف يوم الحدث: مؤتمرات وقمم، ومعارض، وحفلات إطلاق، وحفلات رسمية، وضيافة تراثية.",
+      ar: "فريق واحد يرافق مناسبتك من الفكرة والديكور والإنتاج حتى استقبال الضيوف يوم الحدث: مؤتمرات وقمم، ومعارض، وحفلات إطلاق، وحفلات رسمية، وضيافة تراثية.",
     },
     faq: [
       {
@@ -26,7 +26,7 @@ export const categories: Category[] = [
       },
       {
         q: { en: "Can one team handle the décor, the catering and the stage?", ar: "هل يتولى فريق واحد الديكور والضيافة والمسرح؟" },
-        a: { en: "Yes. Concept, décor, production and guest experience sit with one team, so the décor, the hospitality and the technical crew work to one plan.", ar: "نعم. الفكرة والديكور والإنتاج وتجربة الضيف كلها عند فريق واحد، فيعمل فريق الديكور وفريق الضيافة والفريق التقني على خطة واحدة." },
+        a: { en: "Yes. Concept, décor, production and guest experience sit with one team, so the décor, the hospitality and the technical crew work to one plan.", ar: "نعم. الفكرة والديكور والإنتاج واستقبال الضيوف كلها عند فريق واحد، فيعمل فريق الديكور وفريق الضيافة والفريق التقني على خطة واحدة." },
       },
       {
         q: { en: "Do you offer heritage hospitality?", ar: "هل تقدّمون الضيافة التراثية؟" },
@@ -110,7 +110,7 @@ export const categories: Category[] = [
     title: { en: "Marketing & Brand", ar: "التسويق والعلامة التجارية" },
     summary: {
       en: "Identity, social, search and PR that keep people talking after the event ends.",
-      ar: "هوية وتواصل اجتماعي وبحث وعلاقات عامة، تُبقي الحديث قائمًا بعد انتهاء الفعالية.",
+      ar: "هوية، وتواصل اجتماعي، وظهور في البحث، وعلاقات عامة، تُبقي الحديث عنك قائمًا بعد الفعالية.",
     },
     image: "cat-marketing-brand-4x5",
     theme: "editorial",
@@ -158,7 +158,7 @@ export const categories: Category[] = [
     },
     image: "cat-production-print-gifts-4x5",
     theme: "workshop",
-    intro: { en: "Stands and signage, commercial and large-format print, packaging, corporate gifts and merchandise, produced to brand standard. We design, fabricate and install, and finish each gift with the branding method that suits it.", ar: "أجنحة ولافتات، وطباعة تجارية وكبيرة الحجم، وتغليف، وهدايا للشركات، ومنتجات بهوية العلامة، تُنتَج بمعايير علامتك. نصمّم ونصنّع ونركّب، ونختار لكل هدية طريقة الطباعة أو الحفر التي تليق بها." },
+    intro: { en: "Stands and signage, commercial and large-format print, packaging, corporate gifts and merchandise, produced to brand standard. We design, fabricate and install, and finish each gift with the branding method that suits it.", ar: "أجنحة ولافتات، وطباعة تجارية وكبيرة الحجم، وتغليف، وهدايا للشركات، ومنتجات تحمل هوية علامتك وتلتزم بمعاييرها. نصمّم ونصنّع ونركّب، ونختار لكل هدية طريقة الطباعة أو الحفر التي تليق بها." },
     // Copy deck draft for Rand's review (v1 decks task) + the D78 FAQ fills; clear fixes applied.
     faq: [
       {
@@ -202,7 +202,7 @@ export const categories: Category[] = [
     title: { en: "Software & Digital", ar: "البرمجيات والحلول الرقمية" },
     summary: {
       en: "Websites, apps and custom systems that keep working long after launch day.",
-      ar: "مواقع وتطبيقات وأنظمة تُبنى على مقاسك، وتبقى تعمل بعد الإطلاق بزمن طويل.",
+      ar: "مواقع وتطبيقات وأنظمة تُبنى على مقاسك، وتبقى تعمل طويلًا بعد الإطلاق.",
     },
     image: "cat-software-digital-4x5",
     theme: "interface",

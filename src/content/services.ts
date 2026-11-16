@@ -23,7 +23,7 @@ const POINTS: Record<string, Localized<string[]>> = {
   },
   "product-launches-activations": {
     en: ["Launch concept and the reveal", "Brand activations in malls and venues", "Technology and robotics experiences", "Sponsor activations", "Branded environments"],
-    ar: ["فكرة الإطلاق ولحظة الكشف", "تفعيل العلامات في المراكز التجارية والقاعات", "تجارب التقنية والروبوتات", "تفعيلات الرعاة", "مساحات بهوية العلامة"],
+    ar: ["فكرة الإطلاق ولحظة الكشف", "تفعيل العلامات في المراكز التجارية والقاعات", "عروض تفاعلية بالتقنية والروبوتات", "تفعيلات الرعاة", "مساحات بهوية العلامة"],
   },
   "galas-private-celebrations": {
     en: ["Concept decks and theming", "Gala and wedding décor", "Floral design and styling", "Giveaways and keepsakes", "Photobooths and guest moments", "Full on-day production"],
@@ -134,11 +134,11 @@ const POINTS: Record<string, Localized<string[]>> = {
   },
   "ui-ux-design": {
     en: ["User research and flows", "Clickable prototypes", "A design system"],
-    ar: ["بحث المستخدمين ومسارات الاستخدام", "نماذج تفاعلية للتجربة", "نظام تصميم"],
+    ar: ["بحث المستخدمين ومسارات الاستخدام", "نماذج أولية قابلة للنقر", "نظام تصميم"],
   },
   "ai-consulting": {
     en: ["A review of where AI fits your work", "A pilot plan", "Getting your team started"],
-    ar: ["مراجعة لمواضع فائدة الذكاء الاصطناعي في عملك", "خطة لتجربة أولى", "تهيئة فريقك للبدء"],
+    ar: ["مراجعة لمواضع فائدة الذكاء الاصطناعي في عملك", "خطة لمشروع تجريبي أول", "تهيئة فريقك للبدء"],
   },
 };
 
@@ -235,7 +235,7 @@ export const services: Service[] = [
       { en: "Product launches & brand activations", ar: "إطلاق المنتجات وتفعيل العلامات" },
       {
         en: "Launches and brand activations in malls, venues and exhibitions, including technology and robotics experiences.",
-        ar: "إطلاقات وتفعيلات للعلامات في المراكز التجارية والقاعات والمعارض، بما فيها تجارب التقنية والروبوتات.",
+        ar: "إطلاقات وتفعيلات للعلامات في المراكز التجارية والقاعات والمعارض، ومعها عروض تفاعلية بالتقنية والروبوتات.",
       },
     ],
     [

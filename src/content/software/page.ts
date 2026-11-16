@@ -134,7 +134,7 @@ export const serviceBlocks: Record<string, { outcome: L; idealFor: L[]; phases: 
     phases: ["discover", "design", "build", "launch", "support"],
   },
   "e-commerce": {
-    outcome: l("A store where buying takes a few clear steps, and orders are easy to follow.", "متجر يتم فيه الشراء بخطوات قليلة وواضحة، وتسهل فيه متابعة الطلبات."),
+    outcome: l("A store where buying takes a few clear steps, and orders are easy to follow.", "متجر يُتمّ فيه العميل شراءه بخطوات قليلة وواضحة، ويتابع طلبه بسهولة."),
     idealFor: [
       l("Retail brands starting to sell online", "علامات تجزئة تبدأ البيع عبر الإنترنت"),
       l("Shops moving to a store of their own", "متاجر تنتقل إلى متجرها الإلكتروني الخاص"),

@@ -14,13 +14,13 @@ export interface Principle {
 export const principles: Principle[] = [
   {
     key: "one-roof",
-    title: { en: "Under one roof", ar: "بيت واحد" },
+    title: { en: "Under one roof", ar: "تحت سقف واحد" },
     line: { en: "Strategy, creative, production and delivery, carried through by one team.", ar: "الاستراتيجية والإبداع والإنتاج والتنفيذ، يتولّاها فريق واحد حتى النهاية." },
   },
   {
     key: "concept-to-guest",
     title: { en: "From the concept to the guest", ar: "من الفكرة إلى الضيف" },
-    line: { en: "Concept, décor, production and the guest experience, planned as one.", ar: "الفكرة والديكور والإنتاج وتجربة الضيف، في خطة واحدة." },
+    line: { en: "Concept, décor, production and the guest experience, planned as one.", ar: "الفكرة والديكور والإنتاج واستقبال الضيوف، في خطة واحدة." },
   },
   {
     key: "bilingual",
