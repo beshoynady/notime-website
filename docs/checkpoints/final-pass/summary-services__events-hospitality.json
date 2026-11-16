@@ -1,0 +1,34 @@
+[
+  {
+    "route": "/services/events-hospitality",
+    "locale": "en",
+    "width": 1440,
+    "height": 14848,
+    "overflow": 0,
+    "errors": []
+  },
+  {
+    "route": "/services/events-hospitality",
+    "locale": "ar",
+    "width": 1440,
+    "height": 14809,
+    "overflow": 0,
+    "errors": []
+  },
+  {
+    "route": "/services/events-hospitality",
+    "locale": "en",
+    "width": 390,
+    "height": 15262,
+    "overflow": 0,
+    "errors": []
+  },
+  {
+    "route": "/services/events-hospitality",
+    "locale": "ar",
+    "width": 390,
+    "height": 15342,
+    "overflow": 0,
+    "errors": []
+  }
+]

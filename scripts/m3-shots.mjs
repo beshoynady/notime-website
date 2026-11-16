@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * M3 screenshots: every page in the sitemap plus the 404, in EN and AR, at 1440 and 390.
- *   node scripts/m3-shots.mjs [--base=http://localhost:3100] [--only=/contact]
+ *   node scripts/m3-shots.mjs [--base=http://localhost:3100] [--only=/contact] [--out=docs/checkpoints/m3]
  * Writes docs/checkpoints/m3/<page>/full-{locale}-{width}.jpg: the whole page in reduced motion
  * (every section in its final state), stitched from viewport tiles as in fullpage.mjs (the page
  * ground is a fixed stage that follows the scroll). JPEG, since a phone-width page outgrows
@@ -16,7 +16,7 @@ import sharp from "sharp";
 const args = process.argv.slice(2);
 const base = (args.find((a) => a.startsWith("--base="))?.slice(7) ?? "http://localhost:3100").replace(/\/$/, "");
 const only = args.find((a) => a.startsWith("--only="))?.slice(7);
-const out = path.join("docs", "checkpoints", "m3");
+const out = args.find((a) => a.startsWith("--out="))?.slice(6) ?? path.join("docs", "checkpoints", "m3");
 
 const xml = await (await fetch(`${base}/sitemap.xml`)).text();
 const routes = [
@@ -28,6 +28,8 @@ const routes = [
   ),
   "/this-page-does-not-exist",
 ].filter((r) => !only || r === only);
+// --only also takes a route the sitemap leaves out (/links is noindex).
+if (only && !routes.length) routes.push(only);
 
 const sizes = [
   { width: 1440, height: 900, mobile: false },
