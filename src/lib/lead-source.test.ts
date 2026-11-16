@@ -79,3 +79,11 @@ describe("leadRows", () => {
     expect(leadRows({ landing: "/en" })).toEqual([["Source", "Direct (no tag, no referrer)"], ["Landing page", "/en"]]);
   });
 });
+
+describe("bidi and zero-width characters (review, 2026-11-16)", () => {
+  it("are stripped, so a tag can't reorder or hide a row in the team email", () => {
+    const lead = captureLeadSource({ url: "https://notimehub.com/en?utm_source=ig%E2%80%AEevil%E2%80%8B", referrer: "", host: "notimehub.com", existing: null });
+    expect(lead?.utm_source).toBe("ig evil");
+  });
+});
+

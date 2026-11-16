@@ -23,7 +23,8 @@ const MAX_SERIALIZED = 2000;
 
 function clean(value: string, max = MAX_VALUE): string {
   return value
-    .replace(/[\u0000-\u001f\u007f]+/g, " ")
+    // Control, bidi and zero-width characters: none may reorder or hide a row in the team email.
+    .replace(/[\u0000-\u001f\u007f​-‏‪-‮⁦-⁩﻿]+/g, " ")
     .replace(/\s+/g, " ")
     .trim()
     .slice(0, max);

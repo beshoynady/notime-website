@@ -3,6 +3,7 @@ import { FrameCorners } from "@/components/ornaments/frame-corners";
 import { CaseVisual } from "@/components/ui/case-visual";
 import type { Locale } from "@/content";
 import type { WorkView } from "@/content/work";
+import "@/components/motion/duotone.css";
 
 /**
  * A case's media box (16:9 by default; the parent sizes it). Named, with the client's approval:

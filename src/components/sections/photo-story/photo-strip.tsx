@@ -39,7 +39,8 @@ export function PhotoStrip({
             {title[locale]}
           </h3>
         </div>
-        <ul className="pstrip-track">
+        {/* Focusable, so a keyboard can scroll the swipe row (phones, reduced motion); WCAG 2.1.1. */}
+        <ul className="pstrip-track" tabIndex={0} aria-labelledby={titleId}>
           {photos.map(({ photo, p, caption }) => (
             <li key={photo} className="pstrip-frame" style={{ "--ar": `${p.width} / ${p.height}` } as CSSProperties}>
               <figure>

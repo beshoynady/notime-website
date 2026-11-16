@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { SceneConfig, SceneLayer, SceneShot } from "@/content/scenes/types";
-import { PIN_LIMIT, SECTION_PIN_LIMIT, enterFrom, layerDrift, lineSpans, pinLength, sceneMode, sceneProblems, shotAt, stillState } from "./scene-math";
+import { PIN_LIMIT, SECTION_PIN_LIMIT, enterFrom, layerDrift, lineSpans, pinLength, sceneMode, sceneProblems, shotAt, stillState, wipeInset } from "./scene-math";
 
 const shots: SceneShot[] = [
   { id: "a", copyKey: "a", desktop: [0, 0.45], mobile: [0, 0.35] },
@@ -201,5 +201,15 @@ describe("sceneProblems · a section scene pinned on desktop, passing on mobile 
   it("still checks the mobile crossing", () => {
     const long = beats.map((s, i) => (i === 2 ? { ...s, mobile: [0.7, 1.2] as [number, number] } : s));
     expect(sceneProblems(majlis({ shots: long }), SECTION_PIN_LIMIT)).toEqual(["mobile shot bloom ends past the crossing (1.2 > 1)"]);
+  });
+});
+
+describe("wipeInset (D109)", () => {
+  it("opens from the centre outwards, clamped to 0..1", () => {
+    expect(wipeInset(0)).toBe("inset(0% 50% 0% 50%)");
+    expect(wipeInset(0.5)).toBe("inset(0% 25% 0% 25%)");
+    expect(wipeInset(1)).toBe("inset(0% 0% 0% 0%)");
+    expect(wipeInset(-1)).toBe(wipeInset(0));
+    expect(wipeInset(2)).toBe(wipeInset(1));
   });
 });
