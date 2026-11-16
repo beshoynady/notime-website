@@ -64,3 +64,6 @@ assets-inbox/
 # Agent worktrees (D82)
 .claude/worktrees/
 .worktrees/
+
+# M3 every-page screenshots stay local (88 full pages; docs/checkpoints/m3/README is the index).
+docs/checkpoints/m3/**/*.jpg

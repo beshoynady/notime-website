@@ -494,3 +494,9 @@ All new, written natively from the idea (no old line). Keys in `contactPage.*` (
 | `category.quote.brief` / `formCopy.contact.submit` | أرسل طلبك | «طلب» rather than «ملخّص» or «بريف»: what a Gulf client calls it. |
 | `formCopy.contact.messageHint` | المناسبة أو الهدف، والجمهور، وما تقرّر حتى الآن. تكفي بضعة أسطر. | Lowers the bar to write. |
 | `autoReplyCopy.*` | (four bodies) | Only the approved promises (one working day; 3 working days, 5 improvements). |
+
+## D103 follow-up: related work note (leak-scan false positive)
+
+- Old: «نعرضها دون اسم العميل حتى يوافق على ذكره.»
+- New: «نعرضها دون ذكر العميل حتى يوافق على تسميته.»
+- Why: the old line contains «اسم العميل», the review build's placeholder label, so the production leak scan flagged it. Same meaning.

@@ -18,7 +18,7 @@ export const RELATED_WORK_COPY = {
   title: { en: "Delivered for national organisations", ar: "أعمال نفّذناها لجهات وطنية" },
   note: {
     en: "Shown without the client's name until they approve it.",
-    ar: "نعرضها دون اسم العميل حتى يوافق على ذكره.",
+    ar: "نعرضها دون ذكر العميل حتى يوافق على تسميته.",
   },
   illustrative: {
     en: "Images marked Illustrative stand in for the project's own photos.",
