@@ -46,10 +46,18 @@ for (const category of getCategories()) {
         test("the index has scrolled away before the ground turns to Act 3's tone", async ({ page }) => {
           await gotoReady(page, path);
           // ToneController turns the ground when the FAQ's top crosses 55% of the viewport.
+          // Re-aims until the FAQ really sits there: on a slow runner a late ScrollTrigger refresh
+          // (pin spacing above) can move the page after one jump, so it measured an earlier point.
           const overlap = await page.evaluate(async () => {
             const faq = document.querySelector("section.cat-faq")!;
-            window.scrollTo(0, faq.getBoundingClientRect().top + scrollY - innerHeight * 0.55);
-            await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+            const frames = () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+            for (let i = 0; i < 6; i++) {
+              const off = faq.getBoundingClientRect().top - innerHeight * 0.55;
+              if (i > 0 && Math.abs(off) < 2) break;
+              window.scrollTo(0, scrollY + off);
+              await frames();
+              await new Promise((r) => setTimeout(r, 150));
+            }
             const header = document.getElementById("site-header")!.getBoundingClientRect().bottom;
             return document.querySelector(".cat-index-track .svc-index")!.getBoundingClientRect().bottom - header;
           });
