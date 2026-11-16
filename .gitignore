@@ -67,3 +67,13 @@ assets-inbox/
 
 # M3 every-page screenshots stay local (88 full pages; docs/checkpoints/m3/README is the index).
 docs/checkpoints/m3/**/*.jpg
+
+# Local Claude Code state and project-scope skill copies (skills install globally only; CLAUDE.md)
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
+.claude/skills/
+.claude/agents/
+.github/skills/
+.github/agents/
+.github/hooks/
+scripts/tmp/

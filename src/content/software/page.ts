@@ -36,7 +36,7 @@ export const hero = {
   title: l("Websites and apps your clients actually use, in Arabic and English.", "مواقع وتطبيقات يستخدمها عملاؤك فعلًا، بالعربية والإنجليزية."),
   sub: l(
     "The team that runs your events also builds your platform: bilingual websites, iOS and Android apps, dashboards and the systems behind them. Designed and built in Dubai.",
-    "الفريق الذي يدير فعالياتك يبني منصّتك أيضًا: مواقع بلغتين، وتطبيقات iOS وAndroid، ولوحات إدارة والأنظمة التي تعمل خلفها. نصمّمها ونطوّرها في دبي.",
+    "الفريق الذي يدير فعالياتك يبني منصّتك أيضًا: مواقع بلغتين، وتطبيقات iOS و Android، ولوحات إدارة والأنظمة التي تعمل خلفها. نصمّمها ونطوّرها في دبي.",
   ),
   /** Labels inside the drawn interface (aria-hidden; a picture of a site). */
   ui: {
@@ -470,7 +470,7 @@ export const quality = {
     l("A performance budget for every page, measured against Core Web Vitals", "ميزانية أداء لكل صفحة، نقيسها بمؤشرات Core Web Vitals"),
     l("Security and data protection, designed with the UAE's personal data protection law (PDPL) in mind", "الأمان وحماية البيانات، مع مراعاة قانون حماية البيانات الشخصية في الإمارات"),
   ],
-  stack: l("Built with Next.js · React · TypeScript · Node.js · iOS and Android", "نبني بـ Next.js · React · TypeScript · Node.js · iOS وAndroid"),
+  stack: l("Built with Next.js · React · TypeScript · Node.js · iOS and Android", "نبني بـ Next.js · React · TypeScript · Node.js · iOS و Android"),
 };
 
 export const finalCta = {
@@ -488,6 +488,8 @@ export const faqCopy = {
 
 export const sticky = {
   label: l("Quick actions", "إجراءات سريعة"),
+  /** Shorter than `cta.book`: both buttons fit one line each at 390 px in both locales. */
+  book: l("Book a free intro call", "احجز مكالمة مجانية"),
 };
 
 export const seo = {

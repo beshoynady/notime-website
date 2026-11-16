@@ -154,7 +154,7 @@ export const categories: Category[] = [
     title: { en: "Production, Print & Gifts", ar: "الإنتاج والطباعة والهدايا" },
     summary: {
       en: "Stands, print, packaging and gifts, finished in foil, UV, deboss or laser.",
-      ar: "أجنحة وطباعة وتغليف وهدايا، بلمسات نهائية من الرقائق المعدنية وUV والكبس والحفر بالليزر.",
+      ar: "أجنحة وطباعة وتغليف وهدايا، بلمسات نهائية من الرقائق المعدنية و UV والكبس والحفر بالليزر.",
     },
     image: "cat-production-print-gifts-4x5",
     theme: "workshop",

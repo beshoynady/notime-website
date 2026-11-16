@@ -59,7 +59,7 @@ export const workItems: WorkItem[] = [
       label: { en: "A national sports federation", ar: "اتحاد رياضي وطني" },
       summary: {
         en: "Its digital and media partner: we rebuilt the bilingual website and its connected app, and publish to its channels every day in Arabic and English. One championship campaign, first week: 487K views, +37.6K new followers, 271K reach.",
-        ar: "شريكه الرقمي والإعلامي: أعدنا بناء موقعه بلغتين وتطبيق الجوّال المتصل به، وننشر على منصّاته كل يوم بالعربية والإنجليزية. وفي الأسبوع الأول من إحدى حملات البطولات: 487 ألف مشاهدة، و‎+37.6 ألف متابع جديد، ووصول إلى 271 ألفًا.",
+        ar: "شريكه الرقمي والإعلامي: أعدنا بناء موقعه بلغتين وتطبيق الجوّال المتصل به، وننشر على منصّاته كل يوم بالعربية والإنجليزية. وفي الأسبوع الأول من إحدى حملات البطولات: 487 ألف مشاهدة، و37.6 ألف متابع جديد، ووصول إلى 271 ألفًا.",
       },
       visual: "feed",
     },
@@ -67,7 +67,7 @@ export const workItems: WorkItem[] = [
       label: { en: "UAE Athletics Federation", ar: "الاتحاد الإماراتي لألعاب القوى" },
       summary: {
         en: "The federation's appointed digital and media partner: a full rebuild of the bilingual website and the connected mobile app, plus daily social media in Arabic and English. First week of the Oregon 26 campaign: 487K views, +37.6K new followers, 271K reach.",
-        ar: "الشريك الرقمي والإعلامي المعتمد للاتحاد: إعادة بناء كاملة للموقع الإلكتروني ثنائي اللغة وتطبيق الجوّال المرتبط به، مع إدارة يومية لوسائل التواصل بالعربية والإنجليزية. في الأسبوع الأول من حملة أوريغون 26: 487 ألف مشاهدة، و‎+37.6 ألف متابع جديد، ووصول بلغ 271 ألفًا.",
+        ar: "الشريك الرقمي والإعلامي المعتمد للاتحاد: إعادة بناء كاملة للموقع الإلكتروني ثنائي اللغة وتطبيق الجوّال المرتبط به، مع إدارة يومية لوسائل التواصل بالعربية والإنجليزية. في الأسبوع الأول من حملة أوريغون 26: 487 ألف مشاهدة، و37.6 ألف متابع جديد، ووصول بلغ 271 ألفًا.",
       },
       photos: photos("/images/work/uae-athletics-federation/", 3),
     },

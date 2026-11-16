@@ -122,7 +122,7 @@ const POINTS: Record<string, Localized<string[]>> = {
   },
   "mobile-apps": {
     en: ["iOS and Android", "Connected to your website", "Arabic and English"],
-    ar: ["iOS وAndroid", "مرتبط بموقعك الإلكتروني", "بالعربية والإنجليزية"],
+    ar: ["iOS و Android", "مرتبط بموقعك الإلكتروني", "بالعربية والإنجليزية"],
   },
   "custom-systems": {
     en: ["Admin dashboards and analytics", "Roles and permissions", "Integrations with your tools"],
@@ -427,7 +427,7 @@ export const services: Service[] = [
       { en: "Mobile apps", ar: "تطبيقات الجوّال" },
       {
         en: "iOS and Android apps designed around how people use them.",
-        ar: "تطبيقات iOS وAndroid مصمّمة وفق طريقة استخدام الناس لها.",
+        ar: "تطبيقات iOS و Android مصمّمة وفق طريقة استخدام الناس لها.",
       },
     ],
     [

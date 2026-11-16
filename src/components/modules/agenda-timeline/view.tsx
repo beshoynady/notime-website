@@ -12,7 +12,7 @@ export function AgendaView({ locale, lit = true }: { locale: Locale; lit?: boole
     <div className="evm" data-evm="agenda">
       <div className="evm-head">
         <h3 className="evm-title">{AGENDA.title[locale]}</h3>
-        {AGENDA.example && <ExampleLabel kind="example" />}
+        {AGENDA.example && <ExampleLabel />}
       </div>
       <p className="evm-note">{AGENDA.note[locale]}</p>
       <div className="ag-list">

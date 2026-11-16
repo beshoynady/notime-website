@@ -122,7 +122,7 @@ export default function ContentCalendar({ locale }: ModuleProps) {
   return (
     <div ref={root} className="cal">
       <div className="cal-top">
-        {CALENDAR.example && <ExampleLabel kind="example" className="cal-label" />}
+        {CALENDAR.example && <ExampleLabel className="cal-label" />}
         <h3 className="cal-title">{CALENDAR.title[locale]}</h3>
         <p className="cal-note">{CALENDAR.note[locale]}</p>
       </div>

@@ -52,7 +52,7 @@ export default function CandleMoodboard({ locale }: ModuleProps) {
     <div ref={root} className="evm" data-evm="moodboard">
       <div className="evm-head">
         <h3 className="evm-title">{D.title[locale]}</h3>
-        {D.example && <ExampleLabel kind="example" />}
+        {D.example && <ExampleLabel />}
       </div>
       <p className="evm-note">{D.note[locale]}</p>
       <div className="evm-row" role="group" aria-label={D.moodsLabel[locale]}>

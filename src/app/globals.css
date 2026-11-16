@@ -184,9 +184,20 @@
   h3 {
     text-wrap: balance;
   }
+  /* No paragraph ends on a lone word, in either script (post-M3 polish). */
+  p,
+  li {
+    text-wrap: pretty;
+  }
   ::selection {
     background: var(--color-champagne);
     color: var(--color-espresso);
+  }
+  /* The browser's own surfaces carry the palette: the scrollbar (taupe on espresso, the page's
+     usual ground) and native controls. */
+  html {
+    scrollbar-color: var(--color-taupe) var(--color-espresso);
+    accent-color: var(--color-cocoa);
   }
   /* Espresso on light grounds (13.1:1), champagne on dark ones (10.9:1); taupe on ivory was
      2.18:1 (M1 gate, WCAG 1.4.11). The header isn't a tone section, so it follows its own tone. */

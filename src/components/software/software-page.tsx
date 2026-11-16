@@ -44,7 +44,7 @@ export function SoftwarePage({ category, locale }: { category: Category; locale:
       <QualityStrip locale={locale} />
       <SoftwareFaq category={category} locale={locale} />
       <FinalCta category={category} locale={locale} />
-      <StickyBar label={sticky.label[locale]} book={cta.book[locale]} review={cta.reviewShort[locale]} reviewId={finalCta.reviewAnchor} />
+      <StickyBar label={sticky.label[locale]} book={sticky.book[locale]} review={cta.reviewShort[locale]} reviewId={finalCta.reviewAnchor} />
       <SoftwareMotion />
     </main>
   );

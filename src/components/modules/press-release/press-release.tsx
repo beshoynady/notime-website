@@ -103,7 +103,7 @@ export default function PressRelease({ locale }: ModuleProps) {
   return (
     <div ref={root} className="pr">
       <div className="pr-top">
-        {PRESS_RELEASE.example && <ExampleLabel kind="example" className="pr-label" />}
+        {PRESS_RELEASE.example && <ExampleLabel className="pr-label" />}
         <h3 className="pr-title">{PRESS_RELEASE.title[locale]}</h3>
         <p className="pr-hint">{PRESS_RELEASE.hint[locale]}</p>
       </div>

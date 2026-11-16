@@ -2611,11 +2611,12 @@ html[dir="rtl"] .sw-v-meter i {
   letter-spacing: 0;
   text-transform: none;
 }
-.sw-sticky-main {
-  flex: 1;
-}
+/* Two equal halves, one line each (post-M3: the Arabic labels wrapped to two lines at 390). */
+.sw-sticky-main,
 .sw-sticky-alt {
-  flex: 0 1 auto;
+  flex: 1 1 0;
+  min-inline-size: 0;
+  white-space: nowrap;
 }
 @media (min-width: 900px) {
   .sw-sticky {

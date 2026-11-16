@@ -68,7 +68,7 @@ export async function WorkCase({ item, locale }: { item: WorkItem; locale: Local
             {view.label[locale]}
           </h1>
           <p className="wc-summary text-lead">{view.summary[locale]}</p>
-          <div className={view.named ? "wc-media duotone" : "wc-media"}>
+          <div className="wc-media">
             <CaseMedia view={view} locale={locale} sizes="(min-width: 1280px) 1232px, 100vw" />
           </div>
           <dl className="wc-facts" aria-label={t("factsLabel")}>

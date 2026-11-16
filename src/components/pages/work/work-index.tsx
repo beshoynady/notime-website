@@ -72,7 +72,7 @@ export async function WorkIndex({ locale, filter }: { locale: Locale; filter: Wo
                   <li key={view.slug} className="wk-case">
                     <article aria-labelledby={titleId} className="wk-case-grid" data-card="">
                       <div className="wk-media">
-                        <div className={view.named ? "duotone absolute inset-0" : "absolute inset-0"}>
+                        <div className="absolute inset-0">
                           <CaseMedia view={view} locale={locale} sizes="(min-width: 900px) 56vw, 100vw" />
                         </div>
                       </div>

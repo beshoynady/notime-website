@@ -13,7 +13,7 @@ export function StageLightsStatic({ locale }: ModuleProps) {
     <div className="evm" data-evm="stage">
       <div className="evm-head">
         <h3 className="evm-title">{D.title[locale]}</h3>
-        {D.example && <ExampleLabel kind="example" />}
+        {D.example && <ExampleLabel />}
       </div>
       <p className="evm-note">{D.note[locale]}</p>
       <div className="st-frame">

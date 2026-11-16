@@ -13,7 +13,7 @@ export function StandView({ locale }: { locale: Locale }) {
     <div className="evm" data-evm="stand">
       <div className="evm-head">
         <h3 className="evm-title">{STAND.title[locale]}</h3>
-        {STAND.example && <ExampleLabel kind="example" />}
+        {STAND.example && <ExampleLabel />}
       </div>
       <p className="evm-note">{STAND.note[locale]}</p>
       <div className="sa-grid">
