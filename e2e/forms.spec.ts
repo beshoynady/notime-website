@@ -1,6 +1,9 @@
 import { existsSync, readdirSync, readFileSync, rmSync } from "node:fs";
 import path from "node:path";
 import { expect, test, type Page } from "@playwright/test";
+import { asOwnClient } from "./helpers";
+
+test.beforeEach(({ page }, info) => asOwnClient(page, info));
 
 /**
  * The brief on /contact (D102, Task 4.2). The server runs with Turnstile's always-pass test keys

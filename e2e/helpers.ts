@@ -1,4 +1,4 @@
-import { expect, type Page } from "@playwright/test";
+import { expect, type Page, type TestInfo } from "@playwright/test";
 import type { CategoryTheme } from "../src/content";
 
 /** Navigate and wait until client controllers have hydrated (ToneController marks #page-stage). */
@@ -104,3 +104,13 @@ export const GROUND: Record<CategoryTheme, { dark?: string; light?: string }> = 
   workshop: { light: "rgb(234, 212, 171)" }, // champagne
   interface: { light: "rgb(245, 233, 211)" }, // ivory
 };
+
+/**
+ * Each form test posts as its own client (x-forwarded-for, which the actions read for the rate
+ * limit): the suite sends a dozen forms from one machine, and the limiter's fifth-in-ten-minutes
+ * answer is correct behaviour, not a failure of the test under it (M3 CI).
+ */
+export async function asOwnClient(page: Page, info: TestInfo) {
+  const n = [...`${info.project.name}|${info.titlePath.join("|")}|${info.retry}`].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
+  await page.setExtraHTTPHeaders({ "x-forwarded-for": `10.${(n >>> 16) & 255}.${(n >>> 8) & 255}.${n & 255}` });
+}

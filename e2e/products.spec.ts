@@ -1,4 +1,7 @@
 import { expect, test } from "@playwright/test";
+import { asOwnClient } from "./helpers";
+
+test.beforeEach(({ page }, info) => asOwnClient(page, info));
 
 /** F4: each product page shows Coming soon, labelled previews, and a working "Register interest" (stub delivery). */
 for (const locale of ["en", "ar"] as const) {
