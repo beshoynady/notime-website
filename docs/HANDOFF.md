@@ -1,19 +1,22 @@
-# Session handoff: v1 for Rand, post-M3 pass (five parts), then launch planning
+# Session handoff: final quality & growth pass (§1–§8), then the Arabic report
 
-Updated 2026-11-16 (end of session). Read `CLAUDE.md`, `AGENTS.md` and `PRODUCT.md` first. Decisions: `docs/DECISIONS.md` (latest D106–D108). Open judgment calls: `docs/review/decisions-to-confirm.md` (#30 open).
+Updated 2026-11-16 (session 2 of the post-M3 pass). Read `CLAUDE.md`, `AGENTS.md` and `PRODUCT.md` first. Decisions: `docs/DECISIONS.md` (latest D109). Open judgment calls: `docs/review/decisions-to-confirm.md` (#30–#33 open).
 
-## Current step: post-M3 part 5 (speed, Task 16), in progress
+## The user's brief for this pass (authoritative; "no stops" until the end, then one Arabic report)
 
-The user's message after M3 (authoritative, five parts; "no stops until all five are done", then a one-screen Arabic report with screenshots of the most changed pages at 1440/390 EN/AR and the Lighthouse before/after; keep the tunnel running and say if the link changes). Then the final code review by a fresh subagent (`superpowers:requesting-code-review`), fix Critical/High, then **stop for Hostinger launch planning**.
+§1 settled decisions · §2 AI mentions out · §3 native Arabic · §4 design polish · §5 photographic scroll storytelling · §6 growth (links page, lead source, private-client path, v1.1 SEO pages, launch checklist) · §7 speed (Task 16) · §8 fresh-subagent code review + green full CI · final report: what changed, Lighthouse before/after, screenshots of the most changed pages (1440/390 EN/AR) + 3 frame sequences of photo scenes, CI, a fresh tunnel link, decisions to confirm.
 
 | Part | State |
 |---|---|
-| 1/2 AI mentions out, designed images (D106, `8dea642`) | **Done.** No AI wording on the site; anonymised Work shows `CaseVisual` drawings; inventory `docs/content/temporary-images.md`; launch checklist item added. #29 applied, #27 NDA FAQ pinned hidden (same commit). |
-| 3 Arabic «بيت واحد» + calque audit (D107, `96e6dd4`) | **Done.** Old → new in `docs/content/copy-ar-rewrite.md`. #30 («الحلول الرقمية» kept) is open for the user. |
-| 4 Design polish (D108, `4504d83`) | **Done** with /impeccable polish, /ui-ux-pro-max, /gsap-framer-scroll-animation, /framer-motion-animator audits and /simplify (the user asked for these four). `/impeccable init` wrote `PRODUCT.md` from the user's answers (corporate/government buyers lead; private clients from Instagram). |
-| 5 Speed | **In progress.** See below. |
-| Final report, CI, review build, tunnel | Not started. |
-| Fresh-subagent code review | Not started. |
+| §1 decisions; impeccable hooks | **Done.** #21–#29 logged; the impeccable hooks (SessionStart/PostToolUse/Stop) removed from the gitignored `.claude/settings.local.json`; `.github/hooks` is gone. |
+| §2 AI mentions (D106) · §3 Arabic (D107) · §4 polish (D108) | **Done** in the previous session. |
+| §5 photo scenes (D109, `b03a1d8`) | **Done.** Events opening 2.5D + wipe, home Work strip, About split screen, private stack, Print gift cutout, service-photo wipes. Tools: `scripts/frames.mjs` (frame sheets), `scripts/grade-stories.mjs`. Not yet eyeballed after the last move: the Print gift's final place (`gift` rig). |
+| §6 growth | **Next.** |
+| §7 speed | Inline CSS committed, unmeasured (see "Part 5" below for the order). |
+| §8 review, CI, report | Not started. |
+
+Review server: `npm run review:start -- 3100` on the review build; the quick tunnel from the last session still runs (https://arrival-kingdom-justify-plastics.trycloudflare.com/ar); restarting the review server keeps the link, restarting cloudflared changes it.
+Machine: Python 3.14 has no OpenCV wheel (pip compiles for ages): use Pillow/numpy/scipy; `rembg` works with `python -P` (not `-I`, which hides user site-packages).
 
 ### Part 5: where it stands
 
@@ -23,19 +26,6 @@ The user's message after M3 (authoritative, five parts; "no stops until all five
 - **Then, in order:** (1) Alexandria subset: `python scripts/subset-alexandria.py` writes `alexandria-arabic.v2.woff2` (Arabic block + joiners only, all features and the weight axis kept; fontTools is installed); point `src/app/fonts.css` and `src/lib/fonts.ts` at v2; check harakat (حِرَف) and digits render. (2) Motion: `LazyMotion` + `m` with `domAnimation` loaded async (check for `layout`/drag use first; never touch GSAP-owned elements). (3) Defer non-critical client islands (custom cursor, magnetic, WhatsApp FAB, mega-menu panel) to idle or first interaction, without changing behaviour. (4) Print's LCP is a scene layer: make it text. Measure after each; LCP must stay text and CLS ~0.
 - Target (user): mobile ≥ 90 on home + categories EN/AR. Likely not fully reachable with this motion design under 4× CPU throttling; report honestly with before/after.
 
-### After part 5
-
-- `next build`, unit tests, then the **full CI** (`gh workflow run CI --ref phase-2-services`, `gh run watch <id> --exit-status`).
-- Review build (`npm run review:build`, `npm run review:start -- 3100`); the tunnel (`cloudflared tunnel --url http://localhost:3100 --no-autoupdate`) was at https://arrival-kingdom-justify-plastics.trycloudflare.com/ar this session and dies with the session: a new link goes into `docs/review/tunnel.md`, and tell the user.
-- Screenshots of the most changed pages (home, Software, Work, a case, About) with `MSYS_NO_PATHCONV=1 node scripts/m3-shots.mjs --base=http://localhost:3100 --only=/` etc.
-- The one-screen **Arabic** report: the five parts, screenshots, Lighthouse before/after, CI status, decision #30.
-- Then `superpowers:requesting-code-review` by a fresh subagent; fix Critical/High; **stop** for Hostinger launch planning.
-
-### Session lessons
-
-- The impeccable launcher writes project-scope copies into `.claude/` and `.github/`; they are now gitignored and must never be committed (memory note). Commit with explicit paths.
-- Git Bash turns `--only=/` into a Windows path: prefix `MSYS_NO_PATHCONV=1`.
-- The Lighthouse install lives in `%TEMP%/nt-lighthouse-13.5.0`; it was half-deleted once; reinstall with `PUPPETEER_SKIP_DOWNLOAD=1 npm install --no-save --prefix <dir> lighthouse@13.5.0`.
 
 ## History (before this session's post-M3 pass)
 
