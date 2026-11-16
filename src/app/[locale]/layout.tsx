@@ -44,6 +44,9 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
     title: { default: t("title"), template: `%s · ${t("title")}` },
     description: t("description"),
     alternates: localeAlternates(locale as AppLocale, ""),
+    // No title or description here: Next fills them from each page's own (shallow merge, D103).
+    openGraph: { type: "website", siteName: t("title"), locale: locale === "ar" ? "ar_AE" : "en_AE", alternateLocale: locale === "ar" ? "en_AE" : "ar_AE" },
+    twitter: { card: "summary_large_image" },
   };
 }
 

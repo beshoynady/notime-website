@@ -475,7 +475,9 @@
   },
   "notFound": {
     "title": "This page doesn't exist.",
-    "back": "Back to home"
+    "back": "Back to home",
+    "body": "The link may be out of date, or the address mistyped. Start from what we do, or go back home.",
+    "services": "See our services"
   },
   "scenes": {
     "draft": {

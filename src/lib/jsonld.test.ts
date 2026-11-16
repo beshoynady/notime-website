@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { getCategories, getCategory, getServices, type Category } from "@/content";
-import { categoryJsonLd, overviewJsonLd } from "./jsonld";
+import { categoryJsonLd, homeJsonLd, overviewJsonLd } from "./jsonld";
 
 const SITE = "https://x.test";
 const events = getCategory("events-hospitality")!;
@@ -84,5 +84,15 @@ describe("work and page trails (F1)", () => {
     expect(node).not.toHaveProperty("funder");
     const trail = trailJsonLd([{ name: "Work", path: "/work" }], "ar", "https://x.test") as { itemListElement: { item: string }[] };
     expect(trail.itemListElement.map((i) => i.item)).toEqual(["https://x.test/ar", "https://x.test/ar/work"]);
+  });
+});
+
+describe("homeJsonLd (D103)", () => {
+  it("states the house and the site, with no invented facts", () => {
+    const [org, site] = homeJsonLd("ar", "https://x.test", "info@example.com") as Record<string, unknown>[];
+    expect(org["@type"]).toBe("Organization");
+    expect((org.areaServed as unknown[]).length).toBe(6);
+    for (const k of ["foundingDate", "aggregateRating", "review", "sameAs", "numberOfEmployees"]) expect(org).not.toHaveProperty(k);
+    expect(site).toMatchObject({ "@type": "WebSite", url: "https://x.test/ar", inLanguage: "ar", publisher: { "@id": "https://x.test/#organization" } });
   });
 });

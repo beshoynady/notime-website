@@ -1,7 +1,7 @@
 /**
  * JSON-LD for the services pages (D57). Pure: page components serialize the result.
- * Only facts the site states elsewhere: no ratings, reviews, prices or area served
- * until the client confirms them. FAQ entries still marked TODO are left out.
+ * Only facts the site states elsewhere: no ratings, reviews or prices. The area served is the six
+ * markets the site states (About, FAQ; the 2026 profile). FAQ entries still marked TODO are left out.
  */
 import {
   BREADCRUMB_LABELS,
@@ -12,6 +12,7 @@ import {
   type Locale,
   type Service,
 } from "@/content";
+import { markets, type MarketKey } from "@/content/markets";
 
 const isWritten = (s: string) => !s.startsWith("TODO:");
 
@@ -120,4 +121,33 @@ export function workCaseJsonLd(
     inLanguage: locale,
     creator: organization(siteUrl),
   };
+}
+
+/**
+ * The home page (D103): the house and the site. Only stated facts: the name, the inbox, Dubai
+ * (legal pages, FAQ), the six markets (About), the two languages. No founding date, no social
+ * profiles until they exist (CONTENT_CHECKLIST #7).
+ */
+const COUNTRY: Record<MarketKey, string> = { ae: "United Arab Emirates", sa: "Saudi Arabia", qa: "Qatar", om: "Oman", kw: "Kuwait", eg: "Egypt" };
+
+export function homeJsonLd(locale: Locale, siteUrl: string, email: string): object[] {
+  return [
+    {
+      "@context": "https://schema.org",
+      ...organization(siteUrl),
+      logo: `${siteUrl}/images/brand/logo/logo-light-bg.png`,
+      email,
+      address: { "@type": "PostalAddress", addressLocality: "Dubai", addressCountry: "AE" },
+      areaServed: markets.map((m) => ({ "@type": "Country", name: COUNTRY[m.key] })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      name: ORGANIZATION_NAME,
+      url: `${siteUrl}/${locale}`,
+      inLanguage: locale,
+      publisher: { "@id": `${siteUrl}/#organization` },
+    },
+  ];
 }

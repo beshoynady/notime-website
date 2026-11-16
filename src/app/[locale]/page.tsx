@@ -8,6 +8,11 @@ import { Process } from "@/components/sections/process/process";
 import { ServicesMarquee } from "@/components/sections/services-marquee/services-marquee";
 import { Work } from "@/components/sections/work/work";
 import { ExampleBlock } from "@/components/review/example-block";
+import { JsonLd } from "@/components/seo/json-ld";
+import { contact } from "@/config/contact";
+import { SITE_URL } from "@/config/site";
+import type { Locale } from "@/content";
+import { homeJsonLd } from "@/lib/jsonld";
 import { HOME_REF } from "@/lib/review";
 
 /**
@@ -15,9 +20,11 @@ import { HOME_REF } from "@/lib/review";
  * turns at each section (ToneController): dark hero and about, light categories, dark work and
  * marquee, light digital, dark process, light markets, dark CTA and footer.
  */
-export default function HomePage() {
+export default async function HomePage({ params }: PageProps<"/[locale]">) {
+  const { locale } = await params;
   return (
     <main id="main">
+      <JsonLd data={homeJsonLd(locale as Locale, SITE_URL, contact.email)} />
       <Hero />
       <About />
       {/* Trust blocks (B8): hidden in production until the real material exists (D78); badged
