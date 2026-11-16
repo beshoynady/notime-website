@@ -34,7 +34,7 @@ describe("navigation links", () => {
 
   it("shows the quote button now that /contact exists (D102)", () => {
     expect(QUOTE_LINK.href).toBe("/contact");
-    expect(existsSync("src/app/[locale]/contact/page.tsx")).toBe(true);
+    expect(existsSync("src/app/[locale]/(site)/contact/page.tsx")).toBe(true);
     expect(liveLinks([QUOTE_LINK])).toEqual([QUOTE_LINK]);
   });
 });

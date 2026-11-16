@@ -522,19 +522,40 @@ section[data-tone] {
    server-rendered spacer from the first paint, wherever JS will pin it (data-js, set before paint;
    no pin under reduced motion). ScrollTrigger adopts the spacer (pinSpacer) and writes the same
    distance inline, so nothing below moves when the pin is built: a landing on #printing moved
-   1800 px before this. Heights in svh, as innerHeight on load. */
+   1800 px before this. Heights in svh, as innerHeight on load.
+   The floor (min-block-size: the pinned block's own height + the distance; never more than the
+   real height, as svh <= innerHeight): ScrollTrigger swaps a pin in with `padding: 0` and
+   `height: <the pin>`, and reverts the pins above a trigger to measure it, so for one layout the
+   page was a pin length shorter; Chrome then moved a visitor already below it (scroll anchoring,
+   or clamping near the end). On a slow CPU the pins are built after the visitor has scrolled:
+   1800 px back on Events at 4-8x CPU (final pass, 2026-11-17; e2e/pin-build-scroll.spec.ts).
+   `--pin-on` is 0 without a distance, so a scene that only passes gets no floor. */
 html[data-js]:not([data-reduced]) .hero-pin {
   padding-block-end: 140svh; /* hero-controller: end "+=140%" at every width */
+  min-block-size: calc(max(100svh, 520px) + 140svh);
 }
 html[data-js]:not([data-reduced]) .scene-pin {
+  --pin-own: 100svh;
+  --pin-on: min(var(--pin-m, 0) * 1000, 1);
   padding-block-end: calc(var(--pin-m, 0) * 100svh);
+  min-block-size: calc((var(--pin-own) + var(--pin-m, 0) * 100svh) * var(--pin-on));
+}
+html[data-js]:not([data-reduced]) .scene-pin:has(> .scene) {
+  --pin-own: max(100svh, 480px); /* layered-scene.css: height 100svh, min-height 480px */
+}
+html[data-js]:not([data-reduced]) .svc-scene .scene-pin:has(> .scene) {
+  /* A scene inside a service section sits under the header (category.css). */
+  --pin-own: max(calc(100svh - var(--header-h) - var(--scene-top-extra, 0px)), 480px);
 }
 @media (min-width: 900px) {
   html[data-js]:not([data-reduced]) .process-pin {
     padding-block-end: 100svh; /* process-scroll: end "+=100%", desktop only */
+    min-block-size: 200svh;
   }
   html[data-js]:not([data-reduced]) .scene-pin {
+    --pin-on: min(var(--pin-d, 0) * 1000, 1);
     padding-block-end: calc(var(--pin-d, 0) * 100svh);
+    min-block-size: calc((var(--pin-own) + var(--pin-d, 0) * 100svh) * var(--pin-on));
   }
 }
 

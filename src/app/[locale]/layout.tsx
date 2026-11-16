@@ -1,18 +1,10 @@
 import type { Metadata } from "next";
-import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
-import { CustomCursor } from "@/components/layout/custom-cursor";
-import { SiteFooter } from "@/components/layout/site-footer";
-import { SiteHeader } from "@/components/layout/site-header";
-import { WhatsAppButton } from "@/components/layout/whatsapp-button";
 import { ReviewBanner } from "@/components/review/review-banner";
 import { DirectionProvider } from "@/components/providers/direction-provider";
-import { AnchorScroll } from "@/components/providers/anchor-scroll";
 import { LeadSourceCapture } from "@/components/providers/lead-source-capture";
-import { LenisProvider } from "@/components/providers/lenis-provider";
-import { ToneController } from "@/components/providers/tone-controller";
 import { SITE_URL } from "@/config/site";
 import { dirOf, routing, type AppLocale } from "@/i18n/routing";
 import { FONT_PRELOADS } from "@/lib/fonts";
@@ -67,26 +59,13 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
         ))}
       </head>
       <body>
-        <NextIntlClientProvider>
-          <DirectionProvider direction={dir}>
-            <LenisProvider>
-              <SiteHeader />
-              <div id="page-stage">
-                {children}
-                <SiteFooter />
-              </div>
-              <WhatsAppButton />
-              <ReviewBanner />
-              <CustomCursor />
-              <ToneController />
-              <LeadSourceCapture />
-              {/* Suspense: AnchorScroll reads the search params; the pages stay static. */}
-              <Suspense fallback={null}>
-                <AnchorScroll />
-              </Suspense>
-            </LenisProvider>
-          </DirectionProvider>
-        </NextIntlClientProvider>
+        <DirectionProvider direction={dir}>
+          {/* The site's shell (header, footer, smooth scroll, tones, the client translations)
+              is SiteShell, in (site)/layout.tsx. /links is a route handler (decision #36). */}
+          {children}
+          <ReviewBanner />
+          <LeadSourceCapture />
+        </DirectionProvider>
       </body>
     </html>
   );

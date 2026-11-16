@@ -6,7 +6,8 @@ import { getServices } from "./index";
 /** What renders on a category page: the locale layout and its parts, the route, its sections and modules. */
 const ON_CATEGORY_PAGE = [
   "app/[locale]/layout.tsx",
-  "app/[locale]/services/[category]/",
+  "app/[locale]/(site)/layout.tsx",
+  "app/[locale]/(site)/services/",
   "components/layout/",
   "components/providers/",
   "components/category/",

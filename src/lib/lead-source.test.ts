@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { captureLeadSource, leadRows, parseLeadSource, serializeLeadSource } from "./lead-source";
+import { captureLeadSource, leadChannel, leadRows, parseLeadSource, serializeLeadSource } from "./lead-source";
 
 const HOST = "notimehub.com";
 
@@ -87,3 +87,30 @@ describe("bidi and zero-width characters (review, 2026-11-16)", () => {
   });
 });
 
+
+describe("leadChannel (WhatsApp prefill, decision #35)", () => {
+  it("names the channel from the UTM source first, then from the referring site", () => {
+    expect(leadChannel({ utm_source: "instagram", utm_medium: "bio" })).toBe("instagram");
+    expect(leadChannel({ utm_source: "IG" })).toBe("instagram");
+    expect(leadChannel({ referrer: "l.instagram.com" })).toBe("instagram");
+    expect(leadChannel({ referrer: "www.linkedin.com" })).toBe("linkedin");
+    expect(leadChannel({ referrer: "lnkd.in" })).toBe("linkedin");
+    expect(leadChannel({ utm_source: "meta", utm_medium: "paid" })).toBe("facebook");
+    expect(leadChannel({ referrer: "m.facebook.com" })).toBe("facebook");
+    expect(leadChannel({ referrer: "www.google.ae" })).toBe("google");
+    expect(leadChannel({ utm_source: "google", utm_medium: "business-profile" })).toBe("google");
+    expect(leadChannel({ referrer: "www.tiktok.com" })).toBe("tiktok");
+    expect(leadChannel({ referrer: "t.co" })).toBe("x");
+    expect(leadChannel({ utm_source: "print", utm_medium: "qr" })).toBe("print");
+  });
+  it("says nothing when the source is unknown, missing or our own WhatsApp", () => {
+    expect(leadChannel(null)).toBeNull();
+    expect(leadChannel({ landing: "/en" })).toBeNull();
+    expect(leadChannel({ utm_source: "newsletter-x" })).toBeNull();
+    expect(leadChannel({ referrer: "example.ae" })).toBeNull();
+    expect(leadChannel({ utm_source: "whatsapp", utm_medium: "message" })).toBeNull();
+  });
+  it("prefers the tag over the referrer when both are known", () => {
+    expect(leadChannel({ utm_source: "linkedin", referrer: "www.google.com" })).toBe("linkedin");
+  });
+});

@@ -105,3 +105,43 @@ export function leadRows(lead: LeadSource | null): [string, string][] {
   if (lead.landing) rows.push(["Landing page", lead.landing]);
   return rows;
 }
+
+/** The channels the WhatsApp message can name (decision #35); anything else names none. */
+export const LEAD_CHANNELS = ["instagram", "linkedin", "facebook", "tiktok", "snapchat", "x", "youtube", "google", "print"] as const;
+export type LeadChannel = (typeof LEAD_CHANNELS)[number];
+
+// utm_source values (docs/marketing/utm-guide-ar.md) and their common short forms.
+const SOURCE_CHANNEL: Record<string, LeadChannel> = {
+  instagram: "instagram", ig: "instagram",
+  linkedin: "linkedin",
+  meta: "facebook", facebook: "facebook", fb: "facebook",
+  tiktok: "tiktok", snapchat: "snapchat",
+  x: "x", twitter: "x",
+  youtube: "youtube",
+  google: "google",
+  print: "print", qr: "print",
+};
+// Referring hosts (bare, no www.), matched on the host or any parent domain.
+const HOST_CHANNEL: [RegExp, LeadChannel][] = [
+  [/(^|\.)instagram\.com$/, "instagram"],
+  [/(^|\.)(linkedin\.com|lnkd\.in)$/, "linkedin"],
+  [/(^|\.)(facebook\.com|fb\.com|fb\.me)$/, "facebook"],
+  [/(^|\.)tiktok\.com$/, "tiktok"],
+  [/(^|\.)snapchat\.com$/, "snapchat"],
+  [/(^|\.)(x\.com|twitter\.com|t\.co)$/, "x"],
+  [/(^|\.)(youtube\.com|youtu\.be)$/, "youtube"],
+  [/(^|\.)google\.[a-z.]+$/, "google"],
+];
+
+/**
+ * Where the visit came from, as a channel the WhatsApp prefill can name ("I found you on
+ * Instagram"): the UTM source first, then the referring site; null when unknown. A visitor sent
+ * by our own WhatsApp gets the plain message.
+ */
+export function leadChannel(lead: LeadSource | null): LeadChannel | null {
+  if (!lead) return null;
+  const tag = lead.utm_source?.toLowerCase();
+  if (tag && SOURCE_CHANNEL[tag]) return SOURCE_CHANNEL[tag];
+  const host = lead.referrer ? bareHost(lead.referrer) : "";
+  return HOST_CHANNEL.find(([re]) => re.test(host))?.[1] ?? null;
+}
