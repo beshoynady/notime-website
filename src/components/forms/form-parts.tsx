@@ -5,7 +5,7 @@ import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { useEffect, useRef, useState, type HTMLInputTypeAttribute, type ReactNode, type RefObject } from "react";
 import type { UseFormRegister } from "react-hook-form";
 import { contact } from "@/config/contact";
-import { errorMessages, fill, formCopy, requiredMessages } from "@/content/form-copy";
+import { errorMessages, fill, formCopy, minutesLabel, requiredMessages } from "@/content/form-copy";
 import type { Locale } from "@/content/types";
 import { Link } from "@/i18n/navigation";
 import { HONEYPOT, TURNSTILE_FIELD, type FieldErrorCode, type FormState } from "@/lib/forms/schemas";
@@ -264,7 +264,7 @@ export function FormNotice({ state, locale }: { state: FormState; locale: Locale
   }, [state, message]);
   return (
     <div ref={ref} tabIndex={-1} className="form-notice" role="alert" hidden={!message}>
-      {message && <EmailSentence text={fill(message, { minutes: Math.max(1, Math.ceil((state.retryAfter ?? 60) / 60)) })} />}
+      {message && <EmailSentence text={fill(message, { minutes: minutesLabel(Math.max(1, Math.ceil((state.retryAfter ?? 60) / 60)), locale) })} />}
     </div>
   );
 }
@@ -327,7 +327,15 @@ export function TurnstileSlot({ state, locale }: { state: FormState; locale: Loc
     if (!el || near || !turnstileSiteKey) return;
     const io = new IntersectionObserver(([e]) => e.isIntersecting && setNear(true), { rootMargin: "400px 0px" });
     io.observe(el);
-    return () => io.disconnect();
+    // Also on the first focus in the form (M3): on a phone the slot can sit just past the margin
+    // while the visitor types, and Enter would submit before a token exists.
+    const form = el.closest("form");
+    const onFocus = () => setNear(true);
+    form?.addEventListener("focusin", onFocus, { once: true });
+    return () => {
+      io.disconnect();
+      form?.removeEventListener("focusin", onFocus);
+    };
   }, [near]);
   useEffect(() => {
     if (state.status !== "idle" && state.status !== "success") widget.current?.reset();

@@ -500,3 +500,10 @@ All new, written natively from the idea (no old line). Keys in `contactPage.*` (
 - Old: «نعرضها دون اسم العميل حتى يوافق على ذكره.»
 - New: «نعرضها دون ذكر العميل حتى يوافق على تسميته.»
 - Why: the old line contains «اسم العميل», the review build's placeholder label, so the production leak scan flagged it. Same meaning.
+
+## M3 gate fixes (D105)
+
+- reel.open: «شاهد العرض» → «شاهد الصور» (it opens photos, not a video).
+- process plan: «نبدأ بالمهمة…» → «نبدأ من طلبك…» (stiff for "brief").
+- "Google & Meta" in the paid-media description and the Marketing FAQ: the Arabic و glued to a Latin word rendered as "Metaو"; now «Google و Meta» with a space.
+- The two service titles («التسويق الرقمي وSEO», «… (Google وMeta)») are on the approved list (services-list.md): unchanged; proposed as decisions-to-confirm #29.

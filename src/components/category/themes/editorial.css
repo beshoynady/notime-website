@@ -28,7 +28,9 @@ main[data-theme="editorial"] .scene[data-scene="editorial-opening"] {
   --ed-turn: 1;
   --ed-rule: color-mix(in srgb, var(--color-cocoa) 26%, transparent);
 }
-[dir="rtl"] main[data-theme="editorial"] .scene[data-scene="editorial-opening"] {
+[dir="rtl"]
+  main[data-theme="editorial"]
+  .scene[data-scene="editorial-opening"] {
   --ed-x: 100%;
   --ed-x-end: 0%;
   --ed-turn: -1;
@@ -36,14 +38,23 @@ main[data-theme="editorial"] .scene[data-scene="editorial-opening"] {
 @media (min-width: 900px) {
   main[data-theme="editorial"] .scene[data-scene="editorial-opening"] {
     --ed-frame: min(100%, var(--frame));
-    --ed-cs: calc((100% - var(--ed-frame)) / 2 + var(--gutter-start) + (var(--ed-frame) - var(--gutter-start) - var(--gutter-end) - var(--rail-gap)) / 4 + var(--rail-gap));
+    --ed-cs: calc(
+      (100% - var(--ed-frame)) / 2 + var(--gutter-start) +
+        (
+          var(--ed-frame) - var(--gutter-start) - var(--gutter-end) -
+            var(--rail-gap)
+        ) /
+        4 + var(--rail-gap)
+    );
     --ed-ce: calc((100% - var(--ed-frame)) / 2 + var(--gutter-end));
     --ed-top: 17%;
     --ed-base: max(44%, 430px);
     --ed-band-end: 110px;
   }
   /* The Arabic H1 sets taller (line-height 1.28): the spread's foot rises to clear it. */
-  [dir="rtl"] main[data-theme="editorial"] .scene[data-scene="editorial-opening"] {
+  [dir="rtl"]
+    main[data-theme="editorial"]
+    .scene[data-scene="editorial-opening"] {
     --ed-base: max(48%, 470px);
   }
 }
@@ -53,14 +64,18 @@ main[data-theme="editorial"] .scene[data-scene="editorial-opening"] {
 main[data-theme="editorial"] .scene[data-scene="editorial-opening"] {
   --ed-band-top: calc(100% - 150px);
 }
-html[data-js]:not([data-reduced]) main[data-theme="editorial"] .scene[data-scene="editorial-opening"] {
+html[data-js]:not([data-reduced])
+  main[data-theme="editorial"]
+  .scene[data-scene="editorial-opening"] {
   --ed-band-top: calc(100% - 170px);
 }
 @media (min-width: 900px) {
   main[data-theme="editorial"] .scene[data-scene="editorial-opening"] {
     --ed-band-top: calc(100% - 166px);
   }
-  html[data-js]:not([data-reduced]) main[data-theme="editorial"] .scene[data-scene="editorial-opening"] {
+  html[data-js]:not([data-reduced])
+    main[data-theme="editorial"]
+    .scene[data-scene="editorial-opening"] {
     --ed-band-top: calc(100% - 196px);
   }
 }
@@ -77,9 +92,21 @@ main[data-theme="editorial"] .scene [data-layer="band"] {
    paper. The plate's image (mb-open-paper) covers it once its file exists. */
 main[data-theme="editorial"] .fx-paper {
   background:
-    radial-gradient(90% 70% at 50% 36%, rgb(255 250 240 / 0.6), rgb(255 250 240 / 0) 70%),
-    radial-gradient(140% 120% at 50% 45%, rgb(187 154 121 / 0) 55%, rgb(187 154 121 / 0.18) 100%),
-    repeating-linear-gradient(to bottom, rgb(99 71 49 / 0.022) 0 1px, transparent 1px 6px),
+    radial-gradient(
+      90% 70% at 50% 36%,
+      rgb(255 250 240 / 0.6),
+      rgb(255 250 240 / 0) 70%
+    ),
+    radial-gradient(
+      140% 120% at 50% 45%,
+      rgb(187 154 121 / 0) 55%,
+      rgb(187 154 121 / 0.18) 100%
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgb(99 71 49 / 0.022) 0 1px,
+      transparent 1px 6px
+    ),
     var(--color-ivory);
 }
 
@@ -87,16 +114,23 @@ main[data-theme="editorial"] .fx-paper {
    page's top rule. */
 main[data-theme="editorial"] .fx-folio {
   background:
-    linear-gradient(var(--color-espresso), var(--color-espresso)) var(--ed-x) 4px / 32px 4px no-repeat,
-    linear-gradient(var(--color-cocoa), var(--color-cocoa)) var(--ed-x-end) 5px / 12px 2px no-repeat,
-    linear-gradient(var(--color-cocoa), var(--color-cocoa)) 0 100% / 100% 1px no-repeat;
+    linear-gradient(var(--color-espresso), var(--color-espresso)) var(--ed-x)
+      4px / 32px 4px no-repeat,
+    linear-gradient(var(--color-cocoa), var(--color-cocoa)) var(--ed-x-end)
+      5px / 12px 2px no-repeat,
+    linear-gradient(var(--color-cocoa), var(--color-cocoa)) 0 100% / 100% 1px
+      no-repeat;
 }
 
 /* L3 · the grid: twelve columns (six below 900px), thin cocoa strokes fading toward the foot so
    the H1 reads clean. */
 main[data-theme="editorial"] .fx-grid {
   --ed-cols: 6;
-  background-image: linear-gradient(to right, var(--ed-rule) 1px, transparent 1px);
+  background-image: linear-gradient(
+    to right,
+    var(--ed-rule) 1px,
+    transparent 1px
+  );
   background-size: calc((100% - 1px) / var(--ed-cols)) 100%;
   border-inline-end: 1px solid var(--ed-rule);
   mask-image: linear-gradient(to bottom, #000 0 55%, rgb(0 0 0 / 0.35) 100%);
@@ -110,8 +144,10 @@ main[data-theme="editorial"] .fx-grid {
 /* L3 · two baseline rules: the headline's, a third of the way down, and the spread's foot. */
 main[data-theme="editorial"] .fx-baselines {
   background:
-    linear-gradient(var(--color-cocoa), var(--color-cocoa)) 0 34% / 100% 1px no-repeat,
-    linear-gradient(var(--color-espresso), var(--color-espresso)) 0 100% / 100% 2px no-repeat;
+    linear-gradient(var(--color-cocoa), var(--color-cocoa)) 0 34% / 100% 1px
+      no-repeat,
+    linear-gradient(var(--color-espresso), var(--color-espresso)) 0 100% / 100%
+      2px no-repeat;
 }
 
 /* L1 · the image cell: an art-directed colour plate (a champagne sun over a taupe horizon on
@@ -119,9 +155,18 @@ main[data-theme="editorial"] .fx-baselines {
 main[data-theme="editorial"] .fx-board {
   --ed-sun: 66%;
   background:
-    radial-gradient(circle at var(--ed-sun) 42%, var(--color-champagne) 0 16%, rgb(234 212 171 / 0) 16.4%),
+    radial-gradient(
+      circle at var(--ed-sun) 42%,
+      var(--color-champagne) 0 16%,
+      rgb(234 212 171 / 0) 16.4%
+    ),
     linear-gradient(to top, var(--color-taupe) 0 30%, rgb(187 154 121 / 0) 30%),
-    linear-gradient(165deg, color-mix(in srgb, var(--color-cocoa) 80%, var(--color-taupe)), var(--color-cocoa) 55%, color-mix(in srgb, var(--color-cocoa) 70%, var(--color-espresso)));
+    linear-gradient(
+      165deg,
+      color-mix(in srgb, var(--color-cocoa) 80%, var(--color-taupe)),
+      var(--color-cocoa) 55%,
+      color-mix(in srgb, var(--color-cocoa) 70%, var(--color-espresso))
+    );
   outline: 1px solid rgb(245 233 211 / 0.4);
   outline-offset: -10px;
   box-shadow: 0 22px 44px -28px rgb(46 32 23 / 0.55);
@@ -138,11 +183,20 @@ main[data-theme="editorial"] .fx-board:has(img) {
    greeked text lines. */
 main[data-theme="editorial"] .fx-heads {
   background:
-    linear-gradient(var(--color-espresso), var(--color-espresso)) var(--ed-x) 0 / 100% 11% no-repeat,
-    linear-gradient(var(--color-espresso), var(--color-espresso)) var(--ed-x) 15% / 72% 11% no-repeat,
-    linear-gradient(var(--color-cocoa), var(--color-cocoa)) var(--ed-x) 31% / 54% 5% no-repeat,
-    linear-gradient(var(--color-cocoa), var(--color-cocoa)) var(--ed-x) 42% / 100% 1px no-repeat,
-    repeating-linear-gradient(to bottom, rgb(187 154 121 / 0.75) 0 3px, transparent 3px 11px) var(--ed-x) 100% / 100% 50% no-repeat;
+    linear-gradient(var(--color-espresso), var(--color-espresso)) var(--ed-x)
+      0 / 100% 11% no-repeat,
+    linear-gradient(var(--color-espresso), var(--color-espresso)) var(--ed-x)
+      15% / 72% 11% no-repeat,
+    linear-gradient(var(--color-cocoa), var(--color-cocoa)) var(--ed-x) 31% /
+      54% 5% no-repeat,
+    linear-gradient(var(--color-cocoa), var(--color-cocoa)) var(--ed-x) 42% /
+      100% 1px no-repeat,
+    repeating-linear-gradient(
+        to bottom,
+        rgb(187 154 121 / 0.75) 0 3px,
+        transparent 3px 11px
+      )
+      var(--ed-x) 100% / 100% 50% no-repeat;
 }
 
 /* L2 · a fan of two swatch strips, on the desk at inline-start (desktop only). Drawn in its
@@ -158,11 +212,23 @@ main[data-theme="editorial"] .fx-swatches::after {
   box-shadow: 0 12px 26px -16px rgb(46 32 23 / 0.6);
 }
 main[data-theme="editorial"] .fx-swatches::before {
-  background: linear-gradient(to bottom, var(--color-espresso) 0 30%, var(--color-cocoa) 30% 58%, var(--color-taupe) 58% 84%, var(--color-ivory) 84%);
+  background: linear-gradient(
+    to bottom,
+    var(--color-espresso) 0 30%,
+    var(--color-cocoa) 30% 58%,
+    var(--color-taupe) 58% 84%,
+    var(--color-ivory) 84%
+  );
   transform: rotate(calc(-16deg * var(--ed-turn)));
 }
 main[data-theme="editorial"] .fx-swatches::after {
-  background: linear-gradient(to bottom, var(--color-champagne) 0 30%, var(--color-taupe) 30% 58%, var(--color-ivory) 58% 84%, var(--color-champagne) 84%);
+  background: linear-gradient(
+    to bottom,
+    var(--color-champagne) 0 30%,
+    var(--color-taupe) 30% 58%,
+    var(--color-ivory) 58% 84%,
+    var(--color-champagne) 84%
+  );
   transform: rotate(calc(9deg * var(--ed-turn)));
 }
 
@@ -195,7 +261,11 @@ main[data-theme="editorial"] .fx-pen::after {
   position: absolute;
   inset-inline: 12%;
   inset-block: 54% 30%;
-  background: radial-gradient(closest-side, rgb(46 32 23 / 0.16), rgb(46 32 23 / 0));
+  background: radial-gradient(
+    closest-side,
+    rgb(46 32 23 / 0.16),
+    rgb(46 32 23 / 0)
+  );
   transform: rotate(calc(-22deg * var(--ed-turn)));
 }
 main[data-theme="editorial"] .fx-swatches:has(img)::before,
@@ -228,7 +298,11 @@ main[data-theme="editorial"] .fx-seal::before {
   inset: 24%;
   border-radius: 50%;
   border: 1px solid var(--color-espresso);
-  background: linear-gradient(to right, var(--color-espresso) 50%, transparent 50%);
+  background: linear-gradient(
+    to right,
+    var(--color-espresso) 50%,
+    transparent 50%
+  );
 }
 
 /* The opening's type: the H1 is the key, set heavy and large across the grid; the shot lines
@@ -270,7 +344,9 @@ main[data-theme="editorial"] .cat-opening .scene-line {
     border-block-end: 1px dotted currentColor;
     opacity: 0.45;
   }
-  main[data-theme="editorial"] .svc-index-link[aria-current="location"] .svc-index-title {
+  main[data-theme="editorial"]
+    .svc-index-link[aria-current="location"]
+    .svc-index-title {
     -webkit-text-stroke: 0.55px currentColor;
   }
 }
@@ -332,28 +408,51 @@ main[data-theme="editorial"] .cat-sections > .svc:nth-child(3n + 2) .svc-intro {
   box-shadow: 0 0 0 100vmax var(--color-champagne);
   clip-path: inset(0 -100vmax 0 -16px);
 }
-[dir="rtl"] main[data-theme="editorial"] .cat-sections > .svc:nth-child(3n + 2) .svc-intro {
+[dir="rtl"]
+  main[data-theme="editorial"]
+  .cat-sections
+  > .svc:nth-child(3n + 2)
+  .svc-intro {
   clip-path: inset(0 -16px 0 -100vmax);
 }
-main[data-theme="editorial"] .cat-sections > .svc:nth-child(3n + 2) .svc-intro:lang(ar) {
+main[data-theme="editorial"]
+  .cat-sections
+  > .svc:nth-child(3n + 2)
+  .svc-intro:lang(ar) {
   line-height: 1.55;
 }
 
 @media (min-width: 900px) {
   /* A · the title across seven columns, the promise in the last five, on the title's foot. */
-  main[data-theme="editorial"] .cat-sections > .svc:nth-child(3n + 1) .svc-head {
+  main[data-theme="editorial"]
+    .cat-sections
+    > .svc:nth-child(3n + 1)
+    .svc-head {
     grid-template-columns: repeat(12, minmax(0, 1fr));
     column-gap: 24px;
   }
   main[data-theme="editorial"] .cat-sections > .svc:nth-child(3n + 1) .svc-num {
     grid-column: 1 / -1;
   }
-  main[data-theme="editorial"] .cat-sections > .svc:nth-child(3n + 1) .svc-title {
+  main[data-theme="editorial"]
+    .cat-sections
+    > .svc:nth-child(3n + 1)
+    .svc-title {
     grid-column: 1 / 8;
   }
-  main[data-theme="editorial"] .cat-sections > .svc:nth-child(3n + 1) .svc-intro {
+  main[data-theme="editorial"]
+    .cat-sections
+    > .svc:nth-child(3n + 1)
+    .svc-intro {
     grid-column: 8 / -1;
     align-self: end;
+  }
+  /* The hook (D99) runs under the title; auto-placed, it fell into one column, a word a line. */
+  main[data-theme="editorial"]
+    .cat-sections
+    > .svc:nth-child(3n + 1)
+    .svc-hook {
+    grid-column: 1 / 8;
   }
 
   /* C · three columns: the title and promise, then the points across two. */
@@ -368,7 +467,10 @@ main[data-theme="editorial"] .cat-sections > .svc:nth-child(3n + 2) .svc-intro:l
     grid-column: 1;
     align-self: start;
   }
-  main[data-theme="editorial"] .cat-sections > .svc:nth-child(3n) > .svc-deliver {
+  main[data-theme="editorial"]
+    .cat-sections
+    > .svc:nth-child(3n)
+    > .svc-deliver {
     grid-column: 2 / -1;
     padding-block-start: 30px; /* on the line under the folio */
   }
@@ -379,7 +481,11 @@ main[data-theme="editorial"] .cat-sections > .svc:nth-child(3n + 2) .svc-intro:l
 
 /* Act 3 · the bookend (storyboard): the blank page returns with its grid drawn faintly. */
 main[data-theme="editorial"] .cat-faq {
-  background-image: linear-gradient(to right, color-mix(in srgb, var(--color-cocoa) 7%, transparent) 1px, transparent 1px);
+  background-image: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--color-cocoa) 7%, transparent) 1px,
+    transparent 1px
+  );
   background-size: calc(100% / 12) 100%;
 }
 
@@ -416,14 +522,34 @@ main[data-theme="editorial"] :is(.cal-note, .pr-hint) {
   opacity: 0.85;
 }
 /* Small caps labels: tracked in English; Arabic is never tracked or uppercased. */
-main[data-theme="editorial"] :is(.cal-filter-label, .cal-detail-date, .cal-detail-meta dt, .cal-table th, .cal-entry-ch, .pr-kicker, .pr-dateline, .pr-small-title) {
+main[data-theme="editorial"]
+  :is(
+    .cal-filter-label,
+    .cal-detail-date,
+    .cal-detail-meta dt,
+    .cal-table th,
+    .cal-entry-ch,
+    .pr-kicker,
+    .pr-dateline,
+    .pr-small-title
+  ) {
   font-size: 0.66rem;
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-cocoa);
 }
-main[data-theme="editorial"] :is(.cal-filter-label, .cal-detail-date, .cal-detail-meta dt, .cal-table th, .cal-entry-ch, .pr-kicker, .pr-dateline, .pr-small-title):lang(ar) {
+main[data-theme="editorial"]
+  :is(
+    .cal-filter-label,
+    .cal-detail-date,
+    .cal-detail-meta dt,
+    .cal-table th,
+    .cal-entry-ch,
+    .pr-kicker,
+    .pr-dateline,
+    .pr-small-title
+  ):lang(ar) {
   font-size: 0.78rem;
   letter-spacing: 0;
   text-transform: none;
@@ -526,7 +652,11 @@ main[data-theme="editorial"] .cal-swatch[data-pillar="launch"] {
 }
 main[data-theme="editorial"] .cal-swatch[data-pillar="craft"] {
   border: 1px solid var(--color-cocoa);
-  background: repeating-linear-gradient(45deg, var(--color-cocoa) 0 2px, transparent 2px 4px);
+  background: repeating-linear-gradient(
+    45deg,
+    var(--color-cocoa) 0 2px,
+    transparent 2px 4px
+  );
 }
 main[data-theme="editorial"] .cal-swatch[data-pillar="guide"] {
   border-radius: 50%;
@@ -588,7 +718,11 @@ main[data-theme="editorial"] .cal-cell {
   padding: 5px 6px;
 }
 main[data-theme="editorial"] .cal-table td[data-out] .cal-cell {
-  background: repeating-linear-gradient(135deg, rgb(99 71 49 / 0.06) 0 1px, transparent 1px 7px);
+  background: repeating-linear-gradient(
+    135deg,
+    rgb(99 71 49 / 0.06) 0 1px,
+    transparent 1px 7px
+  );
 }
 main[data-theme="editorial"] .cal-day {
   font-size: 0.72rem;
@@ -669,12 +803,17 @@ main[data-theme="editorial"] .cal-rules-v {
   inset: 0;
 }
 main[data-theme="editorial"] .cal-rules-h {
-  background: repeating-linear-gradient(to bottom, var(--mod-rule) 0 1px, transparent 1px var(--cal-row));
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--mod-rule) 0 1px,
+    transparent 1px var(--cal-row)
+  );
   border-block-end: 1px solid var(--mod-rule);
   transform-origin: var(--mod-o-start);
 }
 main[data-theme="editorial"] .cal-rules-v {
-  background: linear-gradient(to right, var(--mod-rule) 1px, transparent 1px) 0 0 / calc(100% / 7) 100%;
+  background: linear-gradient(to right, var(--mod-rule) 1px, transparent 1px) 0
+    0 / calc(100% / 7) 100%;
   border-inline-end: 1px solid var(--mod-rule);
   transform-origin: 50% 0;
 }
@@ -917,10 +1056,15 @@ main[data-theme="editorial"] .pr-note .pr-note-text {
   html:not([data-reduced]) main[data-theme="editorial"] .pr-note {
     border: 0;
   }
-  html:not([data-reduced]) main[data-theme="editorial"] .pr-note:not([data-active]) {
+  html:not([data-reduced])
+    main[data-theme="editorial"]
+    .pr-note:not([data-active]) {
     display: none;
   }
-  html:not([data-reduced]) main[data-theme="editorial"] .pr-note[data-active] .pr-note-n {
+  html:not([data-reduced])
+    main[data-theme="editorial"]
+    .pr-note[data-active]
+    .pr-note-n {
     border-color: var(--color-champagne);
     background: var(--color-champagne);
     color: var(--color-espresso);

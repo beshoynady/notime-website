@@ -16,10 +16,17 @@ import type { MenuData } from "./menu-data";
 import { liveLinks } from "@/lib/content-status";
 import { NAV_LINKS, QUOTE_LINK } from "./nav-links";
 
-const listVariants: Variants = { hidden: {}, shown: { transition: { staggerChildren: 0.045, delayChildren: 0.1 } } };
+const listVariants: Variants = {
+  hidden: {},
+  shown: { transition: { staggerChildren: 0.045, delayChildren: 0.1 } },
+};
 const itemVariants: Variants = {
   hidden: { y: 22, opacity: 0 },
-  shown: { y: 0, opacity: 1, transition: { duration: 0.7, ease: ease.power3Out } },
+  shown: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.7, ease: ease.power3Out },
+  },
 };
 
 /**
@@ -87,34 +94,64 @@ export function MobileMenu({ data }: { data: MenuData }) {
             className="fixed inset-x-0 top-[calc(var(--header-h)+env(safe-area-inset-top,0px))] bottom-0 overflow-auto overscroll-contain bg-espresso pt-5 pb-[calc(40px+env(safe-area-inset-bottom,0px))] text-ivory min-[900px]:hidden"
             onClick={(e) => (e.target as HTMLElement).closest("a") && close()}
             initial={{ clipPath: "inset(0 0 100% 0)" }}
-            animate={{ clipPath: "inset(0 0 0% 0)", transition: still ?? { duration: 0.7, ease: ease.expoOut } }}
-            exit={{ clipPath: "inset(0 0 100% 0)", transition: still ?? { duration: 0.4, ease: [0.7, 0, 0.84, 0] } }}
+            animate={{
+              clipPath: "inset(0 0 0% 0)",
+              transition: still ?? { duration: 0.7, ease: ease.expoOut },
+            }}
+            exit={{
+              clipPath: "inset(0 0 100% 0)",
+              transition: still ?? { duration: 0.4, ease: [0.7, 0, 0.84, 0] },
+            }}
           >
-            <motion.nav aria-label={t("nav.label")} className="frame" variants={listVariants} initial={reduced ? "shown" : "hidden"} animate="shown">
-              <motion.p variants={itemVariants} className="text-eyebrow mb-1 text-taupe">
+            <motion.nav
+              aria-label={t("nav.label")}
+              className="frame"
+              variants={listVariants}
+              initial={reduced ? "shown" : "hidden"}
+              animate="shown"
+            >
+              <motion.p
+                variants={itemVariants}
+                className="text-eyebrow mb-1 text-taupe"
+              >
                 {t("mobileMenu.services")}
               </motion.p>
               {data.categories.map((c) => (
-                <motion.details key={c.slug} variants={itemVariants} className="group/acc border-b border-line-dark">
+                <motion.details
+                  key={c.slug}
+                  variants={itemVariants}
+                  className="group/acc border-b border-line-dark"
+                >
                   <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 py-[17px] text-[1.15rem] font-light [&::-webkit-details-marker]:hidden">
                     <span>
-                      <Numeral className="inline-block w-[52px] text-[0.66rem] tracking-[0.2em] text-taupe">{c.numeral}</Numeral>
+                      <Numeral className="inline-block w-[52px] text-[0.66rem] tracking-[0.2em] text-taupe">
+                        {c.numeral}
+                      </Numeral>
                       {c.title}
                     </span>
-                    <span aria-hidden="true" className="text-[1.4rem] leading-none text-champagne transition-transform duration-500 ease-expo-out group-open/acc:rotate-45">
+                    <span
+                      aria-hidden="true"
+                      className="text-[1.4rem] leading-none text-champagne transition-transform duration-500 ease-expo-out group-open/acc:rotate-45"
+                    >
                       +
                     </span>
                   </summary>
                   <ul className="m-0 grid list-none p-0 pb-3.5">
                     <li>
-                      <Link href={c.href} className="flex min-h-11 items-center gap-2 ps-[52px] text-champagne no-underline">
+                      <Link
+                        href={c.href}
+                        className="flex min-h-11 items-center gap-2 ps-[52px] text-champagne no-underline"
+                      >
                         {t("megaMenu.viewCategory")}
                         <Arrow className="size-3.5" />
                       </Link>
                     </li>
                     {c.services.map((s) => (
                       <li key={s.slug}>
-                        <Link href={s.href} className="flex min-h-11 items-center ps-[52px] text-ivory/75 no-underline hover:text-champagne">
+                        <Link
+                          href={s.href}
+                          className="flex min-h-11 items-center ps-[52px] text-ivory/75 no-underline hover:text-champagne"
+                        >
                           {s.title}
                         </Link>
                       </li>
@@ -122,19 +159,29 @@ export function MobileMenu({ data }: { data: MenuData }) {
                   </ul>
                 </motion.details>
               ))}
-              {liveLinks(NAV_LINKS).map((l) => (
-                <motion.div key={l.key} variants={itemVariants}>
-                  <Link href={l.href} className="block border-b border-line-dark py-5 text-[1.7rem] font-light no-underline">
-                    {t(`nav.${l.key}`)}
-                  </Link>
-                </motion.div>
-              ))}
+              {/* Contact is the quote button here; the footer lists it (M3). */}
+              {liveLinks(NAV_LINKS.filter((l) => l.key !== "contact")).map(
+                (l) => (
+                  <motion.div key={l.key} variants={itemVariants}>
+                    <Link
+                      href={l.href}
+                      className="block border-b border-line-dark py-5 text-[1.7rem] font-light no-underline"
+                    >
+                      {t(`nav.${l.key}`)}
+                    </Link>
+                  </motion.div>
+                ),
+              )}
               <motion.div variants={itemVariants}>
                 <ProductStrip products={data.products} className="mt-7 mb-6" />
               </motion.div>
               {QUOTE_LINK.live && (
                 <motion.div variants={itemVariants}>
-                  <ButtonLink href={QUOTE_LINK.href} arrow className={cn("w-full")}>
+                  <ButtonLink
+                    href={QUOTE_LINK.href}
+                    arrow
+                    className={cn("w-full")}
+                  >
                     {t("header.quote")}
                   </ButtonLink>
                 </motion.div>

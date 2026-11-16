@@ -81,6 +81,18 @@ a.wk-chip:hover,
 a.wk-chip:focus-visible {
   border-color: var(--color-champagne);
 }
+/* Press feedback (M3). */
+a.wk-chip {
+  transition-property: border-color, background-color, color, scale;
+}
+a.wk-chip:active {
+  scale: 0.97;
+}
+@media (prefers-reduced-motion: reduce) {
+  a.wk-chip:active {
+    scale: none;
+  }
+}
 .wk-chip[aria-current="page"] {
   border-color: var(--color-champagne);
   background: var(--color-champagne);
@@ -223,6 +235,13 @@ a.wk-chip:focus-visible {
   [dir="rtl"] .wk-case-grid:hover .wk-arrow {
     translate: -5px 0;
   }
+}
+/* Keyboard parity (M3): focus moves the arrow as hover does. */
+.wk-case-grid:focus-within .wk-arrow {
+  translate: 5px 0;
+}
+[dir="rtl"] .wk-case-grid:focus-within .wk-arrow {
+  translate: -5px 0;
 }
 @media (prefers-reduced-motion: reduce) {
   .wk-arrow {
@@ -498,6 +517,12 @@ a.wk-chip:focus-visible {
     translate: -5px 0;
   }
 }
+.wc-service:focus-visible svg {
+  translate: 5px 0;
+}
+[dir="rtl"] .wc-service:focus-visible svg {
+  translate: -5px 0;
+}
 .wc-service strong {
   font-weight: 500;
 }
@@ -569,6 +594,27 @@ a.wk-chip:focus-visible {
 }
 @media (prefers-reduced-motion: reduce) {
   .wc-service svg {
+    transition: none;
+  }
+}
+
+/* Image hover, as the homepage cards (M3; the homepage's work cards: sections/work/work.css): the photo settles from 1.04 to 1 under the
+   pointer or keyboard focus. CSS on the img only; Motion's sweep owns its own layer. */
+.wk-media img {
+  scale: 1.04;
+  transition: scale 1.4s var(--ease-expo-out);
+}
+.wk-case-grid:focus-within .wk-media img {
+  scale: 1;
+}
+@media (hover: hover) and (pointer: fine) {
+  .wk-case-grid:hover .wk-media img {
+    scale: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wk-media img {
+    scale: none;
     transition: none;
   }
 }

@@ -10,10 +10,21 @@
   justify-content: flex-end;
   gap: 16px;
   min-block-size: min(64svh, 640px);
-  padding-block: calc(var(--header-h) + var(--scene-top-extra, 0px) + 24px) clamp(40px, 6vw, 72px);
+  padding-block: calc(var(--header-h) + var(--scene-top-extra, 0px) + 24px)
+    clamp(40px, 6vw, 72px);
 }
 .cat-opening-overlay > .crumbs {
   margin-block-end: auto;
+}
+/* Over the Evening's photo the crumbs sat on a bright ceiling under 3:1 (M3): full opacity and
+   a soft espresso halo, which only shows where the photo is light. */
+main[data-theme="evening"] .cat-opening-overlay > .crumbs {
+  text-shadow:
+    0 1px 2px rgba(46, 32, 23, 0.6),
+    0 0 18px rgba(46, 32, 23, 0.65);
+}
+main[data-theme="evening"] .cat-opening-overlay > .crumbs a {
+  opacity: 1;
 }
 .crumbs ol {
   display: flex;
@@ -104,7 +115,9 @@ html[data-js]:not([data-reduced]) .cat-opening .scene-line:last-child {
 }
 @media (min-width: 900px) {
   .cat-opening-overlay > * {
-    margin-inline-start: calc((100% - var(--rail-gap)) * 0.25 + var(--rail-gap));
+    margin-inline-start: calc(
+      (100% - var(--rail-gap)) * 0.25 + var(--rail-gap)
+    );
   }
 }
 
@@ -395,7 +408,7 @@ html[data-js]:not([data-reduced]) .cat-opening .scene-line:last-child {
     padding-inline: 16px 12px;
     border: 0;
     line-height: 1.35;
-    opacity: 0.62;
+    opacity: 0.78; /* M3: 0.62 measured 4.2:1 on ivory, 3.6:1 on champagne */
     transition: opacity 0.3s var(--ease-expo-out);
   }
   .svc-index-link:hover,
@@ -408,7 +421,7 @@ html[data-js]:not([data-reduced]) .cat-opening .scene-line:last-child {
     color: inherit;
   }
   /* Rail numerals in the theme's accent (spec §5.1: champagne on the Evening), at full opacity:
-     at 0.7 inside a 0.62 link they measured 3.76:1 at 10.9px. */
+     at 0.7 inside a 0.62 link (now 0.78) they measured 3.76:1 at 10.9px. */
   .svc-index-num {
     color: var(--theme-accent);
     opacity: 1;
@@ -432,7 +445,9 @@ html[data-js]:not([data-reduced]) .cat-opening .scene-line:last-child {
 .svc-index {
   transition: opacity 0.4s var(--ease-expo-out);
 }
-html[data-js]:not([data-reduced]) .cat-page:has(.cat-opening .scene[data-shot-active="0"]) .svc-index:not(:hover, :focus-within, [data-open]) {
+html[data-js]:not([data-reduced])
+  .cat-page:has(.cat-opening .scene[data-shot-active="0"])
+  .svc-index:not(:hover, :focus-within, [data-open]) {
   opacity: 0.4;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -630,7 +645,9 @@ html[lang="ar"] .svc-module[data-module="stand-assembly"] {
 }
 .svc-scene {
   --frame-w: min(100vw, var(--frame));
-  --bleed-start: calc((100vw - var(--frame-w)) / 2 + var(--gutter-start) + var(--col-start, 0px));
+  --bleed-start: calc(
+    (100vw - var(--frame-w)) / 2 + var(--gutter-start) + var(--col-start, 0px)
+  );
   --bleed-end: calc((100vw - var(--frame-w)) / 2 + var(--gutter-end));
   margin-inline: calc(-1 * var(--bleed-start)) calc(-1 * var(--bleed-end));
 }
@@ -645,7 +662,13 @@ html[lang="ar"] .svc-module[data-module="stand-assembly"] {
 @media (min-width: 900px) {
   .svc-scene {
     /* the rail's column: a quarter of the frame's 3fr / 9fr grid plus its gap */
-    --col-start: calc((var(--frame-w) - var(--gutter-start) - var(--gutter-end) - var(--rail-gap)) / 4 + var(--rail-gap));
+    --col-start: calc(
+      (
+          var(--frame-w) - var(--gutter-start) - var(--gutter-end) -
+            var(--rail-gap)
+        ) /
+        4 + var(--rail-gap)
+    );
   }
 }
 @media (max-width: 899.98px) {

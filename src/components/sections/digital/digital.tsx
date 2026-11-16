@@ -2,7 +2,9 @@ import { ArrowRight } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { SectionRef } from "@/components/review/section-ref";
 import { Badge } from "@/components/ui/badge";
-import { categoryHref, getProducts, type Locale } from "@/content";
+import { categoryHref, getProducts, productHref, type Locale } from "@/content";
+import { PRODUCT_IDS } from "@/content/product-pages";
+import { productsCopy } from "@/content/software/page";
 import { Link } from "@/i18n/navigation";
 import { HOME_REF } from "@/lib/review";
 import "./digital.css";
@@ -14,18 +16,29 @@ const CAPABILITIES = ["websites", "apps", "systems", "ecommerce"] as const;
  * ground (an 8px taupe grid) and UI-label type (category-pages.md §5.5), so it reads as the
  * software side of the house. Four capabilities, then the two products (D78 names) as cards
  * marked "Coming soon", kept apart from the capabilities so they're never read as demos.
- * The product pages and the interest form come later (Tasks F3, F4): no buttons until they exist.
+ * Each card links its product page (F4; the whole card is the target, M3).
  */
 export async function Digital() {
-  const [t, tc, locale] = await Promise.all([getTranslations("digital"), getTranslations("common"), getLocale() as Promise<Locale>]);
+  const [t, tc, locale] = await Promise.all([
+    getTranslations("digital"),
+    getTranslations("common"),
+    getLocale() as Promise<Locale>,
+  ]);
   const products = getProducts();
   return (
-    <section id="digital" data-tone="light" aria-labelledby="digital-title" className="digital section-pad">
+    <section
+      id="digital"
+      data-tone="light"
+      aria-labelledby="digital-title"
+      className="digital section-pad"
+    >
       <SectionRef id={HOME_REF.digital} />
       <div className="frame">
         <header className="digital-head">
           <div>
-            <p className="sec-eyebrow text-eyebrow text-cocoa">{t("eyebrow")}</p>
+            <p className="sec-eyebrow text-eyebrow text-cocoa">
+              {t("eyebrow")}
+            </p>
             <h2 id="digital-title" className="text-h1">
               {t("headingLead")} <b>{t("headingKey")}</b>
             </h2>
@@ -36,7 +49,9 @@ export async function Digital() {
         <ul className="digital-caps">
           {CAPABILITIES.map((k) => (
             <li key={k} className="digital-cap">
-              <h3 className="digital-cap-title">{t(`capabilities.${k}.title`)}</h3>
+              <h3 className="digital-cap-title">
+                {t(`capabilities.${k}.title`)}
+              </h3>
               <p>{t(`capabilities.${k}.body`)}</p>
             </li>
           ))}
@@ -56,6 +71,27 @@ export async function Digital() {
                 <h4 className="digital-product-name">{p.name[locale]}</h4>
                 <p className="digital-product-desc">{p.descriptor[locale]}</p>
                 <p className="digital-product-summary">{p.summary[locale]}</p>
+                {(() => {
+                  const id = PRODUCT_IDS.find(
+                    (k) => productsCopy.items[k].slug === p.slug,
+                  );
+                  return id ? (
+                    <Link
+                      href={productHref(id)}
+                      className="text-link digital-product-link"
+                    >
+                      {productsCopy.more[locale].replace(
+                        "{product}",
+                        p.name[locale],
+                      )}
+                      <ArrowRight
+                        aria-hidden="true"
+                        strokeWidth={1.25}
+                        className="size-4 rtl:-scale-x-100"
+                      />
+                    </Link>
+                  ) : null;
+                })()}
               </li>
             ))}
           </ul>
@@ -64,7 +100,11 @@ export async function Digital() {
         <div className="digital-foot">
           <Link href={categoryHref("software-digital")} className="text-link">
             {t("explore")}
-            <ArrowRight aria-hidden="true" strokeWidth={1.25} className="size-4 rtl:-scale-x-100" />
+            <ArrowRight
+              aria-hidden="true"
+              strokeWidth={1.25}
+              className="size-4 rtl:-scale-x-100"
+            />
           </Link>
         </div>
       </div>

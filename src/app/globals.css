@@ -31,7 +31,9 @@
   --color-error: #9b3b2a;
 
   /* Fonts (variables and @font-face in src/app/fonts.css, self-hosted, D45) */
-  --font-en: var(--font-montserrat), ui-sans-serif, system-ui, "Segoe UI", Arial, sans-serif;
+  --font-en:
+    var(--font-montserrat), ui-sans-serif, system-ui, "Segoe UI", Arial,
+    sans-serif;
   --font-ar: var(--font-alexandria), "Segoe UI", Tahoma, sans-serif;
 
   /* Shape */
@@ -193,7 +195,8 @@
     outline-offset: 3px;
   }
   [data-tone="dark"] :focus-visible,
-  #site-header:is([data-header-tone="hero"], [data-header-tone="dark"]) :focus-visible {
+  #site-header:is([data-header-tone="hero"], [data-header-tone="dark"])
+    :focus-visible {
     outline-color: var(--color-champagne);
   }
   a {
@@ -381,39 +384,92 @@ summary,
 }
 .paint-event {
   background:
-    radial-gradient(60% 40% at 72% 30%, rgba(234, 212, 171, 0.55), transparent 60%),
-    radial-gradient(30% 22% at 20% 22%, rgba(255, 220, 160, 0.45), transparent 70%),
-    radial-gradient(80% 60% at 50% 100%, rgba(99, 71, 49, 0.95), transparent 70%),
+    radial-gradient(
+      60% 40% at 72% 30%,
+      rgba(234, 212, 171, 0.55),
+      transparent 60%
+    ),
+    radial-gradient(
+      30% 22% at 20% 22%,
+      rgba(255, 220, 160, 0.45),
+      transparent 70%
+    ),
+    radial-gradient(
+      80% 60% at 50% 100%,
+      rgba(99, 71, 49, 0.95),
+      transparent 70%
+    ),
     linear-gradient(180deg, #1f150e, #3b2a1d 55%, #2a1d13);
 }
 .paint-table {
   background:
-    radial-gradient(40% 30% at 50% 35%, rgba(245, 233, 211, 0.6), transparent 70%),
-    radial-gradient(70% 20% at 50% 78%, rgba(187, 154, 121, 0.7), transparent 70%),
+    radial-gradient(
+      40% 30% at 50% 35%,
+      rgba(245, 233, 211, 0.6),
+      transparent 70%
+    ),
+    radial-gradient(
+      70% 20% at 50% 78%,
+      rgba(187, 154, 121, 0.7),
+      transparent 70%
+    ),
     linear-gradient(160deg, #4a3526, #241810);
 }
 .paint-studio {
   background:
-    conic-gradient(from 200deg at 30% 40%, rgba(234, 212, 171, 0), rgba(234, 212, 171, 0.45), rgba(234, 212, 171, 0) 30%),
-    radial-gradient(30% 50% at 75% 50%, rgba(187, 154, 121, 0.55), transparent 70%),
+    conic-gradient(
+      from 200deg at 30% 40%,
+      rgba(234, 212, 171, 0),
+      rgba(234, 212, 171, 0.45),
+      rgba(234, 212, 171, 0) 30%
+    ),
+    radial-gradient(
+      30% 50% at 75% 50%,
+      rgba(187, 154, 121, 0.55),
+      transparent 70%
+    ),
     linear-gradient(120deg, #2b1e15, #5b412d 60%, #2e2017);
 }
 .paint-print {
   background:
-    repeating-linear-gradient(90deg, rgba(245, 233, 211, 0.12) 0 2px, transparent 2px 22px),
-    radial-gradient(50% 50% at 40% 40%, rgba(234, 212, 171, 0.55), transparent 70%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(245, 233, 211, 0.12) 0 2px,
+      transparent 2px 22px
+    ),
+    radial-gradient(
+      50% 50% at 40% 40%,
+      rgba(234, 212, 171, 0.55),
+      transparent 70%
+    ),
     linear-gradient(200deg, #6d4f37, #2e2017);
 }
 .paint-code {
   background:
-    repeating-linear-gradient(0deg, rgba(234, 212, 171, 0.1) 0 1px, transparent 1px 18px),
-    radial-gradient(40% 40% at 65% 40%, rgba(234, 212, 171, 0.4), transparent 70%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(234, 212, 171, 0.1) 0 1px,
+      transparent 1px 18px
+    ),
+    radial-gradient(
+      40% 40% at 65% 40%,
+      rgba(234, 212, 171, 0.4),
+      transparent 70%
+    ),
     linear-gradient(140deg, #1d140d, #3e2c1f);
 }
 .paint-brand {
   background:
-    radial-gradient(35% 35% at 35% 50%, rgba(245, 233, 211, 0.55), transparent 70%),
-    radial-gradient(25% 25% at 70% 40%, rgba(187, 154, 121, 0.6), transparent 70%),
+    radial-gradient(
+      35% 35% at 35% 50%,
+      rgba(245, 233, 211, 0.55),
+      transparent 70%
+    ),
+    radial-gradient(
+      25% 25% at 70% 40%,
+      rgba(187, 154, 121, 0.6),
+      transparent 70%
+    ),
     linear-gradient(60deg, #3a291c, #634731);
 }
 
@@ -477,8 +533,12 @@ html[data-js]:not([data-reduced]) .scene-pin {
 #page-stage[data-tone-ready] section[data-zone]:not([data-bg="own"]) {
   transition: opacity 0.45s ease;
 }
-#page-stage[data-ground="light"] section[data-zone][data-tone="dark"]:not([data-bg="own"]):not(:focus-within),
-#page-stage[data-ground="dark"] section[data-zone][data-tone="light"]:not([data-bg="own"]):not(:focus-within) {
+#page-stage[data-ground="light"]
+  section[data-zone][data-tone="dark"]:not([data-bg="own"]):not(:focus-within),
+#page-stage[data-ground="dark"]
+  section[data-zone][data-tone="light"]:not([data-bg="own"]):not(
+    :focus-within
+  ) {
   opacity: 0;
   pointer-events: none;
 }
@@ -635,7 +695,7 @@ html[data-overlay-open] #site-header {
   border-radius: var(--radius-tag);
   background: var(--color-champagne);
   color: var(--color-espresso);
-  font-size: 0.56rem;
+  font-size: 0.64rem; /* M3: 0.56rem read about 9px */
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -669,7 +729,7 @@ html[data-overlay-open] #site-header {
   padding: 3px 7px;
   border: 1px solid currentColor;
   border-radius: var(--radius-tag);
-  font-size: 0.56rem;
+  font-size: 0.64rem; /* M3: 0.56rem read about 9px */
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -814,12 +874,25 @@ html[data-overlay-open] #site-header .logo-on-light {
   opacity: 0.25;
 }
 /* Footer links: quiet until hovered; the global focus ring shows for keyboard users. */
+/* The underline sweeps in from the reading start, as `.text-link` (M3). */
 .footer-link {
   position: relative;
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  text-underline-offset: 4px;
-  transition: color 0.3s var(--ease-power3-out), text-decoration-color 0.3s var(--ease-power3-out);
+  text-decoration: none;
+  background: linear-gradient(var(--color-taupe), var(--color-taupe)) no-repeat;
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  padding-block-end: 2px;
+  transition:
+    color 0.3s var(--ease-power3-out),
+    background-size 0.5s var(--ease-expo-out);
+}
+[dir="rtl"] .footer-link {
+  background-position: 100% 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  .footer-link {
+    transition: color 0.3s var(--ease-power3-out);
+  }
 }
 
 /* Hit area: the 10px gap shared out above and below (≥ 32px per link, WCAG 2.5.8). */
@@ -858,9 +931,10 @@ html[data-overlay-open] #site-header .logo-on-light {
     align-items: start;
   }
 }
-.footer-link:hover {
+.footer-link:hover,
+.footer-link:focus-visible {
   color: var(--color-ivory);
-  text-decoration-color: var(--color-taupe);
+  background-size: 100% 1px;
 }
 .text-link {
   position: relative;

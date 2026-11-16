@@ -117,3 +117,24 @@
     aspect-ratio: 4 / 3;
   }
 }
+
+/* Image hover, as the category cards above it (M3): the photo settles from 1.04 to 1 under the
+   pointer or keyboard focus. CSS on the img only; Motion's HoverSweep owns its own layer. */
+.work-media img {
+  scale: 1.04;
+  transition: scale 1.4s var(--ease-expo-out);
+}
+.work-card:focus-within .work-media img {
+  scale: 1;
+}
+@media (hover: hover) and (pointer: fine) {
+  .work-card:hover .work-media img {
+    scale: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .work-media img {
+    scale: none;
+    transition: none;
+  }
+}

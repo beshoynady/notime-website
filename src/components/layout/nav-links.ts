@@ -1,15 +1,15 @@
-import { ABOUT_HREF, categoryHref, WORK_INDEX_HREF } from "@/content/links";
+import { ABOUT_HREF, categoryHref, CONTACT_HREF, WORK_INDEX_HREF } from "@/content/links";
 
 /**
  * Header and mobile-menu links. A link shows only once its page exists (`live`, fill or hide,
- * D78): Work and About have their pages (v1 plan F1, F2); Contact arrives with the contact page
- * and its form (Task 4.2).
+ * D78). Contact is live (D102); the header and the mobile menu reach it through the quote button,
+ * so only the footer lists it.
  */
 export const NAV_LINKS = [
   { key: "work", href: WORK_INDEX_HREF, live: true },
   { key: "digital", href: categoryHref("software-digital"), live: true },
   { key: "about", href: ABOUT_HREF, live: true },
-  { key: "contact", href: "/contact", live: false },
+  { key: "contact", href: CONTACT_HREF, live: true }, // the page exists (D102)
 ] as const;
 
 /** "Request a quote": hidden until /contact exists. */

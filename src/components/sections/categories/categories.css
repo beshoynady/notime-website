@@ -60,7 +60,8 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(180deg, transparent 30%, rgba(46, 32, 23, 0.92));
+  /* Darker from mid-card (M3): the Events list sat on white flowers under 3:1. */
+  background: linear-gradient(180deg, transparent 20%, rgba(46, 32, 23, 0.6) 50%, rgba(46, 32, 23, 0.95));
 }
 .cat-media {
   position: absolute;

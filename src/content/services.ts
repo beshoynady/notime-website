@@ -359,7 +359,7 @@ export const services: Service[] = [
       { en: "Paid media & media planning (Google & Meta ads)", ar: "الإعلانات المدفوعة وتخطيط الإعلام (Google وMeta)" },
       {
         en: "Google and Meta campaigns, with the channels, budgets and timing behind them matched to the audience.",
-        ar: "حملات Google وMeta، نخطّط لقنواتها وميزانياتها وتوقيتها بما يناسب الجمهور.",
+        ar: "حملات على Google و Meta، نخطّط لقنواتها وميزانياتها وتوقيتها بما يناسب الجمهور.",
       },
     ],
   ]),

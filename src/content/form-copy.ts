@@ -41,7 +41,7 @@ export const formCopy = {
   states: {
     rateLimited: l(
       "Too many attempts from this connection. Try again in {minutes} min, or email us at {email}.",
-      "محاولات كثيرة من هذا الاتصال. حاول مجددًا بعد {minutes} دقيقة، أو راسلنا على {email}.",
+      "محاولات كثيرة من هذا الاتصال. حاول مجددًا بعد {minutes}، أو راسلنا على {email}.",
     ),
     blocked: l(
       "We couldn't confirm the request came from a person. Try again, or email us at {email}.",
@@ -165,4 +165,13 @@ export const formCopy = {
 };
 
 /** Fills `{key}` placeholders. */
+/** Minutes in Arabic with the number's agreement (M3: «9 دقيقة» read wrong): 1, 2, 3–10, 11+. */
+export function minutesLabel(n: number, locale: "en" | "ar"): string {
+  if (locale === "en") return String(n);
+  if (n === 1) return "دقيقة واحدة";
+  if (n === 2) return "دقيقتين";
+  if (n >= 3 && n <= 10) return `${n} دقائق`;
+  return `${n} دقيقة`;
+}
+
 export const fill = (s: string, vars: Record<string, string | number>) => s.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? String(vars[k]) : m));

@@ -10,10 +10,22 @@
   inset: 0;
   z-index: -1;
   background-image:
-    linear-gradient(to right, color-mix(in srgb, var(--color-taupe) 10%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, var(--color-taupe) 10%, transparent) 1px, transparent 1px);
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--color-taupe) 10%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color-taupe) 10%, transparent) 1px,
+      transparent 1px
+    );
   background-size: 8px 8px;
-  mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, #000 40%, transparent 100%);
+  mask-image: radial-gradient(
+    ellipse 80% 70% at 50% 45%,
+    #000 40%,
+    transparent 100%
+  );
   pointer-events: none;
 }
 
@@ -118,6 +130,41 @@
 }
 :lang(ar) .digital-product-desc {
   letter-spacing: 0;
+}
+/* The card is one target (a stretched link); on hover its ground warms and the link underlines. */
+.digital-product {
+  position: relative;
+  transition: background-color 0.3s var(--ease-expo-out);
+}
+.digital-product-link {
+  position: static; /* its ::after stretches over the card, not the link */
+  margin-block-start: 10px;
+  color: var(--color-champagne);
+}
+.digital-product-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+.digital-product:has(.digital-product-link:focus-visible) {
+  outline: 2px solid var(--color-champagne);
+  outline-offset: 3px;
+}
+.digital-product-link:focus-visible {
+  outline: none;
+}
+@media (hover: hover) {
+  .digital-product:hover {
+    background-color: color-mix(
+      in srgb,
+      var(--color-espresso) 86%,
+      var(--color-cocoa)
+    );
+  }
+  .digital-product:hover .digital-product-link {
+    background-size: 100% 1px;
+  }
 }
 .digital-product-summary {
   margin: 6px 0 0;

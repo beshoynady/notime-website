@@ -122,7 +122,7 @@ export const categories: Category[] = [
         a: { en: "Yes. We write and publish in both languages, and each language is written natively, not translated word for word.", ar: "نعم. نكتب وننشر باللغتين، ونكتب كل لغة بأسلوبها، لا بترجمة حرفية." },
       },
       {
-        q: { en: "Do you run Google and Meta ads?", ar: "هل تديرون إعلانات Google وMeta؟" },
+        q: { en: "Do you run Google and Meta ads?", ar: "هل تديرون إعلانات على Google و Meta؟" },
         a: { en: "Yes. We plan the channels, the budget and the timing, run the campaigns, and report on how they performed.", ar: "نعم. نخطّط للقنوات والميزانية والتوقيت، وندير الحملات، ونرفع تقارير عن أدائها." },
       },
       {

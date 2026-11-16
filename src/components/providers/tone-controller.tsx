@@ -24,7 +24,10 @@ export type HeaderTone = Tone | "hero";
  */
 /** A section's ground: its `--tone-ground`, or the tone's default when a page sets none. */
 function groundOf(section: HTMLElement) {
-  return getComputedStyle(section).getPropertyValue("--tone-ground").trim() || PAGE_BG[(section.dataset.tone as Tone) ?? "dark"];
+  return (
+    getComputedStyle(section).getPropertyValue("--tone-ground").trim() ||
+    PAGE_BG[(section.dataset.tone as Tone) ?? "dark"]
+  );
 }
 
 export function ToneController() {
@@ -40,7 +43,9 @@ export function ToneController() {
       const headerH = header?.offsetHeight ?? 68;
       // Only the visible page: under cacheComponents, pages left behind by a client
       // navigation stay in the DOM hidden (React Activity) and must not get triggers.
-      const sections = gsap.utils.toArray<HTMLElement>("#page-stage section[data-tone]").filter((s) => s.checkVisibility());
+      const sections = gsap.utils
+        .toArray<HTMLElement>("#page-stage section[data-tone]")
+        .filter((s) => s.checkVisibility());
 
       // A section's scroll box: its pin spacer when another controller pins it (the spacer
       // holds the whole pinned distance), otherwise the section itself. Read at refresh time.
@@ -48,8 +53,12 @@ export function ToneController() {
       // re-applies each pin's spacing only when it reaches that pin, and a zone refreshed
       // before a pin measured every section below it one pin length too high (D73: the Events
       // opening's pin turned the ground ivory under section VI).
-      const box = (el: HTMLElement) => (el.parentElement?.classList.contains("pin-spacer") ? el.parentElement : el);
-      const docTop = (el: HTMLElement) => box(el).getBoundingClientRect().top + window.scrollY;
+      const box = (el: HTMLElement) =>
+        el.parentElement?.classList.contains("pin-spacer")
+          ? el.parentElement
+          : el;
+      const docTop = (el: HTMLElement) =>
+        box(el).getBoundingClientRect().top + window.scrollY;
 
       let underHeader: HTMLElement | undefined;
       let groundTone: Tone = "dark";
@@ -57,7 +66,11 @@ export function ToneController() {
         if (!header || !underHeader) return;
         const own = underHeader.dataset.bg === "own";
         header.dataset.headerTone =
-          underHeader.dataset.header === "hero" ? "hero" : own ? ((underHeader.dataset.tone as Tone) ?? "dark") : groundTone;
+          underHeader.dataset.header === "hero"
+            ? "hero"
+            : own
+              ? ((underHeader.dataset.tone as Tone) ?? "dark")
+              : groundTone;
       };
       const setGround = (section: HTMLElement) => {
         groundTone = (section.dataset.tone as Tone) ?? "dark";
@@ -76,6 +89,11 @@ export function ToneController() {
         setGround(first);
       }
 
+      // The footer paints its own ground, so it never turns the page's (D105): at the bottom of a
+      // page the last light section stayed on screen while the footer's zone turned the ground
+      // dark and faded it out. The last section above the footer holds the ground to the end.
+      const grounds = sections.filter((s) => !s.closest("footer"));
+
       sections.forEach((section, i) => {
         section.dataset.zone = "";
         const ground = groundOf(section);
@@ -84,19 +102,34 @@ export function ToneController() {
         // ScrollTrigger subtracts the pin's own length from its positions (measured: the
         // header went back to the hero tone only 1.4 viewports too late on the way up).
         const next = sections[i + 1];
-        const zone = (line: () => number) => ({
+        const zone = (
+          line: () => number,
+          to: HTMLElement | undefined = next,
+        ) => ({
           start: () => docTop(section) - line(),
-          end: () => (next ? docTop(next) : docTop(section) + box(section).offsetHeight) - line(),
+          end: () =>
+            (to ? docTop(to) : docTop(section) + box(section).offsetHeight) -
+            line(),
         });
-        ScrollTrigger.create({
-          ...zone(() => innerHeight * 0.55),
-          refreshPriority: -1,
-          onToggle: (self) => {
-            if (!self.isActive) return;
-            gsap.to(stage, { "--page-bg": ground, duration, ease: "power2.out", overwrite: "auto" });
-            setGround(section);
-          },
-        });
+        const g = grounds.indexOf(section);
+        if (g !== -1) {
+          const nextGround = grounds[g + 1];
+          ScrollTrigger.create({
+            ...zone(() => innerHeight * 0.55, nextGround),
+            ...(nextGround ? {} : { end: "max" }),
+            refreshPriority: -1,
+            onToggle: (self) => {
+              if (!self.isActive) return;
+              gsap.to(stage, {
+                "--page-bg": ground,
+                duration,
+                ease: "power2.out",
+                overwrite: "auto",
+              });
+              setGround(section);
+            },
+          });
+        }
         if (header) {
           ScrollTrigger.create({
             ...zone(() => headerH),

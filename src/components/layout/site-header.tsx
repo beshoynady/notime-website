@@ -29,21 +29,40 @@ export function SiteHeader() {
         {t("common.skipToContent")}
       </a>
       <div className="safe-top-strip" aria-hidden="true" />
-      <header id="site-header" data-header-tone="hero" data-anchor-offset="" className="fixed inset-x-0 top-[env(safe-area-inset-top,0px)] z-50">
+      <header
+        id="site-header"
+        data-header-tone="hero"
+        data-anchor-offset=""
+        className="fixed inset-x-0 top-[env(safe-area-inset-top,0px)] z-50"
+      >
         <div className="frame flex h-[var(--header-h)] items-center justify-between gap-4">
           <Logo />
-          <nav aria-label={t("nav.label")} className="hidden items-center gap-[30px] text-[0.78rem] tracking-[0.16em] uppercase min-[900px]:flex lang-ar:text-[0.9rem] lang-ar:tracking-normal lang-ar:normal-case">
+          <nav
+            aria-label={t("nav.label")}
+            className="hidden items-center gap-[30px] text-[0.78rem] tracking-[0.16em] uppercase min-[900px]:flex lang-ar:text-[0.9rem] lang-ar:tracking-normal lang-ar:normal-case"
+          >
             <MegaMenu data={menu} />
-            {liveLinks(NAV_LINKS).map((l) => (
-              <Link key={l.key} href={l.href} className="nav-link no-underline">
-                {t(`nav.${l.key}`)}
-              </Link>
-            ))}
+            {/* Contact is the quote button here; the footer lists it (M3). */}
+            {liveLinks(NAV_LINKS.filter((l) => l.key !== "contact")).map(
+              (l) => (
+                <Link
+                  key={l.key}
+                  href={l.href}
+                  className="nav-link no-underline"
+                >
+                  {t(`nav.${l.key}`)}
+                </Link>
+              ),
+            )}
           </nav>
           <div className="flex items-center gap-3">
             <LangToggle />
             {QUOTE_LINK.live && (
-              <ButtonLink href={QUOTE_LINK.href} size="sm" className="hidden min-[1100px]:inline-flex">
+              <ButtonLink
+                href={QUOTE_LINK.href}
+                size="sm"
+                className="hidden min-[1100px]:inline-flex"
+              >
                 {t("header.quote")}
               </ButtonLink>
             )}
