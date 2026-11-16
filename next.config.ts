@@ -14,6 +14,12 @@ const nextConfig: NextConfig = {
   // Kept on with next-intl via next/root-params (DECISIONS D13, OPEN_QUESTIONS #9).
   cacheComponents: true,
   partialPrefetching: true,
+  experimental: {
+    // Task 16: the CSS (≈83 KB raw, ≈15 KB gzipped across 14 chunks on the homepage) arrives
+    // inside the HTML instead of 14 render-blocking requests. Most visitors are first-time ones
+    // (referrals, search, Instagram), which is the case this trade is made for.
+    inlineCss: true,
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     // Defaults plus Canva's native widths (944, 1136, 1680), so the capped srcset ends exactly
