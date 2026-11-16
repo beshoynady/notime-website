@@ -10,6 +10,7 @@ import { WhatsAppButton } from "@/components/layout/whatsapp-button";
 import { ReviewBanner } from "@/components/review/review-banner";
 import { DirectionProvider } from "@/components/providers/direction-provider";
 import { AnchorScroll } from "@/components/providers/anchor-scroll";
+import { LeadSourceCapture } from "@/components/providers/lead-source-capture";
 import { LenisProvider } from "@/components/providers/lenis-provider";
 import { ToneController } from "@/components/providers/tone-controller";
 import { SITE_URL } from "@/config/site";
@@ -77,6 +78,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
               <ReviewBanner />
               <CustomCursor />
               <ToneController />
+              <LeadSourceCapture />
               {/* Suspense: AnchorScroll reads the search params; the pages stay static. */}
               <Suspense fallback={null}>
                 <AnchorScroll />

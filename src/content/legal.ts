@@ -50,8 +50,8 @@ const privacy: LegalDoc = {
         },
         {
           p: {
-            en: "Technical data. Like any website, our hosting provider processes your IP address and basic browser information to deliver pages and keep the site secure. When you submit a form, Cloudflare Turnstile checks that the request comes from a person and not an automated program, and we use your IP address for a short time to limit repeated submissions.",
-            ar: "البيانات التقنية. كأي موقع إلكتروني، يعالج مزوّد الاستضافة عنوان IP الخاص بك ومعلومات أساسية عن متصفحك، لعرض الصفحات والحفاظ على أمن الموقع. وعند إرسال أي نموذج، تتحقّق خدمة Cloudflare Turnstile من أن الطلب صادر عن شخص لا عن برنامج آلي، ونستخدم عنوان IP لفترة قصيرة للحدّ من تكرار الإرسال.",
+            en: "Technical data. Like any website, our hosting provider processes your IP address and basic browser information to deliver pages and keep the site secure. When you submit a form, Cloudflare Turnstile checks that the request comes from a person and not an automated program, and we use your IP address for a short time to limit repeated submissions. A form also tells us how you reached the site (a link's campaign tag, the site you came from and your first page on ours), so we know which post or link brought you.",
+            ar: "البيانات التقنية. كأي موقع إلكتروني، يعالج مزوّد الاستضافة عنوان IP الخاص بك ومعلومات أساسية عن متصفحك، لعرض الصفحات والحفاظ على أمن الموقع. وعند إرسال أي نموذج، تتحقّق خدمة Cloudflare Turnstile من أن الطلب صادر عن شخص لا عن برنامج آلي، ونستخدم عنوان IP لفترة قصيرة للحدّ من تكرار الإرسال. ويخبرنا النموذج كذلك كيف وصلت إلى الموقع (وسم الحملة في الرابط، والموقع الذي جئت منه، وأول صفحة زرتها عندنا)، لنعرف المنشور أو الرابط الذي أوصلك إلينا.",
           },
         },
         {
@@ -376,6 +376,10 @@ const cookies: LegalDoc = {
               {
                 en: ["nt-intro", "Session storage (not a cookie)", "Remembers that you've seen the home page's opening animation, so it plays only once.", "Until you close the tab"],
                 ar: ["nt-intro", "تخزين الجلسة (ليس ملف تعريف ارتباط)", "يتذكّر أنك شاهدت الحركة الافتتاحية في الصفحة الرئيسية، فلا تُعرض إلا مرة واحدة.", "حتى تغلق التبويب"],
+              },
+              {
+                en: ["nt-lead", "Session storage (not a cookie)", "Notes how you reached the site (the campaign tag in the link, the site you came from and your first page), so a form you send tells us which post or link brought you. It leaves your device only with a form you submit.", "Until you close the tab"],
+                ar: ["nt-lead", "تخزين الجلسة (ليس ملف تعريف ارتباط)", "يسجّل كيف وصلت إلى الموقع (وسم الحملة في الرابط، والموقع الذي جئت منه، وأول صفحة زرتها)، ليخبرنا النموذج الذي ترسله بالمنشور أو الرابط الذي أوصلك إلينا. لا يغادر جهازك إلا مع نموذج ترسله.", "حتى تغلق التبويب"],
               },
             ],
           },

@@ -4,7 +4,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { startTransition, useActionState, useEffect, useRef, useState, type FormEvent } from "react";
 import { useForm, type FieldErrors, type Resolver } from "react-hook-form";
 import type { z } from "zod";
+import { readLeadSource } from "@/components/providers/lead-source-capture";
 import { IDLE, type FieldErrorCode, type FormState } from "@/lib/forms/schemas";
+import { LEAD_FIELD } from "@/lib/lead-source";
 
 type Values = Record<string, unknown>;
 export type SummaryItem = { name: string; code: FieldErrorCode };
@@ -72,7 +74,11 @@ export function useContractForm({
     void form.handleSubmit(() => {
       setSummary((s) => ({ items: [], at: s.at }));
       setSentName(String(form.getValues("name") ?? "").trim());
-      startTransition(() => formAction(new FormData(el)));
+      // Where the visit came from (D110, sessionStorage only); absent without JS or storage.
+      const data = new FormData(el);
+      const lead = readLeadSource();
+      if (lead) data.set(LEAD_FIELD, lead);
+      startTransition(() => formAction(data));
     }, onInvalid)(e);
   };
 

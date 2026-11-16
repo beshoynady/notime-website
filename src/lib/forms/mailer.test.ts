@@ -19,6 +19,13 @@ describe("composeMail", () => {
     expect(byMail.visitorEmail).toBe("ali@example.ae");
     expect(composeMail("websiteReview", { ...base, contact: "+971 50 000 0000" }, shared).visitorEmail).toBeUndefined();
   });
+  it("ends every team email with where the visit came from, when it's known (D110)", () => {
+    const lead = { utm_source: "instagram", utm_medium: "social", landing: "/ar/services/events-hospitality" };
+    const rows = composeMail("contact", brief, { ...shared, lead }).rows;
+    expect(rows.slice(-2)).toEqual([["Source", "instagram / social"], ["Landing page", "/ar/services/events-hospitality"]]);
+    expect(composeMail("contact", brief, shared).rows.some(([k]) => k === "Source")).toBe(false);
+  });
+
   it("drops empty optional rows", () => {
     const labels = composeMail("contact", brief, shared).rows.map(([k]) => k);
     expect(labels).not.toContain("Phone");

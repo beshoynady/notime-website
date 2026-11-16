@@ -1,0 +1,107 @@
+/* /links (D110): one narrow column, large rows for the thumb. Logical properties only. */
+
+.lk-section {
+  min-block-size: 100svh;
+  padding-block: calc(var(--header-h) + 40px) 64px;
+  padding-inline: var(--gutter-start) var(--gutter-end);
+}
+.lk-col {
+  display: grid;
+  gap: 32px;
+  max-inline-size: 520px;
+  margin-inline: auto;
+}
+.lk-head {
+  display: grid;
+  gap: 12px;
+}
+.lk-title {
+  margin: 0;
+  font-size: clamp(2.2rem, 9vw, 3.4rem);
+  font-weight: 200;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.lk-title:lang(ar) {
+  font-weight: 300;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+.lk-lead {
+  margin: 0;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--color-ivory) 78%, transparent);
+}
+
+.lk-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.lk-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-block-size: 68px;
+  padding: 14px 18px;
+  border: 1px solid var(--color-line-dark);
+  border-radius: var(--radius);
+  color: var(--color-ivory);
+  text-decoration: none;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+.lk-row:hover,
+.lk-row:focus-visible {
+  border-color: var(--color-taupe);
+  background: color-mix(in srgb, var(--color-champagne) 6%, transparent);
+}
+.lk-row[data-primary] {
+  border-color: var(--color-champagne);
+  background: var(--color-champagne);
+  color: var(--color-espresso);
+}
+.lk-row[data-primary]:hover,
+.lk-row[data-primary]:focus-visible {
+  background: var(--color-ivory);
+}
+.lk-text {
+  display: grid;
+  gap: 2px;
+  flex: 1 1 auto;
+  min-inline-size: 0;
+}
+.lk-row-title {
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+.lk-row-note {
+  font-size: 0.85rem;
+  opacity: 0.72;
+}
+.lk-arrow {
+  transition: transform 0.4s var(--ease-expo-out, ease);
+}
+.lk-row:hover .lk-arrow,
+.lk-row:focus-visible .lk-arrow {
+  transform: translateX(4px);
+}
+[dir="rtl"] .lk-row:hover .lk-arrow,
+[dir="rtl"] .lk-row:focus-visible .lk-arrow {
+  transform: translateX(-4px) scaleX(-1);
+}
+.lk-email {
+  margin: 0;
+  font-size: 0.9rem;
+  color: color-mix(in srgb, var(--color-ivory) 72%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lk-row,
+  .lk-arrow {
+    transition: none;
+  }
+}

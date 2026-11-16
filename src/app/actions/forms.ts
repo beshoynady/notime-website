@@ -5,6 +5,7 @@ import { handleSubmission } from "@/lib/forms/handle";
 import { composeMail, deliverMail } from "@/lib/forms/mailer";
 import { contactSchema, consultationSchema, interestSchema, websiteReviewSchema, type FormState } from "@/lib/forms/schemas";
 import { parseServiceParam } from "@/lib/forms/service-param";
+import { LEAD_FIELD, parseLeadSource } from "@/lib/lead-source";
 import { verifyTurnstile } from "@/lib/forms/turnstile";
 import { turnstileSecret } from "@/lib/forms/turnstile-config";
 
@@ -23,7 +24,12 @@ async function steps() {
   return { ip: at, verify: (token: string) => verifyTurnstile(token, at, { secret: turnstileSecret() }) };
 }
 
-const shared = (formData: FormData) => ({ locale: String(formData.get("locale") ?? "en"), source: String(formData.get("source") ?? "").slice(0, 60) });
+/** Locale, the form's page, and the visit's lead source (D110; untrusted, re-cleaned by its parser). */
+const shared = (formData: FormData) => ({
+  locale: String(formData.get("locale") ?? "en"),
+  source: String(formData.get("source") ?? "").slice(0, 60),
+  lead: parseLeadSource(String(formData.get(LEAD_FIELD) ?? "")),
+});
 
 /** The free 30-min intro call (Software page, `#consult`). */
 export async function submitConsultation(_prev: FormState, formData: FormData): Promise<FormState> {

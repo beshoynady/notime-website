@@ -7,6 +7,7 @@ import { getServiceByAnchor } from "@/content";
 import { AutoReply } from "@/emails/auto-reply";
 import { autoReplyCopy, fillMail, localeOf } from "@/emails/copy";
 import { TeamEmail } from "@/emails/team-email";
+import { leadRows, type LeadSource } from "@/lib/lead-source";
 import type { Contact, Consultation, FormState, Interest, WebsiteReview } from "./schemas";
 
 /**
@@ -31,7 +32,7 @@ export interface Mail {
 const PRODUCT_NAMES = { "minute-zero": "Minute Zero", "peak-hour": "Peak Hour" } as const;
 const isEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 const row = (label: string, value: string | undefined): [string, string][] => (value ? [[label, value]] : []);
-type Shared = { locale: string; source: string };
+type Shared = { locale: string; source: string; lead?: LeadSource | null };
 
 export function composeMail(kind: "consultation", d: Consultation, s: Shared): Mail;
 export function composeMail(kind: "websiteReview", d: WebsiteReview, s: Shared): Mail;
@@ -39,7 +40,8 @@ export function composeMail(kind: "interest", d: Interest, s: Shared): Mail;
 export function composeMail(kind: "contact", d: Contact, s: Shared): Mail;
 export function composeMail(kind: MailKind, d: Consultation | WebsiteReview | Interest | Contact, s: Shared): Mail {
   const locale = localeOf(s.locale);
-  const meta: [string, string][] = [...row("Page", s.source), ["Language", locale === "ar" ? "Arabic" : "English"]];
+  // The form's page and language, then where the visit came from (D110).
+  const meta: [string, string][] = [...row("Page", s.source), ["Language", locale === "ar" ? "Arabic" : "English"], ...leadRows(s.lead ?? null)];
   switch (kind) {
     case "consultation": {
       const c = d as Consultation;

@@ -625,5 +625,38 @@
       "q5": "Do you work in Arabic and English?",
       "a5": "Yes. We write, design and publish in both, and each language is written natively, not translated word for word."
     }
+  },
+  "linksPage": {
+    "metaTitle": "Links",
+    "metaDescription": "NO TIME Creative House in one tap: request a quote, see the work, plan an event or a private celebration, or start a website or an app.",
+    "eyebrow": "Dubai · six markets",
+    "title": "It's time to start.",
+    "lead": "Events, production, marketing, print and software, from one senior team.",
+    "listLabel": "Quick links",
+    "whatsapp": {
+      "title": "Message us on WhatsApp",
+      "note": "The quickest way to reach the team"
+    },
+    "quote": {
+      "title": "Request a quote",
+      "note": "We reply within one working day"
+    },
+    "work": {
+      "title": "See our work",
+      "note": "Pavilions, award nights, platforms"
+    },
+    "celebrations": {
+      "title": "Events & private celebrations",
+      "note": "Galas, weddings and family evenings"
+    },
+    "software": {
+      "title": "Websites, apps & software",
+      "note": "Built in Arabic and English"
+    },
+    "instagram": {
+      "title": "Instagram",
+      "note": "Behind the scenes"
+    },
+    "email": "Or write to us"
   }
 }

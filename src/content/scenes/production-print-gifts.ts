@@ -39,7 +39,7 @@ const RIG: Record<Rig, { block: string; inline: string; depth: number }> = {
   // The box arrives where the spool was.
   box: { block: "15% 45%", inline: "71% 4%", depth: 0.5 },
   // The finished gift (desktop, D109): near the lens, between the service rail and the board.
-  gift: { block: "44% 30%", inline: "20% 52%", depth: 0.9 },
+  gift: { block: "44% 30%", inline: "30% 44%", depth: 0.9 },
 };
 
 const at = (rig: Rig): Pick<SceneLayer, "box" | "depth"> => ({
