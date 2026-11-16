@@ -1,12 +1,11 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-type Tone = "soon" | "illustrative" | "preview";
+type Tone = "soon" | "preview";
 
 /**
  * Small square-cornered label (2px radius, never a pill).
  * - soon: champagne fill with a pulsing dot ("Coming soon" on products);
- * - illustrative: required on any AI image that stands in for a real project (CLAUDE.md);
  * - preview: concept screens of products still in development.
  * Outline tones take the current text colour, so they read on light and dark grounds.
  */

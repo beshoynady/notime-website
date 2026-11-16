@@ -11,12 +11,9 @@
   },
   "common": {
     "skipToContent": "Skip to content",
-    "aiPlaceholder": "AI image · placeholder",
-    "illustrative": "Illustrative",
     "preview": "Preview",
     "comingSoon": "Coming soon",
-    "example": "Example",
-    "aiExample": "AI-generated example"
+    "example": "Example"
   },
   "nav": {
     "label": "Main",
@@ -145,7 +142,6 @@
       "execution": "Execution",
       "result": "Result"
     },
-    "illustrativeNote": "Some images here are illustrative: they stand in for project photos we can't show yet.",
     "viewProject": "View project",
     "allWork": "All work",
     "todo": {
@@ -252,7 +248,6 @@
     },
     "backToTop": "Back to top",
     "credits": "Image credits",
-    "disclosure": "Some images on this site are AI-generated illustrations.",
     "legalNav": "Legal"
   },
   "styleguide": {
@@ -396,7 +391,7 @@
       "disabled": "Disabled",
       "link": "Text link with an underline that draws in",
       "labels": "Labels",
-      "labelsNote": "“Illustrative” sits on any AI image that stands in for a real project. “Preview” marks concept screens of products still in development.",
+      "labelsNote": "“Coming soon” marks products in development. “Preview” marks their concept screens, and “Example” demonstration data.",
       "fields": "Form fields",
       "eventType": "Event type",
       "options": {

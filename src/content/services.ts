@@ -332,7 +332,7 @@ export const services: Service[] = [
     ],
     [
       "digital-marketing-seo",
-      { en: "Digital marketing & SEO", ar: "التسويق الرقمي وSEO" },
+      { en: "Digital marketing & SEO", ar: "التسويق الرقمي وتحسين الظهور في محركات البحث (SEO)" },
       {
         en: "Search, site speed and measurement that show what works.",
         ar: "محركات البحث وسرعة الموقع والقياس، لتعرف ما الذي ينجح.",
@@ -356,7 +356,7 @@ export const services: Service[] = [
     ],
     [
       "paid-media-planning",
-      { en: "Paid media & media planning (Google & Meta ads)", ar: "الإعلانات المدفوعة وتخطيط الإعلام (Google وMeta)" },
+      { en: "Paid media & media planning (Google & Meta ads)", ar: "الإعلانات المدفوعة وتخطيط الإعلام (إعلانات Google و Meta)" },
       {
         en: "Google and Meta campaigns, with the channels, budgets and timing behind them matched to the audience.",
         ar: "حملات على Google و Meta، نخطّط لقنواتها وميزانياتها وتوقيتها بما يناسب الجمهور.",

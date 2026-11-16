@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getImageSlot, getServices } from "./index";
+import { getServices } from "./index";
 import { BRANDED_PHOTO_DIRS, CLIENT_NAMES, getWorkBySlug, nextWork, workItems, workView, type WorkItem } from "./work";
 
 /** Every string a value holds, however deep. */
@@ -32,11 +32,7 @@ describe("case pages (F1): anonymisation", () => {
       const v = workView(w, false);
       expect(v.photos, w.key).toEqual([]);
       const media = strings(anonymousPage(w)).filter((s) => s.startsWith("/"));
-      const slot = getImageSlot(v.image!);
-      for (const dir of BRANDED_PHOTO_DIRS) {
-        expect(slot.src ?? "", `${w.key} slot`).not.toContain(dir);
-        for (const m of media) expect(m, `${w.key} media`).not.toContain(dir);
-      }
+      for (const dir of BRANDED_PHOTO_DIRS) for (const m of media) expect(m, `${w.key} media`).not.toContain(dir);
     }
   });
 
@@ -71,5 +67,15 @@ describe("case pages (F1): data", () => {
       expect(ar.length, w.key).toBe(en.length);
       for (const s of strings(w.story).filter((x) => !/^[a-z-]+$/.test(x))) expect(s.trim(), w.key).not.toBe("");
     }
+  });
+});
+
+describe("no AI or stock photo on real work (D106)", () => {
+  it("no image slot is reserved for a Work case", async () => {
+    const { imageSlots } = await import("./images");
+    expect(imageSlots.filter((s) => s.id.startsWith("work-")).map((s) => s.id)).toEqual([]);
+  });
+  it("named cases use only their own curated photos", () => {
+    for (const w of workItems) for (const p of w.named.photos) expect(p, w.key).toMatch(/^\/images\/work\//);
   });
 });

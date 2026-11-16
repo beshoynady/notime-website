@@ -1,4 +1,3 @@
-import { useTranslations } from "next-intl";
 import type { Paint } from "@/content";
 import { cn } from "@/lib/utils";
 
@@ -16,8 +15,7 @@ const BOKEH: Record<Paint, ReadonlyArray<readonly [cx: number, cy: number, r: nu
  * Designed placeholder for an image slot without a file yet.
  * TODO: replace placeholder — swapped out automatically once the slot gets a `src`.
  */
-export function AiPlaceholder({ paint, className, showTag = true }: { paint: Paint; className?: string; showTag?: boolean }) {
-  const t = useTranslations("common");
+export function AiPlaceholder({ paint, className }: { paint: Paint; className?: string }) {
   return (
     <div className={cn("absolute inset-0 overflow-hidden bg-espresso-2", className)} aria-hidden="true">
       <div className={cn("paint", `paint-${paint}`)} />
@@ -33,9 +31,6 @@ export function AiPlaceholder({ paint, className, showTag = true }: { paint: Pai
           <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={r} fill={`url(#bokeh-${paint})`} opacity={o} />
         ))}
       </svg>
-      {showTag && (
-        <span className="image-tag absolute start-3 bottom-3 z-[2]">{t("aiPlaceholder")}</span>
-      )}
     </div>
   );
 }

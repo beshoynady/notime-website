@@ -54,9 +54,10 @@ This is Next.js 16. Its APIs differ from older versions. Before using any Next.j
 
 ## AI images
 
-- Allowed for mood imagery and service illustrations.
-- When an AI image stands in for a **real past project**, it must carry a visible label: **"Illustrative"** in English, **"صورة توضيحية"** in Arabic.
-- Store AI images in `public/images/ai/`, kept apart from real photos (`public/images/work/`).
+- Allowed only as mood imagery for the categories and services. **The site never mentions AI** (no tags, captions, footer line or legal sentence about how an image was made; D106, supersedes D77's disclosure line).
+- **No AI or stock photo on Work cards, case studies, or anything presented as a real NO TIME project.** Those use only the project's own photos (`public/images/work/`) or a drawing made in code (`CaseVisual`).
+- Store AI images in `public/images/ai/`, kept apart from real photos. Every slot and its source is listed in `docs/content/temporary-images.md`; replace the temporary ones with real photos before launch.
+- Keep "Example" on demo data and "Preview" on product concept screens.
 
 ## Animation rules
 

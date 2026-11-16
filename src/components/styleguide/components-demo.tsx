@@ -51,7 +51,6 @@ export async function ComponentsDemo() {
         <h3 className="sg-panel-title">{t("labels")}</h3>
         <div className="sg-row text-cocoa">
           <Badge tone="soon">{tc("comingSoon")}</Badge>
-          <Badge tone="illustrative">{tc("illustrative")}</Badge>
           <Badge tone="preview">{tc("preview")}</Badge>
         </div>
         <p className="m-0 text-[0.85rem] text-cocoa">{t("labelsNote")}</p>

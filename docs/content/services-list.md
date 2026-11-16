@@ -35,10 +35,10 @@ This file and `src/content/services.ts` must match: `src/content/content.test.ts
 |---|---|---|---|---|
 | 13 | branding-identity | branding | Branding & identity | الهوية التجارية |
 | 14 | social-media-management | social | Social media management | إدارة وسائل التواصل الاجتماعي |
-| 15 | digital-marketing-seo | digital-marketing | Digital marketing & SEO | التسويق الرقمي وSEO |
+| 15 | digital-marketing-seo | digital-marketing | Digital marketing & SEO | التسويق الرقمي وتحسين الظهور في محركات البحث (SEO) |
 | 16 | content-strategy | content-strategy | Content strategy | استراتيجية المحتوى |
 | 17 | public-relations | pr | Public relations | العلاقات العامة |
-| 18 | paid-media-planning | paid-media | Paid media & media planning (Google & Meta ads) | الإعلانات المدفوعة وتخطيط الإعلام (Google وMeta) |
+| 18 | paid-media-planning | paid-media | Paid media & media planning (Google & Meta ads) | الإعلانات المدفوعة وتخطيط الإعلام (إعلانات Google و Meta) |
 
 ## 4. Production, Print & Gifts · الإنتاج والطباعة والهدايا (`production-print-gifts`)
 

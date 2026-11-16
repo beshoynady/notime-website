@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { QUOTE_LINK } from "@/components/layout/nav-links";
-import { CaseMedia, showsIllustrative } from "@/components/pages/case-media";
+import { CaseMedia } from "@/components/pages/case-media";
 import { PageCrumbs } from "@/components/pages/page-crumbs";
 import { SectionRef } from "@/components/review/section-ref";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -68,7 +68,7 @@ export async function WorkCase({ item, locale }: { item: WorkItem; locale: Local
             {view.label[locale]}
           </h1>
           <p className="wc-summary text-lead">{view.summary[locale]}</p>
-          <div className={view.named || showsIllustrative(view) ? "wc-media duotone" : "wc-media"}>
+          <div className={view.named ? "wc-media duotone" : "wc-media"}>
             <CaseMedia view={view} locale={locale} sizes="(min-width: 1280px) 1232px, 100vw" />
           </div>
           <dl className="wc-facts" aria-label={t("factsLabel")}>
@@ -206,7 +206,6 @@ export async function WorkCase({ item, locale }: { item: WorkItem; locale: Local
           {!view.named && (
             <p className="wc-note">
               {RELATED_WORK_COPY.note[locale]}
-              {showsIllustrative(view) && ` ${RELATED_WORK_COPY.illustrative[locale]}`}
             </p>
           )}
         </div>

@@ -168,6 +168,31 @@ const DRAWINGS: Record<DrawingKey, ReactNode> = {
       <circle cx="540" cy="300" r="8" className="dim" />
     </>
   ),
+  // An award night (Work, D106): a stage under a lighting truss, three beams down onto the podium,
+  // the audience's rows in front.
+  stage: (
+    <>
+      <line x1="80" y1="44" x2="560" y2="44" />
+      <line x1="80" y1="56" x2="560" y2="56" className="dim" />
+      {Array.from({ length: 13 }, (_, i) => (
+        <line key={`k${i}`} x1={80 + i * 40} y1="44" x2={100 + i * 40} y2="56" className="dim" />
+      ))}
+      {[200, 320, 440].map((x) => (
+        <g key={x}>
+          <rect x={x - 9} y="58" width="18" height="14" rx="2" />
+          <path d={`M${x - 6} 72 L${x - 70} 250 H${x + 70} L${x + 6} 72 Z`} className="tint" stroke="none" />
+        </g>
+      ))}
+      <path d="M120 250 H520 L560 280 H80 Z" />
+      <path d="M80 280 V292 H560 V280" className="dim" />
+      <path d="M290 250 V214 H350 V250" />
+      <path d="M306 214 V198 H334 V214" className="dim" />
+      <path d="M320 198 V176 M310 186 Q320 168 330 186" />
+      {[312, 326, 340].map((y, r) => (
+        <path key={y} d={`M${100 + r * 20} ${y} Q320 ${y + 14} ${540 - r * 20} ${y}`} className="dim" strokeDasharray="2 10" />
+      ))}
+    </>
+  ),
   // Merchandise: a tote, a tee and a mug, each with its logo zone marked.
   merch: (
     <>
@@ -184,9 +209,9 @@ const DRAWINGS: Record<DrawingKey, ReactNode> = {
   ),
 };
 
-export function ServiceDrawing({ drawing }: { drawing: DrawingKey }) {
+export function ServiceDrawing({ drawing, className = "svc-drawing" }: { drawing: DrawingKey; className?: string }) {
   return (
-    <svg viewBox="0 0 640 360" aria-hidden="true" focusable="false" className="svc-drawing">
+    <svg viewBox="0 0 640 360" aria-hidden="true" focusable="false" className={className}>
       {DRAWINGS[drawing]}
     </svg>
   );

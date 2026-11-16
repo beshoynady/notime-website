@@ -144,7 +144,6 @@ export async function SiteFooter() {
               </nav>
             </div>
             <div className="flex flex-wrap items-baseline justify-between gap-x-10 gap-y-2 text-[0.8rem] text-ivory/60">
-              <p>{t("disclosure")}</p>
               {isFilled(licence) && <p>{licence}</p>}
             </div>
           </div>

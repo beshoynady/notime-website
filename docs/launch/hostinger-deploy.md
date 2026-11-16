@@ -8,6 +8,7 @@ Decided in D89 and D90. Hostinger documents this in [docs.hostinger.com](https:/
 - **Branch:** deploy from **`main` only**, after the phase PR (`phase-2-services` → `main`) is merged. Never deploy a phase branch. The local `pre-push` guard keeps `main` PR-only (D74).
 - **Node:** **22**. Hostinger offers 18, 20, 22 (the default) and 24. Next 16 needs at least 20.9. The repo pins it: `package.json` `"engines": { "node": ">=22 <23" }` and `.nvmrc` = `22`; CI reads `.nvmrc`.
 - **Green CI:** the full CI run on `main` (lint, typecheck, unit tests, build, the leak scan, e2e) is green.
+- **Images:** replace every temporary image with a real NO TIME photo: the four AI category images and any slot marked temporary in [temporary-images.md](../content/temporary-images.md). Work cards and case pages never carry an AI or stock photo (D106).
 - **Email:** Resend verified for `notimehub.com` ([email-dns.md](email-dns.md)), or the inbox stays on the developer's until it is.
 
 ## 1. Create the app and connect GitHub

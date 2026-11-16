@@ -99,9 +99,11 @@ describe("the legal pages' content (src/content/legal.ts)", () => {
     expect(text).not.toContain("شركة NO TIME");
   });
 
-  it("carries the AI-image disclosure line in the Terms (D77)", () => {
+  it("describes no image by how it was made; work is never shown with a stand-in photo (D106)", () => {
+    const site = JSON.stringify(legalDocs);
+    expect(site).not.toMatch(/AI-generated|بالذكاء الاصطناعي/);
     const terms = JSON.stringify(legalDocs.find((d) => d.slug === "terms"));
-    expect(terms).toContain("Some images on this site are AI-generated illustrations.");
-    expect(terms).toContain("بعض الصور في هذا الموقع توضيحية ومولّدة بالذكاء الاصطناعي.");
+    expect(terms).toContain("never with a stand-in photo");
+    expect(terms).toContain("ولا نضع مكانها صورة بديلة أبدًا");
   });
 });

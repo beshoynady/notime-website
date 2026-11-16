@@ -20,8 +20,4 @@ export const RELATED_WORK_COPY = {
     en: "Shown without the client's name until they approve it.",
     ar: "نعرضها دون ذكر العميل حتى يوافق على تسميته.",
   },
-  illustrative: {
-    en: "Images marked Illustrative stand in for the project's own photos.",
-    ar: "الصور المعلَّمة بعبارة «صورة توضيحية» تحلّ محل صور المشروع نفسه.",
-  },
 } satisfies Record<string, Localized<string>>;

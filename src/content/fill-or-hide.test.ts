@@ -1,8 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { budgetBands } from "./forms";
-import { getImageSlot } from "./index";
 import { principles } from "./principles";
-import { BRANDED_PHOTO_DIRS, CLIENT_NAMES, workItems, workView } from "./work";
+import { CLIENT_NAMES, workItems, workView } from "./work";
 
 /** The D78 data moves (approved 2026-11-09, docs/content/review-fill-or-hide.md). */
 describe("budget bands (D78 §3)", () => {
@@ -48,9 +47,9 @@ describe("anonymised work (D78 §6)", () => {
       expect(v.named).toBe(false);
       const text = [v.label.en, v.label.ar, v.summary.en, v.summary.ar].join(" ");
       for (const name of CLIENT_NAMES) expect(text, `${w.key} mentions ${name}`).not.toContain(name);
-      const slot = getImageSlot(v.image!);
-      expect(slot.illustrative, `${w.key}: a stand-in carries the Illustrative label`).toBe(true);
-      for (const dir of BRANDED_PHOTO_DIRS) expect(slot.src ?? "", `${w.key} uses a branded photo`).not.toContain(dir);
+      // No stand-in photo for a real project (D106): an anonymous case is drawn, never photographed.
+      expect(v.visual, `${w.key} has its drawing`).toBeTruthy();
+      expect(v.photos, `${w.key} shows no photo`).toEqual([]);
     }
   });
 
@@ -60,5 +59,14 @@ describe("anonymised work (D78 §6)", () => {
       expect(v.named).toBe(true);
       expect(v.label).toEqual(w.named.label);
     }
+  });
+});
+
+describe("legal commitments wait for the client (decisions #27)", () => {
+  it("no FAQ promises an NDA until Rand answers", async () => {
+    const { getCategories } = await import("@/content");
+    const en = (await import("@/messages/en.json")).default as { contactPage: { faq: Record<string, string> } };
+    const text = [...getCategories().flatMap((c) => c.faq.map((f) => `${f.q.en} ${f.a.en}`)), ...Object.values(en.contactPage.faq)].join(" ");
+    expect(text).not.toMatch(/\bNDA|non-disclosure|confidentiality agreement/i);
   });
 });

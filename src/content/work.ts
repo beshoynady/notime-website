@@ -1,11 +1,13 @@
 import { WORK_NAMED } from "@/config/work";
 import type { MarketKey } from "./markets";
+import type { DrawingKey } from "./service-visuals";
 import type { CategorySlug, Localized } from "./types";
 
 /**
  * Work (D78 §6, approved 2026-11-09). Real facts from docs/content/case-studies.md. Until a client
- * approves its name (`WORK_NAMED`), the case shows a description instead of the name, and an
- * illustrative image instead of its own photos, which all show the client's brand.
+ * approves its name (`WORK_NAMED`), the case shows a description instead of the name, and a drawing
+ * of the work instead of its own photos, which all show the client's brand. Never a stand-in photo:
+ * no AI or stock image may stand in for a real project (D106).
  */
 export type WorkKey = keyof typeof WORK_NAMED;
 
@@ -17,7 +19,7 @@ export interface WorkItem {
   categories: CategorySlug[];
   /** Where the work took place (the Work index's market filter, D88). Only what the profile states. */
   markets: MarketKey[];
-  anonymous: { label: Localized<string>; summary: Localized<string>; image: string };
+  anonymous: { label: Localized<string>; summary: Localized<string>; visual: DrawingKey };
   named: { label: Localized<string>; summary: Localized<string>; photos: string[] };
   /** The case page (F1). Written without the client's name, so it reads true in both versions. */
   story: WorkStory;
@@ -59,7 +61,7 @@ export const workItems: WorkItem[] = [
         en: "Its digital and media partner: we rebuilt the bilingual website and its connected app, and publish to its channels every day in Arabic and English. One championship campaign, first week: 487K views, +37.6K new followers, 271K reach.",
         ar: "شريكه الرقمي والإعلامي: أعدنا بناء موقعه بلغتين وتطبيق الجوّال المتصل به، وننشر على منصّاته كل يوم بالعربية والإنجليزية. وفي الأسبوع الأول من إحدى حملات البطولات: 487 ألف مشاهدة، و‎+37.6 ألف متابع جديد، ووصول إلى 271 ألفًا.",
       },
-      image: "work-sports-federation-16x9",
+      visual: "feed",
     },
     named: {
       label: { en: "UAE Athletics Federation", ar: "الاتحاد الإماراتي لألعاب القوى" },
@@ -125,7 +127,7 @@ export const workItems: WorkItem[] = [
         en: "Stand design, build and on-site PR at the Dubai Airshow and Arabian Travel Market.",
         ar: "صمّمنا الجناح وبنيناه، وأدرنا علاقاته العامة في أرض الحدث، في معرض دبي للطيران وسوق السفر العربي.",
       },
-      image: "work-airline-pavilion-16x9",
+      visual: "stand",
     },
     named: {
       label: { en: "EgyptAir", ar: "مصر للطيران" },
@@ -165,7 +167,7 @@ export const workItems: WorkItem[] = [
         en: "Tournament branding, on-ground production, award ceremonies and sponsor activations, with the league's social content, award packaging and gift sets.",
         ar: "هوية البطولات، والإنتاج في أرض الحدث، وحفلات التكريم، وتفعيلات الرعاة، ومعها محتوى الدوري على منصّاته، وتغليف الجوائز، وأطقم الهدايا.",
       },
-      image: "work-sports-league-16x9",
+      visual: "stage",
     },
     named: {
       label: { en: "UAE Pro League", ar: "رابطة دوري المحترفين الإماراتي" },
@@ -208,13 +210,13 @@ export const workItems: WorkItem[] = [
   },
 ];
 
-export type WorkView = { key: WorkKey; slug: string; named: boolean; label: Localized<string>; summary: Localized<string>; image?: string; photos: string[] };
+export type WorkView = { key: WorkKey; slug: string; named: boolean; label: Localized<string>; summary: Localized<string>; visual?: DrawingKey; photos: string[] };
 
 /** The version a page shows: named only with the client's approval (`WORK_NAMED`). */
 export function workView(w: WorkItem, named: boolean = WORK_NAMED[w.key]): WorkView {
   return named
     ? { key: w.key, slug: w.slug, named, label: w.named.label, summary: w.named.summary, photos: w.named.photos }
-    : { key: w.key, slug: w.slug, named, label: w.anonymous.label, summary: w.anonymous.summary, image: w.anonymous.image, photos: [] };
+    : { key: w.key, slug: w.slug, named, label: w.anonymous.label, summary: w.anonymous.summary, visual: w.anonymous.visual, photos: [] };
 }
 
 export function getWorkBySlug(slug: string): WorkItem | undefined {

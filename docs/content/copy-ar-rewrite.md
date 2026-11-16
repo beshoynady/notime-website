@@ -506,4 +506,4 @@ All new, written natively from the idea (no old line). Keys in `contactPage.*` (
 - reel.open: «شاهد العرض» → «شاهد الصور» (it opens photos, not a video).
 - process plan: «نبدأ بالمهمة…» → «نبدأ من طلبك…» (stiff for "brief").
 - "Google & Meta" in the paid-media description and the Marketing FAQ: the Arabic و glued to a Latin word rendered as "Metaو"; now «Google و Meta» with a space.
-- The two service titles («التسويق الرقمي وSEO», «… (Google وMeta)») are on the approved list (services-list.md): unchanged; proposed as decisions-to-confirm #29.
+- The two service titles: «التسويق الرقمي وSEO» → «التسويق الرقمي وتحسين الظهور في محركات البحث (SEO)»; «الإعلانات المدفوعة وتخطيط الإعلام (Google وMeta)» → «… (إعلانات Google و Meta)». Approved by the user (2026-11-16, #29); services-list.md updated.

@@ -8,7 +8,7 @@
 // launch is cookieless only (D88): the lines naming it show once `legal.analytics` is set.
 import type { LegalDoc } from "@/lib/legal";
 
-const UPDATED = "2026-11-09";
+const UPDATED = "2026-11-16";
 
 const privacy: LegalDoc = {
   slug: "privacy",
@@ -243,16 +243,10 @@ const terms: LegalDoc = {
     {
       heading: { en: "Images, examples and previews", ar: "الصور والأمثلة والمعاينات" },
       blocks: [
-        // D77: the visible AI-image disclosure (also in the footer), in place of embedded C2PA.
-        { p: { en: "Some images on this site are AI-generated illustrations.", ar: "بعض الصور في هذا الموقع توضيحية ومولّدة بالذكاء الاصطناعي." } },
-        {
-          list: [
-            { text: { en: "Where an image stands in for a real project, it is labelled “Illustrative”.", ar: "حين تأتي صورة بدلًا من مشروع حقيقي، نضع عليها عبارة «صورة توضيحية»." } },
-            { text: { en: "Sample content created with AI is labelled “AI-generated example”.", ar: "المحتوى النموذجي المُنشأ بالذكاء الاصطناعي يحمل عبارة «مثال مولَّد بالذكاء الاصطناعي»." } },
-            { text: { en: "Demonstration data is labelled “Example”, and early product screens are labelled “Preview”.", ar: "بيانات العرض التوضيحي تحمل عبارة «مثال»، وشاشات المنتجات الأولية تحمل عبارة «معاينة»." } },
-          ],
-        },
-        { p: { en: "None of these shows a real result, a real client or a real event.", ar: "لا يعرض أيٌّ منها نتيجة حقيقية، ولا عميلًا حقيقيًا، ولا حدثًا حقيقيًا." } },
+        // D106 (supersedes D77's disclosure line): images are not described by how they were made;
+        // the labels below mark what isn't a real result.
+        { p: { en: "Demonstration data is labelled “Example”, and early product screens are labelled “Preview”. Neither shows a real result, a real client or a real event.", ar: "بيانات العرض التوضيحي تحمل عبارة «مثال»، وشاشات المنتجات الأولية تحمل عبارة «معاينة». ولا يعرض أيٌّ منهما نتيجة حقيقية، ولا عميلًا حقيقيًا، ولا حدثًا حقيقيًا." } },
+        { p: { en: "Our work is shown with the project’s own photos once the client approves, and otherwise with a drawing of the work, never with a stand-in photo.", ar: "نعرض أعمالنا بصور المشروع نفسه بعد موافقة العميل، وإلا فبرسم يصوّر العمل، ولا نضع مكانها صورة بديلة أبدًا." } },
       ],
     },
     {

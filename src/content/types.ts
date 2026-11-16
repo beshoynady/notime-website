@@ -34,8 +34,6 @@ export interface ImageSlot {
   height?: number;
   paint: Paint;
   alt: Localized<string>;
-  /** True when an AI image stands in for a real past project → visible "Illustrative" label. */
-  illustrative: boolean;
 }
 
 export interface Category {

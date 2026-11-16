@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { getTranslations } from "next-intl/server";
-import { CaseMedia, showsIllustrative } from "@/components/pages/case-media";
+import { CaseMedia } from "@/components/pages/case-media";
 import { PageCrumbs } from "@/components/pages/page-crumbs";
 import { SectionRef } from "@/components/review/section-ref";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -31,7 +31,6 @@ export async function WorkIndex({ locale, filter }: { locale: Locale; filter: Wo
   const [t, tw, tm] = await Promise.all([getTranslations("workIndex"), getTranslations("work"), getTranslations("markets")]);
   const cases = applyFilter(workItems, filter).map((w) => ({ item: w, view: workView(w) }));
   const chips = facetChips(workItems, filter, CATEGORY_SLUGS, MARKET_KEYS);
-  const anyIllustrative = cases.some(({ view }) => showsIllustrative(view));
   const categoryName = (c: (typeof CATEGORY_SLUGS)[number]) => getCategory(c)!.title[locale];
   const filtered = Boolean(filter.category || filter.market);
 
@@ -73,7 +72,7 @@ export async function WorkIndex({ locale, filter }: { locale: Locale; filter: Wo
                   <li key={view.slug} className="wk-case">
                     <article aria-labelledby={titleId} className="wk-case-grid" data-card="">
                       <div className="wk-media">
-                        <div className={view.named || showsIllustrative(view) ? "duotone absolute inset-0" : "absolute inset-0"}>
+                        <div className={view.named ? "duotone absolute inset-0" : "absolute inset-0"}>
                           <CaseMedia view={view} locale={locale} sizes="(min-width: 900px) 56vw, 100vw" />
                         </div>
                       </div>
@@ -117,7 +116,6 @@ export async function WorkIndex({ locale, filter }: { locale: Locale; filter: Wo
           {cases.length > 0 && (
             <p className="wk-note">
               {RELATED_WORK_COPY.note[locale]}
-              {anyIllustrative && ` ${RELATED_WORK_COPY.illustrative[locale]}`}
             </p>
           )}
           {filtered && cases.length > 0 && (

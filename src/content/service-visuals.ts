@@ -6,7 +6,7 @@ import type { Localized } from "./types";
  * scripts/grade.mjs), otherwise a small code-drawn composition (service-drawings.tsx). Static, no
  * interactivity. Remove a service's entry when its real module ships (service-visuals.test.ts).
  */
-export type DrawingKey = "timeline" | "frames" | "mark" | "feed" | "search" | "funnel" | "stand" | "dieline" | "merch";
+export type DrawingKey = "timeline" | "frames" | "mark" | "feed" | "search" | "funnel" | "stand" | "dieline" | "merch" | "stage";
 
 export type ServiceVisual =
   | { kind: "photo"; src: string; width: number; height: number; from: string; alt: Localized<string> }
