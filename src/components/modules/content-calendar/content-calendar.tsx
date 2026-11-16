@@ -84,7 +84,7 @@ export default function ContentCalendar({ locale }: ModuleProps) {
       if (!el) return;
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const tl = gsap.timeline({ scrollTrigger: { trigger: el, start: "top 78%", once: true } });
+        const tl = gsap.timeline({ scrollTrigger: { trigger: el, start: "top 78%", toggleActions: "play none none none" } });
         tl.fromTo(el.querySelector(".cal-rules-h"), { scaleX: 0 }, { scaleX: 1, duration: 1.1, ease: "expo.out" });
         tl.fromTo(el.querySelector(".cal-rules-v"), { scaleY: 0 }, { scaleY: 1, duration: 1.1, ease: "expo.out" }, 0.12);
         tl.fromTo(el.querySelector(".cal-month"), { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "expo.out" }, 0);

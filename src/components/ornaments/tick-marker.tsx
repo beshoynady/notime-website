@@ -32,11 +32,16 @@ export function TickMarker({ at, className }: { at?: number; className?: string 
       gsap.set(hand.current, { rotation: angle, svgOrigin: "12 12" });
       if (prefersReducedMotion()) return;
       gsap.set(hand.current, { rotation: angle - 30 });
+      let turned = false;
       ScrollTrigger.create({
         trigger: section ?? svg,
         start: "top 80%",
-        once: true,
-        onEnter: () => gsap.to(hand.current, { rotation: angle, duration: motionTokens.base.duration, ease: motionTokens.base.gsapEase }),
+        // Not `once` (D104): a trigger that kills itself inside a refresh crashes ScrollTrigger.
+        onEnter: () => {
+          if (turned) return;
+          turned = true;
+          gsap.to(hand.current, { rotation: angle, duration: motionTokens.base.duration, ease: motionTokens.base.gsapEase });
+        },
       });
     },
     { scope: root, dependencies: [at] },

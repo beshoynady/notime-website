@@ -41,7 +41,7 @@ export function ProcessScroll({ children }: { children: ReactNode }) {
           gsap.fromTo(
             step,
             { autoAlpha: 0, y: 24 },
-            { autoAlpha: 1, y: 0, duration: 0.7, ease: "power3.out", scrollTrigger: { trigger: step, start: "top 85%", once: true } },
+            { autoAlpha: 1, y: 0, duration: 0.7, ease: "power3.out", scrollTrigger: { trigger: step, start: "top 85%", toggleActions: "play none none none" } },
           );
         });
       });

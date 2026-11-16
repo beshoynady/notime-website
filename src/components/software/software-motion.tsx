@@ -36,7 +36,7 @@ export function SoftwareMotion() {
         const desktop = !!ctx.conditions?.desktop;
         const rtl = document.documentElement.dir === "rtl";
         const dir = rtl ? -1 : 1;
-        const enter = (trigger: Element, start = "top 82%") => ({ trigger, start, once: true });
+        const enter = (trigger: Element, start = "top 82%") => ({ trigger, start, toggleActions: "play none none none" });
 
         for (const v of q(".sw-v")) {
           const paths = v.querySelectorAll("[data-sw-draw]");

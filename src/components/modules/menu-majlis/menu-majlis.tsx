@@ -19,7 +19,7 @@ export default function MenuMajlis({ locale }: ModuleProps) {
       if (!el || el.getBoundingClientRect().top < innerHeight * 0.85) return;
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const tl = gsap.timeline({ scrollTrigger: { trigger: el, start: "top 78%", once: true } });
+        const tl = gsap.timeline({ scrollTrigger: { trigger: el, start: "top 78%", toggleActions: "play none none none" } });
         tl.fromTo(el.querySelectorAll(".mm-stroke"), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.4, ease: "power2.inOut", stagger: 0.18 });
         tl.from(el.querySelectorAll(".mm-sec"), { opacity: 0, y: 12, duration: 0.8, ease: "expo.out", stagger: 0.08 }, 0.3);
       });

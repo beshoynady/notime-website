@@ -53,7 +53,7 @@ export default function PressRelease({ locale }: ModuleProps) {
         gsap.fromTo(
           sets,
           { y: 18, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.9, ease: "expo.out", stagger: 0.09, scrollTrigger: { trigger: el, start: "top 78%", once: true } },
+          { y: 0, opacity: 1, duration: 0.9, ease: "expo.out", stagger: 0.09, scrollTrigger: { trigger: el, start: "top 78%", toggleActions: "play none none none" } },
         );
         // The headline sets from a line mask, desktop only (D43, D44: SplitText at ≥ 900px).
         if (c.conditions.wide && headline.current) {
@@ -72,7 +72,7 @@ export default function PressRelease({ locale }: ModuleProps) {
                   duration: 1.2,
                   ease: "expo.out",
                   stagger: 0.08,
-                  scrollTrigger: { trigger: el, start: "top 78%", once: true, onEnter: () => (played = true) },
+                  scrollTrigger: { trigger: el, start: "top 78%", toggleActions: "play none none none", onEnter: () => (played = true) },
                 });
               },
             });

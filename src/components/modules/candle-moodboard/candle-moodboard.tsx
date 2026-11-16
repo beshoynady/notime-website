@@ -33,7 +33,7 @@ export default function CandleMoodboard({ locale }: ModuleProps) {
       if (!glow) return;
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.fromTo(glow, { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 1.6, ease: "expo.out", scrollTrigger: { trigger: glow, start: "top 80%", once: true } });
+        gsap.fromTo(glow, { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 1.6, ease: "expo.out", scrollTrigger: { trigger: glow, start: "top 80%", toggleActions: "play none none none" } });
       });
       return () => mm.revert();
     },

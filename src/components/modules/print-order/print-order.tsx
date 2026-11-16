@@ -38,7 +38,7 @@ export default function PrintOrder({ service, locale }: ModuleProps) {
         duration: 0.7,
         ease: "power3.out",
         stagger: 0.08,
-        scrollTrigger: { trigger: el, start: "top 85%", once: true },
+        scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none" },
       });
     },
     { scope: root, dependencies: [reduced] },

@@ -53,7 +53,7 @@ export function RevealWords({ children, as: Tag = "p", className, delay = 0, tri
           ease: motionTokens.base.gsapEase,
           stagger: stagger.word,
           delay,
-          scrollTrigger: { trigger: el.current, start: "top 80%", once: true },
+          scrollTrigger: { trigger: el.current, start: "top 80%", toggleActions: "play none none none" },
         },
       );
     },

@@ -5,7 +5,7 @@ import { GROUND, gotoReady, lcpEntry } from "./helpers";
 
 /**
  * Category pages · structure and themes (Task 2.5), every category in EN and AR: one H1, the six
- * service sections in data order, the FAQ (the quote block is hidden until the form works, D74),
+ * service sections in data order (Software's own sales page, D96), the FAQ, the quote block (D102),
  * JSON-LD, no overflow, and the
  * header never dark-on-dark (it follows each section's tone) while the page ground is the theme's.
  */
@@ -61,15 +61,26 @@ for (const category of getCategories()) {
         test.skip(({ isMobile }) => isMobile, "structure is the same at every width");
 
         test("one H1, six sections in data order, the FAQ, the quote block; service CTAs go to the brief (D102)", async ({ page }) => {
+          // Software is its own sales page (D96): service blocks are articles with a hook heading,
+          // and each leads to the page's consultation form instead of the brief.
+          const software = category.slug === "software-digital";
           await gotoReady(page, path);
           await expect(page.locator("h1")).toHaveCount(1);
-          const ids = await page.locator(".cat-sections > section[id]").evaluateAll((els) => els.map((e) => e.id));
+          const ids = await page.locator(software ? ".sw-blocks > article[id]" : ".cat-sections > section[id]").evaluateAll((els) => els.map((e) => e.id));
           expect(ids).toEqual(services.map((s) => s.anchor));
+          await expect(page.locator("section.cat-faq h2")).toHaveCount(1);
+          await expect(page.locator("section.cat-faq details")).toHaveCount(category.faq.length);
+          if (software) {
+            for (const s of services) {
+              await expect(page.locator(`#${s.anchor} #${s.anchor}-title`)).toHaveCount(1);
+              await expect(page.locator(`#${s.anchor} a[href$="?build=${s.anchor}#consult"]`)).toHaveCount(1);
+            }
+            await expect(page.locator("#consult form")).toHaveCount(1);
+            return;
+          }
           for (const s of services) {
             await expect(page.locator(`#${s.anchor} h2#${s.anchor}-title`)).toHaveText(s.title[locale]);
           }
-          await expect(page.locator("section.cat-faq h2")).toHaveCount(1);
-          await expect(page.locator("section.cat-faq details")).toHaveCount(category.faq.length);
           await expect(page.locator("section#quote")).toHaveCount(1);
           for (const s of services) {
             await expect(page.locator(`#${s.anchor} a.svc-quote`)).toHaveAttribute("href", new RegExp(`/contact\\?service=${s.anchor}$`));

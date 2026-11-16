@@ -32,8 +32,9 @@ export function EveningDirector() {
             ScrollTrigger.create({
               trigger: svc,
               start: "top 75%",
-              once: true,
+              // Not `once` (D104): a trigger that kills itself inside a refresh crashes ScrollTrigger.
               onEnter: () => {
+                if (light.hasAttribute("data-lit")) return;
                 light.setAttribute("data-lit", "");
                 gsap.fromTo(light, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.4, ease: "expo.out" });
               },

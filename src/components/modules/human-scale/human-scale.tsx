@@ -57,7 +57,7 @@ export default function HumanScale({ locale }: ModuleProps) {
       gsap.set(rule, { scaleX: 0, transformOrigin: "0% 50%" });
       gsap.set(marks, { autoAlpha: 0 });
       gsap
-        .timeline({ scrollTrigger: { trigger: el, start: "top 85%", once: true } })
+        .timeline({ scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none" } })
         .to(rule, { scaleX: 1, duration: 0.9, ease: "power3.out" })
         .to(marks, { autoAlpha: 1, duration: 0.4, ease: "power3.out" }, "-=0.3");
     },

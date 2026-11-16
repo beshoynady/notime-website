@@ -12,7 +12,9 @@ const categories = getCategories();
 async function expectCategory(page: Page, locale: "en" | "ar", i: number) {
   const c = categories[i];
   await expect(page).toHaveURL(new RegExp(`/${locale}/services/${c.slug}(#.*)?$`));
-  await expect(page.locator("#category-title")).toHaveText(c.title[locale]);
+  // Software is its own sales page (D96), with its own headline.
+  if (c.slug === "software-digital") await expect(page.locator("#sw-title")).toBeVisible();
+  else await expect(page.locator("#category-title")).toHaveText(c.title[locale]);
 }
 
 for (const locale of ["en", "ar"] as const) {
