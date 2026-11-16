@@ -39,3 +39,7 @@ Rand reviews the **review build** (`NEXT_PUBLIC_REVIEW_MODE=1`) through a free C
 - Run nothing heavy (a second Next server, e2e, Lighthouse) while Rand is reviewing: the review server shares this machine's memory.
 - Quick tunnels are for testing: no uptime guarantee, and a limit on concurrent requests. That's fine for one reviewer. The launch goes to Hostinger on NO TIME's own account ([hosting-note-ar.md](hosting-note-ar.md), [../launch/hostinger-deploy.md](../launch/hostinger-deploy.md)); nothing is deployed there before the phase PR is merged.
 - The production build never contains review content (`npm run check:no-review-leak` in CI).
+
+## Current link
+
+- 2026-11-16 (M3): https://arrival-kingdom-justify-plastics.trycloudflare.com/ar (until this machine, the review server or the tunnel restarts).
