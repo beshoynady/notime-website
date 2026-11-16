@@ -7,7 +7,6 @@ import type { SceneConfig } from "@/content/scenes";
 import { categoryJsonLd } from "@/lib/jsonld";
 import { orderNumeral } from "@/lib/roman";
 import { CategoryFaq } from "./category-faq";
-import { SoftwarePage } from "@/components/software/software-page";
 import { CategoryOpening } from "./category-opening";
 import { CategoryQuote } from "./category-quote";
 import { EveningDirector } from "./evening-director";
@@ -20,6 +19,7 @@ import "./themes/studio.css";
 import "./themes/editorial.css";
 import "./themes/workshop.css";
 import "./themes/evening.css";
+
 
 /**
  * A category page (D57, D64): the opening, then the six services, with the service index on a
@@ -40,6 +40,9 @@ import "./themes/evening.css";
  * of LCP (Chrome takes a full-viewport image for background); a short static opening's own
  * grain was the LCP at 390. Hence `data-grain="off"` on the sections and the track.
  *
+ * Software & Digital's public page is its own route (services/software-digital, D91, D111); only
+ * the lab renders it through this template.
+ *
  * `lab` renders the hidden animatic (Task 2.9): the scene as labelled boxes, and the module
  * slots as boxes named by their module key. Public pages never pass it.
  */
@@ -54,9 +57,6 @@ export async function CategoryView({
   scene?: SceneConfig;
   lab?: boolean;
 }) {
-  // Software & Digital renders its own sales sequence (D91); the lab keeps the shared template.
-  if (category.slug === "software-digital" && !lab)
-    return <SoftwarePage category={category} locale={locale} />;
   const services = getServices(category.slug);
   const tone = THEME_TONE[category.theme];
   const endTone = END_TONE[category.theme];
