@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import type { SceneConfig, SceneLayer } from "@/content/scenes";
-import { pinLength, sceneMode, stillState } from "@/lib/scene-math";
+import { pinLength, sceneMode, stillState, wipeInset } from "@/lib/scene-math";
 import { cn } from "@/lib/utils";
 import { SceneDirector } from "./scene-director";
 import { SceneImage } from "./scene-image";
@@ -78,6 +78,8 @@ function Layer({ layer, variant }: { layer: SceneLayer; variant: "live" | "anima
     "--rest-opacity": layer.style?.opacity,
     "--still-opacity": still.opacity,
     "--still-scale": still.scale,
+    "--rest-clip": layer.style?.wipe === undefined ? undefined : wipeInset(layer.style.wipe),
+    "--still-clip": still.wipe === undefined ? undefined : wipeInset(still.wipe),
   } as CSSProperties;
   return (
     <div
@@ -98,7 +100,13 @@ function Layer({ layer, variant }: { layer: SceneLayer; variant: "live" | "anima
               </span>
             </span>
           ) : layer.slot ? (
-            <SceneImage slot={layer.slot} sizes={layer.level === 0 ? "100vw" : "50vw"} eager={layer.eager} />
+            <SceneImage
+              slot={layer.slot}
+              sizes={layer.level === 0 ? "100vw" : "50vw"}
+              eager={layer.eager}
+              // A full-frame layer registers with its plate (cover); a trimmed cutout is never cropped (contain).
+              fit={layer.box.block === "0" && layer.box.inline === "0" ? "cover" : "contain"}
+            />
           ) : null}
         </div>
       </div>

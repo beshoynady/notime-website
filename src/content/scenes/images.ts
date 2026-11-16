@@ -30,7 +30,15 @@ const BY_CATEGORY: { category: CategorySlug; grade: SceneImageSlot["grade"]; slo
         height: 900,
         mobile: { src: "/images/scenes/events-hospitality/ev-open-room-9x16.webp", width: 600, height: 1066 },
       },
-      real("ev-open-table", "catering-2"),
+      // The near tables (D109): cut from the room's own photo along the aisle, full-frame on both crops.
+      {
+        id: "ev-open-table",
+        source: { kind: "real", from: "private-celebrations-1" },
+        src: "/images/scenes/events-hospitality/ev-open-table.webp",
+        width: 1600,
+        height: 900,
+        mobile: { src: "/images/scenes/events-hospitality/ev-open-table-9x16.webp", width: 600, height: 1066 },
+      },
       real("ev-open-florals", "private-celebrations-2"),
       real("ev-open-candles", "private-celebrations-4"),
       real("ev-open-glasses", "catering-1"),
@@ -43,7 +51,25 @@ const BY_CATEGORY: { category: CategorySlug; grade: SceneImageSlot["grade"]; slo
   {
     category: "production-print-gifts",
     grade: "workshop",
-    slots: [plate("pg-open-bench"), ai("pg-open-paper"), ai("pg-open-ribbon"), ai("pg-open-box-base"), ai("pg-open-box-lid")],
+    slots: [
+      plate("pg-open-bench"),
+      ai("pg-open-paper"),
+      ai("pg-open-ribbon"),
+      ai("pg-open-box-base"),
+      ai("pg-open-box-lid"),
+      // The finished gift (D109): NO TIME's gold Dubai-skyline piece, a rembg cutout of gifts-1, graded.
+      {
+        id: "pg-open-gift",
+        source: { kind: "real", from: "gifts-1" },
+        src: "/images/scenes/production-print-gifts/pg-open-gift.webp",
+        width: 1034,
+        height: 616,
+        alt: {
+          en: "A Dubai skyline cut in gold-finished metal, made as a corporate gift.",
+          ar: "أفق دبي مقصوص من معدن بلمسة ذهبية، صُنع هديةً لإحدى الشركات.",
+        },
+      },
+    ],
   },
   {
     category: "marketing-brand",

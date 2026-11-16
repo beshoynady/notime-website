@@ -1,0 +1,82 @@
+/* Photo story, split screen (D109). Logical properties only; unlayered. */
+
+.ps-head {
+  margin-block-end: clamp(40px, 7vw, 96px);
+}
+/* The cap is in the heading's own font size (ch), not the eyebrow's. */
+.ps-title {
+  margin-block-start: 12px;
+  max-inline-size: 18ch;
+}
+
+.ps-beats {
+  display: grid;
+  gap: clamp(56px, 9vw, 120px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ps-beat {
+  display: grid;
+  gap: 20px;
+}
+.ps-text {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+.ps-num {
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  color: var(--color-champagne);
+}
+.ps-beat-title {
+  margin: 0;
+  font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+  font-weight: 300;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+.ps-beat-title:lang(ar) {
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+.ps-beat-body {
+  margin: 0;
+  max-inline-size: 38ch;
+  line-height: 1.7;
+  color: color-mix(in srgb, currentColor 76%, transparent);
+}
+
+.ps-photo {
+  position: relative;
+  margin: 0;
+  aspect-ratio: var(--ar);
+  max-block-size: 82svh;
+}
+.ps-mask,
+.ps-push {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* Desktop: the line holds (sticky) at mid-height beside its photo while the photo scrolls past.
+   A tall photo keeps its ratio and is centred in its column, never wider than the column. */
+@media (min-width: 900px) {
+  .ps-beat {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(32px, 5vw, 80px);
+    align-items: start;
+  }
+  .ps-text {
+    position: sticky;
+    inset-block-start: calc(50svh - 80px);
+    padding-block-start: 24px;
+  }
+  .ps-photo {
+    inline-size: min(100%, calc(82svh * var(--ar)));
+    justify-self: center;
+  }
+}

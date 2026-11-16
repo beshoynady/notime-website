@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { anchorOffset } from "@/components/providers/anchor-scroll";
 import type { SceneConfig, Viewport } from "@/content/scenes";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { enterFrom, layerDrift, lineSpans, pinLength, sceneMode, shotAt } from "@/lib/scene-math";
+import { enterFrom, layerDrift, lineSpans, pinLength, sceneMode, shotAt, wipeInset } from "@/lib/scene-math";
 
 /**
  * Cross-fade of two shot lines, in vh of scroll, centred on the shot boundary: the next line comes
@@ -15,6 +15,7 @@ const LINE_XFADE = 0.06;
 /** Scrubbed eases: entrances settle, light swells (the Evening, spec §5.1). */
 const ENTER_EASE = "power2.out";
 const LIGHT_EASE = "sine.inOut";
+const WIPE_EASE = "power2.inOut";
 
 /**
  * Scrubs a LayeredScene (GSAP owns it, CLAUDE.md): pins the scene for its pin length and plays
@@ -99,9 +100,18 @@ export function SceneDirector({ scene, pinUnderBars = false }: { scene: SceneCon
             const [start, stop] = cueAt(layer.enter.shot);
             tl.fromTo(enter, enterFrom(layer.enter.from, dir), { xPercent: 0, yPercent: 0, opacity: 1, scale: 1, duration: (stop - start) * 0.8, ease: ENTER_EASE }, start);
           }
+          // A wipe tweens from an explicit inset (the computed shorthand doesn't interpolate), on a
+          // slower, cinematic ease (D109); light keys swell.
+          let wipeNow = layer.style?.wipe ?? 1;
           for (const key of layer.keys ?? []) {
             const [start, stop] = cueAt(key.shot);
-            tl.to(light, { ...key.to, duration: (stop - start) * 0.8, ease: LIGHT_EASE }, start);
+            const duration = (stop - start) * 0.8;
+            const { wipe, ...to } = key.to;
+            if (Object.keys(to).length) tl.to(light, { ...to, duration, ease: LIGHT_EASE }, start);
+            if (wipe !== undefined) {
+              tl.fromTo(light, { clipPath: wipeInset(wipeNow) }, { clipPath: wipeInset(wipe), duration, ease: WIPE_EASE, immediateRender: false }, start);
+              wipeNow = wipe;
+            }
           }
         }
 

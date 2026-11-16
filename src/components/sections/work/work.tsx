@@ -6,6 +6,8 @@ import { getCategory, workHref, WORK_INDEX_HREF, type Locale } from "@/content";
 import { Link } from "@/i18n/navigation";
 import { workItems, workView } from "@/content/work";
 import { HOME_REF } from "@/lib/review";
+import { PhotoStrip } from "@/components/sections/photo-story/photo-strip";
+import { STRIP } from "@/content/photo-stories";
 import { Showreel } from "./showreel";
 import "@/components/motion/duotone.css";
 import "./work.css";
@@ -82,6 +84,8 @@ export async function Work() {
           })}
         </ul>
       </div>
+      {/* Real rooms from our events, unnamed (D109): a pinned horizontal strip after the cases. */}
+      <PhotoStrip id="work-strip" eyebrow={STRIP.eyebrow} title={STRIP.title} frames={STRIP.frames} locale={locale} />
     </section>
   );
 }

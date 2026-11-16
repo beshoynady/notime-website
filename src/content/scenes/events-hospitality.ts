@@ -11,12 +11,13 @@ import type { SceneConfig } from "./types";
  * Mobile: three shots on 1.2 vh. Shot 2's lights hand their cues to shot 3, which merges lights
  * and dressing (storyboard, "Mobile").
  *
- * Images (no paid generation and no cutouts in v1): the empty hall is drawn in code, an
- * architect's one-point perspective in champagne hairlines (`fx-ev-hall`, themes/evening.css),
- * and the room is dressed by a real NO TIME photo (`ev-open-room`, private-celebrations-1: no
- * people, no branding) that fades in over the drawing on the same vanishing point. The hall's AI
- * plate keeps its slot and covers the drawing once it exists. The cutout slots (table, florals,
- * candles, glasses) stay documented for a later pass and are not layered.
+ * Images: the empty hall is drawn in code, an architect's one-point perspective in champagne
+ * hairlines (`fx-ev-hall`, themes/evening.css), and the room is dressed by a real NO TIME photo
+ * (private-celebrations-1: no people, no branding) on the same vanishing point, in two depths
+ * (D109): the room (`ev-open-room`) and its near tables (`ev-open-table`, cut along the aisle),
+ * which open together in a mask wipe and then separate as the camera moves in. The hall's AI
+ * plate keeps its slot and covers the drawing once it exists. The florals, candles and glasses
+ * cutouts stay documented for a later pass (the profile's photos don't cut cleanly enough).
  */
 export const EVENTS_OPENING: SceneConfig = {
   id: "events-opening",
@@ -29,8 +30,13 @@ export const EVENTS_OPENING: SceneConfig = {
   layers: [
     // L0: the empty hall, drawn (its plate's slot on top when it exists). Push-in 1.00 → 1.04 over the act.
     { id: "hall", level: 0, slot: "ev-open-hall", fx: "ev-hall", depth: 0.15, push: 0.04, mobile: true, eager: true, box: { block: "0", inline: "0" } },
-    // L0: the room, dressed (a real photo on the drawing's vanishing point): it fades in with the dressing.
-    { id: "room", level: 0, slot: "ev-open-room", depth: 0.15, push: 0.04, mobile: true, box: { block: "0", inline: "0" }, style: { opacity: 0 }, keys: [{ shot: 2, to: { opacity: 1 } }] },
+    // L0: the room, dressed (a real photo on the drawing's vanishing point): it opens over the
+    // drawing in a mask wipe from the centre aisle, like curtains (D109), as the room is dressed.
+    { id: "room", level: 0, slot: "ev-open-room", depth: 0.15, push: 0.04, mobile: true, box: { block: "0", inline: "0" }, style: { wipe: 0 }, keys: [{ shot: 2, to: { wipe: 1 } }] },
+    // L1: the near tables, cut from the same photo along the aisle (D109): full-frame, so they
+    // register with the room at any aspect, and drifting and pushing faster than it, so the camera
+    // dollies down the aisle (2.5D parallax). They open with the room.
+    { id: "near-tables", level: 1, slot: "ev-open-table", depth: 0.55, push: 0.1, mobile: true, box: { block: "0", inline: "0" }, style: { wipe: 0 }, keys: [{ shot: 2, to: { wipe: 1 } }] },
     // L3: dusk. The overlay falls 70% → 40% as the lights come up, then 25% when the room is ready.
     { id: "dusk", level: 3, fx: "shade", depth: 0, mobile: true, box: { block: "0", inline: "0" }, style: { opacity: 0.7 }, keys: [{ shot: 1, to: { opacity: 0.4 } }, { shot: 3, to: { opacity: 0.25 } }] },
     // L3: haze, one radial gradient at 4%, there from the first frame.

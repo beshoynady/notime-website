@@ -3,6 +3,7 @@ import { ModulePlaceholder } from "@/components/modules/module-placeholder";
 import { ModuleSlot } from "@/components/modules/module-slot";
 import { STATIC_FALLBACKS } from "@/components/modules/static-fallbacks";
 import { MajlisArt } from "./majlis-art";
+import { PhotoStack } from "@/components/sections/photo-story/photo-stack";
 import { ServiceVisual } from "./service-visual";
 import { serviceVisual } from "@/content/service-visuals";
 import { ButtonLink } from "@/components/ui/button";
@@ -92,6 +93,10 @@ export async function ServiceSection({
         </div>
       ) : (
         head
+      )}
+      {/* The private client's own entry (§6.3, D109): stacking real photos, a warm line, the brief preset. */}
+      {service.slug === "galas-private-celebrations" && !lab && (
+        <PhotoStack anchor={service.anchor} locale={locale} tone={tone} />
       )}
       <div className="svc-deliver">
         <h3 className="text-eyebrow">{t("deliverTitle")}</h3>

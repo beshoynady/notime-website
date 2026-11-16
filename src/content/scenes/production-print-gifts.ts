@@ -13,7 +13,9 @@ import type { SceneConfig, SceneLayer } from "./types";
  *   and the open outline are desktop only, and shot 3's cues hand over to shot 4.
  * Reduced motion: the closed, ribboned box on the sheet, the dieline faint beside it.
  *
- * No image file exists yet (images.ts, `src: null` renders nothing), so the code-drawn layers
+ * One real layer (D109): the gold skyline gift, a finished piece, arrives in shot 4. The AI
+ * paper cutout is no longer layered (its code twin carries the paper). The other image slots have
+ * no file yet (images.ts, `src: null` renders nothing), so the code-drawn layers
  * (`fx-ws-*`, themes/workshop.css) carry the whole story. The image layers sit right above their
  * code twins and take over when their files arrive.
  * TODO: replace placeholder — drop a code twin (paper, spool, box) once its graded file is in.
@@ -24,7 +26,7 @@ import type { SceneConfig, SceneLayer } from "./types";
  * desktop values here. Layers in a rig share their depth too, so they drift as one.
  */
 
-type Rig = "sheet" | "paper" | "spool" | "board" | "box";
+type Rig = "sheet" | "paper" | "spool" | "board" | "box" | "gift";
 
 /** Desktop placement of each rig (stage %, logical: block start end, inline start end). */
 const RIG: Record<Rig, { block: string; inline: string; depth: number }> = {
@@ -36,6 +38,8 @@ const RIG: Record<Rig, { block: string; inline: string; depth: number }> = {
   spool: { block: "21% 58%", inline: "75% 8%", depth: 1.2 },
   // The box arrives where the spool was.
   box: { block: "15% 45%", inline: "71% 4%", depth: 0.5 },
+  // The finished gift (desktop, D109): near the lens, between the service rail and the board.
+  gift: { block: "44% 30%", inline: "20% 52%", depth: 0.9 },
 };
 
 const at = (rig: Rig): Pick<SceneLayer, "box" | "depth"> => ({
@@ -70,7 +74,6 @@ export const WORKSHOP_OPENING: SceneConfig = {
 
     // Raw materials, over the board's corners: they clear as the dieline is drawn.
     { id: "paper-stack", level: 3, fx: "ws-paper", mobile: true, ...at("paper"), keys: [{ shot: 1, to: { opacity: 0 } }] },
-    { id: "paper", level: 2, slot: "pg-open-paper", mobile: false, ...at("paper"), keys: [{ shot: 1, to: { opacity: 0 } }] },
     { id: "spool", level: 3, fx: "ws-spool", mobile: true, ...at("spool"), keys: [{ shot: 1, to: { opacity: 0 } }] },
     { id: "ribbon-spool", level: 2, slot: "pg-open-ribbon", mobile: false, ...at("spool"), keys: [{ shot: 1, to: { opacity: 0 } }] },
 
@@ -84,5 +87,9 @@ export const WORKSHOP_OPENING: SceneConfig = {
     { id: "box-lid-photo", level: 1, slot: "pg-open-box-lid", mobile: true, ...at("box"), enter: { shot: 3, from: { y: -32 } } },
     // The ribbon, tied across the lid, comes down with it and settles as it closes.
     { id: "ribbon", level: 3, fx: "ws-ribbon", mobile: true, ...at("box"), enter: { shot: 3, from: { y: -32 } } },
+    // L2 (desktop): a finished piece from the workshop, real (D109): the gold skyline gift slides in
+    // from inline-start near the lens as the box closes, and drifts faster than the rigs (2.5D parallax),
+    // ending above the eyebrow and clear of the service rail.
+    { id: "gift", level: 2, slot: "pg-open-gift", mobile: false, ...at("gift"), enter: { shot: 3, from: { x: -20, y: 8 } } },
   ],
 };

@@ -8,14 +8,15 @@ import { capSrcSet } from "@/lib/srcset";
  * A scene layer's image (layers.md): decorative (`alt=""`) unless its slot shows real work as
  * evidence. Plates switch to their 9:16 file below 900px (art direction). Never `priority`:
  * shot-1 layers within the budget load eagerly at normal priority, so the H1 stays the LCP.
- * Nothing renders while the slot has no file; the stage's ground shows instead.
+ * Nothing renders while the slot has no file; the stage's ground shows instead. A cutout (no
+ * plate, `fit="contain"`) is never cropped by its box (D109).
  */
-export function SceneImage({ slot, sizes, eager = false }: { slot: string; sizes: string; eager?: boolean }) {
+export function SceneImage({ slot, sizes, eager = false, fit = "cover" }: { slot: string; sizes: string; eager?: boolean; fit?: "cover" | "contain" }) {
   const locale = useLocale() as Locale;
   const s = getSceneImage(slot);
   if (!s?.src) return null;
   const common = { alt: s.alt?.[locale] ?? "", fill: true, sizes, ...(eager ? { loading: "eager" as const } : {}) };
-  const { props } = getImageProps({ ...common, src: s.src, className: "object-cover" });
+  const { props } = getImageProps({ ...common, src: s.src, className: fit === "contain" ? "object-contain" : "object-cover" });
   const mobile = s.mobile?.src ? getImageProps({ ...common, src: s.mobile.src }).props : null;
   // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text -- getImageProps output (alt included); the srcset is trimmed (D51)
   const img = <img {...props} srcSet={capSrcSet(props.srcSet, s.width)} />;

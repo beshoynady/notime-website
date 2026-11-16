@@ -1,6 +1,7 @@
 import { getImageProps } from "next/image";
 import type { Locale } from "@/content";
 import type { ServiceVisual as Visual } from "@/content/service-visuals";
+import { MaskReveal } from "@/components/motion/mask-reveal";
 import { capSrcSet } from "@/lib/srcset";
 import { ServiceDrawing } from "./service-drawings";
 
@@ -24,10 +25,13 @@ export function ServiceVisual({ visual, locale }: { visual: Visual; locale: Loca
     sizes: "(min-width: 900px) 720px, calc(100vw - 32px)",
     className: "object-cover",
   });
+  // The photo opens with a mask wipe from inline-start as it enters (D109; MaskReveal, GSAP, once).
   return (
     <figure className="svc-visual" data-visual="photo">
-      {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text -- getImageProps output (alt included); the srcset is trimmed (D51) */}
-      <img {...props} srcSet={capSrcSet(props.srcSet, visual.width)} />
+      <MaskReveal className="absolute inset-0 overflow-hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text -- getImageProps output (alt included); the srcset is trimmed (D51) */}
+        <img {...props} srcSet={capSrcSet(props.srcSet, visual.width)} />
+      </MaskReveal>
     </figure>
   );
 }

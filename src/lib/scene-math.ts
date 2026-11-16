@@ -50,8 +50,14 @@ export function enterFrom(from: EnterFrom, dir: 1 | -1) {
   return { xPercent: (from.x ?? 0) * dir, yPercent: from.y ?? 0, opacity: from.opacity ?? 0, scale: from.scale ?? 1 };
 }
 
+/** A mask wipe's clip-path (D109): 0 is closed to a vertical line at the centre, 1 is open. Symmetric, so RTL needs nothing. */
+export function wipeInset(wipe: number): string {
+  const side = Math.round((1 - Math.min(1, Math.max(0, wipe))) * 5000) / 100;
+  return `inset(0% ${side}% 0% ${side}%)`;
+}
+
 /** The end frame of a layer (reduced motion and the still): its last key's values. */
-export function stillState(layer: SceneLayer): { opacity?: number; scale?: number } {
+export function stillState(layer: SceneLayer): { opacity?: number; scale?: number; wipe?: number } {
   return layer.keys?.length ? { ...layer.keys[layer.keys.length - 1].to } : {};
 }
 

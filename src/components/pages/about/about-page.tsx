@@ -4,11 +4,13 @@ import { LightLeak } from "@/components/ornaments/light-leak";
 import { PageCrumbs } from "@/components/pages/page-crumbs";
 import { SectionRef } from "@/components/review/section-ref";
 import { MarketsBoard } from "@/components/sections/markets/markets-board";
+import { PhotoStory } from "@/components/sections/photo-story/photo-story";
 import { JsonLd } from "@/components/seo/json-ld";
 import { ButtonLink } from "@/components/ui/button";
 import { SITE_URL } from "@/config/site";
 import { ABOUT_HREF, BREADCRUMB_LABELS, SERVICES_INDEX_HREF, WORK_INDEX_HREF, type Locale } from "@/content";
 import { markets } from "@/content/markets";
+import { ROOM_STORY } from "@/content/photo-stories";
 import { principles } from "@/content/principles";
 import { Link } from "@/i18n/navigation";
 import { trailJsonLd } from "@/lib/jsonld";
@@ -31,7 +33,7 @@ async function buildOffsets(): Promise<Record<string, string>> {
  * /about (F2). The story from the profile's About page (p3: a Dubai events, marketing and PR house;
  * the brand-meets-audience line; strategy → creative → production → delivery by one team), its two
  * usable figures, the four principles in place of a team section (D78 §5, D88 §4), the six
- * markets on the homepage's clock board, and a closing that never dead-ends. No years, counts,
+ * markets on the homepage's clock board, one evening told in real photos (PhotoStory, D109), and a closing that never dead-ends. No years, counts,
  * awards, logos or testimonials (fill or hide, D78).
  */
 export async function AboutPage({ locale }: { locale: Locale }) {
@@ -79,6 +81,9 @@ export async function AboutPage({ locale }: { locale: Locale }) {
           </div>
         </div>
       </section>
+
+      {/* One evening in four beats, on real photos: the split screen (D109). */}
+      <PhotoStory id="ab-room" eyebrow={ROOM_STORY.eyebrow} title={ROOM_STORY.title} beats={ROOM_STORY.beats} locale={locale} />
 
       <section data-tone="light" aria-labelledby="ab-principles" className="ab-principles section-pad">
         <SectionRef id={PAGE_REF.aboutPrinciples} />

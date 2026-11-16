@@ -33,7 +33,8 @@ export interface EnterFrom {
 export interface LayerKey {
   /** Shot index (0-based) at whose start the change plays, over that shot. */
   shot: number;
-  to: { opacity?: number; scale?: number };
+  /** `wipe`: the mask wipe (D109), 0 = closed to a line at the centre, 1 = open (curtains, so it reads the same in RTL). */
+  to: { opacity?: number; scale?: number; wipe?: number };
 }
 
 export interface SceneLayer {
@@ -53,7 +54,7 @@ export interface SceneLayer {
   /** Placement inside the stage, logical so it mirrors in RTL: CSS `inset-block` and `inset-inline` (start end). */
   box: { block: string; inline: string };
   /** The layer's resting style before any key plays. */
-  style?: { opacity?: number };
+  style?: { opacity?: number; wipe?: number };
   /** Enters during a shot, from these offsets to its resting place. */
   enter?: { shot: number; from: EnterFrom };
   /** Changes at shot starts (light coming up, an overlay falling). The last one is the still. */

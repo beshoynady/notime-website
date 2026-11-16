@@ -29,6 +29,7 @@
 .scene-light {
   opacity: var(--still-opacity, var(--rest-opacity, 1));
   transform: scale(var(--still-scale, 1));
+  clip-path: var(--still-clip, var(--rest-clip, none));
 }
 @media (max-width: 899.98px) {
   .scene-layer:not([data-mobile]) {
@@ -64,6 +65,7 @@
 html[data-js]:not([data-reduced]) .scene-light {
   opacity: var(--rest-opacity, 1);
   transform: none;
+  clip-path: var(--rest-clip, none);
 }
 html[data-js]:not([data-reduced]) .scene-enter[data-enter] {
   opacity: 0;
