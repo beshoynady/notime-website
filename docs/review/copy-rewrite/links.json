@@ -3,17 +3,39 @@
     "rule": "Owner rule 1 (AR); EN keep",
     "ar": "NO TIME Creative House بلمسة واحدة: اطلبوا عرض سعر، وشاهدوا أعمالنا، وخطّطوا لفعالية أو مناسبة خاصة، أو ابدؤوا موقعكم أو تطبيقكم."
   },
-  "m:linksPage.eyebrow": { "rule": "keep", "facts": "⚑ FC#1" },
+  "m:linksPage.eyebrow": {
+    "rule": "keep",
+    "facts": "⚑ FC#1"
+  },
   "m:linksPage.lead": {
     "rule": "\"senior\" is a claim about the team's experience that nothing on the site backs yet",
     "en": "Events, production, marketing, print and software, from one team in Dubai.",
     "ar": "فعاليات وإنتاج وتسويق وطباعة وبرمجيات، من فريق واحد في دبي.",
     "facts": "If Rand confirms the team's experience, \"senior\" can come back with the fact behind it (her bio)"
   },
-  "m:linksPage.whatsapp.title": { "rule": "Owner rule 2 (button)", "ar": "المراسلة على واتساب" },
-  "m:linksPage.quote.title": { "rule": "Owner rule 2 (button)", "ar": "طلب عرض سعر" },
-  "m:linksPage.quote.note": { "rule": "Owner rule 1", "ar": "نردّ عليكم خلال يوم عمل واحد", "facts": "⚑ FC#23" },
-  "m:linksPage.work.title": { "rule": "Owner rule 2 (button)", "ar": "مشاهدة أعمالنا" },
-  "m:linksPage.email": { "rule": "Owner rule 1", "ar": "أو راسلونا على البريد" },
-  "c:links:BREADCRUMB_LABELS.contact": { "rule": "Owner rule 1 (the page's name, as the menu)", "ar": "تواصلوا معنا" }
+  "m:linksPage.whatsapp.title": {
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "راسلونا على واتساب"
+  },
+  "m:linksPage.quote.title": {
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "اطلبوا عرض سعر"
+  },
+  "m:linksPage.quote.note": {
+    "rule": "Owner rule 1",
+    "ar": "نردّ عليكم خلال يوم عمل واحد",
+    "facts": "⚑ FC#23"
+  },
+  "m:linksPage.work.title": {
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "شاهدوا أعمالنا"
+  },
+  "m:linksPage.email": {
+    "rule": "Owner rule 1",
+    "ar": "أو راسلونا على البريد"
+  },
+  "c:links:BREADCRUMB_LABELS.contact": {
+    "rule": "Owner rule 1 (the page's name, as the menu)",
+    "ar": "تواصلوا معنا"
+  }
 }

@@ -1,6 +1,6 @@
 {
   "m:contactPage.metaTitle": {
-    "rule": "Approved sample (choice 2; SEO: the action people search is \"request a quote\"); AR by owner rule 2",
+    "rule": "A title, not a button: the noun reads right; SEO: the action people search",
     "en": "Request a quote",
     "ar": "طلب عرض سعر"
   },
@@ -25,7 +25,7 @@
     "facts": "⚑ FC#23"
   },
   "m:contactPage.formTitle": {
-    "rule": "Approved sample (choice 2); AR by owner rule 2",
+    "rule": "A title, not a button: the noun reads right",
     "en": "Request a quote",
     "ar": "طلب عرض سعر"
   },
@@ -35,12 +35,12 @@
     "ar": "أو راسلونا مباشرة"
   },
   "m:contactPage.copy": {
-    "rule": "Owner rule 2 (button)",
+    "rule": "D-C1 (owner): a form, system or navigation button, so the verbal noun",
     "ar": "نسخ العنوان"
   },
   "m:contactPage.whatsapp": {
-    "rule": "Owner rule 2 (button)",
-    "ar": "المراسلة على واتساب"
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "راسلونا على واتساب"
   },
   "m:contactPage.faqEyebrow": {
     "rule": "Owner rule 1",
@@ -81,9 +81,9 @@
     "ar": "اكتبوا عنوان الموقع بهذا الشكل: yourcompany.ae"
   },
   "c:form-copy:errorMessages.phone": {
-    "rule": "Owner rule 7. The check today accepts a local number without the code: see decision D-C3",
-    "en": "Include the country code, e.g. +971.",
-    "ar": "أضيفوا رمز الدولة، مثل ‎+971."
+    "rule": "D-C3 (owner): letters or a wrong length; a number with no country code has its own message (`phoneCode`)",
+    "en": "Use digits only, e.g. +971 50 123 4567.",
+    "ar": "اكتبوا الرقم بالأرقام فقط، مثل ‎+971 50 123 4567."
   },
   "c:form-copy:errorMessages.contact": {
     "rule": "Owner rule 7: say both shapes that work",
@@ -118,7 +118,7 @@
     "ar": "لم يُرسَل طلبكم بسبب خلل لدينا. حاولوا مرة أخرى، أو راسلونا على {email}."
   },
   "c:form-copy:formCopy.states.another": {
-    "rule": "Owner rule 2 (button)",
+    "rule": "D-C1 (owner): a form, system or navigation button, so the verbal noun",
     "ar": "إرسال طلب آخر"
   },
   "c:form-copy:formCopy.privacy.text": {
@@ -178,9 +178,9 @@
     "ar": "لمن هو، وما الذي يجب أن يفعله، وأي موعد يهمّكم."
   },
   "c:form-copy:formCopy.consultation.submit": {
-    "rule": "N13 (approved) + owner rule 2. Confirm: D-C1",
+    "rule": "D-C1 (owner): one of the six approved buttons, back to the plural command as the owner asked, although it submits a form",
     "en": "Book a free 30-min intro call",
-    "ar": "طلب مكالمة تعارف مجانية (30 دقيقة)",
+    "ar": "اطلبوا مكالمة تعارف مجانية (30 دقيقة)",
     "facts": "⚑ R1 (the intro call is free, 30 minutes)"
   },
   "c:form-copy:formCopy.consultation.micro": {
@@ -214,7 +214,7 @@
     "ar": "هل هناك ما يجب أن نعرفه؟"
   },
   "c:form-copy:formCopy.review.submit": {
-    "rule": "Owner rule 2 (button)",
+    "rule": "D-C1 (owner): a form, system or navigation button, so the verbal noun",
     "ar": "إرسال الموقع للمراجعة"
   },
   "c:form-copy:formCopy.review.successTitle": {
@@ -231,7 +231,7 @@
     "ar": "فيمَ ستستخدمونه؟"
   },
   "c:form-copy:formCopy.interest.submit": {
-    "rule": "Owner rule 2 (button)",
+    "rule": "D-C1 (owner): a form, system or navigation button, so the verbal noun",
     "ar": "تسجيل الاهتمام"
   },
   "c:form-copy:formCopy.interest.successTitle": {
@@ -359,5 +359,23 @@
   "c:forms:budgetBands.events[5].label": {
     "rule": "Owner rule 1 (an option the user picks, in the plural voice)",
     "ar": "نفضّل عدم التحديد"
+  },
+  "new:errorMessages.phoneCode": {
+    "page": "contact",
+    "rule": "D-C3 (owner): a number that starts with 0, or with neither + nor 00",
+    "en": "Include the country code, e.g. +971.",
+    "ar": "أضيفوا رمز الدولة، مثل ‎+971."
+  },
+  "new:formCopy.fields.phoneHint": {
+    "page": "contact",
+    "rule": "D-C3 (owner): shown under the field from the start, before any error",
+    "en": "For example, +971 50 123 4567",
+    "ar": "مثال: ‎+971 50 123 4567"
+  },
+  "new:formCopy.review.contactHint": {
+    "page": "contact",
+    "rule": "D-C3: the review form's \"Email or WhatsApp\" field takes a number too, so it shows both shapes",
+    "en": "For example, name@company.com or +971 50 123 4567",
+    "ar": "مثال: name@company.com أو ‎+971 50 123 4567"
   }
 }

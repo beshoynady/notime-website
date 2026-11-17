@@ -2,7 +2,13 @@
 
 2026-11-17. Method: `docs/review/copy-voice-reference.md` (the voice, the banned words, the rules per kind of text). Inputs: `copy-proposals.md`, `ux-audit.md`, the company profile's own wording (`docs/content/profile-copy.md`), the open facts (`docs/review/fact-check.md`).
 
-**Status: full table, waiting for review.** Beshoy reviews everything; Rand reviews the Arabic and every line marked ⚑. Nothing in `src/` changes until both reviews are done. The changes go in on a separate branch after the audit fixes (`audit-fixes`) are merged, with tests and EN/AR screenshots.
+**Status: the owner's decisions on D-C1 to D-C8 are applied (2026-11-17).** What's still open:
+- the owner's answers on the software promises (list below);
+- Rand's answers to `docs/review/rand-questions.md`.
+
+Nothing in `src/` changes until then. The changes go in on a separate branch after the audit fixes (`audit-fixes`) are merged, with tests and EN/AR screenshots.
+
+**How Rand reviews.** Rand doesn't read this table. She answers the questions, then reads the Arabic on the preview link after the apply. Before that link reaches her, every ⚑ line she hasn't confirmed goes back to its current text. Where the current text makes the same claim, the line stays as it is today, so she still sees it on the link and can strike it. She reads the legal pages last (there's no separate legal reviewer).
 
 **Generated, not hand-copied.** `scripts/copy-inventory.mjs` reads every string in `src/messages/{en,ar}.json` and the localized fields in `src/content/`, so no string is missed. The proposals are in `docs/review/copy-rewrite/*.json`, one file per page; the same files drive the apply step. To rebuild this page:
 
@@ -10,71 +16,85 @@
 node --no-warnings --import ./scripts/lib/alias.mjs scripts/copy-inventory.mjs --render docs/review/copy-rewrite docs/review/copy-rewrite.md --head=docs/review/copy-rewrite/_head.md
 ```
 
-**Count: 1,470 strings. 430 proposals, 11 of them new keys. 77 lines marked ⚑.** A row with an empty Rule column is kept as it is.
+**Count: 1,470 strings. 433 proposals (14 of them new keys), 4 lines hidden, 74 lines marked ⚑.** A row with an empty Rule column is kept as it is.
 
 **Already decided, not reopened here:** N09 (30 services), N13 (Request a free intro call), N15 (the short privacy line), N16 (the closing blocks), N18 (the Arabic fixes); the N05/N06 copy in the approved audit-fixes design; the three samples (approved 2026-11-17).
 
 ## Rules that apply to every page
 
-The voice and choices 1 and 2 were approved with the samples. Owner rules 1 to 8 came with that approval.
+The voice and choices 1 and 2 were approved with the samples. Owner rules 1 to 8 came with that approval. On D-C1 the owner replaced rule 2 with the button rule below.
 
 | # | Rule | How it's applied in the table |
 |---|---|---|
 | Choice 1 | "One team" once per page | Kept where it explains something (About, the FAQ "Can one team handle…", category intros); elsewhere replaced by who replies, when and with what |
 | Choice 2 | "Request", not "brief", for visitors | Contact page, forms, FAQ answers, success messages. The team's email can keep "Brief" |
-| 1 | Arabic: the plural address (أنتم) everywhere, forms, errors and success messages included | Every Arabic string that addresses the visitor. Legal bodies: see D-C4. If Rand prefers the singular, the whole site goes back to it |
-| 2 | Arabic buttons: the neutral verbal noun («إرسال الطلب», not «أرسل طلبي») | Buttons and controls only. Text links and headings keep the plural command («اكتشفوا…», «أخبرونا…»): see D-C2 |
+| 1 | Arabic: the plural address (أنتم) everywhere, forms, errors and success messages included | Every Arabic string that addresses the visitor, the legal bodies included (D-C4). If Rand prefers the singular, the whole site goes back to it |
+| 2 (D-C1) | **Arabic buttons by role.** Form and system buttons use the verbal noun («إرسال الطلب», «التالي», «إعادة المحاولة»). Marketing calls to action use the plural command («اطلبوا عرض سعر», «اطلبوا مكالمة تعارف مجانية», «خطّطوا لفعاليتكم معنا») | **Marketing:** contact, quote, call, WhatsApp, planning, registering interest, seeing the work, discussing a service. **Form or system:** form submits, copy, close, open the menu, play/pause, the module controls, skip links. **Navigation inside the site** (browse the services, show all, product details, read the case study): the verbal noun. Titles and eyebrows aren't buttons («طلب عرض سعر» as the contact page's title). Text links keep the plural command (D-C2). One exception, at the owner's request: the consultation form's submit is one of the six approved buttons, so it reads «اطلبوا مكالمة تعارف مجانية (30 دقيقة)» |
 | 3 | "Across the region" / «في المنطقة», not "the Gulf" | The markets reach Egypt. Applied in every meta description and body line |
 | 4 | Home lead: "Events, films, campaigns and websites, from the first idea to launch day." | Video production is one of the 30 services, so "films" is accurate |
 | 5 | About statement (AR): «نصنع الفكرة في النقطة التي تلتقي فيها العلامة بجمهورها…» | Rand's own sentence (p3), as the owner wrote it |
 | 6 | Galas: the keepsake is a promise | Made optional: "…and, if you'd like, prepare a keepsake for every guest." / «…ونعدّ تذكارًا تودّعون به ضيوفكم إن أردتم.» |
-| 7 | Errors say what's needed, field by field | Email, phone, contact, URL and length each have their own message; the generic one is only the fallback. `tooLong` shows `{max}` (a small code change at apply time). The blocked state uses the owner's text |
+| 7 | Errors say what's needed, field by field | Email, phone, contact, URL and length each have their own message; the generic one is only the fallback. `tooLong` shows `{max}` (a small code change at apply time). The blocked state uses the owner's text. The phone field follows D-C3 |
 | 8 | Scan for banned words and unmarked promises | Done on the text each string would ship with (the proposal, or the current text where it's kept). Result below |
 
 ## How to read the tables
 
 - **ID:** `m:<key>` is a key in `src/messages`; `c:<file>:<path>` is a field in `src/content/<file>.ts`; `new:<key>` is a key to add.
-- **Rule** cites the guide (§2 voice, §3 banned, §4 per kind of text, §5 Arabic), an owner rule (1–8), a choice (1–2) or an approved decision (N05–N18).
-- **(keep)** in a proposed column: that language stays as it is.
-- **Facts:** the source a line rests on (`p3` = profile page 3). **⚑ needs Rand:** the line states a fact or a promise Rand must confirm before launch. `FC#n` is row n of `fact-check.md`; `R1`–`R9` are new rows (below). A ⚑ line that isn't confirmed goes back to the current text or is hidden (fill or hide, D78).
+- **Rule** cites the guide (§2 voice, §3 banned, §4 per kind of text, §5 Arabic), an owner rule (1–8), a choice (1–2), an owner decision (D-C1–D-C8) or an approved decision (N05–N18).
+- **(keep)** in a proposed column: that language stays as it is. **(hide)**: the line doesn't render.
+- **Facts:** the source a line rests on (`p3` = profile page 3). **⚑:** the line states a fact or a promise that must be confirmed before launch. `FC#n` is row n of `fact-check.md`; `R1`–`R9` are promises found in this rewrite (below).
 
 ## Rule 8 scan (2026-11-17)
 
 - **Banned words (§3, EN and AR): 0.** One false alarm cleared: «رحلة» inside «مرحلة».
 - **Banned shapes (§3: "we don't just X", «لا نكتفي بـ», «ليس مجرد», em-dash asides): 0.**
-- **Promises without a ⚑: 0.** The scan matched reply times, durations, "free", "every stage / project / proposal" and their Arabic forms. Seven matches aren't promises (a pricing method, terms set in each proposal, a form option "Within 3 months", a demo label) and stay unmarked. It also found seven promises that weren't marked yet; they're marked now (R1, R2, R8, FC#23, FC#24).
-- **Singular address left in Arabic (rule 1): 0** outside the legal bodies (D-C4). The scan found and fixed eight: the two forms' success titles, the software page's closing lines, an SEO service point, a Creative FAQ, and the drawn interface on the software hero.
+- **Promises without a ⚑: 0.** The scan matched reply times, durations, "free", "every stage / project / proposal" and their Arabic forms. Seven matches aren't promises (a pricing method, terms set in each proposal, a form option "Within 3 months", a demo label) and stay unmarked. Seven promises that weren't marked are marked now.
+- **Singular address left in Arabic (rule 1): 0** outside the legal bodies (D-C4). Eight were found and fixed.
 
-## Decisions to confirm (Beshoy)
+## The owner's decisions (2026-11-17)
 
-| # | Decision | Recommendation |
+| # | Decision | Applied as |
 |---|---|---|
-| D-C1 | Rule 2 changes six approved Arabic button labels: `header.quote` «طلب عرض سعر», `hero.cta` «تخطيط فعاليتكم معنا», `hero.ctaWork` «مشاهدة أعمالنا», software `cta.book` «طلب مكالمة تعارف مجانية», `sticky.book` «طلب مكالمة مجانية», `consultation.submit` «طلب مكالمة تعارف مجانية (30 دقيقة)». Rule 1 changes `workCase.ctaTitle` to «تخطّطون لمشروع كهذا؟» | Accept: one rule for every button, with no exceptions to remember |
-| D-C2 | Rule 2 covers buttons and controls only; text links and headings keep the plural command («اكتشفوا ما ستقدّمه…», «كونوا أول من يعرف…») | Accept: a verbal noun reads like a label, which suits a button but not a sentence |
-| D-C3 | The phone error says "Include the country code, e.g. +971", but today's check accepts a local number (`050 123 4567`). Either (a) the check requires the leading `+`, or (b) the message says "Use digits, e.g. +971 50 123 4567" | (a): the team replies on WhatsApp across six countries, and a number without its code is ambiguous. One schema line plus a test at apply time |
-| D-C4 | Legal bodies (36 rows) move to the plural mechanically at apply time, with no other change of wording. The legal reviewer (FC#22) reads the result | Accept: the legal text keeps its meaning, and the site keeps one voice |
-| D-C5 | The drawn interface on the software hero (an example client site) follows rules 1 and 2 too: «أهلًا بكم», «حجز زيارة» | Accept |
-| D-C6 | The "Coming soon" badge on both product cards (`hero.ui.soon`) becomes "In development" / «قيد التطوير», like the section's eyebrow | Accept: the fixed principle bans "coming soon" |
-| D-C7 | Four labels that shouldn't render in public: `common.comingSoon`, `megaMenu.inDevelopment`, `category.modulePending`, `category.quote.contactPending`. At apply time, check where each renders, and delete it if nothing public uses it | Accept |
-| D-C8 | New keys: `meta.homeTitle` (the home title; `meta.title` is also the title template), `hero.ctaWork`, the Events `metaTitle` / `metaDescription` (the card summary stays the card's), `workIndex.closing.*` (N16), and five N10 form labels | Accept: each one is needed by an approved change |
+| D-C1 | Rejected as proposed; the button rule above replaces it | 36 marketing buttons in the plural command, the six approved ones included; the rest keep the verbal noun |
+| D-C2 | Accepted | Text links and headings keep the plural command |
+| D-C3 | Accepted, changed: see "The phone field" below | New keys `errorMessages.phoneCode`, `formCopy.fields.phoneHint`, `formCopy.review.contactHint`; `errorMessages.phone` reworded |
+| D-C4 | Accepted. There's no legal reviewer: Rand reads the legal pages last | 37 legal rows move to the plural at apply time, with no other change of wording |
+| D-C5 | Accepted, then superseded by D-C1 for the button | «أهلًا بكم»; the drawn site's button «احجزوا زيارة» (a call to action) |
+| D-C6 | Accepted, EN "In development" | `hero.ui.soon`: "In development" / «قيد التطوير» |
+| D-C7 | Accepted | At apply time: delete `common.comingSoon`, `megaMenu.inDevelopment`, `category.modulePending`, `category.quote.contactPending` if nothing public renders them |
+| D-C8 | Accepted | The new keys as listed in the tables |
+| R6 | The online print store isn't built, so its lines are hidden | The "Order your print online" button only links to the contact form (`/contact?service=print-store`): there's no catalogue, cart or checkout. Hidden: the Print FAQ "Can I order prints online?" (question and answer), the service's summary, and the module's button. The module's four steps stay: they describe a request that does work |
 
-## For Rand: the facts and promises (⚑)
+### The phone field (D-C3, for the apply step)
 
-Rows of `fact-check.md` used in this table: FC#1 (six markets, 9 lines), FC#4 (the anonymous projects), FC#5–FC#21 (one service each), FC#22 (legal review), FC#23 (a reply within one working day, 12 lines), FC#24 (support after launch; progress at every stage, 7 lines).
+A pure function in `src/lib/forms/`, test-first (forms and validation are high-risk logic, D82):
 
-New rows, to add to `fact-check.md` when Rand reviews:
+- **Accept** a number that starts with `+` or `00`. Remove spaces, dashes and brackets, then turn a leading `00` into `+`.
+- **Reject with `phoneCode`** ("Include the country code, e.g. +971.") a number that starts with `0` and isn't `00`, or that starts with a digit with no `+`. A number like `971501234567` is ambiguous, so it's treated as missing its code (our call).
+- **Reject with `phone`** ("Use digits only, e.g. +971 50 123 4567.") anything else that isn't 8 to 15 digits after the `+`, with a first digit of 1–9 (E.164).
+- **Store and send** the number in E.164 (`+971501234567`): the team's email and the WhatsApp reply use it.
+- **Show the example** under the field from the start (`phoneHint`), before any error. The review form's "Email or WhatsApp" field shows both shapes (`contactHint`) and applies the same rules when the value isn't an email.
 
-| # | The promise | Where |
+## Software promises: the owner decides (not Rand)
+
+The owner asked for R1, R2 and R7 here. Our call: R8 and the software rows of `fact-check.md` belong here too, since the owner answers for the software side. Say if any of them should go to Rand.
+
+| # | The promise | Lines |
 |---|---|---|
-| R1 | The intro call is free and lasts 30 minutes | Software page, Software & Digital FAQ, the consultation form |
-| R2 | The website review is free, comes within 3 working days, and lists 5 improvements | Software page, the review form |
-| R3 | A concept (Events) or a treatment (Creative) comes with every proposal | Category FAQs |
-| R4 | The client reviews the work at every stage | Home, process |
-| R5 | Every project ends with a report (otherwise: "…and we stay with you after it.") | Home, process |
-| R6 | The online print store is live at launch (today ordering is by request) | Print & gifts |
-| R7 | Every support plan includes a monthly report | Software page |
-| R8 | The quality checks run on every build | Software page |
-| R9 | The three projects in the home About block are recent (otherwise: "Some of our work:") | Home |
+| R1 | The intro call is free and lasts 30 minutes | 5: the software page's call to action, closing line and sticky bar; the Software & Digital FAQ; the consultation form's button |
+| R2 | The website review is free, comes within 3 working days, and lists 5 improvements | 5: the software page (4), the review form's success message |
+| R7 | Every support plan includes a monthly report | 1: the software page, "Ways to work with us" |
+| R8 | The quality checks run on every build | 1: the software page's quality title |
+| FC#18 | NO TIME is the federation's official digital and media partner, and everything listed is live at launch | 2: the software page's case study |
+| FC#19 | Event apps, live results and screens built for clients other than the federation | 1: the software page |
+| FC#20 | Online stores and AI consulting are services we sell, and which payment gateways | 2: the Software & Digital services |
+| FC#21 | The stack shown: Next.js, React, TypeScript, Node.js, iOS and Android | 1: the software page |
+| FC#22 | "Security and data protection, with the UAE personal data law in mind" | 1: the software page's quality list |
+| FC#24 | Support after launch; the client sees progress at every stage | 7: the software page, the Software & Digital FAQ |
+
+## For Rand
+
+The questions are in `docs/review/rand-questions.md`: 15 short questions in Arabic, the most important first. They cover FC#1, FC#4–FC#17, FC#22 (the legal pages), FC#23, and R3, R4, R5 and R9.
 
 ---
 
@@ -89,7 +109,7 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `m:brand.tagline` | Creative House | Creative House | keep |  |  |  |
 | `m:brand.homeLabel` | NO TIME Creative House — home | NO TIME Creative House — الصفحة الرئيسية | §3 em-dash aside (it's read aloud as "dash") | NO TIME Creative House, home | NO TIME Creative House، الصفحة الرئيسية |  |
 | `m:brand.logoAlt` | NO TIME Creative House | NO TIME Creative House | keep |  |  |  |
-| `m:common.skipToContent` | Skip to content | انتقل إلى المحتوى | Owner rule 2: controls in the neutral verbal noun | (keep) | الانتقال إلى المحتوى |  |
+| `m:common.skipToContent` | Skip to content | انتقل إلى المحتوى | D-C1 (owner): a form, system or navigation button, so the verbal noun: controls in the neutral verbal noun | (keep) | الانتقال إلى المحتوى |  |
 | `m:common.preview` | Preview | معاينة | keep |  |  |  |
 | `m:common.comingSoon` | Coming soon | قريبًا | Fixed principle: no "coming soon" control. Check where it renders at apply time; delete the key if nothing public uses it | (delete if unused) | (delete if unused) |  |
 | `m:common.example` | Example | مثال | keep |  |  |  |
@@ -99,7 +119,7 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `m:nav.digital` | Digital Solutions | الحلول الرقمية | keep |  |  |  |
 | `m:nav.about` | About | من نحن | keep |  |  |  |
 | `m:nav.contact` | Contact | تواصل معنا | Owner rule 1: plural address | (keep) | تواصلوا معنا |  |
-| `m:header.quote` | Request a quote | اطلب عرض سعر | Owner rule 2: buttons in the neutral verbal noun. Changes the approved N04/N12 Arabic label: confirm | (keep) | طلب عرض سعر |  |
+| `m:header.quote` | Request a quote | اطلب عرض سعر | D-C1 (owner): a marketing call to action, so the plural command | (keep) | اطلبوا عرض سعر |  |
 | `m:langToggle.label` | Language | اللغة | keep |  |  |  |
 | `m:langToggle.en` | EN | EN | keep |  |  |  |
 | `m:langToggle.ar` | ع | ع | keep |  |  |  |
@@ -113,10 +133,10 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `m:megaMenu.viewCategory` | View category | استعرض الفئة | §4 CTA: "view category" names our structure, not what they get; owner rule 2 (AR) | See the services | استعراض الخدمات |  |
 | `m:megaMenu.inDevelopment` | In development | قيد التطوير | Fixed principle: no "in development" label in public. Check at apply time; delete if no public category uses it | (delete if unused) | (delete if unused) |  |
 | `m:megaMenu.allServices` | All {count} services | جميع الخدمات ({count}) | keep |  |  |  |
-| `m:mobileMenu.open` | Open menu | افتح القائمة | Owner rule 2 (a control's name) | (keep) | فتح القائمة |  |
-| `m:mobileMenu.close` | Close menu | أغلق القائمة | Owner rule 2 | (keep) | إغلاق القائمة |  |
+| `m:mobileMenu.open` | Open menu | افتح القائمة | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | فتح القائمة |  |
+| `m:mobileMenu.close` | Close menu | أغلق القائمة | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | إغلاق القائمة |  |
 | `m:mobileMenu.services` | Services | الخدمات | keep |  |  |  |
-| `m:whatsapp.label` | Chat with us on WhatsApp | راسلنا على واتساب | Owner rule 2 (the floating button's name) | (keep) | المراسلة على واتساب |  |
+| `m:whatsapp.label` | Chat with us on WhatsApp | راسلنا على واتساب | D-C1 (owner): a marketing call to action, so the plural command | (keep) | راسلونا على واتساب |  |
 | `m:whatsapp.pending` | WhatsApp · number pending | واتساب · الرقم قريبًا | keep |  |  |  |
 | `m:whatsapp.prefill` | Hello NO TIME, I'd like to talk about a project. | مرحبًا NO TIME، أودّ الحديث معكم عن مشروع. | keep |  |  |  |
 | `m:whatsapp.prefillFrom` | Hello NO TIME, I found you through {channel} and I'd like to talk about a project. | مرحبًا NO TIME، وصلتكم من {channel}، وأودّ الحديث معكم عن مشروع. | keep |  |  |  |
@@ -145,7 +165,7 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `m:notFound.title` | This page doesn't exist. | هذه الصفحة غير موجودة. | keep |  |  |  |
 | `m:notFound.back` | Back to home | العودة إلى الرئيسية | keep |  |  |  |
 | `m:notFound.body` | The link may be out of date, or the address mistyped. Start from what we do, or go back home. | ربما تغيّر الرابط، أو في العنوان خطأ. ابدأ من خدماتنا، أو عُد إلى الرئيسية. | Owner rule 1 (AR plural); EN keep | (keep) | ربما تغيّر الرابط، أو في العنوان خطأ. ابدؤوا من خدماتنا، أو عودوا إلى الرئيسية. |  |
-| `m:notFound.services` | See our services | تصفّح خدماتنا | Owner rule 2 (button): «تصفّح» reads as a singular command; a verbal noun that can't | (keep) | استعراض خدماتنا |  |
+| `m:notFound.services` | See our services | تصفّح خدماتنا | D-C1 (owner): a form, system or navigation button, so the verbal noun: «تصفّح» reads as a singular command; a verbal noun that can't | (keep) | استعراض خدماتنا |  |
 | `new:meta.homeTitle` | (new) | (new) | SEO: the home title names no service. A new key: `meta.title` is also the template every other title ends with, so it stays | NO TIME Creative House · Events and marketing in Dubai | NO TIME Creative House · فعاليات وتسويق في دبي | p1, p3 |
 
 ## Home
@@ -158,12 +178,12 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `m:hero.title.start.line2` | TO START. | البداية. | keep |  |  |  |
 | `m:hero.title.start.label` | It's time to start. | حان وقت البداية. | keep |  |  |  |
 | `m:hero.lead` | Events, creative production, marketing and digital solutions, planned and delivered by one house. | فعاليات ومحتوى وحملات ومنصّات رقمية، يخطّط لها فريق واحد وينفّذها حتى يوم الإطلاق. | §4 lead: a category list that any agency could use. Owner's line (2026-11-17); films stay: Video production is one of the 30 services | Events, films, campaigns and websites, from the first idea to launch day. | فعاليات وأفلام وحملات ومواقع، من أول فكرة حتى يوم الإطلاق. | services data (video-production) |
-| `m:hero.cta` | See what we make | اكتشف ما نصنعه | N05 (approved): EN as decided. AR follows owner rule 2 (verbal noun): changes the approved «خطّط لفعاليتك معنا»: confirm | Plan your event | تخطيط فعاليتكم معنا |  |
+| `m:hero.cta` | See what we make | اكتشف ما نصنعه | D-C1 (owner): a marketing call to action, so the plural command | Plan your event | خطّطوا لفعاليتكم معنا |  |
 | `m:hero.beatLead` | Every second | كل ثانية | N05: the beat becomes the eyebrow `hero.eyebrow`, same words | Every second is planned. (as hero.eyebrow) | كل ثانية محسوبة. (as hero.eyebrow) |  |
 | `m:hero.beatKey` | is planned. | محسوبة. | N05: merged into `hero.eyebrow` | (delete) | (delete) |  |
 | `m:hud.scene` | Scene 01 — NO TIME | المشهد 01 — NO TIME | §3 em dash; decorative HUD, aria-hidden | Scene 01 · NO TIME | المشهد 01 · NO TIME |  |
 | `m:hud.coords` | 25.2048° N · 55.2708° E | 25.2048° N · 55.2708° E | keep |  |  |  |
-| `m:hud.scroll` | Scroll | مرّر | Owner rule 2 (a singular command) | (keep) | للأسفل |  |
+| `m:hud.scroll` | Scroll | مرّر | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | للأسفل |  |
 | `m:hud.city` | Dubai | دبي | keep |  |  |  |
 | `m:about.eyebrow` | About NO TIME | عن NO TIME | keep |  |  |  |
 | `m:about.statement` | A creative house for events, brands and the ideas in between. One team plans it, builds it, prints it and launches it. | دار إبداعية للفعاليات والعلامات التجارية، وللأفكار التي تجمع بينهما. فريق واحد يخطّط لها، ويبنيها، ويطبعها، ويُطلقها. | §3: "the ideas in between" says nothing; four verbs in a row. Rand's own sentence (p3), lightly edited; AR as the owner wrote it | We build ideas where a brand meets its audience, then carry them all the way: strategy, creative, production and delivery, under one roof. | نصنع الفكرة في النقطة التي تلتقي فيها العلامة بجمهورها، ثم نرافقها حتى النهاية: الاستراتيجية والإبداع والإنتاج والتسليم، تحت سقف واحد. | p3 (Rand's wording) |
@@ -176,8 +196,8 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `m:categories.headingLead` | Five crafts, | خمس حِرَف… | keep |  |  |  |
 | `m:categories.headingKey` | one team behind them. | يتقنها فريق واحد. | keep |  |  |  |
 | `m:categories.intro` | Book one, or hand us the whole brief. A launch can need a stage, a film, a campaign and a gift box, and here the same people plan all four. | اطلب حرفة واحدة، أو اترك لنا المشروع كله. قد يحتاج إطلاقٌ واحد إلى منصّة وفيلم وحملة وعلبة هدايا، وعندنا يخطّط للأربعة فريقٌ واحد. | Choice 2 ("brief"); owner rule 1 (AR plural) | Book one, or hand us the whole project. A launch can need a stage, a film, a campaign and a gift box, and here the same people plan all four. | اطلبوا حرفة واحدة، أو اتركوا لنا المشروع كله. قد يحتاج إطلاقٌ واحد إلى منصّة وفيلم وحملة وعلبة هدايا، وعندنا يخطّط للأربعة الفريقُ نفسه. |  |
-| `m:categories.viewServices` | See the services | اطّلع على الخدمات | Owner rule 2 (button) | (keep) | استعراض الخدمات |  |
-| `m:categories.allServices` | See all services | تصفّح كل الخدمات | Owner rule 2 (button) | (keep) | استعراض كل الخدمات |  |
+| `m:categories.viewServices` | See the services | اطّلع على الخدمات | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | استعراض الخدمات |  |
+| `m:categories.allServices` | See all services | تصفّح كل الخدمات | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | استعراض كل الخدمات |  |
 | `m:services.meta.title` | Services | الخدمات | SEO: "Services" alone matches no search; name what's inside | Services: events, film, marketing, print and digital | خدماتنا: فعاليات وإنتاج وتسويق وطباعة وحلول رقمية |  |
 | `m:services.meta.description` | Every NO TIME service in one place, across five categories: events and hospitality, creative production, marketing and brand, production, print and gifts, and software and digital. | جميع خدماتنا في مكان واحد، ضمن خمس فئات: الفعاليات والضيافة، والإنتاج الإبداعي، والتسويق والعلامة التجارية، والإنتاج والطباعة والهدايا، والبرمجيات والحلول الرقمية. | SEO: 190 chars of category names, cut in results; one concrete line instead | Thirty services in five categories, from conferences and weddings to films, campaigns, print and websites. Find yours, or ask us. | ثلاثون خدمة في خمس فئات، من المؤتمرات والأعراس إلى الأفلام والحملات والطباعة والمواقع. اختاروا ما تحتاجون إليه، أو اسألونا. | services data (30, N09) |
 | `m:services.eyebrow` | Services | الخدمات | keep |  |  |  |
@@ -199,8 +219,8 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `m:work.todo.summary` | TODO: one-line project summary from docs/content/case-studies.md | TODO: سطر تعريفي بالمشروع من ملف دراسات الحالة | keep |  |  |  |
 | `m:work.spansLabel` | Services in this project | خدمات هذا المشروع | keep |  |  |  |
 | `m:marquee.label` | All our services | جميع خدماتنا | keep |  |  |  |
-| `m:marquee.pause` | Pause the services list | أوقف شريط الخدمات | Owner rule 2 (control) | (keep) | إيقاف شريط الخدمات |  |
-| `m:marquee.play` | Play the services list | شغّل شريط الخدمات | Owner rule 2 (control) | (keep) | تشغيل شريط الخدمات |  |
+| `m:marquee.pause` | Pause the services list | أوقف شريط الخدمات | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | إيقاف شريط الخدمات |  |
+| `m:marquee.play` | Play the services list | شغّل شريط الخدمات | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | تشغيل شريط الخدمات |  |
 | `m:digital.eyebrow` | Beyond events | ما بعد الفعاليات | keep |  |  |  |
 | `m:digital.headingLead` | The team behind your event | الفريق الذي يصنع فعاليتك، | Owner rule 1 | (keep) | الفريق الذي يصنع فعاليتكم، |  |
 | `m:digital.headingKey` | builds your platform too. | يبني منصّتك الرقمية أيضًا. | Owner rule 1 | (keep) | يبني منصّتكم الرقمية أيضًا. |  |
@@ -215,10 +235,10 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `m:digital.capabilities.ecommerce.body` | Online stores, from the catalogue to the checkout. | متاجر على الإنترنت، من عرض المنتج حتى إتمام الطلب. | keep |  |  |  |
 | `m:digital.productsEyebrow` | Our products | منتجاتنا | keep |  |  |  |
 | `m:digital.productsIntro` | Two products of our own: check-in for events, and a system for restaurants at their busiest. Both in development. | منتجان من صنعنا: تسجيل حضور للفعاليات، ونظام للمطاعم في أوقات ذروتها. كلاهما قيد التطوير. | keep |  |  |  |
-| `m:digital.registerInterest` | Register interest | سجّل اهتمامك | Owner rule 2 (button) | (keep) | تسجيل الاهتمام |  |
-| `m:digital.requestDemo` | Request a demo | اطلب عرضًا تجريبيًا | Owner rule 2 (button) | (keep) | طلب عرض تجريبي |  |
-| `m:digital.viewProduct` | View product | تعرّف على المنتج | Owner rule 2 (button) | (keep) | تفاصيل المنتج |  |
-| `m:digital.explore` | Explore Software & Digital | اكتشف البرمجيات والحلول الرقمية | Owner rule 2 (button) | (keep) | استكشاف البرمجيات والحلول الرقمية |  |
+| `m:digital.registerInterest` | Register interest | سجّل اهتمامك | D-C1 (owner): a marketing call to action, so the plural command | (keep) | سجّلوا اهتمامكم |  |
+| `m:digital.requestDemo` | Request a demo | اطلب عرضًا تجريبيًا | D-C1 (owner): a marketing call to action, so the plural command | (keep) | اطلبوا عرضًا تجريبيًا |  |
+| `m:digital.viewProduct` | View product | تعرّف على المنتج | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | تفاصيل المنتج |  |
+| `m:digital.explore` | Explore Software & Digital | اكتشف البرمجيات والحلول الرقمية | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | استكشاف البرمجيات والحلول الرقمية |  |
 | `m:process.eyebrow` | How we work | طريقة عملنا | keep |  |  |  |
 | `m:process.headingLead` | Four steps, | أربع خطوات، | keep |  |  |  |
 | `m:process.headingKey` | one team throughout. | وفريق واحد من أولها إلى آخرها. | Choice 1: "one team" is already in this page's Categories heading | one plan. | وخطة واحدة. |  |
@@ -244,10 +264,10 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `m:cta.headingLead` | Have a date in mind? | هل حدّدت موعدًا؟ | §3: a question headline answered by the next line | Pick the date. | حدّدوا الموعد، |  |
 | `m:cta.headingKey` | Let's plan every second of it. | لنخطّط لكل ثانية فيه. | Pairs with the new lead | We'll plan every second of it. | ونخطّط لكل ثانية فيه. |  |
 | `m:cta.body` | Tell us the date and the idea, and we'll come back with the next steps. | أخبرنا بالموعد والفكرة، ونعود إليك بالخطوات التالية. | Owner rule 1 (AR) | (keep) | أخبرونا بالموعد والفكرة، ونعود إليكم بالخطوات التالية. |  |
-| `m:cta.primary` | Request a quote | اطلب عرض سعر | Owner rule 2 (button) | (keep) | طلب عرض سعر |  |
-| `m:cta.secondary` | Chat on WhatsApp | راسلنا على واتساب | Owner rule 2 (button) | (keep) | المراسلة على واتساب |  |
+| `m:cta.primary` | Request a quote | اطلب عرض سعر | D-C1 (owner): a marketing call to action, so the plural command | (keep) | اطلبوا عرض سعر |  |
+| `m:cta.secondary` | Chat on WhatsApp | راسلنا على واتساب | D-C1 (owner): a marketing call to action, so the plural command | (keep) | راسلونا على واتساب |  |
 | `m:cta.bodyInterim` | Start with what you need. Each craft has its own page, with every service inside it. | ابدأ بما تحتاجه: لكل مجال صفحته، وفيها خدماته كلها. | Owner rule 1 (AR) | (keep) | ابدؤوا بما تحتاجون إليه: لكل مجال صفحته، وفيها خدماته كلها. |  |
-| `m:reel.open` | See the photos | شاهد الصور | Owner rule 2 (button) | (keep) | مشاهدة الصور |  |
+| `m:reel.open` | See the photos | شاهد الصور | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | مشاهدة الصور |  |
 | `m:reel.title` | Showreel | عرض الأعمال | keep |  |  |  |
 | `m:reel.description` | Photographs from our events, one after another: dressed tables, florals, hospitality and a heritage setting. | صور من فعالياتنا تتوالى: طاولات مزيّنة، وتنسيقات زهور، وضيافة، وأجواء تراثية. | keep |  |  |  |
 | `m:reel.close` | Close the reel | إغلاق العرض | keep |  |  |  |
@@ -256,7 +276,7 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `m:reel.previous` | Previous | السابقة | keep |  |  |  |
 | `m:reel.next` | Next | التالية | keep |  |  |  |
 | `m:reel.frame` | {n} / {total} | {n} / {total} | keep |  |  |  |
-| `new:hero.ctaWork` | (new) | (new) | N05 (approved) second CTA; AR by owner rule 2: confirm | See our work | مشاهدة أعمالنا |  |
+| `new:hero.ctaWork` | (new) | (new) | D-C1 (owner): a marketing call to action, so the plural command | See our work | شاهدوا أعمالنا |  |
 
 ## Category pages: shared template
 
@@ -265,18 +285,18 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `m:category.breadcrumb` | Breadcrumb | مسار التنقل | keep |  |  |  |
 | `m:category.indexLabel` | Services in this category | خدمات هذه الفئة | keep |  |  |  |
 | `m:category.deliverTitle` | What we deliver | ما نقدّمه | keep |  |  |  |
-| `m:category.quoteCta` | Request a quote | اطلب عرض سعر | Owner rule 2 (button) | (keep) | طلب عرض سعر |  |
-| `m:category.quoteCtaFor` | Request a quote for {service} | اطلب عرض سعر لخدمة {service} | Owner rule 2 (button) | (keep) | طلب عرض سعر لخدمة {service} |  |
+| `m:category.quoteCta` | Request a quote | اطلب عرض سعر | D-C1 (owner): a marketing call to action, so the plural command | (keep) | اطلبوا عرض سعر |  |
+| `m:category.quoteCtaFor` | Request a quote for {service} | اطلب عرض سعر لخدمة {service} | D-C1 (owner): a marketing call to action, so the plural command | (keep) | اطلبوا عرض سعر لخدمة {service} |  |
 | `m:category.faqEyebrow` | Questions | أسئلة | keep |  |  |  |
 | `m:category.faqHeading` | Common questions | أسئلة شائعة | keep |  |  |  |
-| `m:category.quote.eyebrow` | Request a quote | اطلب عرض سعر | Owner rule 2 (the same words as the button) | (keep) | طلب عرض سعر |  |
+| `m:category.quote.eyebrow` | Request a quote | اطلب عرض سعر | A title, not a button: the noun reads right | (keep) | طلب عرض سعر |  |
 | `m:category.quote.body` | Tell us the date, the place and what you need. One team picks it up and replies within one working day. | أخبرنا بالموعد والمكان وما تحتاجه، ويتسلّم طلبك فريق واحد يرد عليك خلال يوم عمل. | Choice 1: on a category page this was the 4th "one team"; owner rule 1 | Tell us the date, the place and what you need. We'll reply within one working day. | أخبرونا بالموعد والمكان وما تحتاجون إليه، ونرد عليكم خلال يوم عمل. | ⚑ FC#23 (one working day, site-wide) |
 | `m:category.quote.service` | Service: {service} | الخدمة: {service} | keep |  |  |  |
-| `m:category.quote.whatsapp` | Chat on WhatsApp | راسلنا على واتساب | Owner rule 2 (button) | (keep) | المراسلة على واتساب |  |
-| `m:category.quote.email` | Email us | راسلنا بالبريد الإلكتروني | Owner rule 2 (button) | (keep) | المراسلة بالبريد الإلكتروني |  |
+| `m:category.quote.whatsapp` | Chat on WhatsApp | راسلنا على واتساب | D-C1 (owner): a marketing call to action, so the plural command | (keep) | راسلونا على واتساب |  |
+| `m:category.quote.email` | Email us | راسلنا بالبريد الإلكتروني | D-C1 (owner): a marketing call to action, so the plural command | (keep) | راسلونا بالبريد الإلكتروني |  |
 | `m:category.quote.contactPending` | Our contact details will appear here soon. | ستظهر بيانات التواصل هنا قريبًا. | Fixed principle (no "soon"): the email is set, so this shouldn't render. Delete if no path shows it | (delete if unused) | (delete if unused) |  |
 | `m:category.quote.prefill` | Hello NO TIME, I'd like a quote for {service}. | مرحبًا NO TIME، أودّ طلب عرض سعر لخدمة {service}. | keep |  |  |  |
-| `m:category.quote.brief` | Send a brief | أرسل طلبك | Choice 2 ("brief"); owner rule 2 | Send a request | إرسال الطلب |  |
+| `m:category.quote.brief` | Send a brief | أرسل طلبك | D-C1 (owner): a marketing call to action, so the plural command | Send a request | أرسلوا طلبكم |  |
 | `m:category.modulePending` | Interactive preview in design | معاينة تفاعلية قيد التصميم | Fixed principle: no "in design" label in public. Delete if every public module is built | (delete if unused) | (delete if unused) |  |
 | `m:category.skip` | Skip to services | انتقل إلى الخدمات | N06 (approved): "Go to the services"; AR by owner rule 2 | Go to the services | الانتقال إلى الخدمات |  |
 | `m:scenes.draft.s1` | TODO: shot 1 line | TODO: سطر اللقطة 1 | keep |  |  |  |
@@ -365,8 +385,8 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `c:service-hooks:SERVICE_HOOKS.stage-technical-production` | Sound, light and screens on one cue sheet, run by the crew that rigged them. | الصوت والإضاءة والشاشات على جدول إشارات واحد، يديره الفريق الذي ركّبها. | keep |  |  |  |
 | `c:photo-stories:PRIVATE_STACK.label` | Private celebrations | المناسبات الخاصة | keep |  |  |  |
 | `c:photo-stories:PRIVATE_STACK.lead` | A wedding, an engagement, a family evening? Tell us the date and the guest count, and we'll carry it from the first sketch to the last candle. | زفاف أو خطوبة أو أمسية عائلية؟ أخبرنا بالموعد وعدد الضيوف، ونتولّى كل شيء من أول تصوّر حتى آخر شمعة. | §3: a question answered by the next line; owner rule 1 | Weddings, engagements, family evenings. Tell us the date and the guest count, and we'll carry it from the first sketch to the last candle. | أعراس وخطوبات وأمسيات عائلية. أخبرونا بالموعد وعدد الضيوف، ونتولّى كل شيء من أول تصوّر حتى آخر شمعة. | p11 (full on-day production) |
-| `c:photo-stories:PRIVATE_STACK.cta` | Plan your celebration | خطّط لمناسبتك معنا | Owner rule 2 (button) | (keep) | تخطيط مناسبتكم معنا |  |
-| `c:photo-stories:PRIVATE_STACK.whatsapp` | Message us on WhatsApp | راسلنا على واتساب | Owner rule 2 (button) | (keep) | المراسلة على واتساب |  |
+| `c:photo-stories:PRIVATE_STACK.cta` | Plan your celebration | خطّط لمناسبتك معنا | D-C1 (owner): a marketing call to action, so the plural command | (keep) | خطّطوا لمناسبتكم معنا |  |
+| `c:photo-stories:PRIVATE_STACK.whatsapp` | Message us on WhatsApp | راسلنا على واتساب | D-C1 (owner): a marketing call to action, so the plural command | (keep) | راسلونا على واتساب |  |
 | `c:photo-stories:PRIVATE_STACK.prefill` | Hello NO TIME, I'm planning a private celebration and would like to talk it through. | مرحبًا NO TIME، أخطّط لمناسبة خاصة وأودّ أن نتحدّث عنها. | keep |  |  |  |
 | `c:photo-stories:PRIVATE_STACK.cards[0].caption` | The table, in your colours | طاولتك، بألوانك | Owner rule 1 | (keep) | طاولتكم، بألوانكم |  |
 | `c:photo-stories:PRIVATE_STACK.cards[1].caption` | A reception to remember | استقبال يبقى في الذاكرة | §3 ("to remember" = unforgettable) | The welcome at the door | الاستقبال عند المدخل |  |
@@ -417,7 +437,7 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `c:modules/agenda-timeline:AGENDA.slots[5].handled` | Catering, table styling, the buffet's service | الضيافة وتنسيق الطاولات وخدمة البوفيه | keep |  |  |  |
 | `c:modules/agenda-timeline:AGENDA.slots[6].label` | Awards and closing | التكريم والختام | keep |  |  |  |
 | `c:modules/agenda-timeline:AGENDA.slots[6].handled` | The ceremony's running order, trophies, photography | تسلسل الحفل والجوائز والتصوير | keep |  |  |  |
-| `c:modules/candle-moodboard:MOODBOARD.title` | Set the mood | اختر الأجواء | Owner rule 2 (an interactive control's title) | (keep) | اختيار الأجواء |  |
+| `c:modules/candle-moodboard:MOODBOARD.title` | Set the mood | اختر الأجواء | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | اختيار الأجواء |  |
 | `c:modules/candle-moodboard:MOODBOARD.note` | Photos from NO TIME events. The three moods are examples of where a concept deck starts. | صور من فعاليات نظّمتها NO TIME، والأجواء الثلاث أمثلة على بداية ملف الفكرة. | keep |  |  |  |
 | `c:modules/candle-moodboard:MOODBOARD.moodsLabel` | Mood | الأجواء | keep |  |  |  |
 | `c:modules/candle-moodboard:MOODBOARD.paletteLabel` | Palette | الألوان | keep |  |  |  |
@@ -452,9 +472,9 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `c:modules/candle-moodboard:MOODBOARD.moods[intimate].photos[2].alt` | A dessert table dressed with florals. | طاولة حلويات مزيّنة بالزهور. | keep |  |  |  |
 | `c:modules/launch-reveal:LAUNCH_REVEAL.title` | The moment of the reveal | لحظة الكشف | keep |  |  |  |
 | `c:modules/launch-reveal:LAUNCH_REVEAL.note` | Start the reveal, then switch the setting. Every format leads to the same five seconds. | ابدأ الكشف، ثم بدّل المكان. كل صيغة تقود إلى الثواني الخمس نفسها. | Owner rule 1 (AR); EN keep | (keep) | ابدؤوا الكشف، ثم بدّلوا المكان. كل صيغة تقود إلى الثواني الخمس نفسها. |  |
-| `c:modules/launch-reveal:LAUNCH_REVEAL.start` | Start the reveal | ابدأ الكشف | Owner rule 2 | (keep) | بدء الكشف |  |
-| `c:modules/launch-reveal:LAUNCH_REVEAL.skip` | Skip the countdown | تخطَّ العدّ التنازلي | Owner rule 2 | (keep) | تخطّي العدّ التنازلي |  |
-| `c:modules/launch-reveal:LAUNCH_REVEAL.reset` | Close the curtain | أسدل الستارة | Owner rule 2 | (keep) | إسدال الستارة |  |
+| `c:modules/launch-reveal:LAUNCH_REVEAL.start` | Start the reveal | ابدأ الكشف | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | بدء الكشف |  |
+| `c:modules/launch-reveal:LAUNCH_REVEAL.skip` | Skip the countdown | تخطَّ العدّ التنازلي | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | تخطّي العدّ التنازلي |  |
+| `c:modules/launch-reveal:LAUNCH_REVEAL.reset` | Close the curtain | أسدل الستارة | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | إسدال الستارة |  |
 | `c:modules/launch-reveal:LAUNCH_REVEAL.productLabel` | Your product | منتجك | Owner rule 1 | (keep) | منتجكم |  |
 | `c:modules/launch-reveal:LAUNCH_REVEAL.formatsLabel` | Setting | المكان | keep |  |  |  |
 | `c:modules/launch-reveal:LAUNCH_REVEAL.formats[mall].label` | Mall | مركز تجاري | keep |  |  |  |
@@ -487,7 +507,7 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `c:modules/menu-majlis:MENU.sections[4].items[2]` | Boardroom hospitality | ضيافة مجالس الإدارة | keep |  |  |  |
 | `c:modules/menu-majlis:MENU.footer` | Composed for each occasion. | تُعدّ لكل مناسبة على حدة. | keep |  |  |  |
 | `c:modules/menu-majlis:MENU.photosNote` | From our heritage setups | من تجهيزاتنا التراثية | keep |  |  |  |
-| `c:modules/stage-lights:STAGE_LIGHTS.title` | Light the stage | أضئ المسرح | Owner rule 2 | (keep) | إضاءة المسرح |  |
+| `c:modules/stage-lights:STAGE_LIGHTS.title` | Light the stage | أضئ المسرح | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | إضاءة المسرح |  |
 | `c:modules/stage-lights:STAGE_LIGHTS.note` | An example rig in four groups. Switch each one, or run the cues as the crew would on the night. | منظومة إضاءة نموذجية من أربع مجموعات. تحكّم في كل مجموعة بنفسك، أو شغّل الإشارات كما يفعل الفريق ليلة الحدث. | Owner rule 1 (AR); EN keep | (keep) | منظومة إضاءة نموذجية من أربع مجموعات. تحكّموا في كل مجموعة بأنفسكم، أو شغّلوا الإشارات كما يفعل الفريق ليلة الحدث. |  |
 | `c:modules/stage-lights:STAGE_LIGHTS.groupsLabel` | Light groups | مجموعات الإضاءة | keep |  |  |  |
 | `c:modules/stage-lights:STAGE_LIGHTS.groups[wash].label` | Wash | الإضاءة العامة | keep |  |  |  |
@@ -498,8 +518,8 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `c:modules/stage-lights:STAGE_LIGHTS.cues[1].label` | Screen up | تشغيل الشاشة | keep |  |  |  |
 | `c:modules/stage-lights:STAGE_LIGHTS.cues[2].label` | Back light for the stage | الإضاءة الخلفية للمسرح | keep |  |  |  |
 | `c:modules/stage-lights:STAGE_LIGHTS.cues[3].label` | Spot on the speaker | الإضاءة المركّزة على المتحدث | keep |  |  |  |
-| `c:modules/stage-lights:STAGE_LIGHTS.run` | Run the cues | شغّل الإشارات | Owner rule 2 | (keep) | تشغيل الإشارات |  |
-| `c:modules/stage-lights:STAGE_LIGHTS.stop` | Stop the cues | أوقف الإشارات | Owner rule 2 | (keep) | إيقاف الإشارات |  |
+| `c:modules/stage-lights:STAGE_LIGHTS.run` | Run the cues | شغّل الإشارات | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | تشغيل الإشارات |  |
+| `c:modules/stage-lights:STAGE_LIGHTS.stop` | Stop the cues | أوقف الإشارات | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | إيقاف الإشارات |  |
 | `c:modules/stage-lights:STAGE_LIGHTS.status.on` | {group} on, {n} of {total} groups | {group}: تعمل، {n} من {total} مجموعات | keep |  |  |  |
 | `c:modules/stage-lights:STAGE_LIGHTS.status.off` | {group} off, {n} of {total} groups | {group}: متوقفة، {n} من {total} مجموعات | keep |  |  |  |
 | `c:modules/stage-lights:STAGE_LIGHTS.status.start` | Cue sequence running | تسلسل الإشارات يعمل | keep |  |  |  |
@@ -599,7 +619,7 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `c:service-hooks:SERVICE_HOOKS.equipment-camera-rental` | Cameras, lenses, lighting and audio for your shoot, booked in one request. | الكاميرات والعدسات والإضاءة والصوت لتصويرك، تحجزها بطلب واحد. | Owner rule 1 (AR); EN keep | (keep) | الكاميرات والعدسات والإضاءة والصوت لتصويركم، تحجزونها بطلب واحد. |  |
 | `c:modules/motion-playground:MOTION_PLAYGROUND.title` | Every second is planned. | كل ثانية محسوبة. | keep |  |  |  |
 | `c:modules/motion-playground:MOTION_PLAYGROUND.cardLabel` | Title card | بطاقة العنوان | keep |  |  |  |
-| `c:modules/motion-playground:MOTION_PLAYGROUND.legend` | Choose an easing | اختر منحنى الحركة | Owner rule 2 (a control's label) | (keep) | اختيار منحنى الحركة |  |
+| `c:modules/motion-playground:MOTION_PLAYGROUND.legend` | Choose an easing | اختر منحنى الحركة | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | اختيار منحنى الحركة |  |
 | `c:modules/motion-playground:MOTION_PLAYGROUND.play` | Play | تشغيل | keep |  |  |  |
 | `c:modules/motion-playground:MOTION_PLAYGROUND.playing` | Playing with | التشغيل بمنحنى | keep |  |  |  |
 | `c:modules/motion-playground:MOTION_PLAYGROUND.reduced` | Motion is reduced on this device, so the card shows its final frame. The curve shows how it would move. | الحركة مخفّفة على هذا الجهاز، لذا تظهر البطاقة في إطارها الأخير، ويبيّن المنحنى كيف كانت ستتحرك. | keep |  |  |  |
@@ -614,7 +634,7 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `c:modules/rental-categories:RENTAL_CATEGORIES.hint` | Choose what your production needs. | اختر ما يحتاجه إنتاجك. | Owner rule 1 | (keep) | اختاروا ما يحتاج إليه إنتاجكم. |  |
 | `c:modules/rental-categories:RENTAL_CATEGORIES.selected` | Selected: | اخترت: | Owner rule 1 | (keep) | اخترتم: |  |
 | `c:modules/rental-categories:RENTAL_CATEGORIES.separator` | ,  | ،  | keep |  |  |  |
-| `c:modules/rental-categories:RENTAL_CATEGORIES.cta` | Ask for availability | اسأل عن التوفّر | Owner rule 2 (button) | (keep) | السؤال عن التوفّر |  |
+| `c:modules/rental-categories:RENTAL_CATEGORIES.cta` | Ask for availability | اسأل عن التوفّر | D-C1 (owner): a marketing call to action, so the plural command | (keep) | اسألوا عن التوفّر |  |
 | `c:modules/rental-categories:RENTAL_CATEGORIES.categories[cameras].name` | Cameras | الكاميرات | keep |  |  |  |
 | `c:modules/rental-categories:RENTAL_CATEGORIES.categories[cameras].line` | Camera bodies for photo and video. | كاميرات للتصوير الفوتوغرافي والفيديو. | keep |  |  |  |
 | `c:modules/rental-categories:RENTAL_CATEGORIES.categories[lenses].name` | Lenses | العدسات | keep |  |  |  |
@@ -781,8 +801,8 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `c:categories:categories[production-print-gifts].faq[0].a` | Screen printing, UV printing, foiling, debossing and laser engraving, chosen to suit each item. | الطباعة الحريرية، والطباعة بالأشعة فوق البنفسجية، والطباعة بالرقائق المعدنية، والكبس الغائر، والحفر بالليزر، ونختار منها ما يناسب كل قطعة. | keep |  |  |  |
 | `c:categories:categories[production-print-gifts].faq[1].q` | Do you install the stands you build? | هل تركّبون الأجنحة التي تصنعونها؟ | keep |  |  |  |
 | `c:categories:categories[production-print-gifts].faq[1].a` | Yes. We design, fabricate and install exhibition stands, activations and branded spaces. | نعم. نصمّم أجنحة المعارض ومساحات التفعيل والمساحات بهوية العلامة، ونصنّعها ونركّبها. | keep | (keep) | (keep) | ⚑ FC#15 (in-house or with a partner) |
-| `c:categories:categories[production-print-gifts].faq[2].q` | Can I order prints online? | هل يمكنني طلب المطبوعات عبر الإنترنت؟ | Owner rule 1 (AR) | (keep) | هل يمكننا طلب المطبوعات عبر الإنترنت؟ |  |
-| `c:categories:categories[production-print-gifts].faq[2].a` | Yes. Tell us the item and the quantity, send your artwork, and we'll confirm the details and the proof with you before printing. | نعم. أخبرنا بالمنتج والكمية وأرسل التصميم، ونؤكّد معك التفاصيل والنسخة التجريبية قبل التنفيذ. | Owner rule 1 (AR); EN keep | (keep) | نعم. أخبرونا بالمنتج والكمية وأرسلوا التصميم، ونؤكّد معكم التفاصيل والنسخة التجريبية قبل التنفيذ. | ⚑ R6: ordering is by request today; "online" holds only if the print store is live at launch (Rand) |
+| `c:categories:categories[production-print-gifts].faq[2].q` | Can I order prints online? | هل يمكنني طلب المطبوعات عبر الإنترنت؟ | Hidden: the claim needs a feature that doesn't exist | (hide) | (hide) | R6: the online store isn't built (ordering is a request through the contact form), so the line is hidden (owner, 2026-11-17) |
+| `c:categories:categories[production-print-gifts].faq[2].a` | Yes. Tell us the item and the quantity, send your artwork, and we'll confirm the details and the proof with you before printing. | نعم. أخبرنا بالمنتج والكمية وأرسل التصميم، ونؤكّد معك التفاصيل والنسخة التجريبية قبل التنفيذ. | Hidden: the claim needs a feature that doesn't exist | (hide) | (hide) | R6: the online store isn't built (ordering is a request through the contact form), so the line is hidden (owner, 2026-11-17) |
 | `c:categories:categories[production-print-gifts].faq[3].q` | Do you make packaging for gifts and awards? | هل تصمّمون تغليفًا للهدايا والجوائز؟ | keep |  |  |  |
 | `c:categories:categories[production-print-gifts].faq[3].a` | Yes: custom boxes and wraps for gift sets and awards. | نعم: علب وتغليف حسب الطلب لأطقم الهدايا والجوائز. | keep |  |  |  |
 | `c:categories:categories[production-print-gifts].faq[4].q` | Is there a minimum quantity? | هل هناك حدّ أدنى للكمية؟ | keep |  |  |  |
@@ -824,7 +844,7 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `c:services:services[corporate-gifts].points[4]` | Giveaways | الهدايا الترويجية | keep |  |  |  |
 | `c:services:services[corporate-gifts].points[5]` | Screen printing, UV, foiling, debossing and laser engraving | الطباعة الحريرية، والطباعة بالأشعة فوق البنفسجية، والطباعة بالرقائق المعدنية، والكبس الغائر، والحفر بالليزر | keep |  |  |  |
 | `c:services:services[online-print-store].title` | Online print store | متجر الطباعة الإلكتروني | keep |  |  |  |
-| `c:services:services[online-print-store].summary` | Order approved print items online, on brand every time. | اطلب مطبوعاتك المعتمدة عبر الإنترنت، بهوية ثابتة في كل مرة. | Owner rule 1 (AR) | (keep) | اطلبوا مطبوعاتكم المعتمدة عبر الإنترنت، بهوية ثابتة في كل مرة. | ⚑ R6 (the online print store is live at launch) |
+| `c:services:services[online-print-store].summary` | Order approved print items online, on brand every time. | اطلب مطبوعاتك المعتمدة عبر الإنترنت، بهوية ثابتة في كل مرة. | Hidden: the claim needs a feature that doesn't exist | (hide) | (hide) | R6: the online store isn't built (ordering is a request through the contact form), so the line is hidden (owner, 2026-11-17) |
 | `c:services:services[online-print-store].points[0]` | Choose the item and the quantity | اختر المنتج والكمية | Owner rule 1 (AR) | (keep) | اختاروا المنتج والكمية |  |
 | `c:services:services[online-print-store].points[1]` | Send your artwork, or ask for a reprint | أرسل التصميم، أو اطلب إعادة طباعة | Owner rule 1 (AR) | (keep) | أرسلوا التصميم، أو اطلبوا إعادة الطباعة |  |
 | `c:services:services[online-print-store].points[2]` | Approve the proof before printing | اعتمد النسخة التجريبية قبل التنفيذ | Owner rule 1 (AR) | (keep) | اعتمدوا النسخة التجريبية قبل التنفيذ |  |
@@ -843,7 +863,7 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `c:service-hooks:SERVICE_HOOKS.branded-merchandise` | Apparel and everyday objects worth keeping, with the logo placed with restraint. | ملابس وأدوات يومية تستحق أن يُحتفظ بها، والشعار عليها بهدوء. | keep |  |  |  |
 | `c:modules/human-scale:HUMAN_SCALE_COPY.title` | Typical formats, drawn to scale | مقاسات شائعة بمقياسها الحقيقي | keep |  |  |  |
 | `c:modules/human-scale:HUMAN_SCALE_COPY.note` | Common sizes for comparison, beside a 1.8 m figure. Each job is printed at the size it needs. | مقاسات شائعة للمقارنة، بجانب شخص طوله 1.8 م. ونطبع كل عمل بالمقاس الذي يحتاجه. | keep |  |  |  |
-| `c:modules/human-scale:HUMAN_SCALE_COPY.choose` | Choose a format | اختر مقاسًا | Owner rule 2 (a control's label) | (keep) | اختيار المقاس |  |
+| `c:modules/human-scale:HUMAN_SCALE_COPY.choose` | Choose a format | اختر مقاسًا | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | اختيار المقاس |  |
 | `c:modules/human-scale:HUMAN_SCALE_COPY.unit` | mm | مم | keep |  |  |  |
 | `c:modules/human-scale:HUMAN_SCALE_COPY.metre` | m | م | keep |  |  |  |
 | `c:modules/human-scale:HUMAN_SCALE_COPY.figure` | 1.8 m | 1.8 م | keep |  |  |  |
@@ -867,7 +887,7 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `c:modules/print-order:ORDER_STEPS[print].line` | Printed to match your brand, and the proof you approved. | طباعة تطابق هوية علامتك والنسخة التي اعتمدتها. | Owner rule 1 (AR) | (keep) | طباعة تطابق هوية علامتكم والنسخة التي اعتمدتموها. |  |
 | `c:modules/print-order:PRINT_ORDER_COPY.title` | How a print order works | كيف يسير طلب الطباعة | keep |  |  |  |
 | `c:modules/print-order:PRINT_ORDER_COPY.step` | Step {n} of {total} | الخطوة {n} من {total} | keep |  |  |  |
-| `c:modules/print-order:PRINT_ORDER_COPY.cta` | Order your print online | اطلب مطبوعاتك عبر الإنترنت | Owner rule 2 (button) | (keep) | طلب المطبوعات عبر الإنترنت | ⚑ R6 (the online print store is live at launch) |
+| `c:modules/print-order:PRINT_ORDER_COPY.cta` | Order your print online | اطلب مطبوعاتك عبر الإنترنت | Hidden: the claim needs a feature that doesn't exist | (hide) | (hide) | R6: the online store isn't built (ordering is a request through the contact form), so the line is hidden (owner, 2026-11-17) |
 
 ## Category: software-digital
 
@@ -958,15 +978,15 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `c:software/page:caseStudy.parts.result.label` | Result | النتيجة | keep |  |  |  |
 | `c:software/page:caseStudy.parts.result.body` | All live: the website, the admin panel and the mobile app. | كلها تعمل الآن: الموقع الإلكتروني ولوحة الإدارة وتطبيق الجوّال. | keep | (keep) | (keep) | ⚑ FC#18 (all live at launch) |
 | `c:software/page:caseStudy.redraw` | Stylised redraw. The client's own screens stay private. | رسم توضيحي مبسّط. شاشات العميل نفسها تبقى خاصة. | keep |  |  |  |
-| `c:software/page:caseStudy.visit` | Visit the live site | زُر الموقع المنشور | Owner rule 2 (button) | (keep) | زيارة الموقع |  |
-| `c:software/page:cta.book` | Book a free 30-min intro call | احجز مكالمة تعارف مجانية (30 دقيقة) | N13 (approved) EN; AR by owner rule 2 changes the approved «اطلب مكالمة تعارف مجانية»: confirm | Request a free intro call | طلب مكالمة تعارف مجانية | ⚑ R1 (the intro call is free, 30 minutes) |
+| `c:software/page:caseStudy.visit` | Visit the live site | زُر الموقع المنشور | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | زيارة الموقع |  |
+| `c:software/page:cta.book` | Book a free 30-min intro call | احجز مكالمة تعارف مجانية (30 دقيقة) | D-C1 (owner): a marketing call to action, so the plural command | Request a free intro call | اطلبوا مكالمة تعارف مجانية | ⚑ R1 (the intro call is free, 30 minutes) |
 | `c:software/page:cta.micro` | No obligation. We reply within one working day. | دون أي التزام. نرد خلال يوم عمل. | keep | (keep) | (keep) | ⚑ FC#23 |
-| `c:software/page:cta.review` | Get a free website review | احصل على مراجعة مجانية لموقعك | Owner rule 2 (button) | (keep) | طلب مراجعة مجانية لموقعكم | ⚑ R2 (the website review: free, 3 working days, 5 improvements) |
+| `c:software/page:cta.review` | Get a free website review | احصل على مراجعة مجانية لموقعك | D-C1 (owner): a marketing call to action, so the plural command | (keep) | اطلبوا مراجعة مجانية لموقعكم | ⚑ R2 (the website review: free, 3 working days, 5 improvements) |
 | `c:software/page:cta.reviewShort` | Free website review | مراجعة مجانية لموقعك | Owner rule 1 | (keep) | مراجعة مجانية لموقعكم | ⚑ R2 (the website review: free, 3 working days, 5 improvements) |
 | `c:software/page:cta.reviewPromise` | Send us your site. Within 3 working days we'll reply with 5 concrete improvements, free. | أرسل لنا موقعك، وخلال 3 أيام عمل نرد عليك بخمسة تحسينات عملية، مجانًا. | Owner rule 1 (AR); EN keep: the kind of specific promise §1 asks for | (keep) | أرسلوا لنا موقعكم، وخلال 3 أيام عمل نرد عليكم بخمسة تحسينات عملية، مجانًا. | ⚑ R2 (the website review: free, 3 working days, 5 improvements) |
-| `c:software/page:cta.work` | See our work | شاهد أعمالنا | Owner rule 2 (button) | (keep) | مشاهدة أعمالنا |  |
-| `c:software/page:cta.discuss` | Discuss this | ناقش هذه الخدمة معنا | Owner rule 2 (button) | (keep) | مناقشة هذه الخدمة معنا |  |
-| `c:software/page:cta.discussFor` | Discuss this: {service} | ناقش هذه الخدمة معنا: {service} | Owner rule 2 (button) | (keep) | مناقشة هذه الخدمة معنا: {service} |  |
+| `c:software/page:cta.work` | See our work | شاهد أعمالنا | D-C1 (owner): a marketing call to action, so the plural command | (keep) | شاهدوا أعمالنا |  |
+| `c:software/page:cta.discuss` | Discuss this | ناقش هذه الخدمة معنا | D-C1 (owner): a marketing call to action, so the plural command | (keep) | ناقشوا هذه الخدمة معنا |  |
+| `c:software/page:cta.discussFor` | Discuss this: {service} | ناقش هذه الخدمة معنا: {service} | D-C1 (owner): a marketing call to action, so the plural command | (keep) | ناقشوا هذه الخدمة معنا: {service} |  |
 | `c:software/page:eventTech.name` | Event technology | تقنيات الفعاليات | keep |  |  |  |
 | `c:software/page:eventTech.eyebrow` | Event technology · our specialty | تقنيات الفعاليات · تخصّصنا | keep |  |  |  |
 | `c:software/page:eventTech.title` | Built by people who run events. | تبنيها فرقٌ تدير الفعاليات بنفسها. | keep |  |  |  |
@@ -983,11 +1003,11 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `c:software/page:eventTech.receive[0]` | Registration and check-in for your guests | التسجيل وتسجيل الحضور لضيوفك | Owner rule 1 | (keep) | التسجيل وتسجيل الحضور لضيوفكم |  |
 | `c:software/page:eventTech.receive[1]` | An event app or microsite with the agenda and live updates | تطبيق أو موقع مصغّر للفعالية بالبرنامج والتحديثات المباشرة | keep |  |  |  |
 | `c:software/page:eventTech.receive[2]` | Live results and screens at the venue | نتائج مباشرة وشاشات في مكان الفعالية | keep |  |  |  |
-| `c:software/page:eventTech.eventsLink` | See Events & Hospitality | تعرّف على الفعاليات والضيافة | Owner rule 2 (button) | (keep) | استعراض الفعاليات والضيافة |  |
+| `c:software/page:eventTech.eventsLink` | See Events & Hospitality | تعرّف على الفعاليات والضيافة | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | استعراض الفعاليات والضيافة |  |
 | `c:software/page:eventTech.counter.label` | Checked in | سجّلوا حضورهم | keep |  |  |  |
 | `c:software/page:eventTech.counter.of` | of | من | keep |  |  |  |
 | `c:software/page:faqCopy.title` | Straight answers on cost, time and ownership. | إجابات مباشرة عن التكلفة والمدة والملكية. | keep |  |  |  |
-| `c:software/page:finalCta.risk` | Book a free 30-min intro call. No obligation. We reply within one working day. | احجز مكالمة تعارف مجانية (30 دقيقة). دون أي التزام. نرد خلال يوم عمل. | Owner rule 2 (AR: the line opens with the action); N13 wording | (keep) | مكالمة تعارف مجانية (30 دقيقة)، دون أي التزام. نرد عليكم خلال يوم عمل. | ⚑ FC#23; ⚑ R1 (the intro call is free, 30 minutes) |
+| `c:software/page:finalCta.risk` | Book a free 30-min intro call. No obligation. We reply within one working day. | احجز مكالمة تعارف مجانية (30 دقيقة). دون أي التزام. نرد خلال يوم عمل. | D-C1 (owner): the line opens with the call to action, so the plural command; N13 wording | (keep) | اطلبوا مكالمة تعارف مجانية (30 دقيقة)، دون أي التزام. نرد عليكم خلال يوم عمل. | ⚑ FC#23; ⚑ R1 (the intro call is free, 30 minutes) |
 | `c:software/page:finalCta.reviewTitle` | Or start with a free website review | أو ابدأ بمراجعة مجانية لموقعك | Owner rule 1 | (keep) | أو ابدؤوا بمراجعة مجانية لموقعكم | ⚑ R2 (the website review: free, 3 working days, 5 improvements) |
 | `c:software/page:hero.title` | Websites and apps your clients actually use, in Arabic and English. | مواقع وتطبيقات يستخدمها عملاؤك فعلًا، بالعربية والإنجليزية. | Owner rule 1 (AR); EN keep | (keep) | مواقع وتطبيقات يستخدمها عملاؤكم فعلًا، بالعربية والإنجليزية. |  |
 | `c:software/page:hero.sub` | The team that runs your events also builds your platform: bilingual websites, iOS and Android apps, dashboards and the systems behind them. Designed and built in Dubai. | الفريق الذي يدير فعالياتك يبني منصّتك أيضًا: مواقع بلغتين، وتطبيقات iOS و Android، ولوحات إدارة والأنظمة التي تعمل خلفها. نصمّمها ونطوّرها في دبي. | Owner rule 1 (AR), N18 rule; EN keep | (keep) | الفريق الذي يدير فعالياتكم يبني منصّتكم أيضًا: مواقع بلغتين، وتطبيقات iOS وAndroid، ولوحات إدارة والأنظمة التي تعمل خلفها. نصمّمها ونطوّرها في دبي. |  |
@@ -996,7 +1016,7 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `c:software/page:hero.ui.wire[2]` | Cards | البطاقات | keep |  |  |  |
 | `c:software/page:hero.ui.welcome` | Welcome | أهلًا بك | Owner rule 1 (the drawn interface too: one voice on the site) | (keep) | أهلًا بكم |  |
 | `c:software/page:hero.ui.welcomeOther` | أهلًا بك | Welcome | Owner rule 1 (this key holds the Arabic shown on the English page) | أهلًا بكم | (keep) |  |
-| `c:software/page:hero.ui.button` | Book a visit | احجز زيارة | Owner rule 2 (a button, even inside the drawn interface) | (keep) | حجز زيارة |  |
+| `c:software/page:hero.ui.button` | Book a visit | احجز زيارة | D-C1 (owner): the drawn site's call to action, so the plural command (replaces D-C5's «حجز زيارة») | (keep) | احجزوا زيارة |  |
 | `c:software/page:hero.ui.states[0]` | Default | افتراضي | keep |  |  |  |
 | `c:software/page:hero.ui.states[1]` | Hover | تمرير | keep |  |  |  |
 | `c:software/page:hero.ui.states[2]` | Active | نشط | keep |  |  |  |
@@ -1044,9 +1064,9 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `c:software/page:productsCopy.intro` | We're building both from our own event and hospitality work. Register interest and we'll write to you when they're ready. | نطوّرهما من خبرتنا في الفعاليات والضيافة. سجّل اهتمامك، وسنكتب لك حين يصبحان جاهزين. | Owner rule 1 (AR); EN keep | (keep) | نطوّرهما من خبرتنا في الفعاليات والضيافة. سجّلوا اهتمامكم، وسنكتب لكم حين يصبحان جاهزين. |  |
 | `c:software/page:productsCopy.problem` | The problem | المشكلة | keep |  |  |  |
 | `c:software/page:productsCopy.features` | Key features | أبرز الميزات | keep |  |  |  |
-| `c:software/page:productsCopy.register` | Register interest | سجّل اهتمامك | Owner rule 2 (button) | (keep) | تسجيل الاهتمام |  |
-| `c:software/page:productsCopy.registerFor` | Register interest in {product} | سجّل اهتمامك بـ{product} | Owner rule 2 (button) | (keep) | تسجيل الاهتمام بـ{product} |  |
-| `c:software/page:productsCopy.close` | Close the form | أغلق النموذج | Owner rule 2 (control) | (keep) | إغلاق النموذج |  |
+| `c:software/page:productsCopy.register` | Register interest | سجّل اهتمامك | D-C1 (owner): a marketing call to action, so the plural command | (keep) | سجّلوا اهتمامكم |  |
+| `c:software/page:productsCopy.registerFor` | Register interest in {product} | سجّل اهتمامك بـ{product} | D-C1 (owner): a marketing call to action, so the plural command | (keep) | سجّلوا اهتمامكم بـ{product} |  |
+| `c:software/page:productsCopy.close` | Close the form | أغلق النموذج | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | إغلاق النموذج |  |
 | `c:software/page:productsCopy.more` | See what {product} will do | تعرّف على ما سيقدّمه {product} | N18 (approved): gender agreement and «» around the name; a text link, so the plural command (owner rule 1) | (keep) | اكتشفوا ما ستقدّمه «{product}» |  |
 | `c:software/page:productsCopy.items.minute-zero.problem` | Queues at the door, and no clear picture of who has arrived. | طوابير عند الباب، ولا صورة واضحة لمن وصل. | keep |  |  |  |
 | `c:software/page:productsCopy.items.minute-zero.features[0]` | QR invitations | دعوات برمز QR | keep |  |  |  |
@@ -1084,10 +1104,10 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `c:software/page:proof.title` | Live today: a national federation's platform, and the site you're reading. | يعمل اليوم: منصة اتحاد رياضي وطني، والموقع الذي تقرؤه الآن. | Owner rule 1 | (keep) | يعمل اليوم: منصة اتحاد رياضي وطني، والموقع الذي تقرؤونه الآن. |  |
 | `c:software/page:proof.federation.label` | A national sports federation | اتحاد رياضي وطني | keep |  |  |  |
 | `c:software/page:proof.federation.line` | Bilingual website, mobile app and content management system, all live. | موقع بلغتين وتطبيق جوّال ونظام لإدارة المحتوى، وكلها تعمل الآن. | keep |  |  |  |
-| `c:software/page:proof.federation.link` | Read the case study | اقرأ دراسة الحالة | Owner rule 2 (button) | (keep) | قراءة دراسة الحالة |  |
+| `c:software/page:proof.federation.link` | Read the case study | اقرأ دراسة الحالة | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | قراءة دراسة الحالة |  |
 | `c:software/page:proof.site.label` | This website | هذا الموقع | keep |  |  |  |
 | `c:software/page:proof.site.line` | Designed and built by our team in Arabic and English, with full right-to-left layouts. The screens here are captured from it. | صمّمه فريقنا وبناه بالعربية والإنجليزية، مع دعم كامل للاتجاه من اليمين إلى اليسار. الشاشات هنا ملتقطة منه مباشرة. | keep |  |  |  |
-| `c:software/page:proof.site.toggle` | Show the site in | اعرض الموقع بـ | Owner rule 2 (control) | (keep) | عرض الموقع بـ |  |
+| `c:software/page:proof.site.toggle` | Show the site in | اعرض الموقع بـ | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | عرض الموقع بـ |  |
 | `c:software/page:proof.site.english` | English | الإنجليزية | keep |  |  |  |
 | `c:software/page:proof.site.arabic` | Arabic | العربية | keep |  |  |  |
 | `c:software/page:proof.site.lighthouse` | Mobile Lighthouse, measured on the live site | نتيجة Lighthouse على الجوّال، مقيسة على الموقع المنشور | keep |  |  |  |
@@ -1096,7 +1116,7 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `c:software/page:quality.items[0]` | Arabic and English, right-to-left and left-to-right | العربية والإنجليزية، من اليمين إلى اليسار ومن اليسار إلى اليمين | keep |  |  |  |
 | `c:software/page:quality.items[1]` | Accessibility: keyboard, contrast and screen readers | سهولة الوصول: لوحة المفاتيح والتباين وقارئات الشاشة | keep |  |  |  |
 | `c:software/page:quality.items[2]` | A performance budget for every page, measured against Core Web Vitals | ميزانية أداء لكل صفحة، نقيسها بمؤشرات Core Web Vitals | keep |  |  |  |
-| `c:software/page:quality.items[3]` | Security and data protection, designed with the UAE's personal data protection law (PDPL) in mind | الأمان وحماية البيانات، مع مراعاة قانون حماية البيانات الشخصية في الإمارات | keep | (keep) | (keep) | ⚑ FC#22 (legal review) |
+| `c:software/page:quality.items[3]` | Security and data protection, designed with the UAE's personal data protection law (PDPL) in mind | الأمان وحماية البيانات، مع مراعاة قانون حماية البيانات الشخصية في الإمارات | keep | (keep) | (keep) | ⚑ FC#22 (Rand reads the legal pages last) |
 | `c:software/page:quality.stack` | Built with Next.js · React · TypeScript · Node.js · iOS and Android | نبني بـ Next.js · React · TypeScript · Node.js · iOS و Android | N18 rule (AR) | (keep) | نبني بـ Next.js · React · TypeScript · Node.js · iOS وAndroid | ⚑ FC#21 |
 | `c:software/page:seo.title` | Website and App Development in Dubai \| NO TIME | تطوير المواقع والتطبيقات في دبي \| NO TIME | keep |  |  |  |
 | `c:software/page:seo.description` | Bilingual Arabic–English websites, mobile apps, event registration systems and custom platforms, built in Dubai by the team that also runs events. | مواقع بالعربية والإنجليزية، وتطبيقات جوّال، وأنظمة تسجيل للفعاليات، ومنصّات مخصّصة، يبنيها في دبي الفريق الذي يدير الفعاليات أيضًا. | keep |  |  |  |
@@ -1130,14 +1150,14 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `c:software/page:services.receive` | You receive | ما تحصل عليه | Owner rule 1 | (keep) | ما تحصلون عليه |  |
 | `c:software/page:services.phases` | Stages | المراحل | keep |  |  |  |
 | `c:software/page:sticky.label` | Quick actions | إجراءات سريعة | keep |  |  |  |
-| `c:software/page:sticky.book` | Book a free intro call | احجز مكالمة مجانية | N13 (approved) short form; AR by owner rule 2: confirm | Request a free call | طلب مكالمة مجانية | ⚑ R1 (the intro call is free, 30 minutes) |
+| `c:software/page:sticky.book` | Book a free intro call | احجز مكالمة مجانية | D-C1 (owner): a marketing call to action, so the plural command | Request a free call | اطلبوا مكالمة مجانية | ⚑ R1 (the intro call is free, 30 minutes) |
 | `c:software/page:tiers.title` | Start where your business is today. Grow from there. | ابدأ من حيث يقف عملك اليوم، ثم انمُ منه. | Owner rule 1 (AR); EN keep | (keep) | ابدؤوا من حيث يقف عملكم اليوم، ثم توسّعوا منه. |  |
 | `c:software/page:tiers.intro` | Three levels of scope, from a focused website to a platform that keeps growing. | ثلاثة مستويات من النطاق، من موقع مركّز إلى منصّة تواصل النمو. | keep |  |  |  |
 | `c:software/page:tiers.note` | Every project is scoped and quoted individually. | نحدّد نطاق كل مشروع ونسعّره على حدة. | Corporate register (§2), as the Contact FAQ | We price each project once we understand it. | نسعّر كل مشروع بعد أن نفهمه. |  |
 | `c:software/page:tiers.idealFor` | Ideal for | مناسب لـ | keep |  |  |  |
 | `c:software/page:tiers.included` | What's included | ما يشمله | keep |  |  |  |
 | `c:software/page:tiers.receive` | You receive | تستلم | Owner rule 1 | (keep) | تستلمون |  |
-| `c:software/page:tiers.cta` | Talk about {tier} | ناقش معنا مستوى {tier} | Owner rule 2 (button) | (keep) | مناقشة مستوى {tier} معنا |  |
+| `c:software/page:tiers.cta` | Talk about {tier} | ناقش معنا مستوى {tier} | D-C1 (owner): a marketing call to action, so the plural command | (keep) | ناقشوا معنا مستوى {tier} |  |
 | `c:software/page:tiers.items.launch.name` | Launch | الانطلاق | keep |  |  |  |
 | `c:software/page:tiers.items.launch.summary` | A focused bilingual website. | موقع مركّز بلغتين. | keep |  |  |  |
 | `c:software/page:tiers.items.launch.ideal` | A new business, a new brand, or a site that needs replacing. | عمل جديد، أو علامة جديدة، أو موقع حان وقت استبداله. | keep |  |  |  |
@@ -1213,8 +1233,8 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `m:workIndex.count` | {count, plural, =0 {No projects} one {# project} other {# projects}} | {count, plural, zero {لا مشاريع} one {مشروع واحد} two {مشروعان} few {{count} مشاريع} many {{count} مشروعًا} other {{count} مشروع}} | keep |  |  |  |
 | `m:workIndex.emptyTitle` | No project to show here yet. | لا مشروع نعرضه هنا بعد. | keep |  |  |  |
 | `m:workIndex.emptyBody` | We list only work we can back with facts, so this page grows one project at a time. Clear a filter, or see what we do in this area. | لا ننشر إلا عملًا نملك حقائقه، لذلك تكبر هذه الصفحة مشروعًا بعد مشروع. أزل أحد عوامل التصفية، أو تعرّف على ما نقدّمه في هذا المجال. | Owner rule 1 (AR); EN keep | (keep) | لا ننشر إلا عملًا نملك حقائقه، لذلك تكبر هذه الصفحة مشروعًا بعد مشروع. أزيلوا أحد عوامل التصفية، أو تعرّفوا على ما نقدّمه في هذا المجال. |  |
-| `m:workIndex.showAll` | Show all work | اعرض كل الأعمال | Owner rule 2 (button) | (keep) | عرض كل الأعمال |  |
-| `m:workIndex.exploreServices` | Explore our services | تصفّح خدماتنا | Owner rule 2 (button) | (keep) | استعراض خدماتنا |  |
+| `m:workIndex.showAll` | Show all work | اعرض كل الأعمال | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | عرض كل الأعمال |  |
+| `m:workIndex.exploreServices` | Explore our services | تصفّح خدماتنا | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | استعراض خدماتنا |  |
 | `m:workCase.factsLabel` | Key facts | أبرز المعلومات | keep |  |  |  |
 | `m:workCase.client` | Client | العميل | keep |  |  |  |
 | `m:workCase.market` | Market | السوق | keep |  |  |  |
@@ -1225,8 +1245,8 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `m:workCase.next` | Next project | المشروع التالي | keep |  |  |  |
 | `m:workCase.ctaTitle` | Planning something like this? | تخطّط لمشروع كهذا؟ | N16 (approved) EN; AR by owner rule 1 (was «تخطّط»): confirm | (keep) | تخطّطون لمشروع كهذا؟ |  |
 | `m:workCase.ctaBody` | Start with the services this project used. Each page lists what we deliver, and how to reach us. | ابدأ بالخدمات التي قام عليها هذا المشروع. في كل صفحة ما نقدّمه، وطريقة التواصل معنا. | Owner rule 1 (AR); EN keep | (keep) | ابدؤوا بالخدمات التي قام عليها هذا المشروع. في كل صفحة ما نقدّمه، وطريقة التواصل معنا. |  |
-| `m:workCase.ctaQuote` | Request a quote | اطلب عرض سعر | Owner rule 2 (button) | (keep) | طلب عرض سعر |  |
-| `m:workCase.ctaCategory` | Explore {category} | تصفّح {category} | Owner rule 2 (button) | (keep) | استعراض {category} |  |
+| `m:workCase.ctaQuote` | Request a quote | اطلب عرض سعر | D-C1 (owner): a marketing call to action, so the plural command | (keep) | اطلبوا عرض سعر |  |
+| `m:workCase.ctaCategory` | Explore {category} | تصفّح {category} | D-C1 (owner): a marketing call to action, so the plural command | (keep) | استكشفوا {category} |  |
 | `c:work:workItems[sports-federation-digital-partner].anonymous.label` | A national sports federation | اتحاد رياضي وطني | keep |  |  |  |
 | `c:work:workItems[sports-federation-digital-partner].anonymous.summary` | Its digital and media partner: we rebuilt the bilingual website and its connected app, and publish to its channels every day in Arabic and English. One championship campaign, first week: 487K views, +37.6K new followers, 271K reach. | شريكه الرقمي والإعلامي: أعدنا بناء موقعه بلغتين وتطبيق الجوّال المتصل به، وننشر على منصّاته كل يوم بالعربية والإنجليزية. وفي الأسبوع الأول من إحدى حملات البطولات: 487 ألف مشاهدة، و37.6 ألف متابع جديد، ووصول إلى 271 ألفًا. | keep | (keep) | (keep) | ⚑ FC#4 + the figures: the client agrees to their publication |
 | `c:work:workItems[sports-federation-digital-partner].named.label` | UAE Athletics Federation | الاتحاد الإماراتي لألعاب القوى | keep |  |  |  |
@@ -1291,7 +1311,7 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `m:aboutPage.story2` | We start at the exact point where a brand meets its audience, then carry the idea all the way: strategy, creative, production and delivery, by one team. | نبدأ من النقطة التي تلتقي فيها العلامة بجمهورها، ثم نمضي بالفكرة حتى آخرها: الاستراتيجية والإبداع والإنتاج والتنفيذ، بفريق واحد. | keep: Rand's own sentence (p3); this is where "one team" belongs | (keep) | (keep) | p3 |
 | `m:aboutPage.story3` | That's why the work spans so much: an airline's pavilion at the Dubai Airshow, a majlis dressed for a heritage welcome, award nights for a football league, a bilingual app for a national sports federation. | ولهذا يتّسع عملنا لكل هذا: جناح لشركة طيران في معرض دبي للطيران، ومجلس تراثي يستقبل الضيوف، وليالي تكريم لدوري كرة قدم، وتطبيق بلغتين لاتحاد رياضي وطني. | keep |  |  |  |
 | `m:aboutPage.story4` | Our name comes with a line we keep: it's time to start. | ومع اسمنا عبارة نلتزم بها: حان وقت البداية. | keep |  |  |  |
-| `m:aboutPage.seeWork` | See the work | شاهد أعمالنا | Owner rule 2 (button) | (keep) | مشاهدة أعمالنا |  |
+| `m:aboutPage.seeWork` | See the work | شاهد أعمالنا | D-C1 (owner): a marketing call to action, so the plural command | (keep) | شاهدوا أعمالنا |  |
 | `m:aboutPage.principlesEyebrow` | How we work | كيف نعمل | keep |  |  |  |
 | `m:aboutPage.principlesTitle` | What stays the same on every project. | ما لا يتغيّر في أي مشروع. | keep |  |  |  |
 | `c:principles:principles[one-roof].title` | Under one roof | تحت سقف واحد | keep |  |  |  |
@@ -1316,9 +1336,9 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `m:productPage.screensNote` | Concept screens with example data. The product is in development, so details may change. | شاشات تصوّرية ببيانات توضيحية. المنتج قيد التطوير، وقد تتغيّر بعض التفاصيل. | keep |  |  |  |
 | `m:productPage.registerTitle` | Be the first to hear when {product} is ready. | كن أول من يعرف حين يصبح {product} جاهزًا. | Owner rule 1; and N18's agreement: both product names are feminine («الدقيقة صفر»، «ساعة الذروة») | (keep) | كونوا أول من يعرف حين تصبح «{product}» جاهزة. |  |
 | `m:productPage.registerBody` | We're building it from our own event and hospitality work. Leave your details and we'll write to you when it's ready. | نطوّره من خبرتنا في الفعاليات والضيافة. اترك بياناتك، وسنكتب لك حين يصبح جاهزًا. | Owner rule 1 (AR); EN keep | (keep) | نطوّره من خبرتنا في الفعاليات والضيافة. اتركوا بياناتكم، وسنكتب لكم حين يصبح جاهزًا. |  |
-| `m:productPage.registerCta` | Register interest | سجّل اهتمامك | Owner rule 2 (button) | (keep) | تسجيل الاهتمام |  |
+| `m:productPage.registerCta` | Register interest | سجّل اهتمامك | D-C1 (owner): a marketing call to action, so the plural command | (keep) | سجّلوا اهتمامكم |  |
 | `m:productPage.otherProduct` | Also in development | قيد التطوير أيضًا | keep |  |  |  |
-| `m:productPage.softwareLink` | See our software services | تعرّف على خدماتنا البرمجية | Owner rule 2 (button) | (keep) | استعراض خدماتنا البرمجية |  |
+| `m:productPage.softwareLink` | See our software services | تعرّف على خدماتنا البرمجية | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | استعراض خدماتنا البرمجية |  |
 | `c:product-pages:productPages.minute-zero.problemDetail` | Paper lists and a crowded door turn the first impression into a wait. | القوائم الورقية والازدحام عند الباب يحوّلان الانطباع الأول إلى انتظار. | keep |  |  |  |
 | `c:product-pages:productPages.minute-zero.features[0].title` | QR invitations | دعوات برمز QR | keep |  |  |  |
 | `c:product-pages:productPages.minute-zero.features[0].line` | Each guest receives a personal code with the invitation. | يصل كل ضيف رمزه الخاص مع الدعوة. | keep |  |  |  |
@@ -1350,17 +1370,17 @@ New rows, to add to `fact-check.md` when Rand reviews:
 
 | ID | Current EN | Current AR | Rule | Proposed EN | Proposed AR | Facts |
 |---|---|---|---|---|---|---|
-| `m:contactPage.metaTitle` | Contact: send us a brief | تواصل معنا: أرسل طلبك | Approved sample (choice 2; SEO: the action people search is "request a quote"); AR by owner rule 2 | Request a quote | طلب عرض سعر |  |
+| `m:contactPage.metaTitle` | Contact: send us a brief | تواصل معنا: أرسل طلبك | A title, not a button: the noun reads right; SEO: the action people search | Request a quote | طلب عرض سعر |  |
 | `m:contactPage.metaDescription` | Tell us about your event, campaign, production or platform. One team picks it up and replies within one working day. | حدّثنا عن فعاليتك أو حملتك أو إنتاجك أو منصّتك، ويتولّى طلبك فريق واحد يردّ عليك خلال يوم عمل. | Approved sample; AR by owner rule 1 | Tell us about your event, film, campaign or website. A few lines are enough, and we reply within one working day. | حدّثونا عن فعاليتكم أو فيلمكم أو حملتكم أو موقعكم. تكفي بضعة أسطر، ونرد عليكم خلال يوم عمل. | ⚑ FC#23 |
 | `m:contactPage.eyebrow` | Contact | تواصل معنا | Owner rule 1 (the page's name, as the menu) | (keep) | تواصلوا معنا |  |
 | `m:contactPage.title` | Tell us what you're planning. | أخبرنا بما تخطّط له. | Approved sample: keep EN; AR by owner rule 1 | (keep) | أخبرونا بما تخطّطون له. |  |
 | `m:contactPage.lead` | A few lines are enough to start: the occasion, the date and what you need. One team picks it up and replies within one working day. | بضعة أسطر تكفي للبداية: المناسبة والموعد وما تحتاجه. يتسلّم طلبك فريق واحد، ويرد عليك خلال يوم عمل. | Approved sample; AR by owner rule 1 | A few lines are enough: the occasion, the date and what you need. We reply within one working day, with our questions or a time to talk. | تكفي بضعة أسطر: المناسبة والموعد وما تحتاجون إليه. نرد عليكم خلال يوم عمل، بأسئلتنا أو بموعد نتحدّث فيه. | ⚑ FC#23 |
-| `m:contactPage.formTitle` | Send us a brief | أرسل لنا طلبك | Approved sample (choice 2); AR by owner rule 2 | Request a quote | طلب عرض سعر |  |
+| `m:contactPage.formTitle` | Send us a brief | أرسل لنا طلبك | A title, not a button: the noun reads right | Request a quote | طلب عرض سعر |  |
 | `m:contactPage.directTitle` | Prefer to write directly? | تفضّل المراسلة مباشرة؟ | Approved sample (§3 question headline); AR by owner rule 1 | Or write to us directly | أو راسلونا مباشرة |  |
 | `m:contactPage.emailLabel` | Email | البريد الإلكتروني | keep |  |  |  |
-| `m:contactPage.copy` | Copy the address | انسخ العنوان | Owner rule 2 (button) | (keep) | نسخ العنوان |  |
+| `m:contactPage.copy` | Copy the address | انسخ العنوان | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | نسخ العنوان |  |
 | `m:contactPage.copied` | Copied | نُسخ | keep |  |  |  |
-| `m:contactPage.whatsapp` | Message us on WhatsApp | راسلنا على واتساب | Owner rule 2 (button) | (keep) | المراسلة على واتساب |  |
+| `m:contactPage.whatsapp` | Message us on WhatsApp | راسلنا على واتساب | D-C1 (owner): a marketing call to action, so the plural command | (keep) | راسلونا على واتساب |  |
 | `m:contactPage.base` | Based in Dubai | مقرّنا دبي | keep |  |  |  |
 | `m:contactPage.faqEyebrow` | Before you write | قبل أن تكتب لنا | Owner rule 1 | (keep) | قبل أن تكتبوا لنا |  |
 | `m:contactPage.faqTitle` | Questions we're asked first | أسئلة تصلنا أولًا | keep |  |  |  |
@@ -1377,7 +1397,7 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `c:form-copy:errorMessages.required` | Fill in this field. | املأ هذا الحقل. | Owner rule 1 (AR); fallback when a field has no message of its own | (keep) | املؤوا هذا الحقل. |  |
 | `c:form-copy:errorMessages.email` | Enter an email address like name@company.com. | اكتب بريدًا إلكترونيًا بهذا الشكل: name@company.com | Owner rule 7 (one message per field, saying what's needed) | Enter an email like name@company.com. | اكتبوا البريد الإلكتروني بهذا الشكل: name@company.com |  |
 | `c:form-copy:errorMessages.url` | Enter a website address like yourcompany.ae. | اكتب عنوان موقع بهذا الشكل: yourcompany.ae | Owner rule 1 (AR); EN keep (already says what's needed) | (keep) | اكتبوا عنوان الموقع بهذا الشكل: yourcompany.ae |  |
-| `c:form-copy:errorMessages.phone` | Enter the number with digits, spaces or a leading +. | اكتب الرقم بالأرقام، ويمكنك استخدام المسافات أو علامة + في أوله. | Owner rule 7. The check today accepts a local number without the code: see decision D-C3 | Include the country code, e.g. +971. | أضيفوا رمز الدولة، مثل ‎+971. |  |
+| `c:form-copy:errorMessages.phone` | Enter the number with digits, spaces or a leading +. | اكتب الرقم بالأرقام، ويمكنك استخدام المسافات أو علامة + في أوله. | D-C3 (owner): letters or a wrong length; a number with no country code has its own message (`phoneCode`) | Use digits only, e.g. +971 50 123 4567. | اكتبوا الرقم بالأرقام فقط، مثل ‎+971 50 123 4567. |  |
 | `c:form-copy:errorMessages.contact` | Enter an email address or a phone number. | اكتب بريدًا إلكترونيًا أو رقم هاتف. | Owner rule 7: say both shapes that work | Enter an email like name@company.com, or a number with the country code, e.g. +971. | اكتبوا بريدًا إلكترونيًا مثل name@company.com، أو رقمًا مع رمز الدولة مثل ‎+971. |  |
 | `c:form-copy:errorMessages.tooLong` | This is too long. Shorten it a little. | النص أطول من المسموح، اختصره قليلًا. | Owner rule 7. Needs `{max}` passed from the schema (a small code change at apply time) | Keep it under {max} characters. | الحد الأقصى لعدد الأحرف: {max} |  |
 | `c:form-copy:errorMessages.invalid` | Check this field and try again. | راجع هذا الحقل وحاول مجددًا. | Owner rule 7: stays only as the fallback for a field with no message of its own (today: an unknown product or option) | Something in this field doesn't fit. Check it and try again. | في هذا الحقل ما لا يناسب. راجعوه وحاولوا مرة أخرى. |  |
@@ -1387,7 +1407,7 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `c:form-copy:formCopy.states.rateLimited` | Too many attempts from this connection. Try again in {minutes} min, or email us at {email}. | محاولات كثيرة من هذا الاتصال. حاول مجددًا بعد {minutes}، أو راسلنا على {email}. | Owner rule 1 (AR); EN keep | (keep) | محاولات كثيرة من هذا الاتصال. حاولوا مرة أخرى بعد {minutes}، أو راسلونا على {email}. |  |
 | `c:form-copy:formCopy.states.blocked` | We couldn't confirm the request came from a person. Try again, or email us at {email}. | لم نتمكّن من التأكد من أن الطلب مُرسَل من شخص. حاول مجددًا، أو راسلنا على {email}. | Owner rule 7 (the owner's text) | The security check didn't load. Try again, or email us at {email}. | لم يكتمل التحقق الأمني. حاولوا مرة أخرى أو راسلونا على {email}. |  |
 | `c:form-copy:formCopy.states.failed` | Your request didn't send because of a problem on our side. Try again, or email us at {email}. | لم يُرسَل طلبك بسبب خلل لدينا. حاول مجددًا، أو راسلنا على {email}. | Owner rule 1 (AR); EN keep | (keep) | لم يُرسَل طلبكم بسبب خلل لدينا. حاولوا مرة أخرى، أو راسلونا على {email}. |  |
-| `c:form-copy:formCopy.states.another` | Send another request | أرسل طلبًا آخر | Owner rule 2 (button) | (keep) | إرسال طلب آخر |  |
+| `c:form-copy:formCopy.states.another` | Send another request | أرسل طلبًا آخر | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | إرسال طلب آخر |  |
 | `c:form-copy:formCopy.privacy.text` | We use these details only to reply to you. Resend delivers our email and Cloudflare protects this form from spam. | نستخدم هذه البيانات للرد عليك فقط. توصل خدمة Resend رسائلنا، وتحمي Cloudflare هذا النموذج من الرسائل المزعجة. | N15 (approved): first sentence; AR by owner rule 1. The vendor sentence stays (the legal page names them too) | We use your details only to reply to you. Resend delivers our email and Cloudflare protects this form from spam. | نستخدم بياناتكم للرد عليكم فقط. توصل خدمة Resend رسائلنا، وتحمي Cloudflare هذا النموذج من الرسائل المزعجة. |  |
 | `c:form-copy:formCopy.privacy.link` | Privacy Policy | سياسة الخصوصية | keep |  |  |  |
 | `c:form-copy:formCopy.honeypot` | Leave this field empty | اترك هذا الحقل فارغًا | Owner rule 1 (screen readers can reach it) | (keep) | اتركوا هذا الحقل فارغًا |  |
@@ -1419,7 +1439,7 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `c:form-copy:formCopy.consultation.budgetHint` | It helps us suggest the right scope. It's never a price. | تساعدنا على اقتراح النطاق المناسب، وليست سعرًا. | keep |  |  |  |
 | `c:form-copy:formCopy.consultation.message` | Tell us a little more | أخبرنا بالمزيد | Owner rule 1 | (keep) | أخبرونا بالمزيد |  |
 | `c:form-copy:formCopy.consultation.messageHint` | Who it's for, what it must do, any date that matters. | لمن هو، وما الذي يجب أن يفعله، وأي موعد يهمّك. | Owner rule 1 | (keep) | لمن هو، وما الذي يجب أن يفعله، وأي موعد يهمّكم. |  |
-| `c:form-copy:formCopy.consultation.submit` | Book a free 30-min intro call | احجز مكالمة تعارف مجانية (30 دقيقة) | N13 (approved) + owner rule 2. Confirm: D-C1 | Book a free 30-min intro call | طلب مكالمة تعارف مجانية (30 دقيقة) | ⚑ R1 (the intro call is free, 30 minutes) |
+| `c:form-copy:formCopy.consultation.submit` | Book a free 30-min intro call | احجز مكالمة تعارف مجانية (30 دقيقة) | D-C1 (owner): one of the six approved buttons, back to the plural command as the owner asked, although it submits a form | Book a free 30-min intro call | اطلبوا مكالمة تعارف مجانية (30 دقيقة) | ⚑ R1 (the intro call is free, 30 minutes) |
 | `c:form-copy:formCopy.consultation.micro` | No obligation. We reply within one working day. | دون أي التزام. نرد خلال يوم عمل. | keep | (keep) | (keep) | ⚑ FC#23 |
 | `c:form-copy:formCopy.consultation.successTitle` | Thanks, {name}. Your request is in. | شكرًا، {name}. وصلنا طلبك. | Choice 2, as the contact form | Thanks, {name}. We have your request. | شكرًا، {name}. وصلنا طلبكم. |  |
 | `c:form-copy:formCopy.consultation.successBody` | We reply within one working day to set a time for the call. | نرد خلال يوم عمل لنحدّد موعد المكالمة. | Owner rule 1 (AR); EN keep | (keep) | نرد عليكم خلال يوم عمل لنحدّد موعد المكالمة. | ⚑ FC#23 |
@@ -1433,11 +1453,11 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `c:form-copy:formCopy.review.goalOptions.easier-updates` | Easier updates | تحديث أسهل | keep |  |  |  |
 | `c:form-copy:formCopy.review.goalOptions.other` | Something else | شيء آخر | keep |  |  |  |
 | `c:form-copy:formCopy.review.message` | Anything we should know? | هل هناك ما يجب أن نعرفه؟ | Owner rule 1 (AR); EN keep | (keep) | هل هناك ما يجب أن نعرفه؟ |  |
-| `c:form-copy:formCopy.review.submit` | Send my site for review | أرسل موقعي للمراجعة | Owner rule 2 (button) | (keep) | إرسال الموقع للمراجعة |  |
+| `c:form-copy:formCopy.review.submit` | Send my site for review | أرسل موقعي للمراجعة | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | إرسال الموقع للمراجعة |  |
 | `c:form-copy:formCopy.review.successTitle` | Thanks, {name}. Your site is with us. | شكرًا، {name}. وصلنا موقعك. | Owner rule 1 (AR); EN keep | (keep) | شكرًا، {name}. وصلنا موقعكم. |  |
 | `c:form-copy:formCopy.review.successBody` | Within 3 working days we'll reply with 5 concrete improvements, free. | خلال 3 أيام عمل نرد عليك بخمسة تحسينات عملية، مجانًا. | Owner rule 1 (AR); EN keep. A promise with a number in it | (keep) | خلال 3 أيام عمل نرد عليكم بخمسة تحسينات عملية، مجانًا. | ⚑ R2 (the website review: free, 3 working days, 5 improvements) |
 | `c:form-copy:formCopy.interest.message` | What would you use it for? | فيمَ ستستخدمه؟ | Owner rule 1 | (keep) | فيمَ ستستخدمونه؟ |  |
-| `c:form-copy:formCopy.interest.submit` | Register interest | سجّل اهتمامك | Owner rule 2 (button) | (keep) | تسجيل الاهتمام |  |
+| `c:form-copy:formCopy.interest.submit` | Register interest | سجّل اهتمامك | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | تسجيل الاهتمام |  |
 | `c:form-copy:formCopy.interest.successTitle` | Thanks, {name}. You're on the list for {product}. | شكرًا، {name}. سجّلنا اهتمامك بـ{product}. | Owner rule 1 (AR); EN keep | (keep) | شكرًا، {name}. سجّلنا اهتمامكم بـ{product}. |  |
 | `c:form-copy:formCopy.interest.successBody` | We'll write to you when it's ready. | سنكتب لك حين يصبح جاهزًا. | Owner rule 1 (AR); EN keep | (keep) | سنكتب لكم حين يصبح جاهزًا. |  |
 | `c:form-copy:formCopy.interest.type` | What do you run? | ما الذي تديره؟ | Owner rule 1 | (keep) | ما الذي تديرونه؟ |  |
@@ -1482,6 +1502,9 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `new:formCopy.contact.guests` | (new) | (new) | N10 (approved, copy §9.1) | Number of guests | عدد الضيوف |  |
 | `new:formCopy.contact.guestsNone` | (new) | (new) | N10: the guest select's empty option | Not sure yet | لم نحدّد بعد |  |
 | `new:formCopy.contact.guestBands` | (new) | (new) | N10 (GUEST_BANDS in the plan, Task 7); numerals follow the locale rule already in use | Under 50 · 50–150 · 150–500 · 500–1,000 · Over 1,000 | أقل من 50 · 50–150 · 150–500 · 500–1,000 · أكثر من 1,000 |  |
+| `new:errorMessages.phoneCode` | (new) | (new) | D-C3 (owner): a number that starts with 0, or with neither + nor 00 | Include the country code, e.g. +971. | أضيفوا رمز الدولة، مثل ‎+971. |  |
+| `new:formCopy.fields.phoneHint` | (new) | (new) | D-C3 (owner): shown under the field from the start, before any error | For example, +971 50 123 4567 | مثال: ‎+971 50 123 4567 |  |
+| `new:formCopy.review.contactHint` | (new) | (new) | D-C3: the review form's "Email or WhatsApp" field takes a number too, so it shows both shapes | For example, name@company.com or +971 50 123 4567 | مثال: name@company.com أو ‎+971 50 123 4567 |  |
 
 ## /links
 
@@ -1493,11 +1516,11 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `m:linksPage.title` | It's time to start. | حان وقت البداية. | keep |  |  |  |
 | `m:linksPage.lead` | Events, production, marketing, print and software, from one senior team. | فعاليات وإنتاج وتسويق وطباعة وبرمجيات، بفريق واحد من أصحاب الخبرة. | "senior" is a claim about the team's experience that nothing on the site backs yet | Events, production, marketing, print and software, from one team in Dubai. | فعاليات وإنتاج وتسويق وطباعة وبرمجيات، من فريق واحد في دبي. | If Rand confirms the team's experience, "senior" can come back with the fact behind it (her bio) |
 | `m:linksPage.listLabel` | Quick links | روابط سريعة | keep |  |  |  |
-| `m:linksPage.whatsapp.title` | Message us on WhatsApp | راسلنا على واتساب | Owner rule 2 (button) | (keep) | المراسلة على واتساب |  |
+| `m:linksPage.whatsapp.title` | Message us on WhatsApp | راسلنا على واتساب | D-C1 (owner): a marketing call to action, so the plural command | (keep) | راسلونا على واتساب |  |
 | `m:linksPage.whatsapp.note` | The quickest way to reach the team | أسرع طريق إلى الفريق | keep |  |  |  |
-| `m:linksPage.quote.title` | Request a quote | اطلب عرض سعر | Owner rule 2 (button) | (keep) | طلب عرض سعر |  |
+| `m:linksPage.quote.title` | Request a quote | اطلب عرض سعر | D-C1 (owner): a marketing call to action, so the plural command | (keep) | اطلبوا عرض سعر |  |
 | `m:linksPage.quote.note` | We reply within one working day | نردّ عليك خلال يوم عمل واحد | Owner rule 1 | (keep) | نردّ عليكم خلال يوم عمل واحد | ⚑ FC#23 |
-| `m:linksPage.work.title` | See our work | شاهد أعمالنا | Owner rule 2 (button) | (keep) | مشاهدة أعمالنا |  |
+| `m:linksPage.work.title` | See our work | شاهد أعمالنا | D-C1 (owner): a marketing call to action, so the plural command | (keep) | شاهدوا أعمالنا |  |
 | `m:linksPage.work.note` | Pavilions, award nights, platforms | أجنحة معارض، ليالي تكريم، منصّات رقمية | keep |  |  |  |
 | `m:linksPage.celebrations.title` | Events & private celebrations | الفعاليات والمناسبات الخاصة | keep |  |  |  |
 | `m:linksPage.celebrations.note` | Galas, weddings and family evenings | حفلات رسمية وأعراس وأمسيات عائلية | keep |  |  |  |
@@ -1529,101 +1552,101 @@ New rows, to add to `fact-check.md` when Rand reviews:
 | `c:legal:legalDocs[privacy].sections[0].heading` | Who we are | من نحن | keep |  |  |  |
 | `c:legal:legalDocs[privacy].sections[0].blocks[0].p` | This website is run by NO TIME Creative House, based in Dubai, United Arab Emirates. In this policy, “we” and “us” mean NO TIME Creative House. | يدير هذا الموقعَ NO TIME Creative House، ومقرّه دبي، الإمارات العربية المتحدة. ويُقصد بكلمة «نحن» في هذه السياسة NO TIME Creative House. | keep |  |  |  |
 | `c:legal:legalDocs[privacy].sections[0].blocks[1].p` | Our registered legal entity is {legalName}, {address}. | كياننا القانوني المسجّل: {legalName}، {address}. | keep |  |  |  |
-| `c:legal:legalDocs[privacy].sections[0].blocks[2].p` | For any question about your personal data, contact us at {dataRequestContact}. | لأي سؤال عن بياناتك الشخصية، تواصل معنا عبر {dataRequestContact}. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
+| `c:legal:legalDocs[privacy].sections[0].blocks[2].p` | For any question about your personal data, contact us at {dataRequestContact}. | لأي سؤال عن بياناتك الشخصية، تواصل معنا عبر {dataRequestContact}. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
 | `c:legal:legalDocs[privacy].sections[1].heading` | What this policy covers | نطاق هذه السياسة | keep |  |  |  |
 | `c:legal:legalDocs[privacy].sections[1].blocks[0].p` | This policy explains what personal data we collect through this website, why, who processes it for us, how long we keep it, and the rights you have. It doesn't cover other websites we link to. | توضّح هذه السياسة البيانات الشخصية التي نجمعها عبر هذا الموقع، وسبب جمعها، ومن يعالجها نيابةً عنّا، ومدة احتفاظنا بها، والحقوق التي تملكها. ولا تشمل المواقع الأخرى التي نضع روابطها. | keep |  |  |  |
 | `c:legal:legalDocs[privacy].sections[2].heading` | What we collect | البيانات التي نجمعها | keep |  |  |  |
-| `c:legal:legalDocs[privacy].sections[2].blocks[0].p` | What you send us. When you use a form on this site (a consultation request, a quote request, or registering interest in a product), we receive what you enter: your name, your email address and/or WhatsApp number, your company if you give it, the service or product you're asking about, a budget range if you choose one, your message, and the details the form asks for (for example an event date, a city, a guest count, items and quantities, or rental dates). | ما ترسله إلينا. عند استخدامك أحد نماذج الموقع (طلب استشارة، أو طلب عرض سعر، أو تسجيل اهتمامك بأحد منتجاتنا)، يصلنا ما تكتبه: اسمك، وبريدك الإلكتروني و/أو رقم واتساب، واسم شركتك إن ذكرته، والخدمة أو المنتج الذي تسأل عنه، ونطاق الميزانية إن اخترته، ورسالتك، والتفاصيل التي يطلبها النموذج (مثل موعد المناسبة، أو المدينة، أو عدد الضيوف، أو المنتجات والكميات، أو مواعيد الاستئجار). | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
-| `c:legal:legalDocs[privacy].sections[2].blocks[1].p` | Technical data. Like any website, our hosting provider processes your IP address and basic browser information to deliver pages and keep the site secure. When you submit a form, Cloudflare Turnstile checks that the request comes from a person and not an automated program, and we use your IP address for a short time to limit repeated submissions. A form also tells us how you reached the site (a link's campaign tag, the site you came from and your first page on ours), so we know which post or link brought you. | البيانات التقنية. كأي موقع إلكتروني، يعالج مزوّد الاستضافة عنوان IP الخاص بك ومعلومات أساسية عن متصفحك، لعرض الصفحات والحفاظ على أمن الموقع. وعند إرسال أي نموذج، تتحقّق خدمة Cloudflare Turnstile من أن الطلب صادر عن شخص لا عن برنامج آلي، ونستخدم عنوان IP لفترة قصيرة للحدّ من تكرار الإرسال. ويخبرنا النموذج كذلك كيف وصلت إلى الموقع (وسم الحملة في الرابط، والموقع الذي جئت منه، وأول صفحة زرتها عندنا)، لنعرف المنشور أو الرابط الذي أوصلك إلينا. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
-| `c:legal:legalDocs[privacy].sections[2].blocks[2].p` | Your language choice. One cookie remembers whether you're reading in English or Arabic. See the [Cookie Policy](/cookies). | اختيار اللغة. ملف تعريف ارتباط واحد يتذكّر هل تتصفّح بالعربية أم بالإنجليزية. راجع [سياسة ملفات تعريف الارتباط](/cookies). | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
-| `c:legal:legalDocs[privacy].sections[2].blocks[3].p` | Visit statistics. We count visits with {analytics}, a service that uses no cookies. It records totals such as pages viewed, the site a visit came from, the country and the type of device, without building a profile of you or following you to other sites, so we don't ask for consent. | إحصاءات الزيارات. نحصي الزيارات عبر {analytics}، وهي خدمة لا تستخدم ملفات تعريف الارتباط. تسجّل أرقامًا إجمالية مثل الصفحات التي شوهدت، والموقع الذي جاءت منه الزيارة، والبلد، ونوع الجهاز، دون أن تكوّن ملفًا عنك أو تتبعك إلى مواقع أخرى، لذلك لا نطلب موافقتك. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
-| `c:legal:legalDocs[privacy].sections[2].blocks[4].p` | What we don't do. We don't use analytics or advertising trackers, and we don't sell or rent your data. If we ever add analytics, we'll update this policy first. | ما لا نفعله. لا نستخدم أدوات تحليل أو تتبّع إعلاني، ولا نبيع بياناتك ولا نؤجّرها. وإذا أضفنا أدوات تحليل يومًا ما، فسنحدّث هذه السياسة أولًا. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
-| `c:legal:legalDocs[privacy].sections[2].blocks[5].p` | What we don't do. We don't use advertising trackers, and we don't sell or rent your data. | ما لا نفعله. لا نستخدم أدوات تتبّع إعلاني، ولا نبيع بياناتك ولا نؤجّرها. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
+| `c:legal:legalDocs[privacy].sections[2].blocks[0].p` | What you send us. When you use a form on this site (a consultation request, a quote request, or registering interest in a product), we receive what you enter: your name, your email address and/or WhatsApp number, your company if you give it, the service or product you're asking about, a budget range if you choose one, your message, and the details the form asks for (for example an event date, a city, a guest count, items and quantities, or rental dates). | ما ترسله إلينا. عند استخدامك أحد نماذج الموقع (طلب استشارة، أو طلب عرض سعر، أو تسجيل اهتمامك بأحد منتجاتنا)، يصلنا ما تكتبه: اسمك، وبريدك الإلكتروني و/أو رقم واتساب، واسم شركتك إن ذكرته، والخدمة أو المنتج الذي تسأل عنه، ونطاق الميزانية إن اخترته، ورسالتك، والتفاصيل التي يطلبها النموذج (مثل موعد المناسبة، أو المدينة، أو عدد الضيوف، أو المنتجات والكميات، أو مواعيد الاستئجار). | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
+| `c:legal:legalDocs[privacy].sections[2].blocks[1].p` | Technical data. Like any website, our hosting provider processes your IP address and basic browser information to deliver pages and keep the site secure. When you submit a form, Cloudflare Turnstile checks that the request comes from a person and not an automated program, and we use your IP address for a short time to limit repeated submissions. A form also tells us how you reached the site (a link's campaign tag, the site you came from and your first page on ours), so we know which post or link brought you. | البيانات التقنية. كأي موقع إلكتروني، يعالج مزوّد الاستضافة عنوان IP الخاص بك ومعلومات أساسية عن متصفحك، لعرض الصفحات والحفاظ على أمن الموقع. وعند إرسال أي نموذج، تتحقّق خدمة Cloudflare Turnstile من أن الطلب صادر عن شخص لا عن برنامج آلي، ونستخدم عنوان IP لفترة قصيرة للحدّ من تكرار الإرسال. ويخبرنا النموذج كذلك كيف وصلت إلى الموقع (وسم الحملة في الرابط، والموقع الذي جئت منه، وأول صفحة زرتها عندنا)، لنعرف المنشور أو الرابط الذي أوصلك إلينا. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
+| `c:legal:legalDocs[privacy].sections[2].blocks[2].p` | Your language choice. One cookie remembers whether you're reading in English or Arabic. See the [Cookie Policy](/cookies). | اختيار اللغة. ملف تعريف ارتباط واحد يتذكّر هل تتصفّح بالعربية أم بالإنجليزية. راجع [سياسة ملفات تعريف الارتباط](/cookies). | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
+| `c:legal:legalDocs[privacy].sections[2].blocks[3].p` | Visit statistics. We count visits with {analytics}, a service that uses no cookies. It records totals such as pages viewed, the site a visit came from, the country and the type of device, without building a profile of you or following you to other sites, so we don't ask for consent. | إحصاءات الزيارات. نحصي الزيارات عبر {analytics}، وهي خدمة لا تستخدم ملفات تعريف الارتباط. تسجّل أرقامًا إجمالية مثل الصفحات التي شوهدت، والموقع الذي جاءت منه الزيارة، والبلد، ونوع الجهاز، دون أن تكوّن ملفًا عنك أو تتبعك إلى مواقع أخرى، لذلك لا نطلب موافقتك. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
+| `c:legal:legalDocs[privacy].sections[2].blocks[4].p` | What we don't do. We don't use analytics or advertising trackers, and we don't sell or rent your data. If we ever add analytics, we'll update this policy first. | ما لا نفعله. لا نستخدم أدوات تحليل أو تتبّع إعلاني، ولا نبيع بياناتك ولا نؤجّرها. وإذا أضفنا أدوات تحليل يومًا ما، فسنحدّث هذه السياسة أولًا. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
+| `c:legal:legalDocs[privacy].sections[2].blocks[5].p` | What we don't do. We don't use advertising trackers, and we don't sell or rent your data. | ما لا نفعله. لا نستخدم أدوات تتبّع إعلاني، ولا نبيع بياناتك ولا نؤجّرها. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
 | `c:legal:legalDocs[privacy].sections[3].heading` | Why we use it | لماذا نستخدم بياناتك | Owner rule 1 (a heading in the page's contents list) | (keep) | لماذا نستخدم بياناتكم |  |
-| `c:legal:legalDocs[privacy].sections[3].blocks[0].list[0].text` | To answer your request: to reply, to understand what you need, and to prepare a proposal. We use your data because you asked us to, as a step before a possible agreement with you. | للردّ على طلبك: لنتواصل معك، ونفهم ما تحتاجه، ونعدّ لك عرضًا. نستخدم بياناتك لأنك طلبت منّا ذلك، تمهيدًا لاتفاق محتمل بيننا. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
+| `c:legal:legalDocs[privacy].sections[3].blocks[0].list[0].text` | To answer your request: to reply, to understand what you need, and to prepare a proposal. We use your data because you asked us to, as a step before a possible agreement with you. | للردّ على طلبك: لنتواصل معك، ونفهم ما تحتاجه، ونعدّ لك عرضًا. نستخدم بياناتك لأنك طلبت منّا ذلك، تمهيدًا لاتفاق محتمل بيننا. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
 | `c:legal:legalDocs[privacy].sections[3].blocks[0].list[1].text` | To keep the site and its forms safe: to block spam and abuse. | لحماية الموقع ونماذجه: لمنع الرسائل المزعجة وإساءة الاستخدام. | keep |  |  |  |
-| `c:legal:legalDocs[privacy].sections[3].blocks[1].p` | We don't use your data for marketing, and we don't make decisions about you by automated means alone. | لا نستخدم بياناتك لأغراض تسويقية، ولا نتّخذ بشأنك قرارات تعتمد على المعالجة الآلية وحدها. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
+| `c:legal:legalDocs[privacy].sections[3].blocks[1].p` | We don't use your data for marketing, and we don't make decisions about you by automated means alone. | لا نستخدم بياناتك لأغراض تسويقية، ولا نتّخذ بشأنك قرارات تعتمد على المعالجة الآلية وحدها. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
 | `c:legal:legalDocs[privacy].sections[4].heading` | Who processes it for us | من يعالج بياناتك نيابةً عنّا | Owner rule 1 (a heading in the page's contents list) | (keep) | من يعالج بياناتكم نيابةً عنّا |  |
 | `c:legal:legalDocs[privacy].sections[4].blocks[0].p` | We use a small number of service providers, who process data only to provide their service to us: | نستعين بعدد محدود من مزوّدي الخدمات، ولا يعالج أيٌّ منهم البيانات إلا لتقديم خدمته لنا: | keep |  |  |  |
 | `c:legal:legalDocs[privacy].sections[4].blocks[1].list[0].text` | Hostinger hosts the website. | Hostinger لاستضافة الموقع. | keep |  |  |  |
 | `c:legal:legalDocs[privacy].sections[4].blocks[1].list[1].text` | {analytics} counts visits in totals, without cookies. | {analytics} لإحصاء الزيارات إجمالًا، دون ملفات تعريف ارتباط. | keep |  |  |  |
 | `c:legal:legalDocs[privacy].sections[4].blocks[1].list[2].text` | Cloudflare (Turnstile) checks form submissions for automated abuse. | Cloudflare (خدمة Turnstile) لفحص النماذج المُرسلة والتصدّي لإساءة الاستخدام الآلية. | keep |  |  |  |
-| `c:legal:legalDocs[privacy].sections[4].blocks[1].list[3].text` | Resend delivers form submissions to our inbox and, where it applies, a confirmation to you. | Resend لإيصال النماذج المُرسلة إلى بريدنا، وإرسال رسالة تأكيد إليك حين ينطبق ذلك. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
-| `c:legal:legalDocs[privacy].sections[4].blocks[1].list[4].text` | WhatsApp (Meta): if you message us on WhatsApp, your number and messages are handled by WhatsApp, under Meta's own terms and privacy policy. | واتساب (Meta): إذا راسلتنا عبر واتساب، فإن رقمك ورسائلك تعالجها خدمة واتساب وفق شروط Meta وسياسة الخصوصية الخاصة بها. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
+| `c:legal:legalDocs[privacy].sections[4].blocks[1].list[3].text` | Resend delivers form submissions to our inbox and, where it applies, a confirmation to you. | Resend لإيصال النماذج المُرسلة إلى بريدنا، وإرسال رسالة تأكيد إليك حين ينطبق ذلك. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
+| `c:legal:legalDocs[privacy].sections[4].blocks[1].list[4].text` | WhatsApp (Meta): if you message us on WhatsApp, your number and messages are handled by WhatsApp, under Meta's own terms and privacy policy. | واتساب (Meta): إذا راسلتنا عبر واتساب، فإن رقمك ورسائلك تعالجها خدمة واتساب وفق شروط Meta وسياسة الخصوصية الخاصة بها. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
 | `c:legal:legalDocs[privacy].sections[4].blocks[2].p` | We may also disclose data where the law requires it. | وقد نُفصح عن البيانات حين يُلزمنا القانون بذلك. | keep |  |  |  |
 | `c:legal:legalDocs[privacy].sections[5].heading` | Data outside the UAE | معالجة البيانات خارج الإمارات | keep |  |  |  |
 | `c:legal:legalDocs[privacy].sections[5].blocks[0].p` | These providers may process data outside the United Arab Emirates, including in the United States. We rely on their contractual and technical safeguards for personal data, and we use only what each service needs. | قد يعالج هؤلاء المزوّدون البيانات خارج دولة الإمارات العربية المتحدة، ومن ذلك الولايات المتحدة. ونعتمد على ضماناتهم التعاقدية والتقنية لحماية البيانات الشخصية، ولا نستخدم إلا ما تحتاجه كل خدمة. | keep |  |  |  |
 | `c:legal:legalDocs[privacy].sections[6].heading` | How long we keep it | مدة الاحتفاظ بالبيانات | keep |  |  |  |
-| `c:legal:legalDocs[privacy].sections[6].blocks[0].p` | We don't keep a database of form submissions on this website: a submission reaches us as an email. If an enquiry doesn't become a project, we delete it within 12 months of our last contact with you. If it does, we keep the records of our agreement for as long as the applicable law requires. | لا نحتفظ في هذا الموقع بقاعدة بيانات للنماذج المُرسلة، فكل نموذج يصلنا رسالةً بالبريد الإلكتروني. وإذا لم يتحوّل الاستفسار إلى مشروع، نحذفه خلال 12 شهرًا من آخر تواصل بيننا. وإذا تحوّل إلى مشروع، نحتفظ بسجلات الاتفاق للمدة التي يفرضها القانون المعمول به. | Owner rule 1: plural at apply, no change of wording. Keep the commitment: the company must be able to keep it | (keep) | (plural at apply; legal review) | ⚑ FC#22 (legal review): deletion within 12 months of the last contact |
+| `c:legal:legalDocs[privacy].sections[6].blocks[0].p` | We don't keep a database of form submissions on this website: a submission reaches us as an email. If an enquiry doesn't become a project, we delete it within 12 months of our last contact with you. If it does, we keep the records of our agreement for as long as the applicable law requires. | لا نحتفظ في هذا الموقع بقاعدة بيانات للنماذج المُرسلة، فكل نموذج يصلنا رسالةً بالبريد الإلكتروني. وإذا لم يتحوّل الاستفسار إلى مشروع، نحذفه خلال 12 شهرًا من آخر تواصل بيننا. وإذا تحوّل إلى مشروع، نحتفظ بسجلات الاتفاق للمدة التي يفرضها القانون المعمول به. | Owner rule 1: plural at apply, no change of wording. Keep the commitment: the company must be able to keep it | (keep) | (plural at apply) | ⚑ FC#22 (Rand reads the legal pages last): deletion within 12 months of the last contact |
 | `c:legal:legalDocs[privacy].sections[7].heading` | Your rights | حقوقك | Owner rule 1 (a heading in the page's contents list) | (keep) | حقوقكم |  |
 | `c:legal:legalDocs[privacy].sections[7].blocks[0].p` | Under the UAE Personal Data Protection Law, you can ask us to: | بموجب قانون حماية البيانات الشخصية في دولة الإمارات، يحقّ لك أن تطلب منّا: | keep |  |  |  |
-| `c:legal:legalDocs[privacy].sections[7].blocks[1].list[0].text` | tell you what personal data we hold about you and give you a copy; | إطلاعك على البيانات الشخصية التي نحتفظ بها عنك وتزويدك بنسخة منها؛ | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
+| `c:legal:legalDocs[privacy].sections[7].blocks[1].list[0].text` | tell you what personal data we hold about you and give you a copy; | إطلاعك على البيانات الشخصية التي نحتفظ بها عنك وتزويدك بنسخة منها؛ | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
 | `c:legal:legalDocs[privacy].sections[7].blocks[1].list[1].text` | correct data that is inaccurate or incomplete; | تصحيح البيانات غير الدقيقة أو غير المكتملة؛ | keep |  |  |  |
-| `c:legal:legalDocs[privacy].sections[7].blocks[1].list[2].text` | delete your data, or restrict how we use it; | حذف بياناتك، أو تقييد استخدامنا لها؛ | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
-| `c:legal:legalDocs[privacy].sections[7].blocks[1].list[3].text` | stop using your data, where the law allows you to object; | التوقّف عن استخدام بياناتك، حيث يجيز لك القانون الاعتراض؛ | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
-| `c:legal:legalDocs[privacy].sections[7].blocks[1].list[4].text` | withdraw your consent, where we rely on it. | سحب موافقتك، حين نعتمد عليها. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
-| `c:legal:legalDocs[privacy].sections[7].blocks[2].p` | To make a request, contact {dataRequestContact}. We may ask you to confirm your identity first. | لتقديم طلب، تواصل معنا عبر {dataRequestContact}، وقد نطلب منك تأكيد هويتك أولًا. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
-| `c:legal:legalDocs[privacy].sections[7].blocks[3].p` | If you're not satisfied with our answer, you can complain to the UAE Data Office. | وإن لم يُرضِك ردّنا، يمكنك تقديم شكوى إلى مكتب الإمارات للبيانات. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
+| `c:legal:legalDocs[privacy].sections[7].blocks[1].list[2].text` | delete your data, or restrict how we use it; | حذف بياناتك، أو تقييد استخدامنا لها؛ | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
+| `c:legal:legalDocs[privacy].sections[7].blocks[1].list[3].text` | stop using your data, where the law allows you to object; | التوقّف عن استخدام بياناتك، حيث يجيز لك القانون الاعتراض؛ | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
+| `c:legal:legalDocs[privacy].sections[7].blocks[1].list[4].text` | withdraw your consent, where we rely on it. | سحب موافقتك، حين نعتمد عليها. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
+| `c:legal:legalDocs[privacy].sections[7].blocks[2].p` | To make a request, contact {dataRequestContact}. We may ask you to confirm your identity first. | لتقديم طلب، تواصل معنا عبر {dataRequestContact}، وقد نطلب منك تأكيد هويتك أولًا. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
+| `c:legal:legalDocs[privacy].sections[7].blocks[3].p` | If you're not satisfied with our answer, you can complain to the UAE Data Office. | وإن لم يُرضِك ردّنا، يمكنك تقديم شكوى إلى مكتب الإمارات للبيانات. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
 | `c:legal:legalDocs[privacy].sections[8].heading` | Security | أمن البيانات | keep |  |  |  |
-| `c:legal:legalDocs[privacy].sections[8].blocks[0].p` | We protect your data with reasonable technical and organisational measures: encrypted connections (HTTPS), limited access, and providers that secure the data they process. No method of transmission over the internet is completely secure. | نحمي بياناتك بإجراءات تقنية وتنظيمية معقولة: اتصال مشفّر (HTTPS)، وصلاحيات وصول محدودة، ومزوّدون يؤمّنون البيانات التي يعالجونها. ولا توجد وسيلة نقل عبر الإنترنت آمنة تمامًا. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
+| `c:legal:legalDocs[privacy].sections[8].blocks[0].p` | We protect your data with reasonable technical and organisational measures: encrypted connections (HTTPS), limited access, and providers that secure the data they process. No method of transmission over the internet is completely secure. | نحمي بياناتك بإجراءات تقنية وتنظيمية معقولة: اتصال مشفّر (HTTPS)، وصلاحيات وصول محدودة، ومزوّدون يؤمّنون البيانات التي يعالجونها. ولا توجد وسيلة نقل عبر الإنترنت آمنة تمامًا. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
 | `c:legal:legalDocs[privacy].sections[9].heading` | Children | الأطفال | keep |  |  |  |
 | `c:legal:legalDocs[privacy].sections[9].blocks[0].p` | This website is meant for businesses and adults. We don't knowingly collect data from anyone under 18. | هذا الموقع موجّه إلى الشركات والبالغين، ولا نجمع عن علمٍ بيانات أي شخص دون 18 عامًا. | keep |  |  |  |
 | `c:legal:legalDocs[privacy].sections[10].heading` | Changes | التعديلات | keep |  |  |  |
 | `c:legal:legalDocs[privacy].sections[10].blocks[0].p` | We may update this policy. The date at the top shows the latest version. | قد نحدّث هذه السياسة، ويوضّح التاريخ في أعلاها أحدث نسخة. | keep |  |  |  |
 | `c:legal:legalDocs[terms].title` | Terms of Use | شروط الاستخدام | keep |  |  |  |
 | `c:legal:legalDocs[terms].sections[0].heading` | About these terms | عن هذه الشروط | keep |  |  |  |
-| `c:legal:legalDocs[terms].sections[0].blocks[0].p` | These terms apply to your use of this website, run by NO TIME Creative House, Dubai, United Arab Emirates. By using the site, you accept them. If you don't, please don't use the site. | تسري هذه الشروط على استخدامك لهذا الموقع، الذي يديره NO TIME Creative House في دبي، الإمارات العربية المتحدة. وباستخدامك الموقع فإنك توافق عليها، وإن لم توافق عليها فنرجو ألّا تستخدمه. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
+| `c:legal:legalDocs[terms].sections[0].blocks[0].p` | These terms apply to your use of this website, run by NO TIME Creative House, Dubai, United Arab Emirates. By using the site, you accept them. If you don't, please don't use the site. | تسري هذه الشروط على استخدامك لهذا الموقع، الذي يديره NO TIME Creative House في دبي، الإمارات العربية المتحدة. وباستخدامك الموقع فإنك توافق عليها، وإن لم توافق عليها فنرجو ألّا تستخدمه. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
 | `c:legal:legalDocs[terms].sections[0].blocks[1].p` | Our registered legal entity is {legalName}, {address}. | كياننا القانوني المسجّل: {legalName}، {address}. | keep |  |  |  |
 | `c:legal:legalDocs[terms].sections[1].heading` | What the site is for | الغرض من الموقع | keep |  |  |  |
-| `c:legal:legalDocs[terms].sections[1].blocks[0].p` | The site describes our services and lets you contact us. Its content is general information, not an offer. The scope, timing and terms of any work are set only in a written proposal or agreement between you and us. | يعرّف الموقع بخدماتنا ويتيح لك التواصل معنا. ومحتواه معلومات عامة، لا عرضٌ ملزِم. أمّا نطاق أي عمل وموعده وشروطه، فلا تُحدَّد إلا في عرض أو اتفاق مكتوب بيننا وبينك. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
+| `c:legal:legalDocs[terms].sections[1].blocks[0].p` | The site describes our services and lets you contact us. Its content is general information, not an offer. The scope, timing and terms of any work are set only in a written proposal or agreement between you and us. | يعرّف الموقع بخدماتنا ويتيح لك التواصل معنا. ومحتواه معلومات عامة، لا عرضٌ ملزِم. أمّا نطاق أي عمل وموعده وشروطه، فلا تُحدَّد إلا في عرض أو اتفاق مكتوب بيننا وبينك. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
 | `c:legal:legalDocs[terms].sections[2].heading` | Images, examples and previews | الصور والأمثلة والمعاينات | keep |  |  |  |
 | `c:legal:legalDocs[terms].sections[2].blocks[0].p` | Demonstration data is labelled “Example”, and early product screens are labelled “Preview”. Neither shows a real result, a real client or a real event. | بيانات العرض التوضيحي تحمل عبارة «مثال»، وشاشات المنتجات الأولية تحمل عبارة «معاينة». ولا يعرض أيٌّ منهما نتيجة حقيقية، ولا عميلًا حقيقيًا، ولا حدثًا حقيقيًا. | keep |  |  |  |
 | `c:legal:legalDocs[terms].sections[2].blocks[1].p` | Our work is shown with the project’s own photos once the client approves, and otherwise with a drawing of the work, never with a stand-in photo. | نعرض أعمالنا بصور المشروع نفسه بعد موافقة العميل، وإلا فبرسم يصوّر العمل، ولا نضع مكانها صورة بديلة أبدًا. | keep |  |  |  |
 | `c:legal:legalDocs[terms].sections[3].heading` | Intellectual property | الملكية الفكرية | keep |  |  |  |
-| `c:legal:legalDocs[terms].sections[3].blocks[0].p` | The site's text, design, graphics, code and the NO TIME name and logo belong to us or to those who licensed them to us. Other names, logos and marks that appear on the site belong to their owners. You may view and share links to our pages, but you may not copy, reproduce or reuse the content for commercial purposes without our written permission. | نصوص الموقع وتصميمه ورسومه وبرمجته، واسم NO TIME وشعارها، ملكٌ لنا أو لمن رخّصها لنا. وتعود الأسماء والشعارات والعلامات الأخرى الظاهرة على صفحات الموقع إلى أصحابها. يمكنك تصفّح صفحاتنا ومشاركة روابطها، لكن لا يجوز نسخ المحتوى أو إعادة إنتاجه أو استخدامه لأغراض تجارية دون إذن مكتوب منّا. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
+| `c:legal:legalDocs[terms].sections[3].blocks[0].p` | The site's text, design, graphics, code and the NO TIME name and logo belong to us or to those who licensed them to us. Other names, logos and marks that appear on the site belong to their owners. You may view and share links to our pages, but you may not copy, reproduce or reuse the content for commercial purposes without our written permission. | نصوص الموقع وتصميمه ورسومه وبرمجته، واسم NO TIME وشعارها، ملكٌ لنا أو لمن رخّصها لنا. وتعود الأسماء والشعارات والعلامات الأخرى الظاهرة على صفحات الموقع إلى أصحابها. يمكنك تصفّح صفحاتنا ومشاركة روابطها، لكن لا يجوز نسخ المحتوى أو إعادة إنتاجه أو استخدامه لأغراض تجارية دون إذن مكتوب منّا. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
 | `c:legal:legalDocs[terms].sections[4].heading` | Using the forms | استخدام النماذج | keep |  |  |  |
-| `c:legal:legalDocs[terms].sections[4].blocks[0].p` | When you use a form, please give accurate information and only your own contact details, or those you're authorised to share. Don't send anything unlawful, harmful or unrelated to your request. We use what you send as our [Privacy Policy](/privacy) describes. | عند استخدامك أي نموذج، نرجو أن تقدّم معلومات صحيحة، وألّا تذكر إلا بيانات الاتصال الخاصة بك أو تلك التي يحقّ لك مشاركتها. ولا ترسل ما هو مخالف للقانون، أو ضار، أو لا يتعلّق بطلبك. ونستخدم ما ترسله وفق ما توضّحه [سياسة الخصوصية](/privacy). | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
+| `c:legal:legalDocs[terms].sections[4].blocks[0].p` | When you use a form, please give accurate information and only your own contact details, or those you're authorised to share. Don't send anything unlawful, harmful or unrelated to your request. We use what you send as our [Privacy Policy](/privacy) describes. | عند استخدامك أي نموذج، نرجو أن تقدّم معلومات صحيحة، وألّا تذكر إلا بيانات الاتصال الخاصة بك أو تلك التي يحقّ لك مشاركتها. ولا ترسل ما هو مخالف للقانون، أو ضار، أو لا يتعلّق بطلبك. ونستخدم ما ترسله وفق ما توضّحه [سياسة الخصوصية](/privacy). | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
 | `c:legal:legalDocs[terms].sections[5].heading` | Acceptable use | الاستخدام المقبول | keep |  |  |  |
-| `c:legal:legalDocs[terms].sections[5].blocks[0].p` | Don't misuse the site: don't try to break into it, overload it, scrape it in bulk, send automated submissions, or interfere with how it works for others. | لا تُسئ استخدام الموقع: لا تحاول اختراقه أو إثقاله بالطلبات، ولا تنسخ محتواه آليًا بكميات كبيرة، ولا ترسل نماذج آلية، ولا تعطّل عمله على الآخرين. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
+| `c:legal:legalDocs[terms].sections[5].blocks[0].p` | Don't misuse the site: don't try to break into it, overload it, scrape it in bulk, send automated submissions, or interfere with how it works for others. | لا تُسئ استخدام الموقع: لا تحاول اختراقه أو إثقاله بالطلبات، ولا تنسخ محتواه آليًا بكميات كبيرة، ولا ترسل نماذج آلية، ولا تعطّل عمله على الآخرين. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
 | `c:legal:legalDocs[terms].sections[6].heading` | Links to other sites | روابط المواقع الأخرى | keep |  |  |  |
-| `c:legal:legalDocs[terms].sections[6].blocks[0].p` | Links to other websites are there for convenience. We don't control those sites and aren't responsible for their content or their privacy practices. | نضع روابط بعض المواقع الأخرى تسهيلًا عليك، لكننا لا نتحكّم فيها، ولا نتحمّل مسؤولية محتواها أو ممارساتها في الخصوصية. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
+| `c:legal:legalDocs[terms].sections[6].blocks[0].p` | Links to other websites are there for convenience. We don't control those sites and aren't responsible for their content or their privacy practices. | نضع روابط بعض المواقع الأخرى تسهيلًا عليك، لكننا لا نتحكّم فيها، ولا نتحمّل مسؤولية محتواها أو ممارساتها في الخصوصية. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
 | `c:legal:legalDocs[terms].sections[7].heading` | Liability | المسؤولية | keep |  |  |  |
 | `c:legal:legalDocs[terms].sections[7].blocks[0].p` | We work to keep the site accurate and available, but we provide it “as is”, without guarantees that it is complete, error-free or always available. To the extent the law allows, we are not liable for any loss that results from using the site or relying on its content. Nothing in these terms limits liability that the law does not allow us to limit. | نحرص على دقّة الموقع وإتاحته، لكننا نقدّمه «كما هو»، دون ضمان اكتماله أو خلوّه من الأخطاء أو إتاحته في كل وقت. وفي الحدود التي يسمح بها القانون، لا نتحمّل المسؤولية عن أي خسارة تنتج عن استخدام الموقع أو الاعتماد على محتواه. ولا يحدّ أي بند في هذه الشروط من مسؤولية لا يجيز القانون الحدّ منها. | keep |  |  |  |
 | `c:legal:legalDocs[terms].sections[8].heading` | Governing law and language | القانون الحاكم واللغة | keep |  |  |  |
-| `c:legal:legalDocs[terms].sections[8].blocks[0].p` | These terms are governed by the laws of the United Arab Emirates. {courts} have jurisdiction over any dispute arising from them. | تخضع هذه الشروط لقوانين دولة الإمارات العربية المتحدة، وتختصّ {courts} بالنظر في أي نزاع ينشأ عنها. | keep: {courts} is filled by the legal reviewer | (keep) | (keep) | ⚑ FC#22 (legal review) |
-| `c:legal:legalDocs[terms].sections[8].blocks[1].p` | If the Arabic and English versions of these terms differ, the {prevailingLanguage} version prevails. | إذا اختلفت النسختان العربية والإنجليزية من هذه الشروط، تُعتمد النسخة {prevailingLanguage}. | keep: {prevailingLanguage} is filled by the legal reviewer | (keep) | (keep) | ⚑ FC#22 (legal review) |
+| `c:legal:legalDocs[terms].sections[8].blocks[0].p` | These terms are governed by the laws of the United Arab Emirates. {courts} have jurisdiction over any dispute arising from them. | تخضع هذه الشروط لقوانين دولة الإمارات العربية المتحدة، وتختصّ {courts} بالنظر في أي نزاع ينشأ عنها. | keep: {courts}: Rand | (keep) | (keep) | ⚑ FC#22 (Rand reads the legal pages last) |
+| `c:legal:legalDocs[terms].sections[8].blocks[1].p` | If the Arabic and English versions of these terms differ, the {prevailingLanguage} version prevails. | إذا اختلفت النسختان العربية والإنجليزية من هذه الشروط، تُعتمد النسخة {prevailingLanguage}. | keep: {prevailingLanguage}: Rand | (keep) | (keep) | ⚑ FC#22 (Rand reads the legal pages last) |
 | `c:legal:legalDocs[terms].sections[9].heading` | Changes | التعديلات | keep |  |  |  |
 | `c:legal:legalDocs[terms].sections[9].blocks[0].p` | We may update these terms. The date at the top shows the latest version. | قد نحدّث هذه الشروط، ويوضّح التاريخ في أعلاها أحدث نسخة. | keep |  |  |  |
 | `c:legal:legalDocs[terms].sections[10].heading` | Contact | التواصل | keep |  |  |  |
 | `c:legal:legalDocs[terms].sections[10].blocks[0].p` | Questions about these terms: {dataRequestContact}. | للأسئلة عن هذه الشروط: {dataRequestContact}. | keep |  |  |  |
 | `c:legal:legalDocs[cookies].title` | Cookie Policy | سياسة ملفات تعريف الارتباط | keep |  |  |  |
 | `c:legal:legalDocs[cookies].sections[0].heading` | What cookies are | ما ملفات تعريف الارتباط | keep |  |  |  |
-| `c:legal:legalDocs[cookies].sections[0].blocks[0].p` | Cookies are small text files a website stores in your browser. Similar technologies, such as your browser's session storage, keep small pieces of information on your device in the same way. | ملفات تعريف الارتباط (الكوكيز) ملفات نصية صغيرة يحفظها الموقع في متصفحك. وتعمل تقنيات مشابهة، مثل تخزين الجلسة في متصفحك، بالطريقة نفسها، فتحفظ معلومات صغيرة على جهازك. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
+| `c:legal:legalDocs[cookies].sections[0].blocks[0].p` | Cookies are small text files a website stores in your browser. Similar technologies, such as your browser's session storage, keep small pieces of information on your device in the same way. | ملفات تعريف الارتباط (الكوكيز) ملفات نصية صغيرة يحفظها الموقع في متصفحك. وتعمل تقنيات مشابهة، مثل تخزين الجلسة في متصفحك، بالطريقة نفسها، فتحفظ معلومات صغيرة على جهازك. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
 | `c:legal:legalDocs[cookies].sections[1].heading` | What we use | ما نستخدمه | keep |  |  |  |
 | `c:legal:legalDocs[cookies].sections[1].blocks[0].p` | We use only what the site needs to work. We don't use analytics, advertising or social media cookies. | لا نستخدم إلا ما يحتاجه الموقع ليعمل، ولا نستخدم ملفات تعريف ارتباط للتحليل أو الإعلانات أو وسائل التواصل الاجتماعي. | keep |  |  |  |
-| `c:legal:legalDocs[cookies].sections[1].blocks[1].p` | We use only what the site needs to work, and no analytics, advertising or social media cookies. Our visit statistics ({analytics}) use no cookies at all. | لا نستخدم إلا ما يحتاجه الموقع ليعمل، ولا نستخدم ملفات تعريف ارتباط للتحليل أو الإعلانات أو وسائل التواصل الاجتماعي. أما إحصاءات الزيارات لدينا ({analytics}) فلا تستخدم أي ملفات تعريف ارتباط. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
+| `c:legal:legalDocs[cookies].sections[1].blocks[1].p` | We use only what the site needs to work, and no analytics, advertising or social media cookies. Our visit statistics ({analytics}) use no cookies at all. | لا نستخدم إلا ما يحتاجه الموقع ليعمل، ولا نستخدم ملفات تعريف ارتباط للتحليل أو الإعلانات أو وسائل التواصل الاجتماعي. أما إحصاءات الزيارات لدينا ({analytics}) فلا تستخدم أي ملفات تعريف ارتباط. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
 | `c:legal:legalDocs[cookies].sections[1].blocks[2].table.head[0]` | Name | الاسم | keep |  |  |  |
 | `c:legal:legalDocs[cookies].sections[1].blocks[2].table.head[1]` | Type | النوع | keep |  |  |  |
 | `c:legal:legalDocs[cookies].sections[1].blocks[2].table.head[2]` | What it does | وظيفته | keep |  |  |  |
 | `c:legal:legalDocs[cookies].sections[1].blocks[2].table.head[3]` | How long | مدته | keep |  |  |  |
 | `c:legal:legalDocs[cookies].sections[1].blocks[2].table.rows[0][0]` | NEXT_LOCALE | NEXT_LOCALE | keep |  |  |  |
 | `c:legal:legalDocs[cookies].sections[1].blocks[2].table.rows[0][1]` | Cookie, set by this site | ملف تعريف ارتباط يضعه هذا الموقع | keep |  |  |  |
-| `c:legal:legalDocs[cookies].sections[1].blocks[2].table.rows[0][2]` | Remembers whether you're reading in English or Arabic. | يتذكّر هل تتصفّح بالعربية أم بالإنجليزية. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
-| `c:legal:legalDocs[cookies].sections[1].blocks[2].table.rows[0][3]` | Until you close your browser | حتى تغلق المتصفح | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
+| `c:legal:legalDocs[cookies].sections[1].blocks[2].table.rows[0][2]` | Remembers whether you're reading in English or Arabic. | يتذكّر هل تتصفّح بالعربية أم بالإنجليزية. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
+| `c:legal:legalDocs[cookies].sections[1].blocks[2].table.rows[0][3]` | Until you close your browser | حتى تغلق المتصفح | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
 | `c:legal:legalDocs[cookies].sections[1].blocks[2].table.rows[1][0]` | nt-intro | nt-intro | keep |  |  |  |
 | `c:legal:legalDocs[cookies].sections[1].blocks[2].table.rows[1][1]` | Session storage (not a cookie) | تخزين الجلسة (ليس ملف تعريف ارتباط) | keep |  |  |  |
-| `c:legal:legalDocs[cookies].sections[1].blocks[2].table.rows[1][2]` | Remembers that you've seen the home page's opening animation, so it plays only once. | يتذكّر أنك شاهدت الحركة الافتتاحية في الصفحة الرئيسية، فلا تُعرض إلا مرة واحدة. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
-| `c:legal:legalDocs[cookies].sections[1].blocks[2].table.rows[1][3]` | Until you close the tab | حتى تغلق التبويب | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
+| `c:legal:legalDocs[cookies].sections[1].blocks[2].table.rows[1][2]` | Remembers that you've seen the home page's opening animation, so it plays only once. | يتذكّر أنك شاهدت الحركة الافتتاحية في الصفحة الرئيسية، فلا تُعرض إلا مرة واحدة. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
+| `c:legal:legalDocs[cookies].sections[1].blocks[2].table.rows[1][3]` | Until you close the tab | حتى تغلق التبويب | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
 | `c:legal:legalDocs[cookies].sections[1].blocks[2].table.rows[2][0]` | nt-lead | nt-lead | keep |  |  |  |
 | `c:legal:legalDocs[cookies].sections[1].blocks[2].table.rows[2][1]` | Session storage (not a cookie) | تخزين الجلسة (ليس ملف تعريف ارتباط) | keep |  |  |  |
-| `c:legal:legalDocs[cookies].sections[1].blocks[2].table.rows[2][2]` | Notes how you reached the site (the campaign tag in the link, the site you came from and your first page), so a form you send tells us which post or link brought you. It leaves your device only with a form you submit. | يسجّل كيف وصلت إلى الموقع (وسم الحملة في الرابط، والموقع الذي جئت منه، وأول صفحة زرتها)، ليخبرنا النموذج الذي ترسله بالمنشور أو الرابط الذي أوصلك إلينا. لا يغادر جهازك إلا مع نموذج ترسله. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
-| `c:legal:legalDocs[cookies].sections[1].blocks[2].table.rows[2][3]` | Until you close the tab | حتى تغلق التبويب | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
-| `c:legal:legalDocs[cookies].sections[1].blocks[3].p` | On our forms, Cloudflare Turnstile runs a check in your browser to tell people from automated programs. How Cloudflare processes that data is described in Cloudflare's privacy policy. | في نماذج الموقع، تُجري خدمة Cloudflare Turnstile فحصًا في متصفحك للتمييز بين الأشخاص والبرامج الآلية. وتوضّح سياسة الخصوصية لدى Cloudflare كيفية معالجتها لهذه البيانات. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
+| `c:legal:legalDocs[cookies].sections[1].blocks[2].table.rows[2][2]` | Notes how you reached the site (the campaign tag in the link, the site you came from and your first page), so a form you send tells us which post or link brought you. It leaves your device only with a form you submit. | يسجّل كيف وصلت إلى الموقع (وسم الحملة في الرابط، والموقع الذي جئت منه، وأول صفحة زرتها)، ليخبرنا النموذج الذي ترسله بالمنشور أو الرابط الذي أوصلك إلينا. لا يغادر جهازك إلا مع نموذج ترسله. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
+| `c:legal:legalDocs[cookies].sections[1].blocks[2].table.rows[2][3]` | Until you close the tab | حتى تغلق التبويب | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
+| `c:legal:legalDocs[cookies].sections[1].blocks[3].p` | On our forms, Cloudflare Turnstile runs a check in your browser to tell people from automated programs. How Cloudflare processes that data is described in Cloudflare's privacy policy. | في نماذج الموقع، تُجري خدمة Cloudflare Turnstile فحصًا في متصفحك للتمييز بين الأشخاص والبرامج الآلية. وتوضّح سياسة الخصوصية لدى Cloudflare كيفية معالجتها لهذه البيانات. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
 | `c:legal:legalDocs[cookies].sections[2].heading` | Your choices | خياراتك | Owner rule 1 (a heading in the page's contents list) | (keep) | خياراتكم |  |
-| `c:legal:legalDocs[cookies].sections[2].blocks[0].p` | These items are needed for the site to work as designed, so we don't ask for consent to use them. You can block or delete cookies in your browser settings. The site still works without them, but it may not remember your language. | هذه العناصر لازمة ليعمل الموقع كما صُمّم، لذلك لا نطلب موافقتك على استخدامها. ويمكنك حظر ملفات تعريف الارتباط أو حذفها من إعدادات متصفحك. سيظل الموقع يعمل دونها، لكنه قد لا يتذكّر لغتك. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
-| `c:legal:legalDocs[cookies].sections[2].blocks[1].p` | If we ever add optional cookies, we'll ask for your consent first and update this policy. | وإذا أضفنا يومًا ملفات تعريف ارتباط اختيارية، فسنطلب موافقتك أولًا ونحدّث هذه السياسة. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
+| `c:legal:legalDocs[cookies].sections[2].blocks[0].p` | These items are needed for the site to work as designed, so we don't ask for consent to use them. You can block or delete cookies in your browser settings. The site still works without them, but it may not remember your language. | هذه العناصر لازمة ليعمل الموقع كما صُمّم، لذلك لا نطلب موافقتك على استخدامها. ويمكنك حظر ملفات تعريف الارتباط أو حذفها من إعدادات متصفحك. سيظل الموقع يعمل دونها، لكنه قد لا يتذكّر لغتك. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
+| `c:legal:legalDocs[cookies].sections[2].blocks[1].p` | If we ever add optional cookies, we'll ask for your consent first and update this policy. | وإذا أضفنا يومًا ملفات تعريف ارتباط اختيارية، فسنطلب موافقتك أولًا ونحدّث هذه السياسة. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
 | `c:legal:legalDocs[cookies].sections[3].heading` | More information | لمزيد من المعلومات | keep |  |  |  |
-| `c:legal:legalDocs[cookies].sections[3].blocks[0].p` | See our [Privacy Policy](/privacy) for how we handle personal data. | راجع [سياسة الخصوصية](/privacy) لمعرفة كيفية تعاملنا مع البيانات الشخصية. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result | (keep) | (plural at apply; legal review) | FC#22 (legal review) |
+| `c:legal:legalDocs[cookies].sections[3].blocks[0].p` | See our [Privacy Policy](/privacy) for how we handle personal data. | راجع [سياسة الخصوصية](/privacy) لمعرفة كيفية تعاملنا مع البيانات الشخصية. | Owner rule 1: the address moves to the plural at apply time, with no change of wording; Rand reads the legal pages last | (keep) | (plural at apply) | FC#22 (Rand reads the legal pages last) |
 
 ## Image alt text
 

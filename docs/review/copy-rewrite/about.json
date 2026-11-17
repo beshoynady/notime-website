@@ -1,18 +1,34 @@
 {
-  "m:aboutPage.metaTitle": { "rule": "SEO: \"About us\" says nothing in a result", "en": "About NO TIME, a creative house in Dubai", "ar": "عن NO TIME، دار إبداعية في دبي" },
+  "m:aboutPage.metaTitle": {
+    "rule": "SEO: \"About us\" says nothing in a result",
+    "en": "About NO TIME, a creative house in Dubai",
+    "ar": "عن NO TIME، دار إبداعية في دبي"
+  },
   "m:aboutPage.metaDescription": {
     "rule": "Choice 1 (\"one team\" stays in the page, not in every snippet)",
     "en": "An events, marketing, PR and production house based in Dubai, working across six markets from Saudi Arabia to Egypt.",
     "ar": "دار للفعاليات والتسويق والعلاقات العامة والإنتاج، مقرّها دبي، وتعمل في ستة أسواق من السعودية إلى مصر.",
     "facts": "p3. ⚑ FC#1"
   },
-  "m:aboutPage.story1": { "rule": "keep: Rand's own sentence (p3)", "facts": "p3" },
-  "m:aboutPage.story2": { "rule": "keep: Rand's own sentence (p3); this is where \"one team\" belongs", "facts": "p3" },
-  "m:aboutPage.seeWork": { "rule": "Owner rule 2 (button)", "ar": "مشاهدة أعمالنا" },
+  "m:aboutPage.story1": {
+    "rule": "keep: Rand's own sentence (p3)",
+    "facts": "p3"
+  },
+  "m:aboutPage.story2": {
+    "rule": "keep: Rand's own sentence (p3); this is where \"one team\" belongs",
+    "facts": "p3"
+  },
+  "m:aboutPage.seeWork": {
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "شاهدوا أعمالنا"
+  },
   "c:principles:principles[one-roof].line": {
     "rule": "Choice 1: the story above already says \"one team\"; give the reason instead",
     "en": "Strategy, creative, production and delivery, with no handover to another agency on the way.",
     "ar": "الاستراتيجية والإبداع والإنتاج والتنفيذ، دون أن ينتقل العمل إلى جهة أخرى في الطريق."
   },
-  "c:principles:principles[six-markets].line": { "rule": "keep", "facts": "⚑ FC#1" }
+  "c:principles:principles[six-markets].line": {
+    "rule": "keep",
+    "facts": "⚑ FC#1"
+  }
 }

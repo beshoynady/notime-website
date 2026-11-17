@@ -3,7 +3,16 @@
     "rule": "Owner rule 1; and N18's agreement: both product names are feminine («الدقيقة صفر»، «ساعة الذروة»)",
     "ar": "كونوا أول من يعرف حين تصبح «{product}» جاهزة."
   },
-  "m:productPage.registerBody": { "rule": "Owner rule 1 (AR); EN keep", "ar": "نطوّره من خبرتنا في الفعاليات والضيافة. اتركوا بياناتكم، وسنكتب لكم حين يصبح جاهزًا." },
-  "m:productPage.registerCta": { "rule": "Owner rule 2 (button)", "ar": "تسجيل الاهتمام" },
-  "m:productPage.softwareLink": { "rule": "Owner rule 2 (button)", "ar": "استعراض خدماتنا البرمجية" }
+  "m:productPage.registerBody": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "نطوّره من خبرتنا في الفعاليات والضيافة. اتركوا بياناتكم، وسنكتب لكم حين يصبح جاهزًا."
+  },
+  "m:productPage.registerCta": {
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "سجّلوا اهتمامكم"
+  },
+  "m:productPage.softwareLink": {
+    "rule": "D-C1 (owner): a form, system or navigation button, so the verbal noun",
+    "ar": "استعراض خدماتنا البرمجية"
+  }
 }

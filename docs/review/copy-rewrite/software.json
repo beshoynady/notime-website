@@ -8,13 +8,13 @@
     "facts": "⚑ FC#18 (all live at launch)"
   },
   "c:software/page:caseStudy.visit": {
-    "rule": "Owner rule 2 (button)",
+    "rule": "D-C1 (owner): a form, system or navigation button, so the verbal noun",
     "ar": "زيارة الموقع"
   },
   "c:software/page:cta.book": {
-    "rule": "N13 (approved) EN; AR by owner rule 2 changes the approved «اطلب مكالمة تعارف مجانية»: confirm",
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
     "en": "Request a free intro call",
-    "ar": "طلب مكالمة تعارف مجانية",
+    "ar": "اطلبوا مكالمة تعارف مجانية",
     "facts": "⚑ R1 (the intro call is free, 30 minutes)"
   },
   "c:software/page:cta.micro": {
@@ -22,8 +22,8 @@
     "facts": "⚑ FC#23"
   },
   "c:software/page:cta.review": {
-    "rule": "Owner rule 2 (button)",
-    "ar": "طلب مراجعة مجانية لموقعكم",
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "اطلبوا مراجعة مجانية لموقعكم",
     "facts": "⚑ R2 (the website review: free, 3 working days, 5 improvements)"
   },
   "c:software/page:cta.reviewShort": {
@@ -37,16 +37,16 @@
     "facts": "⚑ R2 (the website review: free, 3 working days, 5 improvements)"
   },
   "c:software/page:cta.work": {
-    "rule": "Owner rule 2 (button)",
-    "ar": "مشاهدة أعمالنا"
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "شاهدوا أعمالنا"
   },
   "c:software/page:cta.discuss": {
-    "rule": "Owner rule 2 (button)",
-    "ar": "مناقشة هذه الخدمة معنا"
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "ناقشوا هذه الخدمة معنا"
   },
   "c:software/page:cta.discussFor": {
-    "rule": "Owner rule 2 (button)",
-    "ar": "مناقشة هذه الخدمة معنا: {service}"
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "ناقشوا هذه الخدمة معنا: {service}"
   },
   "c:software/page:eventTech.intro": {
     "rule": "Choice 1 (\"one team\" stays in this page's main promise, `why.title`); choice 2 (\"brief\")",
@@ -67,7 +67,7 @@
     "ar": "التسجيل وتسجيل الحضور لضيوفكم"
   },
   "c:software/page:eventTech.eventsLink": {
-    "rule": "Owner rule 2 (button)",
+    "rule": "D-C1 (owner): a form, system or navigation button, so the verbal noun",
     "ar": "استعراض الفعاليات والضيافة"
   },
   "c:software/page:hero.title": {
@@ -144,15 +144,15 @@
     "ar": "نطوّرهما من خبرتنا في الفعاليات والضيافة. سجّلوا اهتمامكم، وسنكتب لكم حين يصبحان جاهزين."
   },
   "c:software/page:productsCopy.register": {
-    "rule": "Owner rule 2 (button)",
-    "ar": "تسجيل الاهتمام"
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "سجّلوا اهتمامكم"
   },
   "c:software/page:productsCopy.registerFor": {
-    "rule": "Owner rule 2 (button)",
-    "ar": "تسجيل الاهتمام بـ{product}"
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "سجّلوا اهتمامكم بـ{product}"
   },
   "c:software/page:productsCopy.close": {
-    "rule": "Owner rule 2 (control)",
+    "rule": "D-C1 (owner): a form, system or navigation button, so the verbal noun",
     "ar": "إغلاق النموذج"
   },
   "c:software/page:productsCopy.more": {
@@ -168,11 +168,11 @@
     "ar": "يعمل اليوم: منصة اتحاد رياضي وطني، والموقع الذي تقرؤونه الآن."
   },
   "c:software/page:proof.federation.link": {
-    "rule": "Owner rule 2 (button)",
+    "rule": "D-C1 (owner): a form, system or navigation button, so the verbal noun",
     "ar": "قراءة دراسة الحالة"
   },
   "c:software/page:proof.site.toggle": {
-    "rule": "Owner rule 2 (control)",
+    "rule": "D-C1 (owner): a form, system or navigation button, so the verbal noun",
     "ar": "عرض الموقع بـ"
   },
   "c:software/page:proof.review.title": {
@@ -181,7 +181,7 @@
   },
   "c:software/page:quality.items[3]": {
     "rule": "keep",
-    "facts": "⚑ FC#22 (legal review)"
+    "facts": "⚑ FC#22 (Rand reads the legal pages last)"
   },
   "c:software/page:quality.stack": {
     "rule": "N18 rule (AR)",
@@ -209,9 +209,9 @@
     "ar": "ما تحصلون عليه"
   },
   "c:software/page:sticky.book": {
-    "rule": "N13 (approved) short form; AR by owner rule 2: confirm",
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
     "en": "Request a free call",
-    "ar": "طلب مكالمة مجانية",
+    "ar": "اطلبوا مكالمة مجانية",
     "facts": "⚑ R1 (the intro call is free, 30 minutes)"
   },
   "c:software/page:tiers.title": {
@@ -228,8 +228,8 @@
     "ar": "تستلمون"
   },
   "c:software/page:tiers.cta": {
-    "rule": "Owner rule 2 (button)",
-    "ar": "مناقشة مستوى {tier} معنا"
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "ناقشوا معنا مستوى {tier}"
   },
   "c:software/page:tiers.items.launch.receive": {
     "rule": "Owner rule 1",
@@ -288,8 +288,8 @@
     "ar": "نموذج تفاعلي أولًا، ثم رابط تجريبي تفتحونه في أي مرحلة."
   },
   "c:software/page:finalCta.risk": {
-    "rule": "Owner rule 2 (AR: the line opens with the action); N13 wording",
-    "ar": "مكالمة تعارف مجانية (30 دقيقة)، دون أي التزام. نرد عليكم خلال يوم عمل.",
+    "rule": "D-C1 (owner): the line opens with the call to action, so the plural command; N13 wording",
+    "ar": "اطلبوا مكالمة تعارف مجانية (30 دقيقة)، دون أي التزام. نرد عليكم خلال يوم عمل.",
     "facts": "⚑ FC#23; ⚑ R1 (the intro call is free, 30 minutes)"
   },
   "c:software/page:finalCta.reviewTitle": {
@@ -315,7 +315,7 @@
     "en": "أهلًا بكم"
   },
   "c:software/page:hero.ui.button": {
-    "rule": "Owner rule 2 (a button, even inside the drawn interface)",
-    "ar": "حجز زيارة"
+    "rule": "D-C1 (owner): the drawn site's call to action, so the plural command (replaces D-C5's «حجز زيارة»)",
+    "ar": "احجزوا زيارة"
   }
 }

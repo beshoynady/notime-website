@@ -77,7 +77,7 @@
     "ar": "الكاميرات والعدسات والإضاءة والصوت لتصويركم، تحجزونها بطلب واحد."
   },
   "c:modules/motion-playground:MOTION_PLAYGROUND.legend": {
-    "rule": "Owner rule 2 (a control's label)",
+    "rule": "D-C1 (owner): a form, system or navigation button, so the verbal noun",
     "ar": "اختيار منحنى الحركة"
   },
   "c:modules/rental-categories:RENTAL_CATEGORIES.hint": {
@@ -89,8 +89,8 @@
     "ar": "اخترتم:"
   },
   "c:modules/rental-categories:RENTAL_CATEGORIES.cta": {
-    "rule": "Owner rule 2 (button)",
-    "ar": "السؤال عن التوفّر"
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "اسألوا عن التوفّر"
   },
   "c:categories:categories[creative-production].faq[1].a": {
     "rule": "Owner rule 1",
