@@ -10,9 +10,17 @@
 
 **Spec:** `docs/superpowers/specs/2026-11-17-audit-fixes-design.md` (approved 2026-11-17). Read it with this plan. Copy comes from `docs/review/copy-proposals.md` (only the sections named here).
 
+**Amended 2026-11-18 (owner-approved; where this plan and the spec differ, this plan wins):**
+1. The branch starts at `e19404f` (the withdrawn case is already gone, D121).
+2. Every Arabic call to action is in the plural command (owner rule 1, D118): «اطلبوا مكالمة تعارف مجانية», «اطلبوا عرض سعر», «خطّطوا لفعاليتكم معنا», «شاهدوا أعمالنا». The wording is the copy rewrite's (`docs/review/copy-rewrite/*.json`), so the later apply doesn't change these strings again.
+3. The "30-min" test covers button labels only; the 30 minutes may appear in the line beside the button (R1, D122).
+4. Tasks 0, 5 and 15 use the football league case (`/work/football-league-events-awards`) where they named the sports case.
+5. Task 6B (new, after Task 6): Home's work grid and Software's proof card adapt to the number of cards.
+6. Task 8's month select without the "A month is enough" hint is confirmed.
+
 ## Branches and order
 
-- `audit-fixes`, cut from `phase-2-services` at `613589a`: Tasks 1–11 and 14–15. Merges into `phase-2-services` after the review and the checks, without waiting for the owner-gated branches.
+- `audit-fixes`, cut from `phase-2-services` at `e19404f`: Tasks 1–11 (with 6B) and 14–15. Merges into `phase-2-services` after the review and the checks, without waiting for the owner-gated branches.
 - `audit-n06`, cut from `audit-fixes` after Task 11: Task 12. It merges only after the owner sees the Events 1440 EN/AR shots, and only if LCP doesn't regress (otherwise stop and report).
 - `audit-n17`, cut from `audit-fixes`: Task 13. It merges only after the owner approves the before/after pairs.
 - One agent at a time (D93). Each task ends with a commit; update `docs/HANDOFF.md` after each task.
@@ -26,7 +34,8 @@
 - Contact data only from `src/config/contact.ts`; WhatsApp shows only when `contactStatus(contact).whatsapp` is true (D78), and its link goes through `WhatsAppLink` (the source-naming prefill, D114).
 - GSAP owns scroll, Motion owns hover; never both on one element. Reduced motion shows the final state with no movement; the reduced specs (`e2e/photo-stories-reduced.spec.ts`, `e2e/no-js.spec.ts`) keep passing.
 - LCP stays text on the home page and the category pages. No layout shift: moving things move by `transform`/`translate`, never `top`, height or margin.
-- Copy in scope: copy-proposals §1.1, §1.3, §1.4, §2.2, §2.3, §2.4, §2.5, §4.1, §4.2, §7.1, §8.1, §9.1, §10.1, and §6.1 with the owner's wording: EN "Request a free intro call", AR «اطلب مكالمة تعارف مجانية» (no "30-min" / «(30 دقيقة)»). Nothing else from copy-proposals.
+- Copy in scope: copy-proposals §1.1, §1.3, §1.4, §2.2, §2.3, §2.4, §2.5, §4.1, §4.2, §7.1, §8.1, §9.1, §10.1, and §6.1 with the owner's wording: EN "Request a free intro call", AR «اطلبوا مكالمة تعارف مجانية» (no "30-min" / «(30 دقيقة)» on the button). Nothing else from copy-proposals.
+- Arabic buttons by role (D118): marketing calls to action in the plural command (the four above, and any new one), form and system buttons in the verbal noun. Every Arabic string that addresses the visitor uses the plural (owner rule 1). Where copy-proposals gives a singular form, use the plural from `docs/review/copy-rewrite/*.json`.
 - Real photos only on Work and anything presented as a NO TIME project; the anonymous cases keep their drawings.
 
 ## Review Focus
@@ -43,23 +52,24 @@
 
 **Files:** none in `src/`. Output: `docs/checkpoints/audit-fixes/before/`.
 
-- [ ] **Step 1:** Keep a production build of `613589a` for the before side of every comparison: `git worktree add ../nt-before 613589a`, build it there with the CI env (local `turbopack.root` edit in that worktree only, never committed), and start it on port 3200.
-- [ ] **Step 2:** Capture the before shots of the visual items at 1440 and 390, EN and AR, into `docs/checkpoints/audit-fixes/before/`: home (hero, the strip, How we work), each category opening, Events › "Choose the mood" at 390, `/work`, `/services` end, the sports and airline case studies, the Contact brief, the header at 900–1023 (EN, AR), the 404 tab title (a text file). Use `scripts/shots.mjs` (read its arguments first); webp, as in `docs/review/shots/`.
+- [ ] **Step 1:** Keep a production build of `e19404f` for the before side of every comparison: `git worktree add ../nt-before e19404f`, build it there with the CI env (local `turbopack.root` edit in that worktree only, never committed), and start it on port 3200.
+- [ ] **Step 2:** Capture the before shots of the visual items at 1440 and 390, EN and AR, into `docs/checkpoints/audit-fixes/before/`: home (hero, the strip, How we work), each category opening, Events › "Choose the mood" at 390, `/work`, `/services` end, the football league and airline case studies, the Contact brief, the header at 900–1023 (EN, AR), the 404 tab title (a text file). Use `scripts/shots.mjs` (read its arguments first); webp, as in `docs/review/shots/`.
 - [ ] **Step 3:** Commit: `docs(checkpoints): audit fixes before shots`.
 
 ### Task 1: Copy fixes (N13, N15, N18)
 
 **Files:**
-- Modify: `src/content/form-copy.ts` (`privacy.text`, `consultation.submit`), `src/content/software/page.ts` (`book`, line ~478 sentence), `src/content/categories.ts:240` (the FAQ answer), the product-link strings («تعرّف على ما سيقدّمه …»; find with `grep -rn "سيقدّمه" src`), the Google/Meta service title in `src/content/services.ts`, the mobile-menu numeral spacing in `src/components/layout/mobile-menu.tsx`.
+- Modify: `src/content/form-copy.ts` (`privacy.text`, `consultation.submit`), `src/content/software/page.ts` (`cta.book`, `sticky.book`, `productsCopy.more`, line ~478 sentence), `src/messages/{en,ar}.json` (`header.quote` AR → «اطلبوا عرض سعر»), `src/content/categories.ts:240` (the FAQ answer), the product-link strings («تعرّف على ما سيقدّمه …»; find with `grep -rn "سيقدّمه" src`), the Google/Meta service title in `src/content/services.ts`, the mobile-menu numeral spacing in `src/components/layout/mobile-menu.tsx`.
 - Test: `src/content/form-copy.test.ts`, `src/content/content.test.ts`.
 
 - [ ] **Step 1: Write the failing tests**
-  - `form-copy.test.ts › privacy line is the short one`: `formCopy.privacy.text.en === "We use your details only to reply to you."` and `.ar === "نستخدم بياناتك للرد عليك فقط."`.
-  - `content.test.ts › no "30-min" call wording remains`: walk every string in `src/content/**` and both message files; none matches `/30-min|30 دقيقة/`. The intro-call CTA equals `"Request a free intro call"` / `"اطلب مكالمة تعارف مجانية"` (`softwarePage.book`, `formCopy.consultation.submit`).
-  - `content.test.ts › Arabic product links agree in gender`: the two strings equal `اكتشف ما ستقدّمه «الدقيقة صفر»` and `اكتشف ما ستقدّمه «ساعة الذروة»`.
+  - `form-copy.test.ts › privacy line is the short one`: `formCopy.privacy.text.en === "We use your details only to reply to you."` and `.ar === "نستخدم بياناتكم للرد عليكم فقط."`.
+  - `content.test.ts › no call button carries a duration`: the button labels `softwarePage.cta.book`, `softwarePage.sticky.book` and `formCopy.consultation.submit` (EN and AR) don't match `/30|٣٠|min|دقيقة/`. The test doesn't check other strings: the line beside the button may say the call lasts 30 minutes (R1). Exact values: `cta.book` and `consultation.submit` = `"Request a free intro call"` / `"اطلبوا مكالمة تعارف مجانية"`; `sticky.book` = `"Request a free call"` / `"اطلبوا مكالمة مجانية"`.
+  - `content.test.ts › the quote button is in the plural`: `header.quote` in `ar.json` equals `"اطلبوا عرض سعر"`.
+  - `content.test.ts › Arabic product links agree in gender`: the rendered strings equal `اكتشفوا ما ستقدّمه «الدقيقة صفر»` and `اكتشفوا ما ستقدّمه «ساعة الذروة»` (template `productsCopy.more` = `اكتشفوا ما ستقدّمه «{product}»`).
   - `content.test.ts › Google/Meta title`: the AR title is `الإعلانات المدفوعة وتخطيط الإعلام (Google وMeta)`.
 - [ ] **Step 2:** Run `npx vitest run src/content`. Expected: the four tests FAIL.
-- [ ] **Step 3:** Change the strings. The sticky-bar short label (AR «اطلب مكالمة مجانية», EN unchanged unless it contains "Book") follows §6.1. In the mobile menu, put a real space (or `gap` on the flex row) between the numeral and the title so AR reads «الفعاليات والضيافة 01»; it's a layout gap, not a typed space, if the numeral is its own element.
+- [ ] **Step 3:** Change the strings. The sticky-bar short label is EN "Request a free call" / AR «اطلبوا مكالمة مجانية». In the mobile menu, put a real space (or `gap` on the flex row) between the numeral and the title so AR reads «الفعاليات والضيافة 01»; it's a layout gap, not a typed space, if the numeral is its own element.
 - [ ] **Step 4:** Run `npx vitest run src/content`. Expected: PASS.
 - [ ] **Step 5:** Commit: `fix(copy): N13 intro call, N15 privacy line, N18 Arabic fixes`.
 
@@ -120,7 +130,7 @@
   - `Choose the mood keeps its gutter at 390` (mobile, `/en` and `/ar` Events): every text element in `#celebrations` other than the scrolling photo row has `rect.left >= 16 - 1` and `rect.right <= innerWidth - 16 + 1`.
 - [ ] **Step 2:** Run. Expected: FAIL (40 px vs 120 px; the clipped lead).
 - [ ] **Step 3:** Implement: the process content inside the page `.frame` (the pin wrapper stays as is; D117's `align-self: start` stays). The mood text and card get the gutter (`padding-inline: var(--gutter-start) var(--gutter-end)`); only the photo row scrolls. N21: shrink the vertical gaps between the facts and the result block on the case template (all cases, layout only; target: no empty band taller than ~40% of the viewport at 1440).
-- [ ] **Step 4:** Run `overflow.spec.ts` and `pin-build-scroll.spec.ts`. Expected: PASS. Take N21 after-shots (sports case, 1440 and 390, EN/AR) into `docs/checkpoints/audit-fixes/after/`.
+- [ ] **Step 4:** Run `overflow.spec.ts` and `pin-build-scroll.spec.ts`. Expected: PASS. Take N21 after-shots (the football league case, 1440 and 390, EN/AR) into `docs/checkpoints/audit-fixes/after/`.
 - [ ] **Step 5:** Commit: `fix(layout): N07 process on the grid, N11 mood gutter, N21 case spacing`.
 
 ### Task 6: N08 Work filters threshold, N16 closing blocks
@@ -136,12 +146,33 @@
 
 - [ ] **Step 1: Write the failing tests**
   - `work-filter.test.ts › filters show from six projects`: `showWorkFilters(5) === false`, `showWorkFilters(6) === true`, `showWorkFilters(0) === false`.
-  - `work.spec.ts › with fewer than six projects there is no filter bar`: `/en/work` has no `nav#filters` (today's data has 3); the filtered URLs (`/en/work?category=…` or the static filter routes) still render their cases (a filtered view stays reachable from category pages; the chips just don't show).
+  - `work.spec.ts › with fewer than six projects there is no filter bar`: `/en/work` has no `nav#filters` (today's data has 2); the filtered URLs (`/en/work?category=…` or the static filter routes) still render their cases (a filtered view stays reachable from category pages; the chips just don't show).
   - `work.spec.ts › /work and /services end with the closing block`: the last section before the footer has the heading `"Planning something like this?"` (`/en/work`) / `"Not sure which service you need?"` (`/en/services`) and a link named "Request a quote" to `/en/contact`; AR equivalents from §7.1/§4.1.
 - [ ] **Step 2:** Run. Expected: FAIL.
 - [ ] **Step 3:** Implement. Copy exactly from §4.1 and §7.1.
 - [ ] **Step 4:** Run. Expected: PASS.
 - [ ] **Step 5:** Commit: `feat(work): N08 filters from six projects, N16 closing blocks`.
+
+### Task 6B: Grids that follow the number of cards (Home's work, Software's proof)
+
+Owner-approved 2026-11-18. At 1440 today, Home's work grid was drawn for three cards (`7fr 5fr`, the lead spans two rows), so with two the second column ends early. Software's proof grid is two columns with one card, so half the row is empty. Both layouts must follow the card count from CSS alone: add a card and the designed layout returns with no code change.
+
+**Files:**
+- Modify: `src/components/sections/work/work.css` (the `@media (min-width: 900px)` block, lines ~110–118), `src/components/software/software.css` (`.sw-proof-grid`, `.sw-proof-card`, lines ~725–745). Markup changes only if a selector needs a hook (none expected).
+- Test: `e2e/grid-count.spec.ts` (new, desktop project).
+
+**Interfaces:** CSS quantity queries on the container, e.g. `.work-grid:has(> :nth-child(3))` / `.sw-proof-grid:has(> :only-child)`. No count is passed from React, so nothing in TSX changes when a case or a proof card is added.
+
+- [ ] **Step 1: Write the failing tests** in `grid-count.spec.ts` (1440×900, `/en` and `/ar`, reduced motion so reveals are final):
+  - `two work cards sit side by side at equal width`: in `#work .work-grid`, the two `.work-card` boxes have widths within 2 px of each other and the same top within 2 px; neither spans two rows (computed `grid-row-end` is not `span 2`).
+  - `a third work card brings back the designed grid`: clone the second `.work-card` into the list with `page.evaluate`, then: the first card's width is greater than the second's by at least 20%, and the second and third cards share the same inline column (left within 2 px EN, right within 2 px AR) and stack (third top > second bottom).
+  - `one proof card takes the full row, image beside text`: on `/en/services/software-digital` and `/ar/...`, `.sw-proof-card`'s width is within 2 px of `.sw-proof-grid`'s; `.sw-proof-visual` and `.sw-proof-label` share a row (their vertical ranges overlap), the visual on the inline-start side (EN: visual.left < label.left; AR: visual.right > label.right).
+  - `a second proof card brings back two columns`: clone the card in place → two cards of equal width (± 2 px) side by side, and in each the visual sits above the label (visual.bottom ≤ label.top).
+  - At 390 (mobile project, one test): Home's work cards and the proof card stack in one column as today (each card's width within 2 px of its grid's).
+- [ ] **Step 2:** Run. Expected: FAIL (2 work cards are `7fr`/`5fr`; the proof card is half width).
+- [ ] **Step 3:** Implement. Work, ≥ 900 px: the default is `repeat(2, minmax(0, 1fr))` with no row span and `aspect-ratio` the same on both media; `.work-grid:has(> :nth-child(3))` restores today's `7fr 5fr`, `[data-lead] { grid-row: span 2 }` and the lead's `4 / 3`. Proof, ≥ 900 px: `.sw-proof-grid:has(> :only-child) > .sw-proof-card` becomes a two-column card (`grid-template-columns: minmax(0, 7fr) minmax(0, 5fr)`, the visual in the first column spanning the text rows, the text aligned to the visual's centre, `margin-block-end: 0` on the visual); with two or more cards today's rules apply unchanged. Logical properties only; RTL mirrors through the grid. The reveal (`data-sw-reveal`) and the hover rules stay as they are.
+- [ ] **Step 4:** Run `grid-count.spec.ts`, `software.spec.ts` (if it exists) and `cls.spec.ts`. Expected: PASS. Take after-shots: Home's work section and Software's proof, 1440 and 390, EN and AR, into `docs/checkpoints/audit-fixes/after/` (no owner gate: approved as described).
+- [ ] **Step 5:** Commit: `fix(layout): Home's work and Software's proof follow the card count`.
 
 ### Task 7: N10 event fields and the category hint: schema, rules, email
 
@@ -248,14 +279,14 @@
 ### Task 11: N05 (B1) the home hero and the strip
 
 **Files:**
-- Modify: `src/components/sections/hero/hero.tsx`, `hero-controller.tsx` (drop the beat's tweens; shorten `end: "+=140%"`), `hero.css` (remove `.hero-beat`; add the eyebrow and the two CTAs), `src/app/globals.css:534` (`.hero-pin` reservation in step with the new end), `src/messages/{en,ar}.json` (`hero.eyebrow` = "Every second is planned." / «كل ثانية محسوبة.»; `hero.cta` = "Plan your event" / «خطّط لفعاليتك معنا»; `hero.ctaWork` = "See our work" / «شاهد أعمالنا»; remove `beatLead`, `beatKey`), `src/app/[locale]/(site)/page.tsx` (the strip after `<Hero />`), `src/components/sections/work/work.tsx` (the strip leaves).
+- Modify: `src/components/sections/hero/hero.tsx`, `hero-controller.tsx` (drop the beat's tweens; shorten `end: "+=140%"`), `hero.css` (remove `.hero-beat`; add the eyebrow and the two CTAs), `src/app/globals.css:534` (`.hero-pin` reservation in step with the new end), `src/messages/{en,ar}.json` (`hero.eyebrow` = "Every second is planned." / «كل ثانية محسوبة.»; `hero.cta` = "Plan your event" / «خطّطوا لفعاليتكم معنا»; `hero.ctaWork` = "See our work" / «شاهدوا أعمالنا»; remove `beatLead`, `beatKey`), `src/app/[locale]/(site)/page.tsx` (the strip after `<Hero />`), `src/components/sections/work/work.tsx` (the strip leaves).
 - Test: `e2e/hero-intro.spec.ts`, `e2e/hero-fit.spec.ts`, `e2e/pin-build-scroll.spec.ts`, `e2e/no-js.spec.ts`, `e2e/photo-stories-reduced.spec.ts`.
 
 **Interfaces:** Consumes `PhotoStrip` and `STRIP` as `work.tsx` uses them today (same `id="work-strip"`; rename to `home-strip` and update every reference, including `scripts/scroll-jank.mjs` defaults and specs, found with `grep -rn "work-strip"`).
 
 - [ ] **Step 1: Write the failing tests** in `hero-intro.spec.ts`:
   - `the hero says it in one screen`: `/en` and `/ar`, desktop and mobile: the eyebrow text above the H1 is "Every second is planned." / «كل ثانية محسوبة.» and visible without scrolling; `.hero-beat` and the sr-only duplicate don't exist; the eyebrow is read once (`getByText` count 1).
-  - `two actions`: a link "Plan your event" → `/en/contact`, a link "See our work" → `/en/work` (AR names from §2.2), both inside the first viewport at 390×844 and 1440×900.
+  - `two actions`: a link "Plan your event" → `/en/contact`, a link "See our work" → `/en/work` (AR «خطّطوا لفعاليتكم معنا» and «شاهدوا أعمالنا»), both inside the first viewport at 390×844 and 1440×900.
   - `the strip comes right after the hero`: `main`'s second top-level block is `#home-strip`; `#work` no longer contains it.
   - `the exit still completes`: scroll to the hero pin's end → the title/clock exit's end state (the existing exit assertion in this spec, re-pointed at the new end).
   - `pin-build-scroll.spec.ts` keeps its floor tests (they read the reservation, so they catch a mismatched `.hero-pin` value).
@@ -298,18 +329,18 @@
 
 ### Task 14: Docs: launch checklist, v1.1, decisions
 
-**Files:** Create `docs/launch/checklist.md` (or extend the existing launch doc in `docs/launch/`); modify `docs/plans/v1.1.md`, `docs/DECISIONS.md` (D118+), `docs/review/decisions-to-confirm.md`, `docs/HANDOFF.md`.
+**Files:** Create `docs/launch/checklist.md` (or extend the existing launch doc in `docs/launch/`); modify `docs/plans/v1.1.md`, `docs/DECISIONS.md` (D125+), `docs/review/decisions-to-confirm.md`, `docs/HANDOFF.md`.
 
 - [ ] **Step 1:** Launch checklist, N03: the two Turnstile env vars (public one at build time), the hostnames (`notimehub.com`, `www.notimehub.com`), the real-send matrix from the spec (four forms × EN/AR × iPhone Safari, Android Chrome, desktop Chrome and Safari), and the blocked-Turnstile fallback test (block `challenges.cloudflare.com`, the email fallback shows). Pass criteria as in the spec.
 - [ ] **Step 2:** v1.1: N13 (B) Cal.com; N14 page length; N20 marquee → one small line (not removed); the rest of N19 (24 px targets etc.); lazy setup of the photo stories with TBT re-measured; a real photo in the home hero on phones, or at every size once ≥ 2000 px photos arrive.
-- [ ] **Step 3:** DECISIONS D118+ (one line each, with the reason): the CTA bar (N04) and its exclusions; the category hint (UI only); the hiding header and its `translate` contract; N05 B1 and the measured pin end; N06 A (when merged); N10's month select and dropped hint; N12's EN hide range; `HEADER_LINKS` vs `NAV_LINKS`; the Work filter threshold. Mirror the calls in `decisions-to-confirm.md` with a recommendation each.
+- [ ] **Step 3:** DECISIONS D125+ (one line each, with the reason): the CTA bar (N04) and its exclusions; the category hint (UI only); the hiding header and its `translate` contract; N05 B1 and the measured pin end; N06 A (when merged); N10's month select and dropped hint; N12's EN hide range; `HEADER_LINKS` vs `NAV_LINKS`; the Work filter threshold; Task 6B's card-count grids. Mirror the calls in `decisions-to-confirm.md` with a recommendation each.
 - [ ] **Step 4:** Commit: `docs: audit fixes decisions, launch checklist, v1.1`.
 
 ### Task 15: Review, verification and the done checks
 
 - [ ] **Step 1:** `superpowers:requesting-code-review` by a fresh agent on `phase-2-services..audit-fixes` (and each gated branch when it's ready). Fix Critical/Important, then re-run the touched tests.
 - [ ] **Step 2:** Full local run: `npm run lint && npm run typecheck && npm test`, then `npx playwright test` against port 3000 (CI-equivalent build). Report pass / flaky / fail separately (retry-pass = flaky).
-- [ ] **Step 3:** axe-core (WCAG 2.0/2.1 A and AA) on the nine pages, EN and AR, 390 and 1440: `/`, `/services`, `/services/events-hospitality`, `/services/software-digital`, `/work`, the sports case study, `/about`, `/contact`, `/links`. Pass: no serious or critical violation.
+- [ ] **Step 3:** axe-core (WCAG 2.0/2.1 A and AA) on the nine pages, EN and AR, 390 and 1440: `/`, `/services`, `/services/events-hospitality`, `/services/software-digital`, `/work`, the football league case study (`/work/football-league-events-awards`), `/about`, `/contact`, `/links`. Pass: no serious or critical violation.
 - [ ] **Step 4:** Lighthouse mobile, ab method, before (port 3200) vs after (port 3000), same machine, nothing else running: `/en`, `/en/services/events-hospitality` (after N06 merges; until then the current category page), `/en/links`. Pass: no LCP or CLS regression; `/links` ≥ 95. Write `docs/checkpoints/lighthouse/audit-fixes/README.md`.
 - [ ] **Step 5:** Screenshots of every page at 1440 and 390, EN and AR, into `docs/checkpoints/audit-fixes/after/` (`scripts/m3-shots.mjs`), and the before/after pairs for the visual items (N05, N06, N07, N11, N12, N21, the CTA bar, the hiding header).
 - [ ] **Step 6:** `superpowers:verification-before-completion`, then push and run the CI `workflow_dispatch`; record the run number. Red blocks the report.
