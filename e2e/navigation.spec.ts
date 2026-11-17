@@ -73,3 +73,51 @@ for (const locale of ["en", "ar"] as const) {
     });
   });
 }
+
+/** N12: Events sits in the desktop main menu, between Services and Digital Solutions. */
+const MENU = {
+  en: ["Services", "Events", "Digital Solutions", "Work", "About"],
+  ar: ["الخدمات", "الفعاليات", "الحلول الرقمية", "أعمالنا", "من نحن"],
+} as const;
+
+test.describe("main menu: Events (N12)", () => {
+  test.beforeEach(({ page }) => {
+    test.skip((page.viewportSize()?.width ?? 0) < 900, "desktop project only");
+  });
+
+  for (const locale of ["en", "ar"] as const) {
+    test(`the main menu reads ${MENU[locale].join(", ")} (${locale})`, async ({ page }) => {
+      await gotoReady(page, `/${locale}`);
+      const items = page.locator("#site-header nav > div > button, #site-header nav > a");
+      const texts = (await items.allTextContents()).map((s) => s.replace(/\s+/g, " ").trim());
+      expect(texts).toEqual([...MENU[locale]]);
+    });
+  }
+
+  test("Events is current on its page", async ({ page }) => {
+    await gotoReady(page, "/en/services/events-hospitality");
+    const events = page.locator("#site-header nav a", { hasText: "Events" });
+    await expect(events).toHaveAttribute("aria-current", "page");
+    await expect(page.locator("#site-header nav a[aria-current=page]")).toHaveCount(1);
+  });
+
+  test("EN hides Events between 900 and 1023, AR keeps it; the row never wraps", async ({ page }) => {
+    for (const [locale, name] of [["en", "Events"], ["ar", "الفعاليات"]] as const) {
+      for (const width of [900, 960, 1023, 1024]) {
+        await page.setViewportSize({ width, height: 800 });
+        await gotoReady(page, `/${locale}`);
+        const events = page.locator("#site-header nav a", { hasText: name });
+        if (locale === "en" && width < 1024) await expect(events).toBeHidden();
+        else await expect(events).toBeVisible();
+        const headerH = await page.evaluate(() => parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-h")));
+        const row = await page.locator("#site-header .frame").boundingBox();
+        expect(row?.height).toBe(headerH);
+        // One line: every nav item sits on the same row.
+        const tops = await page.locator("#site-header nav > *:visible").evaluateAll((els) => els.map((e) => { const r = e.getBoundingClientRect(); return Math.round(r.top + r.height / 2); }));
+        expect(Math.max(...tops) - Math.min(...tops), `${locale}@${width} wraps: ${tops}`).toBeLessThanOrEqual(2);
+        const nav = await page.locator("#site-header nav").boundingBox();
+        expect(nav!.height).toBeLessThan(headerH);
+      }
+    }
+  });
+});

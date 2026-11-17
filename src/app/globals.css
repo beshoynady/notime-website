@@ -13,6 +13,8 @@
 @custom-variant ltr (&:where([dir="ltr"], [dir="ltr"] *));
 /* Arabic-only adjustments (no tracking, no uppercase, one step larger). */
 @custom-variant lang-ar (&:lang(ar));
+/* English-only (the header drops Events between 900 and 1023px in EN, where the row is full). */
+@custom-variant lang-en (&:lang(en));
 /* Tone variants keyed off the nearest data-tone ancestor. */
 @custom-variant tone-dark (&:where([data-tone="dark"], [data-tone="dark"] *));
 @custom-variant tone-light (&:where([data-tone="light"], [data-tone="light"] *));

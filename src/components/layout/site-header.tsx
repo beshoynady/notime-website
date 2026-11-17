@@ -1,5 +1,5 @@
 import { useLocale, useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { NavLink } from "./nav-link";
 import { ButtonLink } from "@/components/ui/button";
 import { LangToggle } from "./lang-toggle";
 import { Logo } from "./logo";
@@ -7,7 +7,7 @@ import { MegaMenu } from "./mega-menu";
 import { MobileMenu } from "./mobile-menu";
 import { getMenuData } from "./menu-data";
 import { liveLinks } from "@/lib/content-status";
-import { NAV_LINKS, QUOTE_LINK } from "./nav-links";
+import { HEADER_LINKS, QUOTE_LINK } from "./nav-links";
 import type { Locale } from "@/content";
 
 /**
@@ -43,17 +43,20 @@ export function SiteHeader() {
           >
             <MegaMenu data={menu} />
             {/* Contact is the quote button here; the footer lists it (M3). */}
-            {liveLinks(NAV_LINKS.filter((l) => l.key !== "contact")).map(
-              (l) => (
-                <Link
-                  key={l.key}
-                  href={l.href}
-                  className="nav-link no-underline"
-                >
-                  {t(`nav.${l.key}`)}
-                </Link>
-              ),
-            )}
+            {liveLinks(HEADER_LINKS).map((l) => (
+              <NavLink
+                key={l.key}
+                href={l.href}
+                // EN is wider: between 900 and 1023px the row has no room for Events (CSS, never JS).
+                className={
+                  l.key === "events"
+                    ? "lang-en:min-[900px]:max-[1023.98px]:hidden"
+                    : undefined
+                }
+              >
+                {t(`nav.${l.key}`)}
+              </NavLink>
+            ))}
           </nav>
           <div className="flex items-center gap-3">
             <LangToggle />
