@@ -1,6 +1,6 @@
 # Audit fixes before launch: design
 
-2026-11-17. Source: the independent UX audit (`docs/review/ux-audit.md`, notes N01–N22; benchmark in `docs/review/benchmark.md`; shots in `docs/review/shots/`). The owner chose what to build (message of 2026-11-17) and approved the approaches below with six changes, all folded in here.
+2026-11-17. Source: the independent UX audit (`docs/review/ux-audit.md`, notes N01–N22; benchmark in `docs/review/benchmark.md`; shots in `docs/review/shots/`). The owner chose what to build (message of 2026-11-17) and approved the approaches below with six changes, then the design with the answers of the second message; all folded in here. **Status: approved 2026-11-17.**
 
 ## Intent
 
@@ -27,15 +27,15 @@ Logical properties only; EN + native AR strings in `src/messages` or content fil
 
 ### N03 · Turnstile keys (owner sets them)
 - `NEXT_PUBLIC_TURNSTILE_SITE_KEY` (public; must be present **at build time**, it is inlined) and `TURNSTILE_SECRET_KEY` (server, runtime). Locally in `.env.local`; on the host in the app's environment variables. In Cloudflare, the widget's hostnames include `notimehub.com` and `www.notimehub.com`. Without them a production build refuses every form by design (D102).
-- **Not part of this plan's "done"** (it needs the keys, the Resend domain and the deployed site): it goes into the launch checklist (`docs/launch/`) as written below.
+- **Not part of this plan's "done"** (it needs the keys, the Resend domain and the deployed site): it goes into the launch checklist (`docs/launch/`) as written below, including the blocked-Turnstile fallback test (owner).
 - **Real-send test plan** (after the keys and the Resend domain are live), on the production domain: iPhone Safari, Android Chrome, desktop Chrome and Safari; each of Contact (with `?service=` preset), Software consultation, website review, product interest; EN and AR. Pass = the team email arrives with the lead-source rows, the auto-reply arrives in the page's language, the success state shows. Then one failure case: block `challenges.cloudflare.com` and check the email fallback. Result logged in `docs/launch/`.
 
 ### N04 · Mobile CTA bar (all pages except `/contact` and `/links`)
 - One client component in the site shell (`src/components/layout/`), generalized from `src/components/software/sticky-bar.tsx`: below 900 px only; hidden on desktop.
-- **Content:** "Request a quote" / «اطلب عرض سعر» (the header's string) full width. When `contactStatus(contact).whatsapp` is true it becomes two equal halves, the second "WhatsApp" / «واتساب» through `WhatsAppLink` (the source-naming message, D114). The quote link carries no preset (builder's call, below: the brief presets one of the 30 services, never a category, and adding category values would change the schema for little gain). Software keeps its two actions ("Request a free intro call" per N13, and the free website review).
+- **Content:** "Request a quote" / «اطلب عرض سعر» (the header's string) full width. When `contactStatus(contact).whatsapp` is true it becomes two equal halves, the second "WhatsApp" / «واتساب» through `WhatsAppLink` (the source-naming message, D114). On a category page the quote link is `/contact?category=<slug>` (owner): a UI-only hint that opens that category's service group in the brief and, for `events-hospitality`, shows the event fields (N10). It is not stored, not sent and not in the email; the schema doesn't change. Elsewhere the link is plain `/contact`. Software keeps its two actions ("Request a free intro call" per N13, and the free website review).
 - **When:** appears once the page's opening has scrolled away (each page marks its opening with one attribute; pages without one use the first section); hides while any form is in view and while a text field has focus (the on-screen keyboard), exactly as Software's does today.
 - **Height 56 px** plus the safe area; its height is reserved at the page's end so it never covers the footer; `scroll-padding-block-end` while it shows.
-- **WhatsApp button:** on phones the floating button hides whenever the bar exists (the bar carries WhatsApp); on desktop it stays.
+- **WhatsApp button:** on phones the floating button hides whenever the shared bar exists (the bar carries WhatsApp); on desktop it stays. **Software** (its bar keeps its two actions, so it has no WhatsApp half): the floating button stays on phones, positioned above its bar (owner).
 - **Events › private celebrations stack (390):** the sticky cards reserve the bar's height at their bottom so the last card isn't covered.
 - `/links` is outside the site shell (plain HTML), so it never gets the bar; `/contact` opts out.
 
@@ -43,14 +43,15 @@ Logical properties only; EN + native AR strings in `src/messages` or content fil
 - On the five category pages below 900 px (Software included, my call: it has no pin at phone width and keeps its own sticky bar), the header slides up when the visitor scrolls down and returns on any scroll up; the service chip bar and the CTA bar stay.
 - **No CLS:** both the header and the chip bar move with `transform` only (the chip bar translates up by the header's height in step with it). Nothing changes `top`, height or layout; transforms don't count as layout shift. Checked by a CLS assertion in e2e.
 - **No pin conflict:** after N06 there is no pinned scene on category pages at phone width (the opening pin goes; it was the only one at 390).
-- **Two small side effects, accepted unless the owner says otherwise:** (1) the private-celebrations cards stick at their usual offset, so with the header hidden there is a 68 px gap above them; (2) an in-page jump downwards (the chip bar, "Go to the services") lands with the header's 68 px of extra space above the heading, since the header hides as the page moves down.
+- **The private-celebrations cards move with the header too,** by transform, like the chip bar, so no gap opens above them (owner: the 68 px gap is not accepted). If that can't be done cleanly (sticky children inside a transformed box), a 390 screenshot goes to the owner before deciding.
+- **Accepted side effect:** an in-page jump downwards (the chip bar, "Go to the services") lands with the header's 68 px of extra space above the heading, since the header hides as the page moves down.
 - The header returns when anything in it gets keyboard focus, when a menu opens, and at the top of the page. Reduced motion: it shows and hides without a transition.
 
 ### N05 (B1) · Home hero
 - Keep the clock hero, its intro and the title/clock exit; remove the second-beat screen. The hero pin shortens to what the exit needs (the builder measures it; today 140 svh, the beat takes part of it); the CSS reservation (`.hero-pin`, D112/D117) changes with it.
 - "Every second is planned." / «كل ثانية محسوبة.» becomes an eyebrow above the H1 (real text, read once; the sr-only duplicate goes).
 - Two CTAs: primary "Plan your event" / «خطّط لفعاليتك معنا» → `/contact`; secondary "See our work" / «شاهد أعمالنا» → `/work`. The lead line is unchanged.
-- The photo strip ("Rooms we dressed, tables we set.") moves from the end of Work to right after the hero, keeping its desktop horizontal hold and its phone swipe row. LCP stays the H1.
+- The photo strip ("Rooms we dressed, tables we set.") moves from the end of Work to right after the hero (its six photos are all from NO TIME's company profile, pages 4, 9, 10, 31, 32: `docs/content/profile-inventory.md`; none temporary), keeping its desktop horizontal hold and its phone swipe row. LCP stays the H1.
 ```
 ┌──────── header ────────┐
 │  ◯ clock (translucent)   │
@@ -64,7 +65,7 @@ Logical properties only; EN + native AR strings in `src/messages` or content fil
 ```
 
 ### N06 (A) · Category openings (Events, Creative, Marketing, Print)
-- **Hero:** the LayeredScene rendered in its final still (the state reduced motion shows today), unpinned, one screen high: breadcrumbs, eyebrow, H1, the last shot line as the lead, "Request a quote" (no preset, as the bar) and "Go to the services ↓".
+- **Hero:** the LayeredScene rendered in its final still (the state reduced motion shows today), unpinned, one screen high: breadcrumbs, eyebrow, H1, the last shot line as the lead, "Request a quote" (`/contact?category=<slug>`, as the bar) and "Go to the services ↓".
 - **Events hero image:** the room photo is 1600 px wide; a dark gradient from the text side plus a light overall dim so its softness doesn't show at 1440. Screenshots at 1440 EN and AR go to the owner **before merging** (owner's change 3).
 - **Build scene:** the existing pinned LayeredScene follows the hero on desktop with motion only (same scene, its shots, its reservation); not rendered on phones or under reduced motion.
 - **LCP:** the hero image is loaded with priority. Before/after Lighthouse on the same machine (ab method) on Events and one other category; **if LCP regresses, stop and report before merging** (owner's change 4).
@@ -79,13 +80,13 @@ phone:   [hero: finished scene + H1 + Request a quote] → services
 
 ### N08 · Work
 - Filters hidden while there are fewer than 6 projects (a constant, tested); a closing block at the end of `/work` (copy N16, reusing `workCase.ctaTitle`).
-- Real project photos only where the project's own photos exist (`public/images/work/`), cropped to hide the client where the case is anonymous. No stand-ins (CLAUDE.md).
+- The anonymous cases keep their drawings (owner): no cropped client photos until a client approves its name or photos.
 
 ### N09 · "360°" → "30 services"
 - The second stat on the home About block and on `/about` (copy §2.4/§8.1). The number comes from the services data (count of services), not typed.
 
 ### N10 · Event date and guests (Contact brief)
-- Two optional fields, shown only when the chosen service is in Events & Hospitality or is "not sure yet": "Event date (approximate)" (month precision is enough; a month input or month + year selects) and "Number of guests" in bands (Up to 50 · 50–150 · 150–500 · Over 500 · Not sure yet). The current "When is it?" stays for other services. Labels from copy §9.1 (needed by the decided item; owner may adjust).
+- Two optional fields, shown only when the chosen service is in Events & Hospitality, or when the page was opened with `?category=events-hospitality` (owner); with no service chosen the general "When is it?" shows: "Event date (approximate)" (month precision is enough; a month input or month + year selects) and "Number of guests" in bands (Up to 50 · 50–150 · 150–500 · Over 500 · Not sure yet). "When is it?" stays for every other case and hides while the event fields show. Labels from copy §9.1 (needed by the decided item; owner may adjust).
 - Schema, server re-parse and the team email rows extended; tests for the show/hide rule and validation.
 
 ### N11 · Clipped text in "Choose the mood" (Events, 390)
@@ -128,12 +129,12 @@ N13 (B) Cal.com booking after the form; N14 page length; N20 the services marque
 - Screenshots of every page at 1440 and 390, EN and AR, in `docs/checkpoints/audit-fixes/`, with before/after for the visual items.
 - The review link on a production build of HEAD; DECISIONS D118+.
 
-## Calls made while writing (owner can overrule)
-- No category preset on the CTA bar and the category hero button (see N04).
+## Calls settled with the owner
+- Category pages link to `/contact?category=<slug>` (UI hint only, no schema change); elsewhere plain `/contact`.
 - The hiding header also applies to Software's page.
-- The N03 real-send test is a launch-checklist item, not part of this plan's "done".
-- N10: "not sure yet" is the empty default, so the event fields show on a plain `/contact`; "When is it?" hides while they show.
-- N13 wording drops "30-min" ("Request a free intro call"), as the owner wrote it.
+- The N03 real-send test (with the blocked-Turnstile fallback) is a launch-checklist item, not part of this plan's "done".
+- N10: event fields only for an Events service or `?category=events-hospitality`; otherwise the general "When is it?".
+- N13 wording drops "30-min" ("Request a free intro call").
 - The owner-gated items (the Events hero image, the photo grade) are built on their own branches so the rest can merge without waiting.
 
 ## Left to the builder
