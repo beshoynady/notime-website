@@ -373,6 +373,7 @@ html[dir="rtl"] .lr-plinth svg {
 }
 .cm-grid {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
 }
 @media (min-width: 760px) {
@@ -386,6 +387,10 @@ html[dir="rtl"] .lr-plinth svg {
   grid-template-columns: 1.3fr 1fr;
   grid-template-rows: 1fr 1fr;
   gap: 8px;
+  /* The width is the column's, never derived: min-block-size 300 through the 4/3 ratio asked for
+     400px and pushed the module 26px past the 390 gutter. */
+  inline-size: 100%;
+  min-inline-size: 0;
   min-block-size: 300px;
   aspect-ratio: 4 / 3;
 }
