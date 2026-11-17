@@ -2,8 +2,10 @@ import { ArrowRight } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { CaseMedia } from "@/components/pages/case-media";
 import { PageCrumbs } from "@/components/pages/page-crumbs";
+import { ClosingCta } from "@/components/sections/closing-cta/closing-cta";
 import { SectionRef } from "@/components/review/section-ref";
 import { JsonLd } from "@/components/seo/json-ld";
+import { QUOTE_LINK } from "@/components/layout/nav-links";
 import { ButtonLink } from "@/components/ui/button";
 import { SITE_URL } from "@/config/site";
 import { BREADCRUMB_LABELS, getCategories, getCategory, SERVICES_INDEX_HREF, workHref, WORK_INDEX_HREF, type Locale } from "@/content";
@@ -28,7 +30,7 @@ const MARKET_KEYS = markets.map((m) => m.key);
  * view with no case shows the empty state, which points to all work and to the services.
  */
 export async function WorkIndex({ locale, filter }: { locale: Locale; filter: WorkFilter }) {
-  const [t, tw, tm] = await Promise.all([getTranslations("workIndex"), getTranslations("work"), getTranslations("markets")]);
+  const [t, tw, tm, tc, th] = await Promise.all([getTranslations("workIndex"), getTranslations("work"), getTranslations("markets"), getTranslations("workCase"), getTranslations("header")]);
   const cases = applyFilter(workItems, filter).map((w) => ({ item: w, view: workView(w) }));
   const chips = facetChips(workItems, filter, CATEGORY_SLUGS, MARKET_KEYS);
   const categoryName = (c: (typeof CATEGORY_SLUGS)[number]) => getCategory(c)!.title[locale];
@@ -130,6 +132,8 @@ export async function WorkIndex({ locale, filter }: { locale: Locale; filter: Wo
           )}
         </div>
       </section>
+
+      <ClosingCta id="wk-closing" title={tc("ctaTitle")} body={t("closing.body")} href={QUOTE_LINK.href} label={th("quote")} tone="light" />
     </main>
   );
 }

@@ -10,17 +10,40 @@ test.describe("work index without JavaScript", () => {
     const cases = page.locator(".wk-case");
     await expect(cases).toHaveCount(2);
 
-    const filters = page.getByRole("navigation", { name: "Filter the work" });
-    await filters.getByRole("link", { name: /Production, Print & Gifts/ }).click();
-    await expect(page).toHaveURL(/\/en\/work\/filter\/production-print-gifts/);
+    await page.goto("/en/work/filter/production-print-gifts");
     await expect(cases).toHaveCount(1);
-    await expect(filters.locator('[aria-current="page"]').first()).toContainText("Production, Print & Gifts");
 
     await page.goto("/en/work/filter/creative-production");
     await expect(cases).toHaveCount(0);
     await page.getByRole("link", { name: "Show all work" }).click();
     await expect(page).toHaveURL(/\/en\/work$/);
   });
+});
+
+test.describe("work index chrome", () => {
+  test("with fewer than six projects there is no filter bar, but filtered views still render", async ({ page }) => {
+    await page.goto("/en/work");
+    await expect(page.locator(".wk-case")).toHaveCount(2);
+    await expect(page.locator("nav#filters")).toHaveCount(0);
+    await page.goto("/en/work/filter/production-print-gifts");
+    await expect(page.locator(".wk-case")).toHaveCount(1);
+    await expect(page.locator("nav#filters")).toHaveCount(0);
+  });
+
+  const closing = [
+    { path: "/en/work", title: "Planning something like this?", label: "Request a quote", href: "/en/contact" },
+    { path: "/ar/work", title: "تخطّطون لمشروع كهذا؟", label: "اطلبوا عرض سعر", href: "/ar/contact" },
+    { path: "/en/services", title: "Not sure which service you need?", label: "Request a quote", href: "/en/contact" },
+    { path: "/ar/services", title: "لم تحدّدوا الخدمة بعد؟", label: "اطلبوا عرض سعر", href: "/ar/contact" },
+  ];
+  for (const c of closing) {
+    test(`${c.path} ends with the closing block`, async ({ page }) => {
+      await page.goto(c.path);
+      const last = page.locator("main > section").last();
+      await expect(last.getByRole("heading", { name: c.title })).toBeVisible();
+      await expect(last.getByRole("link", { name: c.label })).toHaveAttribute("href", c.href);
+    });
+  }
 });
 
 test.describe("case pages", () => {

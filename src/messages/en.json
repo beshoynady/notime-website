@@ -554,6 +554,12 @@
     "next": "Next",
     "frame": "{n} / {total}"
   },
+  "servicesIndex": {
+    "closing": {
+      "title": "Not sure which service you need?",
+      "body": "Tell us the occasion and the date. One team will shape it with you and reply within one working day."
+    }
+  },
   "workIndex": {
     "metaTitle": "Our work",
     "metaDescription": "Selected projects by NO TIME Creative House: an airline's exhibition pavilion, and a football league's tournaments and award nights.",
@@ -571,7 +577,10 @@
     "emptyTitle": "No project to show here yet.",
     "emptyBody": "We list only work we can back with facts, so this page grows one project at a time. Clear a filter, or see what we do in this area.",
     "showAll": "Show all work",
-    "exploreServices": "Explore our services"
+    "exploreServices": "Explore our services",
+    "closing": {
+      "body": "Tell us the date and what you need. One team replies within one working day."
+    }
   },
   "workCase": {
     "factsLabel": "Key facts",
