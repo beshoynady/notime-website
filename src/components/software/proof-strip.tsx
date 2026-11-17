@@ -1,15 +1,12 @@
-import { ArrowDown } from "lucide-react";
 import { BrandImage } from "@/components/ui/brand-image";
 import type { Locale } from "@/content";
 import { cta, finalCta, proof } from "@/content/software/page";
 import { lighthouseProof, SOFTWARE_FLAGS } from "@/config/software";
 import { Laptop, Phone } from "./device-frames";
 import { ProofDevices } from "./proof-devices";
-import { RedrawLaptop, RedrawPhone } from "./redraws";
 
 /**
- * Proof, right after the hero (brief §2): the federation platform (anonymised, D67) and this
- * website, in device frames with real screenshots captured from it (EN and AR). The Lighthouse
+ * Proof, right after the hero (brief §2): this website, in device frames with real screenshots captured from it (EN and AR). The Lighthouse
  * line shows only behind its flag and at 90+ (D65; off in v1). Then the free website review CTA.
  */
 export function ProofStrip({ locale }: { locale: Locale }) {
@@ -31,24 +28,6 @@ export function ProofStrip({ locale }: { locale: Locale }) {
           {proof.title[locale]}
         </h2>
         <div className="sw-proof-grid">
-          <article className="sw-proof-card" data-sw-reveal="">
-            <div className="sw-proof-visual sw-proof-visual-redraw">
-              <div className="sw-proof-pair">
-                <Laptop className="sw-proof-laptop">
-                  <RedrawLaptop />
-                </Laptop>
-                <Phone className="sw-proof-phone">
-                  <RedrawPhone />
-                </Phone>
-              </div>
-            </div>
-            <h3 className="sw-proof-label">{proof.federation.label[locale]}</h3>
-            <p className="sw-proof-line">{proof.federation.line[locale]}</p>
-            <a href="#case-study" className="sw-link">
-              {proof.federation.link[locale]}
-              <ArrowDown aria-hidden="true" strokeWidth={1.25} className="size-4" />
-            </a>
-          </article>
           <article className="sw-proof-card" data-sw-reveal="">
             <ProofDevices
               locale={locale}

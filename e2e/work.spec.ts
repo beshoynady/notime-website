@@ -8,13 +8,13 @@ test.describe("work index without JavaScript", () => {
   test("a chip filters the list and marks itself current; an empty view points back (en)", async ({ page }) => {
     await page.goto("/en/work");
     const cases = page.locator(".wk-case");
-    await expect(cases).toHaveCount(3);
+    await expect(cases).toHaveCount(2);
 
     const filters = page.getByRole("navigation", { name: "Filter the work" });
-    await filters.getByRole("link", { name: /Software & Digital/ }).click();
-    await expect(page).toHaveURL(/\/en\/work\/filter\/software-digital/);
+    await filters.getByRole("link", { name: /Production, Print & Gifts/ }).click();
+    await expect(page).toHaveURL(/\/en\/work\/filter\/production-print-gifts/);
     await expect(cases).toHaveCount(1);
-    await expect(filters.locator('[aria-current="page"]').first()).toContainText("Software & Digital");
+    await expect(filters.locator('[aria-current="page"]').first()).toContainText("Production, Print & Gifts");
 
     await page.goto("/en/work/filter/creative-production");
     await expect(cases).toHaveCount(0);
@@ -28,7 +28,7 @@ test.describe("case pages", () => {
     test(`every case is anonymous and links to the next one (${locale})`, async ({ page }) => {
       await page.goto(`/${locale}/work`);
       const hrefs = await page.locator(".wk-link").evaluateAll((as) => as.map((a) => a.getAttribute("href")!));
-      expect(hrefs).toHaveLength(3);
+      expect(hrefs).toHaveLength(2);
       for (const href of hrefs) {
         await page.goto(href);
         await expect(page.getByRole("heading", { level: 1 })).toBeVisible();

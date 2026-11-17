@@ -18,7 +18,7 @@ Updated 2026-11-16. This list stays in the repo. The site itself never says how 
 | Software proof strip | `notime-website-home-{en,ar}`, `notime-website-category-{en,ar}` | Real screenshots of this site | No (retake after the final polish) |
 | Events opening, shot "the room" | `ev-open-room` (+ 9:16) | Real profile photo, graded (`private-celebrations-1`) | No |
 | Creative opening, the developing frame | `cp-open-frame` | Real profile photo, graded (`catering-4`) | No |
-| Work cards, case pages, related work (anonymised cases) | none | Code drawing `CaseVisual`: airline pavilion = `stand`, federation = `feed`, league = `stage` | Until the client approves the name and photos |
+| Work cards, case pages, related work (anonymised cases) | none | Code drawing `CaseVisual`: airline pavilion = `stand`, league = `stage` | Until the client approves the name and photos |
 | Named cases (private celebrations, catering, heritage, gifts) | the project's photos | Real profile photos under `public/images/work/` | No |
 | Every other scene layer (Events hall and majlis, Print bench, Marketing board, Creative studio, Software) | `src: null` | Nothing renders; the scene's code drawing is the visual | Real or graded files can be added later (`scenes/images.ts`) |
 | Home hero, category openings, service sections | none | Code-driven scenes and drawings (`ServiceDrawing`, the decorative patterns) | No |

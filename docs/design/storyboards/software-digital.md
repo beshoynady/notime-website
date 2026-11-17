@@ -15,7 +15,6 @@ The skeleton's six parts (README §1) stay, with sales blocks between them. Anch
 
 ```
  1  Opening (pinned)                         → H1, core message
- 2  #case-study    Proof: UAE Athletics Federation   (switch: off until approved, OQ #17)
  3  CTA band       Book a free 30-min intro call · WhatsApp
  4  #websites … #ai-consulting   six service scenes (compact)
  5  #event-tech    where the two worlds meet (band)
@@ -106,38 +105,6 @@ Mobile: the cursor, then the wireframe filling in, then the phone alone.
 
 ---
 
-## 2 · Proof: a national sports federation (`#case-study`, the peak)
-
-**Two variants, one switch (D67):** `caseStudies.uaeaf.named` (false).
-- **Anonymised (default, shown now):** "A national sports federation" / «اتحاد رياضي وطني».
-  - No name, no logo, no real screenshots, no URL.
-  - The devices show **stylised mockups** redrawn in the brand palette: an abstract layout of a header, a results table and athlete cards as grey bars, in HTML/CSS. Nothing of the client's branding.
-- **Named (after the client approves, OQ #17):** "UAE Athletics Federation", the real p18 screens in the device frames (`uae-athletics-federation-1`, 1544 × 965 in the laptop; `-2`, 459 × 1048 in the phone), and the live URL. Flipping the one flag switches every text and visual.
-
-**Facts (both variants):** only from the profile (p16, p18; `docs/content/case-studies.md` §2). Anything else is `{{TODO}}`. The federation's own statistics seen in the screenshots are never quoted as ours.
-
-| Part | Anonymised (default; EN draft, AR written natively with the copy deck) | Named variant adds |
-|---|---|---|
-| Eyebrow | Case study · A national sports federation | · UAE Athletics Federation |
-| Title | "A national federation's platform, rebuilt and live." | — |
-| Challenge | "A full rebuild of the federation's digital platform." (p18) · `{{TODO}}`: the starting point and what had to change. | — |
-| Solution | "A modern bilingual website with a complete CMS and a connected mobile application." (p18) NO TIME is the federation's official digital and media partner (p16). | — |
-| What we built | Bilingual website · mobile app · CMS · admin dashboard and analytics (p18). The module list (athletes, clubs, coaches, referees; championships, results and records; news and live coverage) stays: it describes the build, not the client. | — |
-| Result | All live: website, admin panel and mobile app (p18) · `{{TODO}}`: platform results (no numbers until supplied). | the URL uaeathletics.ae |
-
-**Visuals:**
-- Both variants use the same CSS laptop and phone frames as the opening (a visual rhyme).
-- Anonymised: the stylised mockups described above. Named: the profile screens. Fresh screenshots of the live site only with the client's approval.
-
-**Motion (GSAP, the page's one big scene after the opening):**
-- The devices slide in on entry, then the four parts reveal in sequence (no pin).
-- "What we built" draws as a checklist, one line per 80 ms.
-
-**Reduced:** everything visible.
-**Analytics (later):** `case_study_view` once when the section is 50% visible.
-
----
-
 ## 3 · CTA band
 
 - **Button:** "Book a free 30-min intro call" / «احجز مكالمة تعارف مجانية (30 دقيقة)» → `#consult`.
@@ -168,7 +135,7 @@ Mobile: the cursor, then the wireframe filling in, then the phone alone.
 - **Three items:**
   1. **Registration and check-in.** Links to the QR check-in product (Coming soon).
   2. **Event apps and websites.** Agenda, speakers, live updates.
-  3. **Live results and screens.** The federation platform's championships, results and live coverage are the real reference (anonymised unless the case study is named, D67).
+  3. **Live results and screens.** Championships, results and live coverage, on screen as they happen.
 - **Motion:** the band's grid lines draw on entry (GSAP).
 - **Why a band:** this is the page's second high point, where NO TIME's two worlds meet.
 
@@ -244,7 +211,6 @@ Written with the copy deck. Proposed topics: how long a typical website takes (p
 | `consultation_submit` | server-confirmed success | `service`, `locale`, `source` (cta band, service card, final) |
 | `interest_submit` | server-confirmed success | `product`, `locale` |
 | `whatsapp_click` | any WhatsApp link | `placement` (cta band, sticky bar, floating, final) |
-| `case_study_view` | `#case-study` 50% visible, once per visit | `case` (`uaeaf`) |
 
 ## Homepage tie-in
 
@@ -267,7 +233,6 @@ Its four capability cards link to the matching sections (`#websites`, `#apps`, `
 | Arrival | Shot 1 | 1 | Cursor, H1 |
 | Build | Shots 2–3 | 3 | Wireframe, then the UI fills |
 | First peak | Shot 4 | 4 | Live devices, core message |
-| **Peak** | **Case study** | **5** | Real, live work for a national federation |
 | Ask | CTA band | 3 | First conversion point |
 | Scan | Services I–VI | 2–3 | Compact, fast to read |
 | Second peak | Event tech | 4 | The two worlds meet |
@@ -278,7 +243,6 @@ Its four capability cards link to the matching sections (`#websites`, `#apps`, `
 
 ## Open items for this page
 
-- OQ #17: UAEAF name and logo approval (the `named` switch; the anonymised case study shows until then, D67).
 - OQ #5: product names.
 - New OQ #24: product feature lists.
 - CONTENT_CHECKLIST #25: budget bands.

@@ -62,14 +62,14 @@
     "facts": "⚑ FC#16 (delivery)"
   },
   "c:services:services[online-print-store].summary": {
-    "rule": "Hidden: the claim needs a feature that doesn't exist",
-    "en": "(hide)",
-    "ar": "(hide)",
-    "facts": "R6: the online store isn't built (ordering is a request through the contact form), so the line is hidden (owner, 2026-11-17)"
+    "rule": "Owner (2026-11-17): the service is \"Print ordering\" everywhere; nothing suggests a store. Replaces the hidden line: it describes the request through the contact form, which works (our call)",
+    "en": "Tell us the item and the quantity, approve the proof, and we print it to your brand.",
+    "ar": "أخبرونا بالمنتج والكمية، واعتمدوا النسخة التجريبية، ونطبعه بهوية علامتكم."
   },
   "c:services:services[online-print-store].points[0]": {
-    "rule": "Owner rule 1 (AR)",
-    "ar": "اختاروا المنتج والكمية"
+    "rule": "Owner (2026-11-17): the service is \"Print ordering\" everywhere; nothing suggests a store: \"choose\" suggests a picker that doesn't exist",
+    "en": "Tell us the item and the quantity",
+    "ar": "أخبرونا بالمنتج والكمية"
   },
   "c:services:services[online-print-store].points[1]": {
     "rule": "Owner rule 1 (AR)",
@@ -117,9 +117,13 @@
     "ar": "طباعة تطابق هوية علامتكم والنسخة التي اعتمدتموها."
   },
   "c:modules/print-order:PRINT_ORDER_COPY.cta": {
-    "rule": "Hidden: the claim needs a feature that doesn't exist",
-    "en": "(hide)",
-    "ar": "(hide)",
-    "facts": "R6: the online store isn't built (ordering is a request through the contact form), so the line is hidden (owner, 2026-11-17)"
+    "rule": "Owner (2026-11-17): the service is \"Print ordering\" everywhere; nothing suggests a store. The button opens the contact form with the service chosen, which works; a marketing call to action (D-C1). Replaces the hidden button (our call)",
+    "en": "Request your print",
+    "ar": "اطلبوا مطبوعاتكم"
+  },
+  "c:services:services[online-print-store].title": {
+    "rule": "Owner (2026-11-17): the service is \"Print ordering\" everywhere; nothing suggests a store (the title also feeds the card, the menus and the meta)",
+    "en": "Print ordering",
+    "ar": "طلب المطبوعات"
   }
 }

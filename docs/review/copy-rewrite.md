@@ -2,11 +2,9 @@
 
 2026-11-17. Method: `docs/review/copy-voice-reference.md` (the voice, the banned words, the rules per kind of text). Inputs: `copy-proposals.md`, `ux-audit.md`, the company profile's own wording (`docs/content/profile-copy.md`), the open facts (`docs/review/fact-check.md`).
 
-**Status: the owner's decisions on D-C1 to D-C8 are applied (2026-11-17).** What's still open:
-- the owner's answers on the software promises (list below);
-- Rand's answers to `docs/review/rand-questions.md`.
+**Status: the owner's decisions are applied (two rounds, 2026-11-17: D-C1 to D-C8, then D121 to D124).** What's still open: Rand's answers to `docs/review/rand-questions.md` (16 questions).
 
-Nothing in `src/` changes until then. The changes go in on a separate branch after the audit fixes (`audit-fixes`) are merged, with tests and EN/AR screenshots.
+A withdrawn case study was removed from the site itself on 2026-11-17 (D121): its strings no longer exist, so they're not in this table. Apart from that, nothing in `src/` changes until the apply. The changes go in on a separate branch after the audit fixes (`audit-fixes`) are merged, with tests and EN/AR screenshots.
 
 **How Rand reviews.** Rand doesn't read this table. She answers the questions, then reads the Arabic on the preview link after the apply. Before that link reaches her, every ⚑ line she hasn't confirmed goes back to its current text. Where the current text makes the same claim, the line stays as it is today, so she still sees it on the link and can strike it. She reads the legal pages last (there's no separate legal reviewer).
 
@@ -16,7 +14,7 @@ Nothing in `src/` changes until then. The changes go in on a separate branch aft
 node --no-warnings --import ./scripts/lib/alias.mjs scripts/copy-inventory.mjs --render docs/review/copy-rewrite docs/review/copy-rewrite.md --head=docs/review/copy-rewrite/_head.md
 ```
 
-**Count: 1,470 strings. 433 proposals (14 of them new keys), 4 lines hidden, 74 lines marked ⚑.** A row with an empty Rule column is kept as it is.
+**Count: 1,423 strings. 428 proposals (14 of them new keys), 2 lines hidden, 47 lines marked ⚑ (all Rand's).** A row with an empty Rule column is kept as it is.
 
 **Already decided, not reopened here:** N09 (30 services), N13 (Request a free intro call), N15 (the short privacy line), N16 (the closing blocks), N18 (the Arabic fixes); the N05/N06 copy in the approved audit-fixes design; the three samples (approved 2026-11-17).
 
@@ -29,7 +27,7 @@ The voice and choices 1 and 2 were approved with the samples. Owner rules 1 to 8
 | Choice 1 | "One team" once per page | Kept where it explains something (About, the FAQ "Can one team handle…", category intros); elsewhere replaced by who replies, when and with what |
 | Choice 2 | "Request", not "brief", for visitors | Contact page, forms, FAQ answers, success messages. The team's email can keep "Brief" |
 | 1 | Arabic: the plural address (أنتم) everywhere, forms, errors and success messages included | Every Arabic string that addresses the visitor, the legal bodies included (D-C4). If Rand prefers the singular, the whole site goes back to it |
-| 2 (D-C1) | **Arabic buttons by role.** Form and system buttons use the verbal noun («إرسال الطلب», «التالي», «إعادة المحاولة»). Marketing calls to action use the plural command («اطلبوا عرض سعر», «اطلبوا مكالمة تعارف مجانية», «خطّطوا لفعاليتكم معنا») | **Marketing:** contact, quote, call, WhatsApp, planning, registering interest, seeing the work, discussing a service. **Form or system:** form submits, copy, close, open the menu, play/pause, the module controls, skip links. **Navigation inside the site** (browse the services, show all, product details, read the case study): the verbal noun. Titles and eyebrows aren't buttons («طلب عرض سعر» as the contact page's title). Text links keep the plural command (D-C2). One exception, at the owner's request: the consultation form's submit is one of the six approved buttons, so it reads «اطلبوا مكالمة تعارف مجانية (30 دقيقة)» |
+| 2 (D-C1) | **Arabic buttons by role.** Form and system buttons use the verbal noun («إرسال الطلب», «التالي», «إعادة المحاولة»). Marketing calls to action use the plural command («اطلبوا عرض سعر», «اطلبوا مكالمة تعارف مجانية», «خطّطوا لفعاليتكم معنا») | **Marketing:** contact, quote, call, WhatsApp, planning, registering interest, seeing the work, discussing a service. **Form or system:** form submits, copy, close, open the menu, play/pause, the module controls, skip links. **Navigation inside the site** (browse the services, show all, product details, read the case study): the verbal noun. Titles and eyebrows aren't buttons («طلب عرض سعر» as the contact page's title). Text links keep the plural command (D-C2). The consultation form's submit is a call to action too, at the owner's request: «اطلبوا مكالمة تعارف مجانية», with no length on the button (N13); the 30 minutes are in the line beside it |
 | 3 | "Across the region" / «في المنطقة», not "the Gulf" | The markets reach Egypt. Applied in every meta description and body line |
 | 4 | Home lead: "Events, films, campaigns and websites, from the first idea to launch day." | Video production is one of the 30 services, so "films" is accurate |
 | 5 | About statement (AR): «نصنع الفكرة في النقطة التي تلتقي فيها العلامة بجمهورها…» | Rand's own sentence (p3), as the owner wrote it |
@@ -63,38 +61,26 @@ The voice and choices 1 and 2 were approved with the samples. Owner rules 1 to 8
 | D-C6 | Accepted, EN "In development" | `hero.ui.soon`: "In development" / «قيد التطوير» |
 | D-C7 | Accepted | At apply time: delete `common.comingSoon`, `megaMenu.inDevelopment`, `category.modulePending`, `category.quote.contactPending` if nothing public renders them |
 | D-C8 | Accepted | The new keys as listed in the tables |
-| R6 | The online print store isn't built, so its lines are hidden | The "Order your print online" button only links to the contact form (`/contact?service=print-store`): there's no catalogue, cart or checkout. Hidden: the Print FAQ "Can I order prints online?" (question and answer), the service's summary, and the module's button. The module's four steps stay: they describe a request that does work |
+| D121 | A case study is withdrawn (the work was built but never delivered or used) | Removed from the site and the repo: the work case and its campaign figures, the software page's case study and proof card, the mentions on Home and About, the photos and every doc mention (DECISIONS.md keeps the record). Work now has two cases |
+| D122 | The software promises (the owner decides them, not Rand) | R1 stays: the call is free and 30 minutes, the length beside the button, not on it. R2 stays. R7 becomes "Regular reports" / «تقارير دورية». R8 becomes "We test the site automatically before every update." / «نختبر الموقع آليًا قبل كل تحديث.» FC#19 stays (an event app was delivered to a client). FC#20, FC#21, FC#24 stay. FC#22: the data-protection line claims no compliance or certificate: "Security and data protection, planned into the build" |
+| D123 | The print service is "Print ordering" / «طلب المطبوعات» everywhere | The title feeds the card, the menus and the meta. The four order steps mention no payment, cart or shipment tracking; the first service point says "Tell us the item and the quantity" (not "Choose"). Our calls: the summary and the module's button describe the request that works (the contact form) instead of staying hidden; the FAQ "Can I order prints online?" stays hidden. At apply time the anchor `print-store` and the service slug become `print-ordering` |
+| D124 | The phone field (replaces D-C3's spec) | See below |
 
-### The phone field (D-C3, for the apply step)
+### The phone field (D124, for the apply step)
 
-A pure function in `src/lib/forms/`, test-first (forms and validation are high-risk logic, D82):
+Built test-first in `src/lib/forms/` with **`libphonenumber-js`** (no hand-written length rules). Forms and validation are high-risk logic (D82).
 
-- **Accept** a number that starts with `+` or `00`. Remove spaces, dashes and brackets, then turn a leading `00` into `+`.
-- **Reject with `phoneCode`** ("Include the country code, e.g. +971.") a number that starts with `0` and isn't `00`, or that starts with a digit with no `+`. A number like `971501234567` is ambiguous, so it's treated as missing its code (our call).
-- **Reject with `phone`** ("Use digits only, e.g. +971 50 123 4567.") anything else that isn't 8 to 15 digits after the `+`, with a first digit of 1–9 (E.164).
+- **Clean** the input: remove spaces, dashes and brackets.
+- **Accept** a number that starts with `+` or `00` (a leading `00` becomes `+`) when `libphonenumber-js` parses it as a valid number.
+- **Accept without `+`** a number that starts with one of the six markets' codes (971, 966, 974, 968, 965, 20) and is valid for that country by `libphonenumber-js`: add the `+`.
+- **Reject with `phoneCode`** ("Include the country code, e.g. +971." / «أضيفوا رمز الدولة، مثل ‎+971.») a number that starts with `0`, or that matches no country code.
+- **Reject with `phone`** ("Use digits only, e.g. +971 50 123 4567.") anything else that doesn't parse as a valid number.
 - **Store and send** the number in E.164 (`+971501234567`): the team's email and the WhatsApp reply use it.
 - **Show the example** under the field from the start (`phoneHint`), before any error. The review form's "Email or WhatsApp" field shows both shapes (`contactHint`) and applies the same rules when the value isn't an email.
 
-## Software promises: the owner decides (not Rand)
-
-The owner asked for R1, R2 and R7 here. Our call: R8 and the software rows of `fact-check.md` belong here too, since the owner answers for the software side. Say if any of them should go to Rand.
-
-| # | The promise | Lines |
-|---|---|---|
-| R1 | The intro call is free and lasts 30 minutes | 5: the software page's call to action, closing line and sticky bar; the Software & Digital FAQ; the consultation form's button |
-| R2 | The website review is free, comes within 3 working days, and lists 5 improvements | 5: the software page (4), the review form's success message |
-| R7 | Every support plan includes a monthly report | 1: the software page, "Ways to work with us" |
-| R8 | The quality checks run on every build | 1: the software page's quality title |
-| FC#18 | NO TIME is the federation's official digital and media partner, and everything listed is live at launch | 2: the software page's case study |
-| FC#19 | Event apps, live results and screens built for clients other than the federation | 1: the software page |
-| FC#20 | Online stores and AI consulting are services we sell, and which payment gateways | 2: the Software & Digital services |
-| FC#21 | The stack shown: Next.js, React, TypeScript, Node.js, iOS and Android | 1: the software page |
-| FC#22 | "Security and data protection, with the UAE personal data law in mind" | 1: the software page's quality list |
-| FC#24 | Support after launch; the client sees progress at every stage | 7: the software page, the Software & Digital FAQ |
-
 ## For Rand
 
-The questions are in `docs/review/rand-questions.md`: 15 short questions in Arabic, the most important first. They cover FC#1, FC#4–FC#17, FC#22 (the legal pages), FC#23, and R3, R4, R5 and R9.
+The questions are in `docs/review/rand-questions.md` (a PDF beside it for sending): 16 short questions in Arabic, the most important first. They cover FC#1, FC#3 (the lowest budget band), FC#4–FC#17, FC#22 (the legal pages), FC#23, and R3, R4, R5 and R9.
 
 ---
 
@@ -187,7 +173,7 @@ The questions are in `docs/review/rand-questions.md`: 15 short questions in Arab
 | `m:hud.city` | Dubai | دبي | keep |  |  |  |
 | `m:about.eyebrow` | About NO TIME | عن NO TIME | keep |  |  |  |
 | `m:about.statement` | A creative house for events, brands and the ideas in between. One team plans it, builds it, prints it and launches it. | دار إبداعية للفعاليات والعلامات التجارية، وللأفكار التي تجمع بينهما. فريق واحد يخطّط لها، ويبنيها، ويطبعها، ويُطلقها. | §3: "the ideas in between" says nothing; four verbs in a row. Rand's own sentence (p3), lightly edited; AR as the owner wrote it | We build ideas where a brand meets its audience, then carry them all the way: strategy, creative, production and delivery, under one roof. | نصنع الفكرة في النقطة التي تلتقي فيها العلامة بجمهورها، ثم نرافقها حتى النهاية: الاستراتيجية والإبداع والإنتاج والتسليم، تحت سقف واحد. | p3 (Rand's wording) |
-| `m:about.body` | Our base is Dubai, and our work runs across six markets, from Saudi Arabia to Egypt: an airline's pavilion at the Dubai Airshow, a majlis dressed for a heritage welcome, a bilingual app for a national sports federation. Each idea starts where the brand meets its audience, and one team carries it through strategy, creative, production and delivery. | مقرّنا دبي، وعملنا يمتدّ في ستة أسواق من السعودية إلى مصر: جناح لشركة طيران في معرض دبي للطيران، ومجلس تراثي يستقبل الضيوف، وتطبيق بلغتين لاتحاد رياضي وطني. تبدأ كل فكرة من النقطة التي تلتقي فيها العلامة بجمهورها، ثم يتابعها فريق واحد من الاستراتيجية إلى الإبداع والإنتاج، حتى التسليم. | Keeps the three real projects (§1 specifics). The last sentence repeated the statement | We're based in Dubai and work in six markets, from Saudi Arabia to Egypt. Recent work: an airline's pavilion at the Dubai Airshow, a majlis dressed for a heritage welcome, and a bilingual app for a national sports federation. | مقرّنا دبي، ونعمل في ستة أسواق من السعودية إلى مصر. من أعمالنا الأخيرة: جناح لشركة طيران في معرض دبي للطيران، ومجلس تراثي جُهّز لاستقبال الضيوف، وتطبيق بلغتين لاتحاد رياضي وطني. | p3, case studies. ⚑ FC#1 (six markets); ⚑ R9 (the three projects are recent): if Rand doesn't confirm, "Some of our work:" / «من أعمالنا:» |
+| `m:about.body` | Our base is Dubai, and our work runs across six markets, from Saudi Arabia to Egypt: an airline's pavilion at the Dubai Airshow and a majlis dressed for a heritage welcome. Each idea starts where the brand meets its audience, and one team carries it through strategy, creative, production and delivery. | مقرّنا دبي، وعملنا يمتدّ في ستة أسواق من السعودية إلى مصر: جناح لشركة طيران في معرض دبي للطيران، ومجلس تراثي يستقبل الضيوف. تبدأ كل فكرة من النقطة التي تلتقي فيها العلامة بجمهورها، ثم يتابعها فريق واحد من الاستراتيجية إلى الإبداع والإنتاج، حتى التسليم. | Keeps the three real projects (§1 specifics). The last sentence repeated the statement | We're based in Dubai and work in six markets, from Saudi Arabia to Egypt. Recent work: an airline's pavilion at the Dubai Airshow and a majlis dressed for a heritage welcome. | مقرّنا دبي، ونعمل في ستة أسواق من السعودية إلى مصر. من أعمالنا الأخيرة: جناح لشركة طيران في معرض دبي للطيران، ومجلس تراثي جُهّز لاستقبال الضيوف. | p3, case studies. ⚑ FC#1 (six markets); ⚑ R9 (the two projects are recent): if Rand doesn't confirm, "Some of our work:" / «من أعمالنا:» |
 | `m:about.stats.markets.value` | 6 | 6 | keep |  |  |  |
 | `m:about.stats.markets.label` | Markets | أسواق | keep | (keep) | (keep) | ⚑ FC#1 |
 | `m:about.stats.integrated.value` | 360° | 360° | N09 (approved): the count comes from the services data | 30 | 30 |  |
@@ -208,7 +194,7 @@ The questions are in `docs/review/rand-questions.md`: 15 short questions in Arab
 | `m:work.eyebrow` | Our work | أعمالنا | keep |  |  |  |
 | `m:work.headingLead` | Real projects, | مشاريع حقيقية، | keep |  |  |  |
 | `m:work.headingKey` | start to finish. | من الفكرة حتى التسليم. | keep |  |  |  |
-| `m:work.intro` | An airline's pavilion, a football league's award nights, a federation's app. The names stay private until each client says yes. | جناح لشركة طيران وطنية، وليالي تكريم لدوري كرة قدم، وتطبيق لاتحاد رياضي. نحتفظ بالأسماء إلى أن يأذن لنا أصحابها. | keep |  |  |  |
+| `m:work.intro` | An airline's pavilion and a football league's award nights. The names stay private until each client says yes. | جناح لشركة طيران وطنية، وليالي تكريم لدوري كرة قدم. نحتفظ بالأسماء إلى أن يأذن لنا أصحابها. | keep |  |  |  |
 | `m:work.labels.challenge` | Challenge | التحدي | keep |  |  |  |
 | `m:work.labels.idea` | Idea | الفكرة | keep |  |  |  |
 | `m:work.labels.execution` | Execution | التنفيذ | keep |  |  |  |
@@ -843,9 +829,9 @@ The questions are in `docs/review/rand-questions.md`: 15 short questions in Arab
 | `c:services:services[corporate-gifts].points[3]` | Notebooks & pens | الدفاتر والأقلام | keep |  |  |  |
 | `c:services:services[corporate-gifts].points[4]` | Giveaways | الهدايا الترويجية | keep |  |  |  |
 | `c:services:services[corporate-gifts].points[5]` | Screen printing, UV, foiling, debossing and laser engraving | الطباعة الحريرية، والطباعة بالأشعة فوق البنفسجية، والطباعة بالرقائق المعدنية، والكبس الغائر، والحفر بالليزر | keep |  |  |  |
-| `c:services:services[online-print-store].title` | Online print store | متجر الطباعة الإلكتروني | keep |  |  |  |
-| `c:services:services[online-print-store].summary` | Order approved print items online, on brand every time. | اطلب مطبوعاتك المعتمدة عبر الإنترنت، بهوية ثابتة في كل مرة. | Hidden: the claim needs a feature that doesn't exist | (hide) | (hide) | R6: the online store isn't built (ordering is a request through the contact form), so the line is hidden (owner, 2026-11-17) |
-| `c:services:services[online-print-store].points[0]` | Choose the item and the quantity | اختر المنتج والكمية | Owner rule 1 (AR) | (keep) | اختاروا المنتج والكمية |  |
+| `c:services:services[online-print-store].title` | Online print store | متجر الطباعة الإلكتروني | Owner (2026-11-17): the service is "Print ordering" everywhere; nothing suggests a store (the title also feeds the card, the menus and the meta) | Print ordering | طلب المطبوعات |  |
+| `c:services:services[online-print-store].summary` | Order approved print items online, on brand every time. | اطلب مطبوعاتك المعتمدة عبر الإنترنت، بهوية ثابتة في كل مرة. | Owner (2026-11-17): the service is "Print ordering" everywhere; nothing suggests a store. Replaces the hidden line: it describes the request through the contact form, which works (our call) | Tell us the item and the quantity, approve the proof, and we print it to your brand. | أخبرونا بالمنتج والكمية، واعتمدوا النسخة التجريبية، ونطبعه بهوية علامتكم. |  |
+| `c:services:services[online-print-store].points[0]` | Choose the item and the quantity | اختر المنتج والكمية | Owner (2026-11-17): the service is "Print ordering" everywhere; nothing suggests a store: "choose" suggests a picker that doesn't exist | Tell us the item and the quantity | أخبرونا بالمنتج والكمية |  |
 | `c:services:services[online-print-store].points[1]` | Send your artwork, or ask for a reprint | أرسل التصميم، أو اطلب إعادة طباعة | Owner rule 1 (AR) | (keep) | أرسلوا التصميم، أو اطلبوا إعادة الطباعة |  |
 | `c:services:services[online-print-store].points[2]` | Approve the proof before printing | اعتمد النسخة التجريبية قبل التنفيذ | Owner rule 1 (AR) | (keep) | اعتمدوا النسخة التجريبية قبل التنفيذ |  |
 | `c:services:services[online-print-store].points[3]` | Printed to brand standard | طباعة بمعايير علامتك | Owner rule 1 (AR) | (keep) | طباعة بمعايير علامتكم |  |
@@ -887,7 +873,7 @@ The questions are in `docs/review/rand-questions.md`: 15 short questions in Arab
 | `c:modules/print-order:ORDER_STEPS[print].line` | Printed to match your brand, and the proof you approved. | طباعة تطابق هوية علامتك والنسخة التي اعتمدتها. | Owner rule 1 (AR) | (keep) | طباعة تطابق هوية علامتكم والنسخة التي اعتمدتموها. |  |
 | `c:modules/print-order:PRINT_ORDER_COPY.title` | How a print order works | كيف يسير طلب الطباعة | keep |  |  |  |
 | `c:modules/print-order:PRINT_ORDER_COPY.step` | Step {n} of {total} | الخطوة {n} من {total} | keep |  |  |  |
-| `c:modules/print-order:PRINT_ORDER_COPY.cta` | Order your print online | اطلب مطبوعاتك عبر الإنترنت | Hidden: the claim needs a feature that doesn't exist | (hide) | (hide) | R6: the online store isn't built (ordering is a request through the contact form), so the line is hidden (owner, 2026-11-17) |
+| `c:modules/print-order:PRINT_ORDER_COPY.cta` | Order your print online | اطلب مطبوعاتك عبر الإنترنت | Owner (2026-11-17): the service is "Print ordering" everywhere; nothing suggests a store. The button opens the contact form with the service chosen, which works; a marketing call to action (D-C1). Replaces the hidden button (our call) | Request your print | اطلبوا مطبوعاتكم |  |
 
 ## Category: software-digital
 
@@ -901,7 +887,7 @@ The questions are in `docs/review/rand-questions.md`: 15 short questions in Arab
 | `c:categories:categories[software-digital].summary` | Websites, apps and custom systems that keep working long after launch day. | مواقع وتطبيقات وأنظمة تُبنى على مقاسك، وتبقى تعمل طويلًا بعد الإطلاق. | Owner rule 1 (AR); EN keep | (keep) | مواقع وتطبيقات وأنظمة تُبنى على مقاسكم، وتبقى تعمل طويلًا بعد الإطلاق. |  |
 | `c:categories:categories[software-digital].intro` | Websites, mobile apps, custom systems and online stores, designed and built in Arabic and English. We take each one end to end, from UX and design systems to development, content management and analytics, and build it to load fast. | مواقع إلكترونية وتطبيقات جوّال وأنظمة مخصّصة ومتاجر إلكترونية، نصمّمها ونبنيها بالعربية والإنجليزية. نتولّى كلًّا منها من البداية إلى النهاية: من تجربة المستخدم وأنظمة التصميم إلى البرمجة وإدارة المحتوى والتحليلات، ونبنيها لتعمل بسرعة. | §3 banned: "end to end" | Websites, mobile apps, custom systems and online stores, designed and built in Arabic and English. We take each one from UX and design systems to development, content management and analytics, and build it to load fast. | مواقع إلكترونية وتطبيقات جوّال وأنظمة مخصّصة ومتاجر إلكترونية، نصمّمها ونبنيها بالعربية والإنجليزية. نتولّى كلًّا منها من تجربة المستخدم وأنظمة التصميم إلى البرمجة وإدارة المحتوى والتحليلات، ونبنيها لتعمل بسرعة. |  |
 | `c:categories:categories[software-digital].faq[0].q` | How long does a project take? | كم يستغرق المشروع؟ | keep |  |  |  |
-| `c:categories:categories[software-digital].faq[0].a` | It depends on the scope. After the intro call we send a plan with the steps and the dates for your project, and you see progress at every stage. | يعتمد ذلك على حجم المشروع. بعد مكالمة التعارف نرسل لك خطة بالمراحل والمواعيد الخاصة بمشروعك، وترى التقدّم في كل مرحلة. | Owner rule 1 (AR); EN keep | (keep) | يعتمد ذلك على حجم المشروع. بعد مكالمة التعارف نرسل لكم خطة بالمراحل والمواعيد الخاصة بمشروعكم، وترون التقدّم في كل مرحلة. | ⚑ FC#24 |
+| `c:categories:categories[software-digital].faq[0].a` | It depends on the scope. After the intro call we send a plan with the steps and the dates for your project, and you see progress at every stage. | يعتمد ذلك على حجم المشروع. بعد مكالمة التعارف نرسل لك خطة بالمراحل والمواعيد الخاصة بمشروعك، وترى التقدّم في كل مرحلة. | Owner rule 1 (AR); EN keep | (keep) | يعتمد ذلك على حجم المشروع. بعد مكالمة التعارف نرسل لكم خطة بالمراحل والمواعيد الخاصة بمشروعكم، وترون التقدّم في كل مرحلة. | FC#24 confirmed by the owner (2026-11-17) |
 | `c:categories:categories[software-digital].faq[1].q` | How much does a website or an app cost? | كم تكلفة الموقع أو التطبيق؟ | keep |  |  |  |
 | `c:categories:categories[software-digital].faq[1].a` | It depends on the scope, so we don't publish prices. After the intro call we send a proposal with the scope, the stages and the cost, and work starts only when you agree to it. | تعتمد على حجم المشروع، لذلك لا ننشر أسعارًا. بعد مكالمة التعارف نرسل لك عرضًا بالنطاق والمراحل والتكلفة، ولا يبدأ العمل إلا بعد موافقتك. | Owner rule 1 (AR); EN keep | (keep) | تعتمد على حجم المشروع، لذلك لا ننشر أسعارًا. بعد مكالمة التعارف نرسل لكم عرضًا بالنطاق والمراحل والتكلفة، ولا يبدأ العمل إلا بعد موافقتكم. |  |
 | `c:categories:categories[software-digital].faq[2].q` | Is the Arabic as good as the English? | هل تكون النسخة العربية بجودة الإنجليزية نفسها؟ | keep |  |  |  |
@@ -909,11 +895,11 @@ The questions are in `docs/review/rand-questions.md`: 15 short questions in Arab
 | `c:categories:categories[software-digital].faq[3].q` | Will we be able to update the site ourselves? | هل سنتمكّن من تحديث الموقع بأنفسنا؟ | keep |  |  |  |
 | `c:categories:categories[software-digital].faq[3].a` | Yes. We set up a content system in both languages and show your team how to use it at handover. | نعم. نجهّز نظامًا لإدارة المحتوى باللغتين، ونعرّف فريقك على استخدامه عند التسليم. | Owner rule 1 (AR) | (keep) | نعم. نجهّز نظامًا لإدارة المحتوى باللغتين، ونعرّف فريقكم على استخدامه عند التسليم. |  |
 | `c:categories:categories[software-digital].faq[4].q` | Do you support the product after launch? | هل تقدّمون الدعم بعد الإطلاق؟ | keep |  |  |  |
-| `c:categories:categories[software-digital].faq[4].a` | Yes. Support and maintenance after launch are part of how we work, and their scope is agreed in the proposal. | نعم. الدعم والصيانة بعد الإطلاق جزء من طريقة عملنا، ونتّفق على نطاقهما في العرض. | keep | (keep) | (keep) | ⚑ FC#24 |
+| `c:categories:categories[software-digital].faq[4].a` | Yes. Support and maintenance after launch are part of how we work, and their scope is agreed in the proposal. | نعم. الدعم والصيانة بعد الإطلاق جزء من طريقة عملنا، ونتّفق على نطاقهما في العرض. | keep | (keep) | (keep) | FC#24 confirmed by the owner (2026-11-17) |
 | `c:categories:categories[software-digital].faq[5].q` | Who owns the code and the content? | لمن تعود ملكية الكود والمحتوى؟ | keep |  |  |  |
 | `c:categories:categories[software-digital].faq[5].a` | Ownership and licensing are set out in each proposal, before work starts. | تُحدَّد الملكية والترخيص في كل عرض، قبل بدء العمل. | keep |  |  |  |
 | `c:categories:categories[software-digital].faq[6].q` | What do you need from me to start? | ماذا تحتاجون مني للبدء؟ | Owner rule 1 (AR) | (keep) | ماذا تحتاجون منّا للبدء؟ |  |
-| `c:categories:categories[software-digital].faq[6].a` | A few lines on what you want to build and who it's for. Book a free 30-min intro call, and we'll take it from there. | بضعة أسطر عمّا تريد بناءه ولمن. احجز مكالمة تعارف مجانية (30 دقيقة)، ونتابع معك الخطوات التالية. | N13 (approved): "Request a free intro call", no "30-min"; owner rule 1 | A few lines on what you want to build and who it's for. Request a free intro call, and we'll take it from there. | بضعة أسطر عمّا تريدون بناءه ولمن. اطلبوا مكالمة تعارف مجانية، ونتابع معكم الخطوات التالية. | ⚑ R1 (the intro call is free, 30 minutes) |
+| `c:categories:categories[software-digital].faq[6].a` | A few lines on what you want to build and who it's for. Book a free 30-min intro call, and we'll take it from there. | بضعة أسطر عمّا تريد بناءه ولمن. احجز مكالمة تعارف مجانية (30 دقيقة)، ونتابع معك الخطوات التالية. | N13 (approved): "Request a free intro call", no "30-min"; owner rule 1 | A few lines on what you want to build and who it's for. Request a free intro call, and we'll take it from there. | بضعة أسطر عمّا تريدون بناءه ولمن. اطلبوا مكالمة تعارف مجانية، ونتابع معكم الخطوات التالية. | R1 confirmed by the owner (2026-11-17) |
 | `c:categories:categories[software-digital].closing` | Your idea is the next line. | فكرتك هي السطر التالي. | Owner rule 1 (AR) | (keep) | فكرتكم هي السطر التالي. |  |
 | `c:services:services[websites].title` | Websites | المواقع الإلكترونية | keep |  |  |  |
 | `c:services:services[websites].summary` | Fast, bilingual websites that are easy to keep up to date. | مواقع سريعة بلغتين، يسهل تحديثها. | keep |  |  |  |
@@ -934,7 +920,7 @@ The questions are in `docs/review/rand-questions.md`: 15 short questions in Arab
 | `c:services:services[e-commerce].title` | E-commerce | المتاجر الإلكترونية | keep |  |  |  |
 | `c:services:services[e-commerce].summary` | Online stores with clear checkout and simple management. | متاجر إلكترونية بخطوات شراء واضحة وإدارة بسيطة. | keep |  |  |  |
 | `c:services:services[e-commerce].points[0]` | Catalogue management | إدارة المنتجات | keep |  |  |  |
-| `c:services:services[e-commerce].points[1]` | Checkout and payment integration | إتمام الشراء وربط بوابات الدفع | keep | (keep) | (keep) | ⚑ FC#20 (which payment gateways) |
+| `c:services:services[e-commerce].points[1]` | Checkout and payment integration | إتمام الشراء وربط بوابات الدفع | keep | (keep) | (keep) | FC#20 confirmed by the owner (2026-11-17) |
 | `c:services:services[e-commerce].points[2]` | An orders dashboard | لوحة لمتابعة الطلبات | keep |  |  |  |
 | `c:services:services[ui-ux-design].title` | UI/UX design | تصميم الواجهات وتجربة المستخدم | keep |  |  |  |
 | `c:services:services[ui-ux-design].summary` | Interfaces researched, prototyped and tested before they are built. | واجهات ندرس مستخدميها ونجرّب نماذجها ونختبرها قبل بنائها. | keep |  |  |  |
@@ -942,7 +928,7 @@ The questions are in `docs/review/rand-questions.md`: 15 short questions in Arab
 | `c:services:services[ui-ux-design].points[1]` | Clickable prototypes | نماذج أولية قابلة للنقر | keep |  |  |  |
 | `c:services:services[ui-ux-design].points[2]` | A design system | نظام تصميم | keep |  |  |  |
 | `c:services:services[ai-consulting].title` | AI consulting | استشارات الذكاء الاصطناعي | keep |  |  |  |
-| `c:services:services[ai-consulting].summary` | Where AI helps your work, where it does not, and how to start. | أين يفيد الذكاء الاصطناعي عملك، وأين لا يفيد، وكيف تبدأ. | Owner rule 1 (AR) | (keep) | أين يفيد الذكاء الاصطناعي عملكم، وأين لا يفيد، وكيف تبدؤون. | ⚑ FC#20 (what the consulting covers) |
+| `c:services:services[ai-consulting].summary` | Where AI helps your work, where it does not, and how to start. | أين يفيد الذكاء الاصطناعي عملك، وأين لا يفيد، وكيف تبدأ. | Owner rule 1 (AR) | (keep) | أين يفيد الذكاء الاصطناعي عملكم، وأين لا يفيد، وكيف تبدؤون. | FC#20 confirmed by the owner (2026-11-17) |
 | `c:services:services[ai-consulting].points[0]` | A review of where AI fits your work | مراجعة لمواضع فائدة الذكاء الاصطناعي في عملك | Owner rule 1 (AR) | (keep) | مراجعة لمواضع فائدة الذكاء الاصطناعي في عملكم |  |
 | `c:services:services[ai-consulting].points[1]` | A pilot plan | خطة لمشروع تجريبي أول | keep |  |  |  |
 | `c:services:services[ai-consulting].points[2]` | Getting your team started | تهيئة فريقك للبدء | Owner rule 1 (AR) | (keep) | تهيئة فريقكم للبدء |  |
@@ -958,32 +944,11 @@ The questions are in `docs/review/rand-questions.md`: 15 short questions in Arab
 
 | ID | Current EN | Current AR | Rule | Proposed EN | Proposed AR | Facts |
 |---|---|---|---|---|---|---|
-| `c:software/page:caseStudy.eyebrow` | Case study | دراسة حالة | keep |  |  |  |
-| `c:software/page:caseStudy.anonymous.client` | A national sports federation | اتحاد رياضي وطني | keep |  |  |  |
-| `c:software/page:caseStudy.named.client` | UAE Athletics Federation | الاتحاد الإماراتي لألعاب القوى | keep |  |  |  |
-| `c:software/page:caseStudy.named.alt.laptop` | The federation's bilingual website on a laptop. | موقع الاتحاد ثنائي اللغة على شاشة حاسوب محمول. | keep |  |  |  |
-| `c:software/page:caseStudy.named.alt.phone` | The federation's website on a phone. | موقع الاتحاد على شاشة هاتف. | keep |  |  |  |
-| `c:software/page:caseStudy.title` | A national federation's platform, rebuilt and live. | منصة اتحاد وطني، أعدنا بناءها وهي تعمل الآن. | keep |  |  |  |
-| `c:software/page:caseStudy.parts.challenge.label` | Challenge | التحدي | keep |  |  |  |
-| `c:software/page:caseStudy.parts.challenge.body` | A full rebuild of the federation's digital platform. | إعادة بناء كاملة للمنصة الرقمية للاتحاد. | keep |  |  |  |
-| `c:software/page:caseStudy.parts.approach.label` | Approach | النهج | keep |  |  |  |
-| `c:software/page:caseStudy.parts.approach.body` | A modern bilingual website with a complete content management system and a connected mobile app, redesigned from the interface up and fully responsive. As the federation's official digital and media partner, we also publish its social media daily in Arabic and English. | موقع حديث بلغتين، مع نظام كامل لإدارة المحتوى وتطبيق جوّال مرتبط به، أعدنا تصميم واجهته بالكامل ليعمل على كل الشاشات. وبصفتنا الشريك الرقمي والإعلامي الرسمي للاتحاد، ننشر محتواه على وسائل التواصل يوميًا بالعربية والإنجليزية. | keep | (keep) | (keep) | ⚑ FC#18 (official partner at launch) |
-| `c:software/page:caseStudy.parts.built.label` | What we built | ما بنيناه | keep |  |  |  |
-| `c:software/page:caseStudy.parts.built.items[0]` | Bilingual website | موقع بلغتين | keep |  |  |  |
-| `c:software/page:caseStudy.parts.built.items[1]` | Mobile app | تطبيق جوّال | keep |  |  |  |
-| `c:software/page:caseStudy.parts.built.items[2]` | Content management | إدارة المحتوى | keep |  |  |  |
-| `c:software/page:caseStudy.parts.built.items[3]` | Admin dashboard and analytics | لوحة إدارة وتحليلات | keep |  |  |  |
-| `c:software/page:caseStudy.parts.built.items[4]` | Arabic and English, SEO and performance | العربية والإنجليزية، والظهور في البحث والأداء | keep |  |  |  |
-| `c:software/page:caseStudy.parts.built.modules` | Athletes, clubs, coaches and referees · championships, results and national records · news, media library and live coverage | الرياضيون والأندية والمدربون والحكّام · البطولات والنتائج والأرقام القياسية الوطنية · الأخبار ومكتبة الوسائط والتغطية المباشرة | keep |  |  |  |
-| `c:software/page:caseStudy.parts.result.label` | Result | النتيجة | keep |  |  |  |
-| `c:software/page:caseStudy.parts.result.body` | All live: the website, the admin panel and the mobile app. | كلها تعمل الآن: الموقع الإلكتروني ولوحة الإدارة وتطبيق الجوّال. | keep | (keep) | (keep) | ⚑ FC#18 (all live at launch) |
-| `c:software/page:caseStudy.redraw` | Stylised redraw. The client's own screens stay private. | رسم توضيحي مبسّط. شاشات العميل نفسها تبقى خاصة. | keep |  |  |  |
-| `c:software/page:caseStudy.visit` | Visit the live site | زُر الموقع المنشور | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | زيارة الموقع |  |
-| `c:software/page:cta.book` | Book a free 30-min intro call | احجز مكالمة تعارف مجانية (30 دقيقة) | D-C1 (owner): a marketing call to action, so the plural command | Request a free intro call | اطلبوا مكالمة تعارف مجانية | ⚑ R1 (the intro call is free, 30 minutes) |
-| `c:software/page:cta.micro` | No obligation. We reply within one working day. | دون أي التزام. نرد خلال يوم عمل. | keep | (keep) | (keep) | ⚑ FC#23 |
-| `c:software/page:cta.review` | Get a free website review | احصل على مراجعة مجانية لموقعك | D-C1 (owner): a marketing call to action, so the plural command | (keep) | اطلبوا مراجعة مجانية لموقعكم | ⚑ R2 (the website review: free, 3 working days, 5 improvements) |
-| `c:software/page:cta.reviewShort` | Free website review | مراجعة مجانية لموقعك | Owner rule 1 | (keep) | مراجعة مجانية لموقعكم | ⚑ R2 (the website review: free, 3 working days, 5 improvements) |
-| `c:software/page:cta.reviewPromise` | Send us your site. Within 3 working days we'll reply with 5 concrete improvements, free. | أرسل لنا موقعك، وخلال 3 أيام عمل نرد عليك بخمسة تحسينات عملية، مجانًا. | Owner rule 1 (AR); EN keep: the kind of specific promise §1 asks for | (keep) | أرسلوا لنا موقعكم، وخلال 3 أيام عمل نرد عليكم بخمسة تحسينات عملية، مجانًا. | ⚑ R2 (the website review: free, 3 working days, 5 improvements) |
+| `c:software/page:cta.book` | Book a free 30-min intro call | احجز مكالمة تعارف مجانية (30 دقيقة) | D-C1 (owner): a marketing call to action, so the plural command | Request a free intro call | اطلبوا مكالمة تعارف مجانية | R1 confirmed by the owner (2026-11-17) |
+| `c:software/page:cta.micro` | No obligation. We reply within one working day. | دون أي التزام. نرد خلال يوم عمل. | R1 (owner): the call's length goes in the line beside the button | A free 30-minute call, with no obligation. We reply within one working day. | مكالمة مجانية مدتها 30 دقيقة، دون أي التزام. نرد عليكم خلال يوم عمل. | R1 confirmed by the owner (2026-11-17); ⚑ FC#23 |
+| `c:software/page:cta.review` | Get a free website review | احصل على مراجعة مجانية لموقعك | D-C1 (owner): a marketing call to action, so the plural command | (keep) | اطلبوا مراجعة مجانية لموقعكم | R2 confirmed by the owner (2026-11-17) |
+| `c:software/page:cta.reviewShort` | Free website review | مراجعة مجانية لموقعك | Owner rule 1 | (keep) | مراجعة مجانية لموقعكم | R2 confirmed by the owner (2026-11-17) |
+| `c:software/page:cta.reviewPromise` | Send us your site. Within 3 working days we'll reply with 5 concrete improvements, free. | أرسل لنا موقعك، وخلال 3 أيام عمل نرد عليك بخمسة تحسينات عملية، مجانًا. | Owner rule 1 (AR); EN keep: the kind of specific promise §1 asks for | (keep) | أرسلوا لنا موقعكم، وخلال 3 أيام عمل نرد عليكم بخمسة تحسينات عملية، مجانًا. | R2 confirmed by the owner (2026-11-17) |
 | `c:software/page:cta.work` | See our work | شاهد أعمالنا | D-C1 (owner): a marketing call to action, so the plural command | (keep) | شاهدوا أعمالنا |  |
 | `c:software/page:cta.discuss` | Discuss this | ناقش هذه الخدمة معنا | D-C1 (owner): a marketing call to action, so the plural command | (keep) | ناقشوا هذه الخدمة معنا |  |
 | `c:software/page:cta.discussFor` | Discuss this: {service} | ناقش هذه الخدمة معنا: {service} | D-C1 (owner): a marketing call to action, so the plural command | (keep) | ناقشوا هذه الخدمة معنا: {service} |  |
@@ -996,7 +961,7 @@ The questions are in `docs/review/rand-questions.md`: 15 short questions in Arab
 | `c:software/page:eventTech.items[1].title` | Event apps and websites | تطبيقات ومواقع للفعاليات | keep |  |  |  |
 | `c:software/page:eventTech.items[1].body` | The agenda, the speakers and live updates. | البرنامج والمتحدثون والتحديثات المباشرة. | keep |  |  |  |
 | `c:software/page:eventTech.items[2].title` | Live results and screens | النتائج المباشرة والشاشات | keep |  |  |  |
-| `c:software/page:eventTech.items[2].body` | Championships, results and live coverage, as on a national federation's platform. | بطولات ونتائج وتغطية مباشرة، كما في منصة اتحاد وطني. | keep | (keep) | (keep) | ⚑ FC#19 (built for clients other than the federation?) |
+| `c:software/page:eventTech.items[2].body` | Championships, results and live coverage, on screen as they happen. | بطولات ونتائج وتغطية مباشرة، تظهر على الشاشات لحظة حدوثها. | keep | (keep) | (keep) | FC#19 confirmed by the owner (2026-11-17): an event app was delivered to a client |
 | `c:software/page:eventTech.idealFor[0]` | Conferences and exhibitions | المؤتمرات والمعارض | keep |  |  |  |
 | `c:software/page:eventTech.idealFor[1]` | Sports events and championships | الفعاليات الرياضية والبطولات | keep |  |  |  |
 | `c:software/page:eventTech.idealFor[2]` | Galas with a guest list | الحفلات بقوائم ضيوف | keep |  |  |  |
@@ -1007,8 +972,8 @@ The questions are in `docs/review/rand-questions.md`: 15 short questions in Arab
 | `c:software/page:eventTech.counter.label` | Checked in | سجّلوا حضورهم | keep |  |  |  |
 | `c:software/page:eventTech.counter.of` | of | من | keep |  |  |  |
 | `c:software/page:faqCopy.title` | Straight answers on cost, time and ownership. | إجابات مباشرة عن التكلفة والمدة والملكية. | keep |  |  |  |
-| `c:software/page:finalCta.risk` | Book a free 30-min intro call. No obligation. We reply within one working day. | احجز مكالمة تعارف مجانية (30 دقيقة). دون أي التزام. نرد خلال يوم عمل. | D-C1 (owner): the line opens with the call to action, so the plural command; N13 wording | (keep) | اطلبوا مكالمة تعارف مجانية (30 دقيقة)، دون أي التزام. نرد عليكم خلال يوم عمل. | ⚑ FC#23; ⚑ R1 (the intro call is free, 30 minutes) |
-| `c:software/page:finalCta.reviewTitle` | Or start with a free website review | أو ابدأ بمراجعة مجانية لموقعك | Owner rule 1 | (keep) | أو ابدؤوا بمراجعة مجانية لموقعكم | ⚑ R2 (the website review: free, 3 working days, 5 improvements) |
+| `c:software/page:finalCta.risk` | Book a free 30-min intro call. No obligation. We reply within one working day. | احجز مكالمة تعارف مجانية (30 دقيقة). دون أي التزام. نرد خلال يوم عمل. | D-C1 (owner): the line opens with the call to action, so the plural command; N13 wording | (keep) | اطلبوا مكالمة تعارف مجانية (30 دقيقة)، دون أي التزام. نرد عليكم خلال يوم عمل. | ⚑ FC#23; R1 confirmed by the owner (2026-11-17) |
+| `c:software/page:finalCta.reviewTitle` | Or start with a free website review | أو ابدأ بمراجعة مجانية لموقعك | Owner rule 1 | (keep) | أو ابدؤوا بمراجعة مجانية لموقعكم | R2 confirmed by the owner (2026-11-17) |
 | `c:software/page:hero.title` | Websites and apps your clients actually use, in Arabic and English. | مواقع وتطبيقات يستخدمها عملاؤك فعلًا، بالعربية والإنجليزية. | Owner rule 1 (AR); EN keep | (keep) | مواقع وتطبيقات يستخدمها عملاؤكم فعلًا، بالعربية والإنجليزية. |  |
 | `c:software/page:hero.sub` | The team that runs your events also builds your platform: bilingual websites, iOS and Android apps, dashboards and the systems behind them. Designed and built in Dubai. | الفريق الذي يدير فعالياتك يبني منصّتك أيضًا: مواقع بلغتين، وتطبيقات iOS و Android، ولوحات إدارة والأنظمة التي تعمل خلفها. نصمّمها ونطوّرها في دبي. | Owner rule 1 (AR), N18 rule; EN keep | (keep) | الفريق الذي يدير فعالياتكم يبني منصّتكم أيضًا: مواقع بلغتين، وتطبيقات iOS وAndroid، ولوحات إدارة والأنظمة التي تعمل خلفها. نصمّمها ونطوّرها في دبي. |  |
 | `c:software/page:hero.ui.wire[0]` | Header | الترويسة | keep |  |  |  |
@@ -1035,10 +1000,10 @@ The questions are in `docs/review/rand-questions.md`: 15 short questions in Arab
 | `c:software/page:problems.items[2].pain` | Every text change means an email to the agency, then a wait. | كل تعديل في نص يعني رسالة إلى الوكالة، ثم انتظارًا. | keep |  |  |  |
 | `c:software/page:problems.items[2].fix` | Your team updates pages, news and images itself, in a content system that works in both languages. | يحدّث فريقك الصفحات والأخبار والصور بنفسه، من نظام لإدارة المحتوى يعمل باللغتين. | Owner rule 1 | (keep) | يحدّث فريقكم الصفحات والأخبار والصور بنفسه، من نظام لإدارة المحتوى يعمل باللغتين. |  |
 | `c:software/page:problems.items[3].pain` | The agency launched it, then disappeared. | أطلقت الوكالة الموقع ثم اختفت. | keep |  |  |  |
-| `c:software/page:problems.items[3].fix` | Support and maintenance after launch are part of the plan, agreed in the proposal. | الدعم والصيانة بعد الإطلاق جزء من الخطة، ونتّفق عليهما في العرض. | keep | (keep) | (keep) | ⚑ FC#24 |
+| `c:software/page:problems.items[3].fix` | Support and maintenance after launch are part of the plan, agreed in the proposal. | الدعم والصيانة بعد الإطلاق جزء من الخطة، ونتّفق عليهما في العرض. | keep | (keep) | (keep) | FC#24 confirmed by the owner (2026-11-17) |
 | `c:software/page:problems.items[4].pain` | Registration from one vendor, the app from another, the screens from a third. | التسجيل من مورّد، والتطبيق من آخر، والشاشات من ثالث. | keep |  |  |  |
 | `c:software/page:problems.items[4].fix` | One team builds your event technology and runs the event itself. | فريق واحد يبني تقنيات فعاليتك ويدير الفعالية نفسها. | Choice 1 | The people who build your event technology also run the event. | من يبني تقنيات فعاليتكم يدير الفعالية نفسها. |  |
-| `c:software/page:process.title` | You see your project at every stage, not only on launch day. | ترى مشروعك في كل مرحلة، لا يوم الإطلاق وحده. | Owner rule 1 (AR); EN keep | (keep) | ترون مشروعكم في كل مرحلة، لا يوم الإطلاق وحده. | ⚑ FC#24 |
+| `c:software/page:process.title` | You see your project at every stage, not only on launch day. | ترى مشروعك في كل مرحلة، لا يوم الإطلاق وحده. | Owner rule 1 (AR); EN keep | (keep) | ترون مشروعكم في كل مرحلة، لا يوم الإطلاق وحده. | FC#24 confirmed by the owner (2026-11-17) |
 | `c:software/page:process.lead` | Five stages. Each one ends with something you can open, test or sign off. | خمس مراحل، تنتهي كلٌّ منها بشيء تفتحه أو تجرّبه أو تعتمده. | Owner rule 1 | (keep) | خمس مراحل، تنتهي كلٌّ منها بشيء تفتحونه أو تجرّبونه أو تعتمدونه. |  |
 | `c:software/page:process.receive` | You receive | تستلم | Owner rule 1 | (keep) | تستلمون |  |
 | `c:software/page:process.steps.discover.name` | Discover | نستكشف | keep |  |  |  |
@@ -1049,7 +1014,7 @@ The questions are in `docs/review/rand-questions.md`: 15 short questions in Arab
 | `c:software/page:process.steps.design.receive` | A clickable prototype you can try yourself | نموذج تفاعلي تجرّبه بنفسك | Owner rule 1 | (keep) | نموذج تفاعلي تجرّبونه بأنفسكم |  |
 | `c:software/page:process.steps.build.name` | Build | نبني | keep |  |  |  |
 | `c:software/page:process.steps.build.body` | We develop in short stages you can follow. | نبرمج على مراحل قصيرة تتابعها خطوة بخطوة. | Owner rule 1 | (keep) | نبرمج على مراحل قصيرة تتابعونها خطوة بخطوة. |  |
-| `c:software/page:process.steps.build.receive` | A staging link where you see progress at every stage | رابط تجريبي ترى عليه التقدّم في كل مرحلة | Owner rule 1 | (keep) | رابط تجريبي ترون عليه التقدّم في كل مرحلة | ⚑ FC#24 |
+| `c:software/page:process.steps.build.receive` | A staging link where you see progress at every stage | رابط تجريبي ترى عليه التقدّم في كل مرحلة | Owner rule 1 | (keep) | رابط تجريبي ترون عليه التقدّم في كل مرحلة | FC#24 confirmed by the owner (2026-11-17) |
 | `c:software/page:process.steps.launch.name` | Launch | نطلق | keep |  |  |  |
 | `c:software/page:process.steps.launch.body` | We test speed, both languages and every form, then go live. | نختبر السرعة واللغتين وكل النماذج، ثم نطلق. | keep |  |  |  |
 | `c:software/page:process.steps.launch.receive` | A launch checklist we sign off with you | قائمة تحقق للإطلاق نعتمدها معك | Owner rule 1 | (keep) | قائمة تحقق للإطلاق نعتمدها معكم |  |
@@ -1101,10 +1066,7 @@ The questions are in `docs/review/rand-questions.md`: 15 short questions in Arab
 | `c:software/page:productsCopy.demo.covers` | Covers | عدد الضيوف | keep |  |  |  |
 | `c:software/page:productsCopy.demo.orders` | Orders | الطلبات | keep |  |  |  |
 | `c:software/page:productsCopy.demo.peak` | Busiest hour | ساعة الذروة | keep |  |  |  |
-| `c:software/page:proof.title` | Live today: a national federation's platform, and the site you're reading. | يعمل اليوم: منصة اتحاد رياضي وطني، والموقع الذي تقرؤه الآن. | Owner rule 1 | (keep) | يعمل اليوم: منصة اتحاد رياضي وطني، والموقع الذي تقرؤونه الآن. |  |
-| `c:software/page:proof.federation.label` | A national sports federation | اتحاد رياضي وطني | keep |  |  |  |
-| `c:software/page:proof.federation.line` | Bilingual website, mobile app and content management system, all live. | موقع بلغتين وتطبيق جوّال ونظام لإدارة المحتوى، وكلها تعمل الآن. | keep |  |  |  |
-| `c:software/page:proof.federation.link` | Read the case study | اقرأ دراسة الحالة | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | قراءة دراسة الحالة |  |
+| `c:software/page:proof.title` | Live today: the site you're reading. | يعمل اليوم: الموقع الذي تقرؤه الآن. | Owner rule 1 (AR); the line names this site only (D121) | (keep) | يعمل اليوم: الموقع الذي تقرؤونه الآن. |  |
 | `c:software/page:proof.site.label` | This website | هذا الموقع | keep |  |  |  |
 | `c:software/page:proof.site.line` | Designed and built by our team in Arabic and English, with full right-to-left layouts. The screens here are captured from it. | صمّمه فريقنا وبناه بالعربية والإنجليزية، مع دعم كامل للاتجاه من اليمين إلى اليسار. الشاشات هنا ملتقطة منه مباشرة. | keep |  |  |  |
 | `c:software/page:proof.site.toggle` | Show the site in | اعرض الموقع بـ | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | عرض الموقع بـ |  |
@@ -1112,12 +1074,12 @@ The questions are in `docs/review/rand-questions.md`: 15 short questions in Arab
 | `c:software/page:proof.site.arabic` | Arabic | العربية | keep |  |  |  |
 | `c:software/page:proof.site.lighthouse` | Mobile Lighthouse, measured on the live site | نتيجة Lighthouse على الجوّال، مقيسة على الموقع المنشور | keep |  |  |  |
 | `c:software/page:proof.review.title` | How does your site look on a phone, in Arabic? | كيف يبدو موقعك على الهاتف، وبالعربية؟ | Owner rule 1 | (keep) | كيف يبدو موقعكم على الهاتف، وبالعربية؟ |  |
-| `c:software/page:quality.title` | The parts nobody sees, checked on every build. | التفاصيل التي لا يراها أحد، نتحقق منها في كل مشروع. | keep | (keep) | (keep) | ⚑ R8 (the quality checks run on every build) |
+| `c:software/page:quality.title` | The parts nobody sees, checked on every build. | التفاصيل التي لا يراها أحد، نتحقق منها في كل مشروع. | R8 (owner's wording) | We test the site automatically before every update. | نختبر الموقع آليًا قبل كل تحديث. | R8: the owner (2026-11-17) |
 | `c:software/page:quality.items[0]` | Arabic and English, right-to-left and left-to-right | العربية والإنجليزية، من اليمين إلى اليسار ومن اليسار إلى اليمين | keep |  |  |  |
 | `c:software/page:quality.items[1]` | Accessibility: keyboard, contrast and screen readers | سهولة الوصول: لوحة المفاتيح والتباين وقارئات الشاشة | keep |  |  |  |
 | `c:software/page:quality.items[2]` | A performance budget for every page, measured against Core Web Vitals | ميزانية أداء لكل صفحة، نقيسها بمؤشرات Core Web Vitals | keep |  |  |  |
-| `c:software/page:quality.items[3]` | Security and data protection, designed with the UAE's personal data protection law (PDPL) in mind | الأمان وحماية البيانات، مع مراعاة قانون حماية البيانات الشخصية في الإمارات | keep | (keep) | (keep) | ⚑ FC#22 (Rand reads the legal pages last) |
-| `c:software/page:quality.stack` | Built with Next.js · React · TypeScript · Node.js · iOS and Android | نبني بـ Next.js · React · TypeScript · Node.js · iOS و Android | N18 rule (AR) | (keep) | نبني بـ Next.js · React · TypeScript · Node.js · iOS وAndroid | ⚑ FC#21 |
+| `c:software/page:quality.items[3]` | Security and data protection, designed with the UAE's personal data protection law (PDPL) in mind | الأمان وحماية البيانات، مع مراعاة قانون حماية البيانات الشخصية في الإمارات | FC#22 (owner): no compliance or certification the company doesn't hold | Security and data protection, planned into the build | الأمان وحماية البيانات، ضمن خطة البناء من البداية | FC#22: the owner (2026-11-17) |
+| `c:software/page:quality.stack` | Built with Next.js · React · TypeScript · Node.js · iOS and Android | نبني بـ Next.js · React · TypeScript · Node.js · iOS و Android | N18 rule (AR) | (keep) | نبني بـ Next.js · React · TypeScript · Node.js · iOS وAndroid | FC#21 confirmed by the owner (2026-11-17) |
 | `c:software/page:seo.title` | Website and App Development in Dubai \| NO TIME | تطوير المواقع والتطبيقات في دبي \| NO TIME | keep |  |  |  |
 | `c:software/page:seo.description` | Bilingual Arabic–English websites, mobile apps, event registration systems and custom platforms, built in Dubai by the team that also runs events. | مواقع بالعربية والإنجليزية، وتطبيقات جوّال، وأنظمة تسجيل للفعاليات، ومنصّات مخصّصة، يبنيها في دبي الفريق الذي يدير الفعاليات أيضًا. | keep |  |  |  |
 | `c:software/page:serviceBlocks.websites.outcome` | A site your clients actually use, in Arabic and English. | موقع يستخدمه عملاؤك فعلًا، بالعربية والإنجليزية. | Owner rule 1 | (keep) | موقع يستخدمه عملاؤكم فعلًا، بالعربية والإنجليزية. |  |
@@ -1150,7 +1112,7 @@ The questions are in `docs/review/rand-questions.md`: 15 short questions in Arab
 | `c:software/page:services.receive` | You receive | ما تحصل عليه | Owner rule 1 | (keep) | ما تحصلون عليه |  |
 | `c:software/page:services.phases` | Stages | المراحل | keep |  |  |  |
 | `c:software/page:sticky.label` | Quick actions | إجراءات سريعة | keep |  |  |  |
-| `c:software/page:sticky.book` | Book a free intro call | احجز مكالمة مجانية | D-C1 (owner): a marketing call to action, so the plural command | Request a free call | اطلبوا مكالمة مجانية | ⚑ R1 (the intro call is free, 30 minutes) |
+| `c:software/page:sticky.book` | Book a free intro call | احجز مكالمة مجانية | D-C1 (owner): a marketing call to action, so the plural command | Request a free call | اطلبوا مكالمة مجانية | R1 confirmed by the owner (2026-11-17) |
 | `c:software/page:tiers.title` | Start where your business is today. Grow from there. | ابدأ من حيث يقف عملك اليوم، ثم انمُ منه. | Owner rule 1 (AR); EN keep | (keep) | ابدؤوا من حيث يقف عملكم اليوم، ثم توسّعوا منه. |  |
 | `c:software/page:tiers.intro` | Three levels of scope, from a focused website to a platform that keeps growing. | ثلاثة مستويات من النطاق، من موقع مركّز إلى منصّة تواصل النمو. | keep |  |  |  |
 | `c:software/page:tiers.note` | Every project is scoped and quoted individually. | نحدّد نطاق كل مشروع ونسعّره على حدة. | Corporate register (§2), as the Contact FAQ | We price each project once we understand it. | نسعّر كل مشروع بعد أن نفهمه. |  |
@@ -1192,7 +1154,7 @@ The questions are in `docs/review/rand-questions.md`: 15 short questions in Arab
 | `c:software/page:ways.items[project].name` | Fixed-scope project | مشروع بنطاق محدّد | keep |  |  |  |
 | `c:software/page:ways.items[project].body` | A defined scope, a plan with dates, and a launch. Right for a new site, app or system. | نطاق محدّد وخطة بالمواعيد وإطلاق. يناسب موقعًا أو تطبيقًا أو نظامًا جديدًا. | keep |  |  |  |
 | `c:software/page:ways.items[project].points[0]` | Scope and plan agreed before work starts | نتّفق على النطاق والخطة قبل بدء العمل | keep |  |  |  |
-| `c:software/page:ways.items[project].points[1]` | Progress you can see at every stage | تقدّم تراه في كل مرحلة | Owner rule 1 | (keep) | تقدّم ترونه في كل مرحلة | ⚑ FC#24 |
+| `c:software/page:ways.items[project].points[1]` | Progress you can see at every stage | تقدّم تراه في كل مرحلة | Owner rule 1 | (keep) | تقدّم ترونه في كل مرحلة | FC#24 confirmed by the owner (2026-11-17) |
 | `c:software/page:ways.items[project].points[2]` | Launch and handover to your team | الإطلاق والتسليم لفريقك | Owner rule 1 | (keep) | الإطلاق والتسليم لفريقكم |  |
 | `c:software/page:ways.items[support].name` | Monthly support & growth | دعم وتطوير شهري | keep |  |  |  |
 | `c:software/page:ways.items[support].tag` | The natural next step after launch | الخطوة الطبيعية بعد الإطلاق | keep |  |  |  |
@@ -1200,7 +1162,7 @@ The questions are in `docs/review/rand-questions.md`: 15 short questions in Arab
 | `c:software/page:ways.items[support].points[0]` | Maintenance and updates | الصيانة والتحديثات | keep |  |  |  |
 | `c:software/page:ways.items[support].points[1]` | Improvements and new features | تحسينات وميزات جديدة | keep |  |  |  |
 | `c:software/page:ways.items[support].points[2]` | Content updates | تحديث المحتوى | keep |  |  |  |
-| `c:software/page:ways.items[support].points[3]` | Monthly reporting | تقارير شهرية | keep | (keep) | (keep) | ⚑ R7 (a monthly report in every support plan) |
+| `c:software/page:ways.items[support].points[3]` | Monthly reporting | تقارير شهرية | R7 (owner): no fixed frequency | Regular reports | تقارير دورية | R7: the owner (2026-11-17) |
 | `c:software/page:why.title` | One team that plans the event, writes the Arabic and ships the code. | فريق واحد يخطّط للفعالية، ويكتب العربية، ويطلق المنصّة. | keep |  |  |  |
 | `c:software/page:why.lead` | Why NO TIME, in five lines. | لماذا NO TIME، في خمسة أسطر. | keep |  |  |  |
 | `c:software/page:why.items[0].title` | One team for events and digital | فريق واحد للفعاليات والحلول الرقمية | Choice 1 (`why.title` above already says it) | Events and digital under one roof | الفعاليات والحلول الرقمية تحت سقف واحد |  |
@@ -1210,7 +1172,7 @@ The questions are in `docs/review/rand-questions.md`: 15 short questions in Arab
 | `c:software/page:why.items[2].title` | Performance and SEO built in | الأداء والظهور في البحث جزء من البناء | keep |  |  |  |
 | `c:software/page:why.items[2].body` | Speed and search structure are part of the build, and we check them before launch. | السرعة وبنية الظهور في محركات البحث جزء من البناء، ونتحقق منهما قبل الإطلاق. | keep |  |  |  |
 | `c:software/page:why.items[3].title` | Support after launch | دعم بعد الإطلاق | keep |  |  |  |
-| `c:software/page:why.items[3].body` | We stay after go-live, with maintenance and improvements on agreed terms. | نبقى معك بعد الإطلاق، بالصيانة والتحسينات وفق ما نتّفق عليه. | Owner rule 1 | (keep) | نبقى معكم بعد الإطلاق، بالصيانة والتحسينات وفق ما نتّفق عليه. | ⚑ FC#24 |
+| `c:software/page:why.items[3].body` | We stay after go-live, with maintenance and improvements on agreed terms. | نبقى معك بعد الإطلاق، بالصيانة والتحسينات وفق ما نتّفق عليه. | Owner rule 1 | (keep) | نبقى معكم بعد الإطلاق، بالصيانة والتحسينات وفق ما نتّفق عليه. | FC#24 confirmed by the owner (2026-11-17) |
 | `c:software/page:why.items[4].title` | Progress you can see | تقدّم تراه بعينك | Owner rule 1 | (keep) | تقدّم ترونه بأعينكم |  |
 | `c:software/page:why.items[4].body` | A clickable prototype first, then a staging link you can open at any stage. | نموذج تفاعلي أولًا، ثم رابط تجريبي تفتحه في أي مرحلة. | Owner rule 1 | (keep) | نموذج تفاعلي أولًا، ثم رابط تجريبي تفتحونه في أي مرحلة. |  |
 
@@ -1219,12 +1181,12 @@ The questions are in `docs/review/rand-questions.md`: 15 short questions in Arab
 | ID | Current EN | Current AR | Rule | Proposed EN | Proposed AR | Facts |
 |---|---|---|---|---|---|---|
 | `m:workIndex.metaTitle` | Our work | أعمالنا | SEO: "Our work" alone matches no search | Our work: events, stands and digital | أعمالنا: فعاليات وأجنحة وحلول رقمية |  |
-| `m:workIndex.metaDescription` | Selected projects by NO TIME Creative House: an airline's exhibition pavilion, a football league's tournaments and award nights, and a sports federation's website, app and daily channels. | مشاريع مختارة من NO TIME Creative House: جناح لشركة طيران وطنية في المعارض، وبطولات دوري كرة قدم وليالي تكريمه، وموقع اتحاد رياضي وتطبيقه ومنصّاته اليومية. | SEO: 190 chars, cut in results | An airline's pavilion at the Dubai Airshow, a football league's award nights, and a sports federation's website and app: what we did on each. | جناح لشركة طيران في معرض دبي للطيران، وليالي تكريم لدوري كرة قدم، وموقع اتحاد رياضي وتطبيقه: ما الذي قدّمناه في كل منها. | case studies (anonymous) |
+| `m:workIndex.metaDescription` | Selected projects by NO TIME Creative House: an airline's exhibition pavilion, and a football league's tournaments and award nights. | مشاريع مختارة من NO TIME Creative House: جناح لشركة طيران وطنية في المعارض، وبطولات دوري كرة قدم وليالي تكريمه. | SEO: the old line was cut in results; the withdrawn case is gone (D121) | An airline's pavilion at the Dubai Airshow and a football league's award nights: what we did on each. | جناح لشركة طيران في معرض دبي للطيران، وليالي تكريم لدوري كرة قدم: ما الذي قدّمناه في كل منهما. | case studies (anonymous) |
 | `m:workIndex.metaFiltered` | Our work: {filter} | أعمالنا: {filter} | keep |  |  |  |
 | `m:workIndex.eyebrow` | Our work | أعمالنا | keep |  |  |  |
 | `m:workIndex.headingLead` | Work for national organisations, | أعمال لجهات وطنية، | keep |  |  |  |
 | `m:workIndex.headingKey` | shown project by project. | مشروعًا بعد مشروع. | keep |  |  |  |
-| `m:workIndex.intro` | A pavilion at the Dubai Airshow, a football league's award nights, a federation's website, app and daily channels. Each client's name appears once they approve it. | جناح في معرض دبي للطيران، وليالي تكريم لدوري كرة قدم، وموقع اتحاد رياضي وتطبيقه ومنصّاته اليومية. يظهر اسم كل عميل حين يوافق على ذكره. | keep |  |  |  |
+| `m:workIndex.intro` | A pavilion at the Dubai Airshow and a football league's award nights. Each client's name appears once they approve it. | جناح في معرض دبي للطيران، وليالي تكريم لدوري كرة قدم. يظهر اسم كل عميل حين يوافق على ذكره. | keep |  |  |  |
 | `m:workIndex.filterLabel` | Filter the work | تصفية الأعمال | keep |  |  |  |
 | `m:workIndex.serviceFacet` | Service | الخدمة | keep |  |  |  |
 | `m:workIndex.marketFacet` | Market | السوق | keep |  |  |  |
@@ -1247,29 +1209,6 @@ The questions are in `docs/review/rand-questions.md`: 15 short questions in Arab
 | `m:workCase.ctaBody` | Start with the services this project used. Each page lists what we deliver, and how to reach us. | ابدأ بالخدمات التي قام عليها هذا المشروع. في كل صفحة ما نقدّمه، وطريقة التواصل معنا. | Owner rule 1 (AR); EN keep | (keep) | ابدؤوا بالخدمات التي قام عليها هذا المشروع. في كل صفحة ما نقدّمه، وطريقة التواصل معنا. |  |
 | `m:workCase.ctaQuote` | Request a quote | اطلب عرض سعر | D-C1 (owner): a marketing call to action, so the plural command | (keep) | اطلبوا عرض سعر |  |
 | `m:workCase.ctaCategory` | Explore {category} | تصفّح {category} | D-C1 (owner): a marketing call to action, so the plural command | (keep) | استكشفوا {category} |  |
-| `c:work:workItems[sports-federation-digital-partner].anonymous.label` | A national sports federation | اتحاد رياضي وطني | keep |  |  |  |
-| `c:work:workItems[sports-federation-digital-partner].anonymous.summary` | Its digital and media partner: we rebuilt the bilingual website and its connected app, and publish to its channels every day in Arabic and English. One championship campaign, first week: 487K views, +37.6K new followers, 271K reach. | شريكه الرقمي والإعلامي: أعدنا بناء موقعه بلغتين وتطبيق الجوّال المتصل به، وننشر على منصّاته كل يوم بالعربية والإنجليزية. وفي الأسبوع الأول من إحدى حملات البطولات: 487 ألف مشاهدة، و37.6 ألف متابع جديد، ووصول إلى 271 ألفًا. | keep | (keep) | (keep) | ⚑ FC#4 + the figures: the client agrees to their publication |
-| `c:work:workItems[sports-federation-digital-partner].named.label` | UAE Athletics Federation | الاتحاد الإماراتي لألعاب القوى | keep |  |  |  |
-| `c:work:workItems[sports-federation-digital-partner].named.summary` | The federation's appointed digital and media partner: a full rebuild of the bilingual website and the connected mobile app, plus daily social media in Arabic and English. First week of the Oregon 26 campaign: 487K views, +37.6K new followers, 271K reach. | الشريك الرقمي والإعلامي المعتمد للاتحاد: إعادة بناء كاملة للموقع الإلكتروني ثنائي اللغة وتطبيق الجوّال المرتبط به، مع إدارة يومية لوسائل التواصل بالعربية والإنجليزية. في الأسبوع الأول من حملة أوريغون 26: 487 ألف مشاهدة، و37.6 ألف متابع جديد، ووصول بلغ 271 ألفًا. | keep |  |  |  |
-| `c:work:workItems[sports-federation-digital-partner].story.facts[0].label` | Our role | دورنا | keep |  |  |  |
-| `c:work:workItems[sports-federation-digital-partner].story.facts[0].value` | Appointed digital and media partner | الشريك الرقمي والإعلامي المعتمد | keep |  |  |  |
-| `c:work:workItems[sports-federation-digital-partner].story.facts[1].label` | Platform | المنصّة | keep |  |  |  |
-| `c:work:workItems[sports-federation-digital-partner].story.facts[1].value` | Website and app, live | الموقع والتطبيق متاحان للجمهور | keep |  |  |  |
-| `c:work:workItems[sports-federation-digital-partner].story.execution.lead` | We run the federation's whole online presence: the platform it publishes on, and the channels it speaks through, every day, in both languages. | نتولّى حضور الاتحاد على الإنترنت كاملًا: المنصّة التي ينشر عليها، والقنوات التي يخاطب بها جمهوره، كل يوم وباللغتين. | keep |  |  |  |
-| `c:work:workItems[sports-federation-digital-partner].story.execution.points[0]` | A full rebuild of the bilingual website, with a complete CMS and a connected mobile app | إعادة بناء كاملة للموقع بلغتين، بنظام لإدارة المحتوى وتطبيق جوّال متصل به | keep |  |  |  |
-| `c:work:workItems[sports-federation-digital-partner].story.execution.points[1]` | Sections for athletes, clubs, coaches and referees, and for championships, results and national records | أقسام للرياضيين والأندية والمدربين والحكّام، وللبطولات والنتائج والأرقام القياسية الوطنية | keep |  |  |  |
-| `c:work:workItems[sports-federation-digital-partner].story.execution.points[2]` | News, a media library and live coverage, run from an admin dashboard with analytics | الأخبار ومكتبة الوسائط والتغطية المباشرة، تُدار كلها من لوحة تحكم مزوّدة بالتحليلات | keep |  |  |  |
-| `c:work:workItems[sports-federation-digital-partner].story.execution.points[3]` | A content strategy and a monthly calendar, published every day in Arabic and English | استراتيجية محتوى وخطة نشر شهرية، ونشر يومي بالعربية والإنجليزية | keep |  |  |  |
-| `c:work:workItems[sports-federation-digital-partner].story.execution.points[4]` | On-ground coverage and photography, motion graphics, reels and AI video | تغطية وتصوير في أرض الحدث، وموشن جرافيك، ومقاطع ريلز وفيديو بالذكاء الاصطناعي | keep |  |  |  |
-| `c:work:workItems[sports-federation-digital-partner].story.execution.points[5]` | Paid campaigns and community growth, with championship key visuals, some made with AI | حملات مدفوعة وتنمية لجمهور الحسابات، وتصاميم رئيسية للبطولات أُنتج بعضها بالذكاء الاصطناعي | keep |  |  |  |
-| `c:work:workItems[sports-federation-digital-partner].story.result.lead` | The website and the app are live. On social, one championship campaign drew this in its first week: | الموقع والتطبيق متاحان للجمهور اليوم. وعلى المنصّات، حققت إحدى حملات البطولات في أسبوعها الأول: | keep |  |  |  |
-| `c:work:workItems[sports-federation-digital-partner].story.result.figures[0].value` | 487K | 487 ألف | keep |  |  |  |
-| `c:work:workItems[sports-federation-digital-partner].story.result.figures[0].label` | views | مشاهدة | keep |  |  |  |
-| `c:work:workItems[sports-federation-digital-partner].story.result.figures[1].value` | +37.6K | ‎+37.6 ألف | keep |  |  |  |
-| `c:work:workItems[sports-federation-digital-partner].story.result.figures[1].label` | new followers | متابع جديد | keep |  |  |  |
-| `c:work:workItems[sports-federation-digital-partner].story.result.figures[2].value` | 271K | 271 ألف | keep |  |  |  |
-| `c:work:workItems[sports-federation-digital-partner].story.result.figures[2].label` | campaign reach | وصول للحملة | keep |  |  |  |
-| `c:work:workItems[sports-federation-digital-partner].story.result.scope` | One championship campaign, first week only. | حملة بطولة واحدة، في أسبوعها الأول فقط. | keep: the honest scope line the figures need | (keep) | (keep) | ⚑ FC#4 |
 | `c:work:workItems[airline-exhibition-pavilion].anonymous.label` | A national airline | شركة طيران وطنية | keep |  |  |  |
 | `c:work:workItems[airline-exhibition-pavilion].anonymous.summary` | Stand design, build and on-site PR at the Dubai Airshow and Arabian Travel Market. | صمّمنا الجناح وبنيناه، وأدرنا علاقاته العامة في أرض الحدث، في معرض دبي للطيران وسوق السفر العربي. | keep |  |  |  |
 | `c:work:workItems[airline-exhibition-pavilion].named.label` | EgyptAir | مصر للطيران | keep |  |  |  |
@@ -1309,7 +1248,7 @@ The questions are in `docs/review/rand-questions.md`: 15 short questions in Arab
 | `m:aboutPage.title` | Ideas built where a brand meets its audience. | أفكار تُبنى حيث تلتقي العلامة بجمهورها. | keep |  |  |  |
 | `m:aboutPage.story1` | NO TIME is an events, marketing and PR house based in Dubai, working for clients in local, regional and global markets. | NO TIME دار للفعاليات والتسويق والعلاقات العامة، مقرّها دبي، وتعمل لعملاء في أسواق محلية وإقليمية وعالمية. | keep: Rand's own sentence (p3) | (keep) | (keep) | p3 |
 | `m:aboutPage.story2` | We start at the exact point where a brand meets its audience, then carry the idea all the way: strategy, creative, production and delivery, by one team. | نبدأ من النقطة التي تلتقي فيها العلامة بجمهورها، ثم نمضي بالفكرة حتى آخرها: الاستراتيجية والإبداع والإنتاج والتنفيذ، بفريق واحد. | keep: Rand's own sentence (p3); this is where "one team" belongs | (keep) | (keep) | p3 |
-| `m:aboutPage.story3` | That's why the work spans so much: an airline's pavilion at the Dubai Airshow, a majlis dressed for a heritage welcome, award nights for a football league, a bilingual app for a national sports federation. | ولهذا يتّسع عملنا لكل هذا: جناح لشركة طيران في معرض دبي للطيران، ومجلس تراثي يستقبل الضيوف، وليالي تكريم لدوري كرة قدم، وتطبيق بلغتين لاتحاد رياضي وطني. | keep |  |  |  |
+| `m:aboutPage.story3` | That's why the work spans so much: an airline's pavilion at the Dubai Airshow, a majlis dressed for a heritage welcome and award nights for a football league. | ولهذا يتّسع عملنا لكل هذا: جناح لشركة طيران في معرض دبي للطيران، ومجلس تراثي يستقبل الضيوف، وليالي تكريم لدوري كرة قدم. | keep |  |  |  |
 | `m:aboutPage.story4` | Our name comes with a line we keep: it's time to start. | ومع اسمنا عبارة نلتزم بها: حان وقت البداية. | keep |  |  |  |
 | `m:aboutPage.seeWork` | See the work | شاهد أعمالنا | D-C1 (owner): a marketing call to action, so the plural command | (keep) | شاهدوا أعمالنا |  |
 | `m:aboutPage.principlesEyebrow` | How we work | كيف نعمل | keep |  |  |  |
@@ -1439,8 +1378,8 @@ The questions are in `docs/review/rand-questions.md`: 15 short questions in Arab
 | `c:form-copy:formCopy.consultation.budgetHint` | It helps us suggest the right scope. It's never a price. | تساعدنا على اقتراح النطاق المناسب، وليست سعرًا. | keep |  |  |  |
 | `c:form-copy:formCopy.consultation.message` | Tell us a little more | أخبرنا بالمزيد | Owner rule 1 | (keep) | أخبرونا بالمزيد |  |
 | `c:form-copy:formCopy.consultation.messageHint` | Who it's for, what it must do, any date that matters. | لمن هو، وما الذي يجب أن يفعله، وأي موعد يهمّك. | Owner rule 1 | (keep) | لمن هو، وما الذي يجب أن يفعله، وأي موعد يهمّكم. |  |
-| `c:form-copy:formCopy.consultation.submit` | Book a free 30-min intro call | احجز مكالمة تعارف مجانية (30 دقيقة) | D-C1 (owner): one of the six approved buttons, back to the plural command as the owner asked, although it submits a form | Book a free 30-min intro call | اطلبوا مكالمة تعارف مجانية (30 دقيقة) | ⚑ R1 (the intro call is free, 30 minutes) |
-| `c:form-copy:formCopy.consultation.micro` | No obligation. We reply within one working day. | دون أي التزام. نرد خلال يوم عمل. | keep | (keep) | (keep) | ⚑ FC#23 |
+| `c:form-copy:formCopy.consultation.submit` | Book a free 30-min intro call | احجز مكالمة تعارف مجانية (30 دقيقة) | D-C1 + N13 (owner): the plural command, and no "30-min" on the button; the duration is in the line beside it | Request a free intro call | اطلبوا مكالمة تعارف مجانية | R1 confirmed by the owner (2026-11-17) |
+| `c:form-copy:formCopy.consultation.micro` | No obligation. We reply within one working day. | دون أي التزام. نرد خلال يوم عمل. | R1 (owner): the call's length goes in the line beside the button | A free 30-minute call, with no obligation. We reply within one working day. | مكالمة مجانية مدتها 30 دقيقة، دون أي التزام. نرد عليكم خلال يوم عمل. | R1 confirmed by the owner (2026-11-17); ⚑ FC#23 |
 | `c:form-copy:formCopy.consultation.successTitle` | Thanks, {name}. Your request is in. | شكرًا، {name}. وصلنا طلبك. | Choice 2, as the contact form | Thanks, {name}. We have your request. | شكرًا، {name}. وصلنا طلبكم. |  |
 | `c:form-copy:formCopy.consultation.successBody` | We reply within one working day to set a time for the call. | نرد خلال يوم عمل لنحدّد موعد المكالمة. | Owner rule 1 (AR); EN keep | (keep) | نرد عليكم خلال يوم عمل لنحدّد موعد المكالمة. | ⚑ FC#23 |
 | `c:form-copy:formCopy.consultation.prefilled` | We've filled in: {choice}. Change it if you like. | اخترنا لك: {choice}. يمكنك تغييره. | Owner rule 1 | (keep) | اخترنا لكم: {choice}. يمكنكم تغييره. |  |
@@ -1455,7 +1394,7 @@ The questions are in `docs/review/rand-questions.md`: 15 short questions in Arab
 | `c:form-copy:formCopy.review.message` | Anything we should know? | هل هناك ما يجب أن نعرفه؟ | Owner rule 1 (AR); EN keep | (keep) | هل هناك ما يجب أن نعرفه؟ |  |
 | `c:form-copy:formCopy.review.submit` | Send my site for review | أرسل موقعي للمراجعة | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | إرسال الموقع للمراجعة |  |
 | `c:form-copy:formCopy.review.successTitle` | Thanks, {name}. Your site is with us. | شكرًا، {name}. وصلنا موقعك. | Owner rule 1 (AR); EN keep | (keep) | شكرًا، {name}. وصلنا موقعكم. |  |
-| `c:form-copy:formCopy.review.successBody` | Within 3 working days we'll reply with 5 concrete improvements, free. | خلال 3 أيام عمل نرد عليك بخمسة تحسينات عملية، مجانًا. | Owner rule 1 (AR); EN keep. A promise with a number in it | (keep) | خلال 3 أيام عمل نرد عليكم بخمسة تحسينات عملية، مجانًا. | ⚑ R2 (the website review: free, 3 working days, 5 improvements) |
+| `c:form-copy:formCopy.review.successBody` | Within 3 working days we'll reply with 5 concrete improvements, free. | خلال 3 أيام عمل نرد عليك بخمسة تحسينات عملية، مجانًا. | Owner rule 1 (AR); EN keep. A promise with a number in it | (keep) | خلال 3 أيام عمل نرد عليكم بخمسة تحسينات عملية، مجانًا. | R2 confirmed by the owner (2026-11-17) |
 | `c:form-copy:formCopy.interest.message` | What would you use it for? | فيمَ ستستخدمه؟ | Owner rule 1 | (keep) | فيمَ ستستخدمونه؟ |  |
 | `c:form-copy:formCopy.interest.submit` | Register interest | سجّل اهتمامك | D-C1 (owner): a form, system or navigation button, so the verbal noun | (keep) | تسجيل الاهتمام |  |
 | `c:form-copy:formCopy.interest.successTitle` | Thanks, {name}. You're on the list for {product}. | شكرًا، {name}. سجّلنا اهتمامك بـ{product}. | Owner rule 1 (AR); EN keep | (keep) | شكرًا، {name}. سجّلنا اهتمامكم بـ{product}. |  |

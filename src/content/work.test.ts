@@ -12,7 +12,7 @@ function strings(v: unknown): string[] {
 
 /**
  * What an anonymous case page can render: the anonymous view, the story and the slug. The internal
- * `key` ("uaeaf") is never rendered (pages use the slug for ids and React keys), so it is left out.
+ * `key` ("egyptair") is never rendered (pages use the slug for ids and React keys), so it is left out.
  */
 const anonymousPage = (w: WorkItem) => {
   const { key: _key, ...view } = workView(w, false);

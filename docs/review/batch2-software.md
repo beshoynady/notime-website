@@ -16,7 +16,7 @@ Branch `worktree-agent-a0db117a116600633`, built on `phase-2-services` 4593f13. 
 10. **Prefill clicks don't rewrite the URL** (that would make AnchorScroll re-land); they push to a small client store and scroll to `#consult`. The URL alone (`?build=apps&tier=grow#consult`) still prefills on load. Confirm.
 11. **Proof screenshots:** the homepage in the laptop and Creative Production at 390 px in the phone, with an EN/AR toggle. Captured from this site; registered as real slots `notime-website-{home,category}-{en,ar}`. Retake them at M2 after the final copy lands. Confirm.
 12. **The Lighthouse line stays off** (`SOFTWARE_FLAGS.lighthouseProof = false`); it shows only when every score is 90 or more on a production measurement. Confirm.
-13. **The named case study stays off** (it follows `WORK_NAMED.uaeaf`, OQ #17). Off, the devices show abstract redraws with no client name. Confirm.
+13. Withdrawn (D121).
 14. **Label-only eyebrows removed** per the hook standard; they stay only where they carry information (Case study, Our products · Coming soon, Event technology). Confirm.
 15. **The sticky mobile bar** shows after the opening, hides over `#consult` and `#website-review` and while a text field has focus, and hides the WhatsApp button while it shows (WhatsApp is unconfigured anyway, D78). Confirm.
 16. **Tooling (no decision):** in a worktree with a junctioned node_modules, Turbopack needs `turbopack.root` set to the main checkout (a local, uncommitted edit). `--webpack` is not an alternative: Tailwind runs only through the Turbopack loader, so webpack serves the page unstyled.
@@ -55,15 +55,8 @@ Every Arabic line on the page and in the three forms is new, written from the id
 | Key | EN idea | AR line |
 |---|---|---|
 | `caseStudy.eyebrow` | Case study | دراسة حالة |
-| `caseStudy.anonymous.client` | A national sports federation | اتحاد رياضي وطني |
-| `caseStudy.named.client` | UAE Athletics Federation | الاتحاد الإماراتي لألعاب القوى |
-| `caseStudy.named.alt.laptop` | The federation's bilingual website on a laptop. | موقع الاتحاد ثنائي اللغة على شاشة حاسوب محمول. |
-| `caseStudy.named.alt.phone` | The federation's website on a phone. | موقع الاتحاد على شاشة هاتف. |
-| `caseStudy.title` | A national federation's platform, rebuilt and live. | منصة اتحاد وطني، أعدنا بناءها وهي تعمل الآن. |
 | `caseStudy.parts.challenge.label` | Challenge | التحدي |
-| `caseStudy.parts.challenge.body` | A full rebuild of the federation's digital platform. | إعادة بناء كاملة للمنصة الرقمية للاتحاد. |
 | `caseStudy.parts.approach.label` | Approach | النهج |
-| `caseStudy.parts.approach.body` | A modern bilingual website with a complete content management system and a connected mobile app, redesigned from the interface up and fully responsive. As the federation's official digital and media partner, we also publish its social media daily in Arabic and English. | موقع حديث بلغتين، مع نظام كامل لإدارة المحتوى وتطبيق جوّال مرتبط به، أعدنا تصميم واجهته بالكامل ليعمل على كل الشاشات. وبصفتنا الشريك الرقمي والإعلامي الرسمي للاتحاد، ننشر محتواه على وسائل التواصل يوميًا بالعربية والإنجليزية. |
 | `caseStudy.parts.built.label` | What we built | ما بنيناه |
 | `caseStudy.parts.built.items.0` | Bilingual website | موقع بلغتين |
 | `caseStudy.parts.built.items.1` | Mobile app | تطبيق جوّال |
@@ -92,7 +85,7 @@ Every Arabic line on the page and in the three forms is new, written from the id
 | `eventTech.items.1.title` | Event apps and websites | تطبيقات ومواقع للفعاليات |
 | `eventTech.items.1.body` | The agenda, the speakers and live updates. | البرنامج والمتحدثون والتحديثات المباشرة. |
 | `eventTech.items.2.title` | Live results and screens | النتائج المباشرة والشاشات |
-| `eventTech.items.2.body` | Championships, results and live coverage, as on a national federation's platform. | بطولات ونتائج وتغطية مباشرة، كما في منصة اتحاد وطني. |
+| `eventTech.items.2.body` | Championships, results and live coverage, on screen as they happen. | بطولات ونتائج وتغطية مباشرة، تظهر على الشاشات لحظة حدوثها. |
 | `eventTech.idealFor.0` | Conferences and exhibitions | المؤتمرات والمعارض |
 | `eventTech.idealFor.1` | Sports events and championships | الفعاليات الرياضية والبطولات |
 | `eventTech.idealFor.2` | Galas with a guest list | الحفلات بقوائم ضيوف |
@@ -196,10 +189,7 @@ Every Arabic line on the page and in the three forms is new, written from the id
 | `productsCopy.demo.covers` | Covers | عدد الضيوف |
 | `productsCopy.demo.orders` | Orders | الطلبات |
 | `productsCopy.demo.peak` | Busiest hour | ساعة الذروة |
-| `proof.title` | Live today: a national federation's platform, and the site you're reading. | يعمل اليوم: منصة اتحاد رياضي وطني، والموقع الذي تقرؤه الآن. |
-| `proof.federation.label` | A national sports federation | اتحاد رياضي وطني |
-| `proof.federation.line` | Bilingual website, mobile app and content management system, all live. | موقع بلغتين وتطبيق جوّال ونظام لإدارة المحتوى، وكلها تعمل الآن. |
-| `proof.federation.link` | Read the case study | اقرأ دراسة الحالة |
+| `proof.title` | Live today: the site you're reading. | يعمل اليوم: الموقع الذي تقرؤه الآن. |
 | `proof.site.label` | This website | هذا الموقع |
 | `proof.site.line` | Designed and built by our team in Arabic and English, with full right-to-left layouts. The screens here are captured from it. | صمّمه فريقنا وبناه بالعربية والإنجليزية، مع دعم كامل للاتجاه من اليمين إلى اليسار. الشاشات هنا ملتقطة منه مباشرة. |
 | `proof.site.toggle` | Show the site in | اعرض الموقع بـ |

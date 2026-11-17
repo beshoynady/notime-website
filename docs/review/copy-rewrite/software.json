@@ -1,40 +1,30 @@
 {
-  "c:software/page:caseStudy.parts.approach.body": {
-    "rule": "keep",
-    "facts": "⚑ FC#18 (official partner at launch)"
-  },
-  "c:software/page:caseStudy.parts.result.body": {
-    "rule": "keep",
-    "facts": "⚑ FC#18 (all live at launch)"
-  },
-  "c:software/page:caseStudy.visit": {
-    "rule": "D-C1 (owner): a form, system or navigation button, so the verbal noun",
-    "ar": "زيارة الموقع"
-  },
   "c:software/page:cta.book": {
     "rule": "D-C1 (owner): a marketing call to action, so the plural command",
     "en": "Request a free intro call",
     "ar": "اطلبوا مكالمة تعارف مجانية",
-    "facts": "⚑ R1 (the intro call is free, 30 minutes)"
+    "facts": "R1 confirmed by the owner (2026-11-17)"
   },
   "c:software/page:cta.micro": {
-    "rule": "keep",
-    "facts": "⚑ FC#23"
+    "rule": "R1 (owner): the call's length goes in the line beside the button",
+    "en": "A free 30-minute call, with no obligation. We reply within one working day.",
+    "ar": "مكالمة مجانية مدتها 30 دقيقة، دون أي التزام. نرد عليكم خلال يوم عمل.",
+    "facts": "R1 confirmed by the owner (2026-11-17); ⚑ FC#23"
   },
   "c:software/page:cta.review": {
     "rule": "D-C1 (owner): a marketing call to action, so the plural command",
     "ar": "اطلبوا مراجعة مجانية لموقعكم",
-    "facts": "⚑ R2 (the website review: free, 3 working days, 5 improvements)"
+    "facts": "R2 confirmed by the owner (2026-11-17)"
   },
   "c:software/page:cta.reviewShort": {
     "rule": "Owner rule 1",
     "ar": "مراجعة مجانية لموقعكم",
-    "facts": "⚑ R2 (the website review: free, 3 working days, 5 improvements)"
+    "facts": "R2 confirmed by the owner (2026-11-17)"
   },
   "c:software/page:cta.reviewPromise": {
     "rule": "Owner rule 1 (AR); EN keep: the kind of specific promise §1 asks for",
     "ar": "أرسلوا لنا موقعكم، وخلال 3 أيام عمل نرد عليكم بخمسة تحسينات عملية، مجانًا.",
-    "facts": "⚑ R2 (the website review: free, 3 working days, 5 improvements)"
+    "facts": "R2 confirmed by the owner (2026-11-17)"
   },
   "c:software/page:cta.work": {
     "rule": "D-C1 (owner): a marketing call to action, so the plural command",
@@ -60,7 +50,7 @@
   },
   "c:software/page:eventTech.items[2].body": {
     "rule": "keep",
-    "facts": "⚑ FC#19 (built for clients other than the federation?)"
+    "facts": "FC#19 confirmed by the owner (2026-11-17): an event app was delivered to a client"
   },
   "c:software/page:eventTech.receive[0]": {
     "rule": "Owner rule 1",
@@ -93,7 +83,7 @@
   },
   "c:software/page:problems.items[3].fix": {
     "rule": "keep",
-    "facts": "⚑ FC#24"
+    "facts": "FC#24 confirmed by the owner (2026-11-17)"
   },
   "c:software/page:problems.items[4].fix": {
     "rule": "Choice 1",
@@ -103,7 +93,7 @@
   "c:software/page:process.title": {
     "rule": "Owner rule 1 (AR); EN keep",
     "ar": "ترون مشروعكم في كل مرحلة، لا يوم الإطلاق وحده.",
-    "facts": "⚑ FC#24"
+    "facts": "FC#24 confirmed by the owner (2026-11-17)"
   },
   "c:software/page:process.lead": {
     "rule": "Owner rule 1",
@@ -128,7 +118,7 @@
   "c:software/page:process.steps.build.receive": {
     "rule": "Owner rule 1",
     "ar": "رابط تجريبي ترون عليه التقدّم في كل مرحلة",
-    "facts": "⚑ FC#24"
+    "facts": "FC#24 confirmed by the owner (2026-11-17)"
   },
   "c:software/page:process.steps.launch.receive": {
     "rule": "Owner rule 1",
@@ -164,12 +154,8 @@
     "ar": "متابعة الوصول لحظة بلحظة لفريقكم"
   },
   "c:software/page:proof.title": {
-    "rule": "Owner rule 1",
-    "ar": "يعمل اليوم: منصة اتحاد رياضي وطني، والموقع الذي تقرؤونه الآن."
-  },
-  "c:software/page:proof.federation.link": {
-    "rule": "D-C1 (owner): a form, system or navigation button, so the verbal noun",
-    "ar": "قراءة دراسة الحالة"
+    "rule": "Owner rule 1 (AR); the line names this site only (D121)",
+    "ar": "يعمل اليوم: الموقع الذي تقرؤونه الآن."
   },
   "c:software/page:proof.site.toggle": {
     "rule": "D-C1 (owner): a form, system or navigation button, so the verbal noun",
@@ -180,13 +166,15 @@
     "ar": "كيف يبدو موقعكم على الهاتف، وبالعربية؟"
   },
   "c:software/page:quality.items[3]": {
-    "rule": "keep",
-    "facts": "⚑ FC#22 (Rand reads the legal pages last)"
+    "rule": "FC#22 (owner): no compliance or certification the company doesn't hold",
+    "en": "Security and data protection, planned into the build",
+    "ar": "الأمان وحماية البيانات، ضمن خطة البناء من البداية",
+    "facts": "FC#22: the owner (2026-11-17)"
   },
   "c:software/page:quality.stack": {
     "rule": "N18 rule (AR)",
     "ar": "نبني بـ Next.js · React · TypeScript · Node.js · iOS وAndroid",
-    "facts": "⚑ FC#21"
+    "facts": "FC#21 confirmed by the owner (2026-11-17)"
   },
   "c:software/page:serviceBlocks.websites.outcome": {
     "rule": "Owner rule 1",
@@ -212,7 +200,7 @@
     "rule": "D-C1 (owner): a marketing call to action, so the plural command",
     "en": "Request a free call",
     "ar": "اطلبوا مكالمة مجانية",
-    "facts": "⚑ R1 (the intro call is free, 30 minutes)"
+    "facts": "R1 confirmed by the owner (2026-11-17)"
   },
   "c:software/page:tiers.title": {
     "rule": "Owner rule 1 (AR); EN keep",
@@ -250,15 +238,17 @@
   "c:software/page:ways.items[project].points[1]": {
     "rule": "Owner rule 1",
     "ar": "تقدّم ترونه في كل مرحلة",
-    "facts": "⚑ FC#24"
+    "facts": "FC#24 confirmed by the owner (2026-11-17)"
   },
   "c:software/page:ways.items[project].points[2]": {
     "rule": "Owner rule 1",
     "ar": "الإطلاق والتسليم لفريقكم"
   },
   "c:software/page:ways.items[support].points[3]": {
-    "rule": "keep",
-    "facts": "⚑ R7 (a monthly report in every support plan)"
+    "rule": "R7 (owner): no fixed frequency",
+    "en": "Regular reports",
+    "ar": "تقارير دورية",
+    "facts": "R7: the owner (2026-11-17)"
   },
   "c:software/page:why.items[0].title": {
     "rule": "Choice 1 (`why.title` above already says it)",
@@ -277,7 +267,7 @@
   "c:software/page:why.items[3].body": {
     "rule": "Owner rule 1",
     "ar": "نبقى معكم بعد الإطلاق، بالصيانة والتحسينات وفق ما نتّفق عليه.",
-    "facts": "⚑ FC#24"
+    "facts": "FC#24 confirmed by the owner (2026-11-17)"
   },
   "c:software/page:why.items[4].title": {
     "rule": "Owner rule 1",
@@ -290,16 +280,18 @@
   "c:software/page:finalCta.risk": {
     "rule": "D-C1 (owner): the line opens with the call to action, so the plural command; N13 wording",
     "ar": "اطلبوا مكالمة تعارف مجانية (30 دقيقة)، دون أي التزام. نرد عليكم خلال يوم عمل.",
-    "facts": "⚑ FC#23; ⚑ R1 (the intro call is free, 30 minutes)"
+    "facts": "⚑ FC#23; R1 confirmed by the owner (2026-11-17)"
   },
   "c:software/page:finalCta.reviewTitle": {
     "rule": "Owner rule 1",
     "ar": "أو ابدؤوا بمراجعة مجانية لموقعكم",
-    "facts": "⚑ R2 (the website review: free, 3 working days, 5 improvements)"
+    "facts": "R2 confirmed by the owner (2026-11-17)"
   },
   "c:software/page:quality.title": {
-    "rule": "keep",
-    "facts": "⚑ R8 (the quality checks run on every build)"
+    "rule": "R8 (owner's wording)",
+    "en": "We test the site automatically before every update.",
+    "ar": "نختبر الموقع آليًا قبل كل تحديث.",
+    "facts": "R8: the owner (2026-11-17)"
   },
   "c:software/page:hero.ui.soon": {
     "rule": "Fixed principle: no \"coming soon\" (it renders as the badge on both product cards)",

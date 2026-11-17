@@ -43,9 +43,9 @@
   },
   "m:about.body": {
     "rule": "Keeps the three real projects (§1 specifics). The last sentence repeated the statement",
-    "en": "We're based in Dubai and work in six markets, from Saudi Arabia to Egypt. Recent work: an airline's pavilion at the Dubai Airshow, a majlis dressed for a heritage welcome, and a bilingual app for a national sports federation.",
-    "ar": "مقرّنا دبي، ونعمل في ستة أسواق من السعودية إلى مصر. من أعمالنا الأخيرة: جناح لشركة طيران في معرض دبي للطيران، ومجلس تراثي جُهّز لاستقبال الضيوف، وتطبيق بلغتين لاتحاد رياضي وطني.",
-    "facts": "p3, case studies. ⚑ FC#1 (six markets); ⚑ R9 (the three projects are recent): if Rand doesn't confirm, \"Some of our work:\" / «من أعمالنا:»"
+    "en": "We're based in Dubai and work in six markets, from Saudi Arabia to Egypt. Recent work: an airline's pavilion at the Dubai Airshow and a majlis dressed for a heritage welcome.",
+    "ar": "مقرّنا دبي، ونعمل في ستة أسواق من السعودية إلى مصر. من أعمالنا الأخيرة: جناح لشركة طيران في معرض دبي للطيران، ومجلس تراثي جُهّز لاستقبال الضيوف.",
+    "facts": "p3, case studies. ⚑ FC#1 (six markets); ⚑ R9 (the two projects are recent): if Rand doesn't confirm, \"Some of our work:\" / «من أعمالنا:»"
   },
   "m:about.stats.markets.label": {
     "rule": "keep",

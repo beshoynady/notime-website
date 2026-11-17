@@ -30,8 +30,8 @@ describe("principles (D78 §5)", () => {
 });
 
 describe("anonymised work (D78 §6)", () => {
-  it("lists the three approved cases, with the user's label for the airline", () => {
-    expect(workItems.map((w) => w.key)).toEqual(["uaeaf", "egyptair", "uaepl"]);
+  it("lists the two approved cases, with the user's label for the airline", () => {
+    expect(workItems.map((w) => w.key)).toEqual(["egyptair", "uaepl"]);
     expect(workItems.find((w) => w.key === "egyptair")!.anonymous.label).toEqual({ en: "A national airline", ar: "شركة طيران وطنية" });
   });
 

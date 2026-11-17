@@ -50,7 +50,7 @@ One senior team you deal with directly, from the first sketch to the day it goes
 ## Evidence on Hand
 
 - About 75 real photos from the company profile (`public/images/work/`) and the profile PDF's copy.
-- Three anonymised cases with verified facts (`src/content/work.ts`): an airline's pavilion at the Dubai Airshow, a national football league's award nights, a national sports federation's website, app and channels (with first-week campaign figures).
+- Two anonymised cases with verified facts (`src/content/work.ts`): an airline's pavilion at the Dubai Airshow and a national football league's award nights.
 - This website itself, as proof of the software team's work.
 - **Absent, never to be fabricated:** client logos, testimonials, ratings, awards, years in business, project counts, team photos, a showreel. Missing material is hidden or shown as an honest placeholder (fill-or-hide, D78).
 

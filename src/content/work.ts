@@ -42,80 +42,14 @@ export interface WorkStory {
 }
 
 /** Folders of curated client photos that show a client's brand (profile-inventory.md audit). */
-export const BRANDED_PHOTO_DIRS = ["/images/work/uae-athletics-federation/", "/images/work/egyptair-pavilion/", "/images/work/uae-pro-league/"] as const;
+export const BRANDED_PHOTO_DIRS = ["/images/work/egyptair-pavilion/", "/images/work/uae-pro-league/"] as const;
 
 /** Words that identify a client; none may appear in an anonymised case. */
-export const CLIENT_NAMES = ["UAE Pro League", "Pro League", "UAEAF", "Athletics", "uaeathletics", "EgyptAir", "Egypt Air", "Oregon", "ADIB", "مصر للطيران", "دوري المحترفين", "ألعاب القوى"] as const;
+export const CLIENT_NAMES = ["UAE Pro League", "Pro League", "EgyptAir", "Egypt Air", "ADIB", "مصر للطيران", "دوري المحترفين"] as const;
 
 const photos = (dir: string, n: number) => Array.from({ length: n }, (_, i) => `${dir}${dir.split("/").at(-2)}-${i + 1}.webp`);
 
 export const workItems: WorkItem[] = [
-  {
-    key: "uaeaf",
-    slug: "sports-federation-digital-partner",
-    categories: ["software-digital", "marketing-brand"],
-    markets: ["ae"],
-    anonymous: {
-      label: { en: "A national sports federation", ar: "اتحاد رياضي وطني" },
-      summary: {
-        en: "Its digital and media partner: we rebuilt the bilingual website and its connected app, and publish to its channels every day in Arabic and English. One championship campaign, first week: 487K views, +37.6K new followers, 271K reach.",
-        ar: "شريكه الرقمي والإعلامي: أعدنا بناء موقعه بلغتين وتطبيق الجوّال المتصل به، وننشر على منصّاته كل يوم بالعربية والإنجليزية. وفي الأسبوع الأول من إحدى حملات البطولات: 487 ألف مشاهدة، و37.6 ألف متابع جديد، ووصول إلى 271 ألفًا.",
-      },
-      visual: "feed",
-    },
-    named: {
-      label: { en: "UAE Athletics Federation", ar: "الاتحاد الإماراتي لألعاب القوى" },
-      summary: {
-        en: "The federation's appointed digital and media partner: a full rebuild of the bilingual website and the connected mobile app, plus daily social media in Arabic and English. First week of the Oregon 26 campaign: 487K views, +37.6K new followers, 271K reach.",
-        ar: "الشريك الرقمي والإعلامي المعتمد للاتحاد: إعادة بناء كاملة للموقع الإلكتروني ثنائي اللغة وتطبيق الجوّال المرتبط به، مع إدارة يومية لوسائل التواصل بالعربية والإنجليزية. في الأسبوع الأول من حملة أوريغون 26: 487 ألف مشاهدة، و37.6 ألف متابع جديد، ووصول بلغ 271 ألفًا.",
-      },
-      photos: photos("/images/work/uae-athletics-federation/", 3),
-    },
-    // p16–18. Challenge and Idea are {{TODO}} in case-studies.md: hidden. The figures keep their scope.
-    story: {
-      facts: [
-        { label: { en: "Our role", ar: "دورنا" }, value: { en: "Appointed digital and media partner", ar: "الشريك الرقمي والإعلامي المعتمد" } },
-        { label: { en: "Platform", ar: "المنصّة" }, value: { en: "Website and app, live", ar: "الموقع والتطبيق متاحان للجمهور" } },
-      ],
-      execution: {
-        lead: {
-          en: "We run the federation's whole online presence: the platform it publishes on, and the channels it speaks through, every day, in both languages.",
-          ar: "نتولّى حضور الاتحاد على الإنترنت كاملًا: المنصّة التي ينشر عليها، والقنوات التي يخاطب بها جمهوره، كل يوم وباللغتين.",
-        },
-        points: {
-          en: [
-            "A full rebuild of the bilingual website, with a complete CMS and a connected mobile app",
-            "Sections for athletes, clubs, coaches and referees, and for championships, results and national records",
-            "News, a media library and live coverage, run from an admin dashboard with analytics",
-            "A content strategy and a monthly calendar, published every day in Arabic and English",
-            "On-ground coverage and photography, motion graphics, reels and AI video",
-            "Paid campaigns and community growth, with championship key visuals, some made with AI",
-          ],
-          ar: [
-            "إعادة بناء كاملة للموقع بلغتين، بنظام لإدارة المحتوى وتطبيق جوّال متصل به",
-            "أقسام للرياضيين والأندية والمدربين والحكّام، وللبطولات والنتائج والأرقام القياسية الوطنية",
-            "الأخبار ومكتبة الوسائط والتغطية المباشرة، تُدار كلها من لوحة تحكم مزوّدة بالتحليلات",
-            "استراتيجية محتوى وخطة نشر شهرية، ونشر يومي بالعربية والإنجليزية",
-            "تغطية وتصوير في أرض الحدث، وموشن جرافيك، ومقاطع ريلز وفيديو بالذكاء الاصطناعي",
-            "حملات مدفوعة وتنمية لجمهور الحسابات، وتصاميم رئيسية للبطولات أُنتج بعضها بالذكاء الاصطناعي",
-          ],
-        },
-      },
-      result: {
-        lead: {
-          en: "The website and the app are live. On social, one championship campaign drew this in its first week:",
-          ar: "الموقع والتطبيق متاحان للجمهور اليوم. وعلى المنصّات، حققت إحدى حملات البطولات في أسبوعها الأول:",
-        },
-        figures: [
-          { value: { en: "487K", ar: "487 ألف" }, label: { en: "views", ar: "مشاهدة" } },
-          { value: { en: "+37.6K", ar: "‎+37.6 ألف" }, label: { en: "new followers", ar: "متابع جديد" } },
-          { value: { en: "271K", ar: "271 ألف" }, label: { en: "campaign reach", ar: "وصول للحملة" } },
-        ],
-        scope: { en: "One championship campaign, first week only.", ar: "حملة بطولة واحدة، في أسبوعها الأول فقط." },
-      },
-      scope: ["websites", "mobile-apps", "social-media-management", "content-strategy", "paid-media-planning", "photography", "motion-graphics", "ai-content-creation"],
-    },
-  },
   {
     key: "egyptair",
     slug: "airline-exhibition-pavilion",

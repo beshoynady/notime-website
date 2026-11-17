@@ -120,7 +120,6 @@ src/app/[locale]/lab/[animatic]/page.tsx               animatics (noindex, not i
 src/app/[locale]/privacy/page.tsx                      Privacy Policy stub (D66)
 src/content/types.ts                                   + SceneConfig, SceneLayer, PageBlock, CaseStudy
 src/content/scenes/<category>.ts                       shots, layers, copy keys (one file per category)
-src/content/case-studies.ts                            UAEAF case study (enabled: false)
 src/content/modules/<key>.ts                           per-module data (localized; example flag)
 src/lib/scene-math.ts (+ test)                         layerTransform, shotAt, pinLength (pure)
 src/lib/scrollspy.ts, service-param.ts, jsonld.ts, seo.ts (+ tests)
@@ -647,7 +646,6 @@ Storyboard: [software-digital.md](../design/storyboards/software-digital.md). De
 
 **Interfaces:**
 - `Category.blocks?: PageBlock[]` (default: the shared skeleton).
-- `caseStudies.uaeaf.named` (false): the anonymised variant renders by default (D67). One flag switches every text and visual to the named variant.
 - `readLighthouseSummary(path): { date, url, perf, a11y, bp, seo } | null`. It returns null unless the summary is a **production-domain** run.
 - `OUR_WORK_ENABLED` is true only when that run is ≥ 90 in every category (D65).
 
@@ -659,7 +657,6 @@ Storyboard: [software-digital.md](../design/storyboards/software-digital.md). De
   - one with all categories ≥ 90 → on.
 
   E2E:
-  - The case study renders **anonymised** by default: the title "A national sports federation", stylised HTML mockups, and no image, no client name and no URL anywhere in the section (a text search for "Athletics" and "uaeathletics" finds nothing).
   - With `named: true` (a test-only build env), the name, the URL and both real screens render, with their alt text.
   - The CTA band's button lands `#consult`.
   - The microcopy is present in EN and AR.

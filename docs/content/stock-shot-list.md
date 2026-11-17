@@ -50,14 +50,6 @@ The look to aim for across all of them: **warm, low-key, luxurious**: one clear 
 - **Light and angle:** warm interior light, the hall around it darker; three-quarter view at eye level.
 - **Also reject:** any aircraft, airline livery, brand or exhibitor name, even on a far stand.
 
-### 3. `work-sports-federation-16x9` · Our Work card (also the Software case study, see below)
-
-- **Save as:** `work-sports-federation-16x9.jpg`
-- **Search:** `running track dusk` · `athletics track lanes golden hour` · `empty running track sunset`
-- **Shows:** an empty athletics track: lane lines curving away, no runners (one far-off silhouette at most).
-- **Light and angle:** low golden sun or warm dusk, long shadows across the lanes; low camera close to the track surface, lanes leading the eye.
-- **Also reject:** lane numbers in focus, sponsor marks on barriers, a blue sky filling the frame.
-
 ### 4. `product-restaurant-system-16x9` · Digital, restaurant system
 
 - **Save as:** `product-restaurant-system-16x9.jpg`
@@ -101,13 +93,3 @@ These are the Events opening's plates. Each also has a ChatGPT prompt in `image-
 The Events opening also has foreground cutouts (`ev-open-table`, `ev-open-florals`, `ev-open-candles`, `ev-open-glasses`). These need transparent PNGs, which stock photos rarely are; they stay ChatGPT or code. **Skip them here** unless you find a photo on a plain dark background that suits; ask first, and I'll add its row and cut-out step.
 
 ---
-
-## Software
-
-### 8. `work-sports-federation-16x9` · Software case study
-
-The same file as #3: one download serves both places. No second row.
-
----
-
-**After you drop the files:** tell me, and I'll run the ingest, show you the contact sheet, and only then put them on the site.

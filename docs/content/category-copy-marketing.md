@@ -4,7 +4,7 @@ Status: **moved into the data as a draft for Rand's review** (v1 plan, decks tas
 
 ## Sources and rules
 
-As the Events deck. Facts only from the profile (p.12, p.13, p.16, p.17, p.19) and D56/D71. **Proof is anonymised (D67):** no client, championship or outlet is named. The Oregon 26 figures appear only with their scope. Outlets and press items stay out until confirmed (OQ #19).
+As the Events deck. Facts only from the profile (p.12, p.13, p.16, p.17, p.19) and D56/D71. **Proof is anonymised (D67):** no client, championship or outlet is named. Outlets and press items stay out until confirmed (OQ #19).
 
 ---
 
@@ -58,11 +58,8 @@ Promise: *Planned calendars, content and community, week after week.* / «خطط
 
 | | EN | AR |
 |---|---|---|
-| Label | A national sports federation campaign | حملة لاتحاد رياضي وطني |
 | Scope | First week of the campaign | الأسبوع الأول من الحملة |
-| Figures | 487K views · +37.6K new followers · 271K campaign reach | 487 ألف مشاهدة · ‎+37.6 ألف متابع جديد · وصول الحملة 271 ألفًا |
 
-- **Source:** p.17 (verified figures, always with their scope). Western digits (D50). The named variant (federation, championship) waits for OQ #17.
 
 ### III · Digital marketing & SEO (`digital-marketing`)
 

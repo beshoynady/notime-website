@@ -143,7 +143,6 @@ Real facts from `case-studies.md`, no names, logos or URLs. Each item has a conf
 
 | Key | Label EN | Label AR | Summary EN | Summary AR | Facts from |
 |---|---|---|---|---|---|
-| `uaeaf` | A national sports federation | اتحاد رياضي وطني | Its digital and media partner: a full rebuild of the bilingual website and the connected mobile app, plus daily social media in Arabic and English. First week of one championship campaign: 487K views, +37.6K new followers, 271K reach. | شريكه الرقمي والإعلامي: إعادة بناء كاملة للموقع الإلكتروني ثنائي اللغة وتطبيق الجوّال المرتبط به، مع إدارة يومية لوسائل التواصل بالعربية والإنجليزية. في الأسبوع الأول من إحدى حملات البطولات: 487 ألف مشاهدة، و‎+37.6 ألف متابع جديد، ووصول بلغ 271 ألفًا. | p.16–18; figures with their scope (D67) |
 | `egyptair` | A regional airline at Dubai Airshow | شركة طيران إقليمية في معرض دبي للطيران | Stand design, build and on-site PR at the Dubai Airshow and Arabian Travel Market. | تصميم الجناح وبناؤه وإدارة العلاقات العامة في أرض الحدث، في معرض دبي للطيران وسوق السفر العربي. | p.19 (press coverage stays out, OQ #19) |
 | `uaepl` | A national football league | دوري كرة قدم وطني | Tournament branding, on-ground production, award ceremonies and sponsor activations, with the league's social content, award packaging and gift sets. | هوية البطولات، والإنتاج في أرض الحدث، وحفلات التكريم، وتفعيلات الرعاة، إلى جانب محتوى الدوري على وسائل التواصل، وتغليف الجوائز، وأطقم الهدايا. | p.5, p.13, p.23–24 |
 

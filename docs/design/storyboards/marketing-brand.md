@@ -94,8 +94,7 @@ The signature (§5.3): each section opens like a magazine spread with its own fo
 ## Act 3 · Closing
 
 1. **Related work:** hidden until approved (OQ #17).
-   - **Campaign proof (D67), in section II Social:** anonymised by default as "A national sports federation campaign" / «حملة لاتحاد رياضي وطني». It shows the Oregon 26 first-week figures, always with their scope: "first week of the campaign: 487K views · +37.6K new followers · 271K reach" (profile p17). There's no client name, no championship name, no logo and no key visuals.
-   - The same `named` flag as the Software case study switches it to the named version (UAE Athletics Federation, World Athletics U20 Championships, Oregon 26) once the client approves.
+   - **Campaign proof, in section II Social:** none until a client approves a campaign with verified figures (D121).
 2. **FAQ.**
 3. **Bookend:** the blank page returns with the grid drawn faintly. Line: "Your page is next." / «صفحتك هي التالية.» → the quote block.
 

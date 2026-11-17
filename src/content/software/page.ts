@@ -53,12 +53,7 @@ export const hero = {
 };
 
 export const proof = {
-  title: l("Live today: a national federation's platform, and the site you're reading.", "يعمل اليوم: منصة اتحاد رياضي وطني، والموقع الذي تقرؤه الآن."),
-  federation: {
-    label: l("A national sports federation", "اتحاد رياضي وطني"),
-    line: l("Bilingual website, mobile app and content management system, all live.", "موقع بلغتين وتطبيق جوّال ونظام لإدارة المحتوى، وكلها تعمل الآن."),
-    link: l("Read the case study", "اقرأ دراسة الحالة"),
-  },
+  title: l("Live today: the site you're reading.", "يعمل اليوم: الموقع الذي تقرؤه الآن."),
   site: {
     label: l("This website", "هذا الموقع"),
     line: l(
@@ -185,7 +180,7 @@ export const eventTech = {
     { title: l("Event apps and websites", "تطبيقات ومواقع للفعاليات"), body: l("The agenda, the speakers and live updates.", "البرنامج والمتحدثون والتحديثات المباشرة.") },
     {
       title: l("Live results and screens", "النتائج المباشرة والشاشات"),
-      body: l("Championships, results and live coverage, as on a national federation's platform.", "بطولات ونتائج وتغطية مباشرة، كما في منصة اتحاد وطني."),
+      body: l("Championships, results and live coverage, on screen as they happen.", "بطولات ونتائج وتغطية مباشرة، تظهر على الشاشات لحظة حدوثها."),
     },
   ],
   idealFor: [
@@ -202,57 +197,6 @@ export const eventTech = {
   eventsLink: l("See Events & Hospitality", "تعرّف على الفعاليات والضيافة"),
   /** The drawn check-in counter: example data, labelled (category-pages.md §1). */
   counter: { label: l("Checked in", "سجّلوا حضورهم"), of: l("of", "من"), example: 248, total: 320 },
-};
-
-/** The federation case (D67): anonymised by default; `named` only once the client approves (OQ #17). */
-export const caseStudy = {
-  anchor: "case-study",
-  eyebrow: l("Case study", "دراسة حالة"),
-  anonymous: { client: l("A national sports federation", "اتحاد رياضي وطني") },
-  /** Used only when WORK_NAMED.uaeaf is true (the client's written approval, OQ #17). */
-  named: {
-    client: l("UAE Athletics Federation", "الاتحاد الإماراتي لألعاب القوى"),
-    url: "https://uaeathletics.ae",
-    screens: { laptop: "/images/work/uae-athletics-federation/uae-athletics-federation-1.webp", phone: "/images/work/uae-athletics-federation/uae-athletics-federation-2.webp" },
-    alt: {
-      laptop: l("The federation's bilingual website on a laptop.", "موقع الاتحاد ثنائي اللغة على شاشة حاسوب محمول."),
-      phone: l("The federation's website on a phone.", "موقع الاتحاد على شاشة هاتف."),
-    },
-  },
-  title: l("A national federation's platform, rebuilt and live.", "منصة اتحاد وطني، أعدنا بناءها وهي تعمل الآن."),
-  parts: {
-    challenge: {
-      label: l("Challenge", "التحدي"),
-      body: l("A full rebuild of the federation's digital platform.", "إعادة بناء كاملة للمنصة الرقمية للاتحاد."),
-    },
-    approach: {
-      label: l("Approach", "النهج"),
-      body: l(
-        "A modern bilingual website with a complete content management system and a connected mobile app, redesigned from the interface up and fully responsive. As the federation's official digital and media partner, we also publish its social media daily in Arabic and English.",
-        "موقع حديث بلغتين، مع نظام كامل لإدارة المحتوى وتطبيق جوّال مرتبط به، أعدنا تصميم واجهته بالكامل ليعمل على كل الشاشات. وبصفتنا الشريك الرقمي والإعلامي الرسمي للاتحاد، ننشر محتواه على وسائل التواصل يوميًا بالعربية والإنجليزية.",
-      ),
-    },
-    built: {
-      label: l("What we built", "ما بنيناه"),
-      items: [
-        l("Bilingual website", "موقع بلغتين"),
-        l("Mobile app", "تطبيق جوّال"),
-        l("Content management", "إدارة المحتوى"),
-        l("Admin dashboard and analytics", "لوحة إدارة وتحليلات"),
-        l("Arabic and English, SEO and performance", "العربية والإنجليزية، والظهور في البحث والأداء"),
-      ],
-      modules: l(
-        "Athletes, clubs, coaches and referees · championships, results and national records · news, media library and live coverage",
-        "الرياضيون والأندية والمدربون والحكّام · البطولات والنتائج والأرقام القياسية الوطنية · الأخبار ومكتبة الوسائط والتغطية المباشرة",
-      ),
-    },
-    result: {
-      label: l("Result", "النتيجة"),
-      body: l("All live: the website, the admin panel and the mobile app.", "كلها تعمل الآن: الموقع الإلكتروني ولوحة الإدارة وتطبيق الجوّال."),
-    },
-  },
-  redraw: l("Stylised redraw. The client's own screens stay private.", "رسم توضيحي مبسّط. شاشات العميل نفسها تبقى خاصة."),
-  visit: l("Visit the live site", "زُر الموقع المنشور"),
 };
 
 export const process = {

@@ -91,7 +91,7 @@
   "about": {
     "eyebrow": "About NO TIME",
     "statement": "A creative house for events, brands and the ideas in between. One team plans it, builds it, prints it and launches it.",
-    "body": "Our base is Dubai, and our work runs across six markets, from Saudi Arabia to Egypt: an airline's pavilion at the Dubai Airshow, a majlis dressed for a heritage welcome, a bilingual app for a national sports federation. Each idea starts where the brand meets its audience, and one team carries it through strategy, creative, production and delivery.",
+    "body": "Our base is Dubai, and our work runs across six markets, from Saudi Arabia to Egypt: an airline's pavilion at the Dubai Airshow and a majlis dressed for a heritage welcome. Each idea starts where the brand meets its audience, and one team carries it through strategy, creative, production and delivery.",
     "stats": {
       "markets": {
         "value": "6",
@@ -147,7 +147,7 @@
     "eyebrow": "Our work",
     "headingLead": "Real projects,",
     "headingKey": "start to finish.",
-    "intro": "An airline's pavilion, a football league's award nights, a federation's app. The names stay private until each client says yes.",
+    "intro": "An airline's pavilion and a football league's award nights. The names stay private until each client says yes.",
     "labels": {
       "challenge": "Challenge",
       "idea": "Idea",
@@ -553,12 +553,12 @@
   },
   "workIndex": {
     "metaTitle": "Our work",
-    "metaDescription": "Selected projects by NO TIME Creative House: an airline's exhibition pavilion, a football league's tournaments and award nights, and a sports federation's website, app and daily channels.",
+    "metaDescription": "Selected projects by NO TIME Creative House: an airline's exhibition pavilion, and a football league's tournaments and award nights.",
     "metaFiltered": "Our work: {filter}",
     "eyebrow": "Our work",
     "headingLead": "Work for national organisations,",
     "headingKey": "shown project by project.",
-    "intro": "A pavilion at the Dubai Airshow, a football league's award nights, a federation's website, app and daily channels. Each client's name appears once they approve it.",
+    "intro": "A pavilion at the Dubai Airshow and a football league's award nights. Each client's name appears once they approve it.",
     "filterLabel": "Filter the work",
     "serviceFacet": "Service",
     "marketFacet": "Market",
@@ -590,7 +590,7 @@
     "title": "Ideas built where a brand meets its audience.",
     "story1": "NO TIME is an events, marketing and PR house based in Dubai, working for clients in local, regional and global markets.",
     "story2": "We start at the exact point where a brand meets its audience, then carry the idea all the way: strategy, creative, production and delivery, by one team.",
-    "story3": "That's why the work spans so much: an airline's pavilion at the Dubai Airshow, a majlis dressed for a heritage welcome, award nights for a football league, a bilingual app for a national sports federation.",
+    "story3": "That's why the work spans so much: an airline's pavilion at the Dubai Airshow, a majlis dressed for a heritage welcome and award nights for a football league.",
     "story4": "Our name comes with a line we keep: it's time to start.",
     "seeWork": "See the work",
     "principlesEyebrow": "How we work",

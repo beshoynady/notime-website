@@ -22,7 +22,6 @@ const MAX = 1600;
 /** slug -> raw files, in display order. Keep in sync with profile-inventory.md. */
 export const CURATED = {
   "uae-pro-league": ["p5-1.jpg", "p5-3.jpg", "p13-3.jpg", "p13-4.jpg", "p23-4.jpg"],
-  "uae-athletics-federation": ["p18-2.jpg", "p18-4.png", "p6-4.jpg"],
   "egyptair-pavilion": ["p19-2.jpg"],
   // Ultimate Power Solution: every stand photo shows identifiable people (pending rights).
   sandoz: ["p8-1.jpg"],

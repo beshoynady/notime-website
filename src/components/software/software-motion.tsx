@@ -9,8 +9,8 @@ import { gsap, useGSAP } from "@/lib/gsap";
  * motion the page is its final state; the tweens start from hidden only once built (gsap.from on
  * off-screen elements, so nothing flashes).
  * - `[data-sw-draw]`: service lines draw (stroke) as their block arrives.
- * - `[data-sw-reveal]`: children rise in, staggered; the case study's checklist one line per 80 ms.
- * - proof and case-study devices assemble; the proof phone drifts a little against the laptop.
+ * - `[data-sw-reveal]`: children rise in, staggered.
+ * - the proof devices assemble; the proof phone drifts a little against the laptop.
  * - `[data-sw-steps]`: the process rail fills from inline-start (or top on mobile); steps light.
  * - `[data-sw-count]`: the event counter counts up its example value; the meter fills.
  * - `[data-sw-gridlines]`: the event band's grid wipes in from inline-start.
@@ -45,10 +45,7 @@ export function SoftwareMotion() {
         for (const el of q("[data-sw-reveal]")) {
           gsap.from(el.children, { opacity: 0, y: 18, duration: 0.8, ease: "power3.out", stagger: 0.08, scrollTrigger: enter(el) });
         }
-        for (const list of q("[data-sw-checklist]")) {
-          gsap.from(list.children, { opacity: 0, x: -10 * dir, duration: 0.4, ease: "power2.out", stagger: 0.08, scrollTrigger: enter(list, "top 85%") });
-        }
-        for (const pair of q(".sw-proof-pair, [data-sw-devices]")) {
+        for (const pair of q(".sw-proof-pair")) {
           const laptop = pair.querySelector(".sw-laptop");
           const phone = pair.querySelector(".sw-phone");
           const tl = gsap.timeline({ scrollTrigger: enter(pair, "top 85%") });

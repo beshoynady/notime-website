@@ -1,10 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { caseStudyNamed, lighthouseProof, SOFTWARE_FLAGS } from "./software";
+import { lighthouseProof, SOFTWARE_FLAGS } from "./software";
 
 describe("Software page flags", () => {
-  it("ship off: the Lighthouse line and the named case study stay hidden (D65, D67)", () => {
+  it("ships off: the Lighthouse line stays hidden (D65)", () => {
     expect(SOFTWARE_FLAGS.lighthouseProof).toBe(false);
-    expect(caseStudyNamed()).toBe(false);
   });
 
   it("shows Lighthouse scores only with the flag on and every category at 90 or more", () => {

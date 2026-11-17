@@ -3,7 +3,6 @@ import { SITE_URL } from "@/config/site";
 import { getServices, type Category, type Locale } from "@/content";
 import { cta, finalCta, sticky } from "@/content/software/page";
 import { categoryJsonLd } from "@/lib/jsonld";
-import { CaseStudy } from "./case-study";
 import { FinalCta, QualityStrip, SoftwareFaq } from "./closing";
 import { Tiers, Ways, Why } from "./engagement";
 import { InterfaceOpening } from "./interface-opening";
@@ -20,7 +19,7 @@ import "./software.css";
 /**
  * Software & Digital, the site's strongest sales page (D91; docs/content/software-brief.md). Its
  * own sequence of the brief's 14 sections, not the shared category template: the opening, proof,
- * the problem, the six services and event tech, the case study, how we work, the engagement
+ * the problem, the six services and event tech, how we work, the engagement
  * levels, two ways to work, why NO TIME, the products, the quality strip, the FAQ and the final
  * CTA with both forms. One primary CTA (the free 30-min intro call), repeated at each decision
  * point; the free website review is the secondary one. JSON-LD: Service items, FAQPage and
@@ -35,7 +34,6 @@ export function SoftwarePage({ category, locale }: { category: Category; locale:
       <ProofStrip locale={locale} />
       <Problems locale={locale} />
       <ServiceBlocks items={services} locale={locale} />
-      <CaseStudy locale={locale} />
       <ProcessTimeline locale={locale} />
       <Tiers locale={locale} />
       <Ways locale={locale} />

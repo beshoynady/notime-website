@@ -4,7 +4,7 @@ Status: **moved into the data as a draft for Rand's review** (v1 plan, decks tas
 
 ## Sources and rules
 
-As the Events deck. Facts only from the profile (p.15, p.16, p.18) and D56, D65, D67. **Proof is anonymised (D67):** "A national sports federation", no name, logo, URL or screenshot. The federation's own statistics are never quoted. The CTA copy is closed (D65) and repeated here unchanged. Product features are drafts the client must confirm (OQ #24).
+As the Events deck. Facts only from the profile (p.15, p.16, p.18) and D56, D65, D67. **Proof:** this website only; the case study was withdrawn (D121). The CTA copy is closed (D65) and repeated here unchanged. Product features are drafts the client must confirm (OQ #24).
 
 ---
 
@@ -31,10 +31,6 @@ As the Events deck. Facts only from the profile (p.15, p.16, p.18) and D56, D65,
 
 | Part | EN | AR | Source |
 |---|---|---|---|
-| Eyebrow | Case study · A national sports federation | دراسة حالة · اتحاد رياضي وطني | D67 |
-| Title | A national federation's platform, rebuilt and live. | منصة اتحاد وطني، أعدنا بناءها وهي تعمل الآن. | p.18 |
-| Challenge | A full rebuild of the federation's digital platform. | إعادة بناء كاملة للمنصة الرقمية للاتحاد. | p.18 · `TODO`: the starting point (client) |
-| Solution | A modern bilingual website with a complete content management system and a connected mobile app. We are the federation's official digital and media partner. | موقع حديث بلغتين، مع نظام كامل لإدارة المحتوى وتطبيق جوّال مرتبط به. ونحن الشريك الرقمي والإعلامي الرسمي للاتحاد. | p.16, p.18 |
 | What we built | Bilingual website · mobile app · content management · admin dashboard and analytics | موقع بلغتين · تطبيق جوّال · إدارة المحتوى · لوحة إدارة وتحليلات | p.18 |
 | Modules | Athletes, clubs, coaches and referees · championships, results and national records · news, media library and live coverage | الرياضيون والأندية والمدربون والحكّام · البطولات والنتائج والأرقام القياسية الوطنية · الأخبار ومكتبة الوسائط والتغطية المباشرة | p.18 |
 | Result | All live: the website, the admin panel and the mobile app. | كلها تعمل الآن: الموقع الإلكتروني ولوحة الإدارة وتطبيق الجوّال. | p.18 · `TODO`: platform results (client) |
@@ -64,7 +60,7 @@ The promise under each H2 is the approved description (D56). The storyboard's "o
 | Heading | Built by people who run events. | تبنيها فرقٌ تدير الفعاليات بنفسها. | Storyboard. |
 | 1 | **Registration and check-in.** Minute Zero by NO TIME · Coming soon | **التسجيل وتسجيل الحضور.** الدقيقة صفر من NO TIME · قريبًا | D65; D81: the product is named, with no nested quotation marks. |
 | 2 | **Event apps and websites.** The agenda, the speakers and live updates. | **تطبيقات ومواقع للفعاليات.** البرنامج والمتحدثون والتحديثات المباشرة. | D65. |
-| 3 | **Live results and screens.** Championships, results and live coverage, as on a national federation's platform. | **النتائج المباشرة والشاشات.** بطولات ونتائج وتغطية مباشرة، كما في منصة اتحاد وطني. | p.18, anonymised (D67). |
+| 3 | **Live results and screens.** Championships, results and live coverage, on screen as they happen. | **النتائج المباشرة والشاشات.** بطولات ونتائج وتغطية مباشرة، تظهر على الشاشات لحظة حدوثها. | p.18, anonymised (D67). |
 
 ## 6. How we work (`#how-we-work`)
 

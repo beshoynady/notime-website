@@ -10,14 +10,14 @@ For the user's review ("final push", 2026-11-11, §2). Each Arabic line is rewri
 | `hero.lead` **(approved anchor, changed: clearly stronger)** | فعاليات، إنتاج إبداعي، تسويق وحلول رقمية، نخطط لها وننفذها تحت سقف واحد. | فعاليات ومحتوى وحملات ومنصّات رقمية، يخطّط لها بيت واحد ويبنيها ويُطلقها. | Three verbs carry the promise; the old line listed nouns, then «تحت سقف واحد». |
 | `hero.cta` | اكتشف خدماتنا | اكتشف ما نصنعه | Matches the new EN; «ما نصنعه» is warmer than «خدماتنا». |
 | `about.statement` | بيت إبداعي للفعاليات والعلامات التجارية، ولكل فكرة تقع بينهما. فريق واحد يخطط لها، ويبنيها، ويطبعها، ويطلقها. | بيت إبداعي للفعاليات والعلامات التجارية، ولكل فكرة تولد بينهما. فريق واحد يخطّط لها ويبنيها ويطبعها ويُطلقها. | «تولد» gives the idea life; the verbs run without the comma chain. |
-| `about.body` | من دبي، نقدّم الفعاليات والتسويق والعلاقات العامة لعملاء في أسواق محلية وإقليمية وعالمية. نبني كل فكرة عند النقطة التي تلتقي فيها العلامة بجمهورها، ثم نمضي بها حتى النهاية: الاستراتيجية، والإبداع، والإنتاج، والتسليم، تحت سقف واحد. | مقرّنا دبي، وعملنا يمتدّ في ستة أسواق من السعودية إلى مصر: جناح لشركة طيران في معرض دبي للطيران، ومجلس تراثي يستقبل الضيوف، وتطبيق بلغتين لاتحاد رياضي وطني. تبدأ كل فكرة حيث تلتقي العلامة بجمهورها، ثم يحملها فريق واحد عبر الاستراتيجية والإبداع والإنتاج حتى التسليم. | Real projects from the profile instead of a list of services. |
+| `about.body` | من دبي، نقدّم الفعاليات والتسويق والعلاقات العامة لعملاء في أسواق محلية وإقليمية وعالمية. نبني كل فكرة عند النقطة التي تلتقي فيها العلامة بجمهورها، ثم نمضي بها حتى النهاية: الاستراتيجية، والإبداع، والإنتاج، والتسليم، تحت سقف واحد. | مقرّنا دبي، وعملنا يمتدّ في ستة أسواق من السعودية إلى مصر: جناح لشركة طيران في معرض دبي للطيران، ومجلس تراثي يستقبل الضيوف. تبدأ كل فكرة حيث تلتقي العلامة بجمهورها، ثم يحملها فريق واحد عبر الاستراتيجية والإبداع والإنتاج حتى التسليم. | Real projects from the profile instead of a list of services. |
 | `categories.headingLead` | خمس حِرَف، | خمسة مجالات، | «حِرَف» reads as handicraft for software and marketing (decisions-to-confirm #12). |
 | `categories.headingKey` | وفريق واحد خلفها. | وفريق واحد يقف خلفها. | A verb gives the line its stance. |
 | `categories.intro` | كل حرفة قائمة بذاتها، ومعًا تحمل الفعالية أو العلامة من أول فكرة حتى آخر تفصيل. | اطلب مجالًا واحدًا، أو سلّمنا المهمة كاملة. قد يحتاج إطلاق واحد إلى منصّة عرض وفيلم وحملة وعلبة هدايا، وهنا يخطّط لها الفريق نفسه. | A concrete launch replaces the abstract «كل حرفة قائمة بذاتها». |
 | `categories.viewServices` | استعرض الخدمات | اطّلع على الخدمات | More natural than «استعرض». |
 | `categories.allServices` | كل الخدمات | تصفّح كل الخدمات | A verb for a link. |
 | `work.headingKey` | من أولها إلى آخرها. | من الفكرة حتى التسليم. | «من أولها إلى آخرها» was a calque of start to finish. |
-| `work.intro` | أعمال لجهات وطنية، من جناح المعرض إلى الشاشة. | جناح لشركة طيران وطنية، وليالي تكريم لدوري كرة قدم، وتطبيق لاتحاد رياضي. نحتفظ بالأسماء إلى أن يأذن لنا أصحابها. | Specific projects; says why names are hidden. |
+| `work.intro` | أعمال لجهات وطنية، من جناح المعرض إلى الشاشة. | جناح لشركة طيران وطنية، وليالي تكريم لدوري كرة قدم. نحتفظ بالأسماء إلى أن يأذن لنا أصحابها. | Specific projects; says why names are hidden. |
 | `work.viewProject` | استعرض المشروع | تفاصيل المشروع | Natural for a project link. |
 | `digital.headingLead` | حلول رقمية، | الفريق الذي يصنع فعاليتك، | New angle (EN): the event team builds the platform. |
 | `digital.headingKey` | تبقى تعمل بعد الإطلاق. | يبني منصّتك الرقمية أيضًا. | As above. |
@@ -43,7 +43,6 @@ For the user's review ("final push", 2026-11-11, §2). Each Arabic line is rewri
 | `categories.creative.summary` | تصوير وأفلام وموشن ومحتوى بالذكاء الاصطناعي، ومعها الديكورات والمعدّات. | صورة وفيلم وموشن ومحتوى بالذكاء الاصطناعي، ومعها الديكور والمعدّات التي تصنعها. | Natural singular nouns; says what the kit is for. |
 | `categories.print.summary` | لافتات وطباعة كبيرة وتغليف وهدايا، تُنفَّذ وفق معايير العلامة. | أجنحة وطباعة وتغليف وهدايا، بلمسات الرقائق المعدنية وUV والحفر والليزر. | Follows the new EN; the finishes from the profile. |
 | `categories.software.summary` | مواقع وتطبيقات وأنظمة مخصّصة، تواصل عملها بعد يوم الإطلاق بوقت طويل. | مواقع وتطبيقات وأنظمة تُبنى على مقاسك، وتبقى تعمل بعد الإطلاق بزمن طويل. | «على مقاسك» for custom; «تبقى تعمل» reads native (decisions-to-confirm #12). |
-| `work.uaeaf.anonymous` | شريكه الرقمي والإعلامي: إعادة بناء كاملة للموقع الإلكتروني ثنائي اللغة وتطبيق الجوّال المرتبط به، مع إدارة يومية لوسائل التواصل بالعربية والإنجليزية. في الأسبوع الأول من إحدى حملات البطولات: 487 ألف مشاهدة، و‎+37.6 ألف متابع جديد، ووصول بلغ 271 ألفًا. | شريكه الرقمي والإعلامي: أعدنا بناء موقعه بلغتين وتطبيق الجوّال المتصل به، وننشر على منصّاته كل يوم بالعربية والإنجليزية. وفي الأسبوع الأول من إحدى حملات البطولات: 487 ألف مشاهدة، و‎+37.6 ألف متابع جديد، ووصول إلى 271 ألفًا. | Verbs instead of «إعادة بناء كاملة… مع إدارة يومية»; figures and scope unchanged. |
 | `work.egyptair.anonymous` | تصميم الجناح وبناؤه وإدارة العلاقات العامة في أرض الحدث، في معرض دبي للطيران وسوق السفر العربي. | صمّمنا الجناح وبنيناه، وأدرنا علاقاته العامة في أرض الحدث، في معرض دبي للطيران وسوق السفر العربي. | Verbs, first person. |
 | `work.uaepl.anonymous` | هوية البطولات، والإنتاج في أرض الحدث، وحفلات التكريم، وتفعيلات الرعاة، إلى جانب محتوى الدوري على وسائل التواصل، وتغليف الجوائز، وأطقم الهدايا. | هوية البطولات، والإنتاج في أرض الحدث، وحفلات التكريم، وتفعيلات الرعاة، ومعها محتوى الدوري على منصّاته، وتغليف الجوائز، وأطقم الهدايا. | «ومعها» replaces the calque «إلى جانب». |
 
@@ -60,15 +59,8 @@ Every Arabic line on the page and in the three forms is new, written from the id
 | Key | EN idea | AR line |
 |---|---|---|
 | `caseStudy.eyebrow` | Case study | دراسة حالة |
-| `caseStudy.anonymous.client` | A national sports federation | اتحاد رياضي وطني |
-| `caseStudy.named.client` | UAE Athletics Federation | الاتحاد الإماراتي لألعاب القوى |
-| `caseStudy.named.alt.laptop` | The federation's bilingual website on a laptop. | موقع الاتحاد ثنائي اللغة على شاشة حاسوب محمول. |
-| `caseStudy.named.alt.phone` | The federation's website on a phone. | موقع الاتحاد على شاشة هاتف. |
-| `caseStudy.title` | A national federation's platform, rebuilt and live. | منصة اتحاد وطني، أعدنا بناءها وهي تعمل الآن. |
 | `caseStudy.parts.challenge.label` | Challenge | التحدي |
-| `caseStudy.parts.challenge.body` | A full rebuild of the federation's digital platform. | إعادة بناء كاملة للمنصة الرقمية للاتحاد. |
 | `caseStudy.parts.approach.label` | Approach | النهج |
-| `caseStudy.parts.approach.body` | A modern bilingual website with a complete content management system and a connected mobile app, redesigned from the interface up and fully responsive. As the federation's official digital and media partner, we also publish its social media daily in Arabic and English. | موقع حديث بلغتين، مع نظام كامل لإدارة المحتوى وتطبيق جوّال مرتبط به، أعدنا تصميم واجهته بالكامل ليعمل على كل الشاشات. وبصفتنا الشريك الرقمي والإعلامي الرسمي للاتحاد، ننشر محتواه على وسائل التواصل يوميًا بالعربية والإنجليزية. |
 | `caseStudy.parts.built.label` | What we built | ما بنيناه |
 | `caseStudy.parts.built.items.0` | Bilingual website | موقع بلغتين |
 | `caseStudy.parts.built.items.1` | Mobile app | تطبيق جوّال |
@@ -97,7 +89,7 @@ Every Arabic line on the page and in the three forms is new, written from the id
 | `eventTech.items.1.title` | Event apps and websites | تطبيقات ومواقع للفعاليات |
 | `eventTech.items.1.body` | The agenda, the speakers and live updates. | البرنامج والمتحدثون والتحديثات المباشرة. |
 | `eventTech.items.2.title` | Live results and screens | النتائج المباشرة والشاشات |
-| `eventTech.items.2.body` | Championships, results and live coverage, as on a national federation's platform. | بطولات ونتائج وتغطية مباشرة، كما في منصة اتحاد وطني. |
+| `eventTech.items.2.body` | Championships, results and live coverage, on screen as they happen. | بطولات ونتائج وتغطية مباشرة، تظهر على الشاشات لحظة حدوثها. |
 | `eventTech.idealFor.0` | Conferences and exhibitions | المؤتمرات والمعارض |
 | `eventTech.idealFor.1` | Sports events and championships | الفعاليات الرياضية والبطولات |
 | `eventTech.idealFor.2` | Galas with a guest list | الحفلات بقوائم ضيوف |
@@ -201,10 +193,7 @@ Every Arabic line on the page and in the three forms is new, written from the id
 | `productsCopy.demo.covers` | Covers | عدد الضيوف |
 | `productsCopy.demo.orders` | Orders | الطلبات |
 | `productsCopy.demo.peak` | Busiest hour | ساعة الذروة |
-| `proof.title` | Live today: a national federation's platform, and the site you're reading. | يعمل اليوم: منصة اتحاد رياضي وطني، والموقع الذي تقرؤه الآن. |
-| `proof.federation.label` | A national sports federation | اتحاد رياضي وطني |
-| `proof.federation.line` | Bilingual website, mobile app and content management system, all live. | موقع بلغتين وتطبيق جوّال ونظام لإدارة المحتوى، وكلها تعمل الآن. |
-| `proof.federation.link` | Read the case study | اقرأ دراسة الحالة |
+| `proof.title` | Live today: the site you're reading. | يعمل اليوم: الموقع الذي تقرؤه الآن. |
 | `proof.site.label` | This website | هذا الموقع |
 | `proof.site.line` | Designed and built by our team in Arabic and English, with full right-to-left layouts. The screens here are captured from it. | صمّمه فريقنا وبناه بالعربية والإنجليزية، مع دعم كامل للاتجاه من اليمين إلى اليسار. الشاشات هنا ملتقطة منه مباشرة. |
 | `proof.site.toggle` | Show the site in | اعرض الموقع بـ |
@@ -432,8 +421,8 @@ Written natively from the idea; Western digits; «في أرض الحدث» for o
 | Key | Line | Note |
 |---|---|---|
 | `workIndex.headingLead` / `headingKey` | أعمال لجهات وطنية، / مشروعًا بعد مشروع. | Says who the work was for without naming them; «مشروعًا بعد مشروع» carries the ledger idea. |
-| `workIndex.intro` | جناح في معرض دبي للطيران، وليالي تكريم لدوري كرة قدم، وموقع اتحاد رياضي وتطبيقه ومنصّاته اليومية. يظهر اسم كل عميل حين يوافق على ذكره. | Concrete nouns first; the permission line is a plain statement, not an apology. |
-| `workIndex.metaDescription` | مشاريع مختارة من NO TIME Creative House: جناح لشركة طيران وطنية في المعارض، وبطولات دوري كرة قدم وليالي تكريمه، وموقع اتحاد رياضي وتطبيقه ومنصّاته اليومية. | Same three cases, anonymous. |
+| `workIndex.intro` | جناح في معرض دبي للطيران، وليالي تكريم لدوري كرة قدم. يظهر اسم كل عميل حين يوافق على ذكره. | Concrete nouns first; the permission line is a plain statement, not an apology. |
+| `workIndex.metaDescription` | مشاريع مختارة من NO TIME Creative House: جناح لشركة طيران وطنية في المعارض، وبطولات دوري كرة قدم وليالي تكريمه. | Same three cases, anonymous. |
 | `workIndex.filterLabel`, `serviceFacet`, `marketFacet`, `allServices`, `allMarkets` | تصفية الأعمال · الخدمة · السوق · كل الخدمات · كل الأسواق | Standard UI terms. |
 | `workIndex.count` | لا مشاريع / مشروع واحد / مشروعان / {count} مشاريع / {count} مشروعًا / {count} مشروع | Full Arabic plural set, Western digits, as `megaMenu.count`. |
 | `workIndex.emptyTitle` / `emptyBody` | لا مشروع نعرضه هنا بعد. / لا ننشر إلا عملًا نملك حقائقه، لذلك تكبر هذه الصفحة مشروعًا بعد مشروع. أزل أحد عوامل التصفية، أو تعرّف على ما نقدّمه في هذا المجال. | The empty state explains the honesty rule and gives a direction. |
@@ -444,9 +433,7 @@ Written natively from the idea; Western digits; «في أرض الحدث» for o
 | `workCase.ctaTitle` / `ctaBody` | تخطّط لمشروع كهذا؟ / ابدأ بالخدمات التي قام عليها هذا المشروع. في كل صفحة ما نقدّمه، وطريقة التواصل معنا. | A question the reader answers with yes; no promise of a reply time beyond D91. |
 | `workCase.ctaQuote` / `ctaCategory` | اطلب عرض سعر / تصفّح {category} | Matches `cta.primary`. |
 | `work.ts` story facts (3 cases) | دورنا · المنصّة · المعارض · المناسبات; الشريك الرقمي والإعلامي المعتمد; الموقع والتطبيق متاحان للجمهور; تصميم الجناح وبناؤه وعلاقاته العامة; معرض دبي للطيران · سوق السفر العربي; تنفيذ الفعاليات والمحتوى والهدايا; البطولات وليالي التكريم | From case-studies.md, no names. |
-| `work.ts` execution leads | نتولّى حضور الاتحاد على الإنترنت كاملًا: المنصّة التي ينشر عليها، والقنوات التي يخاطب بها جمهوره، كل يوم وباللغتين. · من أول رسم حتى أرض المعرض: صمّمنا الجناح، وبنيناه، وأدرنا علاقاته العامة طوال أيام الحدث. · أيام الدوري الكبرى في يد فريق واحد، من هوية البطولة حتى العلب التي تصل فيها الجوائز. | Each lead opens on the outcome, then the span of the work. |
 | `work.ts` execution points (15) | e.g. «إعادة بناء كاملة للموقع بلغتين، بنظام لإدارة المحتوى وتطبيق جوّال متصل به» · «العلاقات العامة في أرض الحدث» · «الإنتاج في أرض الحدث، ومنه مراسم ما قبل المباراة» | Profile p5, p13, p16–19, p23–24; verbal nouns kept short. |
-| `work.ts` result (sports federation) | الموقع والتطبيق متاحان للجمهور اليوم. وعلى المنصّات، حققت إحدى حملات البطولات في أسبوعها الأول: 487 ألف مشاهدة · ‎+37.6 ألف متابع جديد · 271 ألف وصول للحملة. / حملة بطولة واحدة، في أسبوعها الأول فقط. | The figures never appear without their scope (D67). |
 
 ## About (batch 3, F2: new lines)
 
@@ -455,7 +442,7 @@ Written natively from the idea; Western digits; «في أرض الحدث» for o
 | `aboutPage.title` | أفكار تُبنى حيث تلتقي العلامة بجمهورها. | The profile's p3 thesis, said as one clean sentence. |
 | `aboutPage.story1` | NO TIME بيت للفعاليات والتسويق والعلاقات العامة، مقرّه دبي، ويعمل لعملاء في أسواق محلية وإقليمية وعالمية. | p3 verbatim in meaning; «بيت» keeps the house idea from D95. |
 | `aboutPage.story2` | نبدأ من النقطة التي تلتقي فيها العلامة بجمهورها، ثم نمضي بالفكرة حتى آخرها: الاستراتيجية والإبداع والإنتاج والتنفيذ، بفريق واحد. | «بفريق واحد» replaces the calque «تحت سقف واحد» (D95). |
-| `aboutPage.story3` | ولهذا يتّسع عملنا لكل هذا: جناح لشركة طيران في معرض دبي للطيران، ومجلس تراثي يستقبل الضيوف، وليالي تكريم لدوري كرة قدم، وتطبيق بلغتين لاتحاد رياضي وطني. | Real, anonymous examples (work.ts, profile p31–32). |
+| `aboutPage.story3` | ولهذا يتّسع عملنا لكل هذا: جناح لشركة طيران في معرض دبي للطيران، ومجلس تراثي يستقبل الضيوف، وليالي تكريم لدوري كرة قدم. | Real, anonymous examples (work.ts, profile p31–32). |
 | `aboutPage.story4` | ومع اسمنا عبارة نلتزم بها: حان وقت البداية. | Echoes the approved hero anchor «حان وقت / البداية.». |
 | `aboutPage.seeWork` | شاهد أعمالنا | — |
 | `aboutPage.principlesEyebrow` / `principlesTitle` | كيف نعمل / ما لا يتغيّر في أي مشروع. | Unnumbered principles; the title says why there are four. |

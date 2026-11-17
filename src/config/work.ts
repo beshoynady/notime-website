@@ -4,7 +4,6 @@
  * every text and image of the case then switches to the named version.
  */
 export const WORK_NAMED = {
-  uaeaf: false,
   egyptair: false,
   uaepl: false,
 } as const;

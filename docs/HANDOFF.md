@@ -1,17 +1,20 @@
-# Session handoff: the user's decisions on #30–#36 and requests 1–4 (2026-11-17)
+# Session handoff: the owner's final copy decisions and the withdrawn case (2026-11-17)
 
-Read `CLAUDE.md`, `AGENTS.md` and `PRODUCT.md` first. Decisions: `docs/DECISIONS.md` (latest D117). Judgment calls: `docs/review/decisions-to-confirm.md` (#1–#36 all answered).
+Read `CLAUDE.md`, `AGENTS.md` and `PRODUCT.md` first. Decisions: `docs/DECISIONS.md` (latest D124). Judgment calls: `docs/review/decisions-to-confirm.md` (#1–#36 all answered).
 
-## Latest (2026-11-17, end of session): two pieces of work waiting on the user
+## Latest (2026-11-17, end of session): waiting on the user
 
 Branch `phase-2-services`.
 
 | Work | State | Next action |
 |---|---|---|
-| **Audit fixes** (N03–N22 as chosen) | Design approved (`docs/superpowers/specs/2026-11-17-audit-fixes-design.md`). Plan written: `docs/superpowers/plans/2026-11-17-audit-fixes.md`, 16 tasks; branches `audit-fixes`, `audit-n06`, `audit-n17` | **Waiting for the user to confirm the plan.** Then subagent-driven, TDD, one agent at a time (D93) |
-| **Copy rewrite** (the user's task: docs first) | Voice and samples approved, with owner rules 1–8. **Full table:** `docs/review/copy-rewrite.md`, generated from the code by `scripts/copy-inventory.mjs` (1,470 strings, 433 proposals, 4 hidden, 74 ⚑). The proposals are in `docs/review/copy-rewrite/*.json`, the head in `_head.md`. **The owner decided D-C1–D-C8 (D118–D120):** the Arabic button rule by role, the phone field in E.164, the print store's claim hidden (not built). Rand's 15 questions: `docs/review/rand-questions.md` | **Waiting:** the owner's answers on the software promises (the head's list), and Rand's answers. Rand doesn't read the table: after the apply she reads the Arabic on the preview link, and every ⚑ line she hasn't confirmed goes back to its current text before then. **No `src/` change until then.** Apply on a separate branch after `audit-fixes` is merged: from the JSONs, the phone function test-first, with EN/AR screenshots |
+| **Audit fixes** (N03–N22 as chosen) | Design approved (`docs/superpowers/specs/2026-11-17-audit-fixes-design.md`). Plan: `docs/superpowers/plans/2026-11-17-audit-fixes.md`, 16 tasks; branches `audit-fixes`, `audit-n06`, `audit-n17` | **Waiting for the user to confirm the plan.** The withdrawn case (D121) touches some of its tasks: see the summary sent to the user. Then subagent-driven, TDD, one agent at a time (D93) |
+| **Copy rewrite** (docs first) | Two rounds of owner decisions applied (D-C1–D-C8, D118–D124). Table `docs/review/copy-rewrite.md` (1,423 strings, 428 proposals, 2 hidden, 47 ⚑, all Rand's). Rand's 16 questions: `docs/review/rand-questions.md` + `.pdf` | **Waiting for Rand's answers.** Apply on a separate branch after `audit-fixes` merges: from the JSONs, the phone function test-first with `libphonenumber-js` (D124), print → `print-ordering` (D123), EN/AR screenshots |
+| **Withdrawn case (D121)** | Removed from `src` (Work, Home, About, Software's case study and proof card, photos) and from every doc but DECISIONS.md. Work has 2 cases; the work filter has no Software chip. Screenshots: `docs/review/shots/work-two-cases/` | **Waiting for the user's call on the visual balance** (Software's single proof card, Home's two-up, the one-option market row). Change no design before that |
 
 Rebuild the table after editing a JSON: `node --no-warnings --import ./scripts/lib/alias.mjs scripts/copy-inventory.mjs --render docs/review/copy-rewrite docs/review/copy-rewrite.md --head=docs/review/copy-rewrite/_head.md` (it warns about proposal IDs that no longer exist).
+
+Servers: prod on 3000 and the review build on 3100 (both rebuilt without the withdrawn case), tunnel https://commerce-tension-petersburg-rom.trycloudflare.com/ar. Run e2e with `PW_BASE_URL=http://localhost:3000`.
 
 ## The user's message (2026-11-17, authoritative)
 

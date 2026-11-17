@@ -24,14 +24,14 @@ Key:
 | | Galas & private events | "Gala & wedding décor" (02); "Private & luxury celebrations": baby receptions, showers, intimate gatherings (03) | ✓ | Keep. The profile gives private celebrations a whole section; consider making it its own service |
 | | Hospitality & guest management | "Guest experience" (02); "Catering": private service, majlis, corporate hospitality, desserts, beverages, table styling, buffet styling, boardroom hospitality (12) | ≈ | Keep, but the profile's offer is **catering**. Rename or split (see §2) |
 | | Stage & technical production | "Technical setup" (02); "Sound & lighting": stage design, rigging, DJ & live sound (13) | ✓ | Keep |
-| Creative Production | Photography | "Photography & videography": food styling, product, event coverage (11); "On-ground coverage & photography" (UAEAF, 17) | ✓ | Keep |
+| Creative Production | Photography | "Photography & videography": food styling, product, event coverage (11); "On-ground coverage & photography" | ✓ | Keep |
 | | Video production | "Cinematic product & brand films"; "Editing, sound design & post-production" (06); videography (11) | ✓ | Keep |
 | | Motion graphics | "Motion graphics & logo animation" (06) | ✓ | Keep |
-| | AI content creation | Section 06: AI video ads & reels, AI imagery & campaign key visuals; UAEAF Oregon 26 "Produced with AI" | ✓ | Keep. Strong evidence |
+| | AI content creation | Section 06: AI video ads & reels, AI imagery & campaign key visuals | ✓ | Keep. Strong evidence |
 | | Set & stage design | "Stage design" (13); "Décor", "Floral design · styling" (02); "Décor & floral direction" (03) | ≈ | Keep. Consider "Décor, floral & set design": décor and florals appear on 4 profile pages, more than stages |
 | | Equipment & camera rental | none | ✗ | Ask the client. The profile never offers rental |
 | Marketing & Brand | Branding & identity | "Tournament branding" (UAE PL, 05); "Brand & campaign strategy" (04) | ≈ | Keep. The profile has no stand-alone identity work. Ask whether NO TIME sells logo and identity design |
-| | Social media management | Section 05 (content systems, design, community, growth); UAEAF case (17) | ✓ | Keep. Strong evidence |
+| | Social media management | Section 05 (content systems, design, community, growth) | ✓ | Keep. Strong evidence |
 | | Digital marketing & SEO | "Performance & paid media", "Analytics & reporting" (04); "Paid campaigns & community growth" (17); "SEO & performance" (07) | ✓ | Keep. Title could be "Performance & paid media" |
 | | Content strategy | "Content strategy & monthly calendar" (17); "Content systems" (05) | ✓ | Keep |
 | | Public relations | Section 08: on-site PR management and media coverage | ✓ | Keep. Press claims stay off the site until confirmed (OQ #19) |
@@ -42,8 +42,8 @@ Key:
 | | Corporate gifts | Section 10: "Curated corporate gifts produced to brand standard — screen printing, UV, foiling, debossing and laser engraving" | ✓ | Keep. Strong evidence |
 | | Online print store | none | ✗ | Ask. It reads like a product, not a service; it may belong with the two products (OQ #5) |
 | | Branded merchandise | T-shirt and jersey mock-ups (10, pp. 23–24) | ≈ | Keep, or merge into Corporate gifts |
-| Software & Digital | Websites | Section 07; uaeathletics.ae, live (18) | ✓ | Keep. Strong evidence |
-| | Mobile apps | "Mobile applications: iOS & Android, connected to the web" (07); UAEAF app (18) | ✓ | Keep |
+| Software & Digital | Websites | Section 07 | ✓ | Keep. Strong evidence |
+| | Mobile apps | "Mobile applications: iOS & Android, connected to the web" (07) | ✓ | Keep |
 | | Custom systems | "CMS & dashboards: admin panels, publishing & analytics"; "Integrations & APIs" (07) | ✓ | Keep. Title could be "CMS, dashboards & integrations" |
 | | E-commerce | none | ✗ | Ask the client |
 | | UI/UX design | "UX / UI design: research, flows & design systems" (07) | ✓ | Keep |
@@ -71,8 +71,8 @@ Key:
 | **Brand activations** (02) | "Brand activations · mall & exhibition stands"; Ultimate Power Solution stands with robotics (p7–8) | Add, possibly replacing "Product launches" |
 | **Technology & robotics experiences** (02) | "Exhibitions · technology & robotics experiences" (p7) | Fold into Brand activations or Exhibitions; ask |
 | **Fabrication** (09) | Smith Gulf: "design, fabrication and installation of exhibition stands, activations and branded environments" | Add to "Exhibitions & booths" (as one service: design, build, install) or to Production, Print & Gifts |
-| **Ceremonies & award nights** (02) | "Ceremonies · award nights · corporate & government"; UAEAF recognition ceremony; UAE PL award ceremonies | Add, or fold into "Conferences & summits" renamed "Corporate, government & award events" |
-| **Sports events** | UAE Pro League: "full event delivery … tournament branding … award ceremonies and sponsor activation" (05); UAEAF | Not a separate service in the profile; best shown through Our Work |
+| **Ceremonies & award nights** (02) | "Ceremonies · award nights · corporate & government"; UAE PL award ceremonies | Add, or fold into "Conferences & summits" renamed "Corporate, government & award events" |
+| **Sports events** | UAE Pro League: "full event delivery … tournament branding … award ceremonies and sponsor activation" (05) | Not a separate service in the profile; best shown through Our Work |
 | **Photobooths & guest moments** (03) | Listed under private celebrations | Part of private celebrations; no separate service |
 | ~~Entertainment: Arabic singers, oud players~~ (13) | Talent booking | **Excluded** (project rule: no talent content) |
 | ~~Celebrity & influencer network~~ (14) | Named roster | **Excluded** (project rule) |
@@ -87,7 +87,7 @@ The profile is organised in 13 sections, not 5 categories. The draft's five cate
 | Creative Production | 06 AI content & motion, 11 Photography & videography | Good |
 | Marketing & Brand | 04 Marketing, 05 Social media, 08 PR | Good. The profile's cover line is "Events · Marketing · PR · Production" |
 | Production, Print & Gifts | 09 Production (fabrication), 10 Gift items | Good. "Print" has the least evidence |
-| Software & Digital | 07 Digital platforms | Good. Strongest single case (UAEAF platform, live) |
+| Software & Digital | 07 Digital platforms | Good. |
 
 No category change is proposed. One question for the client: whether **PR** should be named in a category title, as the profile's cover line does ("Marketing, PR & Brand").
 

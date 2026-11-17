@@ -9,9 +9,9 @@ Branch `batch3-pages`, built on `phase-2-services` 4fb917e (merged up to 15817aa
 3. **Chips for values no case has are hidden** (Creative Production, and every market but the UAE today), so no chip ever reads "0" and advertises work we don't have; the rows grow as cases are added. A chip ruled out only by the other facet shows 0 and isn't linked. Confirm.
 4. **The market row shows today with one market (UAE · 3).** It does nothing yet beyond "All", but it is the D88 filter and fills in with the next case outside the UAE. Alternative: hide a row with fewer than two values. Confirm as built.
 5. **All three cases are tagged UAE only.** The airline's shows (Dubai Airshow, ATM) are in Dubai; the profile also lists Egypt for that client without saying what was done there, so Egypt isn't claimed. Confirm; add `eg` once Rand confirms Egyptian work.
-6. **Slugs:** `sports-federation-digital-partner`, `airline-exhibition-pavilion`, `football-league-events-awards`. Anonymous and permanent, so they survive the named switch. Confirm.
-7. **Hidden sections:** Challenge and Idea are `{{TODO}}` for all three in case-studies.md, and Result is supported only for the federation (site and app live; the Oregon figures in their anonymous wording with "first week only"). So the airline and league cases show key facts → Execution → scope → next. Nothing invented. Confirm.
-8. **The case stories are written without names** (the federation, the league), so the same text stays true when `WORK_NAMED` flips; only the label, summary and photos switch. Confirm.
+6. **Slugs:** `airline-exhibition-pavilion`, `football-league-events-awards`. Anonymous and permanent, so they survive the named switch. Confirm.
+7. **Hidden sections:** Challenge and Idea are `{{TODO}}` for both cases in case-studies.md, and neither has a supported Result yet, so those sections are hidden. Confirm.
+8. **The case stories are written without names**, so the same text stays true when `WORK_NAMED` flips; only the label, summary and photos switch. Confirm.
 9. **The airline's execution lists "The media coverage that follows"** (profile p19's own deliverable). The "made headlines" claim stays off (OQ #19). Confirm, or drop the point until the coverage is confirmed.
 10. **The league's Super Cup ceremony is described as "a pre-match ceremony"** (naming the cup would identify the league). Confirm.
 11. **The sticky "On this page" menu shows only with 4+ sections** (the plan's rule). No case reaches 4 today, so none shows it. Confirm.

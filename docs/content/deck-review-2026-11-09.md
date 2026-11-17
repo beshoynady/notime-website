@@ -55,12 +55,10 @@ The Arabic punctuation is correct throughout.
 5. **s4 EN:** "From the idea to a live product."?
 6. **Line fit (check in the browser):**
    - CTA "Book a free 30-min intro call" / «احجز مكالمة تعارف مجانية (30 دقيقة)»
-   - eyebrow "Case study · A national sports federation"
 
 ### Fact check (Rand)
 
-- "We are the federation's official digital and media partner" and "All live": current at launch?
-- Event apps and websites, live results and screens: has NO TIME built these beyond the federation platform?
+- Event apps and websites, live results and screens: has NO TIME delivered these? (Answered: yes, D121.)
 - The e-commerce and AI-consulting deliverables are inferred.
 - The stack list, and the PDPL line (legal check).
 - "We'll reply within one working day": can the team keep that from launch?

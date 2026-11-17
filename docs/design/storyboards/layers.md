@@ -53,12 +53,10 @@
 
 ## V · Software & Digital
 
-**No image layers.** The opening is drawn in code (README §3, L0–L3 as grid, SVG, HTML, CSS frames). The case study is **anonymised by default** (D67): its devices show stylised brand-palette mockups in HTML/CSS, with no images. The **named variant** (after client approval) uses the existing real screens `uae-athletics-federation-1` (1544 × 965) and `-2` (459 × 1048) inside device frames. Their alt text is meaningful, because they're evidence:
+**No image layers.** The opening is drawn in code (README §3, L0–L3 as grid, SVG, HTML, CSS frames).
 
 | Slot | Alt EN | Alt AR |
 |---|---|---|
-| `uae-athletics-federation-1` | The UAE Athletics Federation website home page on a laptop. | الصفحة الرئيسية لموقع اتحاد الإمارات لألعاب القوى على شاشة حاسوب محمول. |
-| `uae-athletics-federation-2` | The same site on a phone. | الموقع نفسه على شاشة هاتف. |
 
 **AI generations:** 0. **Background removals:** 0.
 

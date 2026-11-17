@@ -256,38 +256,6 @@
     "errors": []
   },
   {
-    "route": "/work/sports-federation-digital-partner",
-    "locale": "en",
-    "width": 1440,
-    "height": 4234,
-    "overflow": 0,
-    "errors": []
-  },
-  {
-    "route": "/work/sports-federation-digital-partner",
-    "locale": "ar",
-    "width": 1440,
-    "height": 4189,
-    "overflow": 0,
-    "errors": []
-  },
-  {
-    "route": "/work/sports-federation-digital-partner",
-    "locale": "en",
-    "width": 390,
-    "height": 4766,
-    "overflow": 0,
-    "errors": []
-  },
-  {
-    "route": "/work/sports-federation-digital-partner",
-    "locale": "ar",
-    "width": 390,
-    "height": 4794,
-    "overflow": 0,
-    "errors": []
-  },
-  {
     "route": "/work/airline-exhibition-pavilion",
     "locale": "en",
     "width": 1440,

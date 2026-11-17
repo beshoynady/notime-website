@@ -178,14 +178,16 @@
     "ar": "لمن هو، وما الذي يجب أن يفعله، وأي موعد يهمّكم."
   },
   "c:form-copy:formCopy.consultation.submit": {
-    "rule": "D-C1 (owner): one of the six approved buttons, back to the plural command as the owner asked, although it submits a form",
-    "en": "Book a free 30-min intro call",
-    "ar": "اطلبوا مكالمة تعارف مجانية (30 دقيقة)",
-    "facts": "⚑ R1 (the intro call is free, 30 minutes)"
+    "rule": "D-C1 + N13 (owner): the plural command, and no \"30-min\" on the button; the duration is in the line beside it",
+    "en": "Request a free intro call",
+    "ar": "اطلبوا مكالمة تعارف مجانية",
+    "facts": "R1 confirmed by the owner (2026-11-17)"
   },
   "c:form-copy:formCopy.consultation.micro": {
-    "rule": "keep",
-    "facts": "⚑ FC#23"
+    "rule": "R1 (owner): the call's length goes in the line beside the button",
+    "en": "A free 30-minute call, with no obligation. We reply within one working day.",
+    "ar": "مكالمة مجانية مدتها 30 دقيقة، دون أي التزام. نرد عليكم خلال يوم عمل.",
+    "facts": "R1 confirmed by the owner (2026-11-17); ⚑ FC#23"
   },
   "c:form-copy:formCopy.consultation.successTitle": {
     "rule": "Choice 2, as the contact form",
@@ -224,7 +226,7 @@
   "c:form-copy:formCopy.review.successBody": {
     "rule": "Owner rule 1 (AR); EN keep. A promise with a number in it",
     "ar": "خلال 3 أيام عمل نرد عليكم بخمسة تحسينات عملية، مجانًا.",
-    "facts": "⚑ R2 (the website review: free, 3 working days, 5 improvements)"
+    "facts": "R2 confirmed by the owner (2026-11-17)"
   },
   "c:form-copy:formCopy.interest.message": {
     "rule": "Owner rule 1",

@@ -11,7 +11,7 @@
   "c:categories:categories[software-digital].faq[0].a": {
     "rule": "Owner rule 1 (AR); EN keep",
     "ar": "يعتمد ذلك على حجم المشروع. بعد مكالمة التعارف نرسل لكم خطة بالمراحل والمواعيد الخاصة بمشروعكم، وترون التقدّم في كل مرحلة.",
-    "facts": "⚑ FC#24"
+    "facts": "FC#24 confirmed by the owner (2026-11-17)"
   },
   "c:categories:categories[software-digital].faq[1].a": {
     "rule": "Owner rule 1 (AR); EN keep",
@@ -23,7 +23,7 @@
   },
   "c:categories:categories[software-digital].faq[4].a": {
     "rule": "keep",
-    "facts": "⚑ FC#24"
+    "facts": "FC#24 confirmed by the owner (2026-11-17)"
   },
   "c:categories:categories[software-digital].faq[6].q": {
     "rule": "Owner rule 1 (AR)",
@@ -33,7 +33,7 @@
     "rule": "N13 (approved): \"Request a free intro call\", no \"30-min\"; owner rule 1",
     "en": "A few lines on what you want to build and who it's for. Request a free intro call, and we'll take it from there.",
     "ar": "بضعة أسطر عمّا تريدون بناءه ولمن. اطلبوا مكالمة تعارف مجانية، ونتابع معكم الخطوات التالية.",
-    "facts": "⚑ R1 (the intro call is free, 30 minutes)"
+    "facts": "R1 confirmed by the owner (2026-11-17)"
   },
   "c:categories:categories[software-digital].closing": {
     "rule": "Owner rule 1 (AR)",
@@ -69,12 +69,12 @@
   },
   "c:services:services[e-commerce].points[1]": {
     "rule": "keep",
-    "facts": "⚑ FC#20 (which payment gateways)"
+    "facts": "FC#20 confirmed by the owner (2026-11-17)"
   },
   "c:services:services[ai-consulting].summary": {
     "rule": "Owner rule 1 (AR)",
     "ar": "أين يفيد الذكاء الاصطناعي عملكم، وأين لا يفيد، وكيف تبدؤون.",
-    "facts": "⚑ FC#20 (what the consulting covers)"
+    "facts": "FC#20 confirmed by the owner (2026-11-17)"
   },
   "c:services:services[ai-consulting].points[0]": {
     "rule": "Owner rule 1 (AR)",

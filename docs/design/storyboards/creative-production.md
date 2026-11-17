@@ -97,7 +97,7 @@ The signature (§5.2): each eyebrow is its timecode in (`TC 00:01:00:00` …), a
 
 ## Act 3 · Closing
 
-1. **Related work:** hidden until approved (OQ #17). The Oregon 26 key visuals (p14) are candidates once rights clear.
+1. **Related work:** hidden until approved (OQ #17).
 2. **FAQ.**
 3. **Bookend:** the slate returns, marked "Take 2". Line: "Your take one starts here." / «لقطتك الأولى تبدأ من هنا.» → the quote block.
 

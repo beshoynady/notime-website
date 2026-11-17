@@ -44,14 +44,12 @@ Keep the approved "Interface" opening story.
    - The primary CTA "Book a free 30-min intro call", and a secondary "See our work".
    - The opening story plays: the blinking cursor → wireframe → UI → device.
 2. **Proof strip,** right after the hero:
-   - "A national sports federation: bilingual website, mobile app and CMS, live".
    - "This website": a device-framed real screenshot. The Lighthouse metric shows only when it's ≥ 90 (a flag, off in v1).
    - **Then the free-website-review secondary CTA** (see A below).
 3. **The problem (PAS):** 4–5 pains as short, punchy cards, each answered by a one-line "how we solve it".
 4. **What we build:** the 6 services as **mini landing blocks** (see C below).
 5. **Event technology (our specialty):** registration and check-in, event apps and microsites, live results and screens. It includes "Minute Zero by NO TIME · Coming soon". This is where NO TIME's two worlds meet, so make it visually distinct. Link to the Events page.
 6. **Case study (anonymised):** Challenge → Approach → What we built → Result (verified facts only).
-   - Visuals: stylised brand-palette UI redraws (abstract layout blocks), never the federation's real screens or logos.
    - A config flag switches it to the named version.
 7. **How we work:** Discover → Design → Build → Launch → Support, a scroll-built timeline. Each step shows what happens and **what you receive** (e.g. a clickable prototype, a staging link, a launch checklist).
 8. **Engagement levels, no prices:** three tiers, presented as scope rather than packages for sale.
@@ -111,7 +109,7 @@ Layout:
 - **Product concept screens:** clean UI mockups drawn in code in the brand palette, labelled "Preview": realistic, but clearly concepts, with the example data labelled.
   - Minute Zero: a check-in dashboard, a QR scan screen, a guest list.
   - Peak Hour: a tables view, a kitchen queue, a daily summary.
-- **The case study:** stylised redraws (abstract layout blocks in brand colours), never the federation's real screens or logos.
+- **The case study:** withdrawn (D121); the section waits for a delivered project.
 - **Atmosphere:** code-drawn (gradients, grid, glow). The photo slots are v1.1.
 - **Motion on visuals:** device frames assemble on scroll, UI states animate (a check-in counting up with example data), and the light follows the cursor. GSAP for scroll, Motion for interaction. Reduced-motion stills for all.
 
