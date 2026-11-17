@@ -1,10 +1,9 @@
 "use server";
 
 import { headers } from "next/headers";
-import { handleSubmission } from "@/lib/forms/handle";
+import { handleSubmission, prepareContact } from "@/lib/forms/handle";
 import { composeMail, deliverMail } from "@/lib/forms/mailer";
 import { contactSchema, consultationSchema, interestSchema, websiteReviewSchema, type FormState } from "@/lib/forms/schemas";
-import { parseServiceParam } from "@/lib/forms/service-param";
 import { LEAD_FIELD, parseLeadSource } from "@/lib/lead-source";
 import { verifyTurnstile } from "@/lib/forms/turnstile";
 import { turnstileSecret } from "@/lib/forms/turnstile-config";
@@ -50,6 +49,6 @@ export async function submitInterest(_prev: FormState, formData: FormData): Prom
 export async function submitContact(_prev: FormState, formData: FormData): Promise<FormState> {
   return handleSubmission(contactSchema, formData, {
     ...(await steps()),
-    deliver: (d) => deliverMail(composeMail("contact", { ...d, service: parseServiceParam(d.service) }, shared(formData))),
+    deliver: (d) => deliverMail(composeMail("contact", prepareContact(d), shared(formData))),
   });
 }
