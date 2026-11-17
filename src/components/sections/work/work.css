@@ -106,14 +106,18 @@
   .work-aside {
     padding-block-end: 0.5em;
   }
-  /* The lead case takes the wider column and both rows; the other two stack beside it. */
+  /* Two cases sit side by side at equal width. From the third card on, the lead takes the wider
+     column and both rows and the others stack beside it. CSS only: the count is never passed in. */
   .work-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .work-grid:has(> :nth-child(3)) {
     grid-template-columns: 7fr 5fr;
   }
-  .work-card[data-lead] {
+  .work-grid:has(> :nth-child(3)) > .work-card[data-lead] {
     grid-row: span 2;
   }
-  .work-card[data-lead] .work-media {
+  .work-grid:has(> :nth-child(3)) > .work-card[data-lead] .work-media {
     aspect-ratio: 4 / 3;
   }
 }
