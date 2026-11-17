@@ -120,14 +120,18 @@ export function ChoiceChips({
 }) {
   const id = fieldId(prefix, name);
   return (
+    // A radio group: `radiogroup` (not the fieldset's implicit `group`) is the role that allows
+    // aria-required and aria-invalid; its name stays the legend.
     <fieldset
       id={id}
+      role="radiogroup"
+      aria-labelledby={`${id}-legend`}
       className={cn("form-field form-chips", code && "field-error", caret && "form-caret")}
       aria-describedby={code ? `${id}-error` : undefined}
       aria-invalid={code ? true : undefined}
       aria-required={optional ? undefined : true}
     >
-      <legend className="form-legend">
+      <legend id={`${id}-legend`} className="form-legend">
         {legend}
         {optional && optionalTag(locale)}
       </legend>

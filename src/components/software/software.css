@@ -1161,7 +1161,9 @@ html[data-js]:not([data-reduced]) .sw-op-line:not([data-line="0"]) {
   border: 1px solid var(--color-line-light);
   border-radius: var(--radius-tag);
   font-size: 0.78rem;
-  opacity: 0.45;
+  /* Off: outline only, the text at 72% (5.7:1 on ivory; at opacity 0.45 it measured 2.6:1).
+     The filled chip is what marks a phase as on. */
+  color: color-mix(in srgb, currentColor 72%, transparent);
 }
 .sw-phase-list .is-on {
   border-color: var(--color-espresso);

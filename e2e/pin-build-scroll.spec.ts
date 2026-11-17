@@ -35,7 +35,8 @@ test("building the opening's pin doesn't move a visitor who is already below it"
 for (const path of ["/en", "/en/services/events-hospitality", "/ar/services/production-print-gifts", "/en/services/software-digital"]) {
   test(`${path}: every pin's floor fits inside its real height`, async ({ page }) => {
     await gotoReady(page, path);
-    await page.waitForFunction(() => document.querySelectorAll(".pin-spacer").length > 0, null, { timeout: 30_000 }).catch(() => {});
+    // A page may have no pin at this width (Software pins on desktop only): wait less than the test's own limit.
+    await page.waitForFunction(() => document.querySelectorAll(".pin-spacer").length > 0, null, { timeout: 10_000 }).catch(() => {});
     const over = await page.evaluate(() =>
       [...document.querySelectorAll<HTMLElement>(".hero-pin.pin-spacer, .scene-pin.pin-spacer, .process-pin.pin-spacer")].map((w) => {
         const pin = w.firstElementChild as HTMLElement;
