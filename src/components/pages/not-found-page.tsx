@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { ButtonLink } from "@/components/ui/button";
 import { SERVICES_INDEX_HREF } from "@/content";
@@ -28,4 +29,10 @@ export async function NotFoundPage() {
       </div>
     </main>
   );
+}
+
+/** The tab title: "Page not found · NO TIME Creative House" (the locale layout's template adds the brand). */
+export async function notFoundMetadata({ locale }: { locale: string }): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: "notFound" });
+  return { title: t("metaTitle") };
 }
