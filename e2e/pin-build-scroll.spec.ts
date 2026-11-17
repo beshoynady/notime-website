@@ -42,9 +42,13 @@ for (const path of ["/en", "/en/services/events-hospitality", "/ar/services/prod
         const pin = w.firstElementChild as HTMLElement;
         const floor = parseFloat(getComputedStyle(w).minHeight) || 0;
         const real = pin.offsetHeight + (parseFloat(w.style.paddingBottom) || 0);
-        return { wrapper: w.className, excess: Math.round(floor - real) };
+        // A pin is one screen: one stretched by the floor was measured at that height and kept it.
+        return { wrapper: w.className, excess: Math.round(floor - real), pinOverScreen: Math.round(pin.offsetHeight - innerHeight) };
       }),
     );
-    for (const o of over) expect(o.excess, o.wrapper).toBeLessThanOrEqual(1);
+    for (const o of over) {
+      expect(o.excess, o.wrapper).toBeLessThanOrEqual(1);
+      expect(o.pinOverScreen, `${o.wrapper}: the pin is taller than the screen`).toBeLessThanOrEqual(1);
+    }
   });
 }

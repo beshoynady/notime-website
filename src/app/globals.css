@@ -541,6 +541,13 @@ html[data-js]:not([data-reduced]) .scene-pin {
   padding-block-end: calc(var(--pin-m, 0) * 100svh);
   min-block-size: calc((var(--pin-own) + var(--pin-m, 0) * 100svh) * var(--pin-on));
 }
+/* The pinned element never stretches to the floor: while ScrollTrigger swaps a pin in (padding 0) the
+   floor is all content box, and a pin with no height of its own (Software's opening, the home
+   process stage) grew to it, was measured at that height and kept it: Software's title opened
+   1086 px down, behind two empty screens (UX audit, 2026-11-17). */
+html[data-js]:not([data-reduced]) :is(.hero-pin, .scene-pin, .process-pin) > * {
+  align-self: start;
+}
 html[data-js]:not([data-reduced]) .scene-pin:has(> .scene) {
   --pin-own: max(100svh, 480px); /* layered-scene.css: height 100svh, min-height 480px */
 }
