@@ -99,7 +99,7 @@ export const formCopy = {
     budgetHint: l("It helps us suggest the right scope. It's never a price.", "تساعدنا على اقتراح النطاق المناسب، وليست سعرًا."),
     message: l("Tell us a little more", "أخبرنا بالمزيد"),
     messageHint: l("Who it's for, what it must do, any date that matters.", "لمن هو، وما الذي يجب أن يفعله، وأي موعد يهمّك."),
-    submit: l("Book a free 30-min intro call", "احجز مكالمة تعارف مجانية (30 دقيقة)"),
+    submit: l("Request a free intro call", "اطلبوا مكالمة تعارف مجانية"),
     micro: l("No obligation. We reply within one working day.", "دون أي التزام. نرد خلال يوم عمل."),
     successTitle: l("Thanks, {name}. Your request is in.", "شكرًا، {name}. وصلنا طلبك."),
     successBody: l("We reply within one working day to set a time for the call.", "نرد خلال يوم عمل لنحدّد موعد المكالمة."),

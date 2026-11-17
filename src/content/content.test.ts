@@ -5,6 +5,8 @@ import { copyProblems } from "@/lib/copy-rules";
 import { imageSize } from "@/lib/image-size";
 import { getCategories, getCategory, getImageSlot, getImageSlots, getProducts, getServices, productLockup } from "./index";
 import type { Localized } from "./types";
+import { formCopy } from "./form-copy";
+import { cta, sticky } from "./software/page";
 
 const locales = ["en", "ar"] as const;
 
@@ -322,5 +324,15 @@ describe("image slots", () => {
       }
       if (s.kind === "ai") expect([s.width, s.height], s.id).toEqual(CANVA[s.aspect]);
     }
+  });
+});
+
+describe("N13 intro call wording", () => {
+  it("no call button carries a duration", () => {
+    const labels = [cta.book, sticky.book, formCopy.consultation.submit];
+    for (const label of labels) for (const l of locales) expect(label[l]).not.toMatch(/30|٣٠|min|دقيقة/);
+    expect(cta.book).toEqual({ en: "Request a free intro call", ar: "اطلبوا مكالمة تعارف مجانية" });
+    expect(formCopy.consultation.submit).toEqual(cta.book);
+    expect(sticky.book).toEqual({ en: "Request a free call", ar: "اطلبوا مكالمة مجانية" });
   });
 });
