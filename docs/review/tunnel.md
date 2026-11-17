@@ -42,4 +42,4 @@ Rand reviews the **review build** (`NEXT_PUBLIC_REVIEW_MODE=1`) through a free C
 
 ## Current link
 
-- 2026-11-16 (M3): https://arrival-kingdom-justify-plastics.trycloudflare.com/ar (until this machine, the review server or the tunnel restarts).
+https://commerce-tension-petersburg-rom.trycloudflare.com/ar (started 2026-11-17 on the review build of HEAD e9836ee; production mode, `next build` + `next start`, port 3100). The previous link is dead.
