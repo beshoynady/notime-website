@@ -31,7 +31,9 @@
     "en": "EN",
     "ar": "ع",
     "enName": "English",
-    "arName": "العربية"
+    "arName": "العربية",
+    "enLabel": "EN, English",
+    "arLabel": "ع، العربية"
   },
   "megaMenu": {
     "eyebrow": "الخدمات",

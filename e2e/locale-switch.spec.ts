@@ -45,4 +45,10 @@ test.describe("locale switch", () => {
     await expect(page.locator("#mega-panel")).toBeHidden();
     expect(await page.evaluate(() => document.documentElement.hasAttribute("data-overlay-open"))).toBe(false);
   });
+
+  test("the toggle's names start with its visible text", async ({ page }) => {
+    await gotoReady(page, "/en");
+    await expect(page.locator("header a[hreflang=en]")).toHaveAccessibleName("EN, English");
+    await expect(page.locator("header a[hreflang=ar]")).toHaveAccessibleName("ع، العربية");
+  });
 });

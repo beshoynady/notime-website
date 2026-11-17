@@ -831,11 +831,13 @@ html[data-overlay-open] #site-header {
     border-color 0.3s var(--ease-expo-out),
     box-shadow 0.3s var(--ease-expo-out);
 }
-/* Focus: the rule darkens and thickens to 2px (no outline box on an underlined field). */
+/* Focus: the rule darkens and thickens to 2px (no outline box on an underlined field). The extra
+   pixel comes out of the padding, so the field keeps its height. */
 .field-control:focus-visible {
   outline: none;
+  border-block-end-width: 2px;
+  padding-block-end: 11px;
   border-block-end-color: var(--color-espresso);
-  box-shadow: 0 1px 0 var(--color-espresso);
 }
 .field-hint {
   font-size: 0.78rem;
@@ -845,7 +847,7 @@ html[data-overlay-open] #site-header {
   border-block-end-color: var(--color-error);
 }
 .field-error .field-control:focus-visible {
-  box-shadow: 0 1px 0 var(--color-error);
+  border-block-end-color: var(--color-error);
 }
 .field-error .field-hint {
   color: var(--color-error);

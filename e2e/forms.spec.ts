@@ -81,3 +81,15 @@ for (const value of ["gifts-nope", "<script>alert(1)</script>"]) {
     expect(await page.content()).not.toContain("<script>alert(1)</script>");
   });
 }
+
+test("a focused brief field shows a 2 px line", async ({ page }) => {
+  await page.goto("/en/contact");
+  await scrollToForm(page);
+  const field = page.locator("#brief-name");
+  const box = async () => field.evaluate((el) => ({ w: getComputedStyle(el).borderBlockEndWidth, h: el.getBoundingClientRect().height }));
+  const resting = await box();
+  await field.focus();
+  const focused = await box();
+  expect(focused.w).toBe("2px");
+  expect(focused.h).toBe(resting.h); // no layout shift
+});
