@@ -14,7 +14,7 @@ Deliver: a short message with the preview link, both report paths, and anything 
 
 **Progress ledger (the source of truth after a context reset):** `E:/NO Time/nt-audit-fixes/.superpowers/sdd/2026-11-17-audit-fixes/progress.md` (gitignored). Read it, then `git log --oneline` in the worktree.
 
-**Current step:** Phase 1, Task 2 next (Tasks 0 and 1 done).
+**Current step:** Phase 1, Task 3 running (Tasks 0–2 done).
 
 Servers: 3000 = builds from the worktree (for e2e/Lighthouse after); 3200 = the before build (`E:/NO Time/nt-before`, e19404f); 3100 = review build behind the tunnel https://commerce-tension-petersburg-rom.trycloudflare.com (from `notime-website`, rebuild at the end).
 
