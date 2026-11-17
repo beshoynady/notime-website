@@ -1,0 +1,112 @@
+{
+  "m:hero.lead": {
+    "rule": "§4 lead: a category list that any agency could use. Owner's line (2026-11-17); films stay: Video production is one of the 30 services",
+    "en": "Events, films, campaigns and websites, from the first idea to launch day.",
+    "ar": "فعاليات وأفلام وحملات ومواقع، من أول فكرة حتى يوم الإطلاق.",
+    "facts": "services data (video-production)"
+  },
+  "m:hero.cta": {
+    "rule": "N05 (approved): EN as decided. AR follows owner rule 2 (verbal noun): changes the approved «خطّط لفعاليتك معنا»: confirm",
+    "en": "Plan your event",
+    "ar": "تخطيط فعاليتكم معنا"
+  },
+  "new:hero.ctaWork": {
+    "page": "home",
+    "rule": "N05 (approved) second CTA; AR by owner rule 2: confirm",
+    "en": "See our work",
+    "ar": "مشاهدة أعمالنا"
+  },
+  "m:hero.beatLead": { "rule": "N05: the beat becomes the eyebrow `hero.eyebrow`, same words", "en": "Every second is planned. (as hero.eyebrow)", "ar": "كل ثانية محسوبة. (as hero.eyebrow)" },
+  "m:hero.beatKey": { "rule": "N05: merged into `hero.eyebrow`", "en": "(delete)", "ar": "(delete)" },
+  "m:hud.scene": { "rule": "§3 em dash; decorative HUD, aria-hidden", "en": "Scene 01 · NO TIME", "ar": "المشهد 01 · NO TIME" },
+  "m:hud.scroll": { "rule": "Owner rule 2 (a singular command)", "ar": "للأسفل" },
+  "m:about.statement": {
+    "rule": "§3: \"the ideas in between\" says nothing; four verbs in a row. Rand's own sentence (p3), lightly edited; AR as the owner wrote it",
+    "en": "We build ideas where a brand meets its audience, then carry them all the way: strategy, creative, production and delivery, under one roof.",
+    "ar": "نصنع الفكرة في النقطة التي تلتقي فيها العلامة بجمهورها، ثم نرافقها حتى النهاية: الاستراتيجية والإبداع والإنتاج والتسليم، تحت سقف واحد.",
+    "facts": "p3 (Rand's wording)"
+  },
+  "m:about.body": {
+    "rule": "Keeps the three real projects (§1 specifics). The last sentence repeated the statement",
+    "en": "We're based in Dubai and work in six markets, from Saudi Arabia to Egypt. Recent work: an airline's pavilion at the Dubai Airshow, a majlis dressed for a heritage welcome, and a bilingual app for a national sports federation.",
+    "ar": "مقرّنا دبي، ونعمل في ستة أسواق من السعودية إلى مصر. من أعمالنا الأخيرة: جناح لشركة طيران في معرض دبي للطيران، ومجلس تراثي جُهّز لاستقبال الضيوف، وتطبيق بلغتين لاتحاد رياضي وطني.",
+    "facts": "p3, case studies. ⚑ FC#1 (six markets); ⚑ R9 (the three projects are recent): if Rand doesn't confirm, \"Some of our work:\" / «من أعمالنا:»"
+  },
+  "m:about.stats.markets.label": { "rule": "keep", "facts": "⚑ FC#1" },
+  "m:about.stats.integrated.value": { "rule": "N09 (approved): the count comes from the services data", "en": "30", "ar": "30" },
+  "m:about.stats.integrated.label": { "rule": "N09 (approved)", "en": "Services", "ar": "خدمة" },
+  "m:categories.intro": {
+    "rule": "Choice 2 (\"brief\"); owner rule 1 (AR plural)",
+    "en": "Book one, or hand us the whole project. A launch can need a stage, a film, a campaign and a gift box, and here the same people plan all four.",
+    "ar": "اطلبوا حرفة واحدة، أو اتركوا لنا المشروع كله. قد يحتاج إطلاقٌ واحد إلى منصّة وفيلم وحملة وعلبة هدايا، وعندنا يخطّط للأربعة الفريقُ نفسه."
+  },
+  "m:categories.viewServices": { "rule": "Owner rule 2 (button)", "ar": "استعراض الخدمات" },
+  "m:categories.allServices": { "rule": "Owner rule 2 (button)", "ar": "استعراض كل الخدمات" },
+  "m:services.meta.title": {
+    "rule": "SEO: \"Services\" alone matches no search; name what's inside",
+    "en": "Services: events, film, marketing, print and digital",
+    "ar": "خدماتنا: فعاليات وإنتاج وتسويق وطباعة وحلول رقمية"
+  },
+  "m:services.meta.description": {
+    "rule": "SEO: 190 chars of category names, cut in results; one concrete line instead",
+    "en": "Thirty services in five categories, from conferences and weddings to films, campaigns, print and websites. Find yours, or ask us.",
+    "ar": "ثلاثون خدمة في خمس فئات، من المؤتمرات والأعراس إلى الأفلام والحملات والطباعة والمواقع. اختاروا ما تحتاجون إليه، أو اسألونا.",
+    "facts": "services data (30, N09)"
+  },
+  "m:services.intro": {
+    "rule": "Owner rule 1 (AR plural); EN keep",
+    "ar": "خمس فئات، ولكل فئة صفحتها. افتحوا الفئة لتروا كيف نعمل فيها، أو انتقلوا مباشرةً إلى الخدمة التي تريدونها."
+  },
+  "m:marquee.pause": { "rule": "Owner rule 2 (control)", "ar": "إيقاف شريط الخدمات" },
+  "m:marquee.play": { "rule": "Owner rule 2 (control)", "ar": "تشغيل شريط الخدمات" },
+  "m:digital.headingLead": { "rule": "Owner rule 1", "ar": "الفريق الذي يصنع فعاليتكم،" },
+  "m:digital.headingKey": { "rule": "Owner rule 1", "ar": "يبني منصّتكم الرقمية أيضًا." },
+  "m:digital.intro": {
+    "rule": "Owner rule 1 (AR); EN keep: concrete (two languages, phones, your team edits)",
+    "ar": "مواقع وتطبيقات ولوحات تحكم، نصمّمها بالعربية والإنجليزية من أول رسمة، ونبنيها لتفتح بسرعة على الجوّال. ويحدّث فريقكم محتواها بنفسه."
+  },
+  "m:digital.capabilities.websites.body": { "rule": "Owner rule 1", "ar": "مواقع بلغتين، ونظام محتوى يديره فريقكم بنفسه." },
+  "m:digital.capabilities.apps.body": { "rule": "Owner rule 1; and «و Android» → «وAndroid» (N18 rule)", "ar": "لأجهزة iOS وAndroid، ومتصلة بموقعكم." },
+  "m:digital.capabilities.systems.body": { "rule": "Owner rule 1", "ar": "لوحات تحكم وأنظمة إدارة وربط بين أنظمتكم، مفصّلة على طريقة عملكم." },
+  "m:digital.registerInterest": { "rule": "Owner rule 2 (button)", "ar": "تسجيل الاهتمام" },
+  "m:digital.requestDemo": { "rule": "Owner rule 2 (button)", "ar": "طلب عرض تجريبي" },
+  "m:digital.viewProduct": { "rule": "Owner rule 2 (button)", "ar": "تفاصيل المنتج" },
+  "m:digital.explore": { "rule": "Owner rule 2 (button)", "ar": "استكشاف البرمجيات والحلول الرقمية" },
+  "m:process.headingKey": {
+    "rule": "Choice 1: \"one team\" is already in this page's Categories heading",
+    "en": "one plan.",
+    "ar": "وخطة واحدة."
+  },
+  "m:process.steps.plan.body": {
+    "rule": "Choice 2 (\"brief\"); owner rule 1",
+    "en": "We start with what you need, the audience and the date, then fix the idea, the budget and the timeline.",
+    "ar": "نبدأ بما تحتاجون إليه وبالجمهور والموعد، ثم نثبّت الفكرة والميزانية والجدول."
+  },
+  "m:process.steps.build.body": {
+    "rule": "Owner rule 1 (AR); EN keep. A promise (a review at every stage)",
+    "ar": "نُعدّ التصميم والديكور والمحتوى والمنصّات التي تخدمها، ونراجع معكم كل مرحلة.",
+    "facts": "⚑ R4 (a review with the client at every stage)"
+  },
+  "m:process.steps.produce.body": {
+    "rule": "Choice 1",
+    "en": "Fabrication, print, catering and crew come together on site, on one schedule.",
+    "ar": "في موقع الحدث يجتمع التصنيع والطباعة والضيافة وطواقم العمل، على جدول واحد."
+  },
+  "m:process.steps.launch.body": {
+    "rule": "Owner rule 1 (AR). A promise (a final report on every project)",
+    "ar": "تُفتح الأبواب أو تنطلق الحملة، ونبقى إلى جانبكم حتى التقرير الأخير.",
+    "facts": "⚑ R5 (every project ends with a report); else \"…and we stay with you after it.\" / «ونبقى معكم بعدها.»"
+  },
+  "m:markets.headingLead": { "rule": "keep", "facts": "⚑ FC#1" },
+  "m:cta.headingLead": {
+    "rule": "§3: a question headline answered by the next line",
+    "en": "Pick the date.",
+    "ar": "حدّدوا الموعد،"
+  },
+  "m:cta.headingKey": { "rule": "Pairs with the new lead", "en": "We'll plan every second of it.", "ar": "ونخطّط لكل ثانية فيه." },
+  "m:cta.body": { "rule": "Owner rule 1 (AR)", "ar": "أخبرونا بالموعد والفكرة، ونعود إليكم بالخطوات التالية." },
+  "m:cta.primary": { "rule": "Owner rule 2 (button)", "ar": "طلب عرض سعر" },
+  "m:cta.secondary": { "rule": "Owner rule 2 (button)", "ar": "المراسلة على واتساب" },
+  "m:cta.bodyInterim": { "rule": "Owner rule 1 (AR)", "ar": "ابدؤوا بما تحتاجون إليه: لكل مجال صفحته، وفيها خدماته كلها." },
+  "m:reel.open": { "rule": "Owner rule 2 (button)", "ar": "مشاهدة الصور" }
+}

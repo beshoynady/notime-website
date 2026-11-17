@@ -1,0 +1,33 @@
+{
+  "m:workIndex.metaTitle": { "rule": "SEO: \"Our work\" alone matches no search", "en": "Our work: events, stands and digital", "ar": "أعمالنا: فعاليات وأجنحة وحلول رقمية" },
+  "m:workIndex.metaDescription": {
+    "rule": "SEO: 190 chars, cut in results",
+    "en": "An airline's pavilion at the Dubai Airshow, a football league's award nights, and a sports federation's website and app: what we did on each.",
+    "ar": "جناح لشركة طيران في معرض دبي للطيران، وليالي تكريم لدوري كرة قدم، وموقع اتحاد رياضي وتطبيقه: ما الذي قدّمناه في كل منها.",
+    "facts": "case studies (anonymous)"
+  },
+  "m:workIndex.emptyBody": { "rule": "Owner rule 1 (AR); EN keep", "ar": "لا ننشر إلا عملًا نملك حقائقه، لذلك تكبر هذه الصفحة مشروعًا بعد مشروع. أزيلوا أحد عوامل التصفية، أو تعرّفوا على ما نقدّمه في هذا المجال." },
+  "m:workIndex.showAll": { "rule": "Owner rule 2 (button)", "ar": "عرض كل الأعمال" },
+  "m:workIndex.exploreServices": { "rule": "Owner rule 2 (button)", "ar": "استعراض خدماتنا" },
+  "new:workIndex.closing.title": {
+    "page": "work",
+    "rule": "N16 (approved, copy §7.1): reuses `workCase.ctaTitle`, below",
+    "en": "(= workCase.ctaTitle)",
+    "ar": "(= workCase.ctaTitle)"
+  },
+  "new:workIndex.closing.body": {
+    "page": "work",
+    "rule": "N16 (approved) EN; AR by owner rule 1",
+    "en": "Tell us the date and what you need. One team replies within one working day.",
+    "ar": "أخبرونا بالموعد وما تحتاجون إليه، ويرد عليكم فريق واحد خلال يوم عمل.",
+    "facts": "⚑ FC#23"
+  },
+  "m:workCase.ctaTitle": { "rule": "N16 (approved) EN; AR by owner rule 1 (was «تخطّط»): confirm", "ar": "تخطّطون لمشروع كهذا؟" },
+  "m:workCase.ctaBody": { "rule": "Owner rule 1 (AR); EN keep", "ar": "ابدؤوا بالخدمات التي قام عليها هذا المشروع. في كل صفحة ما نقدّمه، وطريقة التواصل معنا." },
+  "m:workCase.ctaQuote": { "rule": "Owner rule 2 (button)", "ar": "طلب عرض سعر" },
+  "m:workCase.ctaCategory": { "rule": "Owner rule 2 (button)", "ar": "استعراض {category}" },
+  "c:work:workItems[sports-federation-digital-partner].anonymous.summary": { "rule": "keep", "facts": "⚑ FC#4 + the figures: the client agrees to their publication" },
+  "c:work:workItems[sports-federation-digital-partner].story.result.scope": { "rule": "keep: the honest scope line the figures need", "facts": "⚑ FC#4" },
+  "c:work:workItems[airline-exhibition-pavilion].named.summary": { "rule": "keep (shows only with the client's written approval)", "facts": "⚑ FC#4" },
+  "c:work:workItems[football-league-events-awards].named.summary": { "rule": "keep (shows only with the client's written approval)", "facts": "⚑ FC#4" }
+}

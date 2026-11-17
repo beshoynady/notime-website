@@ -1,0 +1,41 @@
+{
+  "c:categories:categories[production-print-gifts].summary": { "rule": "N18 rule (AR: «و» joined to the Latin word)", "ar": "أجنحة وطباعة وتغليف وهدايا، بلمسات نهائية من الرقائق المعدنية وUV والكبس والحفر بالليزر." },
+  "c:categories:categories[production-print-gifts].intro": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "أجنحة ولافتات، وطباعة تجارية وكبيرة الحجم، وتغليف، وهدايا للشركات، ومنتجات تحمل هوية علامتكم وتلتزم بمعاييرها. نصمّم ونصنّع ونركّب، ونختار لكل هدية طريقة الطباعة أو الحفر التي تليق بها."
+  },
+  "c:categories:categories[production-print-gifts].faq[1].a": { "rule": "keep", "facts": "⚑ FC#15 (in-house or with a partner)" },
+  "c:categories:categories[production-print-gifts].faq[2].q": { "rule": "Owner rule 1 (AR)", "ar": "هل يمكننا طلب المطبوعات عبر الإنترنت؟" },
+  "c:categories:categories[production-print-gifts].faq[2].a": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "نعم. أخبرونا بالمنتج والكمية وأرسلوا التصميم، ونؤكّد معكم التفاصيل والنسخة التجريبية قبل التنفيذ.",
+    "facts": "⚑ R6: ordering is by request today; \"online\" holds only if the print store is live at launch (Rand)"
+  },
+  "c:categories:categories[production-print-gifts].faq[4].a": { "rule": "Owner rule 1 (AR)", "ar": "يعتمد ذلك على المنتج وطريقة الطباعة أو الحفر. أخبرونا بما تحتاجون إليه، ونقترح عليكم الكميات المناسبة." },
+  "c:categories:categories[production-print-gifts].faq[5].a": { "rule": "Owner rule 1 (AR)", "ar": "يعتمد ذلك على المنتج والكمية والتشطيب. شاركونا الموعد المطلوب، ونؤكّد لكم ما يمكن تنفيذه." },
+  "c:categories:categories[production-print-gifts].faq[6].a": { "rule": "Owner rule 1 (AR)", "ar": "أخبرونا إلى أين يجب أن يصل طلبكم، ونؤكّد لكم التوصيل مع العرض.", "facts": "⚑ FC#16 (where, and whether delivery is in the price)" },
+  "c:categories:categories[production-print-gifts].faq[7].q": { "rule": "Owner rule 1 (AR)", "ar": "ماذا تحتاجون منّا للبدء؟" },
+  "c:categories:categories[production-print-gifts].faq[7].a": { "rule": "Owner rule 1 (AR)", "ar": "المنتج والكمية والمقاسات والموعد المطلوب، وملفات التصميم أو الشعار، ونعود إليكم بخيارات وعرض." },
+  "c:categories:categories[production-print-gifts].closing": { "rule": "Owner rule 1 (AR)", "ar": "ماذا نصنع لكم؟" },
+  "c:services:services[stand-fabrication-signage].summary": { "rule": "keep", "facts": "⚑ FC#15 (fabrication in-house?), FC#17 (wayfinding signage)" },
+  "c:services:services[packaging-design].points[2]": { "rule": "keep", "facts": "⚑ FC#17 (structure and dielines)" },
+  "c:services:services[corporate-gifts].summary": { "rule": "Owner rule 1 (AR)", "ar": "هدايا نختارها ونضع عليها هويتكم ونوصلها إلى عملائكم وفريقكم.", "facts": "⚑ FC#16 (delivery)" },
+  "c:services:services[online-print-store].summary": { "rule": "Owner rule 1 (AR)", "ar": "اطلبوا مطبوعاتكم المعتمدة عبر الإنترنت، بهوية ثابتة في كل مرة.", "facts": "⚑ R6 (the online print store is live at launch)" },
+  "c:services:services[online-print-store].points[0]": { "rule": "Owner rule 1 (AR)", "ar": "اختاروا المنتج والكمية" },
+  "c:services:services[online-print-store].points[1]": { "rule": "Owner rule 1 (AR)", "ar": "أرسلوا التصميم، أو اطلبوا إعادة الطباعة" },
+  "c:services:services[online-print-store].points[2]": { "rule": "Owner rule 1 (AR)", "ar": "اعتمدوا النسخة التجريبية قبل التنفيذ" },
+  "c:services:services[online-print-store].points[3]": { "rule": "Owner rule 1 (AR)", "ar": "طباعة بمعايير علامتكم" },
+  "c:service-hooks:SERVICE_HOOKS.packaging-design": { "rule": "Owner rule 1 (AR); EN keep", "ar": "العلبة أول ما يفتحه ضيوفكم، فنصمّمها لتحمل إحساس العلامة." },
+  "c:service-hooks:SERVICE_HOOKS.online-print-store": {
+    "rule": "Choice 2 (\"brief\"); owner rule 1",
+    "en": "Reorder approved print without starting from scratch.",
+    "ar": "أعيدوا طلب مطبوعاتكم المعتمدة دون أن تبدؤوا من جديد."
+  },
+  "c:modules/human-scale:HUMAN_SCALE_COPY.choose": { "rule": "Owner rule 2 (a control's label)", "ar": "اختيار المقاس" },
+  "c:modules/print-order:ORDER_STEPS[item].line": { "rule": "Owner rule 1 (AR)", "ar": "بطاقات عمل أو ورق مراسلات أو بروشورات أو لافتات رول أب: أخبرونا بما تحتاجون إليه وبالكمية." },
+  "c:modules/print-order:ORDER_STEPS[artwork].line": { "rule": "Owner rule 1 (AR)", "ar": "أرسلوا ملفات جاهزة للطباعة، أو اطلبوا إعادة طباعة قطعة طبعتموها معنا من قبل." },
+  "c:modules/print-order:ORDER_STEPS[proof].line": { "rule": "Owner rule 1 (AR)", "ar": "تصلكم نسخة تجريبية أولًا، ولا يُطبع شيء قبل أن تعتمدوها." },
+  "c:modules/print-order:ORDER_STEPS[print].title": { "rule": "Owner rule 1 (AR)", "ar": "بمعايير علامتكم" },
+  "c:modules/print-order:ORDER_STEPS[print].line": { "rule": "Owner rule 1 (AR)", "ar": "طباعة تطابق هوية علامتكم والنسخة التي اعتمدتموها." },
+  "c:modules/print-order:PRINT_ORDER_COPY.cta": { "rule": "Owner rule 2 (button)", "ar": "طلب المطبوعات عبر الإنترنت", "facts": "⚑ R6 (the online print store is live at launch)" }
+}

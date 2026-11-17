@@ -2,6 +2,17 @@
 
 Read `CLAUDE.md`, `AGENTS.md` and `PRODUCT.md` first. Decisions: `docs/DECISIONS.md` (latest D117). Judgment calls: `docs/review/decisions-to-confirm.md` (#1–#36 all answered).
 
+## Latest (2026-11-17, end of session): two pieces of work waiting on the user
+
+Branch `phase-2-services`.
+
+| Work | State | Next action |
+|---|---|---|
+| **Audit fixes** (N03–N22 as chosen) | Design approved (`docs/superpowers/specs/2026-11-17-audit-fixes-design.md`). Plan written: `docs/superpowers/plans/2026-11-17-audit-fixes.md`, 16 tasks; branches `audit-fixes`, `audit-n06`, `audit-n17` | **Waiting for the user to confirm the plan.** Then subagent-driven, TDD, one agent at a time (D93) |
+| **Copy rewrite** (the user's task: docs first) | Voice and samples approved, with owner rules 1–8. **Full table done:** `docs/review/copy-rewrite.md`, generated from the code by `scripts/copy-inventory.mjs` (1,470 strings, 430 proposals, 77 ⚑). The proposals are in `docs/review/copy-rewrite/*.json`, the head in `_head.md`. Rule 8 scan: 0 banned words, 0 banned shapes, 0 unmarked promises | **Waiting:** the user reviews everything (decisions D-C1–D-C8 in the doc's head), Rand reviews the Arabic and the ⚑ lines (FC rows + new R1–R9). **No `src/` change until then.** Apply on a separate branch after `audit-fixes` is merged: from the JSONs, with tests and EN/AR screenshots |
+
+Rebuild the table after editing a JSON: `node --no-warnings --import ./scripts/lib/alias.mjs scripts/copy-inventory.mjs --render docs/review/copy-rewrite docs/review/copy-rewrite.md --head=docs/review/copy-rewrite/_head.md` (it warns about proposal IDs that no longer exist).
+
 ## The user's message (2026-11-17, authoritative)
 
 #30 #32 #33 approved (Rand reads the Arabic). #31 approved if every story has a static reduced-motion version and doesn't stutter at 4× CPU. #34 `/links` waits for the WhatsApp number; no Instagram row; the WhatsApp row turns on from `contact.ts`. #35 approved + the WhatsApp message names the source (floating button and `/links`). #36 v1.1, except `/links`: no scroll animation, minimal JS, 90+ on phones before launch. Requests: (1) Lighthouse before/after on the same machine, a complete table; (2) does the Events EN layout really move on a slow device (fix the page, not the test); (3) the reviewer's notes moved to v1.1 with their grades; (4) why 369 local tests vs 379 in CI.

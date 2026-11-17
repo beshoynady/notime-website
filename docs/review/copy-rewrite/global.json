@@ -1,0 +1,56 @@
+{
+  "m:meta.description": {
+    "rule": "§4: a list of four, then \"one team\" (choice 1); 170 chars, cut in results. Owner: \"the region\", not \"the Gulf\" (the markets reach Egypt)",
+    "en": "Events, films, campaigns and websites, planned in Dubai and delivered across the region. Tell us the date and what you need.",
+    "ar": "فعاليات وأفلام وحملات ومواقع، نخطّط لها من دبي وننفّذها في المنطقة. أخبرونا بالموعد وما تحتاجون إليه.",
+    "facts": "p3 (Dubai, markets). ⚑ FC#1 (six markets)"
+  },
+  "new:meta.homeTitle": {
+    "page": "global",
+    "rule": "SEO: the home title names no service. A new key: `meta.title` is also the template every other title ends with, so it stays",
+    "en": "NO TIME Creative House · Events and marketing in Dubai",
+    "ar": "NO TIME Creative House · فعاليات وتسويق في دبي",
+    "facts": "p1, p3"
+  },
+  "m:brand.homeLabel": {
+    "rule": "§3 em-dash aside (it's read aloud as \"dash\")",
+    "en": "NO TIME Creative House, home",
+    "ar": "NO TIME Creative House، الصفحة الرئيسية"
+  },
+  "m:common.skipToContent": { "rule": "Owner rule 2: controls in the neutral verbal noun", "ar": "الانتقال إلى المحتوى" },
+  "m:common.comingSoon": {
+    "rule": "Fixed principle: no \"coming soon\" control. Check where it renders at apply time; delete the key if nothing public uses it",
+    "en": "(delete if unused)",
+    "ar": "(delete if unused)"
+  },
+  "m:nav.contact": { "rule": "Owner rule 1: plural address", "ar": "تواصلوا معنا" },
+  "m:header.quote": {
+    "rule": "Owner rule 2: buttons in the neutral verbal noun. Changes the approved N04/N12 Arabic label: confirm",
+    "ar": "طلب عرض سعر"
+  },
+  "m:megaMenu.intro": {
+    "rule": "Choice 1: \"one team\" in the menu is on every page. Say what the visitor can do instead",
+    "en": "Book one service, or hand us the whole event.",
+    "ar": "اطلبوا خدمة واحدة، أو اتركوا لنا المناسبة كلها."
+  },
+  "m:megaMenu.viewCategory": {
+    "rule": "§4 CTA: \"view category\" names our structure, not what they get; owner rule 2 (AR)",
+    "en": "See the services",
+    "ar": "استعراض الخدمات"
+  },
+  "m:megaMenu.inDevelopment": {
+    "rule": "Fixed principle: no \"in development\" label in public. Check at apply time; delete if no public category uses it",
+    "en": "(delete if unused)",
+    "ar": "(delete if unused)"
+  },
+  "m:mobileMenu.open": { "rule": "Owner rule 2 (a control's name)", "ar": "فتح القائمة" },
+  "m:mobileMenu.close": { "rule": "Owner rule 2", "ar": "إغلاق القائمة" },
+  "m:whatsapp.label": { "rule": "Owner rule 2 (the floating button's name)", "ar": "المراسلة على واتساب" },
+  "m:footer.columns.contact": { "rule": "Owner rule 1", "ar": "تواصلوا معنا" },
+  "m:footer.columns.follow": { "rule": "Owner rule 1", "ar": "تابعونا" },
+  "m:notFound.body": {
+    "rule": "Owner rule 1 (AR plural); EN keep",
+    "ar": "ربما تغيّر الرابط، أو في العنوان خطأ. ابدؤوا من خدماتنا، أو عودوا إلى الرئيسية."
+  },
+  "m:notFound.services": { "rule": "Owner rule 2 (button): «تصفّح» reads as a singular command; a verbal noun that can't", "ar": "استعراض خدماتنا" }
+}

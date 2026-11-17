@@ -1,0 +1,25 @@
+{
+  "m:category.quoteCta": { "rule": "Owner rule 2 (button)", "ar": "طلب عرض سعر" },
+  "m:category.quoteCtaFor": { "rule": "Owner rule 2 (button)", "ar": "طلب عرض سعر لخدمة {service}" },
+  "m:category.quote.eyebrow": { "rule": "Owner rule 2 (the same words as the button)", "ar": "طلب عرض سعر" },
+  "m:category.quote.body": {
+    "rule": "Choice 1: on a category page this was the 4th \"one team\"; owner rule 1",
+    "en": "Tell us the date, the place and what you need. We'll reply within one working day.",
+    "ar": "أخبرونا بالموعد والمكان وما تحتاجون إليه، ونرد عليكم خلال يوم عمل.",
+    "facts": "⚑ FC#23 (one working day, site-wide)"
+  },
+  "m:category.quote.whatsapp": { "rule": "Owner rule 2 (button)", "ar": "المراسلة على واتساب" },
+  "m:category.quote.email": { "rule": "Owner rule 2 (button)", "ar": "المراسلة بالبريد الإلكتروني" },
+  "m:category.quote.contactPending": {
+    "rule": "Fixed principle (no \"soon\"): the email is set, so this shouldn't render. Delete if no path shows it",
+    "en": "(delete if unused)",
+    "ar": "(delete if unused)"
+  },
+  "m:category.quote.brief": { "rule": "Choice 2 (\"brief\"); owner rule 2", "en": "Send a request", "ar": "إرسال الطلب" },
+  "m:category.modulePending": {
+    "rule": "Fixed principle: no \"in design\" label in public. Delete if every public module is built",
+    "en": "(delete if unused)",
+    "ar": "(delete if unused)"
+  },
+  "m:category.skip": { "rule": "N06 (approved): \"Go to the services\"; AR by owner rule 2", "en": "Go to the services", "ar": "الانتقال إلى الخدمات" }
+}

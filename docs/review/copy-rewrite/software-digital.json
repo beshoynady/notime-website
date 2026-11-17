@@ -1,0 +1,87 @@
+{
+  "c:categories:categories[software-digital].summary": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "مواقع وتطبيقات وأنظمة تُبنى على مقاسكم، وتبقى تعمل طويلًا بعد الإطلاق."
+  },
+  "c:categories:categories[software-digital].intro": {
+    "rule": "§3 banned: \"end to end\"",
+    "en": "Websites, mobile apps, custom systems and online stores, designed and built in Arabic and English. We take each one from UX and design systems to development, content management and analytics, and build it to load fast.",
+    "ar": "مواقع إلكترونية وتطبيقات جوّال وأنظمة مخصّصة ومتاجر إلكترونية، نصمّمها ونبنيها بالعربية والإنجليزية. نتولّى كلًّا منها من تجربة المستخدم وأنظمة التصميم إلى البرمجة وإدارة المحتوى والتحليلات، ونبنيها لتعمل بسرعة."
+  },
+  "c:categories:categories[software-digital].faq[0].a": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "يعتمد ذلك على حجم المشروع. بعد مكالمة التعارف نرسل لكم خطة بالمراحل والمواعيد الخاصة بمشروعكم، وترون التقدّم في كل مرحلة.",
+    "facts": "⚑ FC#24"
+  },
+  "c:categories:categories[software-digital].faq[1].a": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "تعتمد على حجم المشروع، لذلك لا ننشر أسعارًا. بعد مكالمة التعارف نرسل لكم عرضًا بالنطاق والمراحل والتكلفة، ولا يبدأ العمل إلا بعد موافقتكم."
+  },
+  "c:categories:categories[software-digital].faq[3].a": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "نعم. نجهّز نظامًا لإدارة المحتوى باللغتين، ونعرّف فريقكم على استخدامه عند التسليم."
+  },
+  "c:categories:categories[software-digital].faq[4].a": {
+    "rule": "keep",
+    "facts": "⚑ FC#24"
+  },
+  "c:categories:categories[software-digital].faq[6].q": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "ماذا تحتاجون منّا للبدء؟"
+  },
+  "c:categories:categories[software-digital].faq[6].a": {
+    "rule": "N13 (approved): \"Request a free intro call\", no \"30-min\"; owner rule 1",
+    "en": "A few lines on what you want to build and who it's for. Request a free intro call, and we'll take it from there.",
+    "ar": "بضعة أسطر عمّا تريدون بناءه ولمن. اطلبوا مكالمة تعارف مجانية، ونتابع معكم الخطوات التالية.",
+    "facts": "⚑ R1 (the intro call is free, 30 minutes)"
+  },
+  "c:categories:categories[software-digital].closing": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "فكرتكم هي السطر التالي."
+  },
+  "c:services:services[websites].points[1]": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "نظام لإدارة المحتوى يديره فريقكم"
+  },
+  "c:services:services[mobile-apps].summary": {
+    "rule": "N18 rule (AR)",
+    "ar": "تطبيقات iOS وAndroid مصمّمة وفق طريقة استخدام الناس لها."
+  },
+  "c:services:services[mobile-apps].points[0]": {
+    "rule": "N18 rule (AR)",
+    "ar": "iOS وAndroid"
+  },
+  "c:services:services[mobile-apps].points[1]": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "مرتبط بموقعكم الإلكتروني"
+  },
+  "c:services:services[custom-systems].summary": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "أدوات وأنظمة داخلية نبنيها وفق طريقة عمل فريقكم."
+  },
+  "c:services:services[custom-systems].points[1]": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "أدوار وصلاحيات لفريقكم"
+  },
+  "c:services:services[custom-systems].points[2]": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "الربط بأدواتكم وأنظمتكم"
+  },
+  "c:services:services[e-commerce].points[1]": {
+    "rule": "keep",
+    "facts": "⚑ FC#20 (which payment gateways)"
+  },
+  "c:services:services[ai-consulting].summary": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "أين يفيد الذكاء الاصطناعي عملكم، وأين لا يفيد، وكيف تبدؤون.",
+    "facts": "⚑ FC#20 (what the consulting covers)"
+  },
+  "c:services:services[ai-consulting].points[0]": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "مراجعة لمواضع فائدة الذكاء الاصطناعي في عملكم"
+  },
+  "c:services:services[ai-consulting].points[2]": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "تهيئة فريقكم للبدء"
+  }
+}

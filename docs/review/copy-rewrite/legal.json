@@ -1,0 +1,223 @@
+{
+  "m:legal.description.privacy": {
+    "rule": "Owner rule 1 (AR; the search snippet of the page); EN keep",
+    "ar": "البيانات الشخصية التي يجمعها NO TIME Creative House عبر هذا الموقع، وسبب جمعها، ومن يعالجها، وحقوقكم."
+  },
+  "m:legal.description.terms": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "الشروط التي تسري عند استخدامكم موقع NO TIME Creative House."
+  },
+  "m:legal.description.cookies": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "ملفات تعريف الارتباط وأدوات التخزين المشابهة التي يستخدمها هذا الموقع، وخياراتكم."
+  },
+  "c:legal:legalDocs[privacy].sections[3].heading": {
+    "rule": "Owner rule 1 (a heading in the page's contents list)",
+    "ar": "لماذا نستخدم بياناتكم"
+  },
+  "c:legal:legalDocs[privacy].sections[4].heading": {
+    "rule": "Owner rule 1 (a heading in the page's contents list)",
+    "ar": "من يعالج بياناتكم نيابةً عنّا"
+  },
+  "c:legal:legalDocs[privacy].sections[7].heading": {
+    "rule": "Owner rule 1 (a heading in the page's contents list)",
+    "ar": "حقوقكم"
+  },
+  "c:legal:legalDocs[cookies].sections[2].heading": {
+    "rule": "Owner rule 1 (a heading in the page's contents list)",
+    "ar": "خياراتكم"
+  },
+  "c:legal:legalDocs[privacy].sections[6].blocks[0].p": {
+    "rule": "Owner rule 1: plural at apply, no change of wording. Keep the commitment: the company must be able to keep it",
+    "ar": "(plural at apply; legal review)",
+    "facts": "⚑ FC#22 (legal review): deletion within 12 months of the last contact"
+  },
+  "c:legal:legalDocs[terms].sections[8].blocks[0].p": {
+    "rule": "keep: {courts} is filled by the legal reviewer",
+    "facts": "⚑ FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[terms].sections[8].blocks[1].p": {
+    "rule": "keep: {prevailingLanguage} is filled by the legal reviewer",
+    "facts": "⚑ FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[privacy].sections[0].blocks[2].p": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[privacy].sections[2].blocks[0].p": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[privacy].sections[2].blocks[1].p": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[privacy].sections[2].blocks[2].p": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[privacy].sections[2].blocks[3].p": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[privacy].sections[2].blocks[4].p": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[privacy].sections[2].blocks[5].p": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[privacy].sections[3].blocks[0].list[0].text": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[privacy].sections[3].blocks[1].p": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[privacy].sections[4].blocks[1].list[3].text": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[privacy].sections[4].blocks[1].list[4].text": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[privacy].sections[7].blocks[1].list[0].text": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[privacy].sections[7].blocks[1].list[2].text": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[privacy].sections[7].blocks[1].list[3].text": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[privacy].sections[7].blocks[1].list[4].text": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[privacy].sections[7].blocks[2].p": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[privacy].sections[7].blocks[3].p": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[privacy].sections[8].blocks[0].p": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[terms].sections[0].blocks[0].p": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[terms].sections[1].blocks[0].p": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[terms].sections[3].blocks[0].p": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[terms].sections[4].blocks[0].p": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[terms].sections[5].blocks[0].p": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[terms].sections[6].blocks[0].p": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[cookies].sections[0].blocks[0].p": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[cookies].sections[1].blocks[1].p": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[cookies].sections[1].blocks[2].table.rows[0][2]": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[cookies].sections[1].blocks[2].table.rows[0][3]": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[cookies].sections[1].blocks[2].table.rows[1][2]": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[cookies].sections[1].blocks[2].table.rows[1][3]": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[cookies].sections[1].blocks[2].table.rows[2][2]": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[cookies].sections[1].blocks[2].table.rows[2][3]": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[cookies].sections[1].blocks[3].p": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[cookies].sections[2].blocks[0].p": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[cookies].sections[2].blocks[1].p": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  },
+  "c:legal:legalDocs[cookies].sections[3].blocks[0].p": {
+    "rule": "Owner rule 1: the address moves to the plural at apply time, with no change of wording; the legal reviewer reads the result",
+    "ar": "(plural at apply; legal review)",
+    "facts": "FC#22 (legal review)"
+  }
+}

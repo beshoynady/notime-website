@@ -1,0 +1,97 @@
+{
+  "new:c:categories:categories[events-hospitality].metaTitle": {
+    "page": "events-hospitality",
+    "rule": "SEO: people search \"event management Dubai\" / «تنظيم فعاليات دبي». A new field: the card title and the H1 stay",
+    "en": "Events & hospitality in Dubai",
+    "ar": "تنظيم الفعاليات والضيافة في دبي",
+    "facts": "p3"
+  },
+  "new:c:categories:categories[events-hospitality].metaDescription": {
+    "page": "events-hospitality",
+    "rule": "SEO: the card summary (95 chars, no place) is also the meta today. A new field; the card keeps its line",
+    "en": "Conferences, stands, launches, weddings and majlis hospitality, planned in Dubai and run on the day by the same team, until the last guest leaves.",
+    "ar": "مؤتمرات وأجنحة معارض وحفلات إطلاق وأعراس ومجالس ضيافة، نخطّط لها من دبي ويديرها الفريق نفسه يوم الحدث حتى يغادر آخر ضيف.",
+    "facts": "p4–p11, p31"
+  },
+  "m:scenes.events.s1": { "rule": "AR: «الحكاية» is the \"stories\" cliché (§1)", "ar": "تبدأ كل مناسبة بقاعة فارغة." },
+  "m:scenes.events.s4": {
+    "rule": "§3 \"every detail\" is abstract; after N06 this line leads the hero, so it should show the room",
+    "en": "The room is ready before the first guest walks in.",
+    "ar": "القاعة جاهزة قبل أن يدخل أول ضيف.",
+    "facts": "p4"
+  },
+  "c:categories:categories[events-hospitality].intro": {
+    "rule": "§4: one 33-word sentence, the list at the end. What, then who does what",
+    "en": "Conferences, stands, launches, galas and heritage welcomes. One team draws the concept, dresses the room, runs the stage and looks after your guests on the day.",
+    "ar": "مؤتمرات وأجنحة وحفلات إطلاق وحفلات رسمية واستقبال تراثي. فريق واحد يضع الفكرة، ويجهّز القاعة، ويدير المسرح، ويهتمّ بضيوفكم يوم الحدث.",
+    "facts": "p4 \"concept · décor · production · guest experience\""
+  },
+  "c:categories:categories[events-hospitality].closing": { "rule": "Owner rule 1 (AR); EN keep", "ar": "أخبرونا بالموعد، ونجهّز لكم القاعة." },
+  "c:categories:categories[events-hospitality].faq[3].a": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "مقرّنا في دبي، ونعمل في ستة أسواق: الإمارات والسعودية وقطر وعُمان والكويت ومصر. ولأي مكان آخر، اسألونا.",
+    "facts": "⚑ FC#1"
+  },
+  "c:categories:categories[events-hospitality].faq[4].a": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "من اللقاءات العائلية الخاصة إلى ليالي الجوائز والفعاليات الكبرى للشركات والجهات الحكومية. أخبرونا بعدد ضيوفكم، ونخطّط على أساسه.",
+    "facts": "⚑ FC#5"
+  },
+  "c:categories:categories[events-hospitality].faq[5].q": { "rule": "Owner rule 1 (AR)", "ar": "متى ينبغي أن نحجز؟" },
+  "c:categories:categories[events-hospitality].faq[5].a": {
+    "rule": "A real lead time is the specific the guide asks for; until Rand gives one, today's line (AR plural)",
+    "en": "(keep) → with Rand's numbers: \"For a wedding, [placeholder: weeks] ahead is comfortable; for a conference, [placeholder: months]. Share your date and we'll tell you honestly.\"",
+    "ar": "يتوقّف ذلك على حجم المناسبة. أرسلوا لنا الموعد، ونؤكّد لكم إن كان متاحًا.",
+    "facts": "⚑ FC#6: placeholders never ship"
+  },
+  "c:categories:categories[events-hospitality].faq[7].q": { "rule": "Owner rule 1 (AR)", "ar": "ماذا تحتاجون منّا للبدء؟" },
+  "c:categories:categories[events-hospitality].faq[7].a": {
+    "rule": "Owner rule 1 (AR); EN keep. A promise (a concept with the proposal)",
+    "ar": "أخبرونا بالموعد ونوع المناسبة والمدينة والعدد التقريبي للضيوف، ونعود إليكم بتصوّر وعرض.",
+    "facts": "⚑ R3 (a concept comes with every proposal)"
+  },
+  "c:service-hooks:SERVICE_HOOKS.galas-private-celebrations": {
+    "rule": "§3: \"an evening guests remember\" is \"unforgettable\" in other words. Owner: the keepsake is offered, not promised",
+    "en": "We choose the theme, dress the tables, set the flowers and, if you'd like, prepare a keepsake for every guest.",
+    "ar": "نختار طابع الأمسية، ونجهّز الطاولات والزهور، ونعدّ تذكارًا تودّعون به ضيوفكم إن أردتم.",
+    "facts": "p9–p11 (theming, décor, florals, keepsakes)"
+  },
+  "c:service-hooks:SERVICE_HOOKS.catering-heritage-hospitality": { "rule": "Owner rule 1 (AR); EN keep", "ar": "قهوة تُصبّ كما يعرفها ضيوفكم، في مجلس جاهز قبل وصولهم." },
+  "c:photo-stories:PRIVATE_STACK.lead": {
+    "rule": "§3: a question answered by the next line; owner rule 1",
+    "en": "Weddings, engagements, family evenings. Tell us the date and the guest count, and we'll carry it from the first sketch to the last candle.",
+    "ar": "أعراس وخطوبات وأمسيات عائلية. أخبرونا بالموعد وعدد الضيوف، ونتولّى كل شيء من أول تصوّر حتى آخر شمعة.",
+    "facts": "p11 (full on-day production)"
+  },
+  "c:photo-stories:PRIVATE_STACK.cta": { "rule": "Owner rule 2 (button)", "ar": "تخطيط مناسبتكم معنا" },
+  "c:photo-stories:PRIVATE_STACK.whatsapp": { "rule": "Owner rule 2 (button)", "ar": "المراسلة على واتساب" },
+  "c:photo-stories:PRIVATE_STACK.cards[0].caption": { "rule": "Owner rule 1", "ar": "طاولتكم، بألوانكم" },
+  "c:photo-stories:PRIVATE_STACK.cards[1].caption": { "rule": "§3 (\"to remember\" = unforgettable)", "en": "The welcome at the door", "ar": "الاستقبال عند المدخل" },
+  "c:photo-stories:PRIVATE_STACK.cards[3].caption": { "rule": "Owner: a keepsake for every guest reads as a promise", "en": "Keepsakes for the guests", "ar": "تذكارات للضيوف" },
+  "c:photo-stories:ROOM_STORY.title": {
+    "rule": "Choice 1: the intro on this page already says it",
+    "en": "How a room comes together.",
+    "ar": "هكذا تكتمل القاعة."
+  },
+  "c:modules/candle-moodboard:MOODBOARD.title": { "rule": "Owner rule 2 (an interactive control's title)", "ar": "اختيار الأجواء" },
+  "c:modules/candle-moodboard:MOODBOARD.moods[wedding].line": {
+    "rule": "§3 (\"an entrance guests remember\")",
+    "en": "White florals, candlelight and an entrance dressed in roses.",
+    "ar": "زهور بيضاء وضوء شموع، ومدخل تزيّنه الورود."
+  },
+  "c:modules/launch-reveal:LAUNCH_REVEAL.note": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "ابدؤوا الكشف، ثم بدّلوا المكان. كل صيغة تقود إلى الثواني الخمس نفسها."
+  },
+  "c:modules/launch-reveal:LAUNCH_REVEAL.start": { "rule": "Owner rule 2", "ar": "بدء الكشف" },
+  "c:modules/launch-reveal:LAUNCH_REVEAL.skip": { "rule": "Owner rule 2", "ar": "تخطّي العدّ التنازلي" },
+  "c:modules/launch-reveal:LAUNCH_REVEAL.reset": { "rule": "Owner rule 2", "ar": "إسدال الستارة" },
+  "c:modules/launch-reveal:LAUNCH_REVEAL.productLabel": { "rule": "Owner rule 1", "ar": "منتجكم" },
+  "c:modules/stage-lights:STAGE_LIGHTS.title": { "rule": "Owner rule 2", "ar": "إضاءة المسرح" },
+  "c:modules/stage-lights:STAGE_LIGHTS.note": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "منظومة إضاءة نموذجية من أربع مجموعات. تحكّموا في كل مجموعة بأنفسكم، أو شغّلوا الإشارات كما يفعل الفريق ليلة الحدث."
+  },
+  "c:modules/stage-lights:STAGE_LIGHTS.run": { "rule": "Owner rule 2", "ar": "تشغيل الإشارات" },
+  "c:modules/stage-lights:STAGE_LIGHTS.stop": { "rule": "Owner rule 2", "ar": "إيقاف الإشارات" }
+}
