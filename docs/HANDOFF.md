@@ -1,6 +1,6 @@
 # Session handoff: the user's decisions on #30–#36 and requests 1–4 (2026-11-17)
 
-Read `CLAUDE.md`, `AGENTS.md` and `PRODUCT.md` first. Decisions: `docs/DECISIONS.md` (latest D115). Judgment calls: `docs/review/decisions-to-confirm.md` (#1–#36 all answered).
+Read `CLAUDE.md`, `AGENTS.md` and `PRODUCT.md` first. Decisions: `docs/DECISIONS.md` (latest D117). Judgment calls: `docs/review/decisions-to-confirm.md` (#1–#36 all answered).
 
 ## The user's message (2026-11-17, authoritative)
 
@@ -8,14 +8,19 @@ Read `CLAUDE.md`, `AGENTS.md` and `PRODUCT.md` first. Decisions: `docs/DECISIONS
 
 | Item | State |
 |---|---|
-| #31 static versions + 4× CPU | **Done.** `e2e/photo-stories-reduced.spec.ts` (10 pass). `scripts/scroll-jank.mjs`; table in `docs/checkpoints/frames/scroll-4x.md`. Found and fixed the one real stutter: the tone turn tweened an inherited variable (D115, eedb8e3). |
-| #34 #35 #36 `/links` | **Done** (54b7fa5): plain HTML route, 99–100; WhatsApp row from `contact.ts` with the source message; no Instagram row (D113, D114). `utm_source=meta` names no channel (eedb8e3). |
-| Request 2 (Events EN moves) | **Done** (54b7fa5, D112): yes, up to 278 px at 8× CPU; fixed in CSS (pin reservations' floor); strict test restored + an 8× CPU test. |
-| Request 1 (Lighthouse A/B) | **Running/next:** worktrees `../nt-lh-before` (1852177, port 3010) and `../nt-lh-links` (691c033, React `/links`, port 3020), both with a local `turbopack.root: "E:/NO Time"` edit (never commit; delete the worktrees after). `node scripts/lighthouse-ab.mjs http://localhost:3010 http://localhost:3000 docs/checkpoints/lighthouse/ab-2026-11-17/rows.json --runs=3 --links-before=http://localhost:3020`. |
-| Request 3 (reviewer notes) / 4 (369 vs 379) | Answers ready (v1.1 "From the final-pass code review"; the 10 lab tests need `NEXT_PUBLIC_ENABLE_LAB=1`, now set for local builds). |
-| Then | Check decision #20 (deep-link flicker) on the build; full e2e (`NEXT_PUBLIC_ENABLE_LAB=1` build); push; `gh workflow run CI --ref phase-2-services`; review build on 3100 + tunnel; the Arabic report. |
+| #31 static versions + 4× CPU | **Done.** `e2e/photo-stories-reduced.spec.ts`; `docs/checkpoints/frames/scroll-4x.md`; the tone stutter fixed (D115), look unchanged (`docs/checkpoints/frames/tone-fix/`). |
+| #34 #35 #36 `/links` | **Done** (D113, D114): measured alone 95–100 EN, 97–99 AR (5 runs each). |
+| Request 1 (Lighthouse A/B) | **Done:** `docs/checkpoints/lighthouse/ab-2026-11-17/` (performance flat 50–63 → 51–62; D111 corrected). Worktrees removed. |
+| Request 2 (Events EN) | **Done** (D112); D112's floor stretched two pins (Software's title 1086 px down, an empty screen before the home process): fixed in D117, test tightened. #20 deep-link flicker verified gone. |
+| Requests 3, 4 | **Done:** v1.1 "From the final-pass code review" (graded table); 369 vs 379 = the 10 lab tests (`NEXT_PUBLIC_ENABLE_LAB=1`). |
+| Accessibility (D116) | Chip fieldsets are radiogroups; Software's off phase chips 5.7:1. |
+| UX audit (the user's brief, `docs/review/ux-audit-brief.md`) | **Done by a fresh agent:** `docs/review/ux-audit.md`, `benchmark.md`, `copy-proposals.md`, `shots/`. Score 6.6/10. Top-10 #1 and #6 were D117 (fixed). #2 is the fail-closed Turnstile without real keys (by design). **The user chooses the rest; implement nothing from it until they do.** |
+| e2e (prod build, `NEXT_PUBLIC_ENABLE_LAB=1` + the Turnstile test site key, as CI) | 406 passed, 0 failed, 158 skipped; 1 flaky on a re-run of the form specs (clean on the second). A build without `NEXT_PUBLIC_TURNSTILE_SITE_KEY` fails the form specs by design. |
+| CI | Full run 44117716681 (workflow_dispatch) on db71ccc+docs. |
 
-Review server: `npm run review:build`, `npm run review:start -- 3100`; tunnel https://arrival-kingdom-justify-plastics.trycloudflare.com (if cloudflared restarts, update `docs/review/tunnel.md`).
+Servers: prod on 3000 (CI-equivalent build); review build on 3100 behind the tunnel https://commerce-tension-petersburg-rom.trycloudflare.com/ar (cloudflared from WinGet's package folder; restarting the review server keeps the link). Playwright's default port is 3100: with the review server up, run e2e with `PW_BASE_URL=http://localhost:3000`.
+
+**Next:** wait for the user's choices from the audit's top 10 and the copy proposals.
 
 ## History (before this session's post-M3 pass)
 
