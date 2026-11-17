@@ -97,9 +97,8 @@
         "value": "6",
         "label": "Markets"
       },
-      "integrated": {
-        "value": "360°",
-        "label": "Integrated"
+      "services": {
+        "label": "Services"
       }
     }
   },
