@@ -40,7 +40,7 @@
 
 ## Review Focus
 
-1. **The CTA bar and the keyboard on phones:** while a text field has focus, the bar must hide so it never covers the field or the keyboard's suggestion row. Test in Task 9 (the email field of the quote block on `/services/marketing-advertising`).
+1. **The CTA bar and the keyboard on phones:** while a text field has focus, the bar must hide so it never covers the field or the keyboard's suggestion row. Test in Task 9 (the email field of the quote block on `/services/marketing-brand`).
 2. **A stale event field after the service changes:** a visitor picks a wedding service, fills guests, then switches to a Marketing service. The fields hide, and the hidden values must not be sent or emailed. Test in Task 7 (server drops them) and Task 8 (the UI clears them).
 3. **`?category=` junk:** `?category=<script>`, an unknown slug, a 300-char value or `?category=events-hospitality&service=<marketing anchor>`. Junk is ignored silently and never echoed; an explicit `service` wins over `category`. Test in Task 7 (`parseCategoryParam`) and Task 8 (the service param wins).
 4. **The hiding header and focus:** a keyboard user tabbing into the header (skip link, logo, burger) while it is hidden must see it. Test in Task 10.
@@ -210,7 +210,7 @@ Owner-approved 2026-11-18. At 1440 today, Home's work grid was drawn for three c
 - [ ] **Step 1: Write the failing tests** in `forms.spec.ts`:
   - `no service: the general timing shows`: `/en/contact` → the "When is it?" group visible; "Event date (approximate)" and "Number of guests" absent.
   - `an events service shows the event fields`: choose an Events & Hospitality service → both event fields visible, "When is it?" hidden; switch to a Marketing service → event fields hidden, "When is it?" back, and the guests value cleared (`form.getValues` is internal: assert by switching back, the select shows its placeholder).
-  - `?category=events-hospitality opens the events group`: `/en/contact?category=events-hospitality` → the event fields show with no service chosen; the service select's first `<optgroup>` label is the Events category title. `/ar/contact?category=marketing-advertising` → the first optgroup is that category; no event fields.
+  - `?category=events-hospitality opens the events group`: `/en/contact?category=events-hospitality` → the event fields show with no service chosen; the service select's first `<optgroup>` label is the Events category title. `/ar/contact?category=marketing-brand` → the first optgroup is that category; no event fields.
   - `?service= wins over ?category=`: `/en/contact?category=events-hospitality&service=<a marketing anchor>` → that service is selected, no event fields.
   - `junk is ignored`: `/en/contact?category=%3Cscript%3E` → the page renders, the default group order, the value isn't in the DOM (`page.content()` doesn't contain `<script>` from the param).
   - `the brief sends the event rows`: fill an events brief with a month and a guest band, submit (test keys), success shows; the file sink's last email (`MAIL_SINK=file`, read as the existing form specs do) has "Event date" and "Guests" rows.
@@ -237,7 +237,7 @@ Owner-approved 2026-11-18. At 1440 today, Home's work grid was drawn for three c
     - `hidden at first, shown after the opening`: `/en` → the bar region (`getByRole("region", { name: <label> })`) not visible; scroll past the hero → visible; its link "Request a quote" goes to `/en/contact`.
     - `category pages carry the hint`: `/ar/services/creative-production` after the opening → the link's href ends `/ar/contact?category=creative-production`.
     - `not on contact, not on Software's page, never on /links`: `/en/contact` and `/en/links` have no shared bar; `/en/services/software-digital` has Software's bar only (one `region` with its label).
-    - `hides for the keyboard` (Review Focus 1): on `/en/services/marketing-advertising`, scroll to the quote block's email field and focus it → the bar not visible; blur → visible again when no form is in view.
+    - `hides for the keyboard` (Review Focus 1): on `/en/services/marketing-brand`, scroll to the quote block's email field and focus it → the bar not visible; blur → visible again when no form is in view.
     - `hides while a form is in view`: scroll the category quote block into view → hidden.
     - `never covers the footer`: scroll to the end → the footer's last link's bottom ≤ the bar's top.
     - `no layout shift`: the page's CLS (the `cls.spec.ts` helper) stays < 0.01 while the bar shows and hides.
