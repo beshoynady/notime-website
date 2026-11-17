@@ -377,6 +377,15 @@ a.wk-chip:active {
 .wc-sec + .wc-sec[data-tone="light"] {
   padding-block-start: 0;
 }
+/* N21: the case file's header runs straight into its story. The opening's own bottom padding and
+   the first section's top padding stacked to 224px of empty ground below the facts. */
+.wc .pg-open {
+  padding-block-end: clamp(28px, 4vw, 48px);
+}
+.wc .pg-open + .wc-sec,
+.wc .wc-toc + .wc-sec {
+  padding-block-start: clamp(40px, 5vw, 64px);
+}
 .wc-grid {
   display: grid;
   gap: 20px 48px;
