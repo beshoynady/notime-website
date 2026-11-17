@@ -5,8 +5,9 @@ import { copyProblems } from "@/lib/copy-rules";
 import { imageSize } from "@/lib/image-size";
 import { getCategories, getCategory, getImageSlot, getImageSlots, getProducts, getServices, productLockup } from "./index";
 import type { Localized } from "./types";
+import ar from "@/messages/ar.json";
 import { formCopy } from "./form-copy";
-import { cta, sticky } from "./software/page";
+import { cta, productsCopy, sticky } from "./software/page";
 
 const locales = ["en", "ar"] as const;
 
@@ -334,5 +335,21 @@ describe("N13 intro call wording", () => {
     expect(cta.book).toEqual({ en: "Request a free intro call", ar: "اطلبوا مكالمة تعارف مجانية" });
     expect(formCopy.consultation.submit).toEqual(cta.book);
     expect(sticky.book).toEqual({ en: "Request a free call", ar: "اطلبوا مكالمة مجانية" });
+  });
+});
+
+describe("N18 Arabic fixes", () => {
+  it("the quote button is in the plural", () => {
+    expect(ar.header.quote).toBe("اطلبوا عرض سعر");
+  });
+  it("Arabic product links agree in gender", () => {
+    const render = (name: string) => productsCopy.more.ar.replace("{product}", name);
+    const [qr, rs] = getProducts();
+    expect(render(qr.name.ar)).toBe("اكتشفوا ما ستقدّمه «الدقيقة صفر»");
+    expect(render(rs.name.ar)).toBe("اكتشفوا ما ستقدّمه «ساعة الذروة»");
+  });
+  it("Google/Meta title", () => {
+    const s = getServices().find((x) => x.slug === "paid-media-planning");
+    expect(s?.title.ar).toBe("الإعلانات المدفوعة وتخطيط الإعلام (Google وMeta)");
   });
 });
