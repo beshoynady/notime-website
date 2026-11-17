@@ -10,3 +10,10 @@ describe("minutesLabel (M3)", () => {
     expect(fill(formCopy.states.rateLimited.ar, { minutes: minutesLabel(9, "ar"), email: "x" })).toContain("بعد 9 دقائق،");
   });
 });
+
+describe("N15 privacy line", () => {
+  it("privacy line is the short one", () => {
+    expect(formCopy.privacy.text.en).toBe("We use your details only to reply to you.");
+    expect(formCopy.privacy.text.ar).toBe("نستخدم بياناتكم للرد عليكم فقط.");
+  });
+});

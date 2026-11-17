@@ -55,8 +55,8 @@ export const formCopy = {
   },
   privacy: {
     text: l(
-      "We use these details only to reply to you. Resend delivers our email and Cloudflare protects this form from spam.",
-      "نستخدم هذه البيانات للرد عليك فقط. توصل خدمة Resend رسائلنا، وتحمي Cloudflare هذا النموذج من الرسائل المزعجة.",
+      "We use your details only to reply to you.",
+      "نستخدم بياناتكم للرد عليكم فقط.",
     ),
     link: l("Privacy Policy", "سياسة الخصوصية"),
   },
