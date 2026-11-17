@@ -1,31 +1,21 @@
-# Session handoff: final quality & growth pass (§1–§8), then the Arabic report
+# Session handoff: the user's decisions on #30–#36 and requests 1–4 (2026-11-17)
 
-Updated 2026-11-16 (session 2 of the post-M3 pass). Read `CLAUDE.md`, `AGENTS.md` and `PRODUCT.md` first. Decisions: `docs/DECISIONS.md` (latest D109). Open judgment calls: `docs/review/decisions-to-confirm.md` (#30–#33 open).
+Read `CLAUDE.md`, `AGENTS.md` and `PRODUCT.md` first. Decisions: `docs/DECISIONS.md` (latest D115). Judgment calls: `docs/review/decisions-to-confirm.md` (#1–#36 all answered).
 
-## The user's brief for this pass (authoritative; "no stops" until the end, then one Arabic report)
+## The user's message (2026-11-17, authoritative)
 
-§1 settled decisions · §2 AI mentions out · §3 native Arabic · §4 design polish · §5 photographic scroll storytelling · §6 growth (links page, lead source, private-client path, v1.1 SEO pages, launch checklist) · §7 speed (Task 16) · §8 fresh-subagent code review + green full CI · final report: what changed, Lighthouse before/after, screenshots of the most changed pages (1440/390 EN/AR) + 3 frame sequences of photo scenes, CI, a fresh tunnel link, decisions to confirm.
+#30 #32 #33 approved (Rand reads the Arabic). #31 approved if every story has a static reduced-motion version and doesn't stutter at 4× CPU. #34 `/links` waits for the WhatsApp number; no Instagram row; the WhatsApp row turns on from `contact.ts`. #35 approved + the WhatsApp message names the source (floating button and `/links`). #36 v1.1, except `/links`: no scroll animation, minimal JS, 90+ on phones before launch. Requests: (1) Lighthouse before/after on the same machine, a complete table; (2) does the Events EN layout really move on a slow device (fix the page, not the test); (3) the reviewer's notes moved to v1.1 with their grades; (4) why 369 local tests vs 379 in CI.
 
-| Part | State |
+| Item | State |
 |---|---|
-| §1 decisions; impeccable hooks | **Done.** #21–#29 logged; the impeccable hooks (SessionStart/PostToolUse/Stop) removed from the gitignored `.claude/settings.local.json`; `.github/hooks` is gone. |
-| §2 AI mentions (D106) · §3 Arabic (D107) · §4 polish (D108) | **Done** in the previous session. |
-| §5 photo scenes (D109, `b03a1d8`) | **Done.** Events opening 2.5D + wipe, home Work strip, About split screen, private stack, Print gift cutout, service-photo wipes. Tools: `scripts/frames.mjs` (frame sheets), `scripts/grade-stories.mjs`. Not yet eyeballed after the last move: the Print gift's final place (`gift` rig). |
-| §6 growth | **Next.** |
-| §7 speed | Done (D111, commit abfc5b4): Software on its own route, inlineCss kept on evidence, perf 46–58 → 54–62, CLS 0; the gap to 90 is in v1.1 → Performance. |
-| §8 review, CI, report | **Done.** Fresh-subagent review: no Critical, Important fixed (471f385), rest in v1.1. Local e2e on prod: 369 passed, 0 flaky. Full CI run 43949477880 green (E2E 379 passed, 0 flaky) after making the Act 3 index check re-aim (ab9f569). Screenshots + 3 frame sheets: `docs/checkpoints/final-pass/`. Review build on 3100, tunnel https://arrival-kingdom-justify-plastics.trycloudflare.com. Final Arabic report sent; waiting for decisions #30–#36. |
+| #31 static versions + 4× CPU | **Done.** `e2e/photo-stories-reduced.spec.ts` (10 pass). `scripts/scroll-jank.mjs`; table in `docs/checkpoints/frames/scroll-4x.md`. Found and fixed the one real stutter: the tone turn tweened an inherited variable (D115, eedb8e3). |
+| #34 #35 #36 `/links` | **Done** (54b7fa5): plain HTML route, 99–100; WhatsApp row from `contact.ts` with the source message; no Instagram row (D113, D114). `utm_source=meta` names no channel (eedb8e3). |
+| Request 2 (Events EN moves) | **Done** (54b7fa5, D112): yes, up to 278 px at 8× CPU; fixed in CSS (pin reservations' floor); strict test restored + an 8× CPU test. |
+| Request 1 (Lighthouse A/B) | **Running/next:** worktrees `../nt-lh-before` (1852177, port 3010) and `../nt-lh-links` (691c033, React `/links`, port 3020), both with a local `turbopack.root: "E:/NO Time"` edit (never commit; delete the worktrees after). `node scripts/lighthouse-ab.mjs http://localhost:3010 http://localhost:3000 docs/checkpoints/lighthouse/ab-2026-11-17/rows.json --runs=3 --links-before=http://localhost:3020`. |
+| Request 3 (reviewer notes) / 4 (369 vs 379) | Answers ready (v1.1 "From the final-pass code review"; the 10 lab tests need `NEXT_PUBLIC_ENABLE_LAB=1`, now set for local builds). |
+| Then | Check decision #20 (deep-link flicker) on the build; full e2e (`NEXT_PUBLIC_ENABLE_LAB=1` build); push; `gh workflow run CI --ref phase-2-services`; review build on 3100 + tunnel; the Arabic report. |
 
-Review server: `npm run review:start -- 3100` on the review build; the quick tunnel from the last session still runs (https://arrival-kingdom-justify-plastics.trycloudflare.com/ar); restarting the review server keeps the link, restarting cloudflared changes it.
-Machine: Python 3.14 has no OpenCV wheel (pip compiles for ages): use Pillow/numpy/scipy; `rembg` works with `python -P` (not `-I`, which hides user site-packages).
-
-### Part 5: where it stands
-
-- **Before** (mobile, simulated throttling, 1 run each, `docs/checkpoints/lighthouse/post-m3/before.json`, script `scripts/lighthouse-pages.mjs`): perf 46–58 everywhere; home EN/AR 46/46 (LCP 4.9/4.8 s, TBT 2.2/3.3 s); categories 48–58; CLS 0 on all; LCP is text except Print (a scene layer). JS 319 KB (home) / 381 KB (categories) transferred; fonts 66 KB EN / 60–95 KB AR. SEO 92 = only the canonical check (it points at notimehub.com from localhost; passes in production).
-- **Diagnosis (home EN):** simulated LCP 5.0 s = TTFB 0.2 s + **render delay 2.7 s**; 14 render-blocking CSS files (83 KB raw, ~15 KB gz). Main thread: script eval 3.7 s, style & layout 3.1 s. Chunks: react-dom/Next runtime ~390 KB raw (fixed cost), GSAP+ScrollTrigger 112 KB, **Motion 144 KB (41 KB unused at load)**. Forced reflow only ~225 ms.
-- **(Superseded by D111: measured and kept.)** `experimental.inlineCss: true` in `next.config.ts` (builds clean). **Next action:** start the prod server (`TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA MAIL_SINK=file MAIL_FROM=website@example.com npx next start -p 3000` after a build with `NEXT_PUBLIC_TURNSTILE_SITE_KEY=1x00000000000000000000AA`), run `node scripts/lighthouse-pages.mjs http://localhost:3000 docs/checkpoints/lighthouse/post-m3/after-inline.json` with **nothing else running**, compare; keep it only if LCP/perf improve (revert otherwise).
-- **Then, in order:** (1) Alexandria subset: `python scripts/subset-alexandria.py` writes `alexandria-arabic.v2.woff2` (Arabic block + joiners only, all features and the weight axis kept; fontTools is installed); point `src/app/fonts.css` and `src/lib/fonts.ts` at v2; check harakat (حِرَف) and digits render. (2) Motion: `LazyMotion` + `m` with `domAnimation` loaded async (check for `layout`/drag use first; never touch GSAP-owned elements). (3) Defer non-critical client islands (custom cursor, magnetic, WhatsApp FAB, mega-menu panel) to idle or first interaction, without changing behaviour. (4) Print's LCP is a scene layer: make it text. Measure after each; LCP must stay text and CLS ~0.
-- Target (user): mobile ≥ 90 on home + categories EN/AR. Likely not fully reachable with this motion design under 4× CPU throttling; report honestly with before/after.
-
+Review server: `npm run review:build`, `npm run review:start -- 3100`; tunnel https://arrival-kingdom-justify-plastics.trycloudflare.com (if cloudflared restarts, update `docs/review/tunnel.md`).
 
 ## History (before this session's post-M3 pass)
 
