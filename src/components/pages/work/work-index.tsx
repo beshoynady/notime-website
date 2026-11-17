@@ -13,7 +13,7 @@ import { workItems, workView } from "@/content/work";
 import { Link } from "@/i18n/navigation";
 import { trailJsonLd } from "@/lib/jsonld";
 import { PAGE_REF } from "@/lib/review";
-import { applyFilter, facetChips, filterHref, type Chip, type WorkFilter } from "@/lib/work-filter";
+import { applyFilter, facetChips, filterHref, showWorkFilters, type Chip, type WorkFilter } from "@/lib/work-filter";
 import "@/components/motion/duotone.css";
 import "./work.css";
 
@@ -23,7 +23,7 @@ const MARKET_KEYS = markets.map((m) => m.key);
 
 /**
  * /work and its filtered views (F1). The chips are plain links to static pages (work-filter.ts),
- * each landing back on the filter bar, so the page works without JavaScript and every view can be
+ * each landing back on the filter bar (shown from six projects only, N08; the filtered views stay reachable by URL), so the page works without JavaScript and every view can be
  * shared. A chip whose count is 0 under the other facet is shown but not linked (no dead end); a
  * view with no case shows the empty state, which points to all work and to the services.
  */
@@ -32,6 +32,7 @@ export async function WorkIndex({ locale, filter }: { locale: Locale; filter: Wo
   const cases = applyFilter(workItems, filter).map((w) => ({ item: w, view: workView(w) }));
   const chips = facetChips(workItems, filter, CATEGORY_SLUGS, MARKET_KEYS);
   const categoryName = (c: (typeof CATEGORY_SLUGS)[number]) => getCategory(c)!.title[locale];
+  const showFilters = showWorkFilters(workItems.length);
   const filtered = Boolean(filter.category || filter.market);
 
   return (
@@ -55,11 +56,13 @@ export async function WorkIndex({ locale, filter }: { locale: Locale; filter: Wo
 
       <section data-tone="dark" className="wk-browse">
         <div className="frame">
-          <nav id={FILTERS_ID} aria-label={t("filterLabel")} className="wk-filters">
-            <SectionRef id={PAGE_REF.workFilters} />
-            <Facet id="wk-facet-service" label={t("serviceFacet")} chips={chips.category} allLabel={t("allServices")} name={categoryName} />
-            <Facet id="wk-facet-market" label={t("marketFacet")} chips={chips.market} allLabel={t("allMarkets")} name={(m) => tm(`countries.${m}`)} />
-          </nav>
+          {showFilters && (
+            <nav id={FILTERS_ID} aria-label={t("filterLabel")} className="wk-filters">
+              <SectionRef id={PAGE_REF.workFilters} />
+              <Facet id="wk-facet-service" label={t("serviceFacet")} chips={chips.category} allLabel={t("allServices")} name={categoryName} />
+              <Facet id="wk-facet-market" label={t("marketFacet")} chips={chips.market} allLabel={t("allMarkets")} name={(m) => tm(`countries.${m}`)} />
+            </nav>
+          )}
 
           <SectionRef id={PAGE_REF.workList} />
           <p className="wk-count text-eyebrow">{t("count", { count: cases.length })}</p>

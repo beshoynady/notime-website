@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import type { CategorySlug } from "@/content/types";
 import { markets, type MarketKey } from "@/content/markets";
 import { workItems } from "@/content/work";
-import { allFacetSegments, applyFilter, facetChips, filterHref, parseFacets, type Facetted } from "./work-filter";
+import { allFacetSegments, applyFilter, facetChips, filterHref, FILTERS_MIN_PROJECTS, parseFacets, showWorkFilters, type Facetted } from "./work-filter";
 
 const CATS: CategorySlug[] = ["events-hospitality", "creative-production", "marketing-brand", "production-print-gifts", "software-digital"];
 const MARKETS: MarketKey[] = markets.map((m) => m.key);
@@ -77,5 +77,15 @@ describe("work filter: visible cases, counts, empty state", () => {
       expect(w.categories.length, w.key).toBeGreaterThan(0);
     }
     expect(applyFilter(workItems, {})).toHaveLength(workItems.length);
+  });
+});
+
+describe("work filter: when the bar shows (N08)", () => {
+  it("shows from six projects", () => {
+    expect(FILTERS_MIN_PROJECTS).toBe(6);
+    expect(showWorkFilters(0)).toBe(false);
+    expect(showWorkFilters(5)).toBe(false);
+    expect(showWorkFilters(6)).toBe(true);
+    expect(showWorkFilters(7)).toBe(true);
   });
 });
