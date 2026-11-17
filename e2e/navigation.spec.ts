@@ -107,7 +107,7 @@ test.describe("main menu: Events (N12)", () => {
     await expect(page.locator("#site-header nav a[aria-current=page]")).toHaveCount(1);
   });
 
-  test("EN hides Events between 900 and 1023, AR keeps it; the row never wraps", async ({ page }) => {
+  test("EN hides Events between 900 and 1023, AR keeps it; no header item wraps", async ({ page }) => {
     for (const [locale, name] of [["en", "Events"], ["ar", "الفعاليات"]] as const) {
       for (const width of [900, 960, 1023, 1024]) {
         await page.setViewportSize({ width, height: 800 });
@@ -115,14 +115,31 @@ test.describe("main menu: Events (N12)", () => {
         const events = page.locator("#site-header nav a", { hasText: name });
         if (locale === "en" && width < 1024) await expect(events).toBeHidden();
         else await expect(events).toBeVisible();
-        const headerH = await page.evaluate(() => parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-h")));
-        const row = await page.locator("#site-header .frame").boundingBox();
-        expect(row?.height).toBe(headerH);
-        // One line: every nav item sits on the same row.
-        const tops = await page.locator("#site-header nav > *:visible").evaluateAll((els) => els.map((e) => { const r = e.getBoundingClientRect(); return Math.round(r.top + r.height / 2); }));
-        expect(Math.max(...tops) - Math.min(...tops), `${locale}@${width} wraps: ${tops}`).toBeLessThanOrEqual(2);
-        const nav = await page.locator("#site-header nav").boundingBox();
-        expect(nav!.height).toBeLessThan(headerH);
+        const layout = await page.evaluate(() => {
+          const nav = document.querySelector("#site-header nav")!;
+          const items = [...nav.querySelectorAll(":scope > div > button, :scope > a")].filter((e) => e.getClientRects().length > 0);
+          // Lines of text per item: distinct line boxes of a Range over its contents.
+          const lines = items.map((e) => {
+            const tops = new Set<number>();
+            const walker = document.createTreeWalker(e, NodeFilter.SHOW_TEXT);
+            for (let t = walker.nextNode(); t; t = walker.nextNode()) {
+              const range = document.createRange();
+              range.selectNodeContents(t);
+              for (const r of range.getClientRects()) if (r.width > 0) tops.add(Math.round(r.top));
+            }
+            return { text: e.textContent?.trim(), lines: tops.size };
+          });
+          const n = nav.getBoundingClientRect();
+          const cluster = nav.nextElementSibling!.getBoundingClientRect();
+          const logo = nav.previousElementSibling!.getBoundingClientRect();
+          const overlap = (a: DOMRect, b: DOMRect) => a.left < b.right && b.left < a.right;
+          return { lines, clusterOverlap: overlap(n, cluster), logoOverlap: overlap(n, logo) };
+        });
+        const where = `${locale}@${width}`;
+        expect(layout.lines.length, where).toBe(locale === "en" && width < 1024 ? 4 : 5);
+        for (const l of layout.lines) expect(l.lines, `${where}: "${l.text}" wraps`).toBe(1);
+        expect(layout.clusterOverlap, `${where}: nav overlaps the language toggle / quote button`).toBe(false);
+        expect(layout.logoOverlap, `${where}: nav overlaps the logo`).toBe(false);
       }
     }
   });
