@@ -11,7 +11,9 @@ export type HeaderTone = Tone | "hero";
 
 /**
  * Page tone system (DECISIONS F):
- * - the page background (#page-stage, `--page-bg`) tweens to a section's ground (`--tone-ground`, which a
+ * - the page background (#page-stage's own background-color, not the inherited `--page-bg`: a custom
+ *   property tweened on the stage re-styled every element under it on every frame, ~90 ms a frame on a
+ *   phone at 4× CPU) tweens to a section's ground (`--tone-ground`, which a
  *   theme may set, globals.css) as it crosses 55% of the viewport;
  * - `data-ground` on the stage names the ground's tone; a zone whose tone differs (the tail of the
  *   section going out, the head of the one coming in) fades out (globals.css), so its text never
@@ -84,7 +86,7 @@ export function ToneController() {
       // first section while the ground had already turned, leaving the active section hidden.
       const first = sections[0];
       if (first) {
-        gsap.set(stage, { "--page-bg": groundOf(first) });
+        gsap.set(stage, { backgroundColor: groundOf(first) });
         underHeader = first;
         setGround(first);
       }
@@ -121,7 +123,7 @@ export function ToneController() {
             onToggle: (self) => {
               if (!self.isActive) return;
               gsap.to(stage, {
-                "--page-bg": ground,
+                backgroundColor: ground,
                 duration,
                 ease: "power2.out",
                 overwrite: "auto",

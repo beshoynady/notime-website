@@ -95,7 +95,8 @@ describe("leadChannel (WhatsApp prefill, decision #35)", () => {
     expect(leadChannel({ referrer: "l.instagram.com" })).toBe("instagram");
     expect(leadChannel({ referrer: "www.linkedin.com" })).toBe("linkedin");
     expect(leadChannel({ referrer: "lnkd.in" })).toBe("linkedin");
-    expect(leadChannel({ utm_source: "meta", utm_medium: "paid" })).toBe("facebook");
+    expect(leadChannel({ utm_source: "meta", utm_medium: "paid", referrer: "l.instagram.com" })).toBe("instagram");
+    expect(leadChannel({ utm_source: "meta", utm_medium: "paid", referrer: "lm.facebook.com" })).toBe("facebook");
     expect(leadChannel({ referrer: "m.facebook.com" })).toBe("facebook");
     expect(leadChannel({ referrer: "www.google.ae" })).toBe("google");
     expect(leadChannel({ utm_source: "google", utm_medium: "business-profile" })).toBe("google");
@@ -107,6 +108,7 @@ describe("leadChannel (WhatsApp prefill, decision #35)", () => {
     expect(leadChannel(null)).toBeNull();
     expect(leadChannel({ landing: "/en" })).toBeNull();
     expect(leadChannel({ utm_source: "newsletter-x" })).toBeNull();
+    expect(leadChannel({ utm_source: "meta", utm_medium: "paid" })).toBeNull();
     expect(leadChannel({ referrer: "example.ae" })).toBeNull();
     expect(leadChannel({ utm_source: "whatsapp", utm_medium: "message" })).toBeNull();
   });

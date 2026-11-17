@@ -13,7 +13,8 @@ const [base, out] = process.argv.slice(2).filter((a) => !a.startsWith("--"));
 const runs = Number(process.argv.find((a) => a.startsWith("--runs="))?.slice(7) ?? 1);
 const only = process.argv.find((a) => a.startsWith("--only="))?.slice(7);
 const cats = ["events-hospitality", "creative-production", "marketing-brand", "production-print-gifts", "software-digital"];
-const paths = ["en", "ar"].flatMap((l) => [`/${l}`, ...cats.map((c) => `/${l}/services/${c}`)]).filter((p) => !only || p === only);
+// --only takes any path (e.g. /en/links), not only the twelve below.
+const paths = only ? [only] : ["en", "ar"].flatMap((l) => [`/${l}`, ...cats.map((c) => `/${l}/services/${c}`)]);
 const config = { extends: "lighthouse:default", settings: { onlyCategories: ["performance", "accessibility", "best-practices", "seo"] } };
 const findDeep = (d, pred) => { if (!d || typeof d !== "object") return null; if (pred(d)) return d; for (const v of Array.isArray(d) ? d : Object.values(d)) { const n = findDeep(v, pred); if (n) return n; } return null; };
 const res = [];

@@ -114,7 +114,8 @@ export type LeadChannel = (typeof LEAD_CHANNELS)[number];
 const SOURCE_CHANNEL: Record<string, LeadChannel> = {
   instagram: "instagram", ig: "instagram",
   linkedin: "linkedin",
-  meta: "facebook", facebook: "facebook", fb: "facebook",
+  // "meta" (paid) is left out: one ad runs on Instagram and Facebook, so the referring site decides.
+  facebook: "facebook", fb: "facebook",
   tiktok: "tiktok", snapchat: "snapchat",
   x: "x", twitter: "x",
   youtube: "youtube",

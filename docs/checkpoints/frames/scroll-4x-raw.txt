@@ -1,0 +1,96 @@
+cold 1440 /en/services/events-hospitality .scene-pin run 1 {"frames":124,"median":16.7,"p95":35.3,"max":183.3,"over33":9.7,"over50":3.2}
+run 2 {"frames":134,"median":16.7,"p95":33.4,"max":99.7,"over33":6.7,"over50":1.5}
+run 3 {"frames":146,"median":16.7,"p95":33.3,"max":66.7,"over33":4.1,"over50":0.7}
+median {"url":"http://localhost:3000/en/services/events-hospitality","sel":".scene-pin","cpu":4,"width":1440,"warm":false,"median":16.7,"p95":33.4,"max":99.7,"over33":6.7,"over50":1.5}
+cold 390 /en/services/events-hospitality .scene-pin run 1 {"frames":98,"median":16.7,"p95":33.4,"max":83.3,"over33":5.1,"over50":1}
+run 2 {"frames":107,"median":16.7,"p95":16.8,"max":33.5,"over33":1.9,"over50":0}
+run 3 {"frames":106,"median":16.7,"p95":16.8,"max":66.7,"over33":0.9,"over50":0.9}
+median {"url":"http://localhost:3000/en/services/events-hospitality","sel":".scene-pin","cpu":4,"width":390,"warm":false,"median":16.7,"p95":16.8,"max":66.7,"over33":1.9,"over50":0.9}
+cold 1440 /en/services/events-hospitality #celebrations .pstack run 1 {"frames":170,"median":16.7,"p95":33.3,"max":249.9,"over33":4.1,"over50":2.4}
+run 2 {"frames":196,"median":16.7,"p95":33.2,"max":66.7,"over33":2,"over50":1}
+run 3 {"frames":197,"median":16.7,"p95":33.3,"max":66.7,"over33":2,"over50":1}
+median {"url":"http://localhost:3000/en/services/events-hospitality","sel":"#celebrations .pstack","cpu":4,"width":1440,"warm":false,"median":16.7,"p95":33.3,"max":66.7,"over33":2,"over50":1}
+cold 390 /en/services/events-hospitality #celebrations .pstack run 1 {"frames":117,"median":16.7,"p95":33.4,"max":283.3,"over33":6.8,"over50":2.6}
+run 2 {"frames":146,"median":16.7,"p95":16.8,"max":50,"over33":2.7,"over50":0}
+run 3 {"frames":146,"median":16.7,"p95":16.8,"max":50,"over33":2.7,"over50":0}
+median {"url":"http://localhost:3000/en/services/events-hospitality","sel":"#celebrations .pstack","cpu":4,"width":390,"warm":false,"median":16.7,"p95":16.8,"max":50,"over33":2.7,"over50":0}
+cold 1440 /en #work-strip run 1 {"frames":179,"median":16.7,"p95":16.9,"max":116.6,"over33":2.8,"over50":2.2}
+run 2 {"frames":218,"median":16.7,"p95":16.8,"max":116.7,"over33":0.5,"over50":0.5}
+run 3 {"frames":219,"median":16.7,"p95":16.8,"max":116.7,"over33":0.5,"over50":0.5}
+median {"url":"http://localhost:3000/en","sel":"#work-strip","cpu":4,"width":1440,"warm":false,"median":16.7,"p95":16.8,"max":116.7,"over33":0.5,"over50":0.5}
+cold 390 /en #work-strip run 1 {"frames":41,"median":16.7,"p95":33.3,"max":133.3,"over33":4.9,"over50":2.4}
+run 2 {"frames":70,"median":16.7,"p95":16.7,"max":116.7,"over33":1.4,"over50":1.4}
+run 3 {"frames":69,"median":16.7,"p95":16.8,"max":133.4,"over33":1.4,"over50":1.4}
+median {"url":"http://localhost:3000/en","sel":"#work-strip","cpu":4,"width":390,"warm":false,"median":16.7,"p95":16.8,"max":133.3,"over33":1.4,"over50":1.4}
+cold 1440 /en/about #ab-room run 1 {"frames":226,"median":16.7,"p95":16.8,"max":66.7,"over33":1.3,"over50":0.4}
+run 2 {"frames":230,"median":16.7,"p95":16.8,"max":66.6,"over33":0.4,"over50":0.4}
+run 3 {"frames":229,"median":16.7,"p95":16.8,"max":33.4,"over33":0,"over50":0}
+median {"url":"http://localhost:3000/en/about","sel":"#ab-room","cpu":4,"width":1440,"warm":false,"median":16.7,"p95":16.8,"max":66.6,"over33":0.4,"over50":0.4}
+cold 390 /en/about #ab-room run 1 {"frames":183,"median":16.7,"p95":16.7,"max":50,"over33":1.6,"over50":0}
+run 2 {"frames":185,"median":16.7,"p95":16.8,"max":50,"over33":0.5,"over50":0}
+run 3 {"frames":185,"median":16.7,"p95":16.8,"max":50,"over33":0.5,"over50":0}
+median {"url":"http://localhost:3000/en/about","sel":"#ab-room","cpu":4,"width":390,"warm":false,"median":16.7,"p95":16.8,"max":50,"over33":0.5,"over50":0}
+cold 1440 /ar/services/production-print-gifts .scene-pin run 1 {"frames":142,"median":16.7,"p95":33.2,"max":133.3,"over33":2.1,"over50":1.4}
+run 2 {"frames":148,"median":16.7,"p95":33.2,"max":100.1,"over33":0.7,"over50":0.7}
+run 3 {"frames":147,"median":16.7,"p95":33.3,"max":116.7,"over33":0.7,"over50":0.7}
+median {"url":"http://localhost:3000/ar/services/production-print-gifts","sel":".scene-pin","cpu":4,"width":1440,"warm":false,"median":16.7,"p95":33.2,"max":116.7,"over33":0.7,"over50":0.7}
+cold 390 /ar/services/production-print-gifts .scene-pin run 1 {"frames":99,"median":16.7,"p95":16.8,"max":116.6,"over33":3,"over50":2}
+run 2 {"frames":105,"median":16.7,"p95":16.8,"max":100,"over33":1,"over50":1}
+run 3 {"frames":101,"median":16.7,"p95":16.8,"max":116.6,"over33":2,"over50":1}
+median {"url":"http://localhost:3000/ar/services/production-print-gifts","sel":".scene-pin","cpu":4,"width":390,"warm":false,"median":16.7,"p95":16.8,"max":116.6,"over33":2,"over50":1}
+cold 1440 /en/privacy main run 1 {"frames":177,"median":16.7,"p95":16.8,"max":266.7,"over33":0.6,"over50":0.6}
+run 2 {"frames":193,"median":16.7,"p95":16.8,"max":16.8,"over33":0,"over50":0}
+run 3 {"frames":192,"median":16.7,"p95":16.8,"max":16.8,"over33":0,"over50":0}
+median {"url":"http://localhost:3000/en/privacy","sel":"main","cpu":4,"width":1440,"warm":false,"median":16.7,"p95":16.8,"max":16.8,"over33":0,"over50":0}
+cold 390 /en/privacy main run 1 {"frames":239,"median":16.7,"p95":16.8,"max":216.6,"over33":0.4,"over50":0.4}
+run 2 {"frames":251,"median":16.7,"p95":16.7,"max":16.8,"over33":0,"over50":0}
+run 3 {"frames":251,"median":16.7,"p95":16.8,"max":16.8,"over33":0,"over50":0}
+median {"url":"http://localhost:3000/en/privacy","sel":"main","cpu":4,"width":390,"warm":false,"median":16.7,"p95":16.8,"max":16.8,"over33":0,"over50":0}
+warm 1440 /en/services/events-hospitality .scene-pin run 1 {"frames":148,"median":16.7,"p95":33.3,"max":50.3,"over33":2,"over50":0.7}
+run 2 {"frames":149,"median":16.7,"p95":33.3,"max":33.4,"over33":0,"over50":0}
+run 3 {"frames":155,"median":16.7,"p95":17.1,"max":33.5,"over33":1.3,"over50":0}
+median {"url":"http://localhost:3000/en/services/events-hospitality","sel":".scene-pin","cpu":4,"width":1440,"warm":true,"median":16.7,"p95":33.3,"max":33.5,"over33":1.3,"over50":0}
+warm 390 /en/services/events-hospitality .scene-pin run 1 {"frames":112,"median":16.7,"p95":16.8,"max":16.8,"over33":0,"over50":0}
+run 2 {"frames":111,"median":16.7,"p95":16.8,"max":16.8,"over33":0,"over50":0}
+run 3 {"frames":112,"median":16.7,"p95":16.7,"max":16.8,"over33":0,"over50":0}
+median {"url":"http://localhost:3000/en/services/events-hospitality","sel":".scene-pin","cpu":4,"width":390,"warm":true,"median":16.7,"p95":16.8,"max":16.8,"over33":0,"over50":0}
+warm 1440 /en/services/events-hospitality #celebrations .pstack run 1 {"frames":212,"median":16.7,"p95":16.8,"max":33.1,"over33":0,"over50":0}
+run 2 {"frames":211,"median":16.7,"p95":16.8,"max":33.2,"over33":0,"over50":0}
+run 3 {"frames":210,"median":16.7,"p95":16.8,"max":33.4,"over33":1,"over50":0}
+median {"url":"http://localhost:3000/en/services/events-hospitality","sel":"#celebrations .pstack","cpu":4,"width":1440,"warm":true,"median":16.7,"p95":16.8,"max":33.2,"over33":0,"over50":0}
+warm 390 /en/services/events-hospitality #celebrations .pstack run 1 {"frames":155,"median":16.7,"p95":16.7,"max":16.8,"over33":0,"over50":0}
+run 2 {"frames":155,"median":16.7,"p95":16.7,"max":16.8,"over33":0,"over50":0}
+run 3 {"frames":155,"median":16.7,"p95":16.8,"max":16.8,"over33":0,"over50":0}
+median {"url":"http://localhost:3000/en/services/events-hospitality","sel":"#celebrations .pstack","cpu":4,"width":390,"warm":true,"median":16.7,"p95":16.7,"max":16.8,"over33":0,"over50":0}
+warm 1440 /en #work-strip run 1 {"frames":218,"median":16.7,"p95":16.8,"max":100,"over33":0.9,"over50":0.9}
+run 2 {"frames":215,"median":16.7,"p95":16.8,"max":100.1,"over33":0.5,"over50":0.5}
+run 3 {"frames":215,"median":16.7,"p95":16.8,"max":116.7,"over33":0.5,"over50":0.5}
+median {"url":"http://localhost:3000/en","sel":"#work-strip","cpu":4,"width":1440,"warm":true,"median":16.7,"p95":16.8,"max":100.1,"over33":0.5,"over50":0.5}
+warm 390 /en #work-strip run 1 {"frames":73,"median":16.7,"p95":16.8,"max":50,"over33":1.4,"over50":0}
+run 2 {"frames":73,"median":16.7,"p95":16.8,"max":66.7,"over33":1.4,"over50":1.4}
+run 3 {"frames":72,"median":16.7,"p95":16.8,"max":66.7,"over33":1.4,"over50":1.4}
+median {"url":"http://localhost:3000/en","sel":"#work-strip","cpu":4,"width":390,"warm":true,"median":16.7,"p95":16.8,"max":66.7,"over33":1.4,"over50":1.4}
+warm 1440 /en/about #ab-room run 1 {"frames":231,"median":16.7,"p95":16.8,"max":33.4,"over33":0,"over50":0}
+run 2 {"frames":231,"median":16.7,"p95":16.8,"max":33.3,"over33":0,"over50":0}
+run 3 {"frames":231,"median":16.7,"p95":16.8,"max":33.4,"over33":0,"over50":0}
+median {"url":"http://localhost:3000/en/about","sel":"#ab-room","cpu":4,"width":1440,"warm":true,"median":16.7,"p95":16.8,"max":33.4,"over33":0,"over50":0}
+warm 390 /en/about #ab-room run 1 {"frames":186,"median":16.7,"p95":16.8,"max":33.4,"over33":0,"over50":0}
+run 2 {"frames":188,"median":16.7,"p95":16.8,"max":16.8,"over33":0,"over50":0}
+run 3 {"frames":187,"median":16.7,"p95":16.8,"max":33.4,"over33":0,"over50":0}
+median {"url":"http://localhost:3000/en/about","sel":"#ab-room","cpu":4,"width":390,"warm":true,"median":16.7,"p95":16.8,"max":33.4,"over33":0,"over50":0}
+warm 1440 /ar/services/production-print-gifts .scene-pin run 1 {"frames":156,"median":16.7,"p95":17,"max":33.4,"over33":0,"over50":0}
+run 2 {"frames":154,"median":16.7,"p95":33.3,"max":33.4,"over33":1.3,"over50":0}
+run 3 {"frames":159,"median":16.7,"p95":16.8,"max":33.5,"over33":1.3,"over50":0}
+median {"url":"http://localhost:3000/ar/services/production-print-gifts","sel":".scene-pin","cpu":4,"width":1440,"warm":true,"median":16.7,"p95":17,"max":33.4,"over33":1.3,"over50":0}
+warm 390 /ar/services/production-print-gifts .scene-pin run 1 {"frames":108,"median":16.7,"p95":16.8,"max":33.4,"over33":0,"over50":0}
+run 2 {"frames":109,"median":16.7,"p95":16.8,"max":33.4,"over33":0.9,"over50":0}
+run 3 {"frames":112,"median":16.7,"p95":16.7,"max":16.8,"over33":0,"over50":0}
+median {"url":"http://localhost:3000/ar/services/production-print-gifts","sel":".scene-pin","cpu":4,"width":390,"warm":true,"median":16.7,"p95":16.8,"max":33.4,"over33":0,"over50":0}
+warm 1440 /en/privacy main run 1 {"frames":192,"median":16.7,"p95":16.8,"max":16.8,"over33":0,"over50":0}
+run 2 {"frames":192,"median":16.7,"p95":16.8,"max":16.8,"over33":0,"over50":0}
+run 3 {"frames":192,"median":16.7,"p95":16.7,"max":16.8,"over33":0,"over50":0}
+median {"url":"http://localhost:3000/en/privacy","sel":"main","cpu":4,"width":1440,"warm":true,"median":16.7,"p95":16.8,"max":16.8,"over33":0,"over50":0}
+warm 390 /en/privacy main run 1 {"frames":251,"median":16.7,"p95":16.7,"max":16.8,"over33":0,"over50":0}
+run 2 {"frames":251,"median":16.7,"p95":16.8,"max":16.8,"over33":0,"over50":0}
+run 3 {"frames":251,"median":16.7,"p95":16.8,"max":16.8,"over33":0,"over50":0}
+median {"url":"http://localhost:3000/en/privacy","sel":"main","cpu":4,"width":390,"warm":true,"median":16.7,"p95":16.8,"max":16.8,"over33":0,"over50":0}
