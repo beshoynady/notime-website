@@ -21,6 +21,7 @@ for (const locale of ["en", "ar"] as const) {
   test.describe(`navigation to the category pages (${locale})`, () => {
     test("mega menu: each category, then a service lands on its section", async ({ page }) => {
       test.skip((page.viewportSize()?.width ?? 0) < 900, "desktop only (≥900px)");
+      test.slow(); // six full page loads in one test: over the 30 s default on a loaded machine
       const open = async () => {
         await gotoReady(page, `/${locale}`);
         await page.locator("button[aria-controls=mega-panel]").click();
@@ -35,7 +36,12 @@ for (const locale of ["en", "ar"] as const) {
       await open();
       await page.locator("#mega-panel ul").first().locator("li").nth(4).locator("a").hover();
       const service = getServices(categories[4].slug)[0];
-      await page.locator("#mega-panel ul.grid-cols-2 a").first().click();
+      // Switching category cross-fades the service lists, so for ~150 ms the previous category's
+      // list is still in the DOM (AnimatePresence popLayout). Wait for it to go before picking.
+      const services = page.locator("#mega-panel ul.grid-cols-2");
+      await expect(services).toHaveCount(1);
+      await expect(services.first().locator("a").first()).toHaveAttribute("href", new RegExp(`/services/${categories[4].slug}#${service.anchor}$`));
+      await services.first().locator("a").first().click();
       await expect(page).toHaveURL(new RegExp(`/${locale}/services/${categories[4].slug}#${service.anchor}$`));
       await expectLanded(page, service.anchor);
     });
