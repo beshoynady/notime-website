@@ -103,3 +103,41 @@ test.describe("Choose the mood keeps its gutter at 390", () => {
     });
   }
 });
+
+test.describe("case study has no empty band (N21)", () => {
+  test.skip(({ isMobile }) => isMobile, "desktop only: the 40% rule is stated at 1440");
+
+  for (const locale of ["en", "ar"] as const) {
+    for (const slug of ["football-league-events-awards", "airline-exhibition-pavilion"]) {
+      test(`${slug} (${locale}): no empty run taller than 40% of the viewport`, async ({ page }) => {
+        await gotoReady(page, `/${locale}/work/${slug}`);
+        // Walk the page so every scroll-revealed section is in its shown state.
+        await page.evaluate(async () => {
+          for (let y = 0; y < document.documentElement.scrollHeight; y += 300) {
+            window.scrollTo(0, y);
+            await new Promise((r) => setTimeout(r, 90));
+          }
+        });
+        const worst = await page.evaluate(() => {
+          const vh = window.innerHeight;
+          const runs: [number, number][] = [];
+          const sel = "main h1, main h2, main h3, main p, main li, main dt, main dd, main img, main svg, main figure";
+          for (const e of document.querySelectorAll(sel)) {
+            const r = e.getBoundingClientRect();
+            if (r.width < 2 || r.height < 2) continue;
+            runs.push([r.top + scrollY, r.bottom + scrollY]);
+          }
+          runs.sort((a, b) => a[0] - b[0]);
+          let end = runs[0][1];
+          let max = 0;
+          for (const [t, b] of runs) {
+            max = Math.max(max, t - end);
+            end = Math.max(end, b);
+          }
+          return { max: Math.round(max), limit: Math.round(vh * 0.4) };
+        });
+        expect(worst.max).toBeLessThanOrEqual(worst.limit);
+      });
+    }
+  }
+});
