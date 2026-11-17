@@ -60,3 +60,46 @@ test.describe("no horizontal scroll at 360px", () => {
     }
   }
 });
+
+test.describe("How we work starts on the page grid", () => {
+  test.skip(({ isMobile }) => isMobile, "desktop only");
+
+  for (const locale of ["en", "ar"] as const) {
+    test(`the heading shares the logo's start edge (${locale})`, async ({ page }) => {
+      await gotoReady(page, `/${locale}`);
+      await page.locator("#how-we-work").scrollIntoViewIfNeeded();
+      const edges = await page.evaluate(() => {
+        const rtl = document.documentElement.dir === "rtl";
+        const edge = (el: Element | null) => {
+          const r = el!.getBoundingClientRect();
+          return rtl ? r.right : r.left;
+        };
+        return { logo: edge(document.querySelector("header a")), h2: edge(document.querySelector("#how-we-work h2")) };
+      });
+      expect(Math.abs(edges.h2 - edges.logo)).toBeLessThanOrEqual(2);
+    });
+  }
+});
+
+test.describe("Choose the mood keeps its gutter at 390", () => {
+  test.skip(({ isMobile }) => !isMobile, "mobile only");
+
+  for (const locale of ["en", "ar"] as const) {
+    test(`the text stays inside the gutter (${locale})`, async ({ page }) => {
+      await gotoReady(page, `/${locale}/services/events-hospitality`);
+      await page.locator("#celebrations").scrollIntoViewIfNeeded();
+      const bad = await page.evaluate(() => {
+        const root = document.querySelector("#celebrations")!;
+        const out: string[] = [];
+        for (const el of root.querySelectorAll("p, h2, h3, h4, a, button, figcaption")) {
+          if (el.closest(".pstack-cards")) continue; // the photo row
+          const r = el.getBoundingClientRect();
+          if (r.width === 0) continue;
+          if (r.left < 15 || r.right > window.innerWidth - 15) out.push(`${el.tagName}.${el.className} ${Math.round(r.left)}-${Math.round(r.right)}`);
+        }
+        return out;
+      });
+      expect(bad).toEqual([]);
+    });
+  }
+});
