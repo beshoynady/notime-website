@@ -29,7 +29,7 @@ describe("the Workshop modules' copy", () => {
     for (const f of SCALE_FORMATS) expect(f.basis.en, f.id).toMatch(/^(ISO A\d|A common .+ size)$/);
   });
 
-  it("keeps the print-store promise's order of steps: item, artwork, proof, print", () => {
+  it("keeps the print-ordering steps in order: item, artwork, proof, print", () => {
     expect(ORDER_STEPS.map((s) => s.id)).toEqual(["item", "artwork", "proof", "print"]);
   });
 });

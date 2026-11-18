@@ -6,6 +6,7 @@ import { budgetBands } from "@/content/forms";
 import { fill, formCopy } from "@/content/form-copy";
 import type { CategorySlug, Locale } from "@/content/types";
 import { parseCategoryParam } from "@/lib/forms/category-param";
+import { currentAnchor } from "@/lib/legacy-anchors";
 import { eventFieldsVisible, monthOptions } from "@/lib/forms/event-visibility";
 import { contactSchema, GUEST_BANDS, TIMELINES } from "@/lib/forms/schemas";
 import { ChoiceChips, ErrorSummary, FormNotice, PrivacyNotice, SelectField, SharedFields, SubmitButton, SuccessPanel, TextField, TurnstileSlot } from "./form-parts";
@@ -55,7 +56,7 @@ function Inner({ locale, services, categories, onAgain }: { locale: Locale; serv
     setNow(new Date());
     if (hint) setCategory(hint);
     const v = new URLSearchParams(window.location.search).get("service");
-    const hit = v ? services.find((s) => s.value === v) : undefined;
+    const hit = v ? services.find((s) => s.value === currentAnchor(v)) : undefined;
     if (!hit) return;
     form.setValue("service", hit.value, { shouldDirty: true });
     // The URL is only readable after hydration (the page is prerendered), so this one-time sync runs here.

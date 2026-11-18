@@ -121,7 +121,7 @@ export const SERVICE_HOOKS: Record<string, Localized<string>> = {
     en: "Chosen for the person, finished in foil, UV, deboss or laser, and delivered.",
     ar: "هدية نختارها لصاحبها، ونمنحها لمستها بالرقائق المعدنية أو UV أو الكبس أو الليزر، ثم نوصلها إليه.",
   },
-  "online-print-store": {
+  "print-ordering": {
     // deck (choose, send artwork or reprint, approve the proof); OQ #23
     en: "Reorder approved print without starting from scratch.",
     ar: "أعيدوا طلب مطبوعاتكم المعتمدة دون أن تبدؤوا من جديد.",

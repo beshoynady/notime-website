@@ -141,6 +141,13 @@ test("?service= wins over ?category=", async ({ page }) => {
   await expect(eventLabel(page)).toHaveCount(0);
 });
 
+test("an old ?service=print-store link still presets Print ordering (D123)", async ({ page }) => {
+  await page.goto("/en/contact?service=print-store");
+  await scrollToForm(page);
+  await expect(page.locator("#brief-service")).toHaveValue("print-ordering");
+  await expect(page.locator("#brief-service option:checked")).toHaveText("Print ordering");
+});
+
 test("?category=<junk> is ignored and never echoed", async ({ page }) => {
   await page.goto("/en/contact?category=%3Cscript%3Ealert(1)%3C%2Fscript%3E");
   await scrollToForm(page);

@@ -106,7 +106,7 @@ const POINTS: Record<string, Localized<string[]>> = {
     en: ["Custom boxes and wraps", "Packaging for awards and gift sets", "Structure and dielines", "Print-ready artwork"],
     ar: ["علب وتغليف حسب الطلب", "تغليف للجوائز وأطقم الهدايا", "الهيكل وقوالب القصّ", "ملفات جاهزة للطباعة"],
   },
-  "online-print-store": {
+  "print-ordering": {
     en: ["Tell us the item and the quantity", "Send your artwork, or ask for a reprint", "Approve the proof before printing", "Printed to brand standard"],
     ar: ["أخبرونا بالمنتج والكمية", "أرسلوا التصميم، أو اطلبوا إعادة الطباعة", "اعتمدوا النسخة التجريبية قبل التنفيذ", "طباعة بمعايير علامتكم"],
   },
@@ -169,7 +169,7 @@ const PAGE: Record<string, { anchor: string; module: ModuleKey; quoteType?: Quot
   "stand-fabrication-signage": { anchor: "fabrication", module: "build-layers" },
   "packaging-design": { anchor: "packaging", module: "unboxing" },
   "corporate-gifts": { anchor: "gifts", module: "gift-configurator" },
-  "online-print-store": { anchor: "print-store", module: "print-order" },
+  "print-ordering": { anchor: "print-ordering", module: "print-order" },
   "branded-merchandise": { anchor: "merchandise", module: "merch-placement" },
   websites: { anchor: "websites", module: "responsive-frames" },
   "mobile-apps": { anchor: "apps", module: "app-screens" },
@@ -397,7 +397,7 @@ export const services: Service[] = [
       },
     ],
     [
-      "online-print-store",
+      "print-ordering",
       { en: "Print ordering", ar: "طلب المطبوعات" },
       {
         en: "Tell us the item and the quantity, approve the proof, and we print it to your brand.",

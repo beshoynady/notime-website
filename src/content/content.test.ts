@@ -135,7 +135,7 @@ const SIGNATURE_MODULES = {
   fabrication: "build-layers",
   packaging: "unboxing",
   gifts: "gift-configurator",
-  "print-store": "print-order",
+  "print-ordering": "print-order",
   merchandise: "merch-placement",
   websites: "responsive-frames",
   apps: "app-screens",
