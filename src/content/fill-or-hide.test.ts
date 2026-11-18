@@ -10,7 +10,8 @@ describe("budget bands (D78 §3)", () => {
       const bands = budgetBands[kind];
       expect(bands, kind).toHaveLength(6);
       expect(bands.at(-1)!.value).toBe("prefer-not");
-      expect(bands.at(-1)!.label).toEqual({ en: "Prefer not to say", ar: "أفضّل عدم التحديد" });
+      // The plural address (copy rewrite, owner rule 1).
+      expect(bands.at(-1)!.label).toEqual({ en: "Prefer not to say", ar: "نفضّل عدم التحديد" });
       for (const b of bands.slice(0, -1)) {
         expect(b.label.en).toMatch(/AED/);
         expect(b.label.ar).toMatch(/درهم$/);

@@ -14,13 +14,13 @@ export const LAUNCH_REVEAL = {
   title: { en: "The moment of the reveal", ar: "لحظة الكشف" },
   note: {
     en: "Start the reveal, then switch the setting. Every format leads to the same five seconds.",
-    ar: "ابدأ الكشف، ثم بدّل المكان. كل صيغة تقود إلى الثواني الخمس نفسها.",
+    ar: "ابدؤوا الكشف، ثم بدّلوا المكان. كل صيغة تقود إلى الثواني الخمس نفسها.",
   },
   countdownFrom: 5,
-  start: { en: "Start the reveal", ar: "ابدأ الكشف" },
-  skip: { en: "Skip the countdown", ar: "تخطَّ العدّ التنازلي" },
-  reset: { en: "Close the curtain", ar: "أسدل الستارة" },
-  productLabel: { en: "Your product", ar: "منتجك" },
+  start: { en: "Start the reveal", ar: "بدء الكشف" },
+  skip: { en: "Skip the countdown", ar: "تخطّي العدّ التنازلي" },
+  reset: { en: "Close the curtain", ar: "إسدال الستارة" },
+  productLabel: { en: "Your product", ar: "منتجكم" },
   formatsLabel: { en: "Setting", ar: "المكان" },
   formats: [
     {

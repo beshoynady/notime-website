@@ -30,8 +30,8 @@ async function resolve(params: PageProps<"/[locale]/services/[category]">["param
 export async function generateMetadata({ params }: PageProps<"/[locale]/services/[category]">): Promise<Metadata> {
   const { locale, category } = await resolve(params);
   return {
-    title: category.title[locale],
-    description: category.summary[locale],
+    title: (category.metaTitle ?? category.title)[locale],
+    description: (category.metaDescription ?? category.summary)[locale],
     alternates: localeAlternates(locale, categoryHref(category.slug)),
   };
 }

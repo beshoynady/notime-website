@@ -34,7 +34,7 @@ export interface Mood {
 
 export const MOODBOARD = {
   example: true,
-  title: { en: "Set the mood", ar: "اختر الأجواء" },
+  title: { en: "Set the mood", ar: "اختيار الأجواء" },
   note: {
     en: "Photos from NO TIME events. The three moods are examples of where a concept deck starts.",
     ar: "صور من فعاليات نظّمتها NO TIME، والأجواء الثلاث أمثلة على بداية ملف الفكرة.",
@@ -58,7 +58,7 @@ export const MOODBOARD = {
     {
       id: "wedding",
       label: { en: "Wedding", ar: "زفاف" },
-      line: { en: "White florals, candlelight and an entrance guests remember.", ar: "زهور بيضاء وضوء شموع، ومدخل يبقى في ذاكرة الضيوف." },
+      line: { en: "White florals, candlelight and an entrance dressed in roses.", ar: "زهور بيضاء وضوء شموع، ومدخل تزيّنه الورود." },
       swatches: [SW.ivory, SW.champagne, SW.taupe],
       florals: { en: "White roses and tall arrangements at the entrance", ar: "ورود بيضاء وتنسيقات عالية عند المدخل" },
       keepsake: { en: "A wrapped bouquet for each guest", ar: "باقة مغلّفة لكل ضيف" },

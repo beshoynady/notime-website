@@ -5,7 +5,7 @@ import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { useEffect, useRef, useState, type HTMLInputTypeAttribute, type ReactNode, type RefObject } from "react";
 import type { UseFormRegister } from "react-hook-form";
 import { contact } from "@/config/contact";
-import { errorMessages, fill, formCopy, minutesLabel, requiredMessages } from "@/content/form-copy";
+import { errorText, fill, formCopy, minutesLabel } from "@/content/form-copy";
 import type { Locale } from "@/content/types";
 import { Link } from "@/i18n/navigation";
 import { HONEYPOT, TURNSTILE_FIELD, type FieldErrorCode, type FormState } from "@/lib/forms/schemas";
@@ -15,11 +15,6 @@ import type { SummaryItem } from "./use-contract-form";
 import "./forms.css";
 
 type Register = UseFormRegister<Record<string, unknown>>;
-
-/** The sentence for a field's error code, in the page's language. */
-export function errorText(name: string, code: FieldErrorCode, locale: Locale): string {
-  return (code === "required" && requiredMessages[name]?.[locale]) || (errorMessages[code] ?? errorMessages.invalid)[locale];
-}
 
 const optionalTag = (locale: Locale) => <span className="form-optional"> ({formCopy.optional[locale]})</span>;
 
@@ -41,6 +36,7 @@ export function TextField({
   multiline = false,
   dir,
   caret = false,
+  max,
 }: {
   prefix: string;
   name: string;
@@ -58,6 +54,8 @@ export function TextField({
   dir?: "ltr";
   /** The page's bookend: the opening's caret blinks in this field until it's used. */
   caret?: boolean;
+  /** The schema's character limit, named by the tooLong message (useContractForm's `maxOf`). */
+  max?: number;
 }) {
   const id = fieldId(prefix, name);
   const described = [hint && `${id}-hint`, code && `${id}-error`].filter(Boolean).join(" ") || undefined;
@@ -82,7 +80,7 @@ export function TextField({
           {hint}
         </span>
       )}
-      {code && <FieldError id={`${id}-error`}>{errorText(name, code, locale)}</FieldError>}
+      {code && <FieldError id={`${id}-error`}>{errorText(name, code, locale, max)}</FieldError>}
     </div>
   );
 }
@@ -249,7 +247,7 @@ export function ErrorSummary({
                   control.scrollIntoView({ block: "center" });
                 }}
               >
-                <b>{labels[it.name] ?? it.name}:</b> {errorText(it.name, it.code, locale)}
+                <b>{labels[it.name] ?? it.name}:</b> {errorText(it.name, it.code, locale, it.max)}
               </a>
             </li>
           );

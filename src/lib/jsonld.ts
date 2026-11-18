@@ -13,6 +13,7 @@ import {
   type Service,
 } from "@/content";
 import { markets, type MarketKey } from "@/content/markets";
+import { shownFaq } from "@/lib/content-status";
 
 const isWritten = (s: string) => !s.startsWith("TODO:");
 
@@ -50,7 +51,7 @@ export function categoryJsonLd(category: Category, services: Service[], locale: 
       })),
     },
   ];
-  const faq = category.faq.filter((f) => isWritten(f.q[locale]) && isWritten(f.a[locale]));
+  const faq = shownFaq(category.faq).filter((f) => isWritten(f.q[locale]) && isWritten(f.a[locale]));
   if (faq.length > 0) {
     nodes.push({
       "@context": "https://schema.org",

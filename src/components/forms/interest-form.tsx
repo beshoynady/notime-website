@@ -23,7 +23,7 @@ function Inner({ locale, source, product, productName, onAgain }: { locale: Loca
   const i = formCopy.interest;
   const f = formCopy.fields;
   const prefix = `interest-${product}`;
-  const { form, state, pending, formAction, formRef, summaryRef, summary, onSubmit, sentName, codeOf } = useContractForm({
+  const { form, state, pending, formAction, formRef, summaryRef, summary, onSubmit, sentName, codeOf, maxOf } = useContractForm({
     schema: interestSchema,
     action: submitInterest,
     defaults: { product, type: "", name: "", email: "", company: "", message: "" },
@@ -48,7 +48,7 @@ function Inner({ locale, source, product, productName, onAgain }: { locale: Loca
       <SharedFields locale={locale} source={source} />
       <input type="hidden" value={product} {...reg("product")} />
       <div className="form-row">
-        <TextField prefix={prefix} name="name" label={f.name[locale]} autoComplete="name" locale={locale} register={reg} code={codeOf("name")} />
+        <TextField prefix={prefix} name="name" label={f.name[locale]} autoComplete="name" locale={locale} register={reg} code={codeOf("name")} max={maxOf("name")} />
         <TextField prefix={prefix} name="email" label={f.email[locale]} type="email" inputMode="email" autoComplete="email" dir="ltr" locale={locale} register={reg} code={codeOf("email")} />
       </div>
       <ChoiceChips
@@ -61,8 +61,8 @@ function Inner({ locale, source, product, productName, onAgain }: { locale: Loca
         code={codeOf("type")}
         optional
       />
-      <TextField prefix={prefix} name="company" label={f.company[locale]} autoComplete="organization" optional locale={locale} register={reg} code={codeOf("company")} />
-      <TextField prefix={prefix} name="message" label={i.message[locale]} multiline optional locale={locale} register={reg} code={codeOf("message")} />
+      <TextField prefix={prefix} name="company" label={f.company[locale]} autoComplete="organization" optional locale={locale} register={reg} code={codeOf("company")} max={maxOf("company")} />
+      <TextField prefix={prefix} name="message" label={i.message[locale]} multiline optional locale={locale} register={reg} code={codeOf("message")} max={maxOf("message")} />
       <TurnstileSlot state={state} locale={locale} />
       <FormNotice state={state} locale={locale} />
       <div className="form-actions">

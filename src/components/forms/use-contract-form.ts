@@ -5,11 +5,12 @@ import { startTransition, useActionState, useEffect, useRef, useState, type Form
 import { useForm, type FieldErrors, type Resolver } from "react-hook-form";
 import type { z } from "zod";
 import { readLeadSource } from "@/components/providers/lead-source-capture";
+import { fieldMax } from "@/lib/forms/field-max";
 import { IDLE, type FieldErrorCode, type FormState } from "@/lib/forms/schemas";
 import { LEAD_FIELD } from "@/lib/lead-source";
 
 type Values = Record<string, unknown>;
-export type SummaryItem = { name: string; code: FieldErrorCode };
+export type SummaryItem = { name: string; code: FieldErrorCode; max?: number };
 
 const asCode = (m: unknown): FieldErrorCode => (typeof m === "string" ? (m as FieldErrorCode) : "invalid");
 
@@ -49,7 +50,7 @@ export function useContractForm({
     Object.entries(codes)
       .filter((e): e is [string, FieldErrorCode] => !!e[1])
       .sort(([a], [b]) => (names.indexOf(a) + 1 || 999) - (names.indexOf(b) + 1 || 999))
-      .map(([name, code]) => ({ name, code }));
+      .map(([name, code]) => ({ name, code, max: fieldMax(schema, name) }));
   const toSummary = (codes: Record<string, FieldErrorCode | undefined>) => setSummary((s) => ({ items: items(codes), at: s.at + 1 }));
 
   // The server's answer reaches the summary during render (React's "adjust state on change" pattern)…
@@ -96,5 +97,5 @@ export function useContractForm({
     summaryRef.current?.focus();
   }, [ready]);
 
-  return { form, state, pending, formAction, formRef, summaryRef, summary: live, onSubmit, sentName, codeOf: (n: string) => (errors[n] ? asCode(errors[n]?.message) : undefined) };
+  return { form, state, pending, formAction, formRef, summaryRef, summary: live, onSubmit, sentName, codeOf: (n: string) => (errors[n] ? asCode(errors[n]?.message) : undefined), maxOf: (n: string) => fieldMax(schema, n) };
 }

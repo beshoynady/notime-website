@@ -9,10 +9,10 @@ export type LightGroupId = "wash" | "spots" | "back" | "screen";
 
 export const STAGE_LIGHTS = {
   example: true,
-  title: { en: "Light the stage", ar: "أضئ المسرح" },
+  title: { en: "Light the stage", ar: "إضاءة المسرح" },
   note: {
     en: "An example rig in four groups. Switch each one, or run the cues as the crew would on the night.",
-    ar: "منظومة إضاءة نموذجية من أربع مجموعات. تحكّم في كل مجموعة بنفسك، أو شغّل الإشارات كما يفعل الفريق ليلة الحدث.",
+    ar: "منظومة إضاءة نموذجية من أربع مجموعات. تحكّموا في كل مجموعة بأنفسكم، أو شغّلوا الإشارات كما يفعل الفريق ليلة الحدث.",
   },
   groupsLabel: { en: "Light groups", ar: "مجموعات الإضاءة" },
   groups: [
@@ -28,8 +28,8 @@ export const STAGE_LIGHTS = {
     { group: "back", label: { en: "Back light for the stage", ar: "الإضاءة الخلفية للمسرح" } },
     { group: "spots", label: { en: "Spot on the speaker", ar: "الإضاءة المركّزة على المتحدث" } },
   ] satisfies { group: LightGroupId; label: Localized<string> }[],
-  run: { en: "Run the cues", ar: "شغّل الإشارات" },
-  stop: { en: "Stop the cues", ar: "أوقف الإشارات" },
+  run: { en: "Run the cues", ar: "تشغيل الإشارات" },
+  stop: { en: "Stop the cues", ar: "إيقاف الإشارات" },
   /** Live region. {group}, {n}, {total} and {cue} are filled in. */
   status: {
     on: { en: "{group} on, {n} of {total} groups", ar: "{group}: تعمل، {n} من {total} مجموعات" },

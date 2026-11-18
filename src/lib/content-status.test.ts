@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { NAV_LINKS, QUOTE_LINK } from "@/components/layout/nav-links";
-import { contactStatus, isFilled, liveLinks } from "./content-status";
+import { contactStatus, isFilled, liveLinks, shownFaq } from "./content-status";
 
 describe("isFilled (fill or hide, D78)", () => {
   it("treats empty, whitespace, TODO and missing values as not filled", () => {
@@ -36,5 +36,25 @@ describe("navigation links", () => {
     expect(QUOTE_LINK.href).toBe("/contact");
     expect(existsSync("src/app/[locale]/(site)/contact/page.tsx")).toBe(true);
     expect(liveLinks([QUOTE_LINK])).toEqual([QUOTE_LINK]);
+  });
+});
+
+describe("shownFaq (D123: a claim the site can't back stays in the data, hidden)", () => {
+  it("leaves out the Print FAQ on ordering prints online, in the page and in its FAQPage JSON-LD", async () => {
+    const { getCategory, getServices } = await import("@/content");
+    const { categoryJsonLd } = await import("./jsonld");
+    const print = getCategory("production-print-gifts")!;
+    const online = print.faq.find((f) => f.q.en === "Can I order prints online?");
+    expect(online, "the line stays in the data").toBeDefined();
+    expect(shownFaq(print.faq)).not.toContain(online);
+    expect(shownFaq(print.faq)).toHaveLength(print.faq.length - 1);
+    const ld = categoryJsonLd(print, getServices("production-print-gifts"), "en", "https://example.com") as Record<string, unknown>[];
+    const names = (ld.find((n) => n["@type"] === "FAQPage")!.mainEntity as { name: string }[]).map((e) => e.name);
+    expect(names).not.toContain("Can I order prints online?");
+  });
+
+  it("keeps every other category's FAQ whole", async () => {
+    const { getCategories } = await import("@/content");
+    for (const c of getCategories().filter((c) => c.slug !== "production-print-gifts")) expect(shownFaq(c.faq), c.slug).toEqual(c.faq);
   });
 });

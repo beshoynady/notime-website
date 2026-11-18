@@ -25,13 +25,13 @@ export const SERVICE_HOOKS: Record<string, Localized<string>> = {
   },
   "galas-private-celebrations": {
     // p.9–p.11 (décor, florals, keepsakes, full on-day production)
-    en: "An evening guests remember, from the first flower to the last keepsake.",
-    ar: "أمسية تبقى في ذاكرة ضيوفك، من أول زهرة حتى آخر تذكار.",
+    en: "We choose the theme, dress the tables, set the flowers and, if you'd like, prepare a keepsake for every guest.",
+    ar: "نختار طابع الأمسية، ونجهّز الطاولات والزهور، ونعدّ تذكارًا تودّعون به ضيوفكم إن أردتم.",
   },
   "catering-heritage-hospitality": {
     // p.31–p.32 (majlis, tents, Arabic coffee, welcome ceremonies, heritage carts)
     en: "Coffee poured the way your guests expect, in a majlis set before they arrive.",
-    ar: "قهوة تُصبّ كما يعرفها ضيوفك، في مجلس جاهز قبل وصولهم.",
+    ar: "قهوة تُصبّ كما يعرفها ضيوفكم، في مجلس جاهز قبل وصولهم.",
   },
   "stage-technical-production": {
     // p.33 (stage, rigging, live sound); D56 ("rigged and run by one crew")
@@ -47,17 +47,17 @@ export const SERVICE_HOOKS: Record<string, Localized<string>> = {
   "video-production": {
     // p.14 (cinematic films; editing, sound design and post-production)
     en: "One crew from the script to the colour grade, so the film you approved on paper is the film you get.",
-    ar: "فريق واحد من كتابة النص حتى تصحيح الألوان، فيصلك الفيلم كما وافقت عليه على الورق.",
+    ar: "فريق واحد من كتابة النص حتى تصحيح الألوان، فيصلكم الفيلم كما وافقتم عليه على الورق.",
   },
   "motion-graphics": {
     // p.14 (motion graphics and logo animation); deck (screen content for stages)
     en: "Your logo, your titles and your stage screens, moving in one style.",
-    ar: "شعارك وعناوينك وشاشات مسرحك، تتحرّك كلها بأسلوب واحد.",
+    ar: "شعاركم وعناوينكم وشاشات مسرحكم، تتحرّك كلها بأسلوب واحد.",
   },
   "ai-content-creation": {
     // p.14 (AI video ads, AI imagery and key visuals, "produced with AI")
     en: "AI shortens the making. Art direction keeps every frame on brand.",
-    ar: "الذكاء الاصطناعي يختصر وقت الإنتاج، والتوجيه الفني يُبقي كل لقطة على هوية علامتك.",
+    ar: "الذكاء الاصطناعي يختصر وقت الإنتاج، والتوجيه الفني يُبقي كل لقطة على هوية علامتكم.",
   },
   "set-stage-design": {
     // deck (drawings and 3D models; sets for the camera, stages for the room)
@@ -67,7 +67,7 @@ export const SERVICE_HOOKS: Record<string, Localized<string>> = {
   "equipment-camera-rental": {
     // deck (cameras, lenses, lighting, audio); no inventory claim until OQ #22
     en: "Cameras, lenses, lighting and audio for your shoot, booked in one request.",
-    ar: "الكاميرات والعدسات والإضاءة والصوت لتصويرك، تحجزها بطلب واحد.",
+    ar: "الكاميرات والعدسات والإضاءة والصوت لتصويركم، تحجزونها بطلب واحد.",
   },
   // Marketing & Brand (step 3). Sources: profile p.12–13, p.17, p.19; category-copy-marketing.md.
   "branding-identity": {
@@ -78,12 +78,12 @@ export const SERVICE_HOOKS: Record<string, Localized<string>> = {
   "social-media-management": {
     // p.17 (daily publishing in Arabic and English); deck (monthly calendar)
     en: "Daily publishing in Arabic and English, from a calendar you have already approved.",
-    ar: "نشر يومي بالعربية والإنجليزية، وفق خطة نشر اعتمدتها مسبقًا.",
+    ar: "نشر يومي بالعربية والإنجليزية، وفق خطة نشر اعتمدتموها مسبقًا.",
   },
   "digital-marketing-seo": {
     // p.15 (SEO & performance, Core Web Vitals, analytics)
     en: "Found in search, fast on a phone, and measured, so the next decision rests on numbers.",
-    ar: "ظهور في نتائج البحث، وسرعة على الهاتف، وقياس يجعل قرارك التالي مبنيًا على الأرقام.",
+    ar: "ظهور في نتائج البحث، وسرعة على الهاتف، وقياس يجعل قراركم التالي مبنيًا على الأرقام.",
   },
   "content-strategy": {
     // deck (messages per channel, monthly calendar, templates)
@@ -98,7 +98,7 @@ export const SERVICE_HOOKS: Record<string, Localized<string>> = {
   "paid-media-planning": {
     // deck (channels, budgets and timing matched to the audience; performance reporting)
     en: "Budget placed where your audience actually scrolls, and reported in plain numbers.",
-    ar: "ميزانيتك حيث يتصفّح جمهورك فعلًا، وتقارير بأرقام واضحة.",
+    ar: "ميزانيتكم حيث يتصفّح جمهوركم فعلًا، وتقارير بأرقام واضحة.",
   },
   // Production, Print & Gifts (step 3). Sources: profile p.19, p.21–24; category-copy-print.md.
   "commercial-large-format-printing": {
@@ -114,7 +114,7 @@ export const SERVICE_HOOKS: Record<string, Localized<string>> = {
   "packaging-design": {
     // deck (boxes, award and gift-set packaging, dielines)
     en: "The box is the first thing they open, so we design it to feel like the brand.",
-    ar: "العلبة أول ما يفتحه ضيفك، فنصمّمها لتحمل إحساس العلامة.",
+    ar: "العلبة أول ما يفتحه ضيوفكم، فنصمّمها لتحمل إحساس العلامة.",
   },
   "corporate-gifts": {
     // profile (gift sets; screen printing, UV, foiling, debossing, laser engraving)
@@ -123,8 +123,8 @@ export const SERVICE_HOOKS: Record<string, Localized<string>> = {
   },
   "online-print-store": {
     // deck (choose, send artwork or reprint, approve the proof); OQ #23
-    en: "Reorder approved print without starting the brief again.",
-    ar: "أعد طلب مطبوعاتك المعتمدة دون أن تبدأ من جديد.",
+    en: "Reorder approved print without starting from scratch.",
+    ar: "أعيدوا طلب مطبوعاتكم المعتمدة دون أن تبدؤوا من جديد.",
   },
   "branded-merchandise": {
     // deck (apparel, bags, everyday objects; printed or engraved to suit the material)

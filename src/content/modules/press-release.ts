@@ -15,7 +15,7 @@ export type PartId = "headline" | "dateline" | "lead" | "quote" | "boilerplate" 
 export const PRESS_RELEASE = {
   example: true,
   title: { en: "Anatomy of a press release", ar: "مكوّنات البيان الصحفي" },
-  hint: { en: "Choose a numbered part to see what it does.", ar: "اختر جزءًا مرقّمًا لتعرف دوره." },
+  hint: { en: "Choose a numbered part to see what it does.", ar: "اختاروا جزءًا مرقّمًا لتعرفوا دوره." },
   /** Names the list of notes for assistive tech. */
   notesLabel: { en: "What each part does", ar: "دور كل جزء" },
   release: {

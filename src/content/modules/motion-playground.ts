@@ -16,7 +16,7 @@ export interface EasingCopy {
 export const MOTION_PLAYGROUND = {
   title: { en: "Every second is planned.", ar: "كل ثانية محسوبة." },
   cardLabel: { en: "Title card", ar: "بطاقة العنوان" },
-  legend: { en: "Choose an easing", ar: "اختر منحنى الحركة" },
+  legend: { en: "Choose an easing", ar: "اختيار منحنى الحركة" },
   play: { en: "Play", ar: "تشغيل" },
   playing: { en: "Playing with", ar: "التشغيل بمنحنى" },
   reduced: {

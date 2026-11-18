@@ -19,7 +19,7 @@ export function WebsiteReviewForm(props: { locale: Locale; source: string }) {
 function Inner({ locale, source, onAgain }: { locale: Locale; source: string; onAgain: () => void }) {
   const r = formCopy.review;
   const f = formCopy.fields;
-  const { form, state, pending, formAction, formRef, summaryRef, summary, onSubmit, sentName, codeOf } = useContractForm({
+  const { form, state, pending, formAction, formRef, summaryRef, summary, onSubmit, sentName, codeOf, maxOf } = useContractForm({
     schema: websiteReviewSchema,
     action: submitWebsiteReview,
     defaults: { websiteUrl: "", name: "", contact: "", goal: null, message: "" },
@@ -49,7 +49,7 @@ function Inner({ locale, source, onAgain }: { locale: Locale; source: string; on
         code={codeOf("websiteUrl")}
       />
       <div className="form-row">
-        <TextField prefix={PREFIX} name="name" label={f.name[locale]} autoComplete="name" locale={locale} register={reg} code={codeOf("name")} />
+        <TextField prefix={PREFIX} name="name" label={f.name[locale]} autoComplete="name" locale={locale} register={reg} code={codeOf("name")} max={maxOf("name")} />
         <TextField prefix={PREFIX} name="contact" label={r.contact[locale]} autoComplete="email" dir="ltr" locale={locale} register={reg} code={codeOf("contact")} />
       </div>
       <ChoiceChips
@@ -61,7 +61,7 @@ function Inner({ locale, source, onAgain }: { locale: Locale; source: string; on
         register={reg}
         code={codeOf("goal")}
       />
-      <TextField prefix={PREFIX} name="message" label={r.message[locale]} multiline optional locale={locale} register={reg} code={codeOf("message")} />
+      <TextField prefix={PREFIX} name="message" label={r.message[locale]} multiline optional locale={locale} register={reg} code={codeOf("message")} max={maxOf("message")} />
       <TurnstileSlot state={state} locale={locale} />
       <FormNotice state={state} locale={locale} />
       <div className="form-actions">

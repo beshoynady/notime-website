@@ -7,7 +7,7 @@ import type { Localized } from "./types";
  */
 export type BudgetBand = { value: string; label: Localized<string> };
 
-const PREFER_NOT: BudgetBand = { value: "prefer-not", label: { en: "Prefer not to say", ar: "أفضّل عدم التحديد" } };
+const PREFER_NOT: BudgetBand = { value: "prefer-not", label: { en: "Prefer not to say", ar: "نفضّل عدم التحديد" } };
 
 export const budgetBands: Record<"events" | "software", BudgetBand[]> = {
   events: [

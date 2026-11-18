@@ -61,7 +61,7 @@ const POINTS: Record<string, Localized<string[]>> = {
   },
   "ai-content-creation": {
     en: ["AI video ads and short videos", "Cinematic AI video", "AI imagery and campaign key visuals", "Art direction true to your brand", "Editing, sound and finishing"],
-    ar: ["إعلانات فيديو ومقاطع قصيرة بالذكاء الاصطناعي", "فيديو سينمائي بالذكاء الاصطناعي", "صور بالذكاء الاصطناعي ومرئيات رئيسية للحملات", "توجيه فني يلتزم بهويتك", "المونتاج والصوت واللمسات الأخيرة"],
+    ar: ["إعلانات فيديو ومقاطع قصيرة بالذكاء الاصطناعي", "فيديو سينمائي بالذكاء الاصطناعي", "صور بالذكاء الاصطناعي ومرئيات رئيسية للحملات", "توجيه فني يلتزم بهويتكم", "المونتاج والصوت واللمسات الأخيرة"],
   },
   "set-stage-design": {
     en: ["Set and stage concepts", "Drawings and 3D models", "Sets built for the camera", "Stages built for the room"],
@@ -82,7 +82,7 @@ const POINTS: Record<string, Localized<string[]>> = {
   },
   "digital-marketing-seo": {
     en: ["Search engine optimisation", "Site speed and Core Web Vitals", "Analytics and reporting", "Measurement across search and your site"],
-    ar: ["تحسين الظهور في محركات البحث", "سرعة الموقع ومؤشرات أداء الويب الأساسية", "التحليلات والتقارير", "قياس النتائج في البحث وعلى موقعك"],
+    ar: ["تحسين الظهور في محركات البحث", "سرعة الموقع ومؤشرات أداء الويب الأساسية", "التحليلات والتقارير", "قياس النتائج في البحث وعلى موقعكم"],
   },
   "content-strategy": {
     en: ["Messages and topics per channel", "A monthly content calendar", "Arabic and English content", "Content systems and templates"],
@@ -107,8 +107,8 @@ const POINTS: Record<string, Localized<string[]>> = {
     ar: ["علب وتغليف حسب الطلب", "تغليف للجوائز وأطقم الهدايا", "الهيكل وقوالب القصّ", "ملفات جاهزة للطباعة"],
   },
   "online-print-store": {
-    en: ["Choose the item and the quantity", "Send your artwork, or ask for a reprint", "Approve the proof before printing", "Printed to brand standard"],
-    ar: ["اختر المنتج والكمية", "أرسل التصميم، أو اطلب إعادة طباعة", "اعتمد النسخة التجريبية قبل التنفيذ", "طباعة بمعايير علامتك"],
+    en: ["Tell us the item and the quantity", "Send your artwork, or ask for a reprint", "Approve the proof before printing", "Printed to brand standard"],
+    ar: ["أخبرونا بالمنتج والكمية", "أرسلوا التصميم، أو اطلبوا إعادة الطباعة", "اعتمدوا النسخة التجريبية قبل التنفيذ", "طباعة بمعايير علامتكم"],
   },
   "branded-merchandise": {
     en: ["Apparel", "Bags and totes", "Desk and everyday objects", "Printed or engraved, to suit the material"],
@@ -118,15 +118,15 @@ const POINTS: Record<string, Localized<string[]>> = {
   // exactly 3 deliverables per service, D65).
   websites: {
     en: ["Arabic and English, with full right-to-left layouts", "A content system your team runs", "SEO and speed from day one"],
-    ar: ["العربية والإنجليزية، مع دعم كامل للاتجاه من اليمين إلى اليسار", "نظام لإدارة المحتوى يديره فريقك", "الظهور في محركات البحث والسرعة من اليوم الأول"],
+    ar: ["العربية والإنجليزية، مع دعم كامل للاتجاه من اليمين إلى اليسار", "نظام لإدارة المحتوى يديره فريقكم", "الظهور في محركات البحث والسرعة من اليوم الأول"],
   },
   "mobile-apps": {
     en: ["iOS and Android", "Connected to your website", "Arabic and English"],
-    ar: ["iOS و Android", "مرتبط بموقعك الإلكتروني", "بالعربية والإنجليزية"],
+    ar: ["iOS وAndroid", "مرتبط بموقعكم الإلكتروني", "بالعربية والإنجليزية"],
   },
   "custom-systems": {
     en: ["Admin dashboards and analytics", "Roles and permissions", "Integrations with your tools"],
-    ar: ["لوحات إدارة وتحليلات", "أدوار وصلاحيات لفريقك", "الربط بأدواتك وأنظمتك"],
+    ar: ["لوحات إدارة وتحليلات", "أدوار وصلاحيات لفريقكم", "الربط بأدواتكم وأنظمتكم"],
   },
   "e-commerce": {
     en: ["Catalogue management", "Checkout and payment integration", "An orders dashboard"],
@@ -138,7 +138,7 @@ const POINTS: Record<string, Localized<string[]>> = {
   },
   "ai-consulting": {
     en: ["A review of where AI fits your work", "A pilot plan", "Getting your team started"],
-    ar: ["مراجعة لمواضع فائدة الذكاء الاصطناعي في عملك", "خطة لمشروع تجريبي أول", "تهيئة فريقك للبدء"],
+    ar: ["مراجعة لمواضع فائدة الذكاء الاصطناعي في عملكم", "خطة لمشروع تجريبي أول", "تهيئة فريقكم للبدء"],
   },
 };
 
@@ -284,8 +284,8 @@ export const services: Service[] = [
       "motion-graphics",
       { en: "Motion graphics", ar: "الموشن جرافيك" },
       {
-        en: "Titles, explainers and screen content that move with purpose.",
-        ar: "عناوين وفيديوهات شرح ومحتوى للشاشات، لكل حركة فيها سبب.",
+        en: "Titles, explainers and screen content, moving in your brand's style.",
+        ar: "عناوين وفيديوهات شرح ومحتوى للشاشات، تتحرّك بأسلوب علامتكم.",
       },
     ],
     [
@@ -335,7 +335,7 @@ export const services: Service[] = [
       { en: "Digital marketing & SEO", ar: "التسويق الرقمي وتحسين الظهور في محركات البحث (SEO)" },
       {
         en: "Search, site speed and measurement that show what works.",
-        ar: "محركات البحث وسرعة الموقع والقياس، لتعرف ما الذي ينجح.",
+        ar: "محركات البحث وسرعة الموقع والقياس، لتعرفوا ما الذي ينجح.",
       },
     ],
     [
@@ -398,10 +398,10 @@ export const services: Service[] = [
     ],
     [
       "online-print-store",
-      { en: "Online print store", ar: "متجر الطباعة الإلكتروني" },
+      { en: "Print ordering", ar: "طلب المطبوعات" },
       {
-        en: "Order approved print items online, on brand every time.",
-        ar: "اطلب مطبوعاتك المعتمدة عبر الإنترنت، بهوية ثابتة في كل مرة.",
+        en: "Tell us the item and the quantity, approve the proof, and we print it to your brand.",
+        ar: "أخبرونا بالمنتج والكمية، واعتمدوا النسخة التجريبية، ونطبعه بهوية علامتكم.",
       },
     ],
     [
@@ -427,7 +427,7 @@ export const services: Service[] = [
       { en: "Mobile apps", ar: "تطبيقات الجوّال" },
       {
         en: "iOS and Android apps designed around how people use them.",
-        ar: "تطبيقات iOS و Android مصمّمة وفق طريقة استخدام الناس لها.",
+        ar: "تطبيقات iOS وAndroid مصمّمة وفق طريقة استخدام الناس لها.",
       },
     ],
     [
@@ -435,7 +435,7 @@ export const services: Service[] = [
       { en: "Custom systems", ar: "أنظمة مخصّصة" },
       {
         en: "Internal tools and systems built for the way your team works.",
-        ar: "أدوات وأنظمة داخلية نبنيها وفق طريقة عمل فريقك.",
+        ar: "أدوات وأنظمة داخلية نبنيها وفق طريقة عمل فريقكم.",
       },
     ],
     [
@@ -459,7 +459,7 @@ export const services: Service[] = [
       { en: "AI consulting", ar: "استشارات الذكاء الاصطناعي" },
       {
         en: "Where AI helps your work, where it does not, and how to start.",
-        ar: "أين يفيد الذكاء الاصطناعي عملك، وأين لا يفيد، وكيف تبدأ.",
+        ar: "أين يفيد الذكاء الاصطناعي عملكم، وأين لا يفيد، وكيف تبدؤون.",
       },
     ],
   ]),
