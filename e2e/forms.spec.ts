@@ -194,3 +194,31 @@ test("a timing picked before an events service is cleared and not sent", async (
   expect(team.text).toContain("Service: ");
   expect(team.text).not.toContain("Timing");
 });
+
+// D124: the phone field. The example shows from the start; a leading 0 asks for the country code.
+test("the phone field shows its example, and a leading 0 asks for the country code", async ({ page }) => {
+  const before = mails().length;
+  await page.goto("/en/contact");
+  await scrollToForm(page);
+  await expect(page.locator("#brief-phone-hint")).toHaveText("For example, +971 50 123 4567");
+  await fillValid(page);
+  await page.fill("#brief-phone", "050 123 4567");
+  await page.click(".ct-form .form-submit");
+  await expect(page.locator("#brief-phone")).toHaveAttribute("aria-invalid", "true");
+  await expect(page.locator("#brief-phone-error")).toHaveText("Include the country code, e.g. +971.");
+  expect(mails().length).toBe(before);
+});
+
+test("a valid number is sent to the team in E.164", async ({ page }) => {
+  const before = mails().length;
+  await page.goto("/en/contact");
+  await scrollToForm(page);
+  await fillValid(page);
+  await page.fill("#brief-phone", "00971 (50) 123-4567");
+  await page.waitForFunction(() => !!(document.querySelector('[name="cf-turnstile-response"]') as HTMLInputElement | null)?.value, null, { timeout: 15_000 });
+  await page.click(".ct-form .form-submit");
+  await expect(page.locator(".form-success, [data-form-success]").first()).toBeVisible({ timeout: 15_000 });
+  await expect.poll(() => mails().length).toBe(before + 2);
+  const team = JSON.parse(readFileSync(path.join(SINK, mails().filter((f) => f.endsWith("team.json")).sort().at(-1)!), "utf8"));
+  expect(team.text).toContain("Phone: +971501234567");
+});

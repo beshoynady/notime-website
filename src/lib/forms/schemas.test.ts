@@ -70,3 +70,23 @@ describe("contact · event fields", () => {
     expect(errs(at({ guests: "lots" }))).toEqual({ guests: "invalid" });
   });
 });
+
+describe("phone fields in E.164 (D124)", () => {
+  const consult = { build: "websites", timeline: "flexible", name: "Sara", email: "sara@example.com" };
+  const brief = { name: "Sara", email: "sara@example.com", message: "A launch." };
+  it("stores the brief's and the intro call's phone in E.164", () => {
+    expect(contactSchema.parse({ ...brief, phone: "00971 50 123 4567" }).phone).toBe("+971501234567");
+    expect(consultationSchema.parse({ ...consult, phone: "(+966) 51-234-5678" }).phone).toBe("+966512345678");
+  });
+  it("asks for the country code on a leading 0, and says 'phone' for garbage", () => {
+    expect(errs(contactSchema.safeParse({ ...brief, phone: "0501234567" }))).toEqual({ phone: "phoneCode" });
+    expect(errs(consultationSchema.safeParse({ ...consult, phone: "call me" }))).toEqual({ phone: "phone" });
+  });
+  it("the review's 'Email or WhatsApp' takes an email as it is, and a number by the same rules", () => {
+    const ok = { websiteUrl: "https://example.com", name: "Omar", goal: "speed" };
+    expect(websiteReviewSchema.parse({ ...ok, contact: "omar@example.com" }).contact).toBe("omar@example.com");
+    expect(websiteReviewSchema.parse({ ...ok, contact: "+971 50 123 4567" }).contact).toBe("+971501234567");
+    expect(errs(websiteReviewSchema.safeParse({ ...ok, contact: "050 123 4567" }))).toEqual({ contact: "phoneCode" });
+    expect(errs(websiteReviewSchema.safeParse({ ...ok, contact: "omar@" }))).toEqual({ contact: "contact" });
+  });
+});

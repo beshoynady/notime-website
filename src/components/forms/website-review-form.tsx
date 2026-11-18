@@ -50,7 +50,7 @@ function Inner({ locale, source, onAgain }: { locale: Locale; source: string; on
       />
       <div className="form-row">
         <TextField prefix={PREFIX} name="name" label={f.name[locale]} autoComplete="name" locale={locale} register={reg} code={codeOf("name")} max={maxOf("name")} />
-        <TextField prefix={PREFIX} name="contact" label={r.contact[locale]} autoComplete="email" dir="ltr" locale={locale} register={reg} code={codeOf("contact")} />
+        <TextField prefix={PREFIX} name="contact" label={r.contact[locale]} hint={r.contactHint[locale]} autoComplete="email" dir="ltr" locale={locale} register={reg} code={codeOf("contact")} />
       </div>
       <ChoiceChips
         prefix={PREFIX}

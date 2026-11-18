@@ -16,6 +16,8 @@ export const errorMessages: Record<FieldErrorCode, L> = {
   email: l("Enter an email like name@company.com.", "اكتبوا البريد الإلكتروني بهذا الشكل: name@company.com"),
   url: l("Enter a website address like yourcompany.ae.", "اكتبوا عنوان الموقع بهذا الشكل: yourcompany.ae"),
   phone: l("Use digits only, e.g. +971 50 123 4567.", "اكتبوا الرقم بالأرقام فقط، مثل ‎+971 50 123 4567."),
+  // D124: a number that starts with 0, or with no country code we can read.
+  phoneCode: l("Include the country code, e.g. +971.", "أضيفوا رمز الدولة، مثل ‎+971."),
   contact: l("Enter an email like name@company.com, or a number with the country code, e.g. +971.", "اكتبوا بريدًا إلكترونيًا مثل name@company.com، أو رقمًا مع رمز الدولة مثل ‎+971."),
   tooLong: l("Keep it under {max} characters.", "الحد الأقصى لعدد الأحرف: {max}"),
   invalid: l("Something in this field doesn't fit. Check it and try again.", "في هذا الحقل ما لا يناسب. راجعوه وحاولوا مرة أخرى."),
@@ -67,6 +69,8 @@ export const formCopy = {
     name: l("Your name", "الاسم"),
     email: l("Email", "البريد الإلكتروني"),
     phone: l("Phone or WhatsApp", "الهاتف أو واتساب"),
+    /** Shown under the phone field from the start, before any error (D124). */
+    phoneHint: l("For example, +971 50 123 4567", "مثال: ‎+971 50 123 4567"),
     company: l("Company", "الشركة"),
     websiteUrl: l("Current website", "موقعكم الحالي"),
     websiteUrlHint: l("For example, yourcompany.ae", "مثال: yourcompany.ae"),
@@ -109,6 +113,8 @@ export const formCopy = {
   review: {
     websiteUrl: l("Your website address", "عنوان موقعكم"),
     contact: l("Email or WhatsApp number", "البريد الإلكتروني أو رقم واتساب"),
+    /** The field takes either shape, so its hint shows both (D124). */
+    contactHint: l("For example, name@company.com or +971 50 123 4567", "مثال: name@company.com أو ‎+971 50 123 4567"),
     goal: l("What's the main goal?", "ما هدفكم الأساسي؟"),
     goalOptions: {
       "more-enquiries": l("More enquiries", "طلبات أكثر"),
