@@ -25,7 +25,7 @@ const privacy: LegalDoc = {
           },
         },
         { p: { en: "Our registered legal entity is {legalName}, {address}.", ar: "كياننا القانوني المسجّل: {legalName}، {address}." }, needs: ["legalName", "address"] },
-        { p: { en: "For any question about your personal data, contact us at {dataRequestContact}.", ar: "لأي سؤال عن بياناتك الشخصية، تواصل معنا عبر {dataRequestContact}." }, needs: ["dataRequestContact"] },
+        { p: { en: "For any question about your personal data, contact us at {dataRequestContact}.", ar: "لأي سؤال عن بياناتكم الشخصية، تواصلوا معنا عبر {dataRequestContact}." }, needs: ["dataRequestContact"] },
       ],
     },
     {
@@ -45,53 +45,53 @@ const privacy: LegalDoc = {
         {
           p: {
             en: "What you send us. When you use a form on this site (a consultation request, a quote request, or registering interest in a product), we receive what you enter: your name, your email address and/or WhatsApp number, your company if you give it, the service or product you're asking about, a budget range if you choose one, your message, and the details the form asks for (for example an event date, a city, a guest count, items and quantities, or rental dates).",
-            ar: "ما ترسله إلينا. عند استخدامك أحد نماذج الموقع (طلب استشارة، أو طلب عرض سعر، أو تسجيل اهتمامك بأحد منتجاتنا)، يصلنا ما تكتبه: اسمك، وبريدك الإلكتروني و/أو رقم واتساب، واسم شركتك إن ذكرته، والخدمة أو المنتج الذي تسأل عنه، ونطاق الميزانية إن اخترته، ورسالتك، والتفاصيل التي يطلبها النموذج (مثل موعد المناسبة، أو المدينة، أو عدد الضيوف، أو المنتجات والكميات، أو مواعيد الاستئجار).",
+            ar: "ما ترسلونه إلينا. عند استخدامكم أحد نماذج الموقع (طلب استشارة، أو طلب عرض سعر، أو تسجيل اهتمامكم بأحد منتجاتنا)، يصلنا ما تكتبونه: اسمكم، وبريدكم الإلكتروني و/أو رقم واتساب، واسم شركتكم إن ذكرتموه، والخدمة أو المنتج الذي تسألون عنه، ونطاق الميزانية إن اخترتموه، ورسالتكم، والتفاصيل التي يطلبها النموذج (مثل موعد المناسبة، أو المدينة، أو عدد الضيوف، أو المنتجات والكميات، أو مواعيد الاستئجار).",
           },
         },
         {
           p: {
             en: "Technical data. Like any website, our hosting provider processes your IP address and basic browser information to deliver pages and keep the site secure. When you submit a form, Cloudflare Turnstile checks that the request comes from a person and not an automated program, and we use your IP address for a short time to limit repeated submissions. A form also tells us how you reached the site (a link's campaign tag, the site you came from and your first page on ours), so we know which post or link brought you.",
-            ar: "البيانات التقنية. كأي موقع إلكتروني، يعالج مزوّد الاستضافة عنوان IP الخاص بك ومعلومات أساسية عن متصفحك، لعرض الصفحات والحفاظ على أمن الموقع. وعند إرسال أي نموذج، تتحقّق خدمة Cloudflare Turnstile من أن الطلب صادر عن شخص لا عن برنامج آلي، ونستخدم عنوان IP لفترة قصيرة للحدّ من تكرار الإرسال. ويخبرنا النموذج كذلك كيف وصلت إلى الموقع (وسم الحملة في الرابط، والموقع الذي جئت منه، وأول صفحة زرتها عندنا)، لنعرف المنشور أو الرابط الذي أوصلك إلينا.",
+            ar: "البيانات التقنية. كأي موقع إلكتروني، يعالج مزوّد الاستضافة عنوان IP الخاص بكم ومعلومات أساسية عن متصفحكم، لعرض الصفحات والحفاظ على أمن الموقع. وعند إرسال أي نموذج، تتحقّق خدمة Cloudflare Turnstile من أن الطلب صادر عن شخص لا عن برنامج آلي، ونستخدم عنوان IP لفترة قصيرة للحدّ من تكرار الإرسال. ويخبرنا النموذج كذلك كيف وصلتم إلى الموقع (وسم الحملة في الرابط، والموقع الذي جئتم منه، وأول صفحة زرتموها عندنا)، لنعرف المنشور أو الرابط الذي أوصلكم إلينا.",
           },
         },
         {
           p: {
             en: "Your language choice. One cookie remembers whether you're reading in English or Arabic. See the [Cookie Policy](/cookies).",
-            ar: "اختيار اللغة. ملف تعريف ارتباط واحد يتذكّر هل تتصفّح بالعربية أم بالإنجليزية. راجع [سياسة ملفات تعريف الارتباط](/cookies).",
+            ar: "اختيار اللغة. ملف تعريف ارتباط واحد يتذكّر هل تتصفّحون بالعربية أم بالإنجليزية. راجعوا [سياسة ملفات تعريف الارتباط](/cookies).",
           },
         },
         {
           p: {
             en: "Visit statistics. We count visits with {analytics}, a service that uses no cookies. It records totals such as pages viewed, the site a visit came from, the country and the type of device, without building a profile of you or following you to other sites, so we don't ask for consent.",
-            ar: "إحصاءات الزيارات. نحصي الزيارات عبر {analytics}، وهي خدمة لا تستخدم ملفات تعريف الارتباط. تسجّل أرقامًا إجمالية مثل الصفحات التي شوهدت، والموقع الذي جاءت منه الزيارة، والبلد، ونوع الجهاز، دون أن تكوّن ملفًا عنك أو تتبعك إلى مواقع أخرى، لذلك لا نطلب موافقتك.",
+            ar: "إحصاءات الزيارات. نحصي الزيارات عبر {analytics}، وهي خدمة لا تستخدم ملفات تعريف الارتباط. تسجّل أرقامًا إجمالية مثل الصفحات التي شوهدت، والموقع الذي جاءت منه الزيارة، والبلد، ونوع الجهاز، دون أن تكوّن ملفًا عنكم أو تتبعكم إلى مواقع أخرى، لذلك لا نطلب موافقتكم.",
           },
           needs: ["analytics"],
         },
         {
           p: {
             en: "What we don't do. We don't use analytics or advertising trackers, and we don't sell or rent your data. If we ever add analytics, we'll update this policy first.",
-            ar: "ما لا نفعله. لا نستخدم أدوات تحليل أو تتبّع إعلاني، ولا نبيع بياناتك ولا نؤجّرها. وإذا أضفنا أدوات تحليل يومًا ما، فسنحدّث هذه السياسة أولًا.",
+            ar: "ما لا نفعله. لا نستخدم أدوات تحليل أو تتبّع إعلاني، ولا نبيع بياناتكم ولا نؤجّرها. وإذا أضفنا أدوات تحليل يومًا ما، فسنحدّث هذه السياسة أولًا.",
           },
           absent: ["analytics"],
         },
         {
           p: {
             en: "What we don't do. We don't use advertising trackers, and we don't sell or rent your data.",
-            ar: "ما لا نفعله. لا نستخدم أدوات تتبّع إعلاني، ولا نبيع بياناتك ولا نؤجّرها.",
+            ar: "ما لا نفعله. لا نستخدم أدوات تتبّع إعلاني، ولا نبيع بياناتكم ولا نؤجّرها.",
           },
           needs: ["analytics"],
         },
       ],
     },
     {
-      heading: { en: "Why we use it", ar: "لماذا نستخدم بياناتك" },
+      heading: { en: "Why we use it", ar: "لماذا نستخدم بياناتكم" },
       blocks: [
         {
           list: [
             {
               text: {
                 en: "To answer your request: to reply, to understand what you need, and to prepare a proposal. We use your data because you asked us to, as a step before a possible agreement with you.",
-                ar: "للردّ على طلبك: لنتواصل معك، ونفهم ما تحتاجه، ونعدّ لك عرضًا. نستخدم بياناتك لأنك طلبت منّا ذلك، تمهيدًا لاتفاق محتمل بيننا.",
+                ar: "للردّ على طلبكم: لنتواصل معكم، ونفهم ما تحتاجونه، ونعدّ لكم عرضًا. نستخدم بياناتكم لأنكم طلبتم منّا ذلك، تمهيدًا لاتفاق محتمل بيننا.",
               },
             },
             { text: { en: "To keep the site and its forms safe: to block spam and abuse.", ar: "لحماية الموقع ونماذجه: لمنع الرسائل المزعجة وإساءة الاستخدام." } },
@@ -100,13 +100,13 @@ const privacy: LegalDoc = {
         {
           p: {
             en: "We don't use your data for marketing, and we don't make decisions about you by automated means alone.",
-            ar: "لا نستخدم بياناتك لأغراض تسويقية، ولا نتّخذ بشأنك قرارات تعتمد على المعالجة الآلية وحدها.",
+            ar: "لا نستخدم بياناتكم لأغراض تسويقية، ولا نتّخذ بشأنكم قرارات تعتمد على المعالجة الآلية وحدها.",
           },
         },
       ],
     },
     {
-      heading: { en: "Who processes it for us", ar: "من يعالج بياناتك نيابةً عنّا" },
+      heading: { en: "Who processes it for us", ar: "من يعالج بياناتكم نيابةً عنّا" },
       blocks: [
         {
           p: {
@@ -119,12 +119,12 @@ const privacy: LegalDoc = {
             { text: { en: "Hostinger hosts the website.", ar: "Hostinger لاستضافة الموقع." } },
             { text: { en: "{analytics} counts visits in totals, without cookies.", ar: "{analytics} لإحصاء الزيارات إجمالًا، دون ملفات تعريف ارتباط." }, needs: ["analytics"] },
             { text: { en: "Cloudflare (Turnstile) checks form submissions for automated abuse.", ar: "Cloudflare (خدمة Turnstile) لفحص النماذج المُرسلة والتصدّي لإساءة الاستخدام الآلية." } },
-            { text: { en: "Resend delivers form submissions to our inbox and, where it applies, a confirmation to you.", ar: "Resend لإيصال النماذج المُرسلة إلى بريدنا، وإرسال رسالة تأكيد إليك حين ينطبق ذلك." } },
+            { text: { en: "Resend delivers form submissions to our inbox and, where it applies, a confirmation to you.", ar: "Resend لإيصال النماذج المُرسلة إلى بريدنا، وإرسال رسالة تأكيد إليكم حين ينطبق ذلك." } },
             // D78: listed before the WhatsApp button can render (both gate on contact.whatsapp).
             {
               text: {
                 en: "WhatsApp (Meta): if you message us on WhatsApp, your number and messages are handled by WhatsApp, under Meta's own terms and privacy policy.",
-                ar: "واتساب (Meta): إذا راسلتنا عبر واتساب، فإن رقمك ورسائلك تعالجها خدمة واتساب وفق شروط Meta وسياسة الخصوصية الخاصة بها.",
+                ar: "واتساب (Meta): إذا راسلتمونا عبر واتساب، فإن رقمكم ورسائلكم تعالجها خدمة واتساب وفق شروط Meta وسياسة الخصوصية الخاصة بها.",
               },
               needs: ["whatsapp"],
             },
@@ -156,29 +156,29 @@ const privacy: LegalDoc = {
       ],
     },
     {
-      heading: { en: "Your rights", ar: "حقوقك" },
+      heading: { en: "Your rights", ar: "حقوقكم" },
       blocks: [
         { p: { en: "Under the UAE Personal Data Protection Law, you can ask us to:", ar: "بموجب قانون حماية البيانات الشخصية في دولة الإمارات، يحقّ لك أن تطلب منّا:" } },
         {
           list: [
-            { text: { en: "tell you what personal data we hold about you and give you a copy;", ar: "إطلاعك على البيانات الشخصية التي نحتفظ بها عنك وتزويدك بنسخة منها؛" } },
+            { text: { en: "tell you what personal data we hold about you and give you a copy;", ar: "إطلاعكم على البيانات الشخصية التي نحتفظ بها عنكم وتزويدكم بنسخة منها؛" } },
             { text: { en: "correct data that is inaccurate or incomplete;", ar: "تصحيح البيانات غير الدقيقة أو غير المكتملة؛" } },
-            { text: { en: "delete your data, or restrict how we use it;", ar: "حذف بياناتك، أو تقييد استخدامنا لها؛" } },
-            { text: { en: "stop using your data, where the law allows you to object;", ar: "التوقّف عن استخدام بياناتك، حيث يجيز لك القانون الاعتراض؛" } },
-            { text: { en: "withdraw your consent, where we rely on it.", ar: "سحب موافقتك، حين نعتمد عليها." } },
+            { text: { en: "delete your data, or restrict how we use it;", ar: "حذف بياناتكم، أو تقييد استخدامنا لها؛" } },
+            { text: { en: "stop using your data, where the law allows you to object;", ar: "التوقّف عن استخدام بياناتكم، حيث يجيز لكم القانون الاعتراض؛" } },
+            { text: { en: "withdraw your consent, where we rely on it.", ar: "سحب موافقتكم، حين نعتمد عليها." } },
           ],
         },
         {
           p: {
             en: "To make a request, contact {dataRequestContact}. We may ask you to confirm your identity first.",
-            ar: "لتقديم طلب، تواصل معنا عبر {dataRequestContact}، وقد نطلب منك تأكيد هويتك أولًا.",
+            ar: "لتقديم طلب، تواصلوا معنا عبر {dataRequestContact}، وقد نطلب منكم تأكيد هويتكم أولًا.",
           },
           needs: ["dataRequestContact"],
         },
         {
           p: {
             en: "If you're not satisfied with our answer, you can complain to the UAE Data Office.",
-            ar: "وإن لم يُرضِك ردّنا، يمكنك تقديم شكوى إلى مكتب الإمارات للبيانات.",
+            ar: "وإن لم يُرضِكم ردّنا، يمكنكم تقديم شكوى إلى مكتب الإمارات للبيانات.",
           },
         },
       ],
@@ -189,7 +189,7 @@ const privacy: LegalDoc = {
         {
           p: {
             en: "We protect your data with reasonable technical and organisational measures: encrypted connections (HTTPS), limited access, and providers that secure the data they process. No method of transmission over the internet is completely secure.",
-            ar: "نحمي بياناتك بإجراءات تقنية وتنظيمية معقولة: اتصال مشفّر (HTTPS)، وصلاحيات وصول محدودة، ومزوّدون يؤمّنون البيانات التي يعالجونها. ولا توجد وسيلة نقل عبر الإنترنت آمنة تمامًا.",
+            ar: "نحمي بياناتكم بإجراءات تقنية وتنظيمية معقولة: اتصال مشفّر (HTTPS)، وصلاحيات وصول محدودة، ومزوّدون يؤمّنون البيانات التي يعالجونها. ولا توجد وسيلة نقل عبر الإنترنت آمنة تمامًا.",
           },
         },
       ],
@@ -223,7 +223,7 @@ const terms: LegalDoc = {
         {
           p: {
             en: "These terms apply to your use of this website, run by NO TIME Creative House, Dubai, United Arab Emirates. By using the site, you accept them. If you don't, please don't use the site.",
-            ar: "تسري هذه الشروط على استخدامك لهذا الموقع، الذي يديره NO TIME Creative House في دبي، الإمارات العربية المتحدة. وباستخدامك الموقع فإنك توافق عليها، وإن لم توافق عليها فنرجو ألّا تستخدمه.",
+            ar: "تسري هذه الشروط على استخدامكم لهذا الموقع، الذي يديره NO TIME Creative House في دبي، الإمارات العربية المتحدة. وباستخدامكم الموقع فإنكم توافقون عليها، وإن لم توافقوا عليها فنرجو ألّا تستخدموه.",
           },
         },
         { p: { en: "Our registered legal entity is {legalName}, {address}.", ar: "كياننا القانوني المسجّل: {legalName}، {address}." }, needs: ["legalName", "address"] },
@@ -235,7 +235,7 @@ const terms: LegalDoc = {
         {
           p: {
             en: "The site describes our services and lets you contact us. Its content is general information, not an offer. The scope, timing and terms of any work are set only in a written proposal or agreement between you and us.",
-            ar: "يعرّف الموقع بخدماتنا ويتيح لك التواصل معنا. ومحتواه معلومات عامة، لا عرضٌ ملزِم. أمّا نطاق أي عمل وموعده وشروطه، فلا تُحدَّد إلا في عرض أو اتفاق مكتوب بيننا وبينك.",
+            ar: "يعرّف الموقع بخدماتنا ويتيح لكم التواصل معنا. ومحتواه معلومات عامة، لا عرضٌ ملزِم. أمّا نطاق أي عمل وموعده وشروطه، فلا تُحدَّد إلا في عرض أو اتفاق مكتوب بيننا وبينكم.",
           },
         },
       ],
@@ -255,7 +255,7 @@ const terms: LegalDoc = {
         {
           p: {
             en: "The site's text, design, graphics, code and the NO TIME name and logo belong to us or to those who licensed them to us. Other names, logos and marks that appear on the site belong to their owners. You may view and share links to our pages, but you may not copy, reproduce or reuse the content for commercial purposes without our written permission.",
-            ar: "نصوص الموقع وتصميمه ورسومه وبرمجته، واسم NO TIME وشعارها، ملكٌ لنا أو لمن رخّصها لنا. وتعود الأسماء والشعارات والعلامات الأخرى الظاهرة على صفحات الموقع إلى أصحابها. يمكنك تصفّح صفحاتنا ومشاركة روابطها، لكن لا يجوز نسخ المحتوى أو إعادة إنتاجه أو استخدامه لأغراض تجارية دون إذن مكتوب منّا.",
+            ar: "نصوص الموقع وتصميمه ورسومه وبرمجته، واسم NO TIME وشعارها، ملكٌ لنا أو لمن رخّصها لنا. وتعود الأسماء والشعارات والعلامات الأخرى الظاهرة على صفحات الموقع إلى أصحابها. يمكنكم تصفّح صفحاتنا ومشاركة روابطها، لكن لا يجوز نسخ المحتوى أو إعادة إنتاجه أو استخدامه لأغراض تجارية دون إذن مكتوب منّا.",
           },
         },
       ],
@@ -266,7 +266,7 @@ const terms: LegalDoc = {
         {
           p: {
             en: "When you use a form, please give accurate information and only your own contact details, or those you're authorised to share. Don't send anything unlawful, harmful or unrelated to your request. We use what you send as our [Privacy Policy](/privacy) describes.",
-            ar: "عند استخدامك أي نموذج، نرجو أن تقدّم معلومات صحيحة، وألّا تذكر إلا بيانات الاتصال الخاصة بك أو تلك التي يحقّ لك مشاركتها. ولا ترسل ما هو مخالف للقانون، أو ضار، أو لا يتعلّق بطلبك. ونستخدم ما ترسله وفق ما توضّحه [سياسة الخصوصية](/privacy).",
+            ar: "عند استخدامكم أي نموذج، نرجو أن تقدّموا معلومات صحيحة، وألّا تذكروا إلا بيانات الاتصال الخاصة بكم أو تلك التي يحقّ لكم مشاركتها. ولا ترسلوا ما هو مخالف للقانون، أو ضار، أو لا يتعلّق بطلبكم. ونستخدم ما ترسلونه وفق ما توضّحه [سياسة الخصوصية](/privacy).",
           },
         },
       ],
@@ -277,7 +277,7 @@ const terms: LegalDoc = {
         {
           p: {
             en: "Don't misuse the site: don't try to break into it, overload it, scrape it in bulk, send automated submissions, or interfere with how it works for others.",
-            ar: "لا تُسئ استخدام الموقع: لا تحاول اختراقه أو إثقاله بالطلبات، ولا تنسخ محتواه آليًا بكميات كبيرة، ولا ترسل نماذج آلية، ولا تعطّل عمله على الآخرين.",
+            ar: "لا تُسيئوا استخدام الموقع: لا تحاولوا اختراقه أو إثقاله بالطلبات، ولا تنسخوا محتواه آليًا بكميات كبيرة، ولا ترسلوا نماذج آلية، ولا تعطّلوا عمله على الآخرين.",
           },
         },
       ],
@@ -288,7 +288,7 @@ const terms: LegalDoc = {
         {
           p: {
             en: "Links to other websites are there for convenience. We don't control those sites and aren't responsible for their content or their privacy practices.",
-            ar: "نضع روابط بعض المواقع الأخرى تسهيلًا عليك، لكننا لا نتحكّم فيها، ولا نتحمّل مسؤولية محتواها أو ممارساتها في الخصوصية.",
+            ar: "نضع روابط بعض المواقع الأخرى تسهيلًا عليكم، لكننا لا نتحكّم فيها، ولا نتحمّل مسؤولية محتواها أو ممارساتها في الخصوصية.",
           },
         },
       ],
@@ -343,7 +343,7 @@ const cookies: LegalDoc = {
         {
           p: {
             en: "Cookies are small text files a website stores in your browser. Similar technologies, such as your browser's session storage, keep small pieces of information on your device in the same way.",
-            ar: "ملفات تعريف الارتباط (الكوكيز) ملفات نصية صغيرة يحفظها الموقع في متصفحك. وتعمل تقنيات مشابهة، مثل تخزين الجلسة في متصفحك، بالطريقة نفسها، فتحفظ معلومات صغيرة على جهازك.",
+            ar: "ملفات تعريف الارتباط (الكوكيز) ملفات نصية صغيرة يحفظها الموقع في متصفحكم. وتعمل تقنيات مشابهة، مثل تخزين الجلسة في متصفحكم، بالطريقة نفسها، فتحفظ معلومات صغيرة على جهازكم.",
           },
         },
       ],
@@ -371,15 +371,15 @@ const cookies: LegalDoc = {
             rows: [
               {
                 en: ["NEXT_LOCALE", "Cookie, set by this site", "Remembers whether you're reading in English or Arabic.", "Until you close your browser"],
-                ar: ["NEXT_LOCALE", "ملف تعريف ارتباط يضعه هذا الموقع", "يتذكّر هل تتصفّح بالعربية أم بالإنجليزية.", "حتى تغلق المتصفح"],
+                ar: ["NEXT_LOCALE", "ملف تعريف ارتباط يضعه هذا الموقع", "يتذكّر هل تتصفّحون بالعربية أم بالإنجليزية.", "حتى تغلقوا المتصفح"],
               },
               {
                 en: ["nt-intro", "Session storage (not a cookie)", "Remembers that you've seen the home page's opening animation, so it plays only once.", "Until you close the tab"],
-                ar: ["nt-intro", "تخزين الجلسة (ليس ملف تعريف ارتباط)", "يتذكّر أنك شاهدت الحركة الافتتاحية في الصفحة الرئيسية، فلا تُعرض إلا مرة واحدة.", "حتى تغلق التبويب"],
+                ar: ["nt-intro", "تخزين الجلسة (ليس ملف تعريف ارتباط)", "يتذكّر أنكم شاهدتم الحركة الافتتاحية في الصفحة الرئيسية، فلا تُعرض إلا مرة واحدة.", "حتى تغلقوا التبويب"],
               },
               {
                 en: ["nt-lead", "Session storage (not a cookie)", "Notes how you reached the site (the campaign tag in the link, the site you came from and your first page), so a form you send tells us which post or link brought you. It leaves your device only with a form you submit.", "Until you close the tab"],
-                ar: ["nt-lead", "تخزين الجلسة (ليس ملف تعريف ارتباط)", "يسجّل كيف وصلت إلى الموقع (وسم الحملة في الرابط، والموقع الذي جئت منه، وأول صفحة زرتها)، ليخبرنا النموذج الذي ترسله بالمنشور أو الرابط الذي أوصلك إلينا. لا يغادر جهازك إلا مع نموذج ترسله.", "حتى تغلق التبويب"],
+                ar: ["nt-lead", "تخزين الجلسة (ليس ملف تعريف ارتباط)", "يسجّل كيف وصلتم إلى الموقع (وسم الحملة في الرابط، والموقع الذي جئتم منه، وأول صفحة زرتموها)، ليخبرنا النموذج الذي ترسلونه بالمنشور أو الرابط الذي أوصلكم إلينا. لا يغادر جهازكم إلا مع نموذج ترسلونه.", "حتى تغلقوا التبويب"],
               },
             ],
           },
@@ -387,24 +387,24 @@ const cookies: LegalDoc = {
         {
           p: {
             en: "On our forms, Cloudflare Turnstile runs a check in your browser to tell people from automated programs. How Cloudflare processes that data is described in Cloudflare's privacy policy.",
-            ar: "في نماذج الموقع، تُجري خدمة Cloudflare Turnstile فحصًا في متصفحك للتمييز بين الأشخاص والبرامج الآلية. وتوضّح سياسة الخصوصية لدى Cloudflare كيفية معالجتها لهذه البيانات.",
+            ar: "في نماذج الموقع، تُجري خدمة Cloudflare Turnstile فحصًا في متصفحكم للتمييز بين الأشخاص والبرامج الآلية. وتوضّح سياسة الخصوصية لدى Cloudflare كيفية معالجتها لهذه البيانات.",
           },
         },
       ],
     },
     {
-      heading: { en: "Your choices", ar: "خياراتك" },
+      heading: { en: "Your choices", ar: "خياراتكم" },
       blocks: [
         {
           p: {
             en: "These items are needed for the site to work as designed, so we don't ask for consent to use them. You can block or delete cookies in your browser settings. The site still works without them, but it may not remember your language.",
-            ar: "هذه العناصر لازمة ليعمل الموقع كما صُمّم، لذلك لا نطلب موافقتك على استخدامها. ويمكنك حظر ملفات تعريف الارتباط أو حذفها من إعدادات متصفحك. سيظل الموقع يعمل دونها، لكنه قد لا يتذكّر لغتك.",
+            ar: "هذه العناصر لازمة ليعمل الموقع كما صُمّم، لذلك لا نطلب موافقتكم على استخدامها. ويمكنكم حظر ملفات تعريف الارتباط أو حذفها من إعدادات متصفحكم. سيظل الموقع يعمل دونها، لكنه قد لا يتذكّر لغتكم.",
           },
         },
         {
           p: {
             en: "If we ever add optional cookies, we'll ask for your consent first and update this policy.",
-            ar: "وإذا أضفنا يومًا ملفات تعريف ارتباط اختيارية، فسنطلب موافقتك أولًا ونحدّث هذه السياسة.",
+            ar: "وإذا أضفنا يومًا ملفات تعريف ارتباط اختيارية، فسنطلب موافقتكم أولًا ونحدّث هذه السياسة.",
           },
         },
       ],
@@ -415,7 +415,7 @@ const cookies: LegalDoc = {
         {
           p: {
             en: "See our [Privacy Policy](/privacy) for how we handle personal data.",
-            ar: "راجع [سياسة الخصوصية](/privacy) لمعرفة كيفية تعاملنا مع البيانات الشخصية.",
+            ar: "راجعوا [سياسة الخصوصية](/privacy) لمعرفة كيفية تعاملنا مع البيانات الشخصية.",
           },
         },
       ],

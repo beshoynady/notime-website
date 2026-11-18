@@ -14,7 +14,7 @@ Deliver: a short message with the preview link, both report paths, and anything 
 
 **Progress ledger (the source of truth after a context reset):** `E:/NO Time/nt-audit-fixes/.superpowers/sdd/2026-11-17-audit-fixes/progress.md` (gitignored). Read it, then `git log --oneline` in the worktree.
 
-**Current step:** Phase 1 done: audit-fixes merged into phase-2-services (3c79130). Next: Phase 2 on branch `copy-rewrite` (worktree E:/NO Time/nt-audit-fixes): apply docs/review/copy-rewrite/*.json, unconfirmed ⚑ keep current text (new ⚑ keys not added), pending lines file, phone field (D124) test-first. Then phase 3 (basic), the one-page report, the short Rand guide.
+**Current step:** Phase 2 committed on `copy-rewrite` (worktree E:/NO Time/nt-audit-fixes, HEAD aa7335a; report .superpowers/sdd/2026-11-17-audit-fixes/phase-2-report.md). Next: e2e of the copy-sensitive specs on :3000, merge copy-rewrite into phase-2-services, then phase 3 basic (full unit+e2e, push + CI run number, shots 1440/390 EN/AR in docs/checkpoints/final/, one Lighthouse home + /links, preview tunnel), the one-page report, the short Rand guide (no PDF).
 
 Servers: 3000 = builds from the worktree (for e2e/Lighthouse after); 3200 = the before build (`E:/NO Time/nt-before`, e19404f); 3100 = review build behind the tunnel https://commerce-tension-petersburg-rom.trycloudflare.com (from `notime-website`, rebuild at the end).
 

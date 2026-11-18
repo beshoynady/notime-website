@@ -6,6 +6,7 @@ import { useLenis, type LenisControls } from "@/components/providers/lenis-provi
 import { prefersReducedMotion } from "@/hooks/use-reduced-motion";
 import { anchorScrollTop, sameDocumentHash } from "@/lib/anchor";
 import { ScrollTrigger } from "@/lib/gsap";
+import { currentAnchor } from "@/lib/legacy-anchors";
 
 /** How long a deep link keeps re-landing while late layout (pin spacer, fonts, images) settles. */
 const SETTLE_MS = 2500;
@@ -158,8 +159,11 @@ export function AnchorScroll() {
   }, [lenis]);
 
   useEffect(() => {
-    const id = sameDocumentHash(location.href, location.href);
+    const hash = sameDocumentHash(location.href, location.href);
+    // A renamed anchor (D123: #print-store) lands on its section, and the address shows the new name.
+    const id = hash && currentAnchor(hash);
     if (!id || id === "main" || !document.getElementById(id)) return;
+    if (id !== hash) history.replaceState(history.state, "", `#${id}`);
     return settleOn(lenis, id);
   }, [lenis, pathname, search]);
 

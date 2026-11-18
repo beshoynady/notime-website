@@ -78,6 +78,14 @@ for (const locale of ["en", "ar"] as const) {
   });
 }
 
+// D123: the print service's anchor was renamed; a link already shared still lands, under its new name.
+test("an old #print-store link lands on Print ordering", async ({ page }) => {
+  await gotoReady(page, "/en/services/production-print-gifts#print-store");
+  await page.waitForTimeout(1500);
+  await expectLandedOnCategory(page, "print-ordering");
+  await expect(page).toHaveURL(/#print-ordering$/);
+});
+
 test.describe("anchor landing (reduced motion)", () => {
   test.use({ reducedMotion: "reduce" });
 

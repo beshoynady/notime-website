@@ -31,7 +31,7 @@ export const CALENDAR = {
   title: { en: "A month of content, planned", ar: "شهر من المحتوى، بخطة واضحة" },
   note: {
     en: "A sample plan for a fictional brand. Filter by pillar or channel, then choose a day to see the post.",
-    ar: "خطة نموذجية لعلامة افتراضية. صفِّها حسب المحور أو القناة، ثم اختر يومًا لترى المنشور.",
+    ar: "خطة نموذجية لعلامة افتراضية. صفّوها حسب المحور أو القناة، ثم اختاروا يومًا لتروا المنشور.",
   },
   filters: {
     pillar: { en: "Pillar", ar: "المحور" },
@@ -53,7 +53,7 @@ export const CALENDAR = {
   } as { en: Partial<Record<Intl.LDMLPluralRule, string>>; ar: Partial<Record<Intl.LDMLPluralRule, string>> },
   empty: {
     en: "No post matches both filters. Choose another pillar or channel.",
-    ar: "لا يوجد منشور يطابق الاختيارين. اختر محورًا أو قناة أخرى.",
+    ar: "لا يوجد منشور يطابق الاختيارين. اختاروا محورًا أو قناة أخرى.",
   },
   pillars: [
     { id: "launch", label: { en: "Launches and news", ar: "إطلاقات وأخبار" } },

@@ -11,7 +11,7 @@ const categories = getCategories();
 
 async function expectCategory(page: Page, locale: "en" | "ar", i: number) {
   const c = categories[i];
-  await expect(page).toHaveURL(new RegExp(`/${locale}/services/${c.slug}(#.*)?$`));
+  await expect(page).toHaveURL(new RegExp(`/${locale}/services/${c.slug}(#.*)?$`), { timeout: 15_000 }); // a client navigation to a large page: ~3 s on this machine
   // Software is its own sales page (D96), with its own headline.
   if (c.slug === "software-digital") await expect(page.locator("#sw-title")).toBeVisible();
   else await expect(page.locator("#category-title")).toHaveText(c.title[locale]);
@@ -21,7 +21,7 @@ for (const locale of ["en", "ar"] as const) {
   test.describe(`navigation to the category pages (${locale})`, () => {
     test("mega menu: each category, then a service lands on its section", async ({ page }) => {
       test.skip((page.viewportSize()?.width ?? 0) < 900, "desktop only (≥900px)");
-      test.slow(); // six full page loads in one test: over the 30 s default on a loaded machine
+      test.setTimeout(180_000); // six full page loads and six client navigations (~3 s each here) in one test
       const open = async () => {
         await gotoReady(page, `/${locale}`);
         await page.locator("button[aria-controls=mega-panel]").click();
@@ -42,7 +42,7 @@ for (const locale of ["en", "ar"] as const) {
       await expect(services).toHaveCount(1);
       await expect(services.first().locator("a").first()).toHaveAttribute("href", new RegExp(`/services/${categories[4].slug}#${service.anchor}$`));
       await services.first().locator("a").first().click();
-      await expect(page).toHaveURL(new RegExp(`/${locale}/services/${categories[4].slug}#${service.anchor}$`));
+      await expect(page).toHaveURL(new RegExp(`/${locale}/services/${categories[4].slug}#${service.anchor}$`), { timeout: 15_000 });
       await expectLanded(page, service.anchor);
     });
 

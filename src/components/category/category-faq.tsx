@@ -2,6 +2,7 @@ import { Plus } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import type { Category, Locale } from "@/content";
 import { SectionRef } from "@/components/review/section-ref";
+import { shownFaq } from "@/lib/content-status";
 import { categoryRef } from "@/lib/review";
 
 /**
@@ -23,7 +24,7 @@ export async function CategoryFaq({ category, locale, tone }: { category: Catego
         </header>
         {/* TODO: replace placeholder — each category's FAQ is written with its copy deck (Task 3.1 and later). */}
         <div className="cat-faq-list">
-          {category.faq.map((item, i) => (
+          {shownFaq(category.faq).map((item, i) => (
             <details key={i} className="cat-faq-item">
               <summary>
                 <span>{item.q[locale]}</span>

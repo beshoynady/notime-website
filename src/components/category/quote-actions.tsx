@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { ButtonLink, buttonVariants } from "@/components/ui/button";
 import { contactHref } from "@/content/links";
 import { contact } from "@/config/contact";
+import { currentAnchor } from "@/lib/legacy-anchors";
 import { whatsappHref } from "@/lib/whatsapp";
 
 /** The quote block's actions for the service named in `?service=<anchor>` (unknown anchors are ignored). */
@@ -16,7 +17,8 @@ export function QuoteActions({
   titles: Record<string, string>;
   tone: "dark" | "light";
 }) {
-  const anchor = useSearchParams().get("service");
+  const param = useSearchParams().get("service");
+  const anchor = param && currentAnchor(param);
   const known = anchor && Object.hasOwn(titles, anchor) ? anchor : undefined;
   return (
     <QuoteActionsView

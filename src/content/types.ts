@@ -36,11 +36,17 @@ export interface ImageSlot {
   alt: Localized<string>;
 }
 
+/** `hidden`: the line stays in the data but doesn't render (fill or hide, D78), e.g. a claim the site can't back yet (D123). */
+export type FaqItem = { q: Localized<string>; a: Localized<string>; hidden?: true };
+
 export interface Category {
   slug: CategorySlug;
   order: 1 | 2 | 3 | 4 | 5;
   title: Localized<string>;
   summary: Localized<string>;
+  /** The search title and description, when they should say more than the card's title and summary. */
+  metaTitle?: Localized<string>;
+  metaDescription?: Localized<string>;
   /** 4:5 image slot id (mega menu, cards). */
   image: string;
   /** Category page design (D57, docs/design/category-pages.md §5). */
@@ -48,7 +54,7 @@ export interface Category {
   /** Page intro under the H1 (2–3 sentences). */
   intro: Localized<string>;
   /** FAQ (4–6) for the page and its FAQPage JSON-LD. Answers state process, never unconfirmed numbers. */
-  faq: { q: Localized<string>; a: Localized<string> }[];
+  faq: FaqItem[];
   /** The closing line (the storyboard's bookend): the quote block's H2, echoing the opening. */
   closing: Localized<string>;
 }

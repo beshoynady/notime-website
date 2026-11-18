@@ -22,5 +22,8 @@ export function contactStatus(c: ContactConfig) {
   return { ...s, any: Object.values(s).some(Boolean) };
 }
 
+/** The FAQ items that render (page and FAQPage JSON-LD): an item marked `hidden` stays in the data only. */
+export const shownFaq = <T extends { hidden?: true }>(faq: readonly T[]) => faq.filter((f) => !f.hidden);
+
 /** Links whose page exists (`live`); the rest stay hidden until their page is built. */
 export const liveLinks = <T extends { live: boolean }>(links: readonly T[]) => links.filter((l) => l.live);

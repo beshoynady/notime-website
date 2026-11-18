@@ -1,12 +1,13 @@
 {
   "meta": {
     "title": "NO TIME Creative House",
+    "homeTitle": "NO TIME Creative House · Events and marketing in Dubai",
     "description": "A Dubai creative house for events, creative production, marketing and digital. One team takes an idea from the first sketch to the day it goes live, across six markets."
   },
   "brand": {
     "name": "NO TIME",
     "tagline": "Creative House",
-    "homeLabel": "NO TIME Creative House — home",
+    "homeLabel": "NO TIME Creative House, home",
     "logoAlt": "NO TIME Creative House"
   },
   "common": {
@@ -41,9 +42,9 @@
     "eyebrow": "Services",
     "headingLead": "One house.",
     "headingKey": "Five crafts.",
-    "intro": "Everything an event or a brand needs, delivered by one team.",
+    "intro": "Book one service, or hand us the whole event.",
     "count": "{count, plural, one {# service} other {# services}}",
-    "viewCategory": "View category",
+    "viewCategory": "See the services",
     "inDevelopment": "In development",
     "allServices": "All {count} services"
   },
@@ -83,19 +84,19 @@
         "label": "It's time to start."
       }
     },
-    "lead": "Events, creative production, marketing and digital solutions, planned and delivered by one house.",
+    "lead": "Events, films, campaigns and websites, from the first idea to launch day.",
     "cta": "Plan your event",
     "ctaWork": "See our work"
   },
   "hud": {
-    "scene": "Scene 01 — NO TIME",
+    "scene": "Scene 01 · NO TIME",
     "coords": "25.2048° N · 55.2708° E",
     "scroll": "Scroll",
     "city": "Dubai"
   },
   "about": {
     "eyebrow": "About NO TIME",
-    "statement": "A creative house for events, brands and the ideas in between. One team plans it, builds it, prints it and launches it.",
+    "statement": "We build ideas where a brand meets its audience, then carry them all the way: strategy, creative, production and delivery, under one roof.",
     "body": "Our base is Dubai, and our work runs across six markets, from Saudi Arabia to Egypt: an airline's pavilion at the Dubai Airshow and a majlis dressed for a heritage welcome. Each idea starts where the brand meets its audience, and one team carries it through strategy, creative, production and delivery.",
     "stats": {
       "markets": {
@@ -111,14 +112,14 @@
     "eyebrow": "What we do",
     "headingLead": "Five crafts,",
     "headingKey": "one team behind them.",
-    "intro": "Book one, or hand us the whole brief. A launch can need a stage, a film, a campaign and a gift box, and here the same people plan all four.",
+    "intro": "Book one, or hand us the whole project. A launch can need a stage, a film, a campaign and a gift box, and here the same people plan all four.",
     "viewServices": "See the services",
     "allServices": "See all services"
   },
   "services": {
     "meta": {
-      "title": "Services",
-      "description": "Every NO TIME service in one place, across five categories: events and hospitality, creative production, marketing and brand, production, print and gifts, and software and digital."
+      "title": "Services: events, film, marketing, print and digital",
+      "description": "Thirty services in five categories, from conferences and weddings to films, campaigns, print and websites. Find yours, or ask us."
     },
     "eyebrow": "Services",
     "headingLead": "Everything we make,",
@@ -140,12 +141,11 @@
       "service": "Service: {service}",
       "whatsapp": "Chat on WhatsApp",
       "email": "Email us",
-      "contactPending": "Our contact details will appear here soon.",
       "prefill": "Hello NO TIME, I'd like a quote for {service}.",
-      "brief": "Send a brief"
+      "brief": "Send a request"
     },
     "modulePending": "Interactive preview in design",
-    "skip": "Skip to services"
+    "skip": "Go to the services"
   },
   "work": {
     "eyebrow": "Our work",
@@ -204,11 +204,11 @@
   "process": {
     "eyebrow": "How we work",
     "headingLead": "Four steps,",
-    "headingKey": "one team throughout.",
+    "headingKey": "one plan.",
     "steps": {
       "plan": {
         "title": "Plan",
-        "body": "We start with the brief, the audience and the date, then set the idea, the budget and the timeline."
+        "body": "We start with what you need, the audience and the date, then fix the idea, the budget and the timeline."
       },
       "build": {
         "title": "Build",
@@ -216,7 +216,7 @@
       },
       "produce": {
         "title": "Produce",
-        "body": "Fabrication, print, catering and crew come together on site, run by one team."
+        "body": "Fabrication, print, catering and crew come together on site, on one schedule."
       },
       "launch": {
         "title": "Launch",
@@ -240,8 +240,8 @@
     "localTime": "Local time"
   },
   "cta": {
-    "headingLead": "Have a date in mind?",
-    "headingKey": "Let's plan every second of it.",
+    "headingLead": "Pick the date.",
+    "headingKey": "We'll plan every second of it.",
     "body": "Tell us the date and the idea, and we'll come back with the next steps.",
     "primary": "Request a quote",
     "secondary": "Chat on WhatsApp",
@@ -501,19 +501,19 @@
     "events": {
       "s1": "It starts with an empty room.",
       "s3": "Tables, flowers and candlelight, each in place.",
-      "s4": "Every detail, ready before the first guest."
+      "s4": "The room is ready before the first guest walks in."
     },
     "creative": {
       "s1": "A black box. Nothing in frame yet.",
       "s2": "Take one.",
       "s3": "Every frame is planned before we roll.",
-      "s4": "Then, the final frame."
+      "s4": "Then the final cut, ready to show."
     },
     "marketing": {
       "s1": "Every brand starts on a blank page.",
       "s2": "First, the grid.",
       "s3": "Then words and images find their place.",
-      "s4": "And the brand comes alive."
+      "s4": "And the brand is ready to post."
     },
     "print": {
       "s1": "Paper, board, ribbon.",
@@ -563,8 +563,8 @@
     }
   },
   "workIndex": {
-    "metaTitle": "Our work",
-    "metaDescription": "Selected projects by NO TIME Creative House: an airline's exhibition pavilion, and a football league's tournaments and award nights.",
+    "metaTitle": "Our work: events, stands and digital",
+    "metaDescription": "An airline's pavilion at the Dubai Airshow and a football league's award nights: what we did on each.",
     "metaFiltered": "Our work: {filter}",
     "eyebrow": "Our work",
     "headingLead": "Work for national organisations,",
@@ -599,7 +599,7 @@
     "ctaCategory": "Explore {category}"
   },
   "aboutPage": {
-    "metaTitle": "About us",
+    "metaTitle": "About NO TIME, a creative house in Dubai",
     "metaDescription": "NO TIME is a Dubai house for events, marketing, PR and production. One team carries each idea through strategy, creative, production and delivery, across six markets.",
     "title": "Ideas built where a brand meets its audience.",
     "story1": "NO TIME is an events, marketing and PR house based in Dubai, working for clients in local, regional and global markets.",
@@ -625,13 +625,13 @@
     "softwareLink": "See our software services"
   },
   "contactPage": {
-    "metaTitle": "Contact: send us a brief",
+    "metaTitle": "Request a quote",
     "metaDescription": "Tell us about your event, campaign, production or platform. One team picks it up and replies within one working day.",
     "eyebrow": "Contact",
     "title": "Tell us what you're planning.",
     "lead": "A few lines are enough to start: the occasion, the date and what you need. One team picks it up and replies within one working day.",
-    "formTitle": "Send us a brief",
-    "directTitle": "Prefer to write directly?",
+    "formTitle": "Request a quote",
+    "directTitle": "Or write to us directly",
     "emailLabel": "Email",
     "copy": "Copy the address",
     "copied": "Copied",
@@ -647,7 +647,7 @@
       "q3": "Can one team handle it from strategy to delivery?",
       "a3": "Yes, that's how we work: one team carries the idea through strategy, creative, production and delivery, so nothing is lost between suppliers.",
       "q4": "What do you need from us to prepare a proposal?",
-      "a4": "The occasion or goal, the date, the place, the audience, and a budget range if you have one. We ask the rest on a short call. Every project is scoped and quoted individually.",
+      "a4": "The occasion or goal, the date, the place, the audience, and a budget range if you have one. We ask the rest on a short call. We price each project once we understand it.",
       "q5": "Do you work in Arabic and English?",
       "a5": "Yes. We write, design and publish in both, and each language is written natively, not translated word for word."
     }
@@ -657,7 +657,7 @@
     "metaDescription": "NO TIME Creative House in one tap: request a quote, see the work, plan an event or a private celebration, or start a website or an app.",
     "eyebrow": "Dubai · six markets",
     "title": "It's time to start.",
-    "lead": "Events, production, marketing, print and software, from one senior team.",
+    "lead": "Events, production, marketing, print and software, from one team in Dubai.",
     "listLabel": "Quick links",
     "whatsapp": {
       "title": "Message us on WhatsApp",

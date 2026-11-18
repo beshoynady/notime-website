@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { parsePhone } from "./phone";
 
 /**
  * The forms' contract (D92, frozen for the parallel batch; the lead owns it). Shared by the
@@ -9,7 +10,7 @@ import { z } from "zod";
  * (`locale`, `source`, the honeypot and the Turnstile token), which the actions read first.
  */
 
-export const FIELD_ERRORS = ["required", "email", "url", "phone", "contact", "tooLong", "invalid"] as const;
+export const FIELD_ERRORS = ["required", "email", "url", "phone", "phoneCode", "contact", "tooLong", "invalid"] as const;
 export type FieldErrorCode = (typeof FIELD_ERRORS)[number];
 
 /** Honeypot field: visually hidden, `tabIndex={-1}`, `autoComplete="off"`; must stay empty. */
@@ -25,12 +26,17 @@ const req = (max: number) =>
     .max(max, { error: "tooLong" });
 const opt = (max: number) => z.string().trim().max(max, { error: "tooLong" }).optional().default("");
 
-const PHONE = /^\+?[0-9 ()-]{7,20}$/;
 const email = z.string({ error: "required" }).trim().min(1, { error: "required" }).pipe(z.email({ error: "email" }));
+/** A phone number, stored and sent in E.164 (D124, ./phone.ts); "" when left empty. */
 const phoneOpt = z
   .string()
-  .trim()
-  .refine((v) => v === "" || PHONE.test(v), { error: "phone" })
+  .max(40, { error: "phone" })
+  .transform((v, ctx) => {
+    const r = parsePhone(v);
+    if (r.ok) return r.e164;
+    ctx.issues.push({ code: "custom", message: r.code, input: v });
+    return z.NEVER;
+  })
   .optional()
   .default("");
 /** A site address; "example.com" is accepted and normalised to https://example.com. */
@@ -79,12 +85,22 @@ export type Consultation = z.output<typeof consultationSchema>;
 
 export const REVIEW_GOALS = ["more-enquiries", "arabic-version", "speed", "easier-updates", "other"] as const;
 
-/** "Email or WhatsApp": one field; an email address or a phone number. */
+/**
+ * "Email or WhatsApp": one field. An email address stays as it is; anything else follows the phone
+ * rules (D124) and is stored in E.164, with `phoneCode` when the country code is missing.
+ */
 const contact = z
   .string({ error: "required" })
   .trim()
   .min(1, { error: "required" })
-  .refine((v) => z.email().safeParse(v).success || PHONE.test(v), { error: "contact" });
+  .max(254, { error: "contact" })
+  .transform((v, ctx) => {
+    if (z.email().safeParse(v).success) return v;
+    const r = v.includes("@") ? null : parsePhone(v);
+    if (r?.ok) return r.e164;
+    ctx.issues.push({ code: "custom", message: r?.code === "phoneCode" ? "phoneCode" : "contact", input: v });
+    return z.NEVER;
+  });
 
 export const websiteReviewSchema = z.object({
   websiteUrl: siteUrl(true),

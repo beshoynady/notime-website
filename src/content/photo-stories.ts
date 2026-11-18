@@ -82,7 +82,7 @@ export interface StoryBeat {
 /** About: one evening, four beats, one team (strategy → creative → production → delivery, p3). */
 export const ROOM_STORY = {
   eyebrow: { en: "From our events", ar: "من فعالياتنا" },
-  title: { en: "Every detail passes through the same team.", ar: "كل تفصيلة تمرّ على الفريق نفسه." },
+  title: { en: "How a room comes together.", ar: "هكذا تكتمل القاعة." },
   beats: [
     {
       photo: "rig",
@@ -138,20 +138,20 @@ export const STRIP = {
 export const PRIVATE_STACK = {
   label: { en: "Private celebrations", ar: "المناسبات الخاصة" },
   lead: {
-    en: "A wedding, an engagement, a family evening? Tell us the date and the guest count, and we'll carry it from the first sketch to the last candle.",
-    ar: "زفاف أو خطوبة أو أمسية عائلية؟ أخبرنا بالموعد وعدد الضيوف، ونتولّى كل شيء من أول تصوّر حتى آخر شمعة.",
+    en: "Weddings, engagements, family evenings. Tell us the date and the guest count, and we'll carry it from the first sketch to the last candle.",
+    ar: "أعراس وخطوبات وأمسيات عائلية. أخبرونا بالموعد وعدد الضيوف، ونتولّى كل شيء من أول تصوّر حتى آخر شمعة.",
   },
-  cta: { en: "Plan your celebration", ar: "خطّط لمناسبتك معنا" },
-  whatsapp: { en: "Message us on WhatsApp", ar: "راسلنا على واتساب" },
+  cta: { en: "Plan your celebration", ar: "خطّطوا لمناسبتكم معنا" },
+  whatsapp: { en: "Message us on WhatsApp", ar: "راسلونا على واتساب" },
   prefill: {
     en: "Hello NO TIME, I'm planning a private celebration and would like to talk it through.",
     ar: "مرحبًا NO TIME، أخطّط لمناسبة خاصة وأودّ أن نتحدّث عنها.",
   },
   cards: [
-    { photo: "florals", caption: { en: "The table, in your colours", ar: "طاولتك، بألوانك" } },
-    { photo: "dessert", caption: { en: "A reception to remember", ar: "استقبال يبقى في الذاكرة" } },
+    { photo: "florals", caption: { en: "The table, in your colours", ar: "طاولتكم، بألوانكم" } },
+    { photo: "dessert", caption: { en: "The welcome at the door", ar: "الاستقبال عند المدخل" } },
     { photo: "terrace", caption: { en: "Outdoors, after sunset", ar: "في الهواء الطلق، بعد الغروب" } },
-    { photo: "keepsake", caption: { en: "A keepsake for every guest", ar: "تذكار لكل ضيف" } },
+    { photo: "keepsake", caption: { en: "Keepsakes for the guests", ar: "تذكارات للضيوف" } },
   ] satisfies { photo: StoryPhotoKey; caption: Localized<string> }[],
 } as const;
 

@@ -27,7 +27,7 @@ export function ConsultationForm(props: { locale: Locale; source: string; tierLa
 function Inner({ locale, source, tierLabels, onAgain }: { locale: Locale; source: string; tierLabels: Record<Tier, string>; onAgain: () => void }) {
   const c = formCopy.consultation;
   const f = formCopy.fields;
-  const { form, state, pending, formAction, formRef, summaryRef, summary, onSubmit, sentName, codeOf } = useContractForm({
+  const { form, state, pending, formAction, formRef, summaryRef, summary, onSubmit, sentName, codeOf, maxOf } = useContractForm({
     schema: consultationSchema,
     action: submitConsultation,
     defaults: { build: null, timeline: null, tier: "", budget: "", websiteUrl: "", message: "", name: "", email: "", phone: "", company: "" },
@@ -135,18 +135,18 @@ function Inner({ locale, source, tierLabels, onAgain }: { locale: Locale; source
           register={reg}
           code={codeOf("websiteUrl")}
         />
-        <TextField prefix={PREFIX} name="message" label={c.message[locale]} hint={c.messageHint[locale]} multiline optional locale={locale} register={reg} code={codeOf("message")} />
+        <TextField prefix={PREFIX} name="message" label={c.message[locale]} hint={c.messageHint[locale]} multiline optional locale={locale} register={reg} code={codeOf("message")} max={maxOf("message")} />
       </fieldset>
 
       <fieldset className="form-group">
         <legend className="form-group-title">{c.you[locale]}</legend>
         <div className="form-row">
-          <TextField prefix={PREFIX} name="name" label={f.name[locale]} autoComplete="name" locale={locale} register={reg} code={codeOf("name")} />
+          <TextField prefix={PREFIX} name="name" label={f.name[locale]} autoComplete="name" locale={locale} register={reg} code={codeOf("name")} max={maxOf("name")} />
           <TextField prefix={PREFIX} name="email" label={f.email[locale]} type="email" inputMode="email" autoComplete="email" dir="ltr" locale={locale} register={reg} code={codeOf("email")} />
         </div>
         <div className="form-row">
-          <TextField prefix={PREFIX} name="phone" label={f.phone[locale]} type="tel" inputMode="tel" autoComplete="tel" dir="ltr" optional locale={locale} register={reg} code={codeOf("phone")} />
-          <TextField prefix={PREFIX} name="company" label={f.company[locale]} autoComplete="organization" optional locale={locale} register={reg} code={codeOf("company")} />
+          <TextField prefix={PREFIX} name="phone" label={f.phone[locale]} hint={f.phoneHint[locale]} type="tel" inputMode="tel" autoComplete="tel" dir="ltr" optional locale={locale} register={reg} code={codeOf("phone")} />
+          <TextField prefix={PREFIX} name="company" label={f.company[locale]} autoComplete="organization" optional locale={locale} register={reg} code={codeOf("company")} max={maxOf("company")} />
         </div>
       </fieldset>
 

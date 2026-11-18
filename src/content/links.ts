@@ -36,7 +36,7 @@ export const BREADCRUMB_LABELS = {
   services: { en: "Services", ar: "الخدمات" },
   work: { en: "Work", ar: "أعمالنا" },
   about: { en: "About", ar: "من نحن" },
-  contact: { en: "Contact", ar: "تواصل معنا" },
+  contact: { en: "Contact", ar: "تواصلوا معنا" },
 } as const;
 
 /** The organization as JSON-LD names it: name and URL only, nothing unconfirmed. */

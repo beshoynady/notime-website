@@ -2,6 +2,7 @@ import { expect, test, type Page } from "@playwright/test";
 import { getCategories, getServices } from "../src/content";
 import { END_TONE, THEME_TONE } from "../src/components/category/theme";
 import { GROUND, gotoReady, heroLcp } from "./helpers";
+import { shownFaq } from "../src/lib/content-status";
 
 /**
  * Category pages · structure and themes (Task 2.5), every category in EN and AR: one H1, the six
@@ -69,7 +70,7 @@ for (const category of getCategories()) {
           const ids = await page.locator(software ? ".sw-blocks > article[id]" : ".cat-sections > section[id]").evaluateAll((els) => els.map((e) => e.id));
           expect(ids).toEqual(services.map((s) => s.anchor));
           await expect(page.locator("section.cat-faq h2")).toHaveCount(1);
-          await expect(page.locator("section.cat-faq details")).toHaveCount(category.faq.length);
+          await expect(page.locator("section.cat-faq details")).toHaveCount(shownFaq(category.faq).length);
           if (software) {
             for (const s of services) {
               await expect(page.locator(`#${s.anchor} #${s.anchor}-title`)).toHaveCount(1);

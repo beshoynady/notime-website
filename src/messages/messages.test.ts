@@ -131,11 +131,9 @@ describe("messages", () => {
     expect(EN["hero.title.start.label"]).toBe("It's time to start.");
     expect(AR["hero.title.start.line2"]).toBe("البداية.");
     expect(AR["hero.title.start.label"]).toBe("حان وقت البداية.");
-    expect(EN["hero.lead"]).toBe(
-      "Events, creative production, marketing and digital solutions, planned and delivered by one house.",
-    );
-    // AR anchors rewritten natively (D95): the old lead was a comma list without «و», and «حِرَف» reads as handicraft.
-    expect(AR["hero.lead"]).toBe("فعاليات ومحتوى وحملات ومنصّات رقمية، يخطّط لها فريق واحد وينفّذها حتى يوم الإطلاق.");
+    // The owner's lead (copy rewrite, owner rule 4): films are Video production, one of the 30 services.
+    expect(EN["hero.lead"]).toBe("Events, films, campaigns and websites, from the first idea to launch day.");
+    expect(AR["hero.lead"]).toBe("فعاليات وأفلام وحملات ومواقع، من أول فكرة حتى يوم الإطلاق.");
     // N05: the old second beat, said once as the eyebrow; two marketing CTAs in the plural command (D118).
     expect(EN["hero.eyebrow"]).toBe("Every second is planned.");
     expect(AR["hero.eyebrow"]).toBe("كل ثانية محسوبة.");

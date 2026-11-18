@@ -16,6 +16,15 @@ import type { Locale } from "@/content";
 import { STRIP } from "@/content/photo-stories";
 import { homeJsonLd } from "@/lib/jsonld";
 import { HOME_REF } from "@/lib/review";
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+
+/** The home title names what the house does; `meta.title` stays the template every other title ends with. */
+export async function generateMetadata({ params }: PageProps<"/[locale]">): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "meta" });
+  return { title: { absolute: t("homeTitle") } };
+}
 
 /**
  * The homepage, in the brief's order (PROJECT_BRIEF §4). The tones alternate so the page ground

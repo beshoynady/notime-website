@@ -48,7 +48,7 @@ This file and `src/content/services.ts` must match: `src/content/content.test.ts
 | 20 | stand-fabrication-signage | fabrication | Stand fabrication & signage | تصنيع الأجنحة واللافتات |
 | 21 | packaging-design | packaging | Packaging design | تصميم التغليف |
 | 22 | corporate-gifts | gifts | Corporate gifts | هدايا الشركات |
-| 23 | online-print-store | print-store | Online print store | متجر الطباعة الإلكتروني |
+| 23 | print-ordering | print-ordering | Print ordering | طلب المطبوعات |
 | 24 | branded-merchandise | merchandise | Branded merchandise | منتجات بهوية العلامة |
 
 ## 5. Software & Digital · البرمجيات والحلول الرقمية (`software-digital`)

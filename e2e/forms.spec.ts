@@ -100,7 +100,7 @@ const guestsLabel = (page: Page) => page.getByLabel("Number of guests");
 test("no service: the general timing shows", async ({ page }) => {
   await page.goto("/en/contact");
   await scrollToForm(page);
-  await expect(page.getByText("When is it?")).toBeVisible();
+  await expect(page.getByText("When do you need it?")).toBeVisible();
   await expect(eventLabel(page)).toHaveCount(0);
   await expect(guestsLabel(page)).toHaveCount(0);
 });
@@ -111,11 +111,11 @@ test("an events service shows the event fields; a marketing one hides and clears
   await page.selectOption("#brief-service", "conferences");
   await expect(eventLabel(page)).toBeVisible();
   await expect(guestsLabel(page)).toBeVisible();
-  await expect(page.getByText("When is it?")).toHaveCount(0);
+  await expect(page.getByText("When do you need it?")).toHaveCount(0);
   await guestsLabel(page).selectOption("50-150");
   await page.selectOption("#brief-service", "branding");
   await expect(eventLabel(page)).toHaveCount(0);
-  await expect(page.getByText("When is it?")).toBeVisible();
+  await expect(page.getByText("When do you need it?")).toBeVisible();
   await page.selectOption("#brief-service", "conferences");
   await expect(guestsLabel(page)).toHaveValue("");
 });
@@ -139,6 +139,13 @@ test("?service= wins over ?category=", async ({ page }) => {
   await scrollToForm(page);
   await expect(page.locator("#brief-service")).toHaveValue("branding");
   await expect(eventLabel(page)).toHaveCount(0);
+});
+
+test("an old ?service=print-store link still presets Print ordering (D123)", async ({ page }) => {
+  await page.goto("/en/contact?service=print-store");
+  await scrollToForm(page);
+  await expect(page.locator("#brief-service")).toHaveValue("print-ordering");
+  await expect(page.locator("#brief-service option:checked")).toHaveText("Print ordering");
 });
 
 test("?category=<junk> is ignored and never echoed", async ({ page }) => {
@@ -172,7 +179,7 @@ test("a timing picked before an events service is cleared and not sent", async (
   await page.locator(".form-chip", { hasText: "Within 3 months" }).click();
   await expect(page.getByLabel("Within 3 months")).toBeChecked();
   await page.selectOption("#brief-service", "conferences");
-  await expect(page.getByText("When is it?")).toHaveCount(0);
+  await expect(page.getByText("When do you need it?")).toHaveCount(0);
   // Cleared, not kept: back on a non-events service the chip comes back unpicked.
   await page.selectOption("#brief-service", "branding");
   await expect(page.getByLabel("Within 3 months")).not.toBeChecked();
@@ -186,4 +193,32 @@ test("a timing picked before an events service is cleared and not sent", async (
   const team = JSON.parse(readFileSync(path.join(SINK, mails().filter((f) => f.endsWith("team.json")).sort().at(-1)!), "utf8"));
   expect(team.text).toContain("Service: ");
   expect(team.text).not.toContain("Timing");
+});
+
+// D124: the phone field. The example shows from the start; a leading 0 asks for the country code.
+test("the phone field shows its example, and a leading 0 asks for the country code", async ({ page }) => {
+  const before = mails().length;
+  await page.goto("/en/contact");
+  await scrollToForm(page);
+  await expect(page.locator("#brief-phone-hint")).toHaveText("For example, +971 50 123 4567");
+  await fillValid(page);
+  await page.fill("#brief-phone", "050 123 4567");
+  await page.click(".ct-form .form-submit");
+  await expect(page.locator("#brief-phone")).toHaveAttribute("aria-invalid", "true");
+  await expect(page.locator("#brief-phone-error")).toHaveText("Include the country code, e.g. +971.");
+  expect(mails().length).toBe(before);
+});
+
+test("a valid number is sent to the team in E.164", async ({ page }) => {
+  const before = mails().length;
+  await page.goto("/en/contact");
+  await scrollToForm(page);
+  await fillValid(page);
+  await page.fill("#brief-phone", "00971 (50) 123-4567");
+  await page.waitForFunction(() => !!(document.querySelector('[name="cf-turnstile-response"]') as HTMLInputElement | null)?.value, null, { timeout: 15_000 });
+  await page.click(".ct-form .form-submit");
+  await expect(page.locator(".form-success, [data-form-success]").first()).toBeVisible({ timeout: 15_000 });
+  await expect.poll(() => mails().length).toBe(before + 2);
+  const team = JSON.parse(readFileSync(path.join(SINK, mails().filter((f) => f.endsWith("team.json")).sort().at(-1)!), "utf8"));
+  expect(team.text).toContain("Phone: +971501234567");
 });

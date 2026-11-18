@@ -54,7 +54,7 @@ export const HUMAN_SCALE_COPY = {
     en: "Common sizes for comparison, beside a 1.8 m figure. Each job is printed at the size it needs.",
     ar: "مقاسات شائعة للمقارنة، بجانب شخص طوله 1.8 م. ونطبع كل عمل بالمقاس الذي يحتاجه.",
   },
-  choose: { en: "Choose a format", ar: "اختر مقاسًا" },
+  choose: { en: "Choose a format", ar: "اختيار المقاس" },
   unit: { en: "mm", ar: "مم" },
   metre: { en: "m", ar: "م" },
   figure: { en: "1.8 m", ar: "1.8 م" },

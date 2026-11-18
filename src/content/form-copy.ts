@@ -12,46 +12,48 @@ const l = (en: string, ar: string): L => ({ en, ar });
 
 /** One message per error code; a field may override `required` with a more specific line. */
 export const errorMessages: Record<FieldErrorCode, L> = {
-  required: l("Fill in this field.", "املأ هذا الحقل."),
-  email: l("Enter an email address like name@company.com.", "اكتب بريدًا إلكترونيًا بهذا الشكل: name@company.com"),
-  url: l("Enter a website address like yourcompany.ae.", "اكتب عنوان موقع بهذا الشكل: yourcompany.ae"),
-  phone: l("Enter the number with digits, spaces or a leading +.", "اكتب الرقم بالأرقام، ويمكنك استخدام المسافات أو علامة + في أوله."),
-  contact: l("Enter an email address or a phone number.", "اكتب بريدًا إلكترونيًا أو رقم هاتف."),
-  tooLong: l("This is too long. Shorten it a little.", "النص أطول من المسموح، اختصره قليلًا."),
-  invalid: l("Check this field and try again.", "راجع هذا الحقل وحاول مجددًا."),
+  required: l("Fill in this field.", "املؤوا هذا الحقل."),
+  email: l("Enter an email like name@company.com.", "اكتبوا البريد الإلكتروني بهذا الشكل: name@company.com"),
+  url: l("Enter a website address like yourcompany.ae.", "اكتبوا عنوان الموقع بهذا الشكل: yourcompany.ae"),
+  phone: l("Use digits only, e.g. +971 50 123 4567.", "اكتبوا الرقم بالأرقام فقط، مثل ‎+971 50 123 4567."),
+  // D124: a number that starts with 0, or with no country code we can read.
+  phoneCode: l("Include the country code, e.g. +971.", "أضيفوا رمز الدولة، مثل ‎+971."),
+  contact: l("Enter an email like name@company.com, or a number with the country code, e.g. +971.", "اكتبوا بريدًا إلكترونيًا مثل name@company.com، أو رقمًا مع رمز الدولة مثل ‎+971."),
+  tooLong: l("Keep it under {max} characters.", "الحد الأقصى لعدد الأحرف: {max}"),
+  invalid: l("Something in this field doesn't fit. Check it and try again.", "في هذا الحقل ما لا يناسب. راجعوه وحاولوا مرة أخرى."),
 };
 
 /** Field-specific "required" lines (by field name), clearer than the generic one. */
 export const requiredMessages: Record<string, L> = {
-  name: l("Enter your name.", "اكتب اسمك."),
-  email: l("Enter your email address.", "اكتب بريدك الإلكتروني."),
-  build: l("Choose what you want to build.", "اختر ما تريد بناءه."),
-  timeline: l("Choose when you want to start.", "اختر متى تريد أن تبدأ."),
-  websiteUrl: l("Enter your website address.", "اكتب عنوان موقعك."),
-  contact: l("Enter an email address or a WhatsApp number.", "اكتب بريدًا إلكترونيًا أو رقم واتساب."),
-  goal: l("Choose the main goal.", "اختر هدفك الأساسي."),
+  name: l("Enter your name.", "اكتبوا اسمكم."),
+  email: l("Enter your email address.", "اكتبوا بريدكم الإلكتروني."),
+  build: l("Choose what you want to build.", "اختاروا ما تريدون بناءه."),
+  timeline: l("Choose when you want to start.", "اختاروا متى تريدون أن تبدؤوا."),
+  websiteUrl: l("Enter your website address.", "اكتبوا عنوان موقعكم."),
+  contact: l("Enter an email address or a WhatsApp number.", "اكتبوا بريدًا إلكترونيًا أو رقم واتساب."),
+  goal: l("Choose the main goal.", "اختاروا هدفكم الأساسي."),
   // Required only on the brief (/contact); optional everywhere else.
-  message: l("Tell us a little about the project.", "اكتب لنا بضعة أسطر عن مشروعك."),
+  message: l("Tell us a little about the project.", "اكتبوا لنا بضعة أسطر عن مشروعكم."),
 };
 
 export const formCopy = {
   optional: l("optional", "اختياري"),
   sending: l("Sending…", "جارٍ الإرسال…"),
-  summaryTitle: l("Check these before sending:", "راجع ما يلي قبل الإرسال:"),
+  summaryTitle: l("Check these before sending:", "راجعوا ما يلي قبل الإرسال:"),
   states: {
     rateLimited: l(
       "Too many attempts from this connection. Try again in {minutes} min, or email us at {email}.",
-      "محاولات كثيرة من هذا الاتصال. حاول مجددًا بعد {minutes}، أو راسلنا على {email}.",
+      "محاولات كثيرة من هذا الاتصال. حاولوا مرة أخرى بعد {minutes}، أو راسلونا على {email}.",
     ),
     blocked: l(
-      "We couldn't confirm the request came from a person. Try again, or email us at {email}.",
-      "لم نتمكّن من التأكد من أن الطلب مُرسَل من شخص. حاول مجددًا، أو راسلنا على {email}.",
+      "The security check didn't load. Try again, or email us at {email}.",
+      "لم يكتمل التحقق الأمني. حاولوا مرة أخرى أو راسلونا على {email}.",
     ),
     failed: l(
       "Your request didn't send because of a problem on our side. Try again, or email us at {email}.",
-      "لم يُرسَل طلبك بسبب خلل لدينا. حاول مجددًا، أو راسلنا على {email}.",
+      "لم يُرسَل طلبكم بسبب خلل لدينا. حاولوا مرة أخرى، أو راسلونا على {email}.",
     ),
-    another: l("Send another request", "أرسل طلبًا آخر"),
+    another: l("Send another request", "إرسال طلب آخر"),
   },
   privacy: {
     text: l(
@@ -61,21 +63,23 @@ export const formCopy = {
     link: l("Privacy Policy", "سياسة الخصوصية"),
   },
   /** The honeypot's label, read only by bots (the field is hidden from people and assistive tech). */
-  honeypot: l("Leave this field empty", "اترك هذا الحقل فارغًا"),
+  honeypot: l("Leave this field empty", "اتركوا هذا الحقل فارغًا"),
 
   fields: {
-    name: l("Your name", "اسمك"),
+    name: l("Your name", "الاسم"),
     email: l("Email", "البريد الإلكتروني"),
     phone: l("Phone or WhatsApp", "الهاتف أو واتساب"),
+    /** Shown under the phone field from the start, before any error (D124). */
+    phoneHint: l("For example, +971 50 123 4567", "مثال: ‎+971 50 123 4567"),
     company: l("Company", "الشركة"),
-    websiteUrl: l("Current website", "موقعك الحالي"),
+    websiteUrl: l("Current website", "موقعكم الحالي"),
     websiteUrlHint: l("For example, yourcompany.ae", "مثال: yourcompany.ae"),
   },
 
   consultation: {
-    project: l("Your project", "مشروعك"),
-    you: l("About you", "عنك"),
-    build: l("What do you want to build?", "ماذا تريد أن تبني؟"),
+    project: l("Your project", "مشروعكم"),
+    you: l("About you", "عنكم"),
+    build: l("What do you want to build?", "ماذا تريدون أن تبنوا؟"),
     buildOptions: {
       websites: l("A website", "موقع إلكتروني"),
       apps: l("A mobile app", "تطبيق جوّال"),
@@ -87,29 +91,31 @@ export const formCopy = {
       other: l("Something else", "شيء آخر"),
     },
     tier: l("Engagement level", "مستوى التعاون"),
-    tierNone: l("Not sure yet", "لم أحدّد بعد"),
-    timeline: l("When do you want to start?", "متى تريد أن تبدأ؟"),
+    tierNone: l("Not sure yet", "لم نحدّد بعد"),
+    timeline: l("When do you want to start?", "متى تريدون أن تبدؤوا؟"),
     timelineOptions: {
-      flexible: l("I'm flexible", "الموعد مرن"),
+      flexible: l("Flexible", "الموعد مرن"),
       "within-3-months": l("Within 3 months", "خلال 3 أشهر"),
       urgent: l("As soon as possible", "في أقرب وقت ممكن"),
     },
     budget: l("Budget range", "الميزانية التقريبية"),
-    budgetNone: l("Choose a range", "اختر نطاقًا"),
+    budgetNone: l("Choose a range", "اختاروا نطاقًا"),
     budgetHint: l("It helps us suggest the right scope. It's never a price.", "تساعدنا على اقتراح النطاق المناسب، وليست سعرًا."),
-    message: l("Tell us a little more", "أخبرنا بالمزيد"),
-    messageHint: l("Who it's for, what it must do, any date that matters.", "لمن هو، وما الذي يجب أن يفعله، وأي موعد يهمّك."),
+    message: l("Tell us a little more", "أخبرونا بالمزيد"),
+    messageHint: l("Who it's for, what it must do, any date that matters.", "لمن هو، وما الذي يجب أن يفعله، وأي موعد يهمّكم."),
     submit: l("Request a free intro call", "اطلبوا مكالمة تعارف مجانية"),
     micro: l("No obligation. We reply within one working day.", "دون أي التزام. نرد خلال يوم عمل."),
-    successTitle: l("Thanks, {name}. Your request is in.", "شكرًا، {name}. وصلنا طلبك."),
+    successTitle: l("Thanks, {name}. We have your request.", "شكرًا، {name}. وصلنا طلبكم."),
     successBody: l("We reply within one working day to set a time for the call.", "نرد خلال يوم عمل لنحدّد موعد المكالمة."),
-    prefilled: l("We've filled in: {choice}. Change it if you like.", "اخترنا لك: {choice}. يمكنك تغييره."),
+    prefilled: l("We've filled in: {choice}. Change it if you like.", "اخترنا لكم: {choice}. يمكنكم تغييره."),
   },
 
   review: {
-    websiteUrl: l("Your website address", "عنوان موقعك"),
+    websiteUrl: l("Your website address", "عنوان موقعكم"),
     contact: l("Email or WhatsApp number", "البريد الإلكتروني أو رقم واتساب"),
-    goal: l("What's the main goal?", "ما هدفك الأساسي؟"),
+    /** The field takes either shape, so its hint shows both (D124). */
+    contactHint: l("For example, name@company.com or +971 50 123 4567", "مثال: name@company.com أو ‎+971 50 123 4567"),
+    goal: l("What's the main goal?", "ما هدفكم الأساسي؟"),
     goalOptions: {
       "more-enquiries": l("More enquiries", "طلبات أكثر"),
       "arabic-version": l("An Arabic version", "نسخة عربية"),
@@ -118,20 +124,20 @@ export const formCopy = {
       other: l("Something else", "شيء آخر"),
     },
     message: l("Anything we should know?", "هل هناك ما يجب أن نعرفه؟"),
-    submit: l("Send my site for review", "أرسل موقعي للمراجعة"),
-    successTitle: l("Thanks, {name}. Your site is with us.", "شكرًا، {name}. وصلنا موقعك."),
+    submit: l("Send my site for review", "إرسال الموقع للمراجعة"),
+    successTitle: l("Thanks, {name}. Your site is with us.", "شكرًا، {name}. وصلنا موقعكم."),
     successBody: l(
       "Within 3 working days we'll reply with 5 concrete improvements, free.",
-      "خلال 3 أيام عمل نرد عليك بخمسة تحسينات عملية، مجانًا.",
+      "خلال 3 أيام عمل نرد عليكم بخمسة تحسينات عملية، مجانًا.",
     ),
   },
 
   interest: {
-    message: l("What would you use it for?", "فيمَ ستستخدمه؟"),
-    submit: l("Register interest", "سجّل اهتمامك"),
-    successTitle: l("Thanks, {name}. You're on the list for {product}.", "شكرًا، {name}. سجّلنا اهتمامك بـ{product}."),
-    successBody: l("We'll write to you when it's ready.", "سنكتب لك حين يصبح جاهزًا."),
-    type: l("What do you run?", "ما الذي تديره؟"),
+    message: l("What would you use it for?", "فيمَ ستستخدمونه؟"),
+    submit: l("Register interest", "تسجيل الاهتمام"),
+    successTitle: l("Thanks, {name}. You're on the list for {product}.", "شكرًا، {name}. سجّلنا اهتمامكم بـ{product}."),
+    successBody: l("We'll write to you when it's ready.", "سنكتب لكم حين يصبح جاهزًا."),
+    type: l("What do you run?", "ما الذي تديرونه؟"),
     typeOptions: {
       event: l("Events", "فعاليات"),
       restaurant: l("A restaurant or café", "مطعم أو مقهى"),
@@ -141,12 +147,12 @@ export const formCopy = {
 
   /** The brief on /contact (D102). The project first, then the person. */
   contact: {
-    project: l("Your project", "مشروعك"),
-    you: l("How we reach you", "كيف نتواصل معك"),
-    service: l("What do you need?", "ما الذي تحتاجه؟"),
-    serviceNone: l("Not sure yet, or several things", "لم أحدّد بعد، أو أكثر من خدمة"),
-    prefilled: l("Selected: {choice}. Change it if you need something else.", "اخترنا لك: {choice}. غيّره إن كنت تحتاج شيئًا آخر."),
-    timeline: l("When is it?", "متى موعده؟"),
+    project: l("Your project", "مشروعكم"),
+    you: l("How we reach you", "كيف نتواصل معكم"),
+    service: l("What do you need?", "ما الذي تحتاجون إليه؟"),
+    serviceNone: l("Not sure yet, or several things", "لم نحدّد بعد، أو أكثر من خدمة"),
+    prefilled: l("Selected: {choice}. Change it if you need something else.", "اخترنا لكم: {choice}. غيّروه إن كنتم تحتاجون شيئًا آخر."),
+    timeline: l("When do you need it?", "متى تحتاجون إليه؟"),
     eventMonth: l("Event date (approximate)", "تاريخ المناسبة (تقريبًا)"),
     eventMonthNone: l("Choose a month", "اختاروا الشهر"),
     guests: l("Number of guests", "عدد الضيوف"),
@@ -160,14 +166,14 @@ export const formCopy = {
     } satisfies Record<(typeof GUEST_BANDS)[number], L>,
     city: l("City or country", "المدينة أو الدولة"),
     cityHint: l("Where the event or the work takes place.", "حيث تُقام الفعالية أو يُنفَّذ العمل."),
-    message: l("Tell us about it", "حدّثنا عنه"),
+    message: l("Tell us about it", "حدّثونا عنه"),
     messageHint: l(
       "The occasion or goal, the audience, and anything already decided. A few lines are enough.",
       "المناسبة أو الهدف، والجمهور، وما تقرّر حتى الآن. تكفي بضعة أسطر.",
     ),
-    submit: l("Send the brief", "أرسل الطلب"),
+    submit: l("Send my request", "إرسال الطلب"),
     micro: l("We reply within one working day.", "نرد خلال يوم عمل."),
-    successTitle: l("Thanks, {name}. Your brief is with us.", "شكرًا، {name}. وصلنا طلبك."),
+    successTitle: l("Thanks, {name}. We have your request.", "شكرًا، {name}. وصلنا طلبكم."),
     successBody: l(
       "We reply within one working day, with the questions we need answered or a time to talk.",
       "نرد خلال يوم عمل، بما نحتاج إلى معرفته أو بموعد للحديث.",
@@ -175,7 +181,6 @@ export const formCopy = {
   },
 };
 
-/** Fills `{key}` placeholders. */
 /** Minutes in Arabic with the number's agreement (M3: «9 دقيقة» read wrong): 1, 2, 3–10, 11+. */
 export function minutesLabel(n: number, locale: "en" | "ar"): string {
   if (locale === "en") return String(n);
@@ -185,4 +190,16 @@ export function minutesLabel(n: number, locale: "en" | "ar"): string {
   return `${n} دقيقة`;
 }
 
+/** Fills `{key}` placeholders. */
 export const fill = (s: string, vars: Record<string, string | number>) => s.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? String(vars[k]) : m));
+
+/**
+ * The sentence for a field's error code: the field's own "required" line when it has one, else the
+ * code's. `tooLong` names the limit (`max`, read from the schema; Latin numerals in both languages,
+ * D50); with no limit known it falls back to the generic line rather than show a raw `{max}`.
+ */
+export function errorText(name: string, code: FieldErrorCode, locale: "en" | "ar", max?: number): string {
+  if (code === "required" && requiredMessages[name]) return requiredMessages[name][locale];
+  if (code === "tooLong") return max ? fill(errorMessages.tooLong[locale], { max: max.toLocaleString("en-US") }) : errorMessages.invalid[locale];
+  return (errorMessages[code] ?? errorMessages.invalid)[locale];
+}

@@ -6,6 +6,7 @@ import { budgetBands } from "@/content/forms";
 import { fill, formCopy } from "@/content/form-copy";
 import type { CategorySlug, Locale } from "@/content/types";
 import { parseCategoryParam } from "@/lib/forms/category-param";
+import { currentAnchor } from "@/lib/legacy-anchors";
 import { eventFieldsVisible, monthOptions } from "@/lib/forms/event-visibility";
 import { contactSchema, GUEST_BANDS, TIMELINES } from "@/lib/forms/schemas";
 import { ChoiceChips, ErrorSummary, FormNotice, PrivacyNotice, SelectField, SharedFields, SubmitButton, SuccessPanel, TextField, TurnstileSlot } from "./form-parts";
@@ -38,7 +39,7 @@ function Inner({ locale, services, categories, onAgain }: { locale: Locale; serv
   const c = formCopy.contact;
   const f = formCopy.fields;
   const t = formCopy.consultation;
-  const { form, state, pending, formAction, formRef, summaryRef, summary, onSubmit, sentName, codeOf } = useContractForm({
+  const { form, state, pending, formAction, formRef, summaryRef, summary, onSubmit, sentName, codeOf, maxOf } = useContractForm({
     schema: contactSchema,
     action: submitContact,
     defaults: { service: "", timeline: "", eventMonth: "", guests: "", budget: "", city: "", message: "", name: "", email: "", phone: "", company: "" },
@@ -55,7 +56,7 @@ function Inner({ locale, services, categories, onAgain }: { locale: Locale; serv
     setNow(new Date());
     if (hint) setCategory(hint);
     const v = new URLSearchParams(window.location.search).get("service");
-    const hit = v ? services.find((s) => s.value === v) : undefined;
+    const hit = v ? services.find((s) => s.value === currentAnchor(v)) : undefined;
     if (!hit) return;
     form.setValue("service", hit.value, { shouldDirty: true });
     // The URL is only readable after hydration (the page is prerendered), so this one-time sync runs here.
@@ -66,7 +67,7 @@ function Inner({ locale, services, categories, onAgain }: { locale: Locale; serv
   const chosen = services.find((s) => s.value === serviceValue);
   const showEvent = eventFieldsVisible({ service: serviceValue, serviceIsEvents: !!chosen?.events, category });
   // Hidden fields are cleared, so a stale value is never posted or validated: the event fields
-  // when they hide, the general timing ("When is it?") when the event fields take its place.
+  // when they hide, the general timing ("When do you need it?") when the event fields take its place.
   useEffect(() => {
     if (showEvent) {
       form.setValue("timeline", "");
@@ -164,7 +165,7 @@ function Inner({ locale, services, categories, onAgain }: { locale: Locale; serv
           />
         )}
         <div className="form-row">
-          <TextField prefix={PREFIX} name="city" label={c.city[locale]} hint={c.cityHint[locale]} autoComplete="address-level2" optional locale={locale} register={reg} code={codeOf("city")} />
+          <TextField prefix={PREFIX} name="city" label={c.city[locale]} hint={c.cityHint[locale]} autoComplete="address-level2" optional locale={locale} register={reg} code={codeOf("city")} max={maxOf("city")} />
           <SelectField
             prefix={PREFIX}
             name="budget"
@@ -177,18 +178,18 @@ function Inner({ locale, services, categories, onAgain }: { locale: Locale; serv
             code={codeOf("budget")}
           />
         </div>
-        <TextField prefix={PREFIX} name="message" label={c.message[locale]} hint={c.messageHint[locale]} multiline locale={locale} register={reg} code={codeOf("message")} />
+        <TextField prefix={PREFIX} name="message" label={c.message[locale]} hint={c.messageHint[locale]} multiline locale={locale} register={reg} code={codeOf("message")} max={maxOf("message")} />
       </fieldset>
 
       <fieldset className="form-group">
         <legend className="form-group-title">{c.you[locale]}</legend>
         <div className="form-row">
-          <TextField prefix={PREFIX} name="name" label={f.name[locale]} autoComplete="name" locale={locale} register={reg} code={codeOf("name")} />
+          <TextField prefix={PREFIX} name="name" label={f.name[locale]} autoComplete="name" locale={locale} register={reg} code={codeOf("name")} max={maxOf("name")} />
           <TextField prefix={PREFIX} name="email" label={f.email[locale]} type="email" inputMode="email" autoComplete="email" dir="ltr" locale={locale} register={reg} code={codeOf("email")} />
         </div>
         <div className="form-row">
-          <TextField prefix={PREFIX} name="phone" label={f.phone[locale]} type="tel" inputMode="tel" autoComplete="tel" dir="ltr" optional locale={locale} register={reg} code={codeOf("phone")} />
-          <TextField prefix={PREFIX} name="company" label={f.company[locale]} autoComplete="organization" optional locale={locale} register={reg} code={codeOf("company")} />
+          <TextField prefix={PREFIX} name="phone" label={f.phone[locale]} hint={f.phoneHint[locale]} type="tel" inputMode="tel" autoComplete="tel" dir="ltr" optional locale={locale} register={reg} code={codeOf("phone")} />
+          <TextField prefix={PREFIX} name="company" label={f.company[locale]} autoComplete="organization" optional locale={locale} register={reg} code={codeOf("company")} max={maxOf("company")} />
         </div>
       </fieldset>
 

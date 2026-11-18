@@ -13,7 +13,7 @@ import "./print-order.css";
  * Print order (spec §6, IV.23; v1 plan A8): "Order your print online" as the four steps of a
  * request, set as job tickets torn from one docket. No cart, no quantities to pick, no prices.
  * The steps are always fully visible (nothing waits on a tap), so the module is complete without
- * its CTA: the request link to `/contact?service=print-store` renders only once the contact page
+ * its CTA: the request link to `/contact?service=print-ordering` renders only once the contact page
  * is live (QUOTE_LINK.live, D83).
  *
  * Owner: GSAP, once: the tickets slide in from inline-start one after another as the module

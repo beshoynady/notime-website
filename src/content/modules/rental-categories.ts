@@ -15,11 +15,11 @@ export interface RentalCategory {
 }
 
 export const RENTAL_CATEGORIES = {
-  hint: { en: "Choose what your production needs.", ar: "اختر ما يحتاجه إنتاجك." },
-  selected: { en: "Selected:", ar: "اخترت:" },
+  hint: { en: "Choose what your production needs.", ar: "اختاروا ما يحتاج إليه إنتاجكم." },
+  selected: { en: "Selected:", ar: "اخترتم:" },
   /** Joins the selected names in the summary. */
   separator: { en: ", ", ar: "، " },
-  cta: { en: "Ask for availability", ar: "اسأل عن التوفّر" },
+  cta: { en: "Ask for availability", ar: "اسألوا عن التوفّر" },
   categories: [
     {
       id: "cameras",
