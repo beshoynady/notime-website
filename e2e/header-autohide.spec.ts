@@ -157,6 +157,18 @@ test.describe("header autohide (phones)", () => {
     await expectHeader(page, "shown");
   });
 
+  test("a tap's focus doesn't hold it", async ({ page }) => {
+    await gotoReady(page, `/en${EVENTS}`);
+    const burger = page.locator("button[aria-controls=mobile-nav]");
+    await burger.tap();
+    await expect(burger).toHaveAttribute("aria-expanded", "true");
+    await burger.tap();
+    await expect(burger).toHaveAttribute("aria-expanded", "false");
+    await expect(burger).toBeFocused(); // the tap left focus in the header
+    await scrollSteps(page, 600);
+    await expectHeader(page, "hidden");
+  });
+
   test("only on category pages", async ({ page }) => {
     for (const path of ["/en", "/en/work"]) {
       await gotoReady(page, path);
@@ -178,6 +190,23 @@ test.describe("header autohide (phones)", () => {
       for (const d of durations) expect(d).toBeLessThan(0.01);
       await scrollSteps(page, 550);
       await expectHeader(page, "shown");
+    });
+
+    // Reduced motion: the cards don't stack (static, photo-stack.css), so none is ever held under
+    // the chip bar and no gap can open when the bar rises with the header; they scroll with the page.
+    test("the celebration cards are never held", async ({ page }) => {
+      await gotoReady(page, `/en${EVENTS}`);
+      const list = await docTop(page, ".pstack-cards");
+      await scrollSteps(page, list - 600, 300);
+      await scrollSteps(page, list + 300);
+      await expectHeader(page, "hidden");
+      const g = await page.evaluate(() => ({
+        positions: [...document.querySelectorAll(".pstack-card")].map((c) => getComputedStyle(c).position),
+        card: document.querySelector(".pstack-card")!.getBoundingClientRect().top,
+        list: document.querySelector(".pstack-cards")!.getBoundingClientRect().top,
+      }));
+      expect(new Set(g.positions)).toEqual(new Set(["static"]));
+      expect(Math.abs(g.card - g.list), "the first card scrolls with its list").toBeLessThanOrEqual(1);
     });
   });
 });
