@@ -14,7 +14,7 @@ Deliver: a short message with the preview link, both report paths, and anything 
 
 **Progress ledger (the source of truth after a context reset):** `E:/NO Time/nt-audit-fixes/.superpowers/sdd/2026-11-17-audit-fixes/progress.md` (gitignored). Read it, then `git log --oneline` in the worktree.
 
-**Current step:** Phase 1: Tasks 0–11 done (11 passed its LCP gate measured alone; README in docs/checkpoints/lighthouse/audit-fixes/). Next: Task 12 on branch audit-n06 (gate vs port 3300 = worktree E:/NO Time/nt-mid at the audit-fixes head), then 13, 14, 15.
+**Current step:** Owner scope cut 2026-11-18 (see ledger): launch only. Tasks 0–11 done; Task 12 on audit-n06 (5bdf6fe) → keep the still hero only, drop the desktop build scene (v1.1), then merge; Task 13 → v1.1; then 14, 15 (basic: tests + CI + shots, one Lighthouse home + /links), phase 2, short report + short Rand guide (no PDF).
 
 Servers: 3000 = builds from the worktree (for e2e/Lighthouse after); 3200 = the before build (`E:/NO Time/nt-before`, e19404f); 3100 = review build behind the tunnel https://commerce-tension-petersburg-rom.trycloudflare.com (from `notime-website`, rebuild at the end).
 
