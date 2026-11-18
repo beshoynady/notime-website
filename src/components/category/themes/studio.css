@@ -35,6 +35,44 @@ main[data-theme="studio"] .cat-opening .scene {
   }
 }
 
+/* N06 · the hero (the scene's still): the developed frame fills the letterbox, and the head sits
+   on its lower part. A grade from the bottom and from the text side (inline-start, mirrored in
+   Arabic) holds the text at AA over the brightest of the photo, like a lower third. Above the
+   layers, under the overlay. */
+main[data-theme="studio"] .scene[data-mode="still"] {
+  --st-hero-from: 90deg;
+}
+[dir="rtl"] main[data-theme="studio"] .scene[data-mode="still"] {
+  --st-hero-from: -90deg;
+}
+/* In the still the developed frame covers the timecode's corner (its last digits ran under the
+   photo at 1440, in the reduced still too): the readout sits just above the frame's top edge
+   (the frame layer's 14% inset), on the night ground. */
+@media (min-width: 900px) {
+  main[data-theme="studio"] .scene[data-mode="still"] {
+    --tc-top: calc(14% - 24px);
+  }
+}
+main[data-theme="studio"] .scene[data-mode="still"] .scene-layers::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to top,
+      color-mix(in srgb, var(--color-night) 90%, transparent) 0%,
+      color-mix(in srgb, var(--color-night) 80%, transparent) 30%,
+      color-mix(in srgb, var(--color-night) 55%, transparent) 46%,
+      color-mix(in srgb, var(--color-night) 0%, transparent) 68%
+    ),
+    linear-gradient(
+      var(--st-hero-from),
+      color-mix(in srgb, var(--color-night) 70%, transparent) 0%,
+      color-mix(in srgb, var(--color-night) 45%, transparent) 50%,
+      color-mix(in srgb, var(--color-night) 0%, transparent) 80%
+    );
+}
+
 /* L0 · the seamless backdrop: a dark wall sweeping into the floor (the cyc), lit from nowhere yet. */
 main[data-theme="studio"] .fx-cyc {
   background:

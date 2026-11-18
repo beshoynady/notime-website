@@ -68,29 +68,31 @@ main[data-theme="evening"] .cat-opening-overlay > .crumbs a {
 .cat-opening-after {
   padding-block: clamp(40px, 6vw, 72px) 0;
 }
-/* The shot lines: one at a time under the H1. The last shot's line is the promise and is set
-   larger (storyboard shot 4); the still keeps them as one paragraph at one size. */
-html[data-js]:not([data-reduced]) .cat-opening .scene-line {
-  align-self: end;
-}
-/* Wide enough that the promise keeps one line on desktop in the fallback face and in Montserrat:
-   when it wrapped inside 52ch, the font swap changed the cell's height (CLS 0.0039, D73). */
-html[data-js]:not([data-reduced]) .cat-opening .scene-copy {
+/* N06 · the hero's lead: the scene's promise (its last shot line), set as the build scene sets it. */
+.cat-opening-lead {
+  margin: 20px 0 0;
   max-inline-size: 42rem;
-}
-html[data-js]:not([data-reduced]) .cat-opening .scene-line:last-child {
   font-size: clamp(1.25rem, 0.95rem + 0.8vw, 1.6rem);
   font-weight: 300;
   line-height: 1.3;
-  /* Two lines reserved: the cell's height never depends on where the promise wraps (narrow
-     desktop widths, Arabic, the fallback face before the swap), so the H1 above never moves. */
-  min-block-size: 2.6em;
 }
-/* "Skip to services": a quiet text control at the opening's bottom, inline-end. Second in the
-   DOM (after the H1), last on screen (order). */
+/* "Request a quote", then the skip control: one row under the lead. On desktop the skip keeps
+   its place at the opening's bottom inline-end; below 900px it follows the button at
+   inline-start (inline-end belongs to the floating WhatsApp button) and wraps under it if needed. */
+.cat-opening-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 28px;
+  margin-block-start: 12px;
+}
+@media (min-width: 900px) {
+  .cat-opening-actions .cat-skip {
+    margin-inline-start: auto;
+  }
+}
+/* "Skip to services": a quiet text control beside "Request a quote" (N06). */
 .cat-skip {
-  order: 1;
-  align-self: flex-end;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -106,12 +108,6 @@ html[data-js]:not([data-reduced]) .cat-opening .scene-line:last-child {
   opacity: 1;
   text-decoration: underline;
   text-underline-offset: 4px;
-}
-/* Below 900px inline-end belongs to the floating WhatsApp button: the skip sits at inline-start. */
-@media (max-width: 899.98px) {
-  .cat-skip {
-    align-self: flex-start;
-  }
 }
 @media (min-width: 900px) {
   .cat-opening-overlay > * {
@@ -279,7 +275,7 @@ html[data-js]:not([data-reduced]) .cat-opening .scene-line:last-child {
   backdrop-filter: blur(10px);
 }
 /* Below 900px the chip bar moves up with the hiding header, in step with it (globals.css, "Header
-   autohide"; its transition is set with the opacity one, below); translate only, so its sticky
+   autohide"; its transition is set below); translate only, so its sticky
    place and every anchor landing stay the same. */
 html[data-header-hidden] .svc-index {
   translate: 0 var(--header-follow);
@@ -444,19 +440,10 @@ html[data-header-hidden] .svc-index {
     background: var(--color-champagne);
   }
 }
-/* The index steps back while the opening's first shot plays (D74, P3): it stays from the first
-   frame (D64) but at 40%, so the shot reads first. Full again once the opening moves on, or as
-   soon as the visitor points at it, focuses into it or opens it. Motion only (data-js, not
-   reduced): the still and the static opening keep it at full. */
+/* The index stays at full from the first frame (D64). It stepped back to 40% during the pinned
+   build scene's first shot (D74, P3); that scene is v1.1 (the owner's scope cut, 2026-11-18). */
 .svc-index {
-  transition:
-    opacity 0.4s var(--ease-expo-out),
-    translate 0.35s var(--ease-expo-out); /* with the hiding header (above) */
-}
-html[data-js]:not([data-reduced])
-  .cat-page:has(.cat-opening .scene[data-shot-active="0"])
-  .svc-index:not(:hover, :focus-within, [data-open]) {
-  opacity: 0.4;
+  transition: translate 0.35s var(--ease-expo-out); /* with the hiding header (above) */
 }
 @media (prefers-reduced-motion: reduce) {
   .svc-index,
