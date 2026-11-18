@@ -19,7 +19,7 @@ export type Phase = (typeof PHASES)[number];
 
 /** The closed CTA copy (D65) and the two approved promises (D91). */
 export const cta = {
-  book: l("Book a free 30-min intro call", "احجز مكالمة تعارف مجانية (30 دقيقة)"),
+  book: l("Request a free intro call", "اطلبوا مكالمة تعارف مجانية"),
   micro: l("No obligation. We reply within one working day.", "دون أي التزام. نرد خلال يوم عمل."),
   review: l("Get a free website review", "احصل على مراجعة مجانية لموقعك"),
   reviewShort: l("Free website review", "مراجعة مجانية لموقعك"),
@@ -361,7 +361,7 @@ export const productsCopy = {
   register: l("Register interest", "سجّل اهتمامك"),
   registerFor: l("Register interest in {product}", "سجّل اهتمامك بـ{product}"),
   close: l("Close the form", "أغلق النموذج"),
-  more: l("See what {product} will do", "تعرّف على ما سيقدّمه {product}"),
+  more: l("See what {product} will do", "اكتشفوا ما ستقدّمه «{product}»"),
   items: {
     "minute-zero": {
       slug: "qr-check-in",
@@ -419,8 +419,8 @@ export const quality = {
 
 export const finalCta = {
   risk: l(
-    "Book a free 30-min intro call. No obligation. We reply within one working day.",
-    "احجز مكالمة تعارف مجانية (30 دقيقة). دون أي التزام. نرد خلال يوم عمل.",
+    "Request a free 30-min intro call. No obligation. We reply within one working day.",
+    "اطلبوا مكالمة تعارف مجانية (30 دقيقة). دون أي التزام. نرد خلال يوم عمل.",
   ),
   reviewAnchor: "website-review",
   reviewTitle: l("Or start with a free website review", "أو ابدأ بمراجعة مجانية لموقعك"),
@@ -433,7 +433,7 @@ export const faqCopy = {
 export const sticky = {
   label: l("Quick actions", "إجراءات سريعة"),
   /** Shorter than `cta.book`: both buttons fit one line each at 390 px in both locales. */
-  book: l("Book a free intro call", "احجز مكالمة مجانية"),
+  book: l("Request a free call", "اطلبوا مكالمة مجانية"),
 };
 
 export const seo = {

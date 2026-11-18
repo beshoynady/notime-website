@@ -33,3 +33,16 @@ for (const locale of ["en", "ar"] as const) {
     });
   });
 }
+
+test.describe("the 404 tab", () => {
+  test.skip(({ isMobile }) => isMobile, "the title doesn't depend on the width");
+
+  test("the tab names the page", async ({ page }) => {
+    await page.goto("/en/no-such-page");
+    await expect(page).toHaveTitle("Page not found · NO TIME Creative House");
+    await page.goto("/ar/no-such-page");
+    await expect(page).toHaveTitle("الصفحة غير موجودة · NO TIME Creative House");
+    await page.goto("/en/services/no-such-category-title");
+    await expect(page).toHaveTitle("Page not found · NO TIME Creative House");
+  });
+});

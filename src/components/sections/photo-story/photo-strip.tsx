@@ -12,6 +12,9 @@ import "./photo-strip.css";
  * mirrors in Arabic. The height comes from the frames' ratios in CSS, so it is reserved from the
  * server render and nothing shifts when the script arrives. Phones, reduced motion and no JS: a
  * native swipe row with snap points (mirrored by the page's direction).
+ *
+ * Its own section (a region named by its title) with a ground tone for the ToneController; the
+ * title is an h2, as a top-level block of the page (home: right after the hero, N05).
  */
 export function PhotoStrip({
   id,
@@ -19,8 +22,10 @@ export function PhotoStrip({
   title,
   frames,
   locale,
+  tone,
 }: {
   id: string;
+  tone: "dark" | "light";
   eyebrow: Localized<string>;
   title: Localized<string>;
   frames: readonly { photo: StoryPhotoKey; caption: Localized<string> }[];
@@ -31,13 +36,13 @@ export function PhotoStrip({
   const ratios = photos.reduce((sum, { p }) => sum + p.width / p.height, 0);
   const style = { "--strip-r": ratios.toFixed(3), "--strip-n": frames.length } as CSSProperties;
   return (
-    <div className="pstrip" id={id} role="region" aria-labelledby={titleId} style={style}>
+    <section className="pstrip" id={id} data-tone={tone} aria-labelledby={titleId} style={style}>
       <div className="pstrip-stage">
         <div className="frame pstrip-head">
           <p className="text-eyebrow text-champagne">{eyebrow[locale]}</p>
-          <h3 id={titleId} className="pstrip-title">
+          <h2 id={titleId} className="pstrip-title">
             {title[locale]}
-          </h3>
+          </h2>
         </div>
         {/* Focusable, so a keyboard can scroll the swipe row (phones, reduced motion); WCAG 2.1.1. */}
         <ul className="pstrip-track" tabIndex={0} aria-labelledby={titleId}>
@@ -54,6 +59,6 @@ export function PhotoStrip({
         </ul>
       </div>
       <PhotoStripMotion />
-    </div>
+    </section>
   );
 }

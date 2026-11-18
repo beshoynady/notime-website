@@ -1,5 +1,7 @@
 import type { z } from "zod";
-import { HONEYPOT, TURNSTILE_FIELD, fieldErrors, type FormState } from "./schemas";
+import { keepEventFields } from "./event-fields";
+import { HONEYPOT, TURNSTILE_FIELD, fieldErrors, type Contact, type FormState } from "./schemas";
+import { parseServiceParam } from "./service-param";
 import { rateLimit } from "./rate-limit";
 
 /** Plain values of a submission, without the shared and anti-spam fields' noise. */
@@ -34,4 +36,14 @@ export async function handleSubmission<S extends z.ZodType>(
   if (!deliver) return { status: "success" };
   const status = await deliver(parsed.data, values);
   return status === "success" ? { status } : { status, fields: values };
+}
+
+/**
+ * The contact brief as it is mailed: an unknown service is dropped, and the event date and guests
+ * are blanked unless the service is an Events one (or none). The form hides those fields for other
+ * services, but a stale value can still be posted. The `?category=` hint never reaches the server.
+ */
+export function prepareContact(d: Contact): Contact {
+  const service = parseServiceParam(d.service);
+  return keepEventFields(service) ? { ...d, service } : { ...d, service, eventMonth: "", guests: "" };
 }

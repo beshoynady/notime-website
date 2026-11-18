@@ -37,7 +37,7 @@ hPanel → the app → **Environment variables**. Hostinger injects them at buil
 | `RESEND_API_KEY` | Resend → API Keys, a key limited to sending | Secret |
 | `CONTACT_TO_EMAIL` | developer's inbox → `info@notimehub.com` once Resend verifies | [email-dns.md](email-dns.md) |
 | `MAIL_FROM` | `website@notimehub.com` (after verification) | Sender of the notifications and the auto-reply |
-| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | the **real** site key (Cloudflare → Turnstile, widget for `notimehub.com`) | Build time. Task 4.2 adds a guard that **fails a production build** when a Turnstile key is missing, so Cloudflare's test keys can't ship |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | the **real** site key (Cloudflare → Turnstile, widget for `notimehub.com` and `www.notimehub.com`) | Build time. Without real keys the build still succeeds, but every form is refused with the email fallback (fail closed, D102). The test and steps: [checklist.md](checklist.md) |
 | `TURNSTILE_SECRET_KEY` | the matching real secret | Secret, runtime |
 | `NEXT_PUBLIC_SITE_URL` | leave **empty** | Empty = `https://notimehub.com` in production (`src/config/site.ts`): canonical, sitemap, OG, hreflang |
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | the business number, digits only, when the client gives it | Build time. Empty = WhatsApp hidden (fill-or-hide, D78) |

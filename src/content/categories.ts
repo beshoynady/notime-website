@@ -237,7 +237,7 @@ export const categories: Category[] = [
       },
       {
         q: { en: "What do you need from me to start?", ar: "ماذا تحتاجون مني للبدء؟" },
-        a: { en: "A few lines on what you want to build and who it's for. Book a free 30-min intro call, and we'll take it from there.", ar: "بضعة أسطر عمّا تريد بناءه ولمن. احجز مكالمة تعارف مجانية (30 دقيقة)، ونتابع معك الخطوات التالية." },
+        a: { en: "A few lines on what you want to build and who it's for. Request a free 30-min intro call, and we'll take it from there.", ar: "بضعة أسطر عمّا تريدون بناءه ولمن. اطلبوا مكالمة تعارف مجانية (30 دقيقة)، ونتابع معكم الخطوات التالية." },
       },
     ],
     closing: { en: "Your idea is the next line.", ar: "فكرتك هي السطر التالي." },

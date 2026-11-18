@@ -8,7 +8,7 @@ test.describe("locale switch", () => {
   test("mid-pin switch: one pin spacer, no leftover split, URL /ar", async ({ page }) => {
     await gotoReady(page, "/en");
     await page.waitForFunction(() => document.documentElement.hasAttribute("data-intro-seen") || !!document.querySelector(".pin-spacer"));
-    await page.evaluate(() => scrollTo(0, innerHeight * 0.7)); // 50% of the 140% pin
+    await page.evaluate(() => scrollTo(0, innerHeight * 0.5)); // 50% of the 100% pin (N05)
     await page.waitForTimeout(600);
 
     await page.locator("header a[hreflang=ar]").click();
@@ -44,5 +44,11 @@ test.describe("locale switch", () => {
     await expect(page.locator("button[aria-controls=mega-panel]")).toHaveAttribute("aria-expanded", "false");
     await expect(page.locator("#mega-panel")).toBeHidden();
     expect(await page.evaluate(() => document.documentElement.hasAttribute("data-overlay-open"))).toBe(false);
+  });
+
+  test("the toggle's names start with its visible text", async ({ page }) => {
+    await gotoReady(page, "/en");
+    await expect(page.locator("header a[hreflang=en]")).toHaveAccessibleName("EN, English");
+    await expect(page.locator("header a[hreflang=ar]")).toHaveAccessibleName("ع، العربية");
   });
 });

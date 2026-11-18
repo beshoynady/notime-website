@@ -18,6 +18,7 @@
   "nav": {
     "label": "Main",
     "services": "Services",
+    "events": "Events",
     "work": "Work",
     "digital": "Digital Solutions",
     "about": "About",
@@ -26,12 +27,15 @@
   "header": {
     "quote": "Request a quote"
   },
+  "ctaBar": {
+    "label": "Quick contact"
+  },
   "langToggle": {
     "label": "Language",
     "en": "EN",
     "ar": "ع",
-    "enName": "English",
-    "arName": "العربية"
+    "enLabel": "EN, English",
+    "arLabel": "ع، العربية"
   },
   "megaMenu": {
     "eyebrow": "Services",
@@ -50,6 +54,7 @@
   },
   "whatsapp": {
     "label": "Chat with us on WhatsApp",
+    "short": "WhatsApp",
     "pending": "WhatsApp · number pending",
     "prefill": "Hello NO TIME, I'd like to talk about a project.",
     "prefillFrom": "Hello NO TIME, I found you through {channel} and I'd like to talk about a project.",
@@ -66,6 +71,7 @@
     }
   },
   "hero": {
+    "eyebrow": "Every second is planned.",
     "titleLine1": "IT'S TIME",
     "title": {
       "create": {
@@ -78,9 +84,8 @@
       }
     },
     "lead": "Events, creative production, marketing and digital solutions, planned and delivered by one house.",
-    "cta": "See what we make",
-    "beatLead": "Every second",
-    "beatKey": "is planned."
+    "cta": "Plan your event",
+    "ctaWork": "See our work"
   },
   "hud": {
     "scene": "Scene 01 — NO TIME",
@@ -97,9 +102,8 @@
         "value": "6",
         "label": "Markets"
       },
-      "integrated": {
-        "value": "360°",
-        "label": "Integrated"
+      "services": {
+        "label": "Services"
       }
     }
   },
@@ -484,6 +488,7 @@
     "title": "This page doesn't exist.",
     "back": "Back to home",
     "body": "The link may be out of date, or the address mistyped. Start from what we do, or go back home.",
+    "metaTitle": "Page not found",
     "services": "See our services"
   },
   "scenes": {
@@ -551,6 +556,12 @@
     "next": "Next",
     "frame": "{n} / {total}"
   },
+  "servicesIndex": {
+    "closing": {
+      "title": "Not sure which service you need?",
+      "body": "Tell us the occasion and the date. One team will shape it with you and reply within one working day."
+    }
+  },
   "workIndex": {
     "metaTitle": "Our work",
     "metaDescription": "Selected projects by NO TIME Creative House: an airline's exhibition pavilion, and a football league's tournaments and award nights.",
@@ -568,7 +579,10 @@
     "emptyTitle": "No project to show here yet.",
     "emptyBody": "We list only work we can back with facts, so this page grows one project at a time. Clear a filter, or see what we do in this area.",
     "showAll": "Show all work",
-    "exploreServices": "Explore our services"
+    "exploreServices": "Explore our services",
+    "closing": {
+      "body": "Tell us the date and what you need. One team replies within one working day."
+    }
   },
   "workCase": {
     "factsLabel": "Key facts",

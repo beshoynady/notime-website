@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
  * EN / ع toggle. Keeps the current page when switching. Each option is a plain link
  * that loads a fresh document (DECISIONS D31): a language switch changes <html lang/dir>
  * and fonts, and a client navigation would keep the other-language tree hidden in the DOM
- * (React Activity under cacheComponents). Named in its own language; 44px hit area.
+ * (React Activity under cacheComponents). Its accessible name starts with the visible text ("EN, English"), in its own language; 44px hit area.
  */
 export function LangToggle({ className }: { className?: string }) {
   const t = useTranslations("langToggle");
@@ -27,7 +27,7 @@ export function LangToggle({ className }: { className?: string }) {
             hrefLang={l}
             lang={l}
             aria-current={active ? "true" : undefined}
-            aria-label={t(l === "en" ? "enName" : "arName")}
+            aria-label={t(l === "en" ? "enLabel" : "arLabel")}
             className={cn(
               "relative grid min-w-11 place-items-center px-3 py-[7px] text-[0.72rem] leading-none tracking-[0.14em] no-underline",
               "before:absolute before:inset-x-0 before:-inset-y-[7px] before:content-['']",

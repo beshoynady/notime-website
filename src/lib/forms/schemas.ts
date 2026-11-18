@@ -121,12 +121,40 @@ export const EVENT_BUDGETS = ["ev-under-50k", "ev-50k-150k", "ev-150k-500k", "ev
 /** Any band: the form shows the software bands for a software service, the event bands otherwise. */
 export const CONTACT_BUDGETS = [...new Set([...EVENT_BUDGETS, ...SOFTWARE_BUDGETS])] as [string, ...string[]];
 
+/** Expected guests for an event brief (optional). Email labels live beside the bands, EN only. */
+export const GUEST_BANDS = ["up-to-50", "50-150", "150-500", "over-500", "not-sure"] as const;
+export const GUEST_LABELS: Record<(typeof GUEST_BANDS)[number], string> = {
+  "up-to-50": "Up to 50",
+  "50-150": "50–150",
+  "150-500": "150–500",
+  "over-500": "Over 500",
+  "not-sure": "Not sure yet",
+};
+
+const monthIndex = (y: number, m: number) => y * 12 + (m - 1);
+/** "YYYY-MM" from the previous month to 37 months ahead of the server date. */
+function monthInRange(v: string): boolean {
+  if (v === "") return true;
+  const now = new Date();
+  const diff = monthIndex(Number(v.slice(0, 4)), Number(v.slice(5, 7))) - monthIndex(now.getUTCFullYear(), now.getUTCMonth() + 1);
+  return diff >= -1 && diff <= 37;
+}
+
 export const contactSchema = z.object({
   /** A service anchor (`?service=` preset); the server keeps it only if it names a real service. */
   service: z.string().trim().max(60).optional().default(""),
   timeline: z.enum(TIMELINES).or(z.literal("")).optional().default(""),
   budget: z.enum(CONTACT_BUDGETS).or(z.literal("")).optional().default(""),
   city: opt(80),
+  /** Events only: the month of the event, "YYYY-MM" (the server drops it for any other service). */
+  eventMonth: z
+    .string()
+    .regex(/^\d{4}-(0[1-9]|1[0-2])$/)
+    .or(z.literal(""))
+    .refine(monthInRange, { error: "invalid" })
+    .optional()
+    .default(""),
+  guests: z.enum(GUEST_BANDS).or(z.literal("")).optional().default(""),
   name: req(100),
   email,
   phone: phoneOpt,

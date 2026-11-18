@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseServiceParam } from "./service-param";
+import { parseCategoryParam, parseServiceParam } from "./service-param";
 
 describe("parseServiceParam", () => {
   it("keeps a real anchor", () => expect(parseServiceParam("apps")).toBe("apps"));
@@ -9,5 +9,12 @@ describe("parseServiceParam", () => {
   it("limits to the anchors a form offers", () => {
     expect(parseServiceParam("gifts", ["apps", "websites"])).toBe("");
     expect(parseServiceParam("apps", ["apps", "websites"])).toBe("apps");
+  });
+});
+
+describe("parseCategoryParam", () => {
+  it("keeps a real category slug", () => expect(parseCategoryParam("events-hospitality")).toBe("events-hospitality"));
+  it("drops unknown, script, over-long and missing values", () => {
+    for (const v of ["<script>", "nope", "a".repeat(61), null, undefined, ""]) expect(parseCategoryParam(v)).toBe("");
   });
 });

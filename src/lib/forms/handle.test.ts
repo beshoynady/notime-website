@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { handleSubmission } from "./handle";
-import { HONEYPOT, interestSchema } from "./schemas";
+import { handleSubmission, prepareContact } from "./handle";
+import { HONEYPOT, contactSchema, interestSchema } from "./schemas";
 
 const fd = (o: Record<string, string>) => {
   const f = new FormData();
@@ -54,5 +54,24 @@ describe("handleSubmission · Turnstile (D102)", () => {
     const r = await handleSubmission(interestSchema, fd({ ...ok, "cf-turnstile-response": "tok" }), { ip: "2.2.2.3", verify: async (t) => ((token = t), true), deliver: async () => "success" });
     expect(r.status).toBe("success");
     expect(token).toBe("tok");
+  });
+});
+
+describe("stale event fields are dropped", () => {
+  const brief = { locale: "en", source: "contact", name: "Sara", email: "sara@example.com", message: "Hello", eventMonth: "2027-03", guests: "50-150" };
+  const run = async (o: Record<string, string>, ip: string) => {
+    let seen: unknown;
+    await handleSubmission(contactSchema, fd({ ...brief, ...o }), { ip, deliver: async (d) => ((seen = prepareContact(d)), "success" as const) });
+    return seen;
+  };
+  it("blanks them for a non-events service", async () => {
+    expect(await run({ service: "branding" }, "2.2.2.1")).toMatchObject({ service: "branding", eventMonth: "", guests: "" });
+  });
+  it("keeps them for an events service or no service", async () => {
+    expect(await run({ service: "conferences" }, "2.2.2.2")).toMatchObject({ eventMonth: "2027-03", guests: "50-150" });
+    expect(await run({}, "2.2.2.3")).toMatchObject({ eventMonth: "2027-03", guests: "50-150" });
+  });
+  it("drops an unknown service and keeps the event fields (no service)", async () => {
+    expect(await run({ service: "<script>" }, "2.2.2.4")).toMatchObject({ service: "", eventMonth: "2027-03" });
   });
 });

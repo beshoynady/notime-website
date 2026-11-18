@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
-import { consultationSchema, fieldErrors, interestSchema, websiteReviewSchema } from "./schemas";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { consultationSchema, contactSchema, fieldErrors, interestSchema, websiteReviewSchema } from "./schemas";
 
 const errs = (r: { success: boolean; error?: unknown }) =>
   r.success ? {} : fieldErrors(r.error as Parameters<typeof fieldErrors>[0]);
@@ -43,5 +43,30 @@ describe("register interest", () => {
     const ok = { product: "peak-hour", name: "Lina", email: "lina@example.com" };
     expect(interestSchema.safeParse(ok).success).toBe(true);
     expect(errs(interestSchema.safeParse({ ...ok, product: "other" }))).toEqual({ product: "invalid" });
+  });
+});
+
+describe("contact · event fields", () => {
+  const ok = { name: "Sara", email: "sara@example.com", message: "An event." };
+  const at = (v: Record<string, string>) => contactSchema.safeParse({ ...ok, ...v });
+  beforeEach(() => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-11-17"));
+  });
+  afterEach(() => vi.useRealTimers());
+
+  it("defaults both to empty", () => {
+    expect(at({}).data).toMatchObject({ eventMonth: "", guests: "" });
+  });
+  it("accepts a month from last month to three years ahead", () => {
+    expect(at({ eventMonth: "2026-10" }).success).toBe(true);
+    expect(at({ eventMonth: "2029-12" }).success).toBe(true);
+  });
+  it("rejects a month out of range or malformed", () => {
+    for (const m of ["2026-09", "2030-01", "2026-13"]) expect(errs(at({ eventMonth: m }))).toEqual({ eventMonth: "invalid" });
+  });
+  it("accepts a guest band and rejects anything else", () => {
+    expect(at({ guests: "150-500" }).success).toBe(true);
+    expect(errs(at({ guests: "lots" }))).toEqual({ guests: "invalid" });
   });
 });

@@ -156,6 +156,7 @@ export function SelectField({
   name,
   label,
   options,
+  groups,
   placeholder,
   locale,
   register,
@@ -166,7 +167,9 @@ export function SelectField({
   prefix: string;
   name: string;
   label: string;
-  options: { value: string; label: string }[];
+  options?: { value: string; label: string }[];
+  /** Grouped options (rendered as `<optgroup>`), for a long list; `options` stays for flat ones. */
+  groups?: { label: string; options: { value: string; label: string }[] }[];
   placeholder: string;
   locale: Locale;
   register: Register;
@@ -176,6 +179,11 @@ export function SelectField({
 }) {
   const id = fieldId(prefix, name);
   const described = [hint && `${id}-hint`, code && `${id}-error`].filter(Boolean).join(" ") || undefined;
+  const option = (o: { value: string; label: string }) => (
+    <option key={o.value} value={o.value}>
+      {o.label}
+    </option>
+  );
   return (
     <div className={cn("field form-field", code && "field-error")}>
       <label htmlFor={id}>
@@ -184,10 +192,11 @@ export function SelectField({
       </label>
       <select id={id} className="field-control form-control form-select" aria-invalid={code ? true : undefined} aria-describedby={described} {...register(name)}>
         <option value="">{placeholder}</option>
-        {options.map((o) => (
-          <option key={o.value} value={o.value}>
-            {o.label}
-          </option>
+        {options?.map(option)}
+        {groups?.map((g) => (
+          <optgroup key={g.label} label={g.label}>
+            {g.options.map(option)}
+          </optgroup>
         ))}
       </select>
       {hint && (

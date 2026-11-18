@@ -123,8 +123,8 @@ export function MobileMenu({ data }: { data: MenuData }) {
                   className="group/acc border-b border-line-dark"
                 >
                   <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 py-[17px] text-[1.15rem] font-light [&::-webkit-details-marker]:hidden">
-                    <span>
-                      <Numeral className="inline-block w-[52px] text-[0.66rem] tracking-[0.2em] text-taupe">
+                    <span className="flex items-baseline gap-3">
+                      <Numeral className="inline-block min-w-[40px] shrink-0 text-[0.66rem] tracking-[0.2em] text-taupe">
                         {c.numeral}
                       </Numeral>
                       {c.title}

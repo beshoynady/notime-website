@@ -27,8 +27,10 @@ const WIPE_EASE = "power2.inOut";
  *
  * `pinUnderBars`: a scene further down the page (the majlis) pins with its top under the fixed
  * header, where a landing on its section puts it; an opening pins at the viewport's top.
+ * `desktopOnly`: no mobile condition, so nothing is built below 900px (for a scene whose box is
+ * `display: none` there: the category opening's build scene, v1.1).
  */
-export function SceneDirector({ scene, pinUnderBars = false }: { scene: SceneConfig; pinUnderBars?: boolean }) {
+export function SceneDirector({ scene, pinUnderBars = false, desktopOnly = false }: { scene: SceneConfig; pinUnderBars?: boolean; desktopOnly?: boolean }) {
   const ref = useRef<HTMLSpanElement>(null);
 
   useGSAP(() => {
@@ -38,9 +40,10 @@ export function SceneDirector({ scene, pinUnderBars = false }: { scene: SceneCon
     mm.add(
       {
         desktop: "(min-width: 900px) and (prefers-reduced-motion: no-preference)",
-        mobile: "(max-width: 899.98px) and (prefers-reduced-motion: no-preference)",
+        ...(!desktopOnly && { mobile: "(max-width: 899.98px) and (prefers-reduced-motion: no-preference)" }),
       },
       (ctx) => {
+        if (!ctx.conditions?.desktop && !ctx.conditions?.mobile) return;
         const viewport: Viewport = ctx.conditions?.desktop ? "desktop" : "mobile";
         const pass = sceneMode(scene, viewport) === "pass";
         const pin = pass ? 1 : pinLength(scene.shots, viewport);

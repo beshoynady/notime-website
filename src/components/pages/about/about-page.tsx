@@ -7,6 +7,8 @@ import { MarketsBoard } from "@/components/sections/markets/markets-board";
 import { PhotoStory } from "@/components/sections/photo-story/photo-story";
 import { JsonLd } from "@/components/seo/json-ld";
 import { ButtonLink } from "@/components/ui/button";
+import { Numeral } from "@/components/ui/numeral";
+import { serviceCount } from "@/lib/service-count";
 import { SITE_URL } from "@/config/site";
 import { ABOUT_HREF, BREADCRUMB_LABELS, SERVICES_INDEX_HREF, WORK_INDEX_HREF, type Locale } from "@/content";
 import { markets } from "@/content/markets";
@@ -19,7 +21,7 @@ import { PAGE_REF } from "@/lib/review";
 import "@/components/sections/markets/markets.css";
 import "./about.css";
 
-const FIGURES = ["markets", "integrated"] as const; // the profile's two usable figures (p3)
+const FIGURES = ["markets", "services"] as const; // the profile's two usable figures (p3)
 const STORY = ["story1", "story2", "story3", "story4"] as const;
 
 /** Each market's UTC offset on the build date (cached, as on the homepage board). */
@@ -51,7 +53,7 @@ export async function AboutPage({ locale }: { locale: Locale }) {
     <main id="main" className="ab">
       <JsonLd data={[trailJsonLd([{ name: BREADCRUMB_LABELS.about[locale], path: ABOUT_HREF }], locale, SITE_URL)]} />
 
-      <section data-tone="dark" aria-labelledby="ab-title" className="pg-open ab-open">
+      <section data-tone="dark" aria-labelledby="ab-title" className="pg-open ab-open" data-cta-opening="">
         <SectionRef id={PAGE_REF.aboutStory} />
         <div className="frame">
           <PageCrumbs current={BREADCRUMB_LABELS.about[locale]} />
@@ -74,7 +76,9 @@ export async function AboutPage({ locale }: { locale: Locale }) {
               {FIGURES.map((k) => (
                 <div key={k}>
                   <dt className="text-eyebrow">{ta(`stats.${k}.label`)}</dt>
-                  <dd className="tabular">{ta(`stats.${k}.value`)}</dd>
+                  <dd className="tabular">
+                  <Numeral>{k === "services" ? String(serviceCount()) : ta(`stats.${k}.value`)}</Numeral>
+                </dd>
                 </div>
               ))}
             </dl>

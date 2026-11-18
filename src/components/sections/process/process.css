@@ -1,4 +1,10 @@
 /* Home · How we work (H-07). The stage is the pinned box on desktop. */
+/* The pin wrapper and the stage fill the section: with align-self: start (globals.css) they shrink
+   to the frame's 1280px and sit at the viewport edge, leaving the heading off the page grid. */
+.process-pin,
+.process-stage {
+  inline-size: 100%;
+}
 .process-stage {
   display: flex;
   align-items: center;

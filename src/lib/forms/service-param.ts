@@ -9,3 +9,5 @@ export function parseServiceParam(value: string | null | undefined, within: read
   if (!value || value.length > 60 || !/^[a-z0-9-]+$/.test(value)) return "";
   return within.includes(value) ? value : "";
 }
+
+export { parseCategoryParam } from "./category-param";

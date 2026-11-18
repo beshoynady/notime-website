@@ -66,6 +66,48 @@ main[data-theme="evening"] .fx-ev-scrim {
     );
   }
 }
+/* N06 · the hero (the scene's still): the room photo is 1600 px wide, so at 1440 its softness
+   would show. A dark gradient from the text side (inline-start, mirrored in Arabic) plus a light
+   overall dim hold the text at AA over the brightest part of the room, and let the room read as
+   atmosphere behind it. Above the layers, under the overlay (the scene's z-index 2). */
+main[data-theme="evening"] .scene[data-mode="still"] {
+  --ev-hero-from: 90deg;
+}
+[dir="rtl"] main[data-theme="evening"] .scene[data-mode="still"] {
+  --ev-hero-from: -90deg;
+}
+main[data-theme="evening"] .scene[data-mode="still"] .scene-layers::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      var(--ev-hero-from),
+      color-mix(in srgb, var(--color-night) 78%, transparent) 0%,
+      color-mix(in srgb, var(--color-night) 52%, transparent) 38%,
+      color-mix(in srgb, var(--color-night) 0%, transparent) 72%
+    ),
+    color-mix(in srgb, var(--color-night) 18%, transparent);
+}
+@media (max-width: 899.98px) {
+  /* Portrait: the text spans the width, so the bottom scrim carries it and the side gradient is
+     softer; the dim stays. The breadcrumbs sit high, on the bright ceiling: a top band holds them. */
+  main[data-theme="evening"] .scene[data-mode="still"] .scene-layers::after {
+    background:
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--color-night) 72%, transparent) 0%,
+        color-mix(in srgb, var(--color-night) 55%, transparent) 20%,
+        color-mix(in srgb, var(--color-night) 0%, transparent) 36%
+      ),
+      linear-gradient(
+        var(--ev-hero-from),
+        color-mix(in srgb, var(--color-night) 45%, transparent) 0%,
+        color-mix(in srgb, var(--color-night) 0%, transparent) 80%
+      ),
+      color-mix(in srgb, var(--color-night) 22%, transparent);
+  }
+}
 /* L3 · the candle points' flicker: a second copy of the points that breathes while the act is
    live (data-live: the pin is active), twice, under 5 s (WCAG 2.2.2), then holds. It stops when
    the act ends and never runs in the still. */

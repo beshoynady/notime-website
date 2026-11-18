@@ -32,6 +32,13 @@ export interface Facetted {
 
 export const FILTER_BASE = "/work";
 
+/** Below this many projects the filter bar only adds noise (N08); filtered views stay reachable by URL. */
+export const FILTERS_MIN_PROJECTS = 6;
+
+export function showWorkFilters(projectCount: number): boolean {
+  return projectCount >= FILTERS_MIN_PROJECTS;
+}
+
 const marketBySlug = (slug: string) => (Object.entries(MARKET_SLUGS) as [MarketKey, string][]).find(([, s]) => s === slug)?.[0];
 
 /**

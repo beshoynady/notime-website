@@ -741,6 +741,33 @@ html[data-js]:not([data-reduced]) .sw-op-line:not([data-line="0"]) {
   border-radius: 6px;
   background: var(--sw-panel);
 }
+/* One proof card takes the whole row, the image beside the text. With two or more, the two-column
+   grid above applies and each card stacks image over text. */
+@media (min-width: 900px) {
+  .sw-proof-grid:has(> :only-child) > .sw-proof-card {
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    grid-template-rows: 1fr repeat(3, auto) 1fr;
+    column-gap: clamp(24px, 3vw, 40px);
+  }
+  .sw-proof-grid:has(> :only-child) > .sw-proof-card > .sw-proof-visual {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    margin-block-end: 0;
+  }
+  .sw-proof-grid:has(> :only-child) > .sw-proof-card > :not(.sw-proof-visual) {
+    grid-column: 2;
+  }
+  .sw-proof-grid:has(> :only-child) > .sw-proof-card > .sw-proof-label {
+    grid-row: 2;
+  }
+  .sw-proof-grid:has(> :only-child) > .sw-proof-card > .sw-proof-line {
+    grid-row: 3;
+  }
+  .sw-proof-grid:has(> :only-child) > .sw-proof-card > .sw-proof-scores {
+    grid-row: 4;
+  }
+}
 .sw-proof-visual {
   position: relative;
   overflow: hidden;
@@ -2028,6 +2055,7 @@ html[dir="rtl"] .sw-v-meter i {
 }
 @media (min-width: 900px) {
   .sw-product {
+    grid-column: 1 / -1;
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
   }
 }
@@ -2370,6 +2398,11 @@ html[dir="rtl"] .sw-v-meter i {
   transform: none;
   visibility: visible;
 }
+/* Under the open mobile menu it steps aside, as the WhatsApp button does (globals.css). */
+html[data-overlay-open] .sw-sticky {
+  visibility: hidden;
+  transition: none;
+}
 .sw-sticky .sw-btn {
   min-block-size: 48px;
   padding-inline: 12px;
@@ -2397,8 +2430,9 @@ html[dir="rtl"] .sw-v-meter i {
   html:has(.sw-sticky[data-show]) {
     scroll-padding-block-end: 84px;
   }
-  /* The floating WhatsApp button steps aside while the bar shows (D65). */
+  /* The floating WhatsApp button rides up above the bar while it shows (translate, not bottom:
+     no layout shift): 72px bar + 12px gap, less the button's own 20px offset. */
   body:has(.sw-sticky[data-show]) .wa-fab {
-    display: none;
+    translate: 0 -64px;
   }
 }

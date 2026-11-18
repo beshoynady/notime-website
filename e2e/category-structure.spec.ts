@@ -1,7 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import { getCategories, getServices } from "../src/content";
 import { END_TONE, THEME_TONE } from "../src/components/category/theme";
-import { GROUND, gotoReady, lcpEntry } from "./helpers";
+import { GROUND, gotoReady, heroLcp } from "./helpers";
 
 /**
  * Category pages · structure and themes (Task 2.5), every category in EN and AR: one H1, the six
@@ -117,7 +117,9 @@ for (const category of getCategories()) {
               }),
           );
           for (const s of sections) expect(s.grained, `a ${s.tone} section`).toBe(s.tone === "dark");
-          expect((await lcpEntry(page)).url, "the LCP is text, not the grain tile").toBe("");
+          // N06: the LCP is the hero's text or its eager, high-priority image; never the grain tile.
+          const lcp = await heroLcp(page);
+          expect(["h1", "lead", "image", "text"], `the LCP is the hero's text or priority image (${lcp.label})`).toContain(lcp.kind);
         });
 
         test("JSON-LD parses: ItemList, BreadcrumbList, FAQPage once the FAQ is written", async ({ page }) => {

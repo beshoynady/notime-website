@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { SceneConfig, SceneLayer, SceneShot } from "@/content/scenes/types";
-import { PIN_LIMIT, SECTION_PIN_LIMIT, enterFrom, layerDrift, lineSpans, pinLength, sceneMode, sceneProblems, shotAt, stillState, wipeInset } from "./scene-math";
+import { PIN_LIMIT, SECTION_PIN_LIMIT, enterFrom, imageLoading, layerDrift, lineSpans, pinLength, sceneMode, sceneProblems, shotAt, stillState, stillLead, wipeInset } from "./scene-math";
 
 const shots: SceneShot[] = [
   { id: "a", copyKey: "a", desktop: [0, 0.45], mobile: [0, 0.35] },
@@ -211,5 +211,46 @@ describe("wipeInset (D109)", () => {
     expect(wipeInset(1)).toBe("inset(0% 0% 0% 0%)");
     expect(wipeInset(-1)).toBe(wipeInset(0));
     expect(wipeInset(2)).toBe(wipeInset(1));
+  });
+});
+
+describe("imageLoading (N06)", () => {
+  const files = new Set(["room", "table", "desk"]);
+  const has = (slot: string) => files.has(slot);
+  const layers = [
+    layer({ id: "hall", level: 0, slot: "hall-plate" }), // no file yet: never loads
+    layer({ id: "room", level: 0, slot: "room", style: { wipe: 0 }, keys: [{ shot: 2, to: { wipe: 1 } }] }),
+    layer({ id: "table", level: 1, slot: "table", style: { wipe: 0 }, keys: [{ shot: 2, to: { wipe: 1 } }] }),
+    layer({ id: "desk", level: 2, slot: "desk", mobile: false }),
+    layer({ id: "shade", level: 3, fx: "shade" }),
+  ];
+  const high = { eager: true, high: true, phoneGate: false };
+  const eager = { eager: true, high: false, phoneGate: false };
+  const lazy = { eager: false, high: false, phoneGate: false };
+
+  it("the still: the first image it shows has high priority, the other phone layers load eagerly, desktop-only ones lazily", () => {
+    expect(imageLoading(scene({ layers }), "still", has)).toEqual({ room: high, table: eager, desk: lazy });
+  });
+
+  it("the still skips an image its end frame hides", () => {
+    const gone = [layer({ id: "flash", slot: "room", style: { opacity: 0 }, keys: [{ shot: 1, to: { opacity: 1 } }, { shot: 2, to: { opacity: 0 } }] }), layers[2]];
+    expect(imageLoading(scene({ layers: gone }), "still", has)).toEqual({ flash: lazy, table: high });
+  });
+
+  it("a desktop-only first image is eager with high priority on desktop, and gated from phones", () => {
+    // `phoneGate`: SceneImage gives phones a placeholder source, so they never fetch the file.
+    expect(imageLoading(scene({ layers: [layers[3], layers[2]] }), "still", has)).toEqual({ desk: { eager: true, high: true, phoneGate: true }, table: eager });
+  });
+
+  it("the build scene never competes with the hero: every image is lazy", () => {
+    expect(imageLoading(scene({ layers }), "build", has)).toEqual({ room: lazy, table: lazy, desk: lazy });
+  });
+});
+
+describe("stillLead (N06)", () => {
+  it("is the copy key of the last shot that has a line", () => {
+    expect(stillLead(shots)).toBe("d");
+    expect(stillLead([...shots, { id: "e", desktop: [2, 2.1], mobile: null }])).toBe("d");
+    expect(stillLead([{ id: "x", desktop: [0, 1], mobile: null }])).toBeUndefined();
   });
 });

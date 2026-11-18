@@ -13,6 +13,8 @@
 @custom-variant ltr (&:where([dir="ltr"], [dir="ltr"] *));
 /* Arabic-only adjustments (no tracking, no uppercase, one step larger). */
 @custom-variant lang-ar (&:lang(ar));
+/* English-only (the header drops Events between 900 and 1023px in EN, where the row is full). */
+@custom-variant lang-en (&:lang(en));
 /* Tone variants keyed off the nearest data-tone ancestor. */
 @custom-variant tone-dark (&:where([data-tone="dark"], [data-tone="dark"] *));
 @custom-variant tone-light (&:where([data-tone="light"], [data-tone="light"] *));
@@ -532,8 +534,8 @@ section[data-tone] {
    1800 px back on Events at 4-8x CPU (final pass, 2026-11-17; e2e/pin-build-scroll.spec.ts).
    `--pin-on` is 0 without a distance, so a scene that only passes gets no floor. */
 html[data-js]:not([data-reduced]) .hero-pin {
-  padding-block-end: 140svh; /* hero-controller: end "+=140%" at every width */
-  min-block-size: calc(max(100svh, 520px) + 140svh);
+  padding-block-end: 100svh; /* hero-controller: end "+=100%" at every width (N05) */
+  min-block-size: calc(max(100svh, 520px) + 100svh);
 }
 html[data-js]:not([data-reduced]) .scene-pin {
   --pin-own: 100svh;
@@ -691,7 +693,8 @@ html[data-js]:not([data-reduced]) .svc-scene .scene-pin:has(> .scene) {
   transition:
     background-color 0.3s var(--ease-expo-out),
     color 0.3s var(--ease-expo-out),
-    border-color 0.3s var(--ease-expo-out);
+    border-color 0.3s var(--ease-expo-out),
+    translate 0.35s var(--ease-expo-out);
 }
 html:not([data-js]) #site-header {
   background: rgba(46, 32, 23, 0.94);
@@ -715,6 +718,29 @@ html[data-overlay-open] #site-header {
   background: var(--color-espresso);
   color: var(--color-ivory);
   border-color: var(--color-line-dark);
+}
+
+/* Header autohide (category pages below 900px; HeaderAutohide sets html[data-header-hidden]).
+   Everything moves by `translate`, which never changes layout (no CLS). The header goes up by its
+   height and the safe area; what is held under it (the chip bar, category.css; the private-
+   celebrations cards, photo-stack.css) goes up by the header's height, so it stops at the safe-
+   area line under the strip. The header's translate stays `none` while shown: any other value
+   would make it the containing block of the mobile menu's fixed overlay (as backdrop-filter does). */
+:root {
+  --header-shift: 0px;
+  --header-follow: 0px;
+}
+html[data-header-hidden] {
+  --header-shift: calc(-1 * (var(--header-h) + env(safe-area-inset-top, 0px)));
+  --header-follow: calc(-1 * var(--header-h));
+}
+html[data-header-hidden]:not([data-overlay-open]) #site-header {
+  translate: 0 var(--header-shift);
+}
+@media (prefers-reduced-motion: reduce) {
+  #site-header {
+    transition: none;
+  }
 }
 .nav-link {
   opacity: 0.78;
@@ -831,11 +857,13 @@ html[data-overlay-open] #site-header {
     border-color 0.3s var(--ease-expo-out),
     box-shadow 0.3s var(--ease-expo-out);
 }
-/* Focus: the rule darkens and thickens to 2px (no outline box on an underlined field). */
+/* Focus: the rule darkens and thickens to 2px (no outline box on an underlined field). The extra
+   pixel comes out of the padding, so the field keeps its height. */
 .field-control:focus-visible {
   outline: none;
+  border-block-end-width: 2px;
+  padding-block-end: 11px;
   border-block-end-color: var(--color-espresso);
-  box-shadow: 0 1px 0 var(--color-espresso);
 }
 .field-hint {
   font-size: 0.78rem;
@@ -845,7 +873,7 @@ html[data-overlay-open] #site-header {
   border-block-end-color: var(--color-error);
 }
 .field-error .field-control:focus-visible {
-  box-shadow: 0 1px 0 var(--color-error);
+  border-block-end-color: var(--color-error);
 }
 .field-error .field-hint {
   color: var(--color-error);
@@ -870,7 +898,15 @@ html[data-overlay-open] #site-header {
 .wa-fab {
   transition:
     opacity 0.3s var(--ease-expo-out),
+    translate 0.4s var(--ease-expo-out),
     visibility 0.3s;
+}
+/* Phones: the shared CTA bar carries WhatsApp, so the floating button steps aside (N04). On
+   Software (its own bar, no WhatsApp half) it stays, above that bar (software.css). */
+@media (max-width: 899.98px) {
+  body:has(.cta-bar) .wa-fab {
+    display: none;
+  }
 }
 html[data-overlay-open] .wa-fab {
   opacity: 0;

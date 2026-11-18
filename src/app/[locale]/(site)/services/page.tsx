@@ -1,6 +1,8 @@
 import { ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
+import { QUOTE_LINK } from "@/components/layout/nav-links";
+import { ClosingCta } from "@/components/sections/closing-cta/closing-cta";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Numeral } from "@/components/ui/numeral";
 import { SITE_URL } from "@/config/site";
@@ -76,6 +78,8 @@ export default async function ServicesPage() {
           </ol>
         </div>
       </section>
+
+      <ClosingCta id="services-closing" title={t("servicesIndex.closing.title")} body={t("servicesIndex.closing.body")} href={QUOTE_LINK.href} label={t("header.quote")} tone="dark" />
     </main>
   );
 }

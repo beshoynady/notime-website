@@ -5,7 +5,7 @@ import { describe, expect, it, vi } from "vitest";
 import { composeMail, deliverMail } from "./mailer";
 
 const shared = { locale: "ar", source: "contact" };
-const brief = { service: "apps", timeline: "" as const, budget: "", city: "Riyadh", name: "Sara", email: "sara@example.com", phone: "", company: "", message: "A booking app." };
+const brief = { service: "apps", timeline: "" as const, budget: "", city: "Riyadh", name: "Sara", email: "sara@example.com", phone: "", company: "", message: "A booking app.", eventMonth: "", guests: "" as const };
 
 describe("composeMail", () => {
   it("names the service on a brief, and General without one", () => {
@@ -30,6 +30,22 @@ describe("composeMail", () => {
     const labels = composeMail("contact", brief, shared).rows.map(([k]) => k);
     expect(labels).not.toContain("Phone");
     expect(labels).toContain("City or country");
+  });
+});
+
+describe("composeMail · event rows", () => {
+  const event = { ...brief, service: "conferences", eventMonth: "2027-03", guests: "50-150" as const };
+  it("adds the event date and guests after the service", () => {
+    const rows = composeMail("contact", event, shared).rows;
+    expect(rows).toContainEqual(["Event date", "March 2027"]);
+    expect(rows).toContainEqual(["Guests", "50–150"]);
+    const labels = rows.map(([k]) => k);
+    expect(labels.indexOf("Event date")).toBeGreaterThan(labels.indexOf("Service"));
+  });
+  it("adds no rows for empty values", () => {
+    const labels = composeMail("contact", brief, shared).rows.map(([k]) => k);
+    expect(labels).not.toContain("Event date");
+    expect(labels).not.toContain("Guests");
   });
 });
 

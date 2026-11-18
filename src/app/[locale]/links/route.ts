@@ -63,7 +63,7 @@ export async function GET(req: NextRequest, ctx: RouteContext<"/[locale]/links">
     fontFaces: FONT_FACE_CSS,
     logo: { src: "/images/brand/logo/logo-dark-bg-wordmark.svg", alt: tb("logoAlt"), homeHref: path("/"), homeLabel: tb("homeLabel") },
     // The other language keeps the visit's tags.
-    lang: { href: `${path("/links", other)}${req.nextUrl.search}`, locale: other, label: tl(other), name: tl(other === "en" ? "enName" : "arName") },
+    lang: { href: `${path("/links", other)}${req.nextUrl.search}`, locale: other, label: tl(other), name: tl(other === "en" ? "enLabel" : "arLabel") },
     eyebrow: t("eyebrow"),
     heading: t("title"),
     lead: t("lead"),

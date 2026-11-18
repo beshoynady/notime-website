@@ -23,10 +23,12 @@ const FAQ = [1, 2, 3, 4, 5] as const;
  */
 export async function ContactPage({ locale }: { locale: Locale }) {
   const t = await getTranslations("contactPage");
-  const order = getCategories().map((c) => c.slug);
+  const categories = getCategories();
+  const order = categories.map((c) => c.slug);
   const briefServices: BriefService[] = [...getServices()]
     .sort((a, b) => order.indexOf(a.category) - order.indexOf(b.category) || a.order - b.order)
-    .map((s) => ({ value: s.anchor, label: s.title[locale], software: s.category === "software-digital" }));
+    .map((s) => ({ value: s.anchor, label: s.title[locale], software: s.category === "software-digital", events: s.category === "events-hospitality", category: s.category }));
+  const briefCategories = categories.map((c) => ({ slug: c.slug, title: c.title[locale] }));
   const wa = whatsappHref(contact.whatsapp);
   const faq = FAQ.map((n) => ({ q: t(`faq.q${n}`), a: t(`faq.a${n}`) }));
   const faqLd = {
@@ -58,7 +60,7 @@ export async function ContactPage({ locale }: { locale: Locale }) {
             <h2 id="ct-form-title" className="ct-h2">
               {t("formTitle")}
             </h2>
-            <ContactForm locale={locale} services={briefServices} />
+            <ContactForm locale={locale} services={briefServices} categories={briefCategories} />
           </div>
           <aside className="ct-direct" aria-labelledby="ct-direct-title">
             <h2 id="ct-direct-title" className="text-eyebrow ct-direct-title">

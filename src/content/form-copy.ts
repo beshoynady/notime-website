@@ -4,7 +4,7 @@
  * Contact page (Task 4.2) reuses them. Errors say what to do, never only what went wrong.
  * `{email}` is filled from src/config/contact.ts, never typed here.
  */
-import type { FieldErrorCode } from "@/lib/forms/schemas";
+import type { FieldErrorCode, GUEST_BANDS } from "@/lib/forms/schemas";
 import type { Localized } from "./types";
 
 type L = Localized<string>;
@@ -55,8 +55,8 @@ export const formCopy = {
   },
   privacy: {
     text: l(
-      "We use these details only to reply to you. Resend delivers our email and Cloudflare protects this form from spam.",
-      "نستخدم هذه البيانات للرد عليك فقط. توصل خدمة Resend رسائلنا، وتحمي Cloudflare هذا النموذج من الرسائل المزعجة.",
+      "We use your details only to reply to you.",
+      "نستخدم بياناتكم للرد عليكم فقط.",
     ),
     link: l("Privacy Policy", "سياسة الخصوصية"),
   },
@@ -99,7 +99,7 @@ export const formCopy = {
     budgetHint: l("It helps us suggest the right scope. It's never a price.", "تساعدنا على اقتراح النطاق المناسب، وليست سعرًا."),
     message: l("Tell us a little more", "أخبرنا بالمزيد"),
     messageHint: l("Who it's for, what it must do, any date that matters.", "لمن هو، وما الذي يجب أن يفعله، وأي موعد يهمّك."),
-    submit: l("Book a free 30-min intro call", "احجز مكالمة تعارف مجانية (30 دقيقة)"),
+    submit: l("Request a free intro call", "اطلبوا مكالمة تعارف مجانية"),
     micro: l("No obligation. We reply within one working day.", "دون أي التزام. نرد خلال يوم عمل."),
     successTitle: l("Thanks, {name}. Your request is in.", "شكرًا، {name}. وصلنا طلبك."),
     successBody: l("We reply within one working day to set a time for the call.", "نرد خلال يوم عمل لنحدّد موعد المكالمة."),
@@ -147,6 +147,17 @@ export const formCopy = {
     serviceNone: l("Not sure yet, or several things", "لم أحدّد بعد، أو أكثر من خدمة"),
     prefilled: l("Selected: {choice}. Change it if you need something else.", "اخترنا لك: {choice}. غيّره إن كنت تحتاج شيئًا آخر."),
     timeline: l("When is it?", "متى موعده؟"),
+    eventMonth: l("Event date (approximate)", "تاريخ المناسبة (تقريبًا)"),
+    eventMonthNone: l("Choose a month", "اختاروا الشهر"),
+    guests: l("Number of guests", "عدد الضيوف"),
+    guestsNone: l("Choose a range", "اختاروا النطاق"),
+    guestOptions: {
+      "up-to-50": l("Up to 50", "حتى 50"),
+      "50-150": l("50–150", "50–150"),
+      "150-500": l("150–500", "150–500"),
+      "over-500": l("Over 500", "أكثر من 500"),
+      "not-sure": l("Not sure yet", "لم يتحدّد بعد"),
+    } satisfies Record<(typeof GUEST_BANDS)[number], L>,
     city: l("City or country", "المدينة أو الدولة"),
     cityHint: l("Where the event or the work takes place.", "حيث تُقام الفعالية أو يُنفَّذ العمل."),
     message: l("Tell us about it", "حدّثنا عنه"),

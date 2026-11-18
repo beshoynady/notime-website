@@ -7,7 +7,7 @@ import { SectionRef } from "@/components/review/section-ref";
 import { HOME_REF } from "@/lib/review";
 
 /**
- * Home · Categories (light). The hero CTA and the menus point here (#services). The page turns
+ * Home · Categories (light). Shareable as `/en#services` (D53). The page turns
  * light on arrival (ToneController), so the espresso cards read as objects on ivory.
  */
 export async function Categories() {

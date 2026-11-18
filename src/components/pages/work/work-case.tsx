@@ -59,7 +59,7 @@ export async function WorkCase({ item, locale }: { item: WorkItem; locale: Local
         ]}
       />
 
-      <section data-tone="dark" aria-labelledby="wc-title" className="pg-open">
+      <section data-tone="dark" aria-labelledby="wc-title" className="pg-open" data-cta-opening="">
         <SectionRef id={PAGE_REF.caseOpening} />
         <div className="frame">
           <PageCrumbs trail={[{ href: WORK_INDEX_HREF, label: BREADCRUMB_LABELS.work[locale] }]} current={view.label[locale]} />

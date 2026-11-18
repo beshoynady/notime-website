@@ -54,16 +54,16 @@ test("About: the one-evening story is plain photos and text", async ({ page }) =
 
 test("Home: the photo strip is a swipe row, not a pinned scrub", async ({ page }) => {
   await gotoReady(page, "/en");
-  await scrollThrough(page, "#work-strip");
+  await scrollThrough(page, "#home-strip");
   const strip = await page.evaluate(() => {
-    const root = document.getElementById("work-strip")!;
+    const root = document.getElementById("home-strip")!;
     const track = root.querySelector<HTMLElement>(".pstrip-track")!;
     return { tall: root.offsetHeight / innerHeight, overflow: getComputedStyle(track).overflowX, focusable: track.tabIndex === 0 };
   });
   expect(strip.tall).toBeLessThan(1.6);
   expect(strip.overflow).toBe("auto");
   expect(strip.focusable).toBe(true);
-  expect(await tweened(page, "#work-strip")).toEqual([]);
+  expect(await tweened(page, "#home-strip")).toEqual([]);
 });
 
 test("Events: the private-celebrations cards don't stack or dim", async ({ page }) => {

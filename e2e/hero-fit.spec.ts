@@ -3,7 +3,8 @@ import { waitForIntroEnd } from "./helpers";
 
 /**
  * The hero title reads in full at rest (D94): every line's text box sits inside the viewport,
- * below the fixed header and clear of the HUD, and the CTA stays above the bottom letterbox.
+ * below the fixed header and clear of the HUD, and the eyebrow and both CTAs (N05) stay inside the
+ * frame, the CTAs above the bottom letterbox.
  * The sizes are the user's list plus two real laptop windows (screen minus browser chrome),
  * where the title used to rise under the header and the CTA dip into the letterbox.
  */
@@ -44,7 +45,8 @@ async function measure(browser: Browser, w: number, h: number, locale: string, v
       header: document.querySelector("#site-header")!.getBoundingClientRect().bottom,
       lines,
       hud,
-      cta: box(document.querySelector(".hero-sub a")!.getBoundingClientRect()),
+      ctas: [...document.querySelectorAll("#hero .hero-sub a")].map((a) => box(a.getBoundingClientRect())),
+      eyebrow: box(document.querySelector("#hero .hero-eyebrow")!.getBoundingClientRect()),
       letterbox: document.querySelector(".hero-letterbox.bottom")!.getBoundingClientRect().top,
       vw: innerWidth,
       vh: innerHeight,
@@ -71,6 +73,13 @@ test.describe("hero title fits", () => {
             expect(l.right, `${at} end inside`).toBeLessThanOrEqual(m.vw);
             for (const b of m.hud) expect(overlaps(l, b), `${at} clear of the HUD`).toBe(false);
           }
-          expect(m.cta.bottom, "CTA above the letterbox").toBeLessThanOrEqual(m.letterbox);
+          expect(m.eyebrow.top, "eyebrow below the header").toBeGreaterThanOrEqual(m.header);
+          for (const b of m.hud) expect(overlaps(m.eyebrow, b), "eyebrow clear of the HUD").toBe(false);
+          expect(m.ctas.length, "two CTAs").toBe(2);
+          for (const [i, c] of m.ctas.entries()) {
+            expect(c.bottom, `CTA ${i + 1} above the letterbox`).toBeLessThanOrEqual(m.letterbox);
+            expect(c.left, `CTA ${i + 1} start inside`).toBeGreaterThanOrEqual(0);
+            expect(c.right, `CTA ${i + 1} end inside`).toBeLessThanOrEqual(m.vw);
+          }
         });
 });

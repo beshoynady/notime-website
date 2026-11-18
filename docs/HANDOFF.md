@@ -1,8 +1,25 @@
-# Session handoff: the owner's final copy decisions and the withdrawn case (2026-11-17)
+# Session handoff: finishing the site, phases 1–5 (from 2026-11-18)
 
-Read `CLAUDE.md`, `AGENTS.md` and `PRODUCT.md` first. Decisions: `docs/DECISIONS.md` (latest D124). Judgment calls: `docs/review/decisions-to-confirm.md` (#1–#36 all answered).
+Read `CLAUDE.md`, `AGENTS.md` and `PRODUCT.md` first. Decisions: `docs/DECISIONS.md` (latest D124; new ones from D125).
 
-## Latest (2026-11-17, end of session): waiting on the user
+## Now: the owner's mandate of 2026-11-18 (authoritative; run without waiting)
+
+1. **Audit fixes:** `docs/superpowers/plans/2026-11-17-audit-fixes.md`, Tasks 0–15 (with 6B), subagent-driven, in the worktree `E:/NO Time/nt-audit-fixes` (branch `audit-fixes` from e19404f). Stop points don't stop: take the safer call (rules in the ledger), record the evidence for the final report. One commit per audit item.
+2. **Copy rewrite apply:** branch `copy-rewrite` cut after `audit-fixes` merges; apply `docs/review/copy-rewrite/*.json` (D118–D124), the phone field test-first (D124). Unconfirmed ⚑ lines keep today's text or hide (D78); list them in one file. Don't wait for Rand.
+3. **Full verification:** unit + e2e green locally and on CI (run number); Lighthouse mobile ab before/after (home, a category page, /links ≥ 95); axe on the nine pages; shots of every page 1440/390 EN/AR in `docs/checkpoints/final/`; the five copy scans; the preview link on a production build of the last commit.
+4. **Final report** (Arabic, for the owner): `docs/report/final-report.md`.
+5. **Site guide for Rand** (Arabic, for the owner to explain the site to Rand): `docs/report/site-guide-for-rand.md` + an RTL Alexandria PDF with a shot per section.
+
+Deliver: a short message with the preview link, both report paths, and anything not merged with its reason. No push to main. Never delete untracked/gitignored files without asking.
+
+**Progress ledger (the source of truth after a context reset):** `E:/NO Time/nt-audit-fixes/.superpowers/sdd/2026-11-17-audit-fixes/progress.md` (gitignored). Read it, then `git log --oneline` in the worktree.
+
+**Current step:** Owner scope cut 2026-11-18 (see ledger). Tasks 0–12 done (12 merged: still hero only), 13 → v1.1. Task 14 done (D125–D137, decisions-to-confirm #37–#47, `docs/launch/checklist.md`, v1.1). Next: Task 15 (basic: review, tests, CI, shots; one Lighthouse home + /links), final fix wave (correctness only), merge into phase-2-services; then phase 2, short report, short Rand guide.
+
+Servers: 3000 = builds from the worktree (for e2e/Lighthouse after); 3200 = the before build (`E:/NO Time/nt-before`, e19404f); 3100 = review build behind the tunnel https://commerce-tension-petersburg-rom.trycloudflare.com (from `notime-website`, rebuild at the end).
+
+## Before (2026-11-17)
+
 
 Branch `phase-2-services`.
 

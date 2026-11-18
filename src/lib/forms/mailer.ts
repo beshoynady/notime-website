@@ -8,7 +8,7 @@ import { AutoReply } from "@/emails/auto-reply";
 import { autoReplyCopy, fillMail, localeOf } from "@/emails/copy";
 import { TeamEmail } from "@/emails/team-email";
 import { leadRows, type LeadSource } from "@/lib/lead-source";
-import type { Contact, Consultation, FormState, Interest, WebsiteReview } from "./schemas";
+import { GUEST_LABELS, type Contact, type Consultation, type FormState, type Interest, type WebsiteReview } from "./schemas";
 
 /**
  * Delivery (Task 4.2, D102): one email to the team (`CONTACT_TO_EMAIL`, reply-to the visitor) and,
@@ -32,6 +32,8 @@ export interface Mail {
 const PRODUCT_NAMES = { "minute-zero": "Minute Zero", "peak-hour": "Peak Hour" } as const;
 const isEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 const row = (label: string, value: string | undefined): [string, string][] => (value ? [[label, value]] : []);
+/** "2027-03" → "March 2027" (the team reads English). */
+const eventDate = (m: string) => (m ? new Intl.DateTimeFormat("en-GB", { month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${m}-01T00:00:00Z`)) : undefined);
 type Shared = { locale: string; source: string; lead?: LeadSource | null };
 
 export function composeMail(kind: "consultation", d: Consultation, s: Shared): Mail;
@@ -74,7 +76,7 @@ export function composeMail(kind: MailKind, d: Consultation | WebsiteReview | In
       return {
         kind, locale, visitorEmail: c.email, vars: { name: c.name },
         subject: `Brief: ${service ?? "General"}`,
-        rows: [["Name", c.name], ["Email", c.email], ...row("Phone", c.phone), ...row("Company", c.company), ...row("Service", service), ...row("City or country", c.city), ...row("Timing", c.timeline), ...row("Budget", c.budget), ["Message", c.message], ...meta],
+        rows: [["Name", c.name], ["Email", c.email], ...row("Phone", c.phone), ...row("Company", c.company), ...row("Service", service), ...row("Event date", eventDate(c.eventMonth)), ...row("Guests", c.guests ? GUEST_LABELS[c.guests] : undefined), ...row("City or country", c.city), ...row("Timing", c.timeline), ...row("Budget", c.budget), ["Message", c.message], ...meta],
       };
     }
   }
