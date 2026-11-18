@@ -4,7 +4,7 @@
  * Contact page (Task 4.2) reuses them. Errors say what to do, never only what went wrong.
  * `{email}` is filled from src/config/contact.ts, never typed here.
  */
-import type { FieldErrorCode } from "@/lib/forms/schemas";
+import type { FieldErrorCode, GUEST_BANDS } from "@/lib/forms/schemas";
 import type { Localized } from "./types";
 
 type L = Localized<string>;
@@ -147,6 +147,17 @@ export const formCopy = {
     serviceNone: l("Not sure yet, or several things", "لم أحدّد بعد، أو أكثر من خدمة"),
     prefilled: l("Selected: {choice}. Change it if you need something else.", "اخترنا لك: {choice}. غيّره إن كنت تحتاج شيئًا آخر."),
     timeline: l("When is it?", "متى موعده؟"),
+    eventMonth: l("Event date (approximate)", "تاريخ المناسبة (تقريبًا)"),
+    eventMonthNone: l("Choose a month", "اختاروا الشهر"),
+    guests: l("Number of guests", "عدد الضيوف"),
+    guestsNone: l("Choose a range", "اختاروا النطاق"),
+    guestOptions: {
+      "up-to-50": l("Up to 50", "حتى 50"),
+      "50-150": l("50–150", "50–150"),
+      "150-500": l("150–500", "150–500"),
+      "over-500": l("Over 500", "أكثر من 500"),
+      "not-sure": l("Not sure yet", "لم يتحدّد بعد"),
+    } satisfies Record<(typeof GUEST_BANDS)[number], L>,
     city: l("City or country", "المدينة أو الدولة"),
     cityHint: l("Where the event or the work takes place.", "حيث تُقام الفعالية أو يُنفَّذ العمل."),
     message: l("Tell us about it", "حدّثنا عنه"),
