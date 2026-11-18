@@ -162,6 +162,18 @@ main[data-theme="workshop"] .svc + .svc::before {
   }
 }
 
+/* N06 · the hero's quiet text at AA: on the champagne ground and over the sheet's drawings, the
+   breadcrumbs, the eyebrow and the skip control in cocoa at 75–85% measured 1.9–3.9:1. In the
+   still they are set at full strength: espresso for the links, cocoa for the eyebrow. */
+main[data-theme="workshop"] .scene[data-mode="still"] :is(.crumbs, .crumbs a, .cat-skip) {
+  color: var(--color-espresso);
+  opacity: 1;
+}
+main[data-theme="workshop"] .scene[data-mode="still"] .cat-opening-eyebrow {
+  color: var(--color-cocoa);
+  opacity: 1;
+}
+
 /* N06 · the hero (the scene's still): the gift rests where the build leaves it, drifted up by its
    depth (0.9 × 14 vh, layerDrift at the act's end), clear of the eyebrow. The build scene's drift
    is GSAP's; the still has none, so CSS places it (`translate`, never animated here). */

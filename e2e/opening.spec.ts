@@ -3,7 +3,7 @@ import { getScene } from "../src/content/scenes";
 import { stillLead } from "../src/lib/scene-math";
 import ar from "../src/messages/ar.json";
 import en from "../src/messages/en.json";
-import { expectLanded, gotoReady } from "./helpers";
+import { expectLanded, gotoReady, heroLcp } from "./helpers";
 
 /**
  * Category pages · the opening shell (Task 2.8; storyboards README §2): the service index shows
@@ -66,27 +66,12 @@ for (const locale of ["en", "ar"] as const) {
       expect(await overflow(page)).toBeLessThanOrEqual(0);
     });
 
-    // N06: the hero is the finished scene, so its room photo shows from the first paint, loaded
-    // with high priority. The LCP is the hero's text (the H1, or the lead where it sets larger,
-    // as at 390 in English) or that photo; never the build scene's (lazy) copy, never anything else.
+    // N06 (controller ruling 2026-11-18): the LCP is the hero's text (H1 or lead) or its eager,
+    // high-priority image in the still scene, and nothing else (heroLcp). Every category below.
     test("LCP is the hero's text or its priority image", async ({ page }) => {
       await gotoReady(page, `/${locale}${PAGE}`);
-      const lcp = await page.evaluate(
-        () =>
-          new Promise<{ inHero: boolean; text: boolean; priority: boolean }>((resolve) => {
-            new PerformanceObserver((list) => {
-              const entry = list.getEntries().at(-1) as PerformanceEntry & { element?: Element; url: string };
-              const el = entry.element;
-              resolve({
-                inHero: !!el?.closest('.cat-opening .scene[data-mode="still"]'),
-                text: entry.url === "",
-                priority: el instanceof HTMLImageElement && el.fetchPriority === "high",
-              });
-            }).observe({ type: "largest-contentful-paint", buffered: true });
-          }),
-      );
-      expect(lcp.inHero).toBe(true);
-      expect(lcp.text || lcp.priority).toBe(true);
+      const lcp = await heroLcp(page);
+      expect(["h1", "lead", "image"], lcp.label).toContain(lcp.kind);
     });
 
     test.describe("pinned", () => {
@@ -153,8 +138,54 @@ for (const slug of SCENE_CATEGORIES) {
       expect(unfinished).toEqual([]);
       await expect(hero(page)).not.toHaveAttribute("data-motion");
     });
+
+    test(`${locale}/${slug}: the LCP is the hero's text or an eager, high-priority hero image`, async ({ page }) => {
+      await gotoReady(page, `/${locale}/services/${slug}`);
+      const lcp = await heroLcp(page);
+      // The Workshop's phone still has no image file: its largest paint is an inline drawing
+      // (no request), reported to the controller as the one exception to the ruling.
+      const allowed = slug === "production-print-gifts" ? ["h1", "lead", "image", "drawing"] : ["h1", "lead", "image"];
+      expect(allowed, lcp.label).toContain(lcp.kind);
+      // Every hero image that shows at this width with high priority is eager (the LCP candidate).
+      const candidates = await hero(page)
+        .locator('img[fetchpriority="high"]')
+        .evaluateAll((imgs) => imgs.filter((i) => i.checkVisibility()).map((i) => (i as HTMLImageElement).loading));
+      for (const loading of candidates) expect(loading).not.toBe("lazy");
+    });
+
+    // The eyebrow reads index · count in both directions (the index first, at inline-start).
+    test(`${locale}/${slug}: the eyebrow shows the index before the count`, async ({ page }) => {
+      await gotoReady(page, `/${locale}/services/${slug}`);
+      const eyebrow = page.locator(".cat-opening-eyebrow");
+      const index = await eyebrow.locator("bdi").first().boundingBox();
+      const count = await eyebrow.locator(".cat-opening-count").boundingBox();
+      if (locale === "en") expect(index!.x + index!.width).toBeLessThanOrEqual(count!.x + 1);
+      else expect(index!.x).toBeGreaterThanOrEqual(count!.x + count!.width - 1);
+    });
   }
+
+  test(`${slug}: phones never request the hero's desktop-only image files`, async ({ page, isMobile }) => {
+    test.skip(!isMobile, "phones");
+    const requested: string[] = [];
+    page.on("request", (r) => requested.push(decodeURIComponent(r.url())));
+    await gotoReady(page, `/en/services/${slug}`);
+    await page.waitForLoadState("networkidle");
+    const files = await page
+      .locator('.cat-opening .scene[data-mode="still"] .scene-layer:not([data-mobile]) img')
+      .evaluateAll((imgs) => imgs.map((i) => new URL((i as HTMLImageElement).getAttribute("src")!, location.href).searchParams.get("url") ?? ""));
+    for (const file of files.filter(Boolean)) expect(requested.filter((u) => u.includes(file)), file).toEqual([]);
+  });
 }
+
+test("desktop: the build scene's last line, the hero's lead, is read once", async ({ page, isMobile }) => {
+  test.skip(isMobile, "the build scene runs on desktop only");
+  await gotoReady(page, "/en/services/events-hospitality");
+  const lead = (await page.locator(".cat-opening-lead").textContent())!;
+  const lines = page.locator(".cat-build .scene-line");
+  const hidden = await lines.evaluateAll((els) => els.map((e) => [e.textContent, e.getAttribute("aria-hidden")]));
+  expect(hidden.filter(([, h]) => h === "true").map(([t]) => t)).toEqual([lead]);
+  expect(hidden.length).toBeGreaterThan(1);
+});
 
 test("phones have no pin", async ({ page, isMobile }) => {
   test.skip(!isMobile, "390");

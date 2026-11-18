@@ -1,7 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import { getCategories, getServices } from "../src/content";
 import { END_TONE, THEME_TONE } from "../src/components/category/theme";
-import { GROUND, gotoReady, lcpEntry } from "./helpers";
+import { GROUND, gotoReady, heroLcp } from "./helpers";
 
 /**
  * Category pages · structure and themes (Task 2.5), every category in EN and AR: one H1, the six
@@ -117,12 +117,9 @@ for (const category of getCategories()) {
               }),
           );
           for (const s of sections) expect(s.grained, `a ${s.tone} section`).toBe(s.tone === "dark");
-          // N06: the hero is the finished scene, so its first image (high priority) may be the LCP.
-          const lcp = await lcpEntry(page);
-          if (lcp.url !== "") {
-            const hero = await page.locator('.cat-opening .scene[data-mode="still"] img[fetchpriority="high"]').evaluateAll((imgs) => imgs.map((i) => (i as HTMLImageElement).currentSrc));
-            expect(hero, "the LCP is text or the hero's priority image, not the grain tile").toContain(lcp.url);
-          }
+          // N06: the LCP is the hero's text or its eager, high-priority image; never the grain tile.
+          const lcp = await heroLcp(page);
+          expect(["h1", "lead", "image", "text"], `the LCP is the hero's text or priority image (${lcp.label})`).toContain(lcp.kind);
         });
 
         test("JSON-LD parses: ItemList, BreadcrumbList, FAQPage once the FAQ is written", async ({ page }) => {

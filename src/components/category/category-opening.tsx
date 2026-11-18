@@ -56,7 +56,8 @@ export async function CategoryOpening({
           <span>
             <Numeral>{orderNumeral(category.order, locale)}</Numeral>
             <span aria-hidden="true"> · </span>
-            {tm("count", { count: serviceCount })}
+            {/* Isolated like the numeral: index, then count, in both directions (N06). */}
+            <bdi className="cat-opening-count">{tm("count", { count: serviceCount })}</bdi>
           </span>
         </p>
         <h1 id="category-title" className="text-h1">
@@ -93,6 +94,7 @@ export async function CategoryOpening({
               variant={variant}
               mode="build"
               desktopOnly
+              echoedShot={scene.shots.findLastIndex((s) => s.copyKey)}
               overlayClassName="frame cat-opening-overlay"
             />
           </div>

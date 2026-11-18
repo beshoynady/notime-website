@@ -99,6 +99,35 @@ export function lcpEntry(page: Page) {
   );
 }
 
+/**
+ * A category page's LCP element as the N06 hero allows it (controller ruling, 2026-11-18): the
+ * hero's text (its H1 or its lead), or a hero image that is eager with `fetchpriority="high"`
+ * inside `.cat-opening`'s still scene. "drawing" is a code-drawn layer of the still scene whose
+ * image is an inline `data:` SVG (no request, painted with the first frame: the Workshop's ribbon
+ * at 390); it is reported separately so a test can name it. `kind` is "other" for anything else.
+ * A page with no still scene (Software's own opening) reports "text" for a text LCP.
+ */
+export function heroLcp(page: Page) {
+  return page.evaluate(
+    () =>
+      new Promise<{ kind: "h1" | "lead" | "image" | "drawing" | "text" | "other"; label: string }>((resolve) => {
+        new PerformanceObserver((list) => {
+          const entry = list.getEntries().at(-1) as PerformanceEntry & { element?: Element; url: string };
+          const el = entry.element ?? null;
+          const label = `${el?.tagName}.${el?.className} ${entry.url}`;
+          if (!document.querySelector('.cat-opening .scene[data-mode="still"]')) return resolve({ kind: entry.url === "" ? "text" : "other", label });
+          const still = el?.closest('.cat-opening .scene[data-mode="still"]');
+          if (!el || !still) return resolve({ kind: "other", label });
+          if (el.matches("h1#category-title")) return resolve({ kind: "h1", label });
+          if (el.matches(".cat-opening-lead")) return resolve({ kind: "lead", label });
+          if (el.matches(".scene-light") && entry.url.startsWith("data:image/svg+xml")) return resolve({ kind: "drawing", label });
+          const img = el instanceof HTMLImageElement && entry.url !== "" && el.loading !== "lazy" && el.getAttribute("fetchpriority") === "high";
+          resolve({ kind: img ? "image" : "other", label });
+        }).observe({ type: "largest-contentful-paint", buffered: true });
+      }),
+  );
+}
+
 /** Each theme's page ground per tone, as `#page-stage` computes it (shared by the category specs). */
 export const GROUND: Record<CategoryTheme, { dark?: string; light?: string }> = {
   evening: { dark: "rgb(46, 32, 23)", light: "rgb(245, 233, 211)" }, // espresso, ivory "morning after" band

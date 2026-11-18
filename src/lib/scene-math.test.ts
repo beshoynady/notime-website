@@ -224,9 +224,9 @@ describe("imageLoading (N06)", () => {
     layer({ id: "desk", level: 2, slot: "desk", mobile: false }),
     layer({ id: "shade", level: 3, fx: "shade" }),
   ];
-  const high = { eager: true, high: true };
-  const eager = { eager: true, high: false };
-  const lazy = { eager: false, high: false };
+  const high = { eager: true, high: true, phoneGate: false };
+  const eager = { eager: true, high: false, phoneGate: false };
+  const lazy = { eager: false, high: false, phoneGate: false };
 
   it("the still: the first image it shows has high priority, the other phone layers load eagerly, desktop-only ones lazily", () => {
     expect(imageLoading(scene({ layers }), "still", has)).toEqual({ room: high, table: eager, desk: lazy });
@@ -237,8 +237,9 @@ describe("imageLoading (N06)", () => {
     expect(imageLoading(scene({ layers: gone }), "still", has)).toEqual({ flash: lazy, table: high });
   });
 
-  it("a desktop-only first image keeps high priority but stays lazy, so phones never fetch it", () => {
-    expect(imageLoading(scene({ layers: [layers[3], layers[2]] }), "still", has)).toEqual({ desk: { eager: false, high: true }, table: eager });
+  it("a desktop-only first image is eager with high priority on desktop, and gated from phones", () => {
+    // `phoneGate`: SceneImage gives phones a placeholder source, so they never fetch the file.
+    expect(imageLoading(scene({ layers: [layers[3], layers[2]] }), "still", has)).toEqual({ desk: { eager: true, high: true, phoneGate: true }, table: eager });
   });
 
   it("the build scene never competes with the hero: every image is lazy", () => {

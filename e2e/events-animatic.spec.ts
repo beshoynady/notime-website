@@ -121,6 +121,17 @@ test("the index dims during the build scene's first shot, back on hover, focus o
   await expect(index).toHaveCSS("opacity", "1");
 });
 
+// N06: phones have no build scene, so nothing dims the index: it stays at full over the hero.
+test("phones: the index stays at full opacity over the hero", async ({ page, isMobile }) => {
+  test.skip(!isMobile, "phones");
+  await gotoReady(page, LAB("en"));
+  await page.waitForTimeout(1000);
+  await expect(page.locator("nav.svc-index")).toHaveCSS("opacity", "1");
+  await page.evaluate(() => window.scrollTo(0, innerHeight * 0.4));
+  await page.waitForTimeout(500);
+  await expect(page.locator("nav.svc-index")).toHaveCSS("opacity", "1");
+});
+
 /** The page ground as #page-stage paints it. */
 const ground = (page: Page) => page.locator("#page-stage").evaluate((el) => getComputedStyle(el).backgroundColor);
 

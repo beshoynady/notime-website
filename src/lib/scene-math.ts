@@ -100,19 +100,24 @@ export function sceneProblems(scene: SceneConfig, limits: Record<Viewport, numbe
   return problems;
 }
 
-/** How a scene layer's image loads: eagerly or lazily, and with high fetch priority or not. */
+/**
+ * How a scene layer's image loads: eagerly or lazily, with high fetch priority or not, and
+ * `phoneGate`: an eager image of a desktop-only layer, which phones must not fetch (SceneImage
+ * gives them a placeholder source; its box is `display: none` there anyway).
+ */
 export interface ImageLoading {
   eager: boolean;
   high: boolean;
+  phoneGate: boolean;
 }
 
 /**
  * How each image layer of a scene loads (N06), by layer id; layers without a file are left out.
- * The still (a category's hero) is the first paint: the first image its end frame shows gets high
- * priority (an LCP candidate), the phone layers it shows load eagerly, and desktop-only or hidden
- * ones lazily (a lazy image in a `display: none` box is never fetched, so phones skip them; a
- * desktop-only first image keeps its high priority once it starts). The build scene follows the
- * hero and reuses its files from the cache, so it never competes: all lazy.
+ * The still (a category's hero) is the first paint: the first image its end frame shows is the
+ * LCP candidate, eager with high priority at every width it shows (gated from phones when the
+ * layer is desktop-only); the other phone layers it shows load eagerly, desktop-only or hidden
+ * ones lazily (a lazy image in a `display: none` box is never fetched). The build scene follows
+ * the hero and reuses its files from the cache, so it never competes: all lazy.
  */
 export function imageLoading(scene: SceneConfig, mode: "build" | "still", hasFile: (slot: string) => boolean): Record<string, ImageLoading> {
   const out: Record<string, ImageLoading> = {};
@@ -121,7 +126,9 @@ export function imageLoading(scene: SceneConfig, mode: "build" | "still", hasFil
     if (!layer.slot || !hasFile(layer.slot)) continue;
     const end = { ...layer.style, ...stillState(layer) };
     const shown = mode === "still" && end.opacity !== 0 && end.wipe !== 0;
-    out[layer.id] = { eager: shown && layer.mobile, high: shown && first };
+    const high = shown && first;
+    const eager = shown && (layer.mobile || high);
+    out[layer.id] = { eager, high, phoneGate: eager && !layer.mobile };
     if (shown) first = false;
   }
   return out;

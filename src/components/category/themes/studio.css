@@ -45,6 +45,14 @@ main[data-theme="studio"] .scene[data-mode="still"] {
 [dir="rtl"] main[data-theme="studio"] .scene[data-mode="still"] {
   --st-hero-from: -90deg;
 }
+/* In the still the developed frame covers the timecode's corner (its last digits ran under the
+   photo at 1440, in the reduced still too): the readout sits just above the frame's top edge
+   (the frame layer's 14% inset), on the night ground. */
+@media (min-width: 900px) {
+  main[data-theme="studio"] .scene[data-mode="still"] {
+    --tc-top: calc(14% - 24px);
+  }
+}
 main[data-theme="studio"] .scene[data-mode="still"] .scene-layers::after {
   content: "";
   position: absolute;

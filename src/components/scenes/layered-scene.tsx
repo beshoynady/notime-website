@@ -31,6 +31,7 @@ export function LayeredScene({
   variant,
   mode = "build",
   desktopOnly = false,
+  echoedShot,
   label,
   overlayClassName,
   pinUnderBars,
@@ -42,6 +43,8 @@ export function LayeredScene({
   variant: "live" | "animatic";
   mode?: "build" | "still";
   desktopOnly?: boolean;
+  /** A shot whose line the page already reads elsewhere (the hero's lead, N06): hidden from the a11y tree here. */
+  echoedShot?: number;
   /** Names the scene as a region; leave it out when the scene sits inside a named section. */
   label?: string;
   /** Sets the overlay's inline box (e.g. `frame`); the overlay itself has no inline padding. */
@@ -73,7 +76,14 @@ export function LayeredScene({
           <div className="scene-copy">
             {scene.shots.map((shot, i) =>
               lines[i] ? (
-                <p key={shot.id} className="scene-line" data-shot={i} data-desktop={shot.desktop ? "" : undefined} data-mobile={shot.mobile ? "" : undefined}>
+                <p
+                  key={shot.id}
+                  className="scene-line"
+                  data-shot={i}
+                  data-desktop={shot.desktop ? "" : undefined}
+                  data-mobile={shot.mobile ? "" : undefined}
+                  aria-hidden={i === echoedShot || undefined}
+                >
                   {lines[i]}
                 </p>
               ) : null,
