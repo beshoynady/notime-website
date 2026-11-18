@@ -1,4 +1,11 @@
 /* The shared mobile CTA bar (N04). Logical properties only; unlayered. Phones only (< 900px). */
+/* Its height, from its parts (button + padding twice + top border): the space reserved at the
+   page's end uses the same variable, so the two can't drift. */
+:root {
+  --cta-bar-btn-h: 40px;
+  --cta-bar-pad: 8px;
+  --cta-bar-h: calc(var(--cta-bar-btn-h) + 2 * var(--cta-bar-pad) + 1px);
+}
 .cta-bar {
   position: fixed;
   z-index: 54;
@@ -6,7 +13,7 @@
   inset-block-end: 0;
   display: flex;
   gap: 8px;
-  padding-block: 8px calc(8px + env(safe-area-inset-bottom, 0px));
+  padding-block: var(--cta-bar-pad) calc(var(--cta-bar-pad) + env(safe-area-inset-bottom, 0px));
   padding-inline: var(--gutter-start) var(--gutter-end);
   border-block-start: 1px solid var(--color-line-light);
   background: rgba(245, 233, 211, 0.97);
@@ -32,7 +39,7 @@ html[data-overlay-open] .cta-bar {
   min-inline-size: 0;
   display: grid;
   place-items: center;
-  block-size: 40px;
+  block-size: var(--cta-bar-btn-h);
   padding-inline: 12px;
   border: 1px solid var(--color-espresso, #2e2017);
   border-radius: 999px;
@@ -55,16 +62,16 @@ html[data-overlay-open] .cta-bar {
   }
 }
 @media (max-width: 899.98px) {
-  /* 56px of bar plus the safe area is reserved at the page's end: it never covers the footer. */
+  /* The bar's full height plus the safe area is reserved at the page's end: it never covers the footer. */
   body:has(.cta-bar) {
-    padding-block-end: calc(56px + env(safe-area-inset-bottom, 0px));
+    padding-block-end: calc(var(--cta-bar-h) + env(safe-area-inset-bottom, 0px));
   }
   html:has(.cta-bar[data-show]) {
-    scroll-padding-block-end: 68px;
+    scroll-padding-block-end: calc(var(--cta-bar-h) + 12px);
   }
   /* The last stacked private-celebrations card clears the bar. */
   body:has(.cta-bar) .pstack-cards {
-    padding-block-end: calc(56px + env(safe-area-inset-bottom, 0px));
+    padding-block-end: calc(var(--cta-bar-h) + env(safe-area-inset-bottom, 0px));
   }
 }
 @media (prefers-reduced-motion: reduce) {

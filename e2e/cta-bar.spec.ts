@@ -86,10 +86,13 @@ test.describe("mobile CTA bar", () => {
         const links = document.querySelectorAll("footer a");
         const last = links[links.length - 1].getBoundingClientRect();
         const b = document.querySelector(".cta-bar")!.getBoundingClientRect();
-        return { lastBottom: last.bottom, barTop: b.top, shown: document.querySelector(".cta-bar")!.hasAttribute("data-show") };
+        const reserved = parseFloat(getComputedStyle(document.body).paddingBlockEnd);
+        return { lastBottom: last.bottom, barTop: b.top, barH: b.height, reserved, shown: document.querySelector(".cta-bar")!.hasAttribute("data-show") };
       });
-      // At the end the bar may be showing or not; either way the last link clears it.
+      // The bar shows at the end, and the space reserved for it is its full height: no overlap.
+      expect(gap.shown).toBe(true);
       expect(gap.lastBottom).toBeLessThanOrEqual(gap.barTop);
+      expect(gap.reserved).toBeGreaterThanOrEqual(gap.barH);
     });
 
     test("after a client navigation it follows the new page's opening", async ({ page }) => {

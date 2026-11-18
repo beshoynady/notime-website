@@ -164,3 +164,26 @@ test("the brief sends the event rows", async ({ page }) => {
   expect(team.text).toContain("Event date: ");
   expect(team.text).toContain("Guests: 150–500");
 });
+
+test("a timing picked before an events service is cleared and not sent", async ({ page }) => {
+  const before = mails().length;
+  await page.goto("/en/contact");
+  await scrollToForm(page);
+  await page.locator(".form-chip", { hasText: "Within 3 months" }).click();
+  await expect(page.getByLabel("Within 3 months")).toBeChecked();
+  await page.selectOption("#brief-service", "conferences");
+  await expect(page.getByText("When is it?")).toHaveCount(0);
+  // Cleared, not kept: back on a non-events service the chip comes back unpicked.
+  await page.selectOption("#brief-service", "branding");
+  await expect(page.getByLabel("Within 3 months")).not.toBeChecked();
+  await page.locator(".form-chip", { hasText: "Within 3 months" }).click();
+  await page.selectOption("#brief-service", "conferences");
+  await fillValid(page);
+  await page.waitForFunction(() => !!(document.querySelector('[name="cf-turnstile-response"]') as HTMLInputElement | null)?.value, null, { timeout: 15_000 });
+  await page.click(".ct-form .form-submit");
+  await expect(page.locator(".form-success, [data-form-success]").first()).toBeVisible({ timeout: 15_000 });
+  await expect.poll(() => mails().length).toBe(before + 2);
+  const team = JSON.parse(readFileSync(path.join(SINK, mails().filter((f) => f.endsWith("team.json")).sort().at(-1)!), "utf8"));
+  expect(team.text).toContain("Service: ");
+  expect(team.text).not.toContain("Timing");
+});

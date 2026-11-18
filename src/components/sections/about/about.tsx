@@ -29,7 +29,9 @@ export async function About() {
             {FIGURES.map((k) => (
               <div key={k}>
                 <dt className="text-eyebrow">{t(`stats.${k}.label`)}</dt>
-                <dd className="tabular">{k === "services" ? <Numeral>{String(serviceCount())}</Numeral> : t(`stats.${k}.value`)}</dd>
+                <dd className="tabular">
+                  <Numeral>{k === "services" ? String(serviceCount()) : t(`stats.${k}.value`)}</Numeral>
+                </dd>
               </div>
             ))}
           </dl>

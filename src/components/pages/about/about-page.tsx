@@ -76,7 +76,9 @@ export async function AboutPage({ locale }: { locale: Locale }) {
               {FIGURES.map((k) => (
                 <div key={k}>
                   <dt className="text-eyebrow">{ta(`stats.${k}.label`)}</dt>
-                  <dd className="tabular">{k === "services" ? <Numeral>{String(serviceCount())}</Numeral> : ta(`stats.${k}.value`)}</dd>
+                  <dd className="tabular">
+                  <Numeral>{k === "services" ? String(serviceCount()) : ta(`stats.${k}.value`)}</Numeral>
+                </dd>
                 </div>
               ))}
             </dl>
