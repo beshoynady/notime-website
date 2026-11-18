@@ -100,7 +100,7 @@ const guestsLabel = (page: Page) => page.getByLabel("Number of guests");
 test("no service: the general timing shows", async ({ page }) => {
   await page.goto("/en/contact");
   await scrollToForm(page);
-  await expect(page.getByText("When is it?")).toBeVisible();
+  await expect(page.getByText("When do you need it?")).toBeVisible();
   await expect(eventLabel(page)).toHaveCount(0);
   await expect(guestsLabel(page)).toHaveCount(0);
 });
@@ -111,11 +111,11 @@ test("an events service shows the event fields; a marketing one hides and clears
   await page.selectOption("#brief-service", "conferences");
   await expect(eventLabel(page)).toBeVisible();
   await expect(guestsLabel(page)).toBeVisible();
-  await expect(page.getByText("When is it?")).toHaveCount(0);
+  await expect(page.getByText("When do you need it?")).toHaveCount(0);
   await guestsLabel(page).selectOption("50-150");
   await page.selectOption("#brief-service", "branding");
   await expect(eventLabel(page)).toHaveCount(0);
-  await expect(page.getByText("When is it?")).toBeVisible();
+  await expect(page.getByText("When do you need it?")).toBeVisible();
   await page.selectOption("#brief-service", "conferences");
   await expect(guestsLabel(page)).toHaveValue("");
 });
@@ -179,7 +179,7 @@ test("a timing picked before an events service is cleared and not sent", async (
   await page.locator(".form-chip", { hasText: "Within 3 months" }).click();
   await expect(page.getByLabel("Within 3 months")).toBeChecked();
   await page.selectOption("#brief-service", "conferences");
-  await expect(page.getByText("When is it?")).toHaveCount(0);
+  await expect(page.getByText("When do you need it?")).toHaveCount(0);
   // Cleared, not kept: back on a non-events service the chip comes back unpicked.
   await page.selectOption("#brief-service", "branding");
   await expect(page.getByLabel("Within 3 months")).not.toBeChecked();

@@ -67,7 +67,7 @@ function Inner({ locale, services, categories, onAgain }: { locale: Locale; serv
   const chosen = services.find((s) => s.value === serviceValue);
   const showEvent = eventFieldsVisible({ service: serviceValue, serviceIsEvents: !!chosen?.events, category });
   // Hidden fields are cleared, so a stale value is never posted or validated: the event fields
-  // when they hide, the general timing ("When is it?") when the event fields take its place.
+  // when they hide, the general timing ("When do you need it?") when the event fields take its place.
   useEffect(() => {
     if (showEvent) {
       form.setValue("timeline", "");
