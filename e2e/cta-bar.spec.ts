@@ -91,6 +91,40 @@ test.describe("mobile CTA bar", () => {
       expect(gap.lastBottom).toBeLessThanOrEqual(gap.barTop);
     });
 
+    for (const [path, sel] of [
+      ["/en/services/marketing-brand", ".cta-bar"],
+      ["/en/services/software-digital", ".sw-sticky"],
+    ] as const) {
+      test(`steps aside while the menu is open: ${sel}`, async ({ page }) => {
+        await gotoReady(page, path);
+        await pastOpening(page);
+        const b = page.locator(sel);
+        await expect(b).toBeVisible();
+        // Category pages hide the header on the way down: a short scroll up, well past the opening, brings the burger back.
+        await page.evaluate(async () => {
+          window.scrollTo({ top: scrollY + 600, behavior: "instant" });
+          for (let i = 0; i < 3; i++) {
+            window.scrollTo({ top: scrollY - 40, behavior: "instant" });
+            await new Promise((r) => requestAnimationFrame(r));
+          }
+        });
+        const burger = page.locator("button[aria-controls=mobile-nav]");
+        await expect(burger).toBeInViewport();
+        await expect(b).toBeVisible();
+        await burger.click();
+        await expect(page.locator("#mobile-nav")).toBeVisible();
+        await expect(b).toBeHidden();
+        // Out of the Tab order: Tab from the menu's last control never lands in the bar, and its links can't take focus.
+        await page.locator("#mobile-nav").locator("a, button, summary").last().focus();
+        await page.keyboard.press("Tab");
+        expect(await page.evaluate((s) => !!document.activeElement?.closest(s), sel)).toBe(false);
+        expect(await b.evaluate((el) => [...el.querySelectorAll("a")].some((a) => (a.focus(), document.activeElement === a)))).toBe(false);
+        await burger.click();
+        await expect(page.locator("#mobile-nav")).toBeHidden();
+        await expect(b).toBeVisible();
+      });
+    }
+
     test("no layout shift while the bar shows and hides", async ({ page }) => {
       await page.addInitScript(() => {
         const w = window as unknown as { __cls: number };

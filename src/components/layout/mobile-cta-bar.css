@@ -20,6 +20,13 @@
   transform: none;
   visibility: visible;
 }
+/* Under the open mobile menu it steps aside, as the WhatsApp button does (globals.css): hidden
+   at once, so it neither paints over the menu nor takes Tab focus (it sits outside #page-stage,
+   which the menu makes inert). */
+html[data-overlay-open] .cta-bar {
+  visibility: hidden;
+  transition: none;
+}
 .cta-bar-btn {
   flex: 1 1 0;
   min-inline-size: 0;

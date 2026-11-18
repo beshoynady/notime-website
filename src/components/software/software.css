@@ -2398,6 +2398,11 @@ html[dir="rtl"] .sw-v-meter i {
   transform: none;
   visibility: visible;
 }
+/* Under the open mobile menu it steps aside, as the WhatsApp button does (globals.css). */
+html[data-overlay-open] .sw-sticky {
+  visibility: hidden;
+  transition: none;
+}
 .sw-sticky .sw-btn {
   min-block-size: 48px;
   padding-inline: 12px;
