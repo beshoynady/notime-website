@@ -14,7 +14,7 @@ Deliver: a short message with the preview link, both report paths, and anything 
 
 **Progress ledger (the source of truth after a context reset):** `E:/NO Time/nt-audit-fixes/.superpowers/sdd/2026-11-17-audit-fixes/progress.md` (gitignored). Read it, then `git log --oneline` in the worktree.
 
-**Current step:** Owner scope cut 2026-11-18 (see ledger). Tasks 0–12 done (12 merged: still hero only), 13 → v1.1. Next: Task 14 (docs), Task 15 (basic: review, tests, CI, shots; one Lighthouse home + /links), final fix wave (correctness only), merge into phase-2-services; then phase 2, short report, short Rand guide.
+**Current step:** Owner scope cut 2026-11-18 (see ledger). Tasks 0–12 done (12 merged: still hero only), 13 → v1.1. Task 14 done (D125–D137, decisions-to-confirm #37–#47, `docs/launch/checklist.md`, v1.1). Next: Task 15 (basic: review, tests, CI, shots; one Lighthouse home + /links), final fix wave (correctness only), merge into phase-2-services; then phase 2, short report, short Rand guide.
 
 Servers: 3000 = builds from the worktree (for e2e/Lighthouse after); 3200 = the before build (`E:/NO Time/nt-before`, e19404f); 3100 = review build behind the tunnel https://commerce-tension-petersburg-rom.trycloudflare.com (from `notime-website`, rebuild at the end).
 
