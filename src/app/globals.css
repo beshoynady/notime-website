@@ -874,7 +874,15 @@ html[data-overlay-open] #site-header {
 .wa-fab {
   transition:
     opacity 0.3s var(--ease-expo-out),
+    translate 0.4s var(--ease-expo-out),
     visibility 0.3s;
+}
+/* Phones: the shared CTA bar carries WhatsApp, so the floating button steps aside (N04). On
+   Software (its own bar, no WhatsApp half) it stays, above that bar (software.css). */
+@media (max-width: 899.98px) {
+  body:has(.cta-bar) .wa-fab {
+    display: none;
+  }
 }
 html[data-overlay-open] .wa-fab {
   opacity: 0;

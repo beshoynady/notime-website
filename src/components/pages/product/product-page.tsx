@@ -57,7 +57,7 @@ export async function ProductPage({ id, locale }: { id: ProductId; locale: Local
         ]}
       />
 
-      <section data-tone="light" aria-labelledby="pp-title" className="pg-open pp-hero">
+      <section data-tone="light" aria-labelledby="pp-title" className="pg-open pp-hero" data-cta-opening="">
         <SectionRef id={PAGE_REF.productHero} />
         <div className="frame">
           <PageCrumbs trail={[{ href: categoryHref(software.slug), label: software.title[locale] }]} current={name} />

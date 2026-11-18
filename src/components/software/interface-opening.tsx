@@ -28,7 +28,7 @@ export async function InterfaceOpening({ category, locale, serviceCount }: { cat
   const lines = ["s1", "s2", "s3", "s4"].map((k) => ts(`software.${k}`));
   const ui = hero.ui;
   return (
-    <section data-tone="light" data-grain="off" aria-labelledby="sw-title" className="sw-opening">
+    <section data-tone="light" data-grain="off" aria-labelledby="sw-title" className="sw-opening" data-cta-opening="">
       <SectionRef id={categoryRef(category.slug, "opening")} />
       <div className="scene-pin" style={{ "--pin-d": OPENING_PIN.desktop, "--pin-m": OPENING_PIN.mobile } as CSSProperties}>
         <div className="sw-op" data-shot="0">

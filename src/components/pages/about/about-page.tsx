@@ -53,7 +53,7 @@ export async function AboutPage({ locale }: { locale: Locale }) {
     <main id="main" className="ab">
       <JsonLd data={[trailJsonLd([{ name: BREADCRUMB_LABELS.about[locale], path: ABOUT_HREF }], locale, SITE_URL)]} />
 
-      <section data-tone="dark" aria-labelledby="ab-title" className="pg-open ab-open">
+      <section data-tone="dark" aria-labelledby="ab-title" className="pg-open ab-open" data-cta-opening="">
         <SectionRef id={PAGE_REF.aboutStory} />
         <div className="frame">
           <PageCrumbs current={BREADCRUMB_LABELS.about[locale]} />

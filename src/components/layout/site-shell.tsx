@@ -2,6 +2,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { Suspense, type ReactNode } from "react";
 import { CustomCursor } from "@/components/layout/custom-cursor";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { MobileCtaBar } from "@/components/layout/mobile-cta-bar";
 import { SiteHeader } from "@/components/layout/site-header";
 import { WhatsAppButton } from "@/components/layout/whatsapp-button";
 import { AnchorScroll } from "@/components/providers/anchor-scroll";
@@ -22,6 +23,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
           {children}
           <SiteFooter />
         </div>
+        <MobileCtaBar />
         <WhatsAppButton />
         <CustomCursor />
         <ToneController />

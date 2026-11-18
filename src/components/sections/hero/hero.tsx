@@ -27,6 +27,7 @@ export async function Hero() {
     <div className="hero-pin">
       <section
         id="hero"
+        data-cta-opening=""
         className="hero"
         data-tone="dark"
         data-header="hero"

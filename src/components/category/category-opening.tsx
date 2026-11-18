@@ -66,7 +66,7 @@ export async function CategoryOpening({
   const intro = <p className="cat-opening-intro text-lead">{category.intro[locale]}</p>;
 
   return (
-    <section data-tone={THEME_TONE[category.theme]} data-grain="off" aria-labelledby="category-title" className="cat-opening">
+    <section data-tone={THEME_TONE[category.theme]} data-grain="off" aria-labelledby="category-title" className="cat-opening" data-cta-opening="">
       <SectionRef id={categoryRef(category.slug, "opening")} />
       {scene ? (
         <LayeredScene

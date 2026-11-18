@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useStickyBarVisible } from "@/components/layout/use-sticky-bar-visible";
 import { CONSULT_ID } from "@/lib/prefill";
 
 /**
@@ -8,46 +8,12 @@ import { CONSULT_ID } from "@/lib/prefill";
  * option. It appears once the opening has scrolled away, and hides while #consult or the review
  * form is in view and while a form field has focus (the on-screen keyboard is up). Its height is
  * reserved at the page's end (software.css), so it never covers content or the focused element.
- * Mobile only (CSS). The floating WhatsApp button hides while it shows (software.css; it doesn't
- * render at all until a number is configured, D78).
+ * Mobile only (CSS). The floating WhatsApp button sits above it while it shows (software.css; it
+ * doesn't render at all until a number is configured, D78). The visibility logic is shared with the
+ * site's CTA bar (use-sticky-bar-visible.ts).
  */
 export function StickyBar({ label, book, review, reviewId }: { label: string; book: string; review: string; reviewId: string }) {
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    const opening = document.querySelector(".sw-opening");
-    const forms = [document.getElementById(CONSULT_ID), document.getElementById(reviewId)].filter((x): x is HTMLElement => !!x);
-    const state = { past: false, inForm: new Set<Element>(), typing: false };
-    const update = () => setShow(state.past && state.inForm.size === 0 && !state.typing);
-
-    const io = new IntersectionObserver((entries) => {
-      for (const e of entries) {
-        if (e.target === opening) state.past = !e.isIntersecting && e.boundingClientRect.top < 0;
-        else if (e.isIntersecting) state.inForm.add(e.target);
-        else state.inForm.delete(e.target);
-      }
-      update();
-    });
-    if (opening) io.observe(opening);
-    for (const f of forms) io.observe(f);
-
-    const isField = (t: EventTarget | null) => t instanceof HTMLElement && t.matches("input:not([type=radio]):not([type=checkbox]), textarea, select");
-    const onIn = (e: FocusEvent) => {
-      state.typing = isField(e.target);
-      update();
-    };
-    const onOut = () => {
-      state.typing = false;
-      update();
-    };
-    document.addEventListener("focusin", onIn);
-    document.addEventListener("focusout", onOut);
-    return () => {
-      io.disconnect();
-      document.removeEventListener("focusin", onIn);
-      document.removeEventListener("focusout", onOut);
-    };
-  }, [reviewId]);
+  const show = useStickyBarVisible("[data-cta-opening]", `#${CONSULT_ID}, #${reviewId}`);
 
   return (
     <div className="sw-sticky" data-show={show || undefined} role="region" aria-label={label} inert={!show}>

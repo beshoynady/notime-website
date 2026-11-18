@@ -2425,8 +2425,9 @@ html[dir="rtl"] .sw-v-meter i {
   html:has(.sw-sticky[data-show]) {
     scroll-padding-block-end: 84px;
   }
-  /* The floating WhatsApp button steps aside while the bar shows (D65). */
+  /* The floating WhatsApp button rides up above the bar while it shows (translate, not bottom:
+     no layout shift): 72px bar + 12px gap, less the button's own 20px offset. */
   body:has(.sw-sticky[data-show]) .wa-fab {
-    display: none;
+    translate: 0 -64px;
   }
 }

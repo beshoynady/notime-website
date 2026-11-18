@@ -1,0 +1,67 @@
+/* The shared mobile CTA bar (N04). Logical properties only; unlayered. Phones only (< 900px). */
+.cta-bar {
+  position: fixed;
+  z-index: 54;
+  inset-inline: 0;
+  inset-block-end: 0;
+  display: flex;
+  gap: 8px;
+  padding-block: 8px calc(8px + env(safe-area-inset-bottom, 0px));
+  padding-inline: var(--gutter-start) var(--gutter-end);
+  border-block-start: 1px solid var(--color-line-light);
+  background: rgba(245, 233, 211, 0.97);
+  transform: translateY(110%);
+  visibility: hidden;
+  transition:
+    transform 0.4s var(--ease-expo-out),
+    visibility 0.4s;
+}
+.cta-bar[data-show] {
+  transform: none;
+  visibility: visible;
+}
+.cta-bar-btn {
+  flex: 1 1 0;
+  min-inline-size: 0;
+  display: grid;
+  place-items: center;
+  block-size: 40px;
+  padding-inline: 12px;
+  border: 1px solid var(--color-espresso, #2e2017);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.cta-bar-main {
+  background: var(--color-espresso, #2e2017);
+  color: var(--color-ivory, #f5e9d3);
+}
+.cta-bar-alt {
+  background: transparent;
+  color: var(--color-espresso, #2e2017);
+}
+@media (min-width: 900px) {
+  .cta-bar {
+    display: none;
+  }
+}
+@media (max-width: 899.98px) {
+  /* 56px of bar plus the safe area is reserved at the page's end: it never covers the footer. */
+  body:has(.cta-bar) {
+    padding-block-end: calc(56px + env(safe-area-inset-bottom, 0px));
+  }
+  html:has(.cta-bar[data-show]) {
+    scroll-padding-block-end: 68px;
+  }
+  /* The last stacked private-celebrations card clears the bar. */
+  body:has(.cta-bar) .pstack-cards {
+    padding-block-end: calc(56px + env(safe-area-inset-bottom, 0px));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cta-bar {
+    transition: none;
+  }
+}

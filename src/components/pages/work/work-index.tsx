@@ -40,7 +40,7 @@ export async function WorkIndex({ locale, filter }: { locale: Locale; filter: Wo
   return (
     <main id="main" className="wk">
       <JsonLd data={[trailJsonLd([{ name: BREADCRUMB_LABELS.work[locale], path: WORK_INDEX_HREF }], locale, SITE_URL)]} />
-      <section data-tone="dark" aria-labelledby="wk-title" className="wk-head pg-open">
+      <section data-tone="dark" aria-labelledby="wk-title" className="wk-head pg-open" data-cta-opening="">
         <SectionRef id={PAGE_REF.workHead} />
         <div className="frame">
           <PageCrumbs current={BREADCRUMB_LABELS.work[locale]} />
