@@ -117,7 +117,12 @@ for (const category of getCategories()) {
               }),
           );
           for (const s of sections) expect(s.grained, `a ${s.tone} section`).toBe(s.tone === "dark");
-          expect((await lcpEntry(page)).url, "the LCP is text, not the grain tile").toBe("");
+          // N06: the hero is the finished scene, so its first image (high priority) may be the LCP.
+          const lcp = await lcpEntry(page);
+          if (lcp.url !== "") {
+            const hero = await page.locator('.cat-opening .scene[data-mode="still"] img[fetchpriority="high"]').evaluateAll((imgs) => imgs.map((i) => (i as HTMLImageElement).currentSrc));
+            expect(hero, "the LCP is text or the hero's priority image, not the grain tile").toContain(lcp.url);
+          }
         });
 
         test("JSON-LD parses: ItemList, BreadcrumbList, FAQPage once the FAQ is written", async ({ page }) => {

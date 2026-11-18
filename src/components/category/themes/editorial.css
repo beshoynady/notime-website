@@ -66,7 +66,7 @@ main[data-theme="editorial"] .scene[data-scene="editorial-opening"] {
 }
 html[data-js]:not([data-reduced])
   main[data-theme="editorial"]
-  .scene[data-scene="editorial-opening"] {
+  .scene[data-scene="editorial-opening"]:not([data-mode="still"]) {
   --ed-band-top: calc(100% - 170px);
 }
 @media (min-width: 900px) {
@@ -75,7 +75,7 @@ html[data-js]:not([data-reduced])
   }
   html[data-js]:not([data-reduced])
     main[data-theme="editorial"]
-    .scene[data-scene="editorial-opening"] {
+    .scene[data-scene="editorial-opening"]:not([data-mode="still"]) {
     --ed-band-top: calc(100% - 196px);
   }
 }

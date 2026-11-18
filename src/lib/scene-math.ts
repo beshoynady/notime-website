@@ -99,3 +99,35 @@ export function sceneProblems(scene: SceneConfig, limits: Record<Viewport, numbe
   }
   return problems;
 }
+
+/** How a scene layer's image loads: eagerly or lazily, and with high fetch priority or not. */
+export interface ImageLoading {
+  eager: boolean;
+  high: boolean;
+}
+
+/**
+ * How each image layer of a scene loads (N06), by layer id; layers without a file are left out.
+ * The still (a category's hero) is the first paint: the first image its end frame shows gets high
+ * priority (an LCP candidate), the phone layers it shows load eagerly, and desktop-only or hidden
+ * ones lazily (a lazy image in a `display: none` box is never fetched, so phones skip them; a
+ * desktop-only first image keeps its high priority once it starts). The build scene follows the
+ * hero and reuses its files from the cache, so it never competes: all lazy.
+ */
+export function imageLoading(scene: SceneConfig, mode: "build" | "still", hasFile: (slot: string) => boolean): Record<string, ImageLoading> {
+  const out: Record<string, ImageLoading> = {};
+  let first = true;
+  for (const layer of scene.layers) {
+    if (!layer.slot || !hasFile(layer.slot)) continue;
+    const end = { ...layer.style, ...stillState(layer) };
+    const shown = mode === "still" && end.opacity !== 0 && end.wipe !== 0;
+    out[layer.id] = { eager: shown && layer.mobile, high: shown && first };
+    if (shown) first = false;
+  }
+  return out;
+}
+
+/** The copy key of the last shot with a line: the still's lead, the scene's promise (N06). */
+export function stillLead(shots: SceneShot[]): string | undefined {
+  return shots.findLast((s) => s.copyKey)?.copyKey;
+}

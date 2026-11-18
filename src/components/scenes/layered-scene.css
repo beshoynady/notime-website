@@ -1,5 +1,6 @@
 /* LayeredScene (D64). Three states:
-   - still (default): no JS, or reduced motion. The end frame: keys at their last values, every
+   - still (default): no JS, reduced motion, or a scene rendered as its still (data-mode="still":
+     a category's hero, N06, at every width). The end frame: keys at their last values, every
      entrance done, every shot line visible as one short paragraph.
    - motion (html[data-js]:not([data-reduced])): shot 1 from the first paint. Entering layers and
      later lines start hidden; SceneDirector (GSAP) takes over from there.
@@ -61,26 +62,26 @@
   content: " ";
 }
 
-/* Motion: shot 1 from the first paint. */
-html[data-js]:not([data-reduced]) .scene-light {
+/* Motion: shot 1 from the first paint. Never on a still scene. */
+html[data-js]:not([data-reduced]) .scene:not([data-mode="still"]) .scene-light {
   opacity: var(--rest-opacity, 1);
   transform: none;
   clip-path: var(--rest-clip, none);
 }
-html[data-js]:not([data-reduced]) .scene-enter[data-enter] {
+html[data-js]:not([data-reduced]) .scene:not([data-mode="still"]) .scene-enter[data-enter] {
   opacity: 0;
 }
-html[data-js]:not([data-reduced]) .scene-copy {
+html[data-js]:not([data-reduced]) .scene:not([data-mode="still"]) .scene-copy {
   display: grid;
 }
-html[data-js]:not([data-reduced]) .scene-line {
+html[data-js]:not([data-reduced]) .scene:not([data-mode="still"]) .scene-line {
   display: block;
   grid-area: 1 / 1;
 }
-html[data-js]:not([data-reduced]) .scene-line::before {
+html[data-js]:not([data-reduced]) .scene:not([data-mode="still"]) .scene-line::before {
   content: none;
 }
-html[data-js]:not([data-reduced]) .scene-line:not(:first-child) {
+html[data-js]:not([data-reduced]) .scene:not([data-mode="still"]) .scene-line:not(:first-child) {
   visibility: hidden;
   opacity: 0;
 }

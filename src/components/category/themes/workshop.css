@@ -162,6 +162,15 @@ main[data-theme="workshop"] .svc + .svc::before {
   }
 }
 
+/* N06 · the hero (the scene's still): the gift rests where the build leaves it, drifted up by its
+   depth (0.9 × 14 vh, layerDrift at the act's end), clear of the eyebrow. The build scene's drift
+   is GSAP's; the still has none, so CSS places it (`translate`, never animated here). */
+@media (min-width: 900px) {
+  main[data-theme="workshop"] .scene[data-mode="still"] [data-layer="gift"] {
+    translate: 0 -12.6vh;
+  }
+}
+
 /* Every drawing is contain-fitted and centred in its layer's box. */
 main[data-theme="workshop"] .scene-light:is(.fx-ws-board, .fx-ws-net, .fx-ws-dims, .fx-ws-ink, .fx-ws-paper, .fx-ws-spool, .fx-ws-fold, .fx-ws-box, .fx-ws-lid, .fx-ws-ribbon) {
   background-position: center;
