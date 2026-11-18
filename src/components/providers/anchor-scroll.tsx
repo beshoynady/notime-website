@@ -45,6 +45,8 @@ function focusHeading(target: HTMLElement) {
  * A sticky bar counts at its stuck position, and only when `target` is inside its scope: the
  * nearest `[data-anchor-scope]` ancestor, else its parent (it scrolls away with that box; the
  * category index sits in a track beside the content it indexes, so it names its scope). Viewport px.
+ * The header that hides on category pages (HeaderAutohide) counts as shown, its `translate` taken
+ * out: a jump up brings it back, so the landing must clear it (a jump down keeps its 68px, spec).
  */
 export function anchorOffset(target?: Element): number {
   let bottom = 0;
@@ -57,7 +59,8 @@ export function anchorOffset(target?: Element): number {
       if (target && !scope?.contains(target)) continue;
       bottom = Math.max(bottom, parseFloat(style.top) + el.offsetHeight);
     } else {
-      bottom = Math.max(bottom, el.getBoundingClientRect().bottom);
+      const shiftY = parseFloat(style.translate.split(" ")[1] ?? "") || 0;
+      bottom = Math.max(bottom, el.getBoundingClientRect().bottom - shiftY);
     }
   }
   return bottom;

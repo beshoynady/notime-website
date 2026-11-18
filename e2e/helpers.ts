@@ -64,10 +64,13 @@ export async function landing(page: Page, id: string) {
     )
     .toBe(true);
   return page.evaluate((id) => {
+    // The bars where they rest: the header that hides on category pages (and the chip bar that
+    // follows it) count as shown, so a jump down keeps the header's height above it (accepted, spec).
+    const rest = (el: Element) => el.getBoundingClientRect().bottom - (parseFloat(getComputedStyle(el).translate.split(" ")[1] ?? "") || 0);
     const target = document.getElementById(id)!.getBoundingClientRect().top;
-    const header = document.getElementById("site-header")!.getBoundingClientRect().bottom;
+    const header = rest(document.getElementById("site-header")!);
     const bar = document.querySelector("nav.svc-index")!;
-    const chipBar = matchMedia("(max-width: 899.98px)").matches ? bar.getBoundingClientRect().bottom : 0;
+    const chipBar = matchMedia("(max-width: 899.98px)").matches ? rest(bar) : 0;
     return target - Math.max(header, chipBar);
   }, id);
 }

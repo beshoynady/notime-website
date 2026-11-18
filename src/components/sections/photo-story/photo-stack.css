@@ -22,6 +22,22 @@
   position: sticky;
   inset-block-start: calc(var(--stack-top) + var(--i) * 12px);
 }
+/* Below 900px the header hides on the way down (globals.css, "Header autohide"): every card moves
+   up with it by translate, in step with the chip bar, so a held card keeps its gap under the bar.
+   All cards move alike, so their order and overlaps are unchanged; the list keeps the header's
+   height above it, so a raised card still in flow never reaches the lead. GSAP owns the figure's
+   transform; the card's translate is CSS's, and the two compose. Reduced motion: static cards. */
+@media (max-width: 899.98px) and (prefers-reduced-motion: no-preference) {
+  .pstack-cards {
+    margin-block-start: var(--header-h);
+  }
+  .pstack-card {
+    transition: translate 0.35s var(--ease-expo-out);
+  }
+  html[data-header-hidden] .pstack-card {
+    translate: 0 var(--header-follow);
+  }
+}
 .pstack-fig {
   position: relative;
   margin: 0;

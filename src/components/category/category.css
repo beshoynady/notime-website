@@ -278,6 +278,12 @@ html[data-js]:not([data-reduced]) .cat-opening .scene-line:last-child {
   background: rgba(245, 233, 211, 0.92);
   backdrop-filter: blur(10px);
 }
+/* Below 900px the chip bar moves up with the hiding header, in step with it (globals.css, "Header
+   autohide"; its transition is set with the opacity one, below); translate only, so its sticky
+   place and every anchor landing stay the same. */
+html[data-header-hidden] .svc-index {
+  translate: 0 var(--header-follow);
+}
 [data-tone="dark"] .svc-index {
   border-color: var(--color-line-dark);
   background: rgba(46, 32, 23, 0.92);
@@ -443,7 +449,9 @@ html[data-js]:not([data-reduced]) .cat-opening .scene-line:last-child {
    soon as the visitor points at it, focuses into it or opens it. Motion only (data-js, not
    reduced): the still and the static opening keep it at full. */
 .svc-index {
-  transition: opacity 0.4s var(--ease-expo-out);
+  transition:
+    opacity 0.4s var(--ease-expo-out),
+    translate 0.35s var(--ease-expo-out); /* with the hiding header (above) */
 }
 html[data-js]:not([data-reduced])
   .cat-page:has(.cat-opening .scene[data-shot-active="0"])

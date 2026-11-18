@@ -693,7 +693,8 @@ html[data-js]:not([data-reduced]) .svc-scene .scene-pin:has(> .scene) {
   transition:
     background-color 0.3s var(--ease-expo-out),
     color 0.3s var(--ease-expo-out),
-    border-color 0.3s var(--ease-expo-out);
+    border-color 0.3s var(--ease-expo-out),
+    translate 0.35s var(--ease-expo-out);
 }
 html:not([data-js]) #site-header {
   background: rgba(46, 32, 23, 0.94);
@@ -717,6 +718,29 @@ html[data-overlay-open] #site-header {
   background: var(--color-espresso);
   color: var(--color-ivory);
   border-color: var(--color-line-dark);
+}
+
+/* Header autohide (category pages below 900px; HeaderAutohide sets html[data-header-hidden]).
+   Everything moves by `translate`, which never changes layout (no CLS). The header goes up by its
+   height and the safe area; what is held under it (the chip bar, category.css; the private-
+   celebrations cards, photo-stack.css) goes up by the header's height, so it stops at the safe-
+   area line under the strip. The header's translate stays `none` while shown: any other value
+   would make it the containing block of the mobile menu's fixed overlay (as backdrop-filter does). */
+:root {
+  --header-shift: 0px;
+  --header-follow: 0px;
+}
+html[data-header-hidden] {
+  --header-shift: calc(-1 * (var(--header-h) + env(safe-area-inset-top, 0px)));
+  --header-follow: calc(-1 * var(--header-h));
+}
+html[data-header-hidden]:not([data-overlay-open]) #site-header {
+  translate: 0 var(--header-shift);
+}
+@media (prefers-reduced-motion: reduce) {
+  #site-header {
+    transition: none;
+  }
 }
 .nav-link {
   opacity: 0.78;
