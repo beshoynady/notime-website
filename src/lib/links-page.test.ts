@@ -10,7 +10,7 @@ const base: LinksPageData = {
   fontPreloads: ["/fonts/montserrat-latin.v1.woff2"],
   fontFaces: "@font-face{font-family:Montserrat}",
   logo: { src: "/images/brand/logo/logo-dark-bg-wordmark.svg", alt: "NO TIME Creative House", homeHref: "/en", homeLabel: "Home" },
-  lang: { href: "/ar/links", locale: "ar", label: "ع", name: "العربية" },
+  lang: { href: "/ar/links", locale: "ar", label: "ع", name: "ع، العربية" },
   eyebrow: "Dubai",
   heading: "It's time to start.",
   lead: "Events, production, marketing.",

@@ -34,6 +34,15 @@ test.describe("/links", () => {
     expect(await read()).toMatchObject({ utm_source: "instagram", landing: "/en/links" });
   });
 
+  test("the language link's name contains its visible text (WCAG 2.5.3)", async ({ page }) => {
+    await page.goto("/en/links");
+    await expect(page.locator(".lk-lang")).toHaveText("ع");
+    await expect(page.locator(".lk-lang")).toHaveAccessibleName("ع، العربية");
+    await page.goto("/ar/links");
+    await expect(page.locator(".lk-lang")).toHaveText("EN");
+    await expect(page.locator(".lk-lang")).toHaveAccessibleName("EN, English");
+  });
+
   test("the language link keeps the visit's tags", async ({ page }) => {
     await page.goto("/en/links?utm_source=instagram&utm_medium=bio");
     await expect(page.locator(".lk-lang")).toHaveAttribute("href", "/ar/links?utm_source=instagram&utm_medium=bio");
