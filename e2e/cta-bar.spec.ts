@@ -9,8 +9,9 @@ const bar = (page: Page, locale: "en" | "ar") => page.getByRole("region", { name
 /** Past the opening: scroll just beyond the marked opening's bottom edge. */
 async function pastOpening(page: Page) {
   await page.evaluate(() => {
+    // The visible page's opening: pages left by a client navigation stay in the DOM, hidden (D32).
+    const opening = [...document.querySelectorAll("[data-cta-opening]")].find((el) => el.checkVisibility())!;
     // The home hero is pinned inside its spacer: the opening ends where the spacer ends.
-    const opening = document.querySelector("[data-cta-opening]")!;
     const el = opening.closest(".hero-pin") ?? opening;
     window.scrollTo(0, el.getBoundingClientRect().bottom + window.scrollY + 40);
   });
@@ -89,6 +90,19 @@ test.describe("mobile CTA bar", () => {
       });
       // At the end the bar may be showing or not; either way the last link clears it.
       expect(gap.lastBottom).toBeLessThanOrEqual(gap.barTop);
+    });
+
+    test("after a client navigation it follows the new page's opening", async ({ page }) => {
+      await gotoReady(page, "/en");
+      await page.evaluate(() => ((window as unknown as { __noReload: boolean }).__noReload = true));
+      await page.locator("button[aria-controls=mobile-nav]").click();
+      await page.locator('#mobile-nav a[href="/en/work"]').click();
+      await page.waitForURL("**/en/work");
+      await expect(page.locator("#wk-title")).toBeVisible();
+      // A client navigation: the home page is still in the DOM, hidden (React Activity, D32).
+      expect(await page.evaluate(() => (window as unknown as { __noReload?: boolean }).__noReload)).toBe(true);
+      await pastOpening(page);
+      await expect(bar(page, "en")).toBeVisible();
     });
 
     for (const [path, sel] of [

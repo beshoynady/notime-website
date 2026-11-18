@@ -1,17 +1,25 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "@/i18n/navigation";
 
 /**
  * Whether a mobile sticky bar should show (shared by the site's CTA bar and Software's bar): the
  * page's opening (`openingSelector`, else the first `main section`) has scrolled away, no element
  * matching `formSelector` is in view, and no text field has focus (the on-screen keyboard is up).
+ * Re-evaluated on every path change: the site's bar remounts per path (mobile-cta-bar.tsx), and
+ * `pathname` re-runs the effect for a bar that stays mounted.
  */
 export function useStickyBarVisible(openingSelector: string, formSelector: string): boolean {
   const [show, setShow] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
-    const opening = document.querySelector(openingSelector) ?? document.querySelector("main section");
+    // The visible page's opening: under cacheComponents, pages left behind by a client navigation
+    // stay in the DOM hidden (React Activity, D32), so the first match may be a hidden page's.
+    // When none is visible yet, the first match, as before.
+    const visible = (sel: string) => Array.from(document.querySelectorAll(sel)).find((el) => el.checkVisibility());
+    const opening = visible(openingSelector) ?? visible("main section") ?? document.querySelector(openingSelector) ?? document.querySelector("main section");
     const forms = Array.from(document.querySelectorAll(formSelector));
     const state = { past: false, inForm: new Set<Element>(), typing: false };
     const update = () => setShow(state.past && state.inForm.size === 0 && !state.typing);
@@ -43,7 +51,7 @@ export function useStickyBarVisible(openingSelector: string, formSelector: strin
       document.removeEventListener("focusin", onIn);
       document.removeEventListener("focusout", onOut);
     };
-  }, [openingSelector, formSelector]);
+  }, [openingSelector, formSelector, pathname]);
 
   return show;
 }
