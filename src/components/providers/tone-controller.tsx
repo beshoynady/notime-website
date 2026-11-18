@@ -47,7 +47,7 @@ export function ToneController() {
       // navigation stay in the DOM hidden (React Activity) and must not get triggers.
       const sections = gsap.utils
         .toArray<HTMLElement>("#page-stage section[data-tone]")
-        .filter((s) => s.checkVisibility());
+        .filter((s) => s.checkVisibility?.() ?? true);
 
       // A section's scroll box: its pin spacer when another controller pins it (the spacer
       // holds the whole pinned distance), otherwise the section itself. Read at refresh time.

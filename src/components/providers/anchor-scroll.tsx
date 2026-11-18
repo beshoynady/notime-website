@@ -52,7 +52,7 @@ export function anchorOffset(target?: Element): number {
   let bottom = 0;
   for (const el of document.querySelectorAll<HTMLElement>("[data-anchor-offset]")) {
     const media = el.dataset.anchorOffset;
-    if ((media && !matchMedia(media).matches) || !el.checkVisibility()) continue;
+    if ((media && !matchMedia(media).matches) || !(el.checkVisibility?.() ?? true)) continue;
     const style = getComputedStyle(el);
     if (style.position === "sticky") {
       const scope = el.closest("[data-anchor-scope]") ?? el.parentElement;

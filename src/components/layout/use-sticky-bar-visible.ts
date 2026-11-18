@@ -18,7 +18,7 @@ export function useStickyBarVisible(openingSelector: string, formSelector: strin
     // The visible page's opening: under cacheComponents, pages left behind by a client navigation
     // stay in the DOM hidden (React Activity, D32), so the first match may be a hidden page's.
     // When none is visible yet, the first match, as before.
-    const visible = (sel: string) => Array.from(document.querySelectorAll(sel)).find((el) => el.checkVisibility());
+    const visible = (sel: string) => Array.from(document.querySelectorAll(sel)).find((el) => el.checkVisibility?.() ?? true);
     const opening = visible(openingSelector) ?? visible("main section") ?? document.querySelector(openingSelector) ?? document.querySelector("main section");
     const forms = Array.from(document.querySelectorAll(formSelector));
     const state = { past: false, inForm: new Set<Element>(), typing: false };
