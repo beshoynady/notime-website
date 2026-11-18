@@ -73,6 +73,7 @@
     }
   },
   "hero": {
+    "eyebrow": "Every second is planned.",
     "titleLine1": "IT'S TIME",
     "title": {
       "create": {
@@ -85,9 +86,8 @@
       }
     },
     "lead": "Events, creative production, marketing and digital solutions, planned and delivered by one house.",
-    "cta": "See what we make",
-    "beatLead": "Every second",
-    "beatKey": "is planned."
+    "cta": "Plan your event",
+    "ctaWork": "See our work"
   },
   "hud": {
     "scene": "Scene 01 — NO TIME",

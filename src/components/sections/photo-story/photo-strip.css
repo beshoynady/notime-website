@@ -7,7 +7,8 @@
   --strip-gap: 16px;
   /* The track's inline padding lines its first frame up with the page's frame. */
   --strip-pad: max(var(--gutter-start), calc((100vw - var(--frame)) / 2 + var(--gutter-start)));
-  margin-block-start: clamp(64px, 10vw, 128px);
+  /* Room below the hero's letterbox; the next section brings its own top padding. */
+  padding-block-start: clamp(56px, 8vw, 96px);
 }
 .pstrip-head {
   display: grid;
@@ -70,6 +71,7 @@
    screen plus the track's overflow (frames' ratios × height + gaps + padding − the viewport). */
 @media (min-width: 900px) {
   html[data-js]:not([data-reduced]) .pstrip {
+    padding-block-start: 0; /* the sticky stage centres itself under the header */
     block-size: calc(
       100svh +
         max(0px, var(--strip-h) * var(--strip-r) + (var(--strip-n) - 1) * var(--strip-gap) + 2 * var(--strip-pad) - 100vw)

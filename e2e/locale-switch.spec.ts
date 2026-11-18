@@ -8,7 +8,7 @@ test.describe("locale switch", () => {
   test("mid-pin switch: one pin spacer, no leftover split, URL /ar", async ({ page }) => {
     await gotoReady(page, "/en");
     await page.waitForFunction(() => document.documentElement.hasAttribute("data-intro-seen") || !!document.querySelector(".pin-spacer"));
-    await page.evaluate(() => scrollTo(0, innerHeight * 0.7)); // 50% of the 140% pin
+    await page.evaluate(() => scrollTo(0, innerHeight * 0.5)); // 50% of the 100% pin (N05)
     await page.waitForTimeout(600);
 
     await page.locator("header a[hreflang=ar]").click();

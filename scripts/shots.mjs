@@ -4,7 +4,7 @@
  *   node scripts/shots.mjs <label> [--hero] [--base=http://localhost:3100]
  * Writes docs/checkpoints/<label>/{en,ar}-{1440,390}[-reduced].png plus menu-open states
  * ({locale}-{width}-menu.png). With --hero, per locale and width: hero-{locale}-{width}-intro-end.png,
- * -scroll-split.png (title splitting, particles warping) and -scroll-beat.png (second beat), plus
+ * -scroll-split.png (title splitting, particles warping) and -scroll-exit.png (the exit's end), plus
  * the recording of intro + scroll (1440 viewport at 960px, EN) twice: hero.webm (VP9 video)
  * and hero.webp (animated WebP, plays inline in docs and chat).
  * Uses the installed Chrome (channel: "chrome"); no Playwright browser or ffmpeg downloads.
@@ -97,11 +97,11 @@ if (hero) {
       const page = await open(ctx, locale, false);
       const name = `hero-${locale}-${s.width}`;
       await page.screenshot({ path: path.join(out, `${name}-intro-end.png`) });
-      // Positions in the 140% pin: lines parting with focus pull; then the beat settled.
-      await scrollPin(page, 0.42);
+      // Positions in the 100% pin (N05): lines parting with focus pull; then the exit's end.
+      await scrollPin(page, 0.3);
       await page.screenshot({ path: path.join(out, `${name}-scroll-split.png`) });
-      await scrollPin(page, 1.05);
-      await page.screenshot({ path: path.join(out, `${name}-scroll-beat.png`) });
+      await scrollPin(page, 0.95);
+      await page.screenshot({ path: path.join(out, `${name}-scroll-exit.png`) });
       await ctx.close();
       console.log("✓", name);
     }

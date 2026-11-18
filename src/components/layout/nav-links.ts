@@ -26,6 +26,3 @@ export const HEADER_LINKS = [
 /** "Request a quote": hidden until /contact exists. */
 export const QUOTE_LINK = { key: "quote", href: "/contact", live: true } as const; // the brief form works (D102)
 export const QUOTE_HREF = QUOTE_LINK.href;
-
-/** The homepage services section: the hero CTA scrolls to it. Menus and cards link the category pages (D57). */
-export const SERVICES_HREF = "/#services";

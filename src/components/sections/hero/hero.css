@@ -12,11 +12,11 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  /* At rest (no JS / reduced motion) the hero is not pinned: row 1 is one viewport with
-     the title block centred in it; the second beat follows in row 2. */
+  /* At rest (no JS / reduced motion) the hero is not pinned: one viewport with the title
+     block centred in it (N05: everything is in the first screen), the bottom letterbox below. */
   display: grid;
-  grid-template-rows: minmax(max(100svh, 620px), auto) auto;
-  padding-block-end: calc(var(--lb-bottom) + 88px);
+  grid-template-rows: minmax(max(100svh, 620px), auto);
+  padding-block-end: var(--lb-bottom);
   color: var(--color-ivory);
   /* Same gradient the canvas paints, so the frame is complete without it. */
   background:
@@ -129,12 +129,18 @@ html[data-js]:not([data-reduced]) .hero-clock-wrap {
   inline-size: 100%;
   text-align: center;
 }
+/* The line the old second beat said, now said once, above the title (N05). */
+.hero-eyebrow {
+  margin: 0;
+  text-shadow: 0 2px 18px rgba(13, 8, 5, 0.8);
+}
 .hero-title {
   /* Capped by height as well as width (D94): the frame between the letterboxes, less the HUD
-     clearance and the lead + CTA (~190px), shared by the two lines (EN 2 × 0.9em + masks;
-     AR 2 × 1.18em + masks). Width-only sizing let the block overflow short laptop windows:
-     the title rose under the header and the CTA dipped into the letterbox. */
-  --fit: calc((100svh - var(--lb-top) - var(--lb-bottom) - 2 * var(--hud-clear) - 190px) / 1.95);
+     clearance and the eyebrow, lead and CTAs (~245px: the eyebrow and its gap ~55px, the lead
+     two lines, the CTA row; N05), shared by the two lines (EN 2 × 0.9em + masks; AR 2 × 1.18em
+     + masks). Width-only sizing let the block overflow short laptop windows: the title rose
+     under the header and the CTA dipped into the letterbox. */
+  --fit: calc((100svh - var(--lb-top) - var(--lb-bottom) - 2 * var(--hud-clear) - 245px) / 1.95);
   margin: 0;
   font-size: clamp(3.2rem, min(12.5vw, var(--fit)), 11.5rem);
   font-weight: 200;
@@ -143,7 +149,7 @@ html[data-js]:not([data-reduced]) .hero-clock-wrap {
   text-wrap: nowrap;
 }
 .hero-title:lang(ar) {
-  --fit: calc((100svh - var(--lb-top) - var(--lb-bottom) - 2 * var(--hud-clear) - 190px) / 2.5);
+  --fit: calc((100svh - var(--lb-top) - var(--lb-bottom) - 2 * var(--hud-clear) - 245px) / 2.5);
   line-height: 1.18;
 }
 .hero-line {
@@ -214,34 +220,20 @@ html[data-js]:not([data-reduced]) .hero-content {
   text-shadow: 0 2px 24px rgba(13, 8, 5, 0.7);
 }
 
-/* 6 · Second beat: in flow below the CTA at rest; a centred overlay revealed on scroll in motion mode. */
-.hero-beat {
-  position: relative;
-  z-index: 5;
-  margin: 0 auto;
-  max-inline-size: 14ch;
-  padding-inline: 16px;
-  font-size: clamp(2.1rem, 6vw, 5.2rem);
-  font-weight: 200;
-  line-height: 1.08;
-  text-align: center;
-  text-wrap: balance;
-  color: var(--color-ivory);
-  pointer-events: none;
+/* Two actions (N05): plan an event (primary), see the work (ghost). One row from 600px;
+   stacked at equal width on phones, so neither label wraps. */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 16px;
 }
-.hero-beat:lang(ar) {
-  line-height: 1.35;
-}
-.hero-beat b {
-  font-weight: 600;
-  color: var(--color-champagne);
-}
-html[data-js]:not([data-reduced]) .hero-beat {
-  position: absolute;
-  inset: 0;
-  block-size: fit-content;
-  margin: auto;
-  opacity: 0; /* the controller reveals it word by word on scroll */
+@media (max-width: 599.98px) {
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    inline-size: min(100%, 320px);
+  }
 }
 
 /* 7 · Letterbox bars, gold hairlines on their inner edges */

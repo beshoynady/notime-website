@@ -136,8 +136,15 @@ describe("messages", () => {
     );
     // AR anchors rewritten natively (D95): the old lead was a comma list without «و», and «حِرَف» reads as handicraft.
     expect(AR["hero.lead"]).toBe("فعاليات ومحتوى وحملات ومنصّات رقمية، يخطّط لها فريق واحد وينفّذها حتى يوم الإطلاق.");
-    expect(EN["hero.beatLead"] + " " + EN["hero.beatKey"]).toBe("Every second is planned.");
-    expect(AR["hero.beatLead"] + " " + AR["hero.beatKey"]).toBe("كل ثانية محسوبة.");
+    // N05: the old second beat, said once as the eyebrow; two marketing CTAs in the plural command (D118).
+    expect(EN["hero.eyebrow"]).toBe("Every second is planned.");
+    expect(AR["hero.eyebrow"]).toBe("كل ثانية محسوبة.");
+    expect(EN["hero.cta"]).toBe("Plan your event");
+    expect(AR["hero.cta"]).toBe("خطّطوا لفعاليتكم معنا");
+    expect(EN["hero.ctaWork"]).toBe("See our work");
+    expect(AR["hero.ctaWork"]).toBe("شاهدوا أعمالنا");
+    expect(EN["hero.beatLead"]).toBeUndefined();
+    expect(AR["hero.beatKey"]).toBeUndefined();
     expect(EN["megaMenu.headingLead"] + " " + EN["megaMenu.headingKey"]).toBe("One house. Five crafts.");
     expect(AR["megaMenu.headingLead"] + " " + AR["megaMenu.headingKey"]).toBe("خمس حِرَف، يجمعها سقف واحد.");
   });

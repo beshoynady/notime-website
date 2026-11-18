@@ -2,7 +2,7 @@
 /**
  * A scroll sequence as one contact sheet: viewport frames with motion on, side by side.
  *   node scripts/frames.mjs <out.jpg> --url=http://localhost:3100/en/about [--width=1440] [--height=900]
- *     [--sel=#work-strip] [--from=0] [--to=1] [--n=5] [--scale=0.4]
+ *     [--sel=#home-strip] [--from=0] [--to=1] [--n=5] [--scale=0.4]
  * Without --sel the frames run from --from to --to as fractions of the page's scroll range. With
  * --sel they run across that element: 0 = its top at the viewport's top, 1 = its bottom there
  * (so a pinned scene plays through). A width below 900 is a touch context at 2x.

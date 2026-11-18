@@ -3,7 +3,8 @@ import { expectLanded as expectLandedOnCategory, gotoReady } from "./helpers";
 
 /**
  * Anchor landing (D53): every route to an anchor puts the target's top at the header's bottom
- * (±4px), then focuses the target's heading. "Explore our services" is the site's first click.
+ * (±4px), then focuses the target's heading. Since N05 the hero's actions open /contact and /work
+ * (e2e/hero-intro.spec.ts), so the home page has no in-page link to #services; a deep link still lands.
  */
 const TOLERANCE = 4;
 
@@ -40,13 +41,6 @@ const skipIntro = (page: Page) => page.addInitScript(() => sessionStorage.setIte
 
 for (const locale of ["en", "ar"] as const) {
   test.describe(`anchor landing (${locale})`, () => {
-    test("hero CTA lands #services under the header and focuses its heading", async ({ page }) => {
-      await skipIntro(page);
-      await gotoReady(page, `/${locale}`);
-      await page.locator('#hero a[href$="#services"]').click();
-      await expectLanded(page, "services", "services-title");
-    });
-
     test("deep link on load (first visit: the intro is skipped, the header is visible)", async ({ page }) => {
       await gotoReady(page, `/${locale}#services`);
       await expect(page.locator("html")).toHaveAttribute("data-intro-seen", "");
@@ -87,15 +81,16 @@ for (const locale of ["en", "ar"] as const) {
 test.describe("anchor landing (reduced motion)", () => {
   test.use({ reducedMotion: "reduce" });
 
+  // An in-page link (the category opening's skip link; the home hero has none since N05).
   test("jumps instantly to the same landing", async ({ page }) => {
-    await gotoReady(page, "/en");
-    await page.locator('#hero a[href$="#services"]').click();
+    await gotoReady(page, "/en/services/events-hospitality");
+    const skip = page.locator("a.cat-skip");
+    const id = (await skip.getAttribute("href"))!.replace(/^#/, "");
+    await skip.click();
     // No easing: the final position is reached within a couple of frames of the click.
     await page.waitForTimeout(120);
-    const offset = await page.evaluate(
-      () => document.getElementById("services")!.getBoundingClientRect().top - document.getElementById("site-header")!.getBoundingClientRect().bottom,
-    );
-    expect(Math.abs(offset), `landing offset ${offset}px`).toBeLessThanOrEqual(TOLERANCE);
-    await expect(page.locator("#services-title")).toBeFocused();
+    const early = await page.evaluate(() => Math.round(scrollY));
+    await expectLandedOnCategory(page, id);
+    expect(Math.abs((await page.evaluate(() => Math.round(scrollY))) - early), "no easing after the jump").toBeLessThanOrEqual(2);
   });
 });
