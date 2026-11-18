@@ -10,7 +10,8 @@ import { gotoReady, lcpEntry } from "./helpers";
 const LAB = (locale: "en" | "ar") => `/${locale}/lab/draft-animatic`;
 const PIN_LIMIT = { desktop: 2.0, mobile: 1.2 };
 
-// N06: the opening is the scene's still (the hero), then the pinned build scene (desktop, motion).
+// N06: the opening is the scene's still (the hero) and nothing else; the pinned build scene that
+// followed it on desktop is v1.1 (BUILD and its helpers serve the fixme tests below).
 const HERO = '.scene[data-mode="still"]';
 const BUILD = ".cat-build .scene";
 const motionReady = (page: Page) => page.locator(`${BUILD}[data-motion]`).waitFor({ state: "attached" });
@@ -24,11 +25,10 @@ test.beforeEach(async ({ request }) => {
   test.skip((await request.get(LAB("en"))).status() !== 200, "lab is off: build with NEXT_PUBLIC_ENABLE_LAB=1");
 });
 
-test("reduced motion: the still, with no pin, the promise as the lead, no build scene", async ({ page }) => {
+test("reduced motion: the still, with no pin, the promise as the lead", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await gotoReady(page, LAB("en"));
   await expect(page.locator(".pin-spacer")).toHaveCount(0);
-  await expect(page.locator(".cat-build")).toBeHidden();
   await expect(page.locator(".cat-opening-lead")).toBeVisible();
   // Every entrance is done: the subject that enters in shot 2 is in place and opaque.
   const subject = page.locator(`${HERO} [data-layer="L1 subject"] .scene-enter`);
@@ -37,18 +37,17 @@ test("reduced motion: the still, with no pin, the promise as the lead, no build 
   for (const scene of await page.locator(".scene").all()) await expect(scene).not.toHaveAttribute("data-motion");
 });
 
-test("motion: the hero is the still at every width; the build scene pins on desktop only", async ({ page, isMobile }) => {
+test("motion: the hero is the still at every width, with no pin", async ({ page }) => {
   await gotoReady(page, LAB("en"));
   await expect(page.locator(`${HERO} [data-layer="L1 subject"] .scene-enter`)).toHaveCSS("opacity", "1");
   await expect(page.locator(HERO)).not.toHaveAttribute("data-motion");
-  if (isMobile) {
-    await page.waitForTimeout(1000);
-    await expect(page.locator(".pin-spacer")).toHaveCount(0);
-    await expect(page.locator(`${BUILD}[data-motion]`)).toHaveCount(0);
-  }
+  await page.waitForTimeout(1000);
+  await expect(page.locator(".cat-opening .pin-spacer")).toHaveCount(0);
+  await expect(page.locator(".cat-opening .scene[data-motion]")).toHaveCount(0);
 });
 
-test("motion: the pin stays within its limit and the shots follow the scroll", async ({ page, isMobile }) => {
+// v1.1: pinned build scene after the category hero (owner scope cut 2026-11-18)
+test.fixme("motion: the pin stays within its limit and the shots follow the scroll", async ({ page, isMobile }) => {
   test.skip(isMobile, "the build scene pins on desktop only (N06)");
   const viewport = "desktop";
   await gotoReady(page, LAB("en"));
@@ -72,7 +71,8 @@ for (const [locale, sign] of [
   ["en", -1],
   ["ar", 1],
 ] as const) {
-  test(`${locale}: a layer entering from inline-start starts on the ${sign < 0 ? "left" : "right"}`, async ({ page, isMobile }) => {
+  // v1.1: pinned build scene after the category hero (owner scope cut 2026-11-18)
+  test.fixme(`${locale}: a layer entering from inline-start starts on the ${sign < 0 ? "left" : "right"}`, async ({ page, isMobile }) => {
     test.skip(isMobile, "the build scene runs on desktop only (N06)");
     await gotoReady(page, LAB(locale));
     await motionReady(page);

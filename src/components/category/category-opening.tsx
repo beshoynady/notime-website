@@ -16,11 +16,10 @@ import { categoryRef } from "@/lib/review";
  * Category page · Act 1, the opening (D64; N06): with a scene, the hero is the scene's finished
  * still, one screen, unpinned: breadcrumbs, eyebrow, the H1 (text), the last shot line as the
  * lead (the promise), "Request a quote" (the header's string, to the brief with the category
- * hinted, as the CTA bar) and the skip control. On desktop with motion the pinned build scene
- * follows it (the same scene, its shots and its reservation); on phones, under reduced motion and
- * without JS it isn't shown (`.cat-build`, category.css) and builds no ScrollTrigger (SceneDirector's
- * desktop-only matchMedia). The intro comes after both. Without a scene (until a category's scene
- * is approved) it's a static opening with no pin and no image.
+ * hinted, as the CTA bar) and the skip control. Nothing pins at any width and no ScrollTrigger is
+ * built here: the pinned build scene that followed the hero on desktop is v1.1 (the owner's scope
+ * cut, 2026-11-18; LayeredScene keeps `mode="build"` for it). The intro follows the hero. Without
+ * a scene (until a category's scene is approved) it's a static opening with no image.
  *
  * The skip control is a hash link, so the anchor utility lands it on the first service's H2
  * (D53) and it works without JS. In the hero it follows "Request a quote" (DOM and screen order
@@ -87,17 +86,6 @@ export async function CategoryOpening({
           <LayeredScene scene={scene} lines={[]} variant={variant} mode="still" overlayClassName="frame cat-opening-overlay">
             {head}
           </LayeredScene>
-          <div className="cat-build">
-            <LayeredScene
-              scene={scene}
-              lines={scene.shots.map((s) => (s.copyKey ? ts(s.copyKey) : ""))}
-              variant={variant}
-              mode="build"
-              desktopOnly
-              echoedShot={scene.shots.findLastIndex((s) => s.copyKey)}
-              overlayClassName="frame cat-opening-overlay"
-            />
-          </div>
           <div className="frame cat-opening-overlay cat-opening-after">{intro}</div>
         </>
       ) : (

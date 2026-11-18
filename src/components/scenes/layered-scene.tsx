@@ -20,8 +20,9 @@ import "./layered-scene.css";
  * `mode="still"` (N06, a category's hero) renders only that end frame, at every width and with or
  * without JS: no pin, no reservation, no SceneDirector, so no ScrollTrigger. Its first image is
  * fetched with high priority. `mode="build"` (the default) is the scrubbed scene above; its images
- * are lazy. `desktopOnly` builds it at ≥ 900px only (the opening's build scene, which its caller
- * hides with CSS elsewhere): no mobile reservation and no mobile timeline.
+ * are lazy. `desktopOnly` builds it at ≥ 900px only, for a caller that hides it with CSS elsewhere
+ * (the category opening's build scene after its hero, v1.1): no mobile reservation and no mobile
+ * timeline.
  *
  * `variant="animatic"` draws each layer as a labelled flat box (the grey-box animatic, Task 2.9).
  */
@@ -31,7 +32,6 @@ export function LayeredScene({
   variant,
   mode = "build",
   desktopOnly = false,
-  echoedShot,
   label,
   overlayClassName,
   pinUnderBars,
@@ -43,8 +43,6 @@ export function LayeredScene({
   variant: "live" | "animatic";
   mode?: "build" | "still";
   desktopOnly?: boolean;
-  /** A shot whose line the page already reads elsewhere (the hero's lead, N06): hidden from the a11y tree here. */
-  echoedShot?: number;
   /** Names the scene as a region; leave it out when the scene sits inside a named section. */
   label?: string;
   /** Sets the overlay's inline box (e.g. `frame`); the overlay itself has no inline padding. */
@@ -82,7 +80,6 @@ export function LayeredScene({
                   data-shot={i}
                   data-desktop={shot.desktop ? "" : undefined}
                   data-mobile={shot.mobile ? "" : undefined}
-                  aria-hidden={i === echoedShot || undefined}
                 >
                   {lines[i]}
                 </p>

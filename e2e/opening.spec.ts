@@ -74,9 +74,10 @@ for (const locale of ["en", "ar"] as const) {
       expect(["h1", "lead", "image"], lcp.label).toContain(lcp.kind);
     });
 
+    // v1.1: pinned build scene after the category hero (owner scope cut 2026-11-18)
     test.describe("pinned", () => {
       test.skip(({ isMobile }) => isMobile, "the build scene pins on desktop only (N06)");
-      test("index VI chosen half a screen into the build scene lands #stage", async ({ page }) => {
+      test.fixme("index VI chosen half a screen into the build scene lands #stage", async ({ page }) => {
         await gotoReady(page, `/${locale}${LAB}`);
         await page.locator(".cat-opening .scene[data-motion]").waitFor({ state: "attached" });
         // Half a screen into the build scene, which follows the one-screen hero (N06).
@@ -87,7 +88,7 @@ for (const locale of ["en", "ar"] as const) {
         await expect(indexLink(page, "stage")).toHaveAttribute("aria-current", "location");
       });
 
-      test("skip from the hero, above the pinned build, lands the first service", async ({ page }) => {
+      test.fixme("skip from the hero, above the pinned build, lands the first service", async ({ page }) => {
         await gotoReady(page, `/${locale}${LAB}`);
         await page.locator(".cat-opening .scene[data-motion]").waitFor({ state: "attached" });
         await skip(page).click();
@@ -100,8 +101,8 @@ for (const locale of ["en", "ar"] as const) {
 
 /**
  * N06 (A): the opening starts with the finished scene. The hero is the LayeredScene's still
- * (unpinned, one screen) with the head, the last shot line as the lead and "Request a quote";
- * on desktop with motion the pinned build scene follows it, and phones have no pin at all.
+ * (unpinned, one screen) with the head, the last shot line as the lead and "Request a quote".
+ * Nothing pins at any width: the pinned build scene that followed it on desktop is v1.1.
  */
 const SCENE_CATEGORIES = ["events-hospitality", "creative-production", "marketing-brand", "production-print-gifts"] as const;
 const MESSAGES = { en, ar } as const;
@@ -177,7 +178,8 @@ for (const slug of SCENE_CATEGORIES) {
   });
 }
 
-test("desktop: the build scene's last line, the hero's lead, is read once", async ({ page, isMobile }) => {
+// v1.1: pinned build scene after the category hero (owner scope cut 2026-11-18)
+test.fixme("desktop: the build scene's last line, the hero's lead, is read once", async ({ page, isMobile }) => {
   test.skip(isMobile, "the build scene runs on desktop only");
   await gotoReady(page, "/en/services/events-hospitality");
   const lead = (await page.locator(".cat-opening-lead").textContent())!;
@@ -187,25 +189,29 @@ test("desktop: the build scene's last line, the hero's lead, is read once", asyn
   expect(hidden.length).toBeGreaterThan(1);
 });
 
-test("phones have no pin", async ({ page, isMobile }) => {
-  test.skip(!isMobile, "390");
-  await gotoReady(page, "/en/services/events-hospitality");
-  await page.waitForTimeout(1500); // past any late ScrollTrigger build
-  await expect(page.locator(".cat-opening .pin-spacer")).toHaveCount(0);
-  await expect(page.locator(".cat-opening .cat-build")).toBeHidden();
-});
-
-test("desktop keeps the build: the pinned scene follows the hero", async ({ page, isMobile }) => {
-  test.skip(isMobile, "1440");
-  await gotoReady(page, "/en/services/events-hospitality");
-  const spacer = page.locator(".cat-opening .cat-build > .scene-pin.pin-spacer");
-  await expect(spacer).toHaveCount(1);
-  const [heroBottom, buildTop] = await page.evaluate(() => [
-    document.querySelector(".cat-opening .scene[data-mode='still']")!.getBoundingClientRect().bottom,
-    document.querySelector(".cat-opening .cat-build")!.getBoundingClientRect().top,
-  ]);
-  expect(buildTop).toBeGreaterThanOrEqual(heroBottom - 1);
-  // The build scene loads nothing before it is needed: its images stay lazy.
-  const eager = await page.locator(".cat-build img").evaluateAll((imgs) => imgs.filter((i) => (i as HTMLImageElement).loading !== "lazy").length);
-  expect(eager).toBe(0);
-});
+// The owner's scope cut (2026-11-18): the opening is the still hero only, at every width. No pin,
+// no ScrollTrigger and no reserved band after it: the intro, then the services, follow the hero.
+for (const slug of SCENE_CATEGORIES) {
+  test(`${slug}: the opening has no pin at any width`, async ({ page }) => {
+    await gotoReady(page, `/en/services/${slug}`);
+    await page.waitForTimeout(1500); // past any late ScrollTrigger build
+    const opening = page.locator("main .cat-opening");
+    await expect(opening.locator(".pin-spacer")).toHaveCount(0);
+    await expect(opening.locator(".scene-pin")).toHaveCount(0);
+    await expect(opening.locator(".scene[data-motion]")).toHaveCount(0); // no SceneDirector
+    // Scrolled half a screen, the hero moves with the page (nothing holds it in place).
+    const top0 = await hero(page).evaluate((el) => el.getBoundingClientRect().top);
+    await page.evaluate(() => window.scrollTo(0, innerHeight / 2));
+    await page.waitForTimeout(300);
+    const [top1, scrolled] = await hero(page).evaluate((el) => [el.getBoundingClientRect().top, scrollY]);
+    expect(scrolled).toBeGreaterThan(0);
+    expect(Math.abs(top0 - scrolled - top1)).toBeLessThanOrEqual(1);
+    // No empty band: the intro starts where the hero ends, and the opening ends after the intro.
+    const [heroBottom, afterTop, afterBottom, openingBottom] = await page.evaluate(() => {
+      const r = (s: string) => document.querySelector(s)!.getBoundingClientRect();
+      return [r('.cat-opening .scene[data-mode="still"]').bottom, r(".cat-opening-after").top, r(".cat-opening-after").bottom, r(".cat-opening").bottom];
+    });
+    expect(Math.abs(afterTop - heroBottom)).toBeLessThanOrEqual(1);
+    expect(Math.abs(openingBottom - afterBottom)).toBeLessThanOrEqual(1);
+  });
+}

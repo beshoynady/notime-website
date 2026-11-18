@@ -305,8 +305,8 @@ main[data-theme="editorial"] .fx-seal::before {
   );
 }
 
-/* The opening's type: the H1 is the key, set heavy and large across the grid; the shot lines
-   are the lead, light. The eyebrow reads as the issue line, in cocoa. */
+/* The opening's type: the H1 is the key, set heavy and large across the grid; the lead is
+   light (category.css). The eyebrow reads as the issue line, in cocoa. */
 main[data-theme="editorial"] .cat-opening h1 {
   font-weight: 800;
   font-size: clamp(2.4rem, 5.6vw, 5.2rem);
@@ -322,9 +322,6 @@ main[data-theme="editorial"] .cat-opening h1:lang(ar) {
 main[data-theme="editorial"] .cat-opening-eyebrow {
   color: var(--color-cocoa);
   opacity: 1;
-}
-main[data-theme="editorial"] .cat-opening .scene-line {
-  font-weight: 300;
 }
 
 /* ==========================================================================

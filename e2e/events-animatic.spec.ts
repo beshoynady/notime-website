@@ -11,23 +11,24 @@ import { GROUND, gotoReady } from "./helpers";
  */
 const LAB = (locale: "en" | "ar") => `/${locale}/services/events-hospitality`;
 const majlis = (page: Page) => page.locator('#hospitality .scene[data-scene="events-majlis"]');
-// N06: the opening is the scene's still (the hero), then the build scene, pinned on desktop only.
+// N06: the opening is the scene's still (the hero) and nothing else; the pinned build scene that
+// followed it on desktop is v1.1 (build and its helpers serve the fixme tests below).
 const build = (page: Page) => page.locator('.cat-opening .cat-build .scene[data-scene="events-opening"]');
 const buildReady = (page: Page) => page.locator(".cat-opening .cat-build .scene[data-motion]").waitFor({ state: "attached" });
 /** Scrolls `vh` screens into the build scene (it starts after the one-screen hero). */
 const scrollIntoBuild = (page: Page, vh: number) =>
   page.evaluate((vh) => window.scrollTo(0, document.querySelector(".cat-build")!.getBoundingClientRect().top + scrollY + innerHeight * vh), vh);
 
-test("the public page plays both scenes", async ({ page }) => {
+test("the public page shows the opening's still and plays the majlis", async ({ page }) => {
   await gotoReady(page, LAB("en"));
   await expect(page.locator('.cat-opening .scene[data-scene="events-opening"][data-mode="still"]')).toHaveCount(1);
-  await expect(build(page)).toHaveCount(1);
   await expect(majlis(page)).toHaveCount(1);
   await expect(majlis(page).locator(".mj-art")).toHaveCount(1); // the drawn dallah and its pour
 });
 
 for (const locale of ["en", "ar"] as const) {
-  test(`${locale}: the build scene plays its shots in order on the pin, one of three lines at a time`, async ({ page, isMobile }) => {
+  // v1.1: pinned build scene after the category hero (owner scope cut 2026-11-18)
+  test.fixme(`${locale}: the build scene plays its shots in order on the pin, one of three lines at a time`, async ({ page, isMobile }) => {
     test.skip(isMobile, "the build scene runs on desktop only (N06)");
     const viewport = "desktop";
     await gotoReady(page, LAB(locale));
@@ -97,7 +98,8 @@ test("mobile: the majlis is not pinned and plays as it crosses the viewport", as
 
 // D74, P3: the index stays from the first frame (D64) but steps back to 40% during shot 1 of
 // the build scene, on its pin (N06); over the hero it is at full.
-test("the index dims during the build scene's first shot, back on hover, focus or the next shot", async ({ page, isMobile }) => {
+// v1.1: pinned build scene after the category hero (owner scope cut 2026-11-18)
+test.fixme("the index dims during the build scene's first shot, back on hover, focus or the next shot", async ({ page, isMobile }) => {
   test.skip(isMobile, "the build scene runs on desktop only (N06)");
   const viewport = "desktop";
   await gotoReady(page, LAB("en"));
@@ -121,9 +123,8 @@ test("the index dims during the build scene's first shot, back on hover, focus o
   await expect(index).toHaveCSS("opacity", "1");
 });
 
-// N06: phones have no build scene, so nothing dims the index: it stays at full over the hero.
-test("phones: the index stays at full opacity over the hero", async ({ page, isMobile }) => {
-  test.skip(!isMobile, "phones");
+// N06: no build scene at any width, so nothing dims the index: it stays at full over the hero.
+test("the index stays at full opacity over the hero", async ({ page }) => {
   await gotoReady(page, LAB("en"));
   await page.waitForTimeout(1000);
   await expect(page.locator("nav.svc-index")).toHaveCSS("opacity", "1");
@@ -135,12 +136,12 @@ test("phones: the index stays at full opacity over the hero", async ({ page, isM
 /** The page ground as #page-stage paints it. */
 const ground = (page: Page) => page.locator("#page-stage").evaluate((el) => getComputedStyle(el).backgroundColor);
 
-// The opening's pin adds its spacer below the opening: the tone zones of everything after it must
-// include that distance (measured before the fix: the ground turned one pin length early, so
-// Stage read ivory on ivory and the FAQ espresso on espresso).
-test("the ground follows the sections below the pinned opening", async ({ page, isMobile }) => {
+// A pin adds its spacer below it: the tone zones of everything after it must include that distance
+// (measured before the fix: the ground turned one pin length early, so Stage read ivory on ivory
+// and the FAQ espresso on espresso). The majlis (section V) pins on desktop.
+test("the ground follows the sections below the pinned scenes", async ({ page }) => {
   await gotoReady(page, LAB("en"));
-  if (!isMobile) await buildReady(page);
+  await page.locator("#hospitality .scene[data-motion]").waitFor({ state: "attached" });
   const scrollToTop = (selector: string, at: number) =>
     page.locator(selector).first().evaluate((el, at) => {
       window.scrollTo(0, el.getBoundingClientRect().top + scrollY - innerHeight * at);
@@ -157,9 +158,8 @@ test("reduced motion: both scenes show their still, nothing pinned, the index at
   await page.emulateMedia({ reducedMotion: "reduce" });
   await gotoReady(page, LAB("en"));
   await expect(page.locator(".pin-spacer")).toHaveCount(0);
-  // N06: the hero is the still with the promise as its lead; the build scene isn't shown.
+  // N06: the hero is the still with the promise as its lead.
   await expect(page.locator(".cat-opening-lead")).toBeVisible();
-  await expect(page.locator(".cat-opening .cat-build")).toBeHidden();
   // The majlis' end frame: poured, steaming, lit, night.
   await expect(majlis(page).locator('[data-layer="tent-bloom"] .scene-light')).toHaveCSS("opacity", "1");
   await expect(majlis(page).locator(".mj-art")).not.toHaveAttribute("data-motion");

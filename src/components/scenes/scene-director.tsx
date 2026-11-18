@@ -27,8 +27,8 @@ const WIPE_EASE = "power2.inOut";
  *
  * `pinUnderBars`: a scene further down the page (the majlis) pins with its top under the fixed
  * header, where a landing on its section puts it; an opening pins at the viewport's top.
- * `desktopOnly`: the opening's build scene (N06) has no mobile condition, so nothing is built
- * below 900px (its box is `display: none` there).
+ * `desktopOnly`: no mobile condition, so nothing is built below 900px (for a scene whose box is
+ * `display: none` there: the category opening's build scene, v1.1).
  */
 export function SceneDirector({ scene, pinUnderBars = false, desktopOnly = false }: { scene: SceneConfig; pinUnderBars?: boolean; desktopOnly?: boolean }) {
   const ref = useRef<HTMLSpanElement>(null);
