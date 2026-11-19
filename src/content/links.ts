@@ -26,6 +26,8 @@ export const ABOUT_HREF = "/about";
 /** The brief (F3, D102); `contactHref("apps")` presets the service. */
 export const CONTACT_HREF = "/contact";
 export const contactHref = (anchor?: string) => (anchor ? `${CONTACT_HREF}?service=${anchor}` : CONTACT_HREF);
+/** The brief with a category hint (D126): that group first and, for Events, the event fields. */
+export const contactCategoryHref = (slug: CategorySlug) => `${CONTACT_HREF}?category=${slug}`;
 
 /** A product page (F4), by the product's id in the forms contract ("minute-zero", "peak-hour"). */
 export const productHref = (id: string) => `/products/${id}`;

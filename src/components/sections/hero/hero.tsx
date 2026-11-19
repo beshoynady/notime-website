@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { ButtonLink } from "@/components/ui/button";
-import { CONTACT_HREF, WORK_INDEX_HREF } from "@/content/links";
+import { contactCategoryHref, WORK_INDEX_HREF } from "@/content/links";
 import { HERO_LINE } from "@/config/hero";
 import { HeroClock } from "./hero-clock";
 import { HeroController } from "./hero-controller";
@@ -63,7 +63,8 @@ export async function Hero() {
           <div className="hero-sub">
             <p className="hero-lead text-lead">{t("lead")}</p>
             <div className="hero-actions">
-              <ButtonLink href={CONTACT_HREF} arrow data-cursor="">
+              {/* "Plan your event" opens the brief on Events, with the event fields (D126). */}
+              <ButtonLink href={contactCategoryHref("events-hospitality")} arrow data-cursor="">
                 {t("cta")}
               </ButtonLink>
               <ButtonLink href={WORK_INDEX_HREF} variant="ghost" data-cursor="">

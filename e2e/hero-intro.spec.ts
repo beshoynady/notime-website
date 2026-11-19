@@ -130,8 +130,8 @@ test.describe("hero intro (reduced motion)", () => {
 
 /** N05 (B1): the hero says it in one screen, offers two actions, and the strip follows it. */
 const HERO_COPY = {
-  en: { eyebrow: "Every second is planned.", plan: "Plan your event", work: "See our work" },
-  ar: { eyebrow: "كل ثانية محسوبة.", plan: "خطّطوا لفعاليتكم معنا", work: "شاهدوا أعمالنا" },
+  en: { eyebrow: "Every second is planned.", plan: "Plan your event", work: "See our work", eventDate: "Event date (approximate)", guests: "Number of guests", events: "Events & Hospitality" },
+  ar: { eyebrow: "كل ثانية محسوبة.", plan: "خطّطوا لفعاليتكم معنا", work: "شاهدوا أعمالنا", eventDate: "تاريخ المناسبة (تقريبًا)", guests: "عدد الضيوف", events: "الفعاليات والضيافة" },
 } as const;
 
 /** Load, skip the intro (a key on desktop, a tap on phones) and wait for its end state. */
@@ -172,7 +172,7 @@ test.describe("N05: one-screen hero", () => {
       const hero = page.locator("#hero");
       const plan = hero.getByRole("link", { name: copy.plan, exact: true });
       const work = hero.getByRole("link", { name: copy.work, exact: true });
-      await expect(plan).toHaveAttribute("href", `/${locale}/contact`);
+      await expect(plan).toHaveAttribute("href", `/${locale}/contact?category=events-hospitality`);
       await expect(work).toHaveAttribute("href", `/${locale}/work`);
       const vh = await page.evaluate(() => innerHeight);
       for (const link of [plan, work]) {
@@ -180,6 +180,16 @@ test.describe("N05: one-screen hero", () => {
         expect(box.y, "inside the first viewport").toBeGreaterThanOrEqual(0);
         expect(box.y + box.height, "inside the first viewport").toBeLessThanOrEqual(vh);
       }
+    });
+
+    test(`"plan your event" opens the brief with the event fields (${locale})`, async ({ page, isMobile }) => {
+      await openHero(page, locale, isMobile);
+      await page.locator("#hero").getByRole("link", { name: copy.plan, exact: true }).click();
+      await page.waitForURL(`**/${locale}/contact?category=events-hospitality`);
+      await page.locator("#brief-message").scrollIntoViewIfNeeded();
+      await expect(page.getByLabel(copy.eventDate)).toBeVisible();
+      await expect(page.getByLabel(copy.guests)).toBeVisible();
+      await expect(page.locator("#brief-service optgroup").first()).toHaveAttribute("label", copy.events);
     });
 
     test(`the strip comes right after the hero (${locale})`, async ({ page }) => {
