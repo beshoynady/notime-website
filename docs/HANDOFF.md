@@ -14,7 +14,7 @@ Deliver: a short message with the preview link, both report paths, and anything 
 
 **Progress ledger (the source of truth after a context reset):** `E:/NO Time/nt-audit-fixes/.superpowers/sdd/2026-11-17-audit-fixes/progress.md` (gitignored). Read it, then `git log --oneline` in the worktree.
 
-**Current step:** Phase 2 committed on `copy-rewrite` (worktree E:/NO Time/nt-audit-fixes, HEAD aa7335a; report .superpowers/sdd/2026-11-17-audit-fixes/phase-2-report.md). Next: e2e of the copy-sensitive specs on :3000, merge copy-rewrite into phase-2-services, then phase 3 basic (full unit+e2e, push + CI run number, shots 1440/390 EN/AR in docs/checkpoints/final/, one Lighthouse home + /links, preview tunnel), the one-page report, the short Rand guide (no PDF).
+**Current step:** Phases 1–2 merged into phase-2-services (e04012f, pushed). Phase 3 in progress: CI full run 44529301787 (the earlier 44401989244 failed on one stale numerals test, fixed in e04012f); local full e2e running on :3000 (worktree E:/NO Time/nt-audit-fixes detached at e04012f); text checks done (docs/checkpoints/final/text-checks.md). Left: one Lighthouse (home + /links, mobile), shots 1440/390 EN/AR of every page into docs/checkpoints/final/, the review build on 3100 + a new tunnel, then the one-page report docs/report/final-report.md and the short Rand guide docs/report/site-guide-for-rand.md (no PDF, no meeting script).
 
 Servers: 3000 = builds from the worktree (for e2e/Lighthouse after); 3200 = the before build (`E:/NO Time/nt-before`, e19404f); 3100 = review build behind the tunnel https://commerce-tension-petersburg-rom.trycloudflare.com (from `notime-website`, rebuild at the end).
 
