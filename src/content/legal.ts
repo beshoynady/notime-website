@@ -158,7 +158,7 @@ const privacy: LegalDoc = {
     {
       heading: { en: "Your rights", ar: "حقوقكم" },
       blocks: [
-        { p: { en: "Under the UAE Personal Data Protection Law, you can ask us to:", ar: "بموجب قانون حماية البيانات الشخصية في دولة الإمارات، يحقّ لك أن تطلب منّا:" } },
+        { p: { en: "Under the UAE Personal Data Protection Law, you can ask us to:", ar: "بموجب قانون حماية البيانات الشخصية في دولة الإمارات، يحقّ لكم أن تطلبوا منّا:" } },
         {
           list: [
             { text: { en: "tell you what personal data we hold about you and give you a copy;", ar: "إطلاعكم على البيانات الشخصية التي نحتفظ بها عنكم وتزويدكم بنسخة منها؛" } },

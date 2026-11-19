@@ -9,28 +9,28 @@ const l = (en: string, ar: string): Localized<string> => ({ en, ar });
  */
 export const autoReplyCopy = {
   subject: {
-    consultation: l("We've received your intro call request", "وصلنا طلبك لمكالمة التعارف"),
-    websiteReview: l("We've received your website for review", "وصلنا موقعك للمراجعة"),
-    interest: l("You're on the list for {product}", "سجّلنا اهتمامك بـ{product}"),
-    contact: l("We've received your brief", "وصلنا طلبك"),
+    consultation: l("We've received your intro call request", "وصلنا طلبكم لمكالمة التعارف"),
+    websiteReview: l("We've received your website for review", "وصلنا موقعكم للمراجعة"),
+    interest: l("You're on the list for {product}", "سجّلنا اهتمامكم بـ{product}"),
+    contact: l("We've received your brief", "وصلنا طلبكم"),
   } satisfies Record<MailKind, Localized<string>>,
   greeting: l("Hello {name},", "مرحبًا {name}،"),
   body: {
     consultation: l(
       "Thank you for booking a free intro call. We reply within one working day to agree a time that suits you.",
-      "شكرًا لحجزك مكالمة تعارف مجانية. نرد عليك خلال يوم عمل واحد لنتفق على موعد يناسبك.",
+      "شكرًا لحجزكم مكالمة تعارف مجانية. نرد عليكم خلال يوم عمل واحد لنتفق على موعد يناسبكم.",
     ),
     websiteReview: l(
       "Thank you for sending your website. Within 3 working days we'll reply with 5 concrete improvements, free.",
-      "شكرًا لإرسال موقعك. خلال 3 أيام عمل نرد عليك بخمسة تحسينات عملية، مجانًا.",
+      "شكرًا لإرسال موقعكم. خلال 3 أيام عمل نرد عليكم بخمسة تحسينات عملية، مجانًا.",
     ),
     interest: l(
       "Thank you for your interest in {product}. We'll write to you as soon as it's ready.",
-      "شكرًا لاهتمامك بـ{product}. سنكتب لك فور جاهزيته.",
+      "شكرًا لاهتمامكم بـ{product}. سنكتب لكم فور جاهزيته.",
     ),
     contact: l(
       "Thank you for your brief. We reply within one working day, with the questions we need answered or a time to talk.",
-      "شكرًا لإرسال طلبك. نرد عليك خلال يوم عمل واحد، بما نحتاج إلى معرفته أو بموعد للحديث.",
+      "شكرًا لإرسال طلبكم. نرد عليكم خلال يوم عمل واحد، بما نحتاج إلى معرفته أو بموعد للحديث.",
     ),
   } satisfies Record<MailKind, Localized<string>>,
   note: l(

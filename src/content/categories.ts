@@ -40,16 +40,16 @@ export const categories: Category[] = [
       },
       {
         q: { en: "Where do you work?", ar: "أين تعملون؟" },
-        a: { en: "We're based in Dubai and work across six markets: the UAE, Saudi Arabia, Qatar, Oman, Kuwait and Egypt. For other locations, ask us.", ar: "مقرّنا في دبي، ونعمل في ستة أسواق: الإمارات والسعودية وقطر وعُمان والكويت ومصر. ولأي مكان آخر، اسألنا." },
+        a: { en: "We're based in Dubai and work across six markets: the UAE, Saudi Arabia, Qatar, Oman, Kuwait and Egypt. For other locations, ask us.", ar: "مقرّنا في دبي، ونعمل في ستة أسواق: الإمارات والسعودية وقطر وعُمان والكويت ومصر. ولأي مكان آخر، اسألونا." },
       },
       // D78 fills (#28), approved 2026-11-09: general but true, no numbers or promised times.
       {
         q: { en: "How many guests can you host?", ar: "كم ضيفًا يمكنكم استقبالُه؟" },
-        a: { en: "From intimate gatherings to award nights and large corporate and government events. Tell us your guest count and we'll plan around it.", ar: "من اللقاءات العائلية الخاصة إلى ليالي الجوائز والفعاليات الكبرى للشركات والجهات الحكومية. أخبرنا بعدد ضيوفك، ونخطّط على أساسه." },
+        a: { en: "From intimate gatherings to award nights and large corporate and government events. Tell us your guest count and we'll plan around it.", ar: "من اللقاءات العائلية الخاصة إلى ليالي الجوائز والفعاليات الكبرى للشركات والجهات الحكومية. أخبرونا بعدد ضيوفكم، ونخطّط على أساسه." },
       },
       {
         q: { en: "How far ahead should I book?", ar: "متى ينبغي أن نحجز؟" },
-        a: { en: "It depends on the scale of the event. Share your date and we'll confirm availability.", ar: "يتوقّف ذلك على حجم المناسبة. أرسل لنا الموعد، ونؤكّد لك إن كان متاحًا." },
+        a: { en: "It depends on the scale of the event. Share your date and we'll confirm availability.", ar: "يتوقّف ذلك على حجم المناسبة. أرسلوا لنا الموعد، ونؤكّد لكم إن كان متاحًا." },
       },
       {
         q: { en: "Can you photograph and film the event?", ar: "هل تصوّرون الفعالية؟" },
@@ -57,7 +57,7 @@ export const categories: Category[] = [
       },
       {
         q: { en: "What do you need from me to start?", ar: "ماذا تحتاجون منّا للبدء؟" },
-        a: { en: "Tell us the date, the type of event, the city and roughly how many guests. We'll come back with a concept and a proposal.", ar: "أخبرنا بالموعد ونوع المناسبة والمدينة والعدد التقريبي للضيوف، ونعود إليك بتصوّر وعرض." },
+        a: { en: "Tell us the date, the type of event, the city and roughly how many guests. We'll come back with a concept and a proposal.", ar: "أخبرونا بالموعد ونوع المناسبة والمدينة والعدد التقريبي للضيوف، ونعود إليكم بتصوّر وعرض." },
       },
     ],
     closing: { en: "Tell us the date. We'll ready the room.", ar: "أخبرونا بالموعد، ونجهّز لكم القاعة." },
@@ -93,7 +93,7 @@ export const categories: Category[] = [
       },
       {
         q: { en: "Can I rent equipment?", ar: "هل يمكننا استئجار المعدّات؟" },
-        a: { en: "Yes: cameras, lenses, lighting and audio. Tell us what you need and your dates, and we'll confirm availability.", ar: "نعم: الكاميرات والعدسات والإضاءة والصوت. أخبرنا بما تحتاجه وبالمواعيد، ونؤكّد لك التوفّر." },
+        a: { en: "Yes: cameras, lenses, lighting and audio. Tell us what you need and your dates, and we'll confirm availability.", ar: "نعم: الكاميرات والعدسات والإضاءة والصوت. أخبرونا بما تحتاجون إليه وبالمواعيد، ونؤكّد لكم التوفّر." },
       },
       {
         q: { en: "Who owns the photos and videos after delivery?", ar: "لمن تعود ملكية الصور والفيديوهات بعد التسليم؟" },
@@ -105,7 +105,7 @@ export const categories: Category[] = [
       },
       {
         q: { en: "What do you need from me to start?", ar: "ماذا تحتاجون منّا للبدء؟" },
-        a: { en: "Tell us what you want to make, where it will be shown and when you need it. We'll come back with a treatment and a proposal.", ar: "أخبرنا بما تريد صنعه، وأين سيُعرض، ومتى تحتاجه، ونعود إليك بتصوّر وعرض." },
+        a: { en: "Tell us what you want to make, where it will be shown and when you need it. We'll come back with a treatment and a proposal.", ar: "أخبرونا بما تريدون صنعه، وأين سيُعرض، ومتى تحتاجون إليه، ونعود إليكم بتصوّر وعرض." },
       },
     ],
     closing: { en: "Your first take starts here.", ar: "لقطتكم الأولى تبدأ من هنا." },
@@ -179,7 +179,7 @@ export const categories: Category[] = [
       {
         hidden: true,
         q: { en: "Can I order prints online?", ar: "هل يمكنني طلب المطبوعات عبر الإنترنت؟" },
-        a: { en: "Yes. Tell us the item and the quantity, send your artwork, and we'll confirm the details and the proof with you before printing.", ar: "نعم. أخبرنا بالمنتج والكمية وأرسل التصميم، ونؤكّد معك التفاصيل والنسخة التجريبية قبل التنفيذ." },
+        a: { en: "Yes. Tell us the item and the quantity, send your artwork, and we'll confirm the details and the proof with you before printing.", ar: "نعم. أخبرونا بالمنتج والكمية وأرسلوا التصميم، ونؤكّد معكم التفاصيل والنسخة التجريبية قبل التنفيذ." },
       },
       {
         q: { en: "Do you make packaging for gifts and awards?", ar: "هل تصمّمون تغليفًا للهدايا والجوائز؟" },
@@ -195,7 +195,7 @@ export const categories: Category[] = [
       },
       {
         q: { en: "Do you deliver?", ar: "هل توصلون الطلبات؟" },
-        a: { en: "Tell us where your order needs to go, and we'll confirm delivery with the proposal.", ar: "أخبرنا إلى أين يجب أن يصل طلبك، ونؤكّد لك التوصيل مع العرض." },
+        a: { en: "Tell us where your order needs to go, and we'll confirm delivery with the proposal.", ar: "أخبرونا إلى أين يجب أن يصل طلبكم، ونؤكّد لكم التوصيل مع العرض." },
       },
       {
         q: { en: "What do you need from me to start?", ar: "ماذا تحتاجون منّا للبدء؟" },

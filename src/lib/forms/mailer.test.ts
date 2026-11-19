@@ -64,7 +64,7 @@ describe("deliverMail", () => {
     await deliverMail(mail, { env: { ...env, MAIL_FROM: "website@example.com" }, send });
     expect(send).toHaveBeenCalledTimes(2);
     expect(send.mock.calls[1][0].to).toEqual(["sara@example.com"]);
-    expect(send.mock.calls[1][0].subject).toBe("وصلنا طلبك");
+    expect(send.mock.calls[1][0].subject).toBe("وصلنا طلبكم");
   });
   it("fails when the team email fails or delivery isn't configured; an auto-reply failure doesn't", async () => {
     expect(await deliverMail(mail, { env, send: vi.fn().mockResolvedValue({ ok: false }) })).toBe("failed");

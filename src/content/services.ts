@@ -309,7 +309,7 @@ export const services: Service[] = [
       { en: "Equipment & camera rental", ar: "تأجير المعدّات والكاميرات" },
       {
         en: "Cameras, lenses and lighting, ready for your production.",
-        ar: "كاميرات وعدسات وإضاءة، جاهزة لإنتاجك.",
+        ar: "كاميرات وعدسات وإضاءة، جاهزة لإنتاجكم.",
       },
     ],
   ]),
@@ -393,7 +393,7 @@ export const services: Service[] = [
       { en: "Corporate gifts", ar: "هدايا الشركات" },
       {
         en: "Gifts chosen, branded and delivered for clients and teams.",
-        ar: "هدايا نختارها ونضع عليها هويتك ونوصلها إلى عملائك وفريقك.",
+        ar: "هدايا نختارها ونضع عليها هويتكم ونوصلها إلى عملائكم وفريقكم.",
       },
     ],
     [

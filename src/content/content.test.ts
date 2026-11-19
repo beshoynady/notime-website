@@ -176,7 +176,7 @@ describe("category pages (D57)", () => {
     const q = faq.map((f) => f.q.en);
     expect(q).toContain("How far ahead should I book?");
     expect(q).toContain("How many guests can you host?");
-    expect(faq.find((f) => f.q.en === "Where do you work?")!.a.ar).toMatch(/ولأي مكان آخر، اسألنا\.$/);
+    expect(faq.find((f) => f.q.en === "Where do you work?")!.a.ar).toMatch(/ولأي مكان آخر، اسألونا\.$/);
   });
 
   it("lists the named deliverables the user confirmed (D71) in their services", () => {
