@@ -42,4 +42,4 @@ Rand reviews the **review build** (`NEXT_PUBLIC_REVIEW_MODE=1`) through a free C
 
 ## Current link
 
-https://commerce-tension-petersburg-rom.trycloudflare.com/ar (started 2026-11-17 on the review build of HEAD e9836ee; production mode, `next build` + `next start`, port 3100). The previous link is dead.
+https://connectivity-civilization-regulated-sega.trycloudflare.com/ar (started 2026-11-19 on the review build of f03252e, the last commit of phases 1–2; production mode, port 3100). The previous link is dead.
