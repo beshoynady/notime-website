@@ -12,7 +12,7 @@ Read `CLAUDE.md`, `AGENTS.md` and `PRODUCT.md` first. Decisions: `docs/DECISIONS
 
 Deliver: a short message with the preview link, both report paths, and anything not merged with its reason. No push to main. Never delete untracked/gitignored files without asking.
 
-**Progress ledger (the source of truth after a context reset):** `E:/NO Time/nt-audit-fixes/.superpowers/sdd/2026-11-17-audit-fixes/progress.md` (gitignored). Read it, then `git log --oneline` in the worktree.
+**Progress ledger:** `.superpowers/sdd/2026-11-17-audit-fixes/progress.md` in this repo (gitignored; moved here from the removed worktree `nt-audit-fixes` on 2026-11-19). The helper worktrees `nt-audit-fixes`, `nt-mid` and `nt-before` were removed on 2026-11-19 (only builds and node_modules in them); ports 3200 and 3300 no longer exist.
 
 **Current step:** All five phases done (2026-11-19). Final report docs/report/final-report.md; Rand guide docs/report/site-guide-for-rand.md (short, no PDF per the owner); shots, Lighthouse and text checks in docs/checkpoints/final/; CI 44529301787 green; preview link in docs/review/tunnel.md (review build on 3100 + quick tunnel; dies with this machine). Next: the owner confirms decisions #37–#47 and the phase-2 items, Rand answers the 16 questions, then launch (docs/launch/checklist.md). Not merged into main.
 
