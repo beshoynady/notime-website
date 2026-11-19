@@ -90,7 +90,7 @@ for (const locale of ["en", "ar"] as const) {
       const expected = locale === "en" ? ["I", "II", "III", "IV", "V", "VI"] : ["01", "02", "03", "04", "05", "06"];
       await expect(page.locator("nav.svc-index .svc-index-num")).toHaveText(expected);
       await expect(page.locator(".svc .svc-num")).toHaveText(expected);
-      await expect(page.locator(".cat-opening-eyebrow bdi")).toHaveText(locale === "en" ? "I" : "01");
+      await expect(page.locator(".cat-opening-eyebrow bdi:not(.cat-opening-count)")).toHaveText(locale === "en" ? "I" : "01");
     });
 
     test("scrolling into section V makes rail V current", async ({ page, isMobile }) => {
