@@ -14,9 +14,11 @@ Deliver: a short message with the preview link, both report paths, and anything 
 
 **Progress ledger:** `.superpowers/sdd/2026-11-17-audit-fixes/progress.md` in this repo (gitignored; moved here from the removed worktree `nt-audit-fixes` on 2026-11-19). The helper worktrees `nt-audit-fixes`, `nt-mid` and `nt-before` were removed on 2026-11-19 (only builds and node_modules in them); ports 3200 and 3300 no longer exist.
 
-**Current step:** All five phases done (2026-11-19). Final report docs/report/final-report.md; Rand guide docs/report/site-guide-for-rand.md (short, no PDF per the owner); shots, Lighthouse and text checks in docs/checkpoints/final/; CI 44529301787 green; preview link in docs/review/tunnel.md (review build on 3100 + quick tunnel; dies with this machine). Next: the owner confirms decisions #37–#47 and the phase-2 items, Rand answers the 16 questions, then launch (docs/launch/checklist.md). Not merged into main.
+**Current step (2026-11-19, second session):** the owner's four tasks are done, one commit each: (1) "Plan your event" opens `/contact?category=events-hospitality` with the event fields, e2e in `hero-intro.spec.ts` (D138, 690363e); (2) the 17 singular ⚑ Arabic lines + 4 slips outside the list moved to the plural, facts unchanged, `copy-pending.md` splits address (done) from fact (waits on Rand) (D139, #48, 2ae25bd); (3) axe on the nine pages EN/AR 1440/390: 0 violations as loaded and under reduced motion, nothing to fix (`docs/checkpoints/final/axe/`, 0423bce); (4) worktrees nt-audit-fixes, nt-mid, nt-before removed, ledger kept (4914483). Full CI 44551771340 green (unit 513/513, e2e 531 passed, 0 failed, 0 flaky). Review build of 4914483 on 3100 behind the same tunnel (`docs/review/tunnel.md`). Not merged into main. **Next:** the owner confirms #48 and the rest; Rand answers the 16 questions (then apply the ⚑ proposals); launch (`docs/launch/checklist.md`).
 
-Servers: 3000 = builds from the worktree (for e2e/Lighthouse after); 3200 = the before build (`E:/NO Time/nt-before`, e19404f); 3100 = review build behind the tunnel https://commerce-tension-petersburg-rom.trycloudflare.com (from `notime-website`, rebuild at the end).
+**Before that:** All five phases done (2026-11-19). Final report docs/report/final-report.md; Rand guide docs/report/site-guide-for-rand.md.
+
+Servers: only 3100 = the review build behind the tunnel (link in `docs/review/tunnel.md`). 3000 is free (start a prod build there for e2e/axe; `PW_BASE_URL=http://localhost:3000`).
 
 ## Before (2026-11-17)
 
