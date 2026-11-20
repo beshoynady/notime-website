@@ -118,6 +118,7 @@ html[dir="rtl"] .sw-page {
   letter-spacing: 0.16em;
   line-height: 1.3;
   text-transform: uppercase;
+  font-family: var(--font-caps); /* capitals swap from their own fallback (B02) */
   text-decoration: none;
   text-align: center;
   cursor: pointer;

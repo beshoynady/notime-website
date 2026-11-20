@@ -151,6 +151,7 @@
   font-weight: 500;
   letter-spacing: 0.32em;
   text-transform: uppercase;
+  font-family: var(--font-caps); /* capitals swap from their own fallback (B02) */
 }
 .marquee-divider .marquee-list li:lang(ar) {
   font-size: 0.9rem;

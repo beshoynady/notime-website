@@ -534,6 +534,7 @@ main[data-theme="editorial"]
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+  font-family: var(--font-caps); /* capitals swap from their own fallback (B02) */
   color: var(--color-cocoa);
 }
 main[data-theme="editorial"]

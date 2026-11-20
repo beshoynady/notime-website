@@ -40,6 +40,7 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  font-family: var(--font-caps); /* capitals swap from their own fallback (B02) */
   border-block-start: 1px dashed var(--color-cocoa);
 }
 .review-banner:lang(ar) {
@@ -78,6 +79,7 @@ html[data-review] .wa-fab {
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  font-family: var(--font-caps); /* capitals swap from their own fallback (B02) */
   color: var(--color-cocoa);
   background: rgb(234 212 171 / 0.45);
 }

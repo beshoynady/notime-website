@@ -81,6 +81,7 @@
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
+  font-family: var(--font-caps); /* capitals swap from their own fallback (B02) */
 }
 .rc-name:lang(ar) {
   font-size: 0.95rem;

@@ -11,6 +11,9 @@
   letter-spacing: -0.02em;
 }
 .ct-title:lang(ar) {
+  /* «أخبرونا بما تخطّطون له.» filled 97% of 14ch on one line: the fallback (about 4% wider for
+     this line's letters) wrapped it to two until the swap (self-audit B02). Same one line, with room. */
+  max-inline-size: 15ch;
   font-weight: 300;
   line-height: 1.35;
   letter-spacing: 0;
@@ -62,6 +65,7 @@
   font-size: 0.8rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  font-family: var(--font-caps); /* capitals swap from their own fallback (B02) */
   color: var(--color-cocoa);
 }
 .ct-email {

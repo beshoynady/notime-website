@@ -10,5 +10,8 @@ import type { AppLocale } from "@/i18n/routing";
  */
 export const FONT_PRELOADS: Record<AppLocale, readonly string[]> = {
   en: ["/fonts/montserrat-latin.v1.woff2"],
-  ar: ["/fonts/alexandria-arabic.v1.woff2", "/fonts/alexandria-latin.v1.woff2"],
+  // Latin first (self-audit B02): while only the Arabic file has loaded, Chrome takes the ch unit
+  // from it, and it has no «0», so ch falls to 0.5em (-30%) and every ch-sized headline and lead
+  // narrows until the Latin file lands (measured on /ar/contact).
+  ar: ["/fonts/alexandria-latin.v1.woff2", "/fonts/alexandria-arabic.v1.woff2"],
 };

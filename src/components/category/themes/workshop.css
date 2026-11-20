@@ -308,6 +308,7 @@ main[data-theme="workshop"] .fx-ws-sheet::after {
   line-height: 1.4;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+  font-family: var(--font-caps); /* capitals swap from their own fallback (B02) */
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   color: var(--color-cocoa);

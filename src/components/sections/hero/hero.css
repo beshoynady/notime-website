@@ -264,6 +264,7 @@ html[data-js]:not([data-reduced]) .hero-content {
   font-size: 0.62rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
+  font-family: var(--font-caps); /* capitals swap from their own fallback (B02) */
   color: rgba(234, 212, 171, 0.72);
 }
 .hero-hud:lang(ar) {

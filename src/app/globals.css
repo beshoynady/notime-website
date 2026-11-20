@@ -168,6 +168,19 @@
   html[lang="ar"] {
     font-family: var(--font-ar);
   }
+  /* Capitals swap from their own fallback (fonts.css, self-audit B02). In the base layer, so any
+     font utility on the element still wins. */
+  :root {
+    --font-caps: var(--font-montserrat-caps), ui-sans-serif, system-ui, "Segoe UI", Arial, sans-serif;
+  }
+  /* Arabic (a page or any lang="ar" subtree): guaranteed-invalid, so font-family: var(--font-caps)
+     falls back to inheriting (an English mark inside .font-en keeps its face). */
+  :lang(ar) {
+    --font-caps: initial;
+  }
+  :is(.uppercase, .text-eyebrow) {
+    font-family: var(--font-caps);
+  }
   body {
     margin: 0;
     background: var(--color-ivory);
@@ -492,6 +505,7 @@ summary,
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
+  font-family: var(--font-caps); /* capitals swap from their own fallback (B02) */
   line-height: 1.3;
   padding: 5px 8px;
   border-radius: var(--radius-tag);
@@ -774,6 +788,7 @@ html[data-header-hidden]:not([data-overlay-open]) #site-header {
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
+  font-family: var(--font-caps); /* capitals swap from their own fallback (B02) */
   line-height: 1.4;
 }
 .badge-soon::before {
@@ -808,6 +823,7 @@ html[data-header-hidden]:not([data-overlay-open]) #site-header {
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
+  font-family: var(--font-caps); /* capitals swap from their own fallback (B02) */
   line-height: 1.4;
 }
 .badge:lang(ar) {
@@ -844,6 +860,7 @@ html[data-header-hidden]:not([data-overlay-open]) #site-header {
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
+  font-family: var(--font-caps); /* capitals swap from their own fallback (B02) */
   color: var(--color-cocoa);
 }
 .field label:lang(ar) {
