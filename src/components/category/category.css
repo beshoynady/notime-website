@@ -445,6 +445,20 @@ html[data-header-hidden] .svc-index {
 .svc-index {
   transition: translate 0.35s var(--ease-expo-out); /* with the hiding header (above) */
 }
+/* Over a full-bleed scene the rail steps aside (ServiceIndex sets data-over-scene; self-audit
+   B11): its 60% scrim cut the scene. It stays while it holds focus. */
+@media (min-width: 900px) {
+  .svc-index {
+    transition:
+      translate 0.35s var(--ease-expo-out),
+      opacity 0.35s var(--ease-expo-out),
+      visibility 0.35s;
+  }
+  .svc-index[data-over-scene]:not(:focus-within) {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .svc-index,
   .svc-index-link {

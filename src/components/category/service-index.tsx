@@ -89,6 +89,24 @@ export function ServiceIndex({ items, label }: { items: IndexItem[]; label: stri
       };
       ScrollTrigger.create({ start: 0, end: "max", onUpdate: update, onRefresh: measure });
       measure();
+
+      // A full-bleed scene runs under the rail's column: while one overlaps the rail's band, the
+      // rail steps aside (category.css), so its scrim doesn't cut the scene (self-audit B11).
+      const nav = navRef.current;
+      if (!nav) return;
+      const band = () => {
+        const top = parseFloat(getComputedStyle(nav).top) || 0;
+        return { top, bottom: top + nav.offsetHeight };
+      };
+      document.querySelectorAll<HTMLElement>(".svc-scene").forEach((scene) => {
+        ScrollTrigger.create({
+          trigger: scene,
+          start: () => `top ${band().bottom}px`,
+          end: () => `bottom ${band().top}px`,
+          invalidateOnRefresh: true,
+          onToggle: (self) => nav.toggleAttribute("data-over-scene", self.isActive),
+        });
+      });
     },
     { dependencies: [items] },
   );
