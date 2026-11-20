@@ -40,3 +40,24 @@ for (const locale of ["en", "ar"] as const) {
     expect(await page.evaluate(() => (window as unknown as { __cardShift: number }).__cardShift)).toBe(0);
   });
 }
+
+/** The owner (2026-11-20): the space kept for the fold must not show as an empty band under a closed card's title. */
+for (const locale of ["en", "ar"] as const) {
+  test(`${locale}: a closed card's title sits at the card's foot`, async ({ page, isMobile }) => {
+    test.skip(!isMobile, "the cards open on scroll only on phones");
+    await gotoReady(page, `/${locale}`);
+    await page.locator(".cats").scrollIntoViewIfNeeded();
+    // The first card is open; the ones below it, still under 60% of the screen, are closed.
+    await page.evaluate(() => window.scrollTo(0, document.querySelector(".cats")!.getBoundingClientRect().top + scrollY - 200));
+    await page.waitForTimeout(1200);
+    const gaps = await page.locator(".cats .cat:not(.is-on)").evaluateAll((cards) =>
+      cards.map((c) => {
+        const card = c.getBoundingClientRect();
+        const title = c.querySelector("h3")!.getBoundingClientRect();
+        return Math.round(card.bottom - title.bottom);
+      }),
+    );
+    expect(gaps.length).toBeGreaterThan(0);
+    for (const gap of gaps) expect(gap).toBeLessThanOrEqual(32); // the card's padding (22px) and a little
+  });
+}

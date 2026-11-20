@@ -179,8 +179,19 @@
   .cats .cat.is-on .cat-fold {
     transform: none;
   }
+  /* A closed card's text drops by the fold's height (measured into --fold-h, CategoryCardsScroll),
+     so its title sits at the card's foot, not above an empty band; opening lifts it as the list
+     fades in. A transform: nothing around it moves. */
+  .cats .cat .cat-txt {
+    transition: transform 0.9s var(--ease-expo-out);
+  }
+  .cats .cat:not(.is-on) .cat-txt {
+    transform: translateY(var(--fold-h, 0px));
+  }
   html:not([data-js]) .cats .cat .cat-fold,
-  html[data-reduced] .cats .cat .cat-fold {
+  html[data-reduced] .cats .cat .cat-fold,
+  html:not([data-js]) .cats .cat .cat-txt,
+  html[data-reduced] .cats .cat .cat-txt {
     max-block-size: none;
     opacity: 1;
     transform: none;
@@ -194,7 +205,8 @@
 @media (prefers-reduced-motion: reduce) {
   .cat,
   .cat-media,
-  .cat-fold {
+  .cat-fold,
+  .cat-txt {
     transition: none;
   }
 }
