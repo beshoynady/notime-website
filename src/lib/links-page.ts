@@ -43,8 +43,8 @@ const WHATSAPP = `<svg class="lk-icon" ${ICON} stroke-width="1.5"><path d="M7.9 
 const CSS = `
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;color-scheme:dark}
-body{margin:0;background:#2e2017;color:#f5e9d3;font-family:"Montserrat","Montserrat Fallback",system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
-html[lang="ar"] body{font-family:"Alexandria","Alexandria Fallback",system-ui,sans-serif}
+body{margin:0;background:#2e2017;color:#f5e9d3;font-family:"Montserrat","Montserrat Fallback","Montserrat Fallback Android",system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+html[lang="ar"] body{font-family:"Alexandria","Alexandria Fallback","Alexandria Fallback Android",system-ui,sans-serif}
 a{color:inherit}
 :focus-visible{outline:2px solid #ead4ab;outline-offset:3px}
 .lk{min-block-size:100svh;padding-block:20px 40px;padding-inline:max(20px,env(safe-area-inset-left)) max(20px,env(safe-area-inset-right))}
