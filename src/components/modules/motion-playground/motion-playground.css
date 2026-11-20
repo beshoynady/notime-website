@@ -207,6 +207,16 @@
 .mp-dot {
   fill: var(--color-ivory);
 }
+/* The mark and the word on one row, centred: the Button wraps its children in one span, and the
+   preflight makes the svg a block, so the mark sat on its own line above «PLAY» (self-audit B08). */
+.mp-play {
+  white-space: nowrap;
+}
+.mp-play > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
 .mp-play-icon {
   inline-size: 8px;
   block-size: 10px;

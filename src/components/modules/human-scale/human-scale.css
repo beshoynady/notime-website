@@ -145,6 +145,12 @@ html[dir="rtl"] .hs-svg {
 .hs-at:lang(ar) > span {
   letter-spacing: 0;
 }
+/* The figure's label ends at its centre and runs toward inline-start, away from the lens beside
+   it: centred, it reached into the lens on a phone, where the text is wide for the drawing
+   (self-audit B07, 11px at 390). flex-end is the inline end in both directions. */
+.hs-fig-label {
+  justify-content: flex-end;
+}
 .hs-size > span {
   padding: 2px 6px;
   background: var(--color-champagne);
