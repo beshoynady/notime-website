@@ -36,6 +36,21 @@ for (const path of PAGES) {
       }).observe({ type: "layout-shift", buffered: true });
     });
     await gotoReady(page, path);
+    // The matched fallbacks are local Arial (Windows, macOS, iOS). Where it's missing (the Linux CI
+    // runner, Android), the stack falls through to the system sans, which nothing is matched to.
+    const hasArial = await page.evaluate(() => {
+      const w = (f: string) => {
+        const s = document.createElement("span");
+        s.style.cssText = `font:40px ${f};position:absolute;white-space:nowrap`;
+        s.textContent = "mmmmmmmmmmlli1WQ";
+        document.body.append(s);
+        const x = s.getBoundingClientRect().width;
+        s.remove();
+        return x;
+      };
+      return w("Arial, monospace") !== w("monospace");
+    });
+    test.skip(!hasArial, "no local Arial: the fallbacks have nothing to match");
     await page.evaluate(() => document.fonts.ready);
     await page.waitForTimeout(800);
     const { cls, shifts } = await page.evaluate(() => {
