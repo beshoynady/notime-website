@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { SceneConfig, SceneLayer, SceneShot } from "@/content/scenes/types";
-import { PIN_LIMIT, SECTION_PIN_LIMIT, enterFrom, imageLoading, layerDrift, lineSpans, pinLength, sceneMode, sceneProblems, shotAt, stillState, stillLead, wipeInset } from "./scene-math";
+import { PIN_LIMIT, SECTION_PIN_LIMIT, enterFrom, imageLoading, layerDrift, layerSizes, lineSpans, pinLength, sceneMode, sceneProblems, shotAt, stillState, stillLead, wipeInset } from "./scene-math";
 
 const shots: SceneShot[] = [
   { id: "a", copyKey: "a", desktop: [0, 0.45], mobile: [0, 0.35] },
@@ -252,5 +252,24 @@ describe("stillLead (N06)", () => {
     expect(stillLead(shots)).toBe("d");
     expect(stillLead([...shots, { id: "e", desktop: [2, 2.1], mobile: null }])).toBe("d");
     expect(stillLead([{ id: "x", desktop: [0, 1], mobile: null }])).toBeUndefined();
+  });
+});
+
+// Self-audit B10 (2026-11-20): every layer above the ground asked for "50vw", so a full-frame plate
+// got a 750px file for a 1440px frame (×2.1 upscale) and a phone plate 384px for ~950.
+describe("layerSizes", () => {
+  it("a full-frame layer fills the viewport's width", () => {
+    expect(layerSizes({ block: "0", inline: "0" })).toBe("100vw");
+    expect(layerSizes({ block: "0 30%", inline: "0" })).toBe("100vw");
+  });
+  it("a cutout asks for its share of the width (start and end insets)", () => {
+    expect(layerSizes({ block: "10% 30%", inline: "26% 26%" })).toBe("48vw");
+    expect(layerSizes({ block: "0", inline: "30% 58%" })).toBe("12vw");
+  });
+  it("one inline value insets both ends", () => {
+    expect(layerSizes({ block: "0", inline: "10%" })).toBe("80vw");
+  });
+  it("an inset it can't read (px, calc) falls back to the full width: never too small", () => {
+    expect(layerSizes({ block: "0", inline: "40px 10%" })).toBe("100vw");
   });
 });

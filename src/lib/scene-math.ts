@@ -138,3 +138,18 @@ export function imageLoading(scene: SceneConfig, mode: "build" | "still", hasFil
 export function stillLead(shots: SceneShot[]): string | undefined {
   return shots.findLast((s) => s.copyKey)?.copyKey;
 }
+
+/**
+ * The `sizes` a layer's image asks for: its share of the viewport's width, read from the layer's
+ * inline insets ("start end", or one value for both, in %). A full-frame layer is "100vw". An
+ * inset it can't read falls back to "100vw": a file too large costs bytes, one too small looks soft
+ * (self-audit B10: every layer above the ground asked for "50vw").
+ */
+export function layerSizes(box: { inline: string; block?: string }): string {
+  const parts = box.inline.trim().split(/\s+/);
+  const pct = parts.map((p) => (p === "0" ? 0 : /^\d+(\.\d+)?%$/.test(p) ? parseFloat(p) : NaN));
+  const [start, end = start] = pct;
+  if (Number.isNaN(start) || Number.isNaN(end)) return "100vw";
+  const share = Math.max(1, Math.round(100 - start - end));
+  return `${share}vw`;
+}

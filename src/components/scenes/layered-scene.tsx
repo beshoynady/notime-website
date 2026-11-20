@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import { getSceneImage, type SceneConfig, type SceneLayer } from "@/content/scenes";
-import { imageLoading, pinLength, sceneMode, stillState, wipeInset, type ImageLoading } from "@/lib/scene-math";
+import { imageLoading, layerSizes, pinLength, sceneMode, stillState, wipeInset, type ImageLoading } from "@/lib/scene-math";
 import { cn } from "@/lib/utils";
 import { SceneDirector } from "./scene-director";
 import { SceneImage } from "./scene-image";
@@ -133,7 +133,7 @@ function Layer({ layer, variant, loading }: { layer: SceneLayer; variant: "live"
           ) : layer.slot ? (
             <SceneImage
               slot={layer.slot}
-              sizes={layer.level === 0 ? "100vw" : "50vw"}
+              sizes={layerSizes(layer.box)}
               loading={loading}
               // A full-frame layer registers with its plate (cover); a trimmed cutout is never cropped (contain).
               fit={layer.box.block === "0" && layer.box.inline === "0" ? "cover" : "contain"}
