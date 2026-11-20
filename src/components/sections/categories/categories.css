@@ -166,10 +166,24 @@
   }
 }
 @media (max-width: 899.98px) {
-  html:not([data-js]) .cat-fold,
-  html[data-reduced] .cat-fold {
+  /* A phone opens the card in view while the visitor reads: growing the fold pushed everything
+     below it (CLS 0.09-0.11, self-audit B01). The fold keeps its space here and only fades and
+     rises in; the card's height never changes. */
+  .cats .cat .cat-fold {
+    max-block-size: none;
+    transform: translateY(8px);
+    transition:
+      opacity 0.6s,
+      transform 0.9s var(--ease-expo-out);
+  }
+  .cats .cat.is-on .cat-fold {
+    transform: none;
+  }
+  html:not([data-js]) .cats .cat .cat-fold,
+  html[data-reduced] .cats .cat .cat-fold {
     max-block-size: none;
     opacity: 1;
+    transform: none;
   }
   html:not([data-js]) .cat-media,
   html[data-reduced] .cat-media {
