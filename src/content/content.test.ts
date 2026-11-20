@@ -80,7 +80,9 @@ describe("services", () => {
     }));
     expect(rows).toHaveLength(30);
     expect(rows.map((r) => r.n)).toEqual(Array.from({ length: 30 }, (_, i) => i + 1));
-    expect(services.map((s) => ({ slug: s.slug, anchor: s.anchor, en: s.title.en, ar: s.title.ar }))).toEqual(
+    // A no-break space is a line-break hint (B04), not a change of wording: it compares as a space.
+    const words = (t: string) => t.replace(/ /g, " ");
+    expect(services.map((s) => ({ slug: s.slug, anchor: s.anchor, en: words(s.title.en), ar: words(s.title.ar) }))).toEqual(
       rows.map(({ slug, anchor, en, ar }) => ({ slug, anchor, en, ar })),
     );
   });
@@ -350,6 +352,8 @@ describe("N18 Arabic fixes", () => {
   });
   it("Google/Meta title", () => {
     const s = getServices().find((x) => x.slug === "paid-media-planning");
-    expect(s?.title.ar).toBe("الإعلانات المدفوعة وتخطيط الإعلام (Google وMeta)");
+    // A no-break space keeps the parenthesis on one line: wrapped in a large RTL title, "(Google"
+    // ended one line and "وMeta)" began the next, so the brackets read as swapped (self-audit B04).
+    expect(s?.title.ar).toBe("الإعلانات المدفوعة وتخطيط الإعلام (Google وMeta)");
   });
 });
