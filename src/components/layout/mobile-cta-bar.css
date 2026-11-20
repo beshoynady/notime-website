@@ -62,8 +62,10 @@ html[data-overlay-open] .cta-bar {
   }
 }
 @media (max-width: 899.98px) {
-  /* The bar's full height plus the safe area is reserved at the page's end: it never covers the footer. */
-  body:has(.cta-bar) {
+  /* The bar's full height plus the safe area is reserved inside the footer's own ground, so the
+     bar never covers the footer's last line and, while it's hidden (a 404, the page's end), the
+     space is the footer's dark, not an ivory band under it (self-audit B03: it sat on the body). */
+  body:has(.cta-bar) footer > section {
     padding-block-end: calc(var(--cta-bar-h) + env(safe-area-inset-bottom, 0px));
   }
   html:has(.cta-bar[data-show]) {

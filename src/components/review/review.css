@@ -54,8 +54,8 @@ html[data-review] .wa-fab {
   bottom: calc(48px + env(safe-area-inset-bottom, 0px));
 }
 /* The phone's sticky bars (quote bar, Software's bar) stand on the banner instead of under it: the
-   banner covered the bottom of their buttons. The page's end reserves both heights; the body rule
-   above would otherwise replace the bars' own reservation (owner report 2026-11-20). */
+   banner covered the bottom of their buttons (owner report 2026-11-20). The footer reserves the
+   bar's height (mobile-cta-bar.css, software.css) and the body above the banner's. */
 @media (max-width: 899.98px) {
   html[data-review] :is(.cta-bar, .sw-sticky) {
     inset-block-end: calc(28px + env(safe-area-inset-bottom, 0px));
@@ -65,12 +65,6 @@ html[data-review] .wa-fab {
   }
   html[data-review] .sw-sticky {
     padding-block-end: 10px;
-  }
-  html[data-review] body:has(.cta-bar) {
-    padding-block-end: calc(var(--cta-bar-h) + 28px + env(safe-area-inset-bottom, 0px));
-  }
-  html[data-review] body:has(.sw-sticky) {
-    padding-block-end: calc(72px + 28px + env(safe-area-inset-bottom, 0px));
   }
 }
 

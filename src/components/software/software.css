@@ -2426,8 +2426,9 @@ html[data-overlay-open] .sw-sticky {
   }
 }
 @media (max-width: 899.98px) {
-  /* Its height is reserved at the page's end, so it never covers the footer's last line. */
-  body:has(.sw-sticky) {
+  /* Its height is reserved inside the footer's own ground, so it never covers the footer's last
+     line and no ivory band shows under the footer while it's hidden (self-audit B03). */
+  body:has(.sw-sticky) footer > section {
     padding-block-end: calc(72px + env(safe-area-inset-bottom, 0px));
   }
   html:has(.sw-sticky[data-show]) {

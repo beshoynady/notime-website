@@ -86,7 +86,8 @@ test.describe("mobile CTA bar", () => {
         const links = document.querySelectorAll("footer a");
         const last = links[links.length - 1].getBoundingClientRect();
         const b = document.querySelector(".cta-bar")!.getBoundingClientRect();
-        const reserved = parseFloat(getComputedStyle(document.body).paddingBlockEnd);
+        // The reservation sits inside the footer's own ground (self-audit B03), not on the body.
+        const reserved = parseFloat(getComputedStyle(document.querySelector("footer > section")!).paddingBlockEnd);
         return { lastBottom: last.bottom, barTop: b.top, barH: b.height, reserved, shown: document.querySelector(".cta-bar")!.hasAttribute("data-show") };
       });
       // The bar shows at the end, and the space reserved for it is its full height: no overlap.
