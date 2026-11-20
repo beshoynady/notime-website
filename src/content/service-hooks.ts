@@ -15,8 +15,8 @@ export const SERVICE_HOOKS: Record<string, Localized<string>> = {
   },
   "exhibitions-booths": {
     // p.19, p.21 (design, fabrication, installation, on-site PR); D56 (staffed)
-    en: "A stand people step into, drawn, built and staffed by the same team.",
-    ar: "جناح يدخله الزوّار، يرسمه ويبنيه ويديره فريق واحد.",
+    en: "In a mall or an exhibition hall, with our staff on the stand and PR on site.",
+    ar: "في مركز تجاري أو في قاعة معارض، وفريقنا على الجناح، والعلاقات العامة في أرض الحدث.",
   },
   "product-launches-activations": {
     // p.4 (concept), p.7 (technology and robotics), p.8 (malls, venues, exhibitions)
@@ -34,9 +34,9 @@ export const SERVICE_HOOKS: Record<string, Localized<string>> = {
     ar: "قهوة تُصبّ كما يعرفها ضيوفكم، في مجلس جاهز قبل وصولهم.",
   },
   "stage-technical-production": {
-    // p.33 (stage, rigging, live sound); D56 ("rigged and run by one crew")
-    en: "Sound, light and screens on one cue sheet, run by the crew that rigged them.",
-    ar: "الصوت والإضاءة والشاشات على جدول إشارات واحد، يديره الفريق الذي ركّبها.",
+    // p.33 (stage, rigging, live sound). The crew claim (D56) is out until Rand confirms it (D148).
+    en: "Sound, light and screens cued from one sheet, so the room changes when the programme does.",
+    ar: "الصوت والإضاءة والشاشات على جدول إشارات واحد، فتتغيّر القاعة مع كل فقرة من البرنامج.",
   },
   // Creative Production (step 3). Sources: profile p.14 (AI content & motion), category-copy-creative.md.
   photography: {
@@ -45,9 +45,9 @@ export const SERVICE_HOOKS: Record<string, Localized<string>> = {
     ar: "لكل لقطة إضاءتها المقصودة: القاعة ليلة الحدث، والمنتج على الطاولة، والطبق قبل أن يبرد.",
   },
   "video-production": {
-    // p.14 (cinematic films; editing, sound design and post-production)
-    en: "One crew from the script to the colour grade, so the film you approved on paper is the film you get.",
-    ar: "فريق واحد من كتابة النص حتى تصحيح الألوان، فيصلكم الفيلم كما وافقتم عليه على الورق.",
+    // p.14 (cinematic films; editing, sound design and post-production). "One crew" is out until Rand confirms it (D148).
+    en: "From the script to the colour grade.",
+    ar: "من كتابة النص حتى تصحيح الألوان.",
   },
   "motion-graphics": {
     // p.14 (motion graphics and logo animation); deck (screen content for stages)
@@ -87,8 +87,8 @@ export const SERVICE_HOOKS: Record<string, Localized<string>> = {
   },
   "content-strategy": {
     // deck (messages per channel, monthly calendar, templates)
-    en: "One written plan for what each channel says, so nothing goes out on guesswork.",
-    ar: "خطة مكتوبة واحدة لما تقوله كل قناة، فلا يُنشر شيء بالتخمين.",
+    en: "Topics and templates set in advance, so nothing goes out on guesswork.",
+    ar: "مواضيع وقوالب محدّدة مسبقًا، فلا يُنشر شيء بالتخمين.",
   },
   "public-relations": {
     // p.19 (stand design, build and on-site PR, and the media coverage that follows)
@@ -103,8 +103,8 @@ export const SERVICE_HOOKS: Record<string, Localized<string>> = {
   // Production, Print & Gifts (step 3). Sources: profile p.19, p.21–24; category-copy-print.md.
   "commercial-large-format-printing": {
     // deck (business cards to backdrops and wall graphics, printed to scale)
-    en: "From a business card to a wall graphic, the same colour and the same brand.",
-    ar: "من بطاقة العمل إلى الرسم الجداري، اللون نفسه والهوية نفسها.",
+    en: "Every piece in the same colour and the same brand, whatever its size.",
+    ar: "كل قطعة باللون نفسه والهوية نفسها، مهما كان حجمها.",
   },
   "stand-fabrication-signage": {
     // p.19 (stand design, build and on-site management)

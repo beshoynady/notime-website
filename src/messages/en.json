@@ -97,7 +97,7 @@
   "about": {
     "eyebrow": "About NO TIME",
     "statement": "We build ideas where a brand meets its audience, then carry them all the way: strategy, creative, production and delivery, under one roof.",
-    "body": "Our base is Dubai, and our work runs across six markets, from Saudi Arabia to Egypt: an airline's pavilion at the Dubai Airshow and a majlis dressed for a heritage welcome. Each idea starts where the brand meets its audience, and one team carries it through strategy, creative, production and delivery.",
+    "body": "Our base is Dubai, and our work runs across six markets, from Saudi Arabia to Egypt. It ranges from an airline's pavilion at the Dubai Airshow to a majlis dressed for a heritage welcome, and the same team stays with each idea from strategy to delivery.",
     "stats": {
       "markets": {
         "value": "6",
@@ -594,7 +594,7 @@
     "scopeIntro": "Each one has its own section, with what we deliver.",
     "next": "Next project",
     "ctaTitle": "Planning something like this?",
-    "ctaBody": "Start with the services this project used. Each page lists what we deliver, and how to reach us.",
+    "ctaBody": "Start with the services this project used, or tell us the date and what you need.",
     "ctaQuote": "Request a quote",
     "ctaCategory": "Explore {category}"
   },

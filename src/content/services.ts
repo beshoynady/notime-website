@@ -34,8 +34,8 @@ const POINTS: Record<string, Localized<string[]>> = {
     ar: ["تجهيز المجالس والخيام الصحراوية", "القهوة العربية ومراسم الاستقبال", "العربات التراثية ومحطات الطهي أمام الضيوف", "حلويات ومشروبات بتوقيعنا", "تنسيق البوفيه والطاولات", "الخدمة الخاصة وضيافة مجالس الإدارة"],
   },
   "stage-technical-production": {
-    en: ["Stage design", "Rigging", "Live sound", "Lighting", "Screens", "Technical setup, run by one crew"],
-    ar: ["تصميم المسرح", "تركيب الهياكل وتعليق المعدات", "الصوت المباشر", "الإضاءة", "الشاشات", "تجهيز تقني يديره فريق واحد"],
+    en: ["Stage design", "Rigging", "Live sound", "Lighting", "Screens", "Technical setup"],
+    ar: ["تصميم المسرح", "تركيب الهياكل وتعليق المعدات", "الصوت المباشر", "الإضاءة", "الشاشات", "التجهيز التقني"],
   },
   "commercial-large-format-printing": {
     en: ["Roll-up banners", "Feather flags", "Business cards", "Brochures", "Backdrops and wall graphics"],
@@ -258,8 +258,8 @@ export const services: Service[] = [
       "stage-technical-production",
       { en: "Stage & technical production", ar: "الإنتاج الفني والتقني للمسرح" },
       {
-        en: "Stage, sound, light and screens, rigged and run by one crew.",
-        ar: "المسرح والصوت والإضاءة والشاشات، يجهّزها ويديرها فريق واحد.",
+        en: "Stage design, rigging, live sound, lighting and screens.",
+        ar: "تصميم المسرح، وتركيب المعدات، والصوت المباشر، والإضاءة، والشاشات.",
       },
     ],
   ]),
@@ -268,16 +268,16 @@ export const services: Service[] = [
       "photography",
       { en: "Photography", ar: "التصوير الفوتوغرافي" },
       {
-        en: "Event, product and portrait photography, lit with intent.",
-        ar: "تصوير الفعاليات والمنتجات والبورتريه، بإضاءة مدروسة.",
+        en: "Photography for events, products, food and portraits.",
+        ar: "تصوير الفعاليات والمنتجات والأطباق والبورتريه.",
       },
     ],
     [
       "video-production",
       { en: "Video production", ar: "إنتاج الفيديو" },
       {
-        en: "From script and shoot to the final edit and colour.",
-        ar: "من النص والتصوير حتى المونتاج النهائي وتصحيح الألوان.",
+        en: "Brand, product and event films, sound design included.",
+        ar: "أفلام للعلامات والمنتجات والفعاليات، مع تصميم الصوت.",
       },
     ],
     [
@@ -318,8 +318,8 @@ export const services: Service[] = [
       "branding-identity",
       { en: "Branding & identity", ar: "الهوية التجارية" },
       {
-        en: "Name, mark, voice and system, built to hold together.",
-        ar: "الاسم والشعار ونبرة الخطاب والنظام البصري، في هوية واحدة متماسكة.",
+        en: "Brand strategy, naming, visual identity and guidelines.",
+        ar: "استراتيجية العلامة، والتسمية، والهوية البصرية، ودليل الاستخدام.",
       },
     ],
     [
@@ -408,8 +408,8 @@ export const services: Service[] = [
       "branded-merchandise",
       { en: "Branded merchandise", ar: "منتجات بهوية العلامة" },
       {
-        en: "Apparel and objects carrying the brand with restraint.",
-        ar: "ملابس وقطع تحمل العلامة بأناقة وهدوء.",
+        en: "Apparel, bags and desk items, printed or engraved.",
+        ar: "ملابس وحقائب وأدوات مكتب، بالطباعة أو الحفر.",
       },
     ],
   ]),

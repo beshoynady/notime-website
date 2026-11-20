@@ -15,7 +15,7 @@ export const principles: Principle[] = [
   {
     key: "one-roof",
     title: { en: "Under one roof", ar: "تحت سقف واحد" },
-    line: { en: "Strategy, creative, production and delivery, with no handover to another agency on the way.", ar: "الاستراتيجية والإبداع والإنتاج والتنفيذ، دون أن ينتقل العمل إلى جهة أخرى في الطريق." },
+    line: { en: "The team that writes the strategy sees it through to delivery, with no handover to another agency.", ar: "الفريق الذي يضع الاستراتيجية يتابعها حتى التسليم، دون أن ينتقل العمل إلى جهة أخرى." },
   },
   {
     key: "concept-to-guest",

@@ -102,7 +102,7 @@ export const problems = {
 /** The mini landing block of each service, by service slug (services.ts holds title, promise, deliverables). */
 export const serviceBlocks: Record<string, { outcome: L; idealFor: L[]; phases: Phase[] }> = {
   websites: {
-    outcome: l("A site your clients actually use, in Arabic and English.", "موقع يستخدمه عملاؤكم فعلًا، بالعربية والإنجليزية."),
+    outcome: l("A site your clients use, written as well in Arabic as in English.", "موقع يستخدمه عملاؤكم، وعربيّته متقنة كإنجليزيته."),
     idealFor: [
       l("Companies selling to Arabic and English speakers", "شركات تخاطب عملاء بالعربية والإنجليزية"),
       l("Teams that update their content often", "فرق تحدّث محتواها باستمرار"),
@@ -295,7 +295,7 @@ export const tiers = {
 
 export const ways = {
   anchor: "ways-to-work",
-  title: l("After launch, the work keeps going. So do we.", "بعد الإطلاق يستمر العمل، ونستمر معه."),
+  title: l("Built for launch day, supported after it.", "نبنيه ليوم الإطلاق، ونبقى معه بعده."),
   lead: l("Two ways to work with us.", "طريقتان للعمل معنا."),
   items: [
     {
