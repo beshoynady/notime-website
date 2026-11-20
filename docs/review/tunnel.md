@@ -42,4 +42,4 @@ Rand reviews the **review build** (`NEXT_PUBLIC_REVIEW_MODE=1`) through a free C
 
 ## Current link
 
-https://underwear-adding-frankfurt-sphere.trycloudflare.com/ar (started 2026-11-20; the review server on port 3100 was rebuilt on 46fedb8 the same day behind the same tunnel). The previous link is dead.
+https://mat-gathering-others-strike.trycloudflare.com/ar (started 2026-11-20 after a session restart; review build of 46fedb8 on port 3100). The previous link is dead.

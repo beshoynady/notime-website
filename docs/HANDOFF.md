@@ -8,7 +8,7 @@ Four phases (the owner's message of 2026-11-20): **1** cut-off sections fixed on
 
 **Current step (2026-11-20):** Phase 1 done: 46fedb8 `fix(pins)` (D140, #49): home "How we work" pins only from 640px tall (padding trimmed 640–780px), Software's opening title scales with height and pins only from 680px, review banner no longer covers the phone's sticky bars. New `e2e/pinned-fit.spec.ts`; evidence `docs/checkpoints/cut-fix/`. Sweep of the 15 pages × 7 sizes × 2 locales: nothing else cut. CI push 44644160344 and full 44644202502 running. **Next:** phase 2 on branch `visual-pass`.
 
-Servers: 3100 = review build of 46fedb8 behind the tunnel https://underwear-adding-frankfurt-sphere.trycloudflare.com (new link 2026-11-20). 3000 free (prod build of 46fedb8 in `.next`).
+Servers: 3100 = review build of 46fedb8 behind the tunnel https://mat-gathering-others-strike.trycloudflare.com (restarted 2026-11-20). 3000 free (prod build of 46fedb8 in `.next`).
 
 ## Before: the owner's mandate of 2026-11-18 (authoritative; run without waiting)
 
