@@ -21,10 +21,16 @@ import "../globals.css";
 // on mid-session, and never removed, so an intro-only hidden state can't come back), data-intro-seen
 // (the hero intro already played this session, or the URL has a hash: a deep link such as
 // /en#services lands on its section with the header visible, D53; no shutters, no hidden header).
-// data-fonts: the locale's brand face has loaded, or 1.1s have passed. On desktop first visits
-// the hero content waits for it behind the shutters, so the font swap is not a layout shift
-// (hero.css, D45). The load starts in a frame callback, once the @font-face rules are known.
-const BOOT_SCRIPT = `(function(d){d.dataset.js="";try{var m=matchMedia("(prefers-reduced-motion: reduce)"),r=function(){if(m.matches)d.dataset.reduced=""};r();m.addEventListener("change",r)}catch(e){}try{if(sessionStorage.getItem("nt-intro")||location.hash.length>1)d.dataset.introSeen=""}catch(e){}var f=function(){d.dataset.fonts=""};setTimeout(f,1100);requestAnimationFrame(function(){try{var a=d.lang==="ar";document.fonts.load("1em "+(a?"Alexandria":"Montserrat"),a?"\\u0628A1":"A1").then(f,f)}catch(e){f()}})})(document.documentElement)`;
+// data-font-wait (D149): set at once, removed when every brand file the page uses has loaded
+// (Montserrat latin and Alexandria arabic on both locales, Alexandria latin too on /ar), or after
+// 10s (a file that never comes). While it's set the brand families are out of the stacks (fonts.css), so the page swaps from
+// the matched fallbacks to the brand faces in one step: file by file, a line set half in each
+// (Alexandria's Arabic letters with its spaces still in the fallback) broke differently for a
+// moment, and moved back (CLS 0.015 on Android, measured). Without JS it's never set.
+// data-fonts: the same files have loaded, or 1.1s have passed. On desktop first visits the hero
+// content waits for it behind the shutters (hero.css, D45). The loads start in a frame callback,
+// once the @font-face rules are known.
+const BOOT_SCRIPT = `(function(d){d.dataset.js="";try{var m=matchMedia("(prefers-reduced-motion: reduce)"),r=function(){if(m.matches)d.dataset.reduced=""};r();m.addEventListener("change",r)}catch(e){}try{if(sessionStorage.getItem("nt-intro")||location.hash.length>1)d.dataset.introSeen=""}catch(e){}var f=function(){d.dataset.fonts=""},g=function(){delete d.dataset.fontWait;f()};d.dataset.fontWait="";setTimeout(f,1100);setTimeout(g,10000);requestAnimationFrame(function(){try{var l=document.fonts;Promise.all([l.load("1em Montserrat","A1"),l.load("1em Alexandria","\\u0628"),d.lang==="ar"?l.load("1em Alexandria","A1"):0]).then(g,g)}catch(e){g()}})})(document.documentElement)`;
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

@@ -528,3 +528,10 @@
   --font-montserrat-caps: "Montserrat", "Montserrat Caps Fallback", "Montserrat Caps Fallback Android";
   --font-alexandria: "Alexandria", "Alexandria Fallback", "Alexandria Fallback Android";
 }
+/* Until every brand file the page uses has loaded (the boot script, D149), the fallbacks alone:
+   the swap then happens in one step, never with a line set half in each. */
+html[data-font-wait] {
+  --font-montserrat: "Montserrat Fallback", "Montserrat Fallback Android";
+  --font-montserrat-caps: "Montserrat Caps Fallback", "Montserrat Caps Fallback Android";
+  --font-alexandria: "Alexandria Fallback", "Alexandria Fallback Android";
+}
