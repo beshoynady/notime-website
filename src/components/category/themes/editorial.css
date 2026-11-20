@@ -763,7 +763,15 @@ main[data-theme="editorial"] .cal .cal-entry-ch {
   font-size: 0.6rem;
   letter-spacing: 0.06em;
 }
+/* A long channel name ends in an ellipsis; the language mark stays whole (self-audit B05:
+   «INSTAGRAM AR · E» was cut mid-word). The detail panel and the post's name carry it in full. */
+main[data-theme="editorial"] .cal-entry-name {
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 main[data-theme="editorial"] .cal-entry-lang {
+  flex: none;
   opacity: 0.75;
 }
 main[data-theme="editorial"] .cal-entry-topic {

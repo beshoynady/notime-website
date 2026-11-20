@@ -179,19 +179,19 @@ export default function ContentCalendar({ locale }: ModuleProps) {
                               className="cal-entry"
                               data-pillar={entry.pillar}
                               aria-pressed={current?.id === entry.id}
-                              aria-label={`${dayLabel(entry.day)}: ${entry.topic[locale]}`}
                               onClick={() => choose(entry)}
                               initial={{ opacity: 0, scale: 0.9 }}
                               animate={{ opacity: 1, scale: 1 }}
                               exit={{ opacity: 0, scale: 0.9 }}
                               transition={t}
                             >
+                              {/* The name is the visible text, led by the day for a screen reader
+                                  (WCAG 2.5.3: an aria-label of day and topic left the channel out). */}
+                              <span className="sr-only">{`${dayLabel(entry.day)}: `}</span>
                               <span className="cal-swatch" data-pillar={entry.pillar} aria-hidden="true" />
                               <span className="cal-entry-ch">
-                                {channelOf(entry)}
-                                <span className="cal-entry-lang" aria-hidden="true">
-                                  {CALENDAR.langMarks[entry.lang][locale]}
-                                </span>
+                                <span className="cal-entry-name">{channelOf(entry)}</span>
+                                <span className="cal-entry-lang">{CALENDAR.langMarks[entry.lang][locale]}</span>
                               </span>
                               <span className="cal-entry-topic">{entry.topic[locale]}</span>
                             </motion.button>
