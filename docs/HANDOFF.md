@@ -2,7 +2,15 @@
 
 Read `CLAUDE.md`, `AGENTS.md` and `PRODUCT.md` first. Decisions: `docs/DECISIONS.md` (latest D124; new ones from D125).
 
-## Now: the owner's mandate of 2026-11-18 (authoritative; run without waiting)
+## Now: the owner's mandate of 2026-11-20 (review, fix, creative pass)
+
+Four phases (the owner's message of 2026-11-20): **1** cut-off sections fixed on `phase-2-services`; **2** self-audit on a new branch `visual-pass` (from the last commit): `docs/review/self-audit.md`, scores per page × three lenses (art director, senior front-end, UX/conversion), notes split into bugs (fix now, one commit each) / weaknesses / opportunities (don't build), compare with nqshmedia.com/ar-ae and `docs/review/benchmark.md`; then **stop** and send the scores, the bug count, top 5 weaknesses, top 5 opportunities; **3** brainstorming with the owner, one question at a time in plain Arabic, 2–3 options each with mockups, home → Events → other categories → Work → global; design doc in `docs/superpowers/specs/` for approval; **4** plan and build only after approval. Limits: Lighthouse mobile not below today (home 52–55, /links ≥ 95), CLS 0; no cut section at any of the seven sizes; axe clean; honesty (D78); no merge to main.
+
+**Current step (2026-11-20):** Phase 1 done: 46fedb8 `fix(pins)` (D140, #49): home "How we work" pins only from 640px tall (padding trimmed 640–780px), Software's opening title scales with height and pins only from 680px, review banner no longer covers the phone's sticky bars. New `e2e/pinned-fit.spec.ts`; evidence `docs/checkpoints/cut-fix/`. Sweep of the 15 pages × 7 sizes × 2 locales: nothing else cut. CI push 44644160344 and full 44644202502 running. **Next:** phase 2 on branch `visual-pass`.
+
+Servers: 3100 = review build of 46fedb8 behind the tunnel https://underwear-adding-frankfurt-sphere.trycloudflare.com (new link 2026-11-20). 3000 free (prod build of 46fedb8 in `.next`).
+
+## Before: the owner's mandate of 2026-11-18 (authoritative; run without waiting)
 
 1. **Audit fixes:** `docs/superpowers/plans/2026-11-17-audit-fixes.md`, Tasks 0–15 (with 6B), subagent-driven, in the worktree `E:/NO Time/nt-audit-fixes` (branch `audit-fixes` from e19404f). Stop points don't stop: take the safer call (rules in the ledger), record the evidence for the final report. One commit per audit item.
 2. **Copy rewrite apply:** branch `copy-rewrite` cut after `audit-fixes` merges; apply `docs/review/copy-rewrite/*.json` (D118–D124), the phone field test-first (D124). Unconfirmed ⚑ lines keep today's text or hide (D78); list them in one file. Don't wait for Rand.

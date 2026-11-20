@@ -42,4 +42,4 @@ Rand reviews the **review build** (`NEXT_PUBLIC_REVIEW_MODE=1`) through a free C
 
 ## Current link
 
-https://connectivity-civilization-regulated-sega.trycloudflare.com/ar (started 2026-11-19; the review server on port 3100 was rebuilt on 4914483 the same day and restarted behind the same tunnel, so the link didn't change). The previous link is dead.
+https://underwear-adding-frankfurt-sphere.trycloudflare.com/ar (started 2026-11-20; the review server on port 3100 was rebuilt on 46fedb8 the same day behind the same tunnel). The previous link is dead.
