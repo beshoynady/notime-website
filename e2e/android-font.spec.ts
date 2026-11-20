@@ -34,6 +34,12 @@ function asAndroid(css: string) {
 
 const PAGES = ["/en", "/en/services/software-digital", "/en/about", "/ar", "/ar/about", "/ar/contact", "/ar/services/events-hospitality"];
 
+// Android draws text unhinted, with fractional advances. Chromium on Linux (the CI runner) hints
+// and rounds each glyph's advance to a whole pixel by default, which moved line breaks by a word
+// on two pages that Android, like Windows, sets as the fallback did (D149). The flag only acts on
+// Linux.
+test.use({ launchOptions: { args: ["--font-render-hinting=none"] } });
+
 for (const p of PAGES) {
   test(`${p}: a late font swap on Android moves nothing`, async ({ page, isMobile }) => {
     test.skip(!isMobile, "Android is a phone");
