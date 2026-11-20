@@ -58,6 +58,21 @@ test.describe("review build", () => {
     });
   }
 
+  // The banner sat on top of the phone's sticky bars and covered their buttons (owner report 2026-11-20).
+  for (const [path, bar] of [["/ar/services/events-hospitality", ".cta-bar"], ["/en/services/software-digital", ".sw-sticky"]] as const) {
+    test(`${path}: the phone's sticky bar stands on the banner`, async ({ page, isMobile }) => {
+      test.skip(!isMobile, "the sticky bars are phone-only");
+      await gotoReady(page, `${base}${path}`);
+      await page.evaluate(() => window.scrollTo(0, innerHeight * 2.2));
+      const shown = page.locator(`${bar}[data-show]`);
+      await expect(shown).toBeVisible();
+      await page.waitForTimeout(600); // the bar's slide-in
+      const barBox = (await shown.boundingBox())!;
+      const bannerBox = (await page.locator(".review-banner").boundingBox())!;
+      expect(barBox.y + barBox.height).toBeLessThanOrEqual(bannerBox.y + 1);
+    });
+  }
+
   test("category page: every service section is numbered", async ({ page }) => {
     const c = getCategories()[0];
     await gotoReady(page, `${base}/en/services/${c.slug}`);

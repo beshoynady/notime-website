@@ -12,7 +12,13 @@ import { OPENING_SHOTS, shotIndexAt } from "@/lib/interface-shots";
  * phone alone. Reduced motion: nothing is built; the server-rendered still stays.
  *
  * Owners: every tweened element here is GSAP's alone (the stage has no Motion).
+ *
+ * A desktop screen shorter than PIN_MIN_H can't hold the opening's copy and stage under the header
+ * (owner report 2026-11-20), so it plays there as on mobile: no pin. globals.css uses the same value.
  */
+const PIN_MIN_H = 680;
+const MOTION = "(prefers-reduced-motion: no-preference)";
+
 export function InterfaceDirector() {
   const ref = useRef<HTMLSpanElement>(null);
 
@@ -23,8 +29,8 @@ export function InterfaceDirector() {
     const mm = gsap.matchMedia();
     mm.add(
       {
-        desktop: "(min-width: 900px) and (prefers-reduced-motion: no-preference)",
-        mobile: "(max-width: 899.98px) and (prefers-reduced-motion: no-preference)",
+        desktop: `(min-width: 900px) and (min-height: ${PIN_MIN_H}px) and ${MOTION}`,
+        mobile: `(max-width: 899.98px) and ${MOTION}, (max-height: ${PIN_MIN_H - 0.02}px) and ${MOTION}`,
       },
       (ctx) => {
         const desktop = !!ctx.conditions?.desktop;

@@ -29,7 +29,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 28px;
+  /* Exactly 28px (plus the safe area): the phone's sticky bars stand on it (below). */
+  box-sizing: border-box;
+  block-size: calc(28px + env(safe-area-inset-bottom, 0px));
+  line-height: 1.2;
   padding: 4px 16px calc(4px + env(safe-area-inset-bottom, 0px));
   background: var(--color-champagne);
   color: var(--color-espresso);
@@ -49,6 +52,26 @@ html[data-review] body {
 }
 html[data-review] .wa-fab {
   bottom: calc(48px + env(safe-area-inset-bottom, 0px));
+}
+/* The phone's sticky bars (quote bar, Software's bar) stand on the banner instead of under it: the
+   banner covered the bottom of their buttons. The page's end reserves both heights; the body rule
+   above would otherwise replace the bars' own reservation (owner report 2026-11-20). */
+@media (max-width: 899.98px) {
+  html[data-review] :is(.cta-bar, .sw-sticky) {
+    inset-block-end: calc(28px + env(safe-area-inset-bottom, 0px));
+  }
+  html[data-review] .cta-bar {
+    padding-block-end: var(--cta-bar-pad);
+  }
+  html[data-review] .sw-sticky {
+    padding-block-end: 10px;
+  }
+  html[data-review] body:has(.cta-bar) {
+    padding-block-end: calc(var(--cta-bar-h) + 28px + env(safe-area-inset-bottom, 0px));
+  }
+  html[data-review] body:has(.sw-sticky) {
+    padding-block-end: calc(72px + 28px + env(safe-area-inset-bottom, 0px));
+  }
 }
 
 /* Example blocks: badged, dashed, unmistakably not real content. */

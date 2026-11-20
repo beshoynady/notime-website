@@ -347,16 +347,19 @@ html[dir="rtl"] .sw-page {
   margin: 0;
   color: var(--color-cocoa);
 }
+/* The title also scales with the screen's height (svh): on a short laptop screen the pinned
+   opening outgrew the screen and its last lines stayed cut off (owner report 2026-11-20). On a
+   screen 900px or taller the height term never wins, so the title keeps its size there. */
 .sw-op-title {
   margin: 0;
   font-weight: 300;
-  font-size: clamp(2rem, 4.1vw, 3.8rem);
+  font-size: clamp(2rem, min(4.1vw, 6.6svh), 3.8rem);
   line-height: 1.06;
   letter-spacing: -0.015em;
   max-inline-size: 17ch;
 }
 .sw-op-title:lang(ar) {
-  font-size: clamp(1.85rem, 3.6vw, 3.3rem);
+  font-size: clamp(1.85rem, min(3.6vw, 5.8svh), 3.3rem);
   line-height: 1.42;
   letter-spacing: 0;
 }

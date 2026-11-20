@@ -557,7 +557,16 @@ html[data-js]:not([data-reduced]) .svc-scene .scene-pin:has(> .scene) {
   /* A scene inside a service section sits under the header (category.css). */
   --pin-own: max(calc(100svh - var(--header-h) - var(--scene-top-extra, 0px)), 480px);
 }
-@media (min-width: 900px) {
+/* Software's opening doesn't pin on a desktop screen under 680px tall (PIN_MIN_H in
+   interface-director.tsx): no distance is reserved there. */
+@media (min-width: 900px) and (max-height: 679.98px) {
+  html[data-js]:not([data-reduced]) .sw-opening .scene-pin {
+    padding-block-end: 0;
+    min-block-size: 0;
+  }
+}
+/* 640px: PROCESS_PIN_MIN_H in process-scroll.tsx (no pin on a screen too short for the steps). */
+@media (min-width: 900px) and (min-height: 640px) {
   html[data-js]:not([data-reduced]) .process-pin {
     padding-block-end: 100svh; /* process-scroll: end "+=100%", desktop only */
     min-block-size: 200svh;
