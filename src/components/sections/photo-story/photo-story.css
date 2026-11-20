@@ -61,6 +61,10 @@
   inset: 0;
   overflow: hidden;
 }
+.ps-push {
+  /* A warm ground while the photo loads: on a slow line the frame still shows (W02). */
+  background-color: color-mix(in srgb, var(--color-cocoa) 55%, var(--color-espresso));
+}
 
 /* Desktop: the line holds (sticky) at mid-height beside its photo while the photo scrolls past.
    A tall photo keeps its ratio and is centred in its column, never wider than the column. */

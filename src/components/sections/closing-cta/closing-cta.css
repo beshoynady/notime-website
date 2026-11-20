@@ -3,7 +3,9 @@
   display: grid;
   justify-items: start;
   gap: 24px;
-  padding-block: clamp(24px, 5vw, 64px);
+  /* Bottom only: on top of the section's own padding, the top one left 440px of bare ground
+     after the /services list on a laptop (W02, empty screens). */
+  padding-block: 0 clamp(24px, 5vw, 64px);
 }
 .closing-cta-title {
   margin: 0;

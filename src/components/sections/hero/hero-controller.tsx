@@ -24,6 +24,8 @@ const INTRO_DEADLINE_MS = 4500;
 const REVEAL_DEADLINE_MS = 2400;
 /** Same as the motion-mode CSS on .hero-title, so the focus pull can add blur to it. */
 const TITLE_SHADOW = "drop-shadow(0px 4px 40px rgba(13, 8, 5, 0.55))";
+/** How far the title dims on its way out (W02): still read, no longer competing. */
+const TITLE_FLOOR = 0.45;
 /** Same breakpoint as the CSS: masks, letter rise and SplitText only from here up. */
 const WIDE = "(min-width: 900px)";
 const NARROW = "(max-width: 899.98px)";
@@ -99,11 +101,14 @@ export function HeroController() {
           },
         });
         ScrollTrigger.sort();
-        // Line 1 exits towards the reading start, line 2 towards the end (mirrored in AR).
-        tl.to(lines[0], { xPercent: -38 * dir, opacity: 0, ease: "power2.in", duration: 1 }, 0)
-          .to(lines[1], { xPercent: 38 * dir, opacity: 0, ease: "power2.in", duration: 1 }, 0)
+        // Line 1 parts towards the reading start, line 2 towards the end (mirrored in AR). They
+        // dim but stay on screen and leave with the hero: faded to nothing, the rest of the pin
+        // and the hero's way out were lights alone, an empty screen (W02, the owner 2026-11-20).
+        tl.to(lines[0], { xPercent: -38 * dir, opacity: TITLE_FLOOR, ease: "power2.in", duration: 1 }, 0)
+          .to(lines[1], { xPercent: 38 * dir, opacity: TITLE_FLOOR, ease: "power2.in", duration: 1 }, 0)
           .to(q(".hero-eyebrow"), { y: -40, opacity: 0, duration: 0.6 }, 0)
-          .to(q(".hero-sub"), { y: -50, opacity: 0, duration: 0.6 }, 0)
+          // The lead and the quote button stay put and leave with the hero (W02): faded, the
+          // hero's lower half was lights alone on short laptops (1366 × 768, 1280 × 720).
           .to(q(".hero-clock-wrap"), { scale: 2.9, opacity: 0, duration: 1.25 }, 0)
           .to(state, { spread: 2.5, speed: 8, duration: 1.2 }, 0)
           .to(q(".hero-hud"), { opacity: 0, duration: 0.4 }, 0)
@@ -113,7 +118,7 @@ export function HeroController() {
           .to(state, { speed: 1.4, spread: 1.7, duration: 0.6 }, 1.2);
         // Focus pull (elevation): the title racks out of focus as it leaves. Desktop only.
         if (ctx.conditions?.wide)
-          tl.fromTo(title, { filter: `${TITLE_SHADOW} blur(0px)` }, { filter: `${TITLE_SHADOW} blur(6px)`, duration: 0.4 }, 0.6);
+          tl.fromTo(title, { filter: `${TITLE_SHADOW} blur(0px)` }, { filter: `${TITLE_SHADOW} blur(3px)`, duration: 0.4 }, 0.6);
       });
 
       // ---- Intro or repeat-visit reveal ----------------------------------------------

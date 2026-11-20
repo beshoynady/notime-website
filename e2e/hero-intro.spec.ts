@@ -227,9 +227,10 @@ test.describe("N05: one-screen hero", () => {
       };
     });
     expect(Math.abs(s.heroTop), "still held at the pin's end").toBeLessThanOrEqual(2);
-    expect(s.lines).toEqual([0, 0]);
+    // W02: the title dims to its floor and the lead with the quote button stays (no empty screen).
+    expect(s.lines).toEqual([0.45, 0.45]);
     expect(s.clock).toEqual([0]);
-    expect(s.sub).toEqual([0]);
+    expect(s.sub).toEqual([1]);
     expect(s.eyebrow).toEqual([0]);
   });
 });

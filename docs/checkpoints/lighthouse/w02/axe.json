@@ -1,0 +1,92 @@
+[
+  {
+    "path": "/en",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/services",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/services",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/services/events-hospitality",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/services/events-hospitality",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/services/software-digital",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/services/software-digital",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/work",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/work",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/about",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/about",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/contact",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/contact",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/products/qr-check-in",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/products/qr-check-in",
+    "width": 390,
+    "violations": []
+  }
+]

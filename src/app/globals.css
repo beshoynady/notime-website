@@ -83,7 +83,9 @@
   --radius: 4px;
   --header-h: 68px;
   --frame: 1280px;
-  --section-pad: clamp(72px, 11vw, 160px);
+  /* Bounded by height too: by width alone, two of them stacked to over half of a 1280 × 720 or
+     1366 × 768 screen (W02, empty screens). */
+  --section-pad: clamp(72px, min(11vw, 17svh), 160px);
   --page-bg: var(--color-espresso); /* tweened by ToneController */
 
   /* Light tone (default) */
@@ -520,10 +522,11 @@ summary,
 }
 
 /* ==========================================================================
-   Stage and section tones. Each tone section paints its own background by
-   default (readable without JS). Once ToneController runs, sections turn
-   transparent and #page-stage tweens its own background-color (from --page-bg,
-   the first paint) between espresso and ivory.
+   Stage and section tones. Each tone section paints its own background, with
+   or without JS (W02: a see-through section on the other tone had to be hidden
+   until the page ground turned, which left empty screens). #page-stage still
+   tweens its own background-color (from --page-bg, the first paint) as each
+   section crosses 55%, for what shows between sections and over-scroll.
    ========================================================================== */
 #page-stage {
   background: var(--page-bg);
@@ -531,9 +534,6 @@ summary,
 }
 section[data-tone] {
   background-color: var(--tone-ground);
-}
-#page-stage[data-tone-ready] section[data-tone]:not([data-bg="own"]) {
-  background-color: transparent;
 }
 /* Pin reservations (M1, anchor landing). A pinned block's scroll distance is reserved on its
    server-rendered spacer from the first paint, wherever JS will pin it (data-js, set before paint;
@@ -592,26 +592,10 @@ html[data-js]:not([data-reduced]) .svc-scene .scene-pin:has(> .scene) {
   }
 }
 
-/* A zone on the other tone's ground fades out (ToneController, M1): the tail of the section going
-   out and the head of the one coming in would otherwise be dark text on espresso or ivory text on
-   ivory. Focus brings it back, so a keyboard user never lands on hidden text. */
-#page-stage[data-tone-ready] section[data-zone]:not([data-bg="own"]) {
-  transition: opacity 0.45s ease;
-}
-#page-stage[data-ground="light"]
-  section[data-zone][data-tone="dark"]:not([data-bg="own"]):not(:focus-within),
-#page-stage[data-ground="dark"]
-  section[data-zone][data-tone="light"]:not([data-bg="own"]):not(
-    :focus-within
-  ) {
-  opacity: 0;
-  pointer-events: none;
-}
-@media (prefers-reduced-motion: reduce) {
-  #page-stage[data-tone-ready] section[data-zone] {
-    transition: none;
-  }
-}
+/* No zone fades out (W02, the owner 2026-11-20: "no empty screen at any scroll moment"). Each tone
+   section paints its own ground (above), so the head of the section coming in is readable on its
+   own ground from its first pixel; hiding it until the page ground turned left up to half a
+   screen empty at every tone change. */
 
 /* ==========================================================================
    Marquee (CSS-driven; reverses in RTL; pauses on hover; still when reduced)

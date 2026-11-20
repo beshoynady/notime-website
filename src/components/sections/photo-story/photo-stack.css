@@ -48,6 +48,8 @@
 }
 .pstack-img {
   position: relative;
+  /* A warm ground while the photo loads: on a slow line the frame still shows (W02). */
+  background-color: color-mix(in srgb, var(--color-cocoa) 55%, var(--color-espresso));
   aspect-ratio: 4 / 3;
   max-block-size: 62svh;
   inline-size: 100%;

@@ -133,12 +133,12 @@ main[data-theme="evening"] .cat-opening-overlay > .crumbs a {
     --scene-top-extra: 61px;
   }
 }
-/* The page box carries the grain (CategoryView), so its sections are see-through. Before the
-   tone controller runs (or without JS) the box holds the ground the sections would have held. */
+/* The page box carries the grain (CategoryView), so its sections are see-through and the box
+   holds their ground (its grain, z-index -1 in the box, paints above that background). */
 .cat-page > section[data-tone] {
   background-color: transparent;
 }
-#page-stage:not([data-tone-ready]) .cat-page {
+#page-stage .cat-page {
   background-color: var(--tone-ground);
 }
 .cat-index-track {
@@ -186,7 +186,7 @@ main[data-theme="evening"] .cat-opening-overlay > .crumbs a {
 .svc {
   display: grid;
   gap: 32px;
-  padding-block: clamp(56px, 8vw, 120px);
+  padding-block: clamp(56px, min(8vw, 12svh), 120px); /* height-bound: W02 */
   border-block-start: 1px solid var(--border);
 }
 [data-tone="dark"] .svc {
@@ -713,7 +713,7 @@ main[data-theme] [data-tone] {
 /* Act 3 · the FAQ and the quote block (CategoryFaq, CategoryQuote). At ≥ 900px they keep the
    page's columns: the label in the rail's column, the content in the sections' column. */
 .cat-end {
-  padding-block: clamp(64px, 9vw, 128px);
+  padding-block: clamp(64px, min(9vw, 13svh), 128px); /* height-bound: W02 */
 }
 .cat-faq + .cat-quote {
   padding-block-start: 0;

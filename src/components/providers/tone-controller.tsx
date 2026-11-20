@@ -15,14 +15,12 @@ export type HeaderTone = Tone | "hero";
  *   property tweened on the stage re-styled every element under it on every frame, ~90 ms a frame on a
  *   phone at 4× CPU) tweens to a section's ground (`--tone-ground`, which a
  *   theme may set, globals.css) as it crosses 55% of the viewport;
- * - `data-ground` on the stage names the ground's tone; a zone whose tone differs (the tail of the
- *   section going out, the head of the one coming in) fades out (globals.css), so its text never
- *   sits on the wrong ground (M1: About's stats on ivory measured about 1.1:1);
+ * - `data-ground` on the stage names the ground's tone. Each section paints its own ground
+ *   (globals.css), so its text never sits on the wrong one (M1: About's stats on ivory measured
+ *   about 1.1:1). Sections on the other tone used to fade out instead, which left up to half a
+ *   screen empty at each tone change (W02); `data-zone` only marks the sections now;
  * - the header switches tone when a section passes under it (`data-header-tone` on #site-header):
- *   a section that paints its own ground (`data-bg="own"`: hero, footer) sets it, any other
- *   follows the ground, since a transparent section shows the ground under the header.
- * Sections only become transparent once this controller has run (`#page-stage[data-tone-ready]`),
- * so the page stays readable if JS fails.
+ *   the section's own tone (or "hero"), since every section paints its own ground.
  */
 /** A section's ground: its `--tone-ground`, or the tone's default when a page sets none. */
 function groundOf(section: HTMLElement) {
@@ -66,13 +64,10 @@ export function ToneController() {
       let groundTone: Tone = "dark";
       const setHeader = () => {
         if (!header || !underHeader) return;
-        const own = underHeader.dataset.bg === "own";
         header.dataset.headerTone =
           underHeader.dataset.header === "hero"
             ? "hero"
-            : own
-              ? ((underHeader.dataset.tone as Tone) ?? "dark")
-              : groundTone;
+            : ((underHeader.dataset.tone as Tone) ?? "dark");
       };
       const setGround = (section: HTMLElement) => {
         groundTone = (section.dataset.tone as Tone) ?? "dark";

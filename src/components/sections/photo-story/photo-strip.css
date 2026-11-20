@@ -53,6 +53,8 @@
 .pstrip-img {
   position: relative;
   overflow: hidden;
+  /* A warm ground while the photo loads: on a slow line the frame still shows (W02). */
+  background-color: color-mix(in srgb, var(--color-cocoa) 55%, var(--color-espresso));
   block-size: var(--strip-h);
   aspect-ratio: var(--ar);
 }
