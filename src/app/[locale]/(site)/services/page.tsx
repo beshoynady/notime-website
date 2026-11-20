@@ -79,7 +79,7 @@ export default async function ServicesPage() {
         </div>
       </section>
 
-      <ClosingCta id="services-closing" title={t("servicesIndex.closing.title")} body={t("servicesIndex.closing.body")} href={QUOTE_LINK.href} label={t("header.quote")} tone="dark" />
+      <ClosingCta id="services-closing" title={t("servicesIndex.closing.title")} body={t("servicesIndex.closing.body")} href={QUOTE_LINK.href} label={t("header.quote")} tone="dark" ownGround />
     </main>
   );
 }

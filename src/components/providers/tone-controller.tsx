@@ -94,7 +94,11 @@ export function ToneController() {
       // The footer paints its own ground, so it never turns the page's (D105): at the bottom of a
       // page the last light section stayed on screen while the footer's zone turned the ground
       // dark and faded it out. The last section above the footer holds the ground to the end.
-      const grounds = sections.filter((s) => !s.closest("footer"));
+      // Any other section that paints its own ground (data-bg="own") likewise, except the page's
+      // first, which sets the initial ground (the hero): /services' closing CTA (self-audit B12).
+      const grounds = sections.filter(
+        (s, i) => !s.closest("footer") && (i === 0 || s.dataset.bg !== "own"),
+      );
 
       sections.forEach((section, i) => {
         section.dataset.zone = "";
