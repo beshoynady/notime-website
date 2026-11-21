@@ -4,12 +4,10 @@
  *   node scripts/lighthouse.mjs [base=http://localhost:3100] [outDir=docs/checkpoints/lighthouse] [--runs=3]
  *
  * Default Lighthouse mobile profile: Moto G Power emulation, simulated throttling
- * (150 ms RTT, 1.6 Mbps, 4x CPU slowdown). Three scenarios per run, via the user-flow API:
- *   first   - cold first visit: storage and cache reset, so the intro plays.
- *   return  - the same tab navigates again without a storage reset: sessionStorage["nt-intro"]
- *             is set, so the intro is skipped (short title reveal), and the HTTP cache is warm.
- *   skipped - isolation case: intro skipped (flag seeded before the boot script runs) but with
- *             storage and cache reset, so the cold network cost matches "first".
+ * (150 ms RTT, 1.6 Mbps, 4x CPU slowdown). Two scenarios per run, via the user-flow API:
+ *   first  - cold first visit: storage and cache reset.
+ *   return - the same tab navigates again without a storage reset: the HTTP cache is warm.
+ * (The intro and its "skipped" scenario are gone: home opens complete, D156.)
  *
  * Lighthouse is not a project dependency: it is installed once with npm into
  * $LIGHTHOUSE_DIR (default: <os tmp>/nt-lighthouse-<version>). It drives the installed Chrome
@@ -29,7 +27,7 @@ const base = (positional[0] ?? "http://localhost:3100").replace(/\/$/, "");
 const outDir = positional[1] ?? path.join("docs", "checkpoints", "lighthouse");
 const RUNS = Number(args.find((a) => a.startsWith("--runs="))?.slice(7) ?? 3);
 const LOCALES = ["en", "ar"];
-const SCENARIOS = ["first", "return", "skipped"];
+const SCENARIOS = ["first", "return"];
 
 // ---- Lighthouse install (outside the repo) ---------------------------------------------
 const lhDir = process.env.LIGHTHOUSE_DIR ?? path.join(os.tmpdir(), `nt-lighthouse-${LH_VERSION}`);
@@ -130,27 +128,15 @@ for (const locale of LOCALES) {
   runs[locale] = Object.fromEntries(SCENARIOS.map((s) => [s, []]));
   const url = `${base}/${locale}`;
   for (let i = 1; i <= RUNS; i++) {
-    // first + return in one tab, so the return visit keeps this tab's sessionStorage.
+    // first + return in one tab, so the return visit keeps this tab's cache.
     const [first, ret] = await withPage(async (page) => {
       const flow = await startFlow(page, { config });
-      await flow.navigate(url, { name: "first visit (intro)" });
-      await flow.navigate(url, { name: "return visit (intro skipped)", disableStorageReset: true });
+      await flow.navigate(url, { name: "first visit" });
+      await flow.navigate(url, { name: "return visit (warm cache)", disableStorageReset: true });
       const res = await flow.createFlowResult();
       return res.steps.map((s) => s.lhr);
     });
-    // skipped: a fresh tab with the session flag seeded before any page script.
-    const [skipped] = await withPage(async (page) => {
-      await page.evaluateOnNewDocument(() => {
-        try {
-          sessionStorage.setItem("nt-intro", "1");
-        } catch {}
-      });
-      const flow = await startFlow(page, { config });
-      await flow.navigate(url, { name: "intro skipped, cold cache" });
-      const res = await flow.createFlowResult();
-      return res.steps.map((s) => s.lhr);
-    });
-    for (const [scenario, lhr] of [["first", first], ["return", ret], ["skipped", skipped]]) {
+    for (const [scenario, lhr] of [["first", first], ["return", ret]]) {
       const s = summarize(lhr);
       runs[locale][scenario].push(s);
       writeFileSync(path.join(outDir, "raw", `lh-${locale}-${scenario}-${i}.json.gz`), gzipSync(JSON.stringify(lhr)));

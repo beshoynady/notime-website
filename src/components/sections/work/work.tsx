@@ -1,8 +1,7 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { HoverSweep } from "@/components/motion/hover-sweep";
 import { SectionRef } from "@/components/review/section-ref";
-import { FrameCorners } from "@/components/ornaments/frame-corners";
-import { MediaImage } from "@/components/ui/media-image";
+import { CaseMedia } from "@/components/pages/case-media";
 import { getCategory, workHref, WORK_INDEX_HREF, type Locale } from "@/content";
 import { Link } from "@/i18n/navigation";
 import { media } from "@/content/media";
@@ -58,35 +57,30 @@ export async function Work() {
           </div>
         </header>
         <ul className="work-grid">
-          {cases.map(({ item, view, cover }, i) => {
-            return (
-              <li key={view.key} className="work-card" data-lead={i === 0 ? "" : undefined}>
-                {cover && (
-                  <Link href={workHref(view.slug)} tabIndex={-1} aria-hidden="true" className="work-media-link">
-                    <HoverSweep className="work-media">
-                      <div className="duotone absolute inset-0">
-                        <MediaImage entry={cover} locale={locale} decorative sizes={i === 0 ? "(min-width: 900px) 58vw, 100vw" : "(min-width: 900px) 40vw, 100vw"} />
-                      </div>
-                      <FrameCorners inset="md" />
-                    </HoverSweep>
+          {cases.map(({ item, view, cover }, i) => (
+            <li key={view.key} className="work-card" data-lead={i === 0 ? "" : undefined}>
+              {cover && (
+                <Link href={workHref(view.slug)} tabIndex={-1} aria-hidden="true" className="work-media-link">
+                  <HoverSweep className="work-media">
+                    <CaseMedia view={view} cover={cover} locale={locale} sizes={i === 0 ? "(min-width: 900px) 58vw, 100vw" : "(min-width: 900px) 40vw, 100vw"} />
+                  </HoverSweep>
+                </Link>
+              )}
+              <div className="work-body">
+                <ul className="work-meta text-eyebrow" aria-label={t("spansLabel")}>
+                  {item.categories.map((c) => (
+                    <li key={c}>{getCategory(c)?.title[locale]}</li>
+                  ))}
+                </ul>
+                <h3 className="work-title">
+                  <Link href={workHref(view.slug)} className="work-link">
+                    {view.label[locale]}
                   </Link>
-                )}
-                <div className="work-body">
-                  <ul className="work-meta text-eyebrow" aria-label={t("spansLabel")}>
-                    {item.categories.map((c) => (
-                      <li key={c}>{getCategory(c)?.title[locale]}</li>
-                    ))}
-                  </ul>
-                  <h3 className="work-title">
-                    <Link href={workHref(view.slug)} className="work-link">
-                      {view.label[locale]}
-                    </Link>
-                  </h3>
-                  <p className="work-summary">{view.summary[locale]}</p>
-                </div>
-              </li>
-            );
-          })}
+                </h3>
+                <p className="work-summary">{view.summary[locale]}</p>
+              </div>
+            </li>
+          ))}
         </ul>
       </div>
     </section>

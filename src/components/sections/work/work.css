@@ -126,7 +126,10 @@
    pointer or keyboard focus. CSS on the img only; Motion's HoverSweep owns its own layer. */
 .work-media img {
   scale: 1.04;
-  transition: scale 1.4s var(--ease-expo-out);
+  /* Both transitions: this shorthand would otherwise drop duotone.css's colour fade on hover. */
+  transition:
+    scale 1.4s var(--ease-expo-out),
+    filter 0.6s var(--ease-power3-out);
 }
 .work-card:focus-within .work-media img {
   scale: 1;

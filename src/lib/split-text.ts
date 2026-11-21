@@ -29,15 +29,15 @@ export function loadSplitText(): Promise<SplitTextPlugin> {
 
 /**
  * Run `fn` inside `ctx` once SplitText is loaded (so the context's revert also reverts the
- * split), or `onFail` if it cannot load. Returns a cancel function for the caller's cleanup.
+ * split); if it cannot load, nothing runs. Returns a cancel function for the caller's cleanup.
  * The flag is per call on purpose: `ctx.isReverted` cannot guard a late promise, because
  * useGSAP and gsap.matchMedia reuse one context across runs and `add()` resets it.
  */
-export function withSplitText(ctx: gsap.Context, fn: (Split: SplitTextPlugin) => void, onFail?: () => void): () => void {
+export function withSplitText(ctx: gsap.Context, fn: (Split: SplitTextPlugin) => void): () => void {
   let live = true;
   loadSplitText().then(
     (Split) => live && ctx.add(() => fn(Split)),
-    () => live && onFail && ctx.add(onFail),
+    () => {},
   );
   return () => {
     live = false;

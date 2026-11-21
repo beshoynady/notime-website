@@ -161,8 +161,6 @@ html[data-js]:not([data-reduced]) .hero-clock-wrap {
   fill: none;
   stroke: rgba(234, 212, 171, 0.5);
   stroke-width: 1;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 0;
 }
 .hero-clock-ring2 {
   fill: none;

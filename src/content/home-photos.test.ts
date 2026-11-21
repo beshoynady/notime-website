@@ -1,13 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { getCategories } from "./index";
-import { MEDIA } from "./media";
+import { mediaAll } from "./media";
 import { workItems } from "./work";
 
 /**
  * Home (visual portfolio, Task C4; docs/content/visual-stories.md "Home"): the «Five crafts» cards
  * and «Real projects» are photographs from the registry, Rand's own wherever one exists.
  */
-const entry = (id: string) => MEDIA.find((m) => m.id === id);
+const entry = mediaAll;
 
 describe("home: the five crafts cards", () => {
   it("each card's photo is the one the story names", () => {

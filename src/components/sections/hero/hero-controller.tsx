@@ -11,6 +11,8 @@ import { formatTimecode } from "@/lib/time";
 const TITLE_FLOOR = 0.45;
 const WIDE = "(min-width: 900px)";
 const NARROW = "(max-width: 899.98px)";
+/** The visitor's first move, which builds the pin (D156). */
+const INTENT = ["wheel", "touchstart", "keydown", "pointerdown", "scroll"] as const;
 
 /**
  * Client half of the hero (D156). Nothing here gates the first screen: the server markup is
@@ -43,8 +45,9 @@ export function HeroController() {
       // phone, D156). LCP ends at the first input, and globals.css already reserves the pin's
       // distance (.hero-pin), so a late build moves nothing.
       const mm = gsap.matchMedia();
+      const intent = new AbortController();
       const build = () => {
-        off();
+        intent.abort();
         // Both conditions: matchMedia only runs while at least one matches.
         mm.add({ wide: WIDE, narrow: NARROW }, (ctx) => {
           const lines = q(".hero-line");
@@ -82,20 +85,15 @@ export function HeroController() {
         });
         hero.dataset.heroPinned = "";
       };
-      const INTENT = ["wheel", "touchstart", "keydown", "pointerdown", "scroll"] as const;
-      const opts = { passive: true, capture: true } as const;
-      function off() {
-        for (const e of INTENT) removeEventListener(e, build, opts);
-      }
       if (scrollY > 0) build();
-      else for (const e of INTENT) addEventListener(e, build, opts);
+      else for (const e of INTENT) addEventListener(e, build, { passive: true, capture: true, signal: intent.signal });
 
       // Webfonts change line widths: re-measure the pin once they are in.
       document.fonts?.ready.then(() => alive && ScrollTrigger.refresh());
 
       return () => {
         alive = false;
-        off();
+        intent.abort();
         mm.revert();
         delete hero.dataset.heroReady;
         delete hero.dataset.heroPinned;
@@ -112,26 +110,17 @@ export function HeroController() {
     const t0 = performance.now();
     const reduced = prefersReducedMotion();
     let last = "";
-    let raf = 0;
     let timer = 0;
     let onScreen = true;
     const write = () => {
       const txt = formatTimecode(performance.now() - t0);
       if (txt !== last) tc.textContent = last = txt;
     };
-    const loop = () => {
-      write();
-      raf = requestAnimationFrame(loop);
-    };
-    const stop = () => {
-      cancelAnimationFrame(raf);
-      clearInterval(timer);
-    };
+    const stop = () => clearInterval(timer);
+    // One tick per frame of the 24 fps timecode, not per display frame (once a second when reduced).
     const start = () => {
       stop();
-      if (!onScreen || document.hidden) return;
-      if (reduced) timer = window.setInterval(write, 1000);
-      else raf = requestAnimationFrame(loop);
+      if (onScreen && !document.hidden) timer = window.setInterval(write, reduced ? 1000 : 1000 / 24);
     };
     const io = new IntersectionObserver(([e]) => {
       onScreen = e.isIntersecting;

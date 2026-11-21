@@ -9,6 +9,9 @@ import { orderNumeral } from "@/lib/roman";
 import { CategoryCardsScroll } from "./category-cards-scroll";
 import "./categories.css";
 
+/** Open card: about 55% of the 1280px frame (≈ 700px); closed or stacked: full width on phones. */
+const SIZES = "(min-width: 1280px) 700px, (min-width: 900px) 55vw, 100vw";
+
 /**
  * Expanding category cards (approved in the styleguide). Desktop: the hovered or focused card
  * widens (CSS flex-grow, 0.9s). Phone: the card in view opens as you scroll (ScrollTrigger
@@ -22,12 +25,10 @@ export async function CategoryCards() {
     <CategoryCardsScroll>
       {getCategories().map((c, i) => {
         const photo = c.photo ? media(c.photo) : undefined;
-        // Open card: about 55% of the 1280px frame (≈ 700px); closed or stacked: full width on phones.
-        const sizes = "(min-width: 1280px) 700px, (min-width: 900px) 55vw, 100vw";
         return (
           <Link key={c.slug} href={categoryHref(c.slug)} className={i === 0 ? "cat is-on" : "cat"}>
             <div className="cat-media">
-              {photo ? <MediaImage entry={photo} locale={locale} sizes={sizes} decorative /> : <BrandImage slot={c.image} fill decorative sizes={sizes} />}
+              {photo ? <MediaImage entry={photo} locale={locale} sizes={SIZES} decorative /> : <BrandImage slot={c.image} fill decorative sizes={SIZES} />}
             </div>
             <div className="cat-txt">
               <span className="cat-num tabular" aria-hidden="true">

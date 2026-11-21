@@ -21,8 +21,6 @@ export function HeroClock() {
         cx={C}
         cy={C}
         r={CLOCK.ring}
-        pathLength={1}
-        transform={`rotate(-90 ${C} ${C})`}
       />
       <line className="hero-clock-hand" x1={C} y1="332" x2={C} y2="30" />
       <circle className="hero-clock-hub" cx={C} cy={C} r="3.5" />
