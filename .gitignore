@@ -77,3 +77,6 @@ docs/checkpoints/m3/**/*.jpg
 .github/agents/
 .github/hooks/
 scripts/tmp/
+
+# graphify knowledge graph (local navigation aid; rebuilt per file, never committed)
+graphify-out/
