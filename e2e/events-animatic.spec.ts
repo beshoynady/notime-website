@@ -21,7 +21,7 @@ const scrollIntoBuild = (page: Page, vh: number) =>
 
 test("the public page shows the opening's still and plays the majlis", async ({ page }) => {
   await gotoReady(page, LAB("en"));
-  await expect(page.locator('.cat-opening .scene[data-scene="events-opening"][data-mode="still"]')).toHaveCount(1);
+  await expect(page.locator('.cat-opening .scene[data-scene="events-opening"][data-mode]')).toHaveCount(1);
   await expect(majlis(page)).toHaveCount(1);
   await expect(majlis(page).locator(".mj-art")).toHaveCount(1); // the drawn dallah and its pour
 });

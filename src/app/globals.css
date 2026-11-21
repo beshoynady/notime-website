@@ -585,6 +585,9 @@ html[data-js]:not([data-reduced]) .svc-scene .scene-pin:has(> .scene) {
     padding-block-end: 100svh; /* process-scroll: end "+=100%", desktop only */
     min-block-size: 200svh;
   }
+}
+/* Scenes pin from 1024px (PIN_MIN_WIDTH, D151); below it they pass and reserve nothing extra. */
+@media (min-width: 1024px) and (min-height: 640px) {
   html[data-js]:not([data-reduced]) .scene-pin {
     --pin-on: min(var(--pin-d, 0) * 1000, 1);
     padding-block-end: calc(var(--pin-d, 0) * 100svh);

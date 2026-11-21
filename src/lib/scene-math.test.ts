@@ -242,6 +242,17 @@ describe("imageLoading (N06)", () => {
     expect(imageLoading(scene({ layers: [layers[3], layers[2]] }), "still", has)).toEqual({ desk: { eager: true, high: true, phoneGate: true }, table: eager });
   });
 
+  it("the hero (D154): desktop's first frame and the phone's still both load first; a later entrance waits", () => {
+    const night = layer({ id: "night", level: 0, slot: "desk", mobile: false });
+    const entrance = layer({ id: "door", level: 2, slot: "table", mobile: false, enter: { shot: 3, from: { opacity: 0 } } });
+    expect(imageLoading(scene({ layers: [night, layers[1], layers[2], entrance] }), "hero", has)).toEqual({
+      night: { eager: true, high: true, phoneGate: true },
+      room: high,
+      table: eager,
+      door: lazy,
+    });
+  });
+
   it("the build scene never competes with the hero: every image is lazy", () => {
     expect(imageLoading(scene({ layers }), "build", has)).toEqual({ room: lazy, table: lazy, desk: lazy });
   });

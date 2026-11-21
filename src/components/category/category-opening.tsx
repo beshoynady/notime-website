@@ -14,7 +14,8 @@ import { categoryRef } from "@/lib/review";
 
 /**
  * Category page · Act 1, the opening (D64; N06): with a scene, the hero is the scene's finished
- * still, one screen, unpinned: breadcrumbs, eyebrow, the H1 (text), the last shot line as the
+ * still, one screen, unpinned (a scene marked `hero`, D154, plays its film pinned from 1024px and is
+ * that still below; the head below is on screen from the first frame either way): breadcrumbs, eyebrow, the H1 (text), the last shot line as the
  * lead (the promise), "Request a quote" (the header's string, to the brief with the category
  * hinted, as the CTA bar) and the skip control. Nothing pins at any width and no ScrollTrigger is
  * built here: the pinned build scene that followed the hero on desktop is v1.1 (the owner's scope
@@ -83,7 +84,7 @@ export async function CategoryOpening({
       <SectionRef id={categoryRef(category.slug, "opening")} />
       {scene ? (
         <>
-          <LayeredScene scene={scene} lines={[]} variant={variant} mode="still" overlayClassName="frame cat-opening-overlay">
+          <LayeredScene scene={scene} lines={[]} variant={variant} mode={scene.hero ? "hero" : "still"} overlayClassName="frame cat-opening-overlay">
             {head}
           </LayeredScene>
           <div className="frame cat-opening-overlay cat-opening-after">{intro}</div>

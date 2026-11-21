@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
 import en from "@/messages/en.json";
 import ar from "@/messages/ar.json";
-import { SECTION_PIN_LIMIT, sceneProblems } from "@/lib/scene-math";
+import { SECTION_PIN_LIMIT, sceneProblems, visibleLayers } from "@/lib/scene-math";
 import { getCategories, getServices } from "..";
 import { EVENTS_OPENING } from "./events-hospitality";
-import { allScenes, allSectionScenes, DRAFT_LAB_ID, DRAFT_SCENE, getLabScene, getScene, getSectionScene, LAB_IDS, labCategory, labScene } from ".";
+import { allScenes, allSectionScenes, getSceneImage, DRAFT_LAB_ID, DRAFT_SCENE, getLabScene, getScene, getSectionScene, LAB_IDS, labCategory, labScene } from ".";
 
 const scenes = allScenes();
 const sectionScenes = new Set(allSectionScenes());
@@ -45,6 +45,22 @@ describe("scenes, public and in review", () => {
     expect(EVENTS_OPENING.shots.filter((s) => s.desktop)).toHaveLength(4);
     expect(lined("desktop")).toEqual(["events.s1", "events.s3", "events.s4"]);
     expect(lined("mobile")).toEqual(lined("desktop"));
+  });
+
+  it("the Evening opening is photographs only: the room at night, the light, the tables, the entrance (D153, D154)", () => {
+    expect(EVENTS_OPENING.layers.filter((l) => l.fx === "ev-hall")).toEqual([]);
+    for (const l of EVENTS_OPENING.layers.filter((x) => x.slot)) expect(getSceneImage(l.slot!)?.src, l.id).toBeTruthy();
+    const plate = EVENTS_OPENING.layers.find((l) => l.level === 0 && !l.keys);
+    expect(plate?.slot).toBe("ev-open-night");
+    const entrance = EVENTS_OPENING.layers.find((l) => l.slot === "private-celebrations-3");
+    expect(entrance?.enter?.shot).toBe(3);
+  });
+
+  it("a scene drops the layers whose picture is hidden, and keeps its shots (fill or hide, D78)", () => {
+    const shown = visibleLayers(EVENTS_OPENING, (slot) => slot !== "private-celebrations-3");
+    expect(shown.layers.some((l) => l.slot === "private-celebrations-3")).toBe(false);
+    expect(shown.layers.length).toBe(EVENTS_OPENING.layers.length - 1);
+    expect(shown.shots).toEqual(EVENTS_OPENING.shots);
   });
 
   it("every scene is listed once for the rule checks", () => {

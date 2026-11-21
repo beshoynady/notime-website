@@ -56,9 +56,15 @@ function measure(page: Page, i: number) {
       }
       return true;
     };
+    // A scene's full-frame plate is the backdrop: it bleeds past the frame on purpose (cover, drift
+    // and push), so only the content above it is measured. Framed photos still count.
+    const plate = (e: Element) => {
+      const layer = e.closest<HTMLElement>(".scene-layer");
+      return !!layer && /^0(px)?$/.test(layer.style.insetBlock) && /^0(px)?$/.test(layer.style.insetInline);
+    };
     const leaves = [...pin.querySelectorAll("h1,h2,h3,h4,p,li,a,button,img,figcaption,dt,dd")].filter((e) => {
       const r = e.getBoundingClientRect();
-      return r.width > 2 && r.height > 2 && shown(e);
+      return r.width > 2 && r.height > 2 && shown(e) && !plate(e);
     });
     const name = (e: Element) => `${e.tagName.toLowerCase()} "${(e.textContent || e.getAttribute("alt") || "").trim().slice(0, 30)}"`;
     let low = leaves[0], high = leaves[0];

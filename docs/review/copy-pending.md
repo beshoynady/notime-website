@@ -166,3 +166,11 @@ The owner approved these English changes (`docs/review/humanizer-pass.md`). The 
 ★ on H15–H17: the claims that the crew who rig the stage also run it (D56) and that one crew makes the film are out of the site until Rand answers question 17 in `rand-questions.md` (stage and photography crews: in-house, partners or freelancers; D148). If she confirms them, they can come back.
 
 ⚑ on H12: the merchandise line waits on Rand like the other ⚑ rows. Her answers on gifts (question 14) and on branded apparel (question 15, «الملابس الممهورة بالهوية») decide whether it stays; on launch day it's hidden if unconfirmed, as every ⚑ line.
+
+## Visual portfolio: new lines (2026-11-21)
+
+New copy written for the photo scenes (`docs/content/visual-stories.md`). None states a fact, so none waits on Rand; each is shown here so the owner sees every line that changed. English checked with humanizer; Arabic written natively.
+
+| ID | Was EN | Was AR | Now EN | Now AR | Why |
+|---|---|---|---|---|---|
+| `m:scenes.events.s1` | It starts with an empty room. | تبدأ كل مناسبة بقاعة فارغة. | It starts before the lights come on. | تبدأ قبل أن تُضاء الأنوار. | The opening's first frame is now the room at night (D153), not an empty drawn hall. |

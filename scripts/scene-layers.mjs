@@ -69,7 +69,7 @@ async function render(file, crop, item, suffix = "") {
     const g = GRADES[item.grade];
     img = img.recomb(g.matrix).modulate(g.modulate);
   }
-  if (item.night) img = img.modulate({ brightness: 0.42, saturation: 0.55 }).recomb([[0.82, 0, 0], [0, 0.9, 0], [0, 0.04, 1.08]]);
+  if (item.night) img = img.modulate({ brightness: 0.62, saturation: 0.65 }).recomb([[0.82, 0, 0], [0, 0.9, 0], [0, 0.04, 1.08]]);
   let buf = await img.png().toBuffer();
   if (item.cut === "rembg") {
     const tmpIn = path.join(STOCK, `_cut-${item.id}${suffix}.png`);

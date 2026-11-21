@@ -194,6 +194,48 @@ export const MEDIA: MediaEntry[] = [
   }, "portrait · the stand front on, empty or before doors open", clientVisible),
 ];
 
+/** A stock frame (public/images/stock/<id>.webp + -9x16), graded with the category's grade (D153). */
+const stock = (id: string, from: string, by: string, url: string, width: number, height: number, mobile: [number, number], spec: string): MediaEntry => ({
+  id,
+  file: `/images/stock/${id}.webp`,
+  width,
+  height,
+  mobile: { file: `/images/stock/${id}-9x16.webp`, width: mobile[0], height: mobile[1] },
+  source: "stock",
+  credit: { by, url, license: "Unsplash License" },
+  from,
+  replace: true,
+  grade: "evening",
+  alt: null,
+  spec,
+});
+
+/** Scene plates made by scripts/scene-layers.mjs (docs/content/recipes/<page>.json). */
+MEDIA.push(
+  {
+    id: "ev-open-night",
+    file: "/images/scenes/events-hospitality/ev-open-night.webp",
+    width: 1600,
+    height: 900,
+    mobile: { file: "/images/scenes/events-hospitality/ev-open-night-9x16.webp", width: 600, height: 1066 },
+    source: "rand-profile",
+    from: "p9-2",
+    grade: "evening",
+    alt: null,
+    spec: "16:9 + 9:16 · the dressed hall before the lights: same frame as ev-open-room, graded to night",
+  },
+  stock("ev-conf-rows", "unsplash:tCFbHdEIUMU", "Declan Sun", "https://unsplash.com/photos/tCFbHdEIUMU", 2400, 1350, [1080, 1920],
+    "16:9 + 9:16 · a large conference hall, chairs in exact rows, nobody yet; a real NO TIME summit hall replaces it"),
+  stock("ev-conf-session", "unsplash:ZXx-aoBPYuM", "Thomas Delacrétaz", "https://unsplash.com/photos/ZXx-aoBPYuM", 2400, 1350, [1080, 1919],
+    "16:9 + 9:16 · a session running, the audience from behind, the stage and screen lit"),
+  stock("ev-launch-spot", "unsplash:kqgC_6j6AaA", "Fujiphilm", "https://unsplash.com/photos/kqgC_6j6AaA", 2400, 1350, [1080, 1920],
+    "16:9 + 9:16 · a dark stage, one pool of light, seconds before a reveal"),
+  stock("ev-stage-beams", "unsplash:UgKL6h7kPT8", "Liana S", "https://unsplash.com/photos/UgKL6h7kPT8", 2400, 1350, [1080, 1920],
+    "16:9 + 9:16 · the first beams through haze in a dark hall (a NO TIME rig at first light replaces it)"),
+  stock("ev-stage-live", "unsplash:euieMyZIBmY", "Andrew Haha Lee", "https://unsplash.com/photos/euieMyZIBmY", 2400, 1350, [1080, 1920],
+    "16:9 + 9:16 · the full rig on, the seated audience from behind, no faces"),
+);
+
 /** Ids hidden by the environment (tests: NEXT_PUBLIC_MEDIA_HIDE=a,b). */
 const ENV_HIDE = (process.env.NEXT_PUBLIC_MEDIA_HIDE ?? "").split(",").filter(Boolean);
 

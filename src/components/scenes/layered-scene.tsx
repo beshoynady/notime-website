@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import { getSceneImage, type SceneConfig, type SceneLayer } from "@/content/scenes";
-import { imageLoading, layerSizes, pinLength, sceneMode, stillState, wipeInset, type ImageLoading } from "@/lib/scene-math";
+import { imageLoading, layerSizes, pinLength, sceneMode, stillState, visibleLayers, wipeInset, type ImageLoading, type RenderMode } from "@/lib/scene-math";
 import { cn } from "@/lib/utils";
 import { SceneDirector } from "./scene-director";
 import { SceneImage } from "./scene-image";
@@ -20,18 +20,19 @@ import "./layered-scene.css";
  * `mode="still"` (N06, a category's hero) renders only that end frame, at every width and with or
  * without JS: no pin, no reservation, no SceneDirector, so no ScrollTrigger. Its first image is
  * fetched with high priority. `mode="build"` (the default) is the scrubbed scene above; its images
- * are lazy. `desktopOnly` builds it at ≥ 900px only, for a caller that hides it with CSS elsewhere
- * (the category opening's build scene after its hero, v1.1): no mobile reservation and no mobile
- * timeline.
+ * are lazy. `mode="hero"` (D154, a category opening that plays its film) is both: the pinned build
+ * where scenes pin (≥ PIN_MIN_WIDTH), the still below it, with no mobile reservation or timeline.
+ * Its first desktop frame and its phone still load first (imageLoading).
+ *
+ * A layer whose picture is hidden or missing is dropped (visibleLayers, D78), so its beat doesn't play.
  *
  * `variant="animatic"` draws each layer as a labelled flat box (the grey-box animatic, Task 2.9).
  */
 export function LayeredScene({
-  scene,
+  scene: config,
   lines,
   variant,
   mode = "build",
-  desktopOnly = false,
   label,
   overlayClassName,
   pinUnderBars,
@@ -41,8 +42,7 @@ export function LayeredScene({
   /** The shots' lines, already translated, in shot order; "" for a shot without one. */
   lines: string[];
   variant: "live" | "animatic";
-  mode?: "build" | "still";
-  desktopOnly?: boolean;
+  mode?: RenderMode;
   /** Names the scene as a region; leave it out when the scene sits inside a named section. */
   label?: string;
   /** Sets the overlay's inline box (e.g. `frame`); the overlay itself has no inline padding. */
@@ -51,14 +51,17 @@ export function LayeredScene({
   pinUnderBars?: boolean;
   children?: ReactNode;
 }) {
+  const has = (slot: string) => !!getSceneImage(slot)?.src;
+  const scene = visibleLayers(config, has);
   const still = mode === "still";
-  const loading = imageLoading(scene, mode, (slot) => !!getSceneImage(slot)?.src);
+  const hero = mode === "hero";
+  const loading = imageLoading(scene, mode, has);
   const stage = (
     <div
       className="scene"
       data-scene={scene.id}
       data-variant={variant}
-      data-mode={still ? "still" : undefined}
+      data-mode={mode === "build" ? undefined : mode}
       data-shot-active={still ? undefined : "0"}
       role={label ? "region" : undefined}
       aria-label={label}
@@ -88,14 +91,14 @@ export function LayeredScene({
           </div>
         )}
       </div>
-      {!still && <SceneDirector scene={scene} pinUnderBars={pinUnderBars} desktopOnly={desktopOnly} />}
+      {!still && <SceneDirector scene={scene} pinUnderBars={pinUnderBars} desktopOnly={hero} />}
     </div>
   );
   if (still) return stage;
   // The pin's scroll distance per width, reserved from the server render (globals.css, "Pin
   // reservations"): ScrollTrigger adopts this wrapper as its spacer, so its spacing replaces the
   // reservation in the same task and a landing on a section below never moves (M1).
-  const reserve = (v: "desktop" | "mobile") => (sceneMode(scene, v) === "pass" || (desktopOnly && v === "mobile") ? 0 : pinLength(scene.shots, v));
+  const reserve = (v: "desktop" | "mobile") => (sceneMode(scene, v) === "pass" || (hero && v === "mobile") ? 0 : pinLength(scene.shots, v));
   return (
     <div className="scene-pin" style={{ "--pin-d": reserve("desktop"), "--pin-m": reserve("mobile") } as CSSProperties}>
       {stage}

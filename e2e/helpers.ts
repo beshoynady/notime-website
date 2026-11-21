@@ -115,8 +115,8 @@ export function heroLcp(page: Page) {
           const entry = list.getEntries().at(-1) as PerformanceEntry & { element?: Element; url: string };
           const el = entry.element ?? null;
           const label = `${el?.tagName}.${el?.className} ${entry.url}`;
-          if (!document.querySelector('.cat-opening .scene[data-mode="still"]')) return resolve({ kind: entry.url === "" ? "text" : "other", label });
-          const still = el?.closest('.cat-opening .scene[data-mode="still"]');
+          if (!document.querySelector('.cat-opening .scene[data-mode]')) return resolve({ kind: entry.url === "" ? "text" : "other", label });
+          const still = el?.closest('.cat-opening .scene[data-mode]');
           if (!el || !still) return resolve({ kind: "other", label });
           if (el.matches("h1#category-title")) return resolve({ kind: "h1", label });
           if (el.matches(".cat-opening-lead")) return resolve({ kind: "lead", label });

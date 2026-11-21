@@ -1,54 +1,43 @@
 import type { SceneConfig } from "./types";
 
 /**
- * I · Events & Hospitality, "The Evening" (docs/design/storyboards/events-hospitality.md).
- * Public since the full Events build (batch 2): the animatic was approved with D74's changes.
+ * I · Events & Hospitality, "The evening, before the first guest" (docs/content/visual-stories.md;
+ * D153, D154). Photographs only: one real NO TIME room (private-celebrations-1, no people, no
+ * branding) in three depths, and the entrance from the same kind of evening.
  *
- * Opening, desktop: four shots on a 2.0 vh pin (empty room → lights up → dressed → ready) and
- * three lines (D74, P1): shot 2 has none, so the first line holds while the lights come up. The
- * shots are timed for the lines (about 1 s each at a normal scroll): the dressing gets the second
- * line, and the promise lands with the last light key.
- * Mobile: three shots on 1.2 vh. Shot 2's lights hand their cues to shot 3, which merges lights
- * and dressing (storyboard, "Mobile").
- *
- * Images: the empty hall is drawn in code, an architect's one-point perspective in champagne
- * hairlines (`fx-ev-hall`, themes/evening.css), and the room is dressed by a real NO TIME photo
- * (private-celebrations-1: no people, no branding) on the same vanishing point, in two depths
- * (D109): the room (`ev-open-room`) and its near tables (`ev-open-table`, cut along the aisle),
- * which open together in a mask wipe and then separate as the camera moves in. The hall's AI
- * plate keeps its slot and covers the drawing once it exists. The florals, candles and glasses
- * cutouts stay documented for a later pass (the profile's photos don't cut cleanly enough).
+ * Laptop (≥ 1024px, D151): the hero pins and plays four beats on a 2.0 vh pin, with the eyebrow,
+ * H1, lead and "Request a quote" there from the first frame (LayeredScene mode "hero"):
+ *   1. the room at night (the same photo graded to the hour before; `ev-open-night`),
+ *   2. light comes up: the room in its own light wipes in from the centre aisle (`ev-open-room`),
+ *   3. the near tables (cut from the same photo along the aisle, D109) open and walk closer,
+ *   4. the entrance arrangement comes in from the inline-end, a framed photo: the first guest's view.
+ * Phones and reduced motion: the still, the lit room with its tables (the entrance is desktop-only).
  */
 export const EVENTS_OPENING: SceneConfig = {
   id: "events-opening",
+  hero: true,
   shots: [
-    { id: "empty-room", copyKey: "events.s1", desktop: [0, 0.4], mobile: [0, 0.5] },
+    { id: "night", copyKey: "events.s1", desktop: [0, 0.4], mobile: [0, 0.5] },
     { id: "lights-up", desktop: [0.4, 0.83], mobile: null },
     { id: "dressed", copyKey: "events.s3", desktop: [0.83, 1.8], mobile: [0.5, 1.05] },
     { id: "ready", copyKey: "events.s4", desktop: [1.8, 2.0], mobile: [1.05, 1.2] },
   ],
   layers: [
-    // L0: the empty hall, drawn (its plate's slot on top when it exists). Push-in 1.00 → 1.04 over the act.
-    { id: "hall", level: 0, slot: "ev-open-hall", fx: "ev-hall", depth: 0.15, push: 0.04, mobile: true, eager: true, box: { block: "0", inline: "0" } },
-    // L0: the room, dressed (a real photo on the drawing's vanishing point): it opens over the
-    // drawing in a mask wipe from the centre aisle, like curtains (D109), as the room is dressed.
-    { id: "room", level: 0, slot: "ev-open-room", depth: 0.15, push: 0.04, mobile: true, box: { block: "0", inline: "0" }, style: { wipe: 0 }, keys: [{ shot: 2, to: { wipe: 1 } }] },
-    // L1: the near tables, cut from the same photo along the aisle (D109): full-frame, so they
-    // register with the room at any aspect, and drifting and pushing faster than it, so the camera
-    // dollies down the aisle (2.5D parallax). They open with the room.
-    { id: "near-tables", level: 1, slot: "ev-open-table", depth: 0.55, push: 0.1, mobile: true, box: { block: "0", inline: "0" }, style: { wipe: 0 }, keys: [{ shot: 2, to: { wipe: 1 } }] },
-    // L3: dusk. The overlay falls 70% → 40% as the lights come up, then 25% when the room is ready.
-    { id: "dusk", level: 3, fx: "shade", depth: 0, mobile: true, box: { block: "0", inline: "0" }, style: { opacity: 0.7 }, keys: [{ shot: 1, to: { opacity: 0.4 } }, { shot: 3, to: { opacity: 0.25 } }] },
-    // L3: haze, one radial gradient at 4%, there from the first frame.
-    { id: "haze", level: 3, fx: "haze", depth: 0.05, mobile: true, box: { block: "10% 30%", inline: "10% 10%" } },
-    // L3: the stage glow comes up in shot 2, then spreads to fill the frame for shot 4.
-    { id: "stage-glow", level: 3, fx: "glow", depth: 0.2, mobile: true, box: { block: "18% 38%", inline: "26% 26%" }, style: { opacity: 0 }, keys: [{ shot: 1, to: { opacity: 1, scale: 1.1 } }, { shot: 3, to: { scale: 1.6 } }] },
-    // L3: two beams from the rig (desktop).
-    { id: "beam-start", level: 3, fx: "beam", depth: 0.1, mobile: false, box: { block: "0 30%", inline: "30% 58%" }, style: { opacity: 0 }, keys: [{ shot: 1, to: { opacity: 0.5 } }] },
-    { id: "beam-end", level: 3, fx: "beam", depth: 0.1, mobile: false, box: { block: "0 30%", inline: "58% 30%" }, style: { opacity: 0 }, keys: [{ shot: 1, to: { opacity: 0.5 } }] },
-    // L3: candle points light up as the room is ready; they flicker twice while the act is live (evening.css).
-    { id: "candle-points", level: 3, fx: "candles", depth: 0.3, mobile: true, box: { block: "46% 22%", inline: "14% 14%" }, style: { opacity: 0 }, keys: [{ shot: 3, to: { opacity: 1 } }] },
-    // L3: the scrim under the H1 and the lines (the lit room's floor is pale).
+    // L0: the room at night, the hour before (the film's first frame, desktop only: phones get the
+    // still, D154). Push-in 1.00 → 1.04 over the act.
+    { id: "night", level: 0, slot: "ev-open-night", depth: 0.15, push: 0.04, mobile: false, eager: true, box: { block: "0", inline: "0" } },
+    // L0: the same room in its light, wiping in from the centre aisle like curtains (D109).
+    { id: "room", level: 0, slot: "ev-open-room", depth: 0.15, push: 0.04, mobile: true, eager: true, box: { block: "0", inline: "0" }, style: { wipe: 0 }, keys: [{ shot: 1, to: { wipe: 1 } }] },
+    // L1: the near tables, cut from the same photo along the aisle (D109): they open as the room is
+    // dressed, then drift and push faster than it, so the camera walks down the aisle (2.5D).
+    { id: "near-tables", level: 1, slot: "ev-open-table", depth: 0.55, push: 0.1, mobile: true, eager: true, box: { block: "0", inline: "0" }, style: { wipe: 0 }, keys: [{ shot: 2, to: { wipe: 1 } }] },
+    // L3: the overlay lifts as the light comes up (text stays AA over the scrim below).
+    { id: "dusk", level: 3, fx: "shade", depth: 0, mobile: true, box: { block: "0", inline: "0" }, style: { opacity: 0.3 }, keys: [{ shot: 1, to: { opacity: 0.2 } }, { shot: 3, to: { opacity: 0.15 } }] },
+    // L3: the stage's warm glow at the end of the aisle.
+    { id: "stage-glow", level: 3, fx: "glow", depth: 0.2, mobile: true, box: { block: "18% 38%", inline: "26% 26%" }, style: { opacity: 0 }, keys: [{ shot: 1, to: { opacity: 0.8, scale: 1.1 } }, { shot: 3, to: { scale: 1.5 } }] },
+    // L2: the entrance (a real NO TIME arrangement), a framed photo at the inline-end (mirrors in AR).
+    { id: "entrance", level: 2, slot: "private-celebrations-3", fx: "ev-frame", depth: 0.6, mobile: false, box: { block: "24% 14%", inline: "66% 7%" }, enter: { shot: 3, from: { x: 12, opacity: 0 } } },
+    // L3: the scrim under the H1 and the lines.
     { id: "scrim", level: 3, fx: "ev-scrim", depth: 0, mobile: true, box: { block: "0", inline: "0" } },
   ],
 };

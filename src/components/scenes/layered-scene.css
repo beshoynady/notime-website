@@ -1,6 +1,6 @@
 /* LayeredScene (D64). Three states:
    - still (default): no JS, reduced motion, or a scene rendered as its still (data-mode="still":
-     a category's hero, N06, at every width). The end frame: keys at their last values, every
+     a category's hero, N06, at every width; data-mode="hero" below 1024px, D154). The end frame: keys at their last values, every
      entrance done, every shot line visible as one short paragraph.
    - motion (html[data-js]:not([data-reduced])): shot 1 from the first paint. Entering layers and
      later lines start hidden; SceneDirector (GSAP) takes over from there.
@@ -32,7 +32,8 @@
   transform: scale(var(--still-scale, 1));
   clip-path: var(--still-clip, var(--rest-clip, none));
 }
-@media (max-width: 899.98px) {
+/* Desktop-only layers animate only where scenes pin (PIN_MIN_WIDTH, D151). */
+@media (max-width: 1023.98px) {
   .scene-layer:not([data-mobile]) {
     display: none;
   }
@@ -62,28 +63,53 @@
   content: " ";
 }
 
-/* Motion: shot 1 from the first paint. Never on a still scene. */
-html[data-js]:not([data-reduced]) .scene:not([data-mode="still"]) .scene-light {
+/* Motion: shot 1 from the first paint. Never on a still scene; a hero (D154) only where it pins,
+   so below PIN_MIN_WIDTH it stays the still. */
+html[data-js]:not([data-reduced]) .scene:not([data-mode]) .scene-light {
   opacity: var(--rest-opacity, 1);
   transform: none;
   clip-path: var(--rest-clip, none);
 }
-html[data-js]:not([data-reduced]) .scene:not([data-mode="still"]) .scene-enter[data-enter] {
+html[data-js]:not([data-reduced]) .scene:not([data-mode]) .scene-enter[data-enter] {
   opacity: 0;
 }
-html[data-js]:not([data-reduced]) .scene:not([data-mode="still"]) .scene-copy {
+html[data-js]:not([data-reduced]) .scene:not([data-mode]) .scene-copy {
   display: grid;
 }
-html[data-js]:not([data-reduced]) .scene:not([data-mode="still"]) .scene-line {
+html[data-js]:not([data-reduced]) .scene:not([data-mode]) .scene-line {
   display: block;
   grid-area: 1 / 1;
 }
-html[data-js]:not([data-reduced]) .scene:not([data-mode="still"]) .scene-line::before {
+html[data-js]:not([data-reduced]) .scene:not([data-mode]) .scene-line::before {
   content: none;
 }
-html[data-js]:not([data-reduced]) .scene:not([data-mode="still"]) .scene-line:not(:first-child) {
+html[data-js]:not([data-reduced]) .scene:not([data-mode]) .scene-line:not(:first-child) {
   visibility: hidden;
   opacity: 0;
+}
+@media (min-width: 1024px) {
+  html[data-js]:not([data-reduced]) .scene[data-mode="hero"] .scene-light {
+    opacity: var(--rest-opacity, 1);
+    transform: none;
+    clip-path: var(--rest-clip, none);
+  }
+  html[data-js]:not([data-reduced]) .scene[data-mode="hero"] .scene-enter[data-enter] {
+    opacity: 0;
+  }
+  html[data-js]:not([data-reduced]) .scene[data-mode="hero"] .scene-copy {
+    display: grid;
+  }
+  html[data-js]:not([data-reduced]) .scene[data-mode="hero"] .scene-line {
+    display: block;
+    grid-area: 1 / 1;
+  }
+  html[data-js]:not([data-reduced]) .scene[data-mode="hero"] .scene-line::before {
+    content: none;
+  }
+  html[data-js]:not([data-reduced]) .scene[data-mode="hero"] .scene-line:not(:first-child) {
+    visibility: hidden;
+    opacity: 0;
+  }
 }
 
 /* While a scene's trigger is active (data-live, SceneDirector), the boxes that move get their own

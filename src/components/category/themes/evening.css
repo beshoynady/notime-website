@@ -9,10 +9,8 @@
    rail's active numeral is a lit candle point. Everything else stays quiet. */
 
 main[data-theme="evening"] {
-  /* Scene drawings (SVG, code only: no plate or cutout exists yet; storyboards README §3). Generated
-     once from the brand palette. The hall shares its vanishing point (50%, 62%) with the real room
-     photo that fades in over it (ev-open-room), so the drawing becomes the room. */
-  --ev-svg-hall: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900' preserveAspectRatio='xMidYMid slice'%3E%3Cg fill='none' stroke='%23EAD4AB' stroke-width='1' vector-effect='non-scaling-stroke'%3E%3Cpath d='M-1200 900L329.4 640M-600 900L470.6 640M-200 900L564.7 640M200 900L658.8 640M500 900L729.4 640M800 900L800 640M1100 900L870.6 640M1400 900L941.2 640M1800 900L1035.3 640M2400 900L1176.5 640M544.6 652H1055.4M470.8 668H1129.2M369.2 690H1230.8M221.6 722H1378.4M0 770H1600M-323 840H1923M-600 0L450 420M0 0L600 420M400 0L700 420M800 0L800 420M1200 0L900 420M1600 0L1000 420M2200 0L1150 420M-209.5 80H1809.5M4.8 170H1595.2M195.2 250H1404.8M361.9 320H1238.1M492.9 375H1107.1' opacity='.16'/%3E%3Cpath d='M192 134.4V816.8M229.3 138.5V812.7M1408 134.4V816.8M1370.7 138.5V812.7M336 235.2V754.4M362.2 237.8V751.8M1264 235.2V754.4M1237.8 237.8V751.8M444 310.8V707.6M462 312.4V706M1156 310.8V707.6M1138 312.4V706M522 365.4V673.8M534 366.2V673M1078 365.4V673.8M1066 366.2V673' opacity='.22'/%3E%3Cpath d='M600 420H1000V640H600Z M640 600H960V640H640Z M626 640L640 600M974 640L960 600 M700 440H900V560H700Z' opacity='.34'/%3E%3Cpath d='M560 170v90M1040 170v90M660 250v60M940 250v60M720 320v40M880 320v40M400 80v130M1200 80v130' opacity='.2'/%3E%3C/g%3E%3Cg fill='%23EAD4AB' opacity='.35'%3E%3Ccircle cx='560' cy='264' r='4'/%3E%3Ccircle cx='1040' cy='264' r='4'/%3E%3Ccircle cx='660' cy='314' r='3'/%3E%3Ccircle cx='940' cy='314' r='3'/%3E%3Ccircle cx='720' cy='364' r='3'/%3E%3Ccircle cx='880' cy='364' r='3'/%3E%3Ccircle cx='400' cy='214' r='5'/%3E%3Ccircle cx='1200' cy='214' r='5'/%3E%3C/g%3E%3C/svg%3E");
+  /* Scene drawings (SVG, code only; storyboards README §3), generated once from the brand palette.
+     The opening is photographs only (D153); these remain for the section scenes until Task 6. */
   --ev-svg-dusk: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900' preserveAspectRatio='xMidYMid slice'%3E%3Cdefs%3E%3ClinearGradient id='s' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%230D0805'/%3E%3Cstop offset='.38' stop-color='%232E2017'/%3E%3Cstop offset='.56' stop-color='%23634731'/%3E%3Cstop offset='.62' stop-color='%23BB9A79'/%3E%3C/linearGradient%3E%3CradialGradient id='h' cx='.5' cy='.62' r='.5' gradientTransform='matrix(1 0 0 .32 0 .42)'%3E%3Cstop offset='0' stop-color='%23EAD4AB' stop-opacity='.55'/%3E%3Cstop offset='1' stop-color='%23EAD4AB' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='1600' height='900' fill='url(%23s)'/%3E%3Crect width='1600' height='900' fill='url(%23h)'/%3E%3Cpath d='M0 560C220 532 380 548 560 556S900 520 1120 540 1460 566 1600 548V900H0Z' fill='%23634731'/%3E%3Cpath d='M0 610C260 570 520 600 760 612S1200 580 1600 604V900H0Z' fill='%232E2017'/%3E%3Cpath d='M0 700C300 650 640 690 900 706S1360 676 1600 690V900H0Z' fill='%230D0805' opacity='.6'/%3E%3Cpath d='M0 800C380 760 760 790 1060 804S1460 790 1600 796V900H0Z' fill='%230D0805' opacity='.8'/%3E%3C/svg%3E");
   --ev-svg-tent: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 280'%3E%3Cdefs%3E%3ClinearGradient id='i' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23634731'/%3E%3Cstop offset='1' stop-color='%23BB9A79'/%3E%3C/linearGradient%3E%3CradialGradient id='g' cx='.5' cy='.7' r='.6'%3E%3Cstop offset='0' stop-color='%23EAD4AB' stop-opacity='.75'/%3E%3Cstop offset='1' stop-color='%23EAD4AB' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cg stroke='%23BB9A79' stroke-width='1' opacity='.55'%3E%3Cpath d='M24 92L-10 250M576 92L610 250M120 62L80 250M480 62L520 250'/%3E%3C/g%3E%3Crect x='40' y='104' width='520' height='132' fill='url(%23i)'/%3E%3Crect x='40' y='104' width='520' height='132' fill='url(%23g)'/%3E%3Crect x='40' y='118' width='520' height='34' fill='%232E2017' opacity='.55'/%3E%3Cpath d='M52 128l12 12 12-12M76 128l12 12 12-12M100 128l12 12 12-12M124 128l12 12 12-12M148 128l12 12 12-12M172 128l12 12 12-12M196 128l12 12 12-12M220 128l12 12 12-12M244 128l12 12 12-12M268 128l12 12 12-12M292 128l12 12 12-12M316 128l12 12 12-12M340 128l12 12 12-12M364 128l12 12 12-12M388 128l12 12 12-12M412 128l12 12 12-12M436 128l12 12 12-12M460 128l12 12 12-12M484 128l12 12 12-12M508 128l12 12 12-12M532 128l12 12 12-12' fill='none' stroke='%23EAD4AB' stroke-width='2' opacity='.7'/%3E%3Cpath d='M40 150H560M40 120H560' stroke='%23EAD4AB' stroke-width='1' opacity='.45'/%3E%3Cg fill='%23F5E9D3' opacity='.5'%3E%3Crect x='64' y='196' width='40' height='22' rx='5'/%3E%3Crect x='116' y='196' width='40' height='22' rx='5'/%3E%3Crect x='168' y='196' width='40' height='22' rx='5'/%3E%3Crect x='220' y='196' width='40' height='22' rx='5'/%3E%3Crect x='272' y='196' width='40' height='22' rx='5'/%3E%3Crect x='324' y='196' width='40' height='22' rx='5'/%3E%3Crect x='376' y='196' width='40' height='22' rx='5'/%3E%3Crect x='428' y='196' width='40' height='22' rx='5'/%3E%3Crect x='480' y='196' width='40' height='22' rx='5'/%3E%3Crect x='532' y='196' width='40' height='22' rx='5'/%3E%3C/g%3E%3Cpath d='M40 236H560L590 250H10Z' fill='%23634731'/%3E%3Cpath d='M150 236H450L470 248H130Z' fill='%23BB9A79' opacity='.45'/%3E%3Cpath d='M10 98L120 58L210 80L300 48L390 80L480 58L590 98L560 110H40Z' fill='%230D0805'/%3E%3Cpath d='M120 58V236M300 48V236M480 58V236' stroke='%230D0805' stroke-width='5'/%3E%3C/svg%3E");
 }
@@ -42,10 +40,15 @@ main[data-theme="evening"] [data-tone="dark"] .svc-num {
    Act 1 · the opening (EVENTS_OPENING, src/content/scenes/events-hospitality.ts)
    ========================================================================== */
 /* L0 · the empty hall: night at the edges, espresso in the room, the drawing on top. */
-main[data-theme="evening"] .fx-ev-hall {
-  background:
-    var(--ev-svg-hall) center / cover no-repeat,
-    radial-gradient(90% 80% at 50% 62%, var(--color-espresso), var(--color-night));
+/* L2 · a framed photograph inside a scene (the entrance, D154): a champagne hairline and a deep
+   shadow, so a real photo reads as a print set into the room, not a cut-out. */
+main[data-theme="evening"] .fx-ev-frame {
+  outline: 1px solid color-mix(in srgb, var(--color-champagne) 55%, transparent);
+  outline-offset: 6px;
+  box-shadow: 0 30px 80px -20px rgb(0 0 0 / 0.65);
+}
+main[data-theme="evening"] .fx-ev-frame img {
+  object-fit: cover;
 }
 /* L3 · a scrim under the H1 and the shot lines, so ivory text holds on the lit room's pale floor. */
 main[data-theme="evening"] .fx-ev-scrim {
@@ -70,13 +73,13 @@ main[data-theme="evening"] .fx-ev-scrim {
    would show. A dark gradient from the text side (inline-start, mirrored in Arabic) plus a light
    overall dim hold the text at AA over the brightest part of the room, and let the room read as
    atmosphere behind it. Above the layers, under the overlay (the scene's z-index 2). */
-main[data-theme="evening"] .scene[data-mode="still"] {
+main[data-theme="evening"] .scene[data-mode] {
   --ev-hero-from: 90deg;
 }
-[dir="rtl"] main[data-theme="evening"] .scene[data-mode="still"] {
+[dir="rtl"] main[data-theme="evening"] .scene[data-mode] {
   --ev-hero-from: -90deg;
 }
-main[data-theme="evening"] .scene[data-mode="still"] .scene-layers::after {
+main[data-theme="evening"] .scene[data-mode] .scene-layers::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -92,7 +95,7 @@ main[data-theme="evening"] .scene[data-mode="still"] .scene-layers::after {
 @media (max-width: 899.98px) {
   /* Portrait: the text spans the width, so the bottom scrim carries it and the side gradient is
      softer; the dim stays. The breadcrumbs sit high, on the bright ceiling: a top band holds them. */
-  main[data-theme="evening"] .scene[data-mode="still"] .scene-layers::after {
+  main[data-theme="evening"] .scene[data-mode] .scene-layers::after {
     background:
       linear-gradient(
         to bottom,

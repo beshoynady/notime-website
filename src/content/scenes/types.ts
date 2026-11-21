@@ -72,6 +72,8 @@ export interface SceneConfig {
    * pins briefly on desktop and passes on mobile (D74, P2).
    */
   mode?: SceneMode | Record<Viewport, SceneMode>;
+  /** A category opening that plays its film as the hero (D154): pinned from 1024px, the still below. */
+  hero?: true;
   shots: SceneShot[];
   layers: SceneLayer[];
 }
