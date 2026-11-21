@@ -15,7 +15,7 @@ Task 10 Creative (D158, f49b0ac): studio opening film (stock night → lit → R
 **Owner, 2026-11-21 (mid-run):** /simplify runs ONCE at the close over all new pages (not per page); the independent code review stays at the close. Approved: Software's temporary home card, "Rooms we dressed" → Work. CLS flake: keep the logging, report the cause in the final report if it recurs. Preview: refresh after Creative, then after every two pages.
 **Next:** Task 11 Marketing, 12 Print (then refresh the preview), 13 Software, 14 About/products (refresh), 15 Work, 16 close (simplify over all pages, code review, CI, report, PR). OPEN_QUESTIONS #25 waits for Task 16.
 **Deleted with the owner's approval (2026-11-21):** the old `~/.claude/skills/ui-ux-pro-max`, `.next/cache/images`, `src/graphify-out/` (root `graphify-out/` kept). `.next-base/` is approved for deletion after the last A/B (Task 16).
-**Servers:** 3000 = prod build of HEAD (CI env, lab on); 3200 = the f086c44 "before" build (`.next-base`); 3100 = review build (`.next-review`, 1ac76ca) behind the tunnel https://minds-makers-roof-appearance.trycloudflare.com (`docs/review/tunnel.md`). Don't stop 3100 or cloudflared.
+**Servers:** 3000 = prod build of HEAD (CI env, lab on); 3200 = the f086c44 "before" build (`.next-base`); 3100 = review build (`.next-review`, 47e1ca4, Creative done) behind the tunnel https://vast-expires-monica-types.trycloudflare.com (`docs/review/tunnel.md`). Don't stop 3100 or cloudflared.
 
 ## Now: the owner's mandate of 2026-11-20 (review, fix, creative pass)
 

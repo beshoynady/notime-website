@@ -42,4 +42,4 @@ Rand reviews the **review build** (`NEXT_PUBLIC_REVIEW_MODE=1`) through a free C
 
 ## Current link
 
-https://minds-makers-roof-appearance.trycloudflare.com/ar (started 2026-11-21 after the session restart took the old tunnel down; review build of `phase-2-services` 1ac76ca on port 3100). The previous link (pink-courtesy-dive-conference) is dead.
+https://vast-expires-monica-types.trycloudflare.com/ar (started 2026-11-21 after Cloudflare dropped the previous quick tunnel, "Tunnel not found"; review build of `phase-2-services` 47e1ca4, Creative done, on port 3100). The previous link (minds-makers-roof-appearance) is dead.
