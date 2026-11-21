@@ -42,4 +42,4 @@ Rand reviews the **review build** (`NEXT_PUBLIC_REVIEW_MODE=1`) through a free C
 
 ## Current link
 
-https://mat-gathering-others-strike.trycloudflare.com/ar (started 2026-11-20 after a session restart; review build of 46fedb8 on port 3100). The previous link is dead.
+https://pink-courtesy-dive-conference.trycloudflare.com/ar (started 2026-11-21 after a session restart; review build of `phase-2-services` 1ac76ca, the same code as 638e67f, on port 3100). The previous link is dead.
