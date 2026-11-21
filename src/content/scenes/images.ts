@@ -1,4 +1,5 @@
 import type { CategorySlug } from "../types";
+import { media } from "../media";
 import type { SceneImageSlot } from "./types";
 
 /**
@@ -103,6 +104,25 @@ const BY_CATEGORY: { category: CategorySlug; grade: SceneImageSlot["grade"]; slo
 
 export const SCENE_IMAGES: SceneImageSlot[] = BY_CATEGORY.flatMap(({ category, grade, slots }) => slots.map((s) => ({ ...s, category, grade })));
 
+/**
+ * A layer's image: a storyboard slot above, else the image registry (media.ts, D152), where the
+ * photo-beat scenes keep their layers. A hidden or unknown registry id resolves to nothing, so
+ * its layer renders no image.
+ */
 export function getSceneImage(id: string): SceneImageSlot | undefined {
-  return SCENE_IMAGES.find((s) => s.id === id);
+  const slot = SCENE_IMAGES.find((s) => s.id === id);
+  if (slot) return slot;
+  const m = media(id);
+  if (!m) return undefined;
+  return {
+    id,
+    category: "events-hospitality",
+    grade: m.grade ?? "evening",
+    source: m.source === "stock" || m.source === "ai" ? { kind: "ai", from: m.from } : { kind: "real", from: m.from ?? id },
+    src: m.file,
+    width: m.width,
+    height: m.height,
+    mobile: m.mobile && { src: m.mobile.file, width: m.mobile.width, height: m.mobile.height },
+    alt: m.alt ?? undefined,
+  };
 }
