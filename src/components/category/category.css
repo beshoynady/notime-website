@@ -446,17 +446,16 @@ html[data-header-hidden] .svc-index {
   transition: translate 0.35s var(--ease-expo-out); /* with the hiding header (above) */
 }
 /* Over a full-bleed scene the rail steps aside (ServiceIndex sets data-over-scene; self-audit
-   B11): its 60% scrim cut the scene. It stays while it holds focus. */
+   B11): its 60% scrim cut the scene. It only fades: every Events section is a scene (D153), so
+   it stays in the Tab order and comes back on focus or hover, never out of reach. */
 @media (min-width: 900px) {
   .svc-index {
     transition:
       translate 0.35s var(--ease-expo-out),
-      opacity 0.35s var(--ease-expo-out),
-      visibility 0.35s;
+      opacity 0.35s var(--ease-expo-out);
   }
-  .svc-index[data-over-scene]:not(:focus-within) {
+  .svc-index[data-over-scene]:not(:focus-within, :hover) {
     opacity: 0;
-    visibility: hidden;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -549,44 +548,6 @@ html[lang="ar"] .svc-module[data-module="print-order"] {
   }
   html[lang="ar"] .svc-module[data-module="print-order"] {
     min-block-size: 293px;
-  }
-}
-/* The Events & Hospitality modules (batch 2). Their static fallback is server-rendered in the same
-   box, so these only guard the first paint. ESTIMATES from the CSS boxes at 390 and 1440, kept
-   below the expected height (a short slot grows, it never leaves a gap); re-measure at M3 with
-   scripts/anchor-shift.mjs and replace them. */
-html[lang="en"] .svc-module[data-module="stage-lights"] {
-  min-block-size: 440px;
-}
-html[lang="ar"] .svc-module[data-module="stage-lights"] {
-  min-block-size: 450px;
-}
-html[lang="en"] .svc-module[data-module="candle-moodboard"] {
-  min-block-size: 560px;
-}
-html[lang="ar"] .svc-module[data-module="candle-moodboard"] {
-  min-block-size: 570px;
-}
-html[lang="en"] .svc-module[data-module="menu-majlis"] {
-  min-block-size: 760px;
-}
-html[lang="ar"] .svc-module[data-module="menu-majlis"] {
-  min-block-size: 780px;
-}
-@media (min-width: 900px) {
-  html[lang="en"] .svc-module[data-module="stage-lights"],
-  html[lang="ar"] .svc-module[data-module="stage-lights"] {
-    min-block-size: 640px;
-  }
-  html[lang="en"] .svc-module[data-module="candle-moodboard"],
-  html[lang="ar"] .svc-module[data-module="candle-moodboard"] {
-    min-block-size: 520px;
-  }
-  html[lang="en"] .svc-module[data-module="menu-majlis"] {
-    min-block-size: 520px;
-  }
-  html[lang="ar"] .svc-module[data-module="menu-majlis"] {
-    min-block-size: 540px;
   }
 }
 .module-placeholder {

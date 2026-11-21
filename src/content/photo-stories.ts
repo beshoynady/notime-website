@@ -7,10 +7,9 @@ import type { Localized } from "./types";
  * the company's own work in general, never a named project: Work cards and case studies keep
  * their own rules (CaseMedia, D106).
  *
- * Three stories:
+ * Two stories (the Galas photo stack gave way to its photo scene and work strip, D153):
  * - `ROOM_STORY` (About): split screen, the line pinned beside its photo, four beats of one evening;
- * - `STRIP` (home, Our work): a pinned horizontal strip, mirrored in Arabic;
- * - `PRIVATE_STACK` (Events, Galas & private celebrations): photo cards that stack as you scroll.
+ * - `STRIP` (home, Our work): a pinned horizontal strip, mirrored in Arabic.
  */
 export interface StoryPhoto {
   /** File stem in public/images/stories/ (webp + avif). */
@@ -130,28 +129,6 @@ export const STRIP = {
     { photo: "rig", caption: { en: "Stage and technical", ar: "المسرح والتجهيزات الفنية" } },
     { photo: "florals", caption: { en: "Florals and décor", ar: "الزهور والديكور" } },
     { photo: "tent", caption: { en: "Desert majlis", ar: "مجلس في الصحراء" } },
-  ] satisfies { photo: StoryPhotoKey; caption: Localized<string> }[],
-} as const;
-
-/** Events › Galas & private celebrations (#celebrations): the private client's own entry (§6.3,
- * mostly from Instagram, on a phone). Warm and direct; the brief opens preset to this service. */
-export const PRIVATE_STACK = {
-  label: { en: "Private celebrations", ar: "المناسبات الخاصة" },
-  lead: {
-    en: "Weddings, engagements, family evenings. Tell us the date and the guest count, and we'll carry it from the first sketch to the last candle.",
-    ar: "أعراس وخطوبات وأمسيات عائلية. أخبرونا بالموعد وعدد الضيوف، ونتولّى كل شيء من أول تصوّر حتى آخر شمعة.",
-  },
-  cta: { en: "Plan your celebration", ar: "خطّطوا لمناسبتكم معنا" },
-  whatsapp: { en: "Message us on WhatsApp", ar: "راسلونا على واتساب" },
-  prefill: {
-    en: "Hello NO TIME, I'm planning a private celebration and would like to talk it through.",
-    ar: "مرحبًا NO TIME، أخطّط لمناسبة خاصة وأودّ أن نتحدّث عنها.",
-  },
-  cards: [
-    { photo: "florals", caption: { en: "The table, in your colours", ar: "طاولتكم، بألوانكم" } },
-    { photo: "dessert", caption: { en: "The welcome at the door", ar: "الاستقبال عند المدخل" } },
-    { photo: "terrace", caption: { en: "Outdoors, after sunset", ar: "في الهواء الطلق، بعد الغروب" } },
-    { photo: "keepsake", caption: { en: "Keepsakes for the guests", ar: "تذكارات للضيوف" } },
   ] satisfies { photo: StoryPhotoKey; caption: Localized<string> }[],
 } as const;
 

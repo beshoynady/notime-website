@@ -121,6 +121,7 @@ function Layer({ layer, variant, loading }: { layer: SceneLayer; variant: "live"
       data-layer={layer.id}
       data-level={layer.level}
       data-mobile={layer.mobile ? "" : undefined}
+      data-phone-only={layer.desktop === false ? "" : undefined}
       style={{ insetBlock: layer.box.block, insetInline: layer.box.inline }}
     >
       <div className="scene-enter" data-enter={layer.enter ? "" : undefined}>

@@ -63,9 +63,6 @@ export type CategoryTheme = "evening" | "studio" | "editorial" | "workshop" | "i
 
 /** One signature module per service (docs/design/category-pages.md §6). */
 export type ModuleKey =
-  | "candle-moodboard"
-  | "menu-majlis"
-  | "stage-lights"
   | "aperture-gallery"
   | "scrub-reel"
   | "motion-playground"

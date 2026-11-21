@@ -71,10 +71,6 @@ html[data-overlay-open] .cta-bar {
   html:has(.cta-bar[data-show]) {
     scroll-padding-block-end: calc(var(--cta-bar-h) + 12px);
   }
-  /* The last stacked private-celebrations card clears the bar. */
-  body:has(.cta-bar) .pstack-cards {
-    padding-block-end: calc(var(--cta-bar-h) + env(safe-area-inset-bottom, 0px));
-  }
 }
 @media (prefers-reduced-motion: reduce) {
   .cta-bar {

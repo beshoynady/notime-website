@@ -732,8 +732,8 @@ html[data-overlay-open] #site-header {
 
 /* Header autohide (category pages below 900px; HeaderAutohide sets html[data-header-hidden]).
    Everything moves by `translate`, which never changes layout (no CLS). The header goes up by its
-   height and the safe area; what is held under it (the chip bar, category.css; the private-
-   celebrations cards, photo-stack.css) goes up by the header's height, so it stops at the safe-
+   height and the safe area; what is held under it (the chip bar, category.css) goes up by the
+   header's height, so it stops at the safe-
    area line under the strip. The header's translate stays `none` while shown: any other value
    would make it the containing block of the mobile menu's fixed overlay (as backdrop-filter does). */
 :root {

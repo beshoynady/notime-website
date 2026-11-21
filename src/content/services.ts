@@ -147,13 +147,13 @@ const POINTS: Record<string, Localized<string[]>> = {
  * signature module (docs/design/category-pages.md §6), if the section still has one. quoteType defaults to the category's.
  */
 const PAGE: Record<string, { anchor: string; module?: ModuleKey; quoteType?: QuoteType }> = {
-  // Events I–III: photo scenes and Rand's work instead of a module (D153).
+  // Events: photo scenes and Rand's work instead of a module (D153).
   "conferences-summits": { anchor: "conferences" },
   "exhibitions-booths": { anchor: "exhibitions" },
   "product-launches-activations": { anchor: "launches" },
-  "galas-private-celebrations": { anchor: "celebrations", module: "candle-moodboard" },
-  "catering-heritage-hospitality": { anchor: "hospitality", module: "menu-majlis" },
-  "stage-technical-production": { anchor: "stage", module: "stage-lights" },
+  "galas-private-celebrations": { anchor: "celebrations" },
+  "catering-heritage-hospitality": { anchor: "hospitality" },
+  "stage-technical-production": { anchor: "stage" },
   photography: { anchor: "photography", module: "aperture-gallery" },
   "video-production": { anchor: "video", module: "scrub-reel" },
   "motion-graphics": { anchor: "motion", module: "motion-playground" },

@@ -77,6 +77,25 @@ for (const locale of ["en", "ar"] as const) {
       expect(await ring("stage")).toBe("solid");
     });
 
+    // B11 with every Events section a scene (D153): over a scene the rail fades out of the way,
+    // but stays in the Tab order and comes back on focus or hover, so it's never out of reach.
+    test("over a scene the rail fades, and focus or hover brings it back", async ({ page, isMobile }) => {
+      test.skip(isMobile, "rail: desktop");
+      await gotoReady(page, `/${locale}${PAGE}#exhibitions`);
+      await expectLanded(page, "exhibitions");
+      const nav = page.locator("nav.svc-index");
+      await expect(nav).toHaveAttribute("data-over-scene", "");
+      await page.locator("#exhibitions-title").blur();
+      await expect(nav).toHaveCSS("opacity", "0");
+      await indexLink(page, "stage").focus();
+      await expect(indexLink(page, "stage")).toBeFocused();
+      await expect(nav).toHaveCSS("opacity", "1");
+      await indexLink(page, "stage").blur();
+      await expect(nav).toHaveCSS("opacity", "0");
+      await nav.hover();
+      await expect(nav).toHaveCSS("opacity", "1");
+    });
+
     test("a deep link on load lands focused, with no ring (how the visitor arrived is unknown)", async ({ page, isMobile }) => {
       test.skip(isMobile, "the same at both widths");
       await gotoReady(page, `/${locale}${PAGE}#launches`);

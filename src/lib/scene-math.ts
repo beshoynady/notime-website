@@ -132,6 +132,12 @@ export function imageLoading(scene: SceneConfig, mode: RenderMode, hasFile: (slo
   let firstRest = true;
   for (const layer of scene.layers) {
     if (!layer.slot || !hasFile(layer.slot)) continue;
+    // A phone-only plate is hidden on laptops, so it never loads eagerly (an eager image loads even
+    // when hidden) and never takes the first place.
+    if (layer.desktop === false) {
+      out[layer.id] = { eager: false, high: false, phoneGate: false };
+      continue;
+    }
     const end = { ...layer.style, ...stillState(layer) };
     // The still shows on phones in a hero (D154) and at every width in a still.
     const atStill = mode !== "build" && end.opacity !== 0 && end.wipe !== 0 && (mode === "still" || layer.mobile);

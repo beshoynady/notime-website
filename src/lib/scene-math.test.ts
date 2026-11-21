@@ -253,6 +253,11 @@ describe("imageLoading (N06)", () => {
     });
   });
 
+  it("a phone-only plate (desktop: false) never loads eagerly: laptops hide it and must not fetch it", () => {
+    const phone = layer({ id: "phone", level: 0, slot: "room", desktop: false });
+    expect(imageLoading(scene({ layers: [phone, layers[2]] }), "still", has)).toEqual({ phone: lazy, table: high });
+  });
+
   it("the build scene never competes with the hero: every image is lazy", () => {
     expect(imageLoading(scene({ layers }), "build", has)).toEqual({ room: lazy, table: lazy, desk: lazy });
   });

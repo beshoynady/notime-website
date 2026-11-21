@@ -105,33 +105,72 @@ export const EVENTS_LAUNCHES: SceneConfig = {
   ],
 };
 
+/*
+ * Sections IV–VI (D153). Rand's photos here are under 1100px wide, too small to fill a laptop
+ * screen sharp, so on a laptop each beat is the photo framed at its own size over a blurred copy of
+ * itself (`fx-ev-blur`, the same picture as atmosphere, never upscaled sharp). A phone gets one
+ * portrait photo as its plate instead (`desktop: false`), sharp at its width.
+ */
+
+/** IV · "Candles lit, roses set": the runner, then the roses close; Rand's own tables follow. */
+export const EVENTS_GALAS: SceneConfig = {
+  id: "events-galas",
+  mode: "pass",
+  shots: [
+    { id: "runner", desktop: [0, 0.3], mobile: [0, 1] },
+    { id: "roses", desktop: [0.3, 0.45], mobile: null },
+  ],
+  layers: [
+    { id: "backdrop", level: 0, slot: "private-celebrations-4", fx: "ev-blur", depth: 0.1, mobile: false, box: { block: "0", inline: "0" } },
+    { id: "phone-plate", level: 0, slot: "private-celebrations-2", depth: 0.15, push: 0.04, mobile: true, desktop: false, box: { block: "0", inline: "0" } },
+    { id: "runner", level: 2, slot: "private-celebrations-4", fx: "ev-frame", depth: 0.3, mobile: false, box: { block: "10% 50%", inline: "34% 25%" } },
+    { id: "roses", level: 2, slot: "private-celebrations-2", fx: "ev-frame", depth: 0.55, mobile: false, box: { block: "6% 30%", inline: "78% 4%" }, enter: { shot: 1, from: { y: 8, opacity: 0 } } },
+    scrim,
+  ],
+};
+
 /**
- * Section V's majlis (hospitality), the page's peak (D74, P2). Desktop: a short pin (0.6 vh) with
- * two beats, the coffee pour, then the light blooming in the tent as the sky deepens; it scrolls
- * in at dusk, the scene's resting frame. Mobile: no pin, it plays while it crosses the viewport
- * (dusk, pour, night). Reduced motion: the end frame (poured, lit, night).
- *
- * Drawn in code in v1: the dusk over the dunes (`fx-mj-dusk`) and the lit tent (`fx-mj-tent`) are
- * layers here; the dallah, the cup, the pour and the steam are one SVG drawing over the stage
- * (MajlisArt), so the pour always meets the cup, scrubbed by its own GSAP trigger on the same
- * scroll range. The plate and tent slots keep their place and cover the drawings once their files
- * exist. No lines: the section's H2 and promise sit over its lower third, which the layers leave clear.
+ * V · "Sunset, the coffee is poured": the page's peak (D74, P2). Laptop: a short pin (0.6 vh) under
+ * the header, the tent at night, then the carts, then the coffee on the carpet. Phone: no pin, the
+ * brass cart as its plate as it crosses. Reduced motion: the end frame, every photo in place.
  */
 export const EVENTS_MAJLIS: SceneConfig = {
   id: "events-majlis",
   mode: { desktop: "pin", mobile: "pass" },
   shots: [
-    { id: "dusk", desktop: null, mobile: [0, 0.4] },
-    { id: "pour", desktop: [0, 0.3], mobile: [0.4, 0.7] },
-    { id: "bloom", desktop: [0.3, 0.6], mobile: [0.7, 1] },
+    { id: "tent", desktop: [0, 0.2], mobile: [0, 1] },
+    { id: "carts", desktop: [0.2, 0.4], mobile: null },
+    { id: "coffee", desktop: [0.4, 0.6], mobile: null },
   ],
   layers: [
-    { id: "sand", level: 0, slot: "ev-majlis-dusk", fx: "mj-dusk", depth: 0.15, push: 0.03, mobile: true, box: { block: "0", inline: "0" } },
-    // L3: the sky deepens from dusk to night.
-    { id: "night-sky", level: 3, fx: "shade", depth: 0, mobile: true, box: { block: "0 45%", inline: "0" }, style: { opacity: 0 }, keys: [{ shot: 2, to: { opacity: 0.55 } }] },
-    // L3: the tent's light blooms (beat 2): one glow behind and around it.
-    { id: "tent-bloom", level: 3, fx: "glow", depth: 0.5, mobile: true, box: { block: "24% 26%", inline: "0 40%" }, style: { opacity: 0 }, keys: [{ shot: 2, to: { opacity: 1, scale: 1.2 } }] },
-    // L1: the tent on the horizon, at inline-start (mirrors in AR), its base on the far dune.
-    { id: "tent", level: 1, slot: "ev-majlis-tent", fx: "mj-tent", depth: 0.5, mobile: true, box: { block: "34% 35%", inline: "6% 52%" } },
+    { id: "backdrop", level: 0, slot: "heritage-5", fx: "ev-blur", depth: 0.1, mobile: false, box: { block: "0", inline: "0" } },
+    { id: "phone-plate", level: 0, slot: "heritage-4", depth: 0.15, push: 0.04, mobile: true, desktop: false, box: { block: "0", inline: "0" } },
+    // The centre frame: the tent, then the coffee poured on the carpet in its place (beat 3).
+    { id: "tent", level: 1, slot: "heritage-5", fx: "ev-frame", depth: 0.3, mobile: false, box: { block: "8% 42%", inline: "34% 36%" } },
+    { id: "coffee", level: 1, slot: "heritage-2", fx: "ev-frame", depth: 0.3, mobile: false, box: { block: "8% 42%", inline: "34% 36%" }, enter: { shot: 2, from: { opacity: 0 } } },
+    // The right column: the brass carts arrive (beat 2).
+    { id: "carts", level: 2, slot: "heritage-1", fx: "ev-frame", depth: 0.5, mobile: false, box: { block: "10% 56%", inline: "67% 3%" }, enter: { shot: 1, from: { x: 12, opacity: 0 } } },
+    scrim,
+  ],
+};
+
+/**
+ * VI · "The rig goes up, then the light": the truss going up (Rand's photo, framed), the first beams
+ * through haze, then the full rig live (stock until Rand's own rig photos arrive). Laptop: a short
+ * pin (0.6 vh); phone: the beams, then the live rig, as it crosses.
+ */
+export const EVENTS_STAGE: SceneConfig = {
+  id: "events-stage",
+  mode: { desktop: "pin", mobile: "pass" },
+  shots: [
+    { id: "rig", desktop: [0, 0.2], mobile: null },
+    { id: "beams", desktop: [0.2, 0.4], mobile: [0, 0.3] },
+    { id: "live", desktop: [0.4, 0.6], mobile: [0.3, 0.55] },
+  ],
+  layers: [
+    { id: "beams", level: 0, slot: "ev-stage-beams", depth: 0.15, push: 0.04, mobile: true, box: { block: "0", inline: "0" }, style: { opacity: 0.35 }, keys: [{ shot: 1, to: { opacity: 1 } }] },
+    { id: "live", level: 0, slot: "ev-stage-live", depth: 0.15, push: 0.04, mobile: true, box: { block: "0", inline: "0" }, style: { opacity: 0 }, keys: [{ shot: 2, to: { opacity: 1 } }] },
+    { id: "rig", level: 2, slot: "private-celebrations-8", fx: "ev-frame", depth: 0.4, mobile: false, box: { block: "10% 46%", inline: "44% 10%" }, keys: [{ shot: 1, to: { opacity: 0 } }] },
+    scrim,
   ],
 };

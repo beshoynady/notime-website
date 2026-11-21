@@ -32,9 +32,15 @@
   transform: scale(var(--still-scale, 1));
   clip-path: var(--still-clip, var(--rest-clip, none));
 }
-/* Desktop-only layers animate only where scenes pin (PIN_MIN_WIDTH, D151). */
+/* Desktop-only layers animate only where scenes pin (PIN_MIN_WIDTH, D151); phone-only layers
+   (a portrait plate where laptops show frames, D153) only below it. */
 @media (max-width: 1023.98px) {
   .scene-layer:not([data-mobile]) {
+    display: none;
+  }
+}
+@media (min-width: 1024px) {
+  .scene-layer[data-phone-only] {
     display: none;
   }
 }
@@ -140,15 +146,6 @@ html[data-js]:not([data-reduced]) .scene:not([data-mode]) .scene-line:not(:first
 }
 .fx-haze {
   background: radial-gradient(closest-side, rgba(245, 233, 211, 0.04), rgba(245, 233, 211, 0) 100%);
-}
-/* Candle points: a few small glows; their flicker arrives with the live build (Task 3.2). */
-.fx-candles {
-  background:
-    radial-gradient(circle at 12% 60%, rgba(234, 212, 171, 0.55) 0 3px, rgba(234, 212, 171, 0) 14px),
-    radial-gradient(circle at 30% 40%, rgba(234, 212, 171, 0.5) 0 2px, rgba(234, 212, 171, 0) 12px),
-    radial-gradient(circle at 48% 66%, rgba(234, 212, 171, 0.55) 0 3px, rgba(234, 212, 171, 0) 14px),
-    radial-gradient(circle at 66% 44%, rgba(234, 212, 171, 0.5) 0 2px, rgba(234, 212, 171, 0) 12px),
-    radial-gradient(circle at 84% 62%, rgba(234, 212, 171, 0.55) 0 3px, rgba(234, 212, 171, 0) 14px);
 }
 
 /* Animatic: flat boxes, one tone per level, labelled with the slot id and depth. */

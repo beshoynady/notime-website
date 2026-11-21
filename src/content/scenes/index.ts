@@ -1,6 +1,6 @@
 import type { CategorySlug, Service } from "../types";
 import { STUDIO_OPENING } from "./creative-production";
-import { EVENTS_CONFERENCES, EVENTS_EXHIBITIONS, EVENTS_LAUNCHES, EVENTS_MAJLIS, EVENTS_OPENING } from "./events-hospitality";
+import { EVENTS_CONFERENCES, EVENTS_EXHIBITIONS, EVENTS_GALAS, EVENTS_LAUNCHES, EVENTS_MAJLIS, EVENTS_OPENING, EVENTS_STAGE } from "./events-hospitality";
 import { EDITORIAL_OPENING } from "./marketing-brand";
 import { WORKSHOP_OPENING } from "./production-print-gifts";
 import type { SceneConfig } from "./types";
@@ -39,6 +39,9 @@ const SECTION_SCENES: Record<string, SceneConfig> = {
   "conferences-summits": EVENTS_CONFERENCES,
   "exhibitions-booths": EVENTS_EXHIBITIONS,
   "product-launches-activations": EVENTS_LAUNCHES,
+  // IV–VI (D153): galas passing, the majlis and the stage pinned briefly on a laptop.
+  "galas-private-celebrations": EVENTS_GALAS,
+  "stage-technical-production": EVENTS_STAGE,
   "catering-heritage-hospitality": EVENTS_MAJLIS, // the majlis (D74, P2), public with the full Events build
 };
 const LAB_SECTION_SCENES: Record<string, SceneConfig> = {};

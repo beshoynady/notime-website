@@ -8,6 +8,9 @@ export const GALLERIES: Record<string, string[]> = {
   // ⚑ client-visible: shown until Rand says otherwise (question 4); hide one with NEXT_PUBLIC_MEDIA_HIDE.
   // (uae-pro-league-1, a print on fabric, stays in the laptop scene: a 3:4 tile crops it to nothing.)
   "exhibitions-booths": ["sandoz-1", "egyptair-pavilion-1"],
+  // None repeats a photo this page already shows in a scene (the opening, EVENTS_GALAS, EVENTS_MAJLIS).
+  "galas-private-celebrations": ["private-celebrations-5", "private-celebrations-6", "private-celebrations-7", "catering-3"],
+  "catering-heritage-hospitality": ["heritage-3", "catering-5", "catering-2", "catering-6", "catering-4"],
 };
 
 /** The ids a page shows: the visible ones in order, or none when fewer than two remain. */

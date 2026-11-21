@@ -8,13 +8,6 @@
    own small light at inline-start that comes on as it arrives (EveningLights, GSAP, once), and the
    rail's active numeral is a lit candle point. Everything else stays quiet. */
 
-main[data-theme="evening"] {
-  /* Scene drawings (SVG, code only; storyboards README §3), generated once from the brand palette.
-     The opening is photographs only (D153); these remain for the section scenes until Task 6. */
-  --ev-svg-dusk: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900' preserveAspectRatio='xMidYMid slice'%3E%3Cdefs%3E%3ClinearGradient id='s' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%230D0805'/%3E%3Cstop offset='.38' stop-color='%232E2017'/%3E%3Cstop offset='.56' stop-color='%23634731'/%3E%3Cstop offset='.62' stop-color='%23BB9A79'/%3E%3C/linearGradient%3E%3CradialGradient id='h' cx='.5' cy='.62' r='.5' gradientTransform='matrix(1 0 0 .32 0 .42)'%3E%3Cstop offset='0' stop-color='%23EAD4AB' stop-opacity='.55'/%3E%3Cstop offset='1' stop-color='%23EAD4AB' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='1600' height='900' fill='url(%23s)'/%3E%3Crect width='1600' height='900' fill='url(%23h)'/%3E%3Cpath d='M0 560C220 532 380 548 560 556S900 520 1120 540 1460 566 1600 548V900H0Z' fill='%23634731'/%3E%3Cpath d='M0 610C260 570 520 600 760 612S1200 580 1600 604V900H0Z' fill='%232E2017'/%3E%3Cpath d='M0 700C300 650 640 690 900 706S1360 676 1600 690V900H0Z' fill='%230D0805' opacity='.6'/%3E%3Cpath d='M0 800C380 760 760 790 1060 804S1460 790 1600 796V900H0Z' fill='%230D0805' opacity='.8'/%3E%3C/svg%3E");
-  --ev-svg-tent: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 280'%3E%3Cdefs%3E%3ClinearGradient id='i' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23634731'/%3E%3Cstop offset='1' stop-color='%23BB9A79'/%3E%3C/linearGradient%3E%3CradialGradient id='g' cx='.5' cy='.7' r='.6'%3E%3Cstop offset='0' stop-color='%23EAD4AB' stop-opacity='.75'/%3E%3Cstop offset='1' stop-color='%23EAD4AB' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cg stroke='%23BB9A79' stroke-width='1' opacity='.55'%3E%3Cpath d='M24 92L-10 250M576 92L610 250M120 62L80 250M480 62L520 250'/%3E%3C/g%3E%3Crect x='40' y='104' width='520' height='132' fill='url(%23i)'/%3E%3Crect x='40' y='104' width='520' height='132' fill='url(%23g)'/%3E%3Crect x='40' y='118' width='520' height='34' fill='%232E2017' opacity='.55'/%3E%3Cpath d='M52 128l12 12 12-12M76 128l12 12 12-12M100 128l12 12 12-12M124 128l12 12 12-12M148 128l12 12 12-12M172 128l12 12 12-12M196 128l12 12 12-12M220 128l12 12 12-12M244 128l12 12 12-12M268 128l12 12 12-12M292 128l12 12 12-12M316 128l12 12 12-12M340 128l12 12 12-12M364 128l12 12 12-12M388 128l12 12 12-12M412 128l12 12 12-12M436 128l12 12 12-12M460 128l12 12 12-12M484 128l12 12 12-12M508 128l12 12 12-12M532 128l12 12 12-12' fill='none' stroke='%23EAD4AB' stroke-width='2' opacity='.7'/%3E%3Cpath d='M40 150H560M40 120H560' stroke='%23EAD4AB' stroke-width='1' opacity='.45'/%3E%3Cg fill='%23F5E9D3' opacity='.5'%3E%3Crect x='64' y='196' width='40' height='22' rx='5'/%3E%3Crect x='116' y='196' width='40' height='22' rx='5'/%3E%3Crect x='168' y='196' width='40' height='22' rx='5'/%3E%3Crect x='220' y='196' width='40' height='22' rx='5'/%3E%3Crect x='272' y='196' width='40' height='22' rx='5'/%3E%3Crect x='324' y='196' width='40' height='22' rx='5'/%3E%3Crect x='376' y='196' width='40' height='22' rx='5'/%3E%3Crect x='428' y='196' width='40' height='22' rx='5'/%3E%3Crect x='480' y='196' width='40' height='22' rx='5'/%3E%3Crect x='532' y='196' width='40' height='22' rx='5'/%3E%3C/g%3E%3Cpath d='M40 236H560L590 250H10Z' fill='%23634731'/%3E%3Cpath d='M150 236H450L470 248H130Z' fill='%23BB9A79' opacity='.45'/%3E%3Cpath d='M10 98L120 58L210 80L300 48L390 80L480 58L590 98L560 110H40Z' fill='%230D0805'/%3E%3Cpath d='M120 58V236M300 48V236M480 58V236' stroke='%230D0805' stroke-width='5'/%3E%3C/svg%3E");
-}
-
 /* ==========================================================================
    Type (§5.1): large, airy display, like candlelit signage.
    ========================================================================== */
@@ -49,6 +42,12 @@ main[data-theme="evening"] .fx-ev-frame {
 }
 main[data-theme="evening"] .fx-ev-frame img {
   object-fit: cover;
+}
+/* L0 · a beat's own photo as atmosphere behind its sharp frame (D153): blurred and dimmed, so a
+   file smaller than the screen never shows soft. Scaled past the edges so the blur has no rim. */
+main[data-theme="evening"] .fx-ev-blur img {
+  filter: blur(28px) saturate(0.85) brightness(0.5);
+  transform: scale(1.12);
 }
 /* L3 · a scrim under the H1 and the shot lines, so ivory text holds on the lit room's pale floor. */
 main[data-theme="evening"] .fx-ev-scrim {
@@ -111,88 +110,6 @@ main[data-theme="evening"] .scene[data-mode] .scene-layers::after {
       color-mix(in srgb, var(--color-night) 22%, transparent);
   }
 }
-/* L3 · the candle points' flicker: a second copy of the points that breathes while the act is
-   live (data-live: the pin is active), twice, under 5 s (WCAG 2.2.2), then holds. It stops when
-   the act ends and never runs in the still. */
-main[data-theme="evening"] .fx-candles::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: inherit;
-  opacity: 0;
-}
-html[data-js]:not([data-reduced]) main[data-theme="evening"] .scene[data-live] .fx-candles::after {
-  animation: ev-flicker 2.3s ease-in-out 2;
-}
-@keyframes ev-flicker {
-  0%,
-  100% {
-    opacity: 0;
-  }
-  18% {
-    opacity: 0.7;
-  }
-  34% {
-    opacity: 0.25;
-  }
-  58% {
-    opacity: 0.85;
-  }
-  76% {
-    opacity: 0.35;
-  }
-}
-
-/* ==========================================================================
-   Section V · the majlis (EVENTS_MAJLIS) and its art (majlis-art.tsx)
-   ========================================================================== */
-main[data-theme="evening"] .fx-mj-dusk {
-  background: var(--ev-svg-dusk) center / cover no-repeat;
-}
-main[data-theme="evening"] .fx-mj-tent {
-  background: var(--ev-svg-tent) center bottom / contain no-repeat;
-}
-/* The dallah, the cup, the pour and the steam: one drawing, so the pour always meets the cup. It
-   sits at inline-end, above the H2 and the promise, and pours toward inline-start: the drawing
-   mirrors in Arabic (a wrapper flip; GSAP moves only the parts inside). */
-main[data-theme="evening"] .mj-art {
-  position: absolute;
-  inset-block-start: 9%;
-  inset-inline-end: 5%;
-  inline-size: min(40vw, 620px);
-  aspect-ratio: 600 / 440;
-  pointer-events: none;
-}
-html[dir="rtl"] main[data-theme="evening"] .mj-art svg {
-  transform: scaleX(-1);
-}
-main[data-theme="evening"] .mj-art svg {
-  display: block;
-  inline-size: 100%;
-  block-size: 100%;
-  overflow: visible;
-}
-@media (max-width: 899.98px) {
-  main[data-theme="evening"] .mj-art {
-    inset-block-start: 6%;
-    inset-inline-end: 2%;
-    inline-size: min(86vw, 460px);
-  }
-}
-/* Short screens: keep the art clear of the H2 block. */
-@media (min-width: 900px) and (max-height: 760px) {
-  main[data-theme="evening"] .mj-art {
-    inline-size: min(34vw, 480px);
-  }
-}
-/* Motion: the pour and the steam start undrawn; GSAP draws them (the still keeps them drawn). */
-html[data-js]:not([data-reduced]) main[data-theme="evening"] .mj-art[data-motion] .mj-pour {
-  stroke-dashoffset: 1;
-}
-html[data-js]:not([data-reduced]) main[data-theme="evening"] .mj-art[data-motion] .mj-steam {
-  opacity: 0;
-}
-
 /* ==========================================================================
    Act 2 · each section's own light (EveningDirector)
    ========================================================================== */

@@ -91,6 +91,7 @@ export function SceneDirector({ scene, pinUnderBars = false, desktopOnly = false
 
         for (const layer of scene.layers) {
           if (viewport === "mobile" && !layer.mobile) continue;
+          if (viewport === "desktop" && layer.desktop === false) continue;
           const el = root.querySelector<HTMLElement>(`[data-layer="${CSS.escape(layer.id)}"]`);
           if (!el) continue;
           const enter = el.querySelector<HTMLElement>(".scene-enter")!;

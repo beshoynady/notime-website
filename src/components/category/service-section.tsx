@@ -2,8 +2,6 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { ModulePlaceholder } from "@/components/modules/module-placeholder";
 import { ModuleSlot } from "@/components/modules/module-slot";
 import { STATIC_FALLBACKS } from "@/components/modules/static-fallbacks";
-import { MajlisArt } from "./majlis-art";
-import { PhotoStack } from "@/components/sections/photo-story/photo-stack";
 import { ServiceVisual } from "./service-visual";
 import { ServiceGallery } from "./service-gallery";
 import { GALLERIES } from "@/content/galleries";
@@ -30,8 +28,8 @@ import { serviceRef } from "@/lib/review";
  * same box), or the empty one when it has none (Task 2.4). Related work is one block per page
  * (RelatedWork, before the FAQ).
  *
- * A section with its own scene (the Events majlis, D64) sets its numeral, H2 and promise over the
- * scene's lower third; the lab route shows it as the animatic.
+ * A section with its own scene (every Events section, D153) sets its numeral, H2 and promise over
+ * the scene's lower third; the lab route shows it as the animatic.
  */
 export async function ServiceSection({
   service,
@@ -89,19 +87,11 @@ export async function ServiceSection({
             overlayClassName="svc-scene-overlay"
             pinUnderBars
           >
-            {/* The majlis's drawn foreground (the dallah's pour) rides the scene's own range. */}
-            {scene.id === "events-majlis" && !lab && (
-              <MajlisArt scene={scene} />
-            )}
             {head}
           </LayeredScene>
         </div>
       ) : (
         head
-      )}
-      {/* The private client's own entry (§6.3, D109): stacking real photos, a warm line, the brief preset. */}
-      {service.slug === "galas-private-celebrations" && !lab && (
-        <PhotoStack anchor={service.anchor} locale={locale} tone={tone} />
       )}
       <div className="svc-deliver">
         <h3 className="text-eyebrow">{t("deliverTitle")}</h3>

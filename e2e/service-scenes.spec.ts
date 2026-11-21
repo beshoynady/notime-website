@@ -1,15 +1,16 @@
 import { expect, test } from "@playwright/test";
-import { gotoReady } from "./helpers";
+import { expectLanded, gotoReady } from "./helpers";
 
 /**
- * Events I–III (D153): each section tells its story in photographs (a scene that plays as it
- * passes, never pinned) instead of a drawn module, and Rand's own work follows as a strip that
- * starts at the inline-start in both directions.
+ * The Events sections (D153): each tells its story in photographs instead of a drawn module. I–IV
+ * play as they pass, never pinned; the majlis (V) and the stage (VI) pin from 1024px. Rand's own
+ * work follows as a strip that starts at the inline-start in both directions, and a deep link
+ * lands on its H2 even when the section is a pinned scene.
  */
-const SECTIONS = ["conferences", "exhibitions", "launches"] as const;
+const SECTIONS = ["conferences", "exhibitions", "launches", "celebrations"] as const;
 
 for (const locale of ["en", "ar"] as const) {
-  test(`${locale}: Events I–III are photo scenes with no module`, async ({ page }) => {
+  test(`${locale}: Events I–IV are photo scenes with no module and no pin`, async ({ page }) => {
     await gotoReady(page, `/${locale}/services/events-hospitality`);
     for (const id of SECTIONS) {
       const section = page.locator(`section#${id}`);
@@ -34,4 +35,13 @@ for (const locale of ["en", "ar"] as const) {
       expect((await img.boundingBox())!.width).toBeGreaterThan(40);
     }
   });
+
+  for (const id of ["hospitality", "stage"] as const) {
+    test(`${locale}: a deep link to #${id} lands on its H2 over the scene`, async ({ page }) => {
+      await gotoReady(page, `/${locale}/services/events-hospitality#${id}`);
+      await expectLanded(page, id);
+      await expect(page.locator(`#${id} .scene [data-layer] img`).first()).toBeAttached();
+      await expect(page.locator(`#${id}-title`)).toBeInViewport();
+    });
+  }
 }

@@ -49,8 +49,10 @@ export interface SceneLayer {
   slot?: string;
   /** L3 effect class (`fx-<name>` in layered-scene.css), e.g. "glow", "shade", "beam". */
   fx?: string;
-  /** Rendered and animated below 900px too. */
+  /** Rendered and animated below PIN_MIN_WIDTH (1024px) too. */
   mobile: boolean;
+  /** `false`: a phone-only layer (below PIN_MIN_WIDTH), e.g. a portrait plate where laptops show frames (D153). */
+  desktop?: false;
   /** Placement inside the stage, logical so it mirrors in RTL: CSS `inset-block` and `inset-inline` (start end). */
   box: { block: string; inline: string };
   /** The layer's resting style before any key plays. */

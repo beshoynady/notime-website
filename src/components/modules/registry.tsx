@@ -42,10 +42,6 @@ const load = (importer: () => Promise<{ default: ComponentType<ModuleProps> }>) 
  * later): an unregistered key keeps its static fallback and never loads anything.
  */
 export const MODULES: Partial<Record<ModuleKey, LazyExoticComponent<ComponentType<ModuleProps>>>> = {
-  // Events & Hospitality (batch 2, Tasks 3.3–3.8).
-  "candle-moodboard": load(() => import("./candle-moodboard/candle-moodboard")),
-  "menu-majlis": load(() => import("./menu-majlis/menu-majlis")),
-  "stage-lights": load(() => import("./stage-lights/stage-lights")),
   // Batch 1 (D83): the template-built categories' modules.
   "rental-categories": load(() => import("./rental-categories/rental-categories")),
   "motion-playground": load(() => import("./motion-playground/motion-playground")),
