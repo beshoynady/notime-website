@@ -1,9 +1,10 @@
 import { expect, test, type Page } from "@playwright/test";
-import { gotoReady } from "./helpers";
+import { expectLanded as expectLandedOnCategory, gotoReady } from "./helpers";
 
 /**
  * Anchor landing (D53): every route to an anchor puts the target's top at the header's bottom
- * (±4px), then focuses the target's heading. "Explore our services" is the site's first click.
+ * (±4px), then focuses the target's heading. Since N05 the hero's actions open /contact and /work
+ * (e2e/hero-intro.spec.ts), so the home page has no in-page link to #services; a deep link still lands.
  */
 const TOLERANCE = 4;
 
@@ -28,10 +29,11 @@ async function landing(page: Page, id: string) {
   }, id);
 }
 
+/** Focus first: it marks the end of the landing (see expectLanded in helpers.ts). */
 async function expectLanded(page: Page, id: string, heading: string) {
+  await expect(page.locator(`#${heading}`)).toBeFocused({ timeout: 10_000 });
   const offset = await landing(page, id);
   expect(Math.abs(offset), `landing offset ${offset}px`).toBeLessThanOrEqual(TOLERANCE);
-  await expect(page.locator(`#${heading}`)).toBeFocused();
   await expect(page).toHaveURL(new RegExp(`#${id}$`));
 }
 
@@ -39,13 +41,6 @@ const skipIntro = (page: Page) => page.addInitScript(() => sessionStorage.setIte
 
 for (const locale of ["en", "ar"] as const) {
   test.describe(`anchor landing (${locale})`, () => {
-    test("hero CTA lands #services under the header and focuses its heading", async ({ page }) => {
-      await skipIntro(page);
-      await gotoReady(page, `/${locale}`);
-      await page.locator('#hero a[href$="#services"]').click();
-      await expectLanded(page, "services", "services-title");
-    });
-
     test("deep link on load (first visit: the intro is skipped, the header is visible)", async ({ page }) => {
       await gotoReady(page, `/${locale}#services`);
       await expect(page.locator("html")).toHaveAttribute("data-intro-seen", "");
@@ -56,41 +51,54 @@ for (const locale of ["en", "ar"] as const) {
       expect(await page.locator("[data-header-shell]").evaluate((el) => getComputedStyle(el).opacity)).toBe("1");
     });
 
-    test("mega-menu service link lands #services and closes the panel", async ({ page, isMobile }) => {
+    // Since the menus link the category pages (6530abf, D57), a service link opens its category
+    // page at the service's anchor; the menu closes and the landing is the same rule.
+    test("mega-menu service link lands its section on the category page and closes the panel", async ({ page, isMobile }) => {
       test.skip(isMobile, "desktop mega menu");
       await skipIntro(page);
       await gotoReady(page, `/${locale}`);
       await page.locator("button[aria-controls=mega-panel]").click();
-      await page.locator('#mega-panel a[href$="#services"]').first().click();
+      await page.locator('#mega-panel a[href$="/services/events-hospitality#conferences"]').first().click();
       await expect(page.locator("#mega-panel")).toBeHidden();
-      await expectLanded(page, "services", "services-title");
+      await expect(page).toHaveURL(new RegExp(`/${locale}/services/events-hospitality#conferences$`));
+      await expectLandedOnCategory(page, "conferences");
     });
 
-    test("mobile-menu service link lands #services after the menu closes", async ({ page, isMobile }) => {
+    test("mobile-menu service link lands its section on the category page after the menu closes", async ({ page, isMobile }) => {
       test.skip(!isMobile, "mobile menu");
       await skipIntro(page);
       await gotoReady(page, `/${locale}`);
       await page.locator("button[aria-controls=mobile-nav]").click();
       await page.locator("#mobile-nav summary").first().click();
-      await page.locator('#mobile-nav a[href$="#services"]').first().click();
+      await page.locator('#mobile-nav a[href$="/services/events-hospitality#conferences"]').first().click();
       await expect(page.locator("#mobile-nav")).toBeHidden();
-      await expectLanded(page, "services", "services-title");
+      await expect(page).toHaveURL(new RegExp(`/${locale}/services/events-hospitality#conferences$`));
+      await expectLandedOnCategory(page, "conferences");
     });
   });
 }
 
+// D123: the print service's anchor was renamed; a link already shared still lands, under its new name.
+test("an old #print-store link lands on Print ordering", async ({ page }) => {
+  await gotoReady(page, "/en/services/production-print-gifts#print-store");
+  await page.waitForTimeout(1500);
+  await expectLandedOnCategory(page, "print-ordering");
+  await expect(page).toHaveURL(/#print-ordering$/);
+});
+
 test.describe("anchor landing (reduced motion)", () => {
   test.use({ reducedMotion: "reduce" });
 
+  // An in-page link (the category opening's skip link; the home hero has none since N05).
   test("jumps instantly to the same landing", async ({ page }) => {
-    await gotoReady(page, "/en");
-    await page.locator('#hero a[href$="#services"]').click();
+    await gotoReady(page, "/en/services/events-hospitality");
+    const skip = page.locator("a.cat-skip");
+    const id = (await skip.getAttribute("href"))!.replace(/^#/, "");
+    await skip.click();
     // No easing: the final position is reached within a couple of frames of the click.
     await page.waitForTimeout(120);
-    const offset = await page.evaluate(
-      () => document.getElementById("services")!.getBoundingClientRect().top - document.getElementById("site-header")!.getBoundingClientRect().bottom,
-    );
-    expect(Math.abs(offset), `landing offset ${offset}px`).toBeLessThanOrEqual(TOLERANCE);
-    await expect(page.locator("#services-title")).toBeFocused();
+    const early = await page.evaluate(() => Math.round(scrollY));
+    await expectLandedOnCategory(page, id);
+    expect(Math.abs((await page.evaluate(() => Math.round(scrollY))) - early), "no easing after the jump").toBeLessThanOrEqual(2);
   });
 });

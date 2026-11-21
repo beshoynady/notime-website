@@ -44,8 +44,8 @@ The canonical list is [docs/content/services-list.md](../content/services-list.m
 |---|---|
 | I Events & Hospitality | Conferences & summits (`conferences`) · Exhibitions & booths (`exhibitions`) · Product launches & brand activations (`launches`) · Galas & private celebrations (`celebrations`) · Catering & heritage hospitality (`hospitality`) · Stage & technical production (`stage`) |
 | II Creative Production | Photography (`photography`) · Video production (`video`) · Motion graphics (`motion`) · AI content creation (`ai-content`) · Set & stage design (`set-design`) · Equipment & camera rental (`rental`) |
-| III Marketing & Brand | Branding & identity (`branding`) · Social media management (`social`) · Digital marketing & SEO (`digital-marketing`) · Content strategy (`content-strategy`) · Public relations (`pr`) · Media planning (`media-planning`) |
-| IV Production, Print & Gifts | Large-format printing (`large-format`) · Stand fabrication & signage (`fabrication`) · Packaging design (`packaging`) · Corporate gifts (`gifts`) · Online print store (`print-store`) · Branded merchandise (`merchandise`) |
+| III Marketing & Brand | Branding & identity (`branding`) · Social media management (`social`) · Digital marketing & SEO (`digital-marketing`) · Content strategy (`content-strategy`) · Public relations (`pr`) · Paid media & media planning (Google & Meta ads) (`paid-media`, D71) |
+| IV Production, Print & Gifts | Commercial & large-format printing (`printing`) · Stand fabrication & signage (`fabrication`) · Packaging design (`packaging`) · Corporate gifts (`gifts`) · Online print store (`print-store`) · Branded merchandise (`merchandise`) |
 | V Software & Digital | Websites (`websites`) · Mobile apps (`apps`) · Custom systems (`systems`) · E-commerce (`e-commerce`) · UI/UX design (`ux`) · AI consulting (`ai-consulting`) |
 
 ## Build order
@@ -54,7 +54,8 @@ The canonical list is [docs/content/services-list.md](../content/services-list.m
 |---|---|---|
 | 1 | Shared infrastructure (Tasks 2.1–2.10) | — |
 | 2 | Events & Hospitality: animatic → **approval** → images and cutouts → **approval** → full build | **CP7** |
-| 3 | Software & Digital: animatic → **approval** → forms pipeline and page → modules → **performance work (phase-1 Task 16)** → production Lighthouse | **CP8**, then publish |
+| 2b | **Form pipeline (Task 4.2), pulled forward (D74):** right after the full Events build, before the Software animatic | — |
+| 3 | Software & Digital: animatic → **approval** → page → modules → **performance work (phase-1 Task 16)** → production Lighthouse | **CP8**, then publish |
 | 4 | Production, Print & Gifts: animatic → approval → images → build | CP9 |
 | 5 | Marketing & Brand: the same | CP10 |
 | 6 | Creative Production: the same (waits on the showreel, the inventory, photo consent) | CP11 |
@@ -119,7 +120,6 @@ src/app/[locale]/lab/[animatic]/page.tsx               animatics (noindex, not i
 src/app/[locale]/privacy/page.tsx                      Privacy Policy stub (D66)
 src/content/types.ts                                   + SceneConfig, SceneLayer, PageBlock, CaseStudy
 src/content/scenes/<category>.ts                       shots, layers, copy keys (one file per category)
-src/content/case-studies.ts                            UAEAF case study (enabled: false)
 src/content/modules/<key>.ts                           per-module data (localized; example flag)
 src/lib/scene-math.ts (+ test)                         layerTransform, shotAt, pinLength (pure)
 src/lib/scrollspy.ts, service-param.ts, jsonld.ts, seo.ts (+ tests)
@@ -272,7 +272,9 @@ e2e/category-*.spec.ts, e2e/opening.spec.ts, e2e/forms.spec.ts, e2e/software-pag
 - [x] **Step 4:** Run the tests. Expected: PASS.
 - [x] **Step 5:** Commit `feat(modules): lazy module slot with static fallback and failure safety`.
 
-### Task 2.5: Category sections, FAQ, quote block, themes and grounds (in progress)
+### Task 2.5: Category sections, FAQ, quote block, themes and grounds
+
+Done (D69). As built: `category-faq.tsx`, `category-quote.tsx` and `quote-actions.tsx` (client, reads `?service=`); theme tokens live in `category.css` (no separate `theme.css`); the closing line is `Category.closing`; the index track releases early when Act 3's tone differs. The service select arrives with the form (Task 4.2); related work stays hidden until real work exists (OQ #17).
 
 **Files:**
 - Create: `src/components/category/{category-faq,quote-block}.tsx`, `src/components/category/theme.css`.
@@ -299,10 +301,10 @@ e2e/category-*.spec.ts, e2e/opening.spec.ts, e2e/forms.spec.ts, e2e/software-pag
   - JSON-LD has ItemList and BreadcrumbList, and FAQPage only once the FAQ is written;
   - `data-header-tone` equals each section's tone at the header line;
   - `#page-stage`'s background equals the theme's ground mid-section.
-- [ ] **Step 2:** Run it. Expected: FAIL.
-- [ ] **Step 3:** Implement the sections, the 5 theme blocks and the grounds.
-- [ ] **Step 4:** Run it, plus `npm run lint`. Expected: PASS.
-- [ ] **Step 5:** Commit `feat(services): category sections, FAQ, quote block, theme tokens and grounds`.
+- [x] **Step 2:** Run it. Expected: FAIL.
+- [x] **Step 3:** Implement the sections, the 5 theme blocks and the grounds.
+- [x] **Step 4:** Run it, plus `npm run lint`. Expected: PASS.
+- [x] **Step 5:** Commit `feat(services): category sections, FAQ, quote block, theme tokens and grounds`.
 
 ### Task 2.6: Menus, links and the quote preset
 
@@ -341,6 +343,8 @@ e2e/category-*.spec.ts, e2e/opening.spec.ts, e2e/forms.spec.ts, e2e/software-pag
 
 ### Task 2.7: `<LayeredScene>` and the scene math
 
+**Done (D68).** As built: `src/lib/scene-math.ts` exports `pinLength`, `shotAt`, `layerDrift(depth, push, progress)`, `enterFrom(from, dir)`, `stillState(layer)` and `sceneProblems(scene)` (the limits are checked as data, so a config test lists every problem instead of throwing). `<LayeredScene scene lines variant="live" | "animatic">` with `SceneDirector` (client, GSAP); the still is not a variant: it is the CSS state without JS or under reduced motion. L3 atmosphere is CSS (`fx-shade`, `fx-glow`, `fx-beam`), so there is no `atmosphere.tsx`. The e2e runs on the lab route (Task 2.9), not a styleguide fixture. Shot indexes are 0-based (`data-shot-active="2"` is the third shot).
+
 **Files:**
 - Create: `src/lib/scene-math.ts` (+ test), `src/content/scenes/types.ts`, `src/components/scenes/{layered-scene.tsx,layered-scene.css,atmosphere.tsx}`.
 - Test: `e2e/layered-scene.spec.ts`, run on a styleguide fixture (`/[locale]/styleguide#scene`).
@@ -361,7 +365,7 @@ e2e/category-*.spec.ts, e2e/opening.spec.ts, e2e/forms.spec.ts, e2e/software-pag
   - Shot copy renders as one `<p>` per shot in DOM order. Only the active one is visible, except in the still, which shows them all.
   - Images go through `BrandImage`. `loading` is eager only for shot-1 layers flagged within budget; there's never a `priority`.
 
-- [ ] **Step 1:** Write the unit tests:
+- [x] **Step 1:** Write the unit tests:
   - `layerTransform(0, 1, 1)` is `{x:0, y:0, scale:1}`;
   - `layerTransform(1, 0.5, 1).y` is −7;
   - an `enter.from.x` of 30 gives +30 in EN and −30 in AR;
@@ -374,12 +378,14 @@ e2e/category-*.spec.ts, e2e/opening.spec.ts, e2e/forms.spec.ts, e2e/software-pag
   - motion: after scrolling to the shot-3 range, `[data-shot-active]` is 3;
   - AR: a layer entering from inline-start starts with a positive `translateX` in RTL;
   - the H1 is the LCP element (PerformanceObserver `largest-contentful-paint` entry's element is the `h1`) at 390 and 1440.
-- [ ] **Step 2:** Run. Expected: FAIL.
-- [ ] **Step 3:** Implement.
-- [ ] **Step 4:** Run. Expected: PASS.
-- [ ] **Step 5:** Commit `feat(scenes): LayeredScene with depth parallax, animatic and still variants`.
+- [x] **Step 2:** Run. Expected: FAIL.
+- [x] **Step 3:** Implement.
+- [x] **Step 4:** Run. Expected: PASS.
+- [x] **Step 5:** Commit `feat(scenes): LayeredScene with depth parallax, animatic and still variants`.
 
 ### Task 2.8: The opening shell: index from the first frame, skip control, curtain
+
+**Done (D68).** As built: `CategoryView` (shared by the public page and the lab) renders the opening, then the index on a track over the whole page (`.cat-index-track`, anchor scope on `.cat-page`), then the services. The skip control is a hash link (no JS needed); below 900px it sits at inline-start, clear of the WhatsApp button. Tab order is breadcrumbs → skip → index (the test asserts that sequence rather than "3 stops", since the two breadcrumb links come first). Grain moved to the page box. `Category.imageWide`, the hero and the two cancelled slots are gone.
 
 **Files:**
 - Create: `src/components/category/category-opening.tsx`.
@@ -392,7 +398,7 @@ e2e/category-*.spec.ts, e2e/opening.spec.ts, e2e/forms.spec.ts, e2e/software-pag
 - **Mobile chip bar:** under the header from the first frame.
 - **The skip control hides** (`inert` plus opacity) once the opening has scrolled past.
 
-- [ ] **Step 1:** Write the e2e tests, Events page, EN and AR, desktop and mobile:
+- [x] **Step 1:** Write the e2e tests, Events page, EN and AR, desktop and mobile:
   - At load, the rail (desktop) or the chip bar (mobile) is visible and its first link is reachable with Tab within 3 stops after the header.
   - "Skip to services" with Enter lands `#conferences` within ±4px, H2 focused.
   - Rail VI clicked at 0.5 vh into the opening lands `#stage` within ±4px.
@@ -400,12 +406,14 @@ e2e/category-*.spec.ts, e2e/opening.spec.ts, e2e/forms.spec.ts, e2e/software-pag
   - The measured pin length (pin spacer height minus the viewport) is ≤ 2.0 vh desktop and ≤ 1.2 vh mobile.
   - No horizontal overflow at 360 in the opening.
   - Reduced motion: no pin spacer, the skip control still works.
-- [ ] **Step 2:** Run. Expected: FAIL.
-- [ ] **Step 3:** Implement.
-- [ ] **Step 4:** Run, plus `category-index`, `anchor-scroll`, `category-structure`. Expected: PASS.
-- [ ] **Step 5:** Commit `feat(services): category opening with index from the first frame and skip control`.
+- [x] **Step 2:** Run. Expected: FAIL.
+- [x] **Step 3:** Implement.
+- [x] **Step 4:** Run, plus `category-index`, `anchor-scroll`, `category-structure`. Expected: PASS.
+- [x] **Step 5:** Commit `feat(services): category opening with index from the first frame and skip control`.
 
 ### Task 2.9: Lab route for animatics
+
+**Done (D68).** As built: the proxy answers 404 for the lab while it is off and for unknown ids (`closedLabLocale`, unit-tested); the page keeps `notFound()` as a second guard. The lab also shows the draft scene for a category with no scene yet.
 
 **Files:**
 - Create: `src/app/[locale]/lab/[animatic]/page.tsx`.
@@ -417,13 +425,15 @@ e2e/category-*.spec.ts, e2e/opening.spec.ts, e2e/forms.spec.ts, e2e/software-pag
 - `notFound()` unless `NEXT_PUBLIC_ENABLE_LAB === "1"` at build time.
 - Not in the sitemap, not linked.
 
-- [ ] **Step 1:** Write the tests:
+- [x] **Step 1:** Write the tests:
   - unit: the sitemap has no `/lab/` URL;
   - e2e (built with the flag): the page has `<meta name="robots" content="noindex, nofollow">`, the boxes carry their slot ids, and the index and skip control work.
-- [ ] **Step 2–4:** Fail, implement, pass.
-- [ ] **Step 5:** Commit `feat(lab): hidden animatic route`.
+- [x] **Step 2–4:** Fail, implement, pass.
+- [x] **Step 5:** Commit `feat(lab): hidden animatic route`.
 
 ### Task 2.10: Scene images: slots, grade and export
+
+**Done.** As built: the grades and their category map live in `src/lib/grade.ts` (erasable TypeScript, unit-tested, imported by the script; Software has none). The matrices are starting values, marked TODO, to be tuned on the graded/ungraded contact sheet (stop point 3). `src/content/scenes/images.ts` holds the 23 slots of layers.md (tested one to one), each with its grade and source; plates carry a 9:16 file (`<slot>-9x16`). The script prints per-file sizes and batch totals; the per-scene mobile budget is enforced by the content test, which reads the files a scene's mobile layers use. LayeredScene's live variant draws slots through `SceneImage` (decorative `alt=""`, art-directed plates, srcset capped); BrandImage's `eager` prop went with it. `image-native.spec.ts` is unchanged: no scene image renders yet, and the unit test checks native sizes.
 
 **Files:**
 - Create: `scripts/grade.mjs`, `src/content/scenes/images.ts` (scene layer slots, the same `ImageSlot` type plus `source: { kind: "real" | "ai"; from?: string }` and `grade`).
@@ -433,12 +443,12 @@ e2e/category-*.spec.ts, e2e/opening.spec.ts, e2e/forms.spec.ts, e2e/software-pag
 - `node scripts/grade.mjs <category> <in> <out>` applies the category's colour matrix (`GRADES` in the script: Evening, Workshop, Editorial, Studio) and writes AVIF and WebP (alpha kept) at native size.
 - It refuses to upscale, and prints each file's bytes and the scene's mobile total.
 
-- [ ] **Step 1:** Write the unit tests:
+- [x] **Step 1:** Write the unit tests:
   - every scene layer slot with a `src` has `width`/`height` equal to the file's real size;
   - real-source layers name their source photo;
   - a scene's mobile layers total ≤ 600 KB on disk (read with `fs.stat`).
-- [ ] **Step 2–4:** Fail, implement, pass. The slots have `src: null` until images exist, so the size tests are skipped per slot until then.
-- [ ] **Step 5:** Commit `feat(scenes): scene image slots and the colour grade export`.
+- [x] **Step 2–4:** Fail, implement, pass. The slots have `src: null` until images exist, so the size tests are skipped per slot until then.
+- [x] **Step 5:** Commit `feat(scenes): scene image slots and the colour grade export`.
 
 ---
 
@@ -448,26 +458,28 @@ Storyboard: [events-hospitality.md](../design/storyboards/events-hospitality.md)
 
 ### Task 3.0: Events animatic → STOP (stop point 2)
 
+Built (D70). Independent review and rhythm/layout fixes applied (D72, D73; `docs/checkpoints/events-animatic-review/`). The user decided the review's proposals (D74): three lines on desktop over four shots (P1), a 0.6 vh desktop pin with two beats for the majlis (P2), the index dimmed during shot 1 (P3), 01–06 numerals in Arabic (P4, P5), the quote block hidden on public pages until the form works (P6), and a focus ring after keyboard landings only (P7). All applied. As built: `events-hospitality.ts` holds `EVENTS_OPENING` (2.0 / 1.2 vh) and `EVENTS_MAJLIS` (a pass scene in section V); both are lab-only until approved. Shot lines are drafts in `scenes.events.*` (CONTENT_CHECKLIST #26). Tests: `scene-math.test.ts` (pass scenes), `scenes.test.ts` (gating), `e2e/events-animatic.spec.ts`; `layered-scene.spec.ts` now runs on the Studio's draft.
+
 **Files:** create `src/content/scenes/events-hospitality.ts` (opening and majlis configs, from the storyboard's shot table); add the storyboard's shot lines to the messages as drafts (marked in the copy deck as pending approval).
 
-- [ ] **Step 1:** Run `npx vitest run src/lib/scene-math src/content`. Expected: PASS (the config passes `pinLength` and the layer limits).
-- [ ] **Step 2:** Build with `NEXT_PUBLIC_ENABLE_LAB=1`. Run `opening.spec.ts` against `/[locale]/lab/events-animatic`. Expected: PASS.
-- [ ] **Step 3:** Record a short screen capture (Playwright video, desktop and mobile) and take screenshots at 1440 and 390, EN and AR: shot by shot, the majlis scene, the index and the skip control.
-- [ ] **Step 4:** Commit `feat(lab): Events & Hospitality animatic`.
-- [ ] **Step 5:** Report to the user in Arabic with the recording, the screenshots and the timings table. **Stop** for approval of rhythm and layout.
+- [x] **Step 1:** Run `npx vitest run src/lib/scene-math src/content`. Expected: PASS (the config passes `pinLength` and the layer limits).
+- [x] **Step 2:** Build with `NEXT_PUBLIC_ENABLE_LAB=1`. Run `opening.spec.ts` against `/[locale]/lab/events-animatic`. Expected: PASS.
+- [x] **Step 3:** Record a short screen capture (Playwright video, desktop and mobile) and take screenshots at 1440 and 390, EN and AR: shot by shot, the majlis scene, the index and the skip control.
+- [x] **Step 4:** Commit `feat(lab): Events & Hospitality animatic`.
+- [x] **Step 5:** Report to the user in Arabic with the recording, the screenshots and the timings table. **Stop** for approval of rhythm and layout. (Reviewed; decisions D74.)
 
-### Task 3.1: Events copy (EN first, AR written natively)
+### Task 3.1: Events copy (EN first, AR written natively): done, approved 2026-11-09 (D75)
 
 **Files:**
 - Modify: `src/content/categories.ts`, `services.ts` (events entries), `messages` (shot lines).
 - Create: `docs/content/category-copy-events.md` (a copy deck in the established format: key, EN, AR, a note on the AR phrasing).
 - Modify: `docs/CONTENT_CHECKLIST.md`.
 
-- [ ] **Step 1:** Write the category intro (2–3 sentences), the one-line promise and 4–6 points per service, 5 FAQ entries, and the approved shot lines.
+- [x] **Step 1:** Write the category intro (2–3 sentences), the one-line promise and 4–6 points per service, 5 FAQ entries, and the approved shot lines. (Approved with 6 FAQ entries and the user's Arabic changes; copy rules in `src/lib/copy-rules.ts`.)
   - Use the 2026 profile (`profile-copy.md`) and `services-proposal.md` only.
   - Questions needing client facts (lead times, coverage area, minimum guest counts) become `TODO:` keys in CONTENT_CHECKLIST, not answers.
-- [ ] **Step 2:** Run `npx vitest run src/content src/messages`. Expected: PASS (counts, banned phrases, Arabic punctuation, Western digits).
-- [ ] **Step 3:** Commit `content(services): Events & Hospitality copy deck`.
+- [x] **Step 2:** Run `npx vitest run src/content src/messages`. Expected: PASS (counts, banned phrases, Arabic punctuation, Western digits).
+- [x] **Step 3:** Commit `content(services): Events & Hospitality copy deck`.
 
 ### Task 3.1b: Events images and cutouts → STOP (stop point 3)
 
@@ -497,7 +509,8 @@ Only after the animatic is approved.
 - [ ] **Step 2:** Run them. Expected: FAIL.
 - [ ] **Step 3:** Implement as storyboard and spec §5.1 (transform and opacity only).
 - [ ] **Step 4:** Run them. Expected: PASS.
-- [ ] **Step 5:** Commit `feat(services): The Evening theme, opening and majlis scene`.
+- [ ] **Step 5:** Re-measure frames through the majlis at 4× CPU with the real images: target **≤ 3%** of frames over 18 ms on desktop (4.5% on the animatic, accepted for now, D75).
+- [ ] **Step 6:** Commit `feat(services): The Evening theme, opening and majlis scene`.
 
 ### Tasks 3.3–3.8: Events modules (one task each, in this order)
 
@@ -576,6 +589,8 @@ Storyboard: [software-digital.md](../design/storyboards/software-digital.md). De
 
 ### Task 4.2: Form pipeline (D66)
 
+**Runs right after Task 3.9 (the full Events build), before the Software animatic (D74, P6).** Until it ships, public category pages hide the quote block and every "Request a quote" link that targets it; the lab route keeps them for review. When the form works, both return on the public pages (`category-view.tsx`, `service-section.tsx`) and the quote form replaces the WhatsApp/email actions. Resend is configured; Turnstile keeps Cloudflare's test keys until the user adds real ones.
+
 **Files:**
 - Create:
   - `src/lib/forms/{schemas,rate-limit,turnstile,mailer}.ts` (+ tests);
@@ -631,7 +646,6 @@ Storyboard: [software-digital.md](../design/storyboards/software-digital.md). De
 
 **Interfaces:**
 - `Category.blocks?: PageBlock[]` (default: the shared skeleton).
-- `caseStudies.uaeaf.named` (false): the anonymised variant renders by default (D67). One flag switches every text and visual to the named variant.
 - `readLighthouseSummary(path): { date, url, perf, a11y, bp, seo } | null`. It returns null unless the summary is a **production-domain** run.
 - `OUR_WORK_ENABLED` is true only when that run is ≥ 90 in every category (D65).
 
@@ -643,7 +657,6 @@ Storyboard: [software-digital.md](../design/storyboards/software-digital.md). De
   - one with all categories ≥ 90 → on.
 
   E2E:
-  - The case study renders **anonymised** by default: the title "A national sports federation", stylised HTML mockups, and no image, no client name and no URL anywhere in the section (a text search for "Athletics" and "uaeathletics" finds nothing).
   - With `named: true` (a test-only build env), the name, the URL and both real screens render, with their alt text.
   - The CTA band's button lands `#consult`.
   - The microcopy is present in EN and AR.
@@ -727,7 +740,7 @@ Its quote block switches from the WhatsApp/email actions to the real quote form 
 | Order | Category | Storyboard | Modules (effort) | Checkpoint | Waits on |
 |---|---|---|---|---|---|
 | 4 | Production, Print & Gifts (The Workshop) | [production-print-gifts.md](../design/storyboards/production-print-gifts.md) | human-scale S, print-order S, merch-placement S, build-layers M, gift-configurator M, unboxing M ⚠ | CP9 | OQ #23 (print store) for its section V |
-| 5 | Marketing & Brand (The Editorial) | [marketing-brand.md](../design/storyboards/marketing-brand.md) | mark-build M, content-calendar M, press-release M, flighting-chart M, example-dashboard M, phone-feed M ⚠ | CP10 | Logo SVG (CONTENT_CHECKLIST #14) for the full mark build |
+| 5 | Marketing & Brand (The Editorial) | [marketing-brand.md](../design/storyboards/marketing-brand.md) | mark-build M, content-calendar M, press-release M, campaign-funnel M, example-dashboard M, phone-feed M ⚠ | CP10 | Logo SVG (CONTENT_CHECKLIST #14) for the full mark build |
 | 6 | Creative Production (The Studio) | [creative-production.md](../design/storyboards/creative-production.md) | motion-playground S, idea-to-image M, set-model M, rental-categories S, aperture-gallery M ⚠, scrub-reel M ⚠ | CP11 | Showreel (#1), equipment inventory (OQ #22), photo consent (OQ #18) |
 
 **Effort:**

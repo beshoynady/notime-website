@@ -87,15 +87,14 @@ The signature (§5.3): each section opens like a magazine spread with its own fo
 | III | Digital marketing & SEO | The chart axis draws | `example-dashboard` | C |
 | IV | Content strategy | The month grid's rules draw | `content-calendar` | A |
 | V | Public relations | The headline sets from a line mask (≥ 900px only) | `press-release` | B |
-| VI | Media planning | The week columns draw | `flighting-chart` | C |
+| VI | Paid media & media planning (Google & Meta ads) | The funnel's first bar draws across the column | `campaign-funnel` (example data, D71) | C |
 
 **Reading order (all):** folio → H2 → promise → module → deliverables → CTA.
 
 ## Act 3 · Closing
 
 1. **Related work:** hidden until approved (OQ #17).
-   - **Campaign proof (D67), in section II Social:** anonymised by default as "A national sports federation campaign" / «حملة لاتحاد رياضي وطني». It shows the Oregon 26 first-week figures, always with their scope: "first week of the campaign: 487K views · +37.6K new followers · 271K reach" (profile p17). There's no client name, no championship name, no logo and no key visuals.
-   - The same `named` flag as the Software case study switches it to the named version (UAE Athletics Federation, World Athletics U20 Championships, Oregon 26) once the client approves.
+   - **Campaign proof, in section II Social:** none until a client approves a campaign with verified figures (D121).
 2. **FAQ.**
 3. **Bookend:** the blank page returns with the grid drawn faintly. Line: "Your page is next." / «صفحتك هي التالية.» → the quote block.
 
@@ -110,5 +109,5 @@ The signature (§5.3): each section opens like a magazine spread with its own fo
 | **Peak** | **II Social:** the only service with real, scoped figures in the profile (anonymised campaign proof, D67), and the liveliest module | **5** |
 | Calm | III–IV | 2 |
 | Build | V PR | 3 |
-| Calm | VI Media planning | 2 |
+| Calm | VI Paid media | 2 |
 | CTA | Bookend | 3 |

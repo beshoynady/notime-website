@@ -1,8 +1,12 @@
 import { getTranslations } from "next-intl/server";
 import { ScrubColorWords } from "@/components/motion/scrub-color-words";
 import "./about.css";
+import { SectionRef } from "@/components/review/section-ref";
+import { Numeral } from "@/components/ui/numeral";
+import { HOME_REF } from "@/lib/review";
+import { serviceCount } from "@/lib/service-count";
 
-const FIGURES = ["markets", "integrated"] as const; // the profile's two figures (copy-deck rules)
+const FIGURES = ["markets", "services"] as const; // the profile's two figures (copy-deck rules)
 
 /**
  * Home · About (dark, continuing the hero). One large statement whose words colour in as it
@@ -13,6 +17,7 @@ export async function About() {
   const t = await getTranslations("about");
   return (
     <section id="about" data-tone="dark" aria-labelledby="about-title" className="section-pad">
+      <SectionRef id={HOME_REF.about} />
       <div className="frame">
         <h2 id="about-title" className="sec-eyebrow text-eyebrow text-champagne">
           {t("eyebrow")}
@@ -24,7 +29,9 @@ export async function About() {
             {FIGURES.map((k) => (
               <div key={k}>
                 <dt className="text-eyebrow">{t(`stats.${k}.label`)}</dt>
-                <dd className="tabular">{t(`stats.${k}.value`)}</dd>
+                <dd className="tabular">
+                  <Numeral>{k === "services" ? String(serviceCount()) : t(`stats.${k}.value`)}</Numeral>
+                </dd>
               </div>
             ))}
           </dl>

@@ -21,7 +21,7 @@
 - **Formats:**
   - Cutouts: AVIF and WebP with alpha.
   - Plates: AVIF (q≈55) and WebP (q≈78).
-  - Paths: `public/images/scenes/<category>/<slot>.{avif,webp}`. Real-source cutouts keep a note of their source photo in the slot data.
+  - Paths: `public/images/scenes/<category>/<slot>.{avif,webp}`; a plate's 9:16 file is `<slot>-9x16`. The slots are data in `src/content/scenes/images.ts`, tested one to one against this file. Real-source cutouts keep a note of their source photo in the slot data.
   - Sizes and srcset rules as before: `BrandImage`, native `width`/`height`, srcset capped at native width (D51).
 - **Budget per opening:** ≤ 5 image layers and ≤ ~600 KB on mobile. Later shots and mid-page scenes lazy-load one viewport ahead. The build reports the **measured** weight per scene.
 - **Alt text:** scene layers are decorative (`alt=""`), because the shot copy carries the meaning in text. The one exception is a layer that shows real work as evidence (marked below).
@@ -34,7 +34,8 @@
 | Slot | Scene · level | Aspect / size | Source | Prompt / source note | BG removal | Depth | Alt |
 |---|---|---|---|---|---|---|---|
 | `ev-open-hall` | Opening · L0 | 16:9 1680 × 944 + 9:16 944 × 1680 | AI | House style. A wide empty banquet hall seen from the back, lights off except a faint warm wash on the stage at the far end, soft haze, bare floor, no tables, no people. Symmetrical, deep perspective, very low detail in the shadows. | none | 0.15 | decorative |
-| `ev-open-table` | Opening · L1 | ~1200 × 520 trimmed | **Real**, `catering-2` (p4-1, long dining table, crystal and florals, 1247 × 703, grade A) | Cut out the table run and its settings; drop the background room. | Canva remove-background; manual touch-up of glass edges | 0.5 | decorative |
+| `ev-open-room` | Opening · L0 (the room, dressed; batch 2) | 16:9 1600 × 900 + 9:16 600 × 1066 (crops of the 1600 × 1066 source, native pixels) | **Real**, `private-celebrations-1` (p9-2, conservatory hall with lanterns and long candlelit tables, 1600 × 1066, A; no people in focus, no branding) | Fades in over the code-drawn hall on the same vanishing point while the room is dressed. Built in v1 instead of the cutouts below (no paid tools); graded with `scripts/grade.mjs`. | none | 0.15 | decorative |
+| `ev-open-table` | Opening · L1 (the near tables; D109) | 16:9 1600 × 900 + 9:16 600 × 1066, full-frame with alpha (same crops as `ev-open-room`) | **Real**, `private-celebrations-1` (p9-2, the same room) | The two near table runs, cut along the centre aisle (a real depth edge) with a long soft ramp where they recede; under them the room plate carries a blurred, darker fill, so their drift never reveals a second table. Opens with the room in the mask wipe, then drifts at depth 0.55 with a 0.10 push (the dolly). `scripts` recipe in D109. | Pillow mask (no paid tools) | 0.55 | decorative |
 | `ev-open-florals` | Opening · L2 | ~700 × 900 trimmed | **Real**, `private-celebrations-2` (p9-1, white and blue florals with candles, 859 × 1290, A) | The floral arrangement only. The grade warms the blue hydrangeas toward taupe. | Canva remove-background | 1.2 | decorative |
 | `ev-open-candles` | Opening · L2 | ~600 × 400 trimmed | **Real**, `private-celebrations-4` (p10-5, candles and hydrangeas on a runner, 811 × 541, B) | The candle cluster. *Fallback:* AI cutout, "a cluster of five ivory pillar candles of different heights, lit, isolated…". | Canva remove-background | 1.0 | decorative |
 | `ev-open-glasses` | Opening · L2 (desktop only) | ~500 × 500 trimmed | **Real**, `catering-1` (p28-1, crystal and gold service, 1408 × 794, A) | Two or three crystal glasses, shown large and out of focus near the lens (the softness hides the source's resolution). | Canva remove-background | 1.3 | decorative |
@@ -52,12 +53,10 @@
 
 ## V · Software & Digital
 
-**No image layers.** The opening is drawn in code (README §3, L0–L3 as grid, SVG, HTML, CSS frames). The case study is **anonymised by default** (D67): its devices show stylised brand-palette mockups in HTML/CSS, with no images. The **named variant** (after client approval) uses the existing real screens `uae-athletics-federation-1` (1544 × 965) and `-2` (459 × 1048) inside device frames. Their alt text is meaningful, because they're evidence:
+**No image layers.** The opening is drawn in code (README §3, L0–L3 as grid, SVG, HTML, CSS frames).
 
 | Slot | Alt EN | Alt AR |
 |---|---|---|
-| `uae-athletics-federation-1` | The UAE Athletics Federation website home page on a laptop. | الصفحة الرئيسية لموقع اتحاد الإمارات لألعاب القوى على شاشة حاسوب محمول. |
-| `uae-athletics-federation-2` | The same site on a phone. | الموقع نفسه على شاشة هاتف. |
 
 **AI generations:** 0. **Background removals:** 0.
 
@@ -68,6 +67,7 @@
 | `pg-open-bench` | Opening · L0 | 16:9 + 9:16 | AI | House style. A dark walnut worktable seen from directly above, bare, warm side light, faint tool marks, nothing on it. | none | 0.15 | decorative |
 | `pg-open-paper` + `pg-open-ribbon` | Opening · L2 | from one 4:5 generation, two cutouts | AI | House style, flat lay from above. A small stack of ivory card stock, a sheet of grey board, and a spool of champagne satin ribbon, spaced apart, isolated, on a plain neutral warm-grey background. No text. | Canva remove-background, then split into two files | 1.0 / 1.2 | decorative |
 | `pg-open-box-base` + `pg-open-box-lid` | Opening · L1 | from one 4:5 generation, two cutouts | AI | House style. A rigid gift box in deep espresso with its matching lid held a little above it, straight-on view, isolated, on a plain neutral warm-grey background. No logos, text or emblems. | Canva remove-background; the lid is split from the base with a manual SVG mask | 0.5 | decorative |
+| `pg-open-gift` | Opening · L2 (desktop; D109) | 1034 × 616 trimmed | **Real**, `gifts-1` (p23-3, gold Dubai-skyline gift, 1280 × 719, A) | The finished gift arrives near the lens as the box closes (shot 4) and drifts faster than the rigs, ending clear of the service rail. Replaces the paper cutout as a layer (the slot stays documented). | rembg `isnet-general-use` with alpha matting; edges checked on espresso and champagne | 0.9 | evidence (alt) |
 
 **Totals:**
 - **Opening, mobile:** 3 layers, ≈ 270 KB.

@@ -1,8 +1,13 @@
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
+import { copyProblems } from "@/lib/copy-rules";
 import { imageSize } from "@/lib/image-size";
-import { getCategories, getCategory, getImageSlot, getImageSlots, getProducts, getServices } from "./index";
+import { getCategories, getCategory, getImageSlot, getImageSlots, getProducts, getServices, productLockup } from "./index";
+import type { Localized } from "./types";
+import ar from "@/messages/ar.json";
+import { formCopy } from "./form-copy";
+import { cta, productsCopy, sticky } from "./software/page";
 
 const locales = ["en", "ar"] as const;
 
@@ -20,7 +25,6 @@ describe("categories", () => {
         expect(c.summary[l].trim(), `${c.slug}.summary.${l}`).not.toBe("");
       }
       expect(getImageSlot(c.image).aspect).toBe("4:5");
-      expect(getImageSlot(c.imageWide).aspect).toBe("16:9");
     }
   });
 
@@ -76,7 +80,9 @@ describe("services", () => {
     }));
     expect(rows).toHaveLength(30);
     expect(rows.map((r) => r.n)).toEqual(Array.from({ length: 30 }, (_, i) => i + 1));
-    expect(services.map((s) => ({ slug: s.slug, anchor: s.anchor, en: s.title.en, ar: s.title.ar }))).toEqual(
+    // A no-break space is a line-break hint (B04), not a change of wording: it compares as a space.
+    const words = (t: string) => t.replace(/ /g, " ");
+    expect(services.map((s) => ({ slug: s.slug, anchor: s.anchor, en: words(s.title.en), ar: words(s.title.ar) }))).toEqual(
       rows.map(({ slug, anchor, en, ar }) => ({ slug, anchor, en, ar })),
     );
   });
@@ -88,10 +94,12 @@ describe("services", () => {
     for (const a of anchors) expect(a).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);
   });
 
-  it("every service has 4–6 'what we deliver' points, the same count in EN and AR", () => {
+  it("every service has its category's number of 'what we deliver' points (D65), the same in EN and AR", () => {
     for (const s of services) {
-      expect(s.points.en.length, s.slug).toBeGreaterThanOrEqual(4);
-      expect(s.points.en.length, s.slug).toBeLessThanOrEqual(6);
+      // Software & Digital: 3 deliverables per service (D65); the other categories 4–6.
+      const [min, max] = s.category === "software-digital" ? [3, 3] : [4, 6];
+      expect(s.points.en.length, s.slug).toBeGreaterThanOrEqual(min);
+      expect(s.points.en.length, s.slug).toBeLessThanOrEqual(max);
       expect(s.points.ar.length, s.slug).toBe(s.points.en.length);
       for (const l of locales) for (const p of s.points[l]) expect(p.trim(), `${s.slug}.points.${l}`).not.toBe("");
     }
@@ -124,12 +132,12 @@ const SIGNATURE_MODULES = {
   "digital-marketing": "example-dashboard",
   "content-strategy": "content-calendar",
   pr: "press-release",
-  "media-planning": "flighting-chart",
-  "large-format": "human-scale",
+  "paid-media": "campaign-funnel",
+  printing: "human-scale",
   fabrication: "build-layers",
   packaging: "unboxing",
   gifts: "gift-configurator",
-  "print-store": "print-order",
+  "print-ordering": "print-order",
   merchandise: "merch-placement",
   websites: "responsive-frames",
   apps: "app-screens",
@@ -150,11 +158,11 @@ describe("category pages (D57)", () => {
     });
   });
 
-  it("each category has an intro and 4–6 FAQ entries in both locales", () => {
+  it("each category has an intro and 4–8 FAQ entries in both locales (cap raised to 8, D78)", () => {
     for (const c of getCategories()) {
       for (const l of locales) expect(c.intro[l].trim(), `${c.slug}.intro.${l}`).not.toBe("");
       expect(c.faq.length, c.slug).toBeGreaterThanOrEqual(4);
-      expect(c.faq.length, c.slug).toBeLessThanOrEqual(6);
+      expect(c.faq.length, c.slug).toBeLessThanOrEqual(8);
       for (const f of c.faq) {
         for (const l of locales) {
           expect(f.q[l].trim()).not.toBe("");
@@ -162,6 +170,46 @@ describe("category pages (D57)", () => {
         }
       }
     }
+  });
+
+  it("Events answers booking time and guest count, and invites other locations (D78 fills, #28)", () => {
+    const faq = getCategories().find((c) => c.slug === "events-hospitality")!.faq;
+    expect(faq).toHaveLength(8);
+    const q = faq.map((f) => f.q.en);
+    expect(q).toContain("How far ahead should I book?");
+    expect(q).toContain("How many guests can you host?");
+    expect(faq.find((f) => f.q.en === "Where do you work?")!.a.ar).toMatch(/ولأي مكان آخر، اسألونا\.$/);
+  });
+
+  it("lists the named deliverables the user confirmed (D71) in their services", () => {
+    const points = (slug: string) => getServices().find((s) => s.slug === slug)!.points;
+    // The D71 points lead each list; the copy deck adds its own after them.
+    expect(points("commercial-large-format-printing").en.slice(0, 4)).toEqual(["Roll-up banners", "Feather flags", "Business cards", "Brochures"]);
+    expect(points("corporate-gifts").en.slice(0, 5)).toEqual(["Gift sets", "Branded bottles", "Bags", "Notebooks & pens", "Giveaways"]);
+    for (const slug of ["commercial-large-format-printing", "corporate-gifts"]) {
+      for (const p of points(slug).ar) expect(p.startsWith("TODO:"), p).toBe(false);
+    }
+  });
+
+  it("follows the copy rules (copy-rules.ts) in every localized field", () => {
+    const fields = [
+      ...getCategories().flatMap((c) => [
+        [`${c.slug}.title`, c.title],
+        [`${c.slug}.summary`, c.summary],
+        [`${c.slug}.intro`, c.intro],
+        [`${c.slug}.closing`, c.closing],
+        ...c.faq.flatMap((f, i) => [
+          [`${c.slug}.faq.${i}.q`, f.q],
+          [`${c.slug}.faq.${i}.a`, f.a],
+        ]),
+      ]),
+      ...getServices().flatMap((s) => [
+        [`${s.slug}.title`, s.title],
+        [`${s.slug}.summary`, s.summary],
+        ...s.points.en.map((en, i) => [`${s.slug}.points.${i}`, { en, ar: s.points.ar[i] }]),
+      ]),
+    ] as [string, Localized<string>][];
+    expect(fields.flatMap(([k, t]) => [...copyProblems(k, t.en, "en"), ...copyProblems(k, t.ar, "ar")])).toEqual([]);
   });
 
   it("placeholder copy is marked TODO in both locales or in neither", () => {
@@ -178,6 +226,14 @@ describe("products", () => {
     expect(products.every((p) => p.status === "comingSoon")).toBe(true);
     for (const p of products) expect(() => getImageSlot(p.image)).not.toThrow();
   });
+
+  it("carries the approved names, with a lockup that says what each one does (D78)", () => {
+    const [qr, rs] = getProducts();
+    expect(qr.name).toEqual({ en: "Minute Zero", ar: "الدقيقة صفر" });
+    expect(rs.name).toEqual({ en: "Peak Hour", ar: "ساعة الذروة" });
+    expect(productLockup(qr, "en")).toBe("Minute Zero · QR event check-in");
+    expect(productLockup(rs, "ar")).toBe("ساعة الذروة · نظام إدارة المطاعم");
+  });
 });
 
 describe("image slots", () => {
@@ -191,9 +247,10 @@ describe("image slots", () => {
   });
 
   // Task 14: every slot has exactly one art-direction entry (`### \`<id>\``) and vice versa.
+  // Entries headed "(cancelled, Dnn)" stay in the doc as a record and have no slot (D67).
   it("matches docs/content/image-prompts.md one to one", () => {
     const doc = readFileSync(path.join(process.cwd(), "docs", "content", "image-prompts.md"), "utf8");
-    const documented = [...doc.matchAll(/^### `([a-z0-9-]+)`/gm)].map((m) => m[1]);
+    const documented = [...doc.matchAll(/^### `([a-z0-9-]+)`(?! \(cancelled)/gm)].map((m) => m[1]);
     expect(new Set(documented).size, "duplicate entries in image-prompts.md").toBe(documented.length);
     expect([...documented].sort()).toEqual(getImageSlots().map((s) => s.id).sort());
     // The documented alt texts are the ones the site renders.
@@ -216,12 +273,15 @@ describe("image slots", () => {
         "process-build-4x5",
         "process-produce-4x5",
         "process-launch-4x5",
+        "notime-website-home-en",
+        "notime-website-home-ar",
+        "notime-website-category-en",
+        "notime-website-category-ar",
       ].sort(),
     );
     for (const s of real) {
       expect(s.src, s.id).toMatch(/^\/images\/work\/[a-z0-9-]+\/[a-z0-9-]+\.webp$/);
       expect(existsSync(path.join(process.cwd(), "public", s.src!)), `${s.id}: ${s.src}`).toBe(true);
-      expect(s.illustrative, s.id).toBe(false);
       expect(s.blurDataURL, s.id).toMatch(/^data:image\/webp;base64,/);
     }
   });
@@ -267,5 +327,33 @@ describe("image slots", () => {
       }
       if (s.kind === "ai") expect([s.width, s.height], s.id).toEqual(CANVA[s.aspect]);
     }
+  });
+});
+
+describe("N13 intro call wording", () => {
+  it("no call button carries a duration", () => {
+    const labels = [cta.book, sticky.book, formCopy.consultation.submit];
+    for (const label of labels) for (const l of locales) expect(label[l]).not.toMatch(/30|٣٠|min|دقيقة/);
+    expect(cta.book).toEqual({ en: "Request a free intro call", ar: "اطلبوا مكالمة تعارف مجانية" });
+    expect(formCopy.consultation.submit).toEqual(cta.book);
+    expect(sticky.book).toEqual({ en: "Request a free call", ar: "اطلبوا مكالمة مجانية" });
+  });
+});
+
+describe("N18 Arabic fixes", () => {
+  it("the quote button is in the plural", () => {
+    expect(ar.header.quote).toBe("اطلبوا عرض سعر");
+  });
+  it("Arabic product links agree in gender", () => {
+    const render = (name: string) => productsCopy.more.ar.replace("{product}", name);
+    const [qr, rs] = getProducts();
+    expect(render(qr.name.ar)).toBe("اكتشفوا ما ستقدّمه «الدقيقة صفر»");
+    expect(render(rs.name.ar)).toBe("اكتشفوا ما ستقدّمه «ساعة الذروة»");
+  });
+  it("Google/Meta title", () => {
+    const s = getServices().find((x) => x.slug === "paid-media-planning");
+    // A no-break space keeps the parenthesis on one line: wrapped in a large RTL title, "(Google"
+    // ended one line and "وMeta)" began the next, so the brackets read as swapped (self-audit B04).
+    expect(s?.title.ar).toBe("الإعلانات المدفوعة وتخطيط الإعلام (Google وMeta)");
   });
 });

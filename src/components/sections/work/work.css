@@ -1,0 +1,144 @@
+/* Home · Our work (H-04). Unlayered, like the other sections: spacing lives here. */
+.work-head {
+  display: grid;
+  gap: 24px;
+  margin-block-end: clamp(40px, 6vw, 72px);
+}
+.work-head h2 {
+  margin: 20px 0 0;
+}
+.work-head h2 b {
+  display: block;
+}
+.work-aside {
+  display: grid;
+  justify-items: start;
+  gap: 20px;
+}
+.work-intro {
+  margin: 0;
+  color: color-mix(in srgb, var(--color-ivory) 72%, transparent);
+}
+
+.work-grid {
+  display: grid;
+  gap: clamp(32px, 4vw, 48px) 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.work-card {
+  display: grid;
+  gap: 20px;
+  align-content: start;
+}
+.work-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius);
+  background: var(--color-espresso-2);
+}
+.work-media-link {
+  display: block;
+  border-radius: var(--radius);
+}
+.work-link {
+  color: inherit;
+  text-decoration: none;
+}
+.work-link:hover,
+.work-link:focus-visible {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+}
+.work-body {
+  display: grid;
+  gap: 10px;
+}
+.work-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--color-taupe);
+}
+.work-meta li:not(:last-child)::after {
+  content: "·";
+  margin-inline-start: 14px;
+  opacity: 0.6;
+}
+@media (max-width: 899.98px) {
+  .work-meta {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .work-meta li::after {
+    content: none !important;
+  }
+}
+.work-title {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.2vw, 1.9rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.work-summary {
+  margin: 0;
+  max-inline-size: 58ch;
+  color: color-mix(in srgb, var(--color-ivory) 74%, transparent);
+  line-height: 1.6;
+}
+.work-note {
+  margin-block: 32px 0;
+  font-size: 0.85rem;
+  color: color-mix(in srgb, var(--color-ivory) 60%, transparent);
+}
+
+@media (min-width: 900px) {
+  .work-head {
+    grid-template-columns: 7fr 5fr;
+    align-items: end;
+  }
+  .work-aside {
+    padding-block-end: 0.5em;
+  }
+  /* Two cases sit side by side at equal width. From the third card on, the lead takes the wider
+     column and both rows and the others stack beside it. CSS only: the count is never passed in. */
+  .work-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .work-grid:has(> :nth-child(3)) {
+    grid-template-columns: 7fr 5fr;
+  }
+  .work-grid:has(> :nth-child(3)) > .work-card[data-lead] {
+    grid-row: span 2;
+  }
+  .work-grid:has(> :nth-child(3)) > .work-card[data-lead] .work-media {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* Image hover, as the category cards above it (M3): the photo settles from 1.04 to 1 under the
+   pointer or keyboard focus. CSS on the img only; Motion's HoverSweep owns its own layer. */
+.work-media img {
+  scale: 1.04;
+  transition: scale 1.4s var(--ease-expo-out);
+}
+.work-card:focus-within .work-media img {
+  scale: 1;
+}
+@media (hover: hover) and (pointer: fine) {
+  .work-card:hover .work-media img {
+    scale: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .work-media img {
+    scale: none;
+    transition: none;
+  }
+}

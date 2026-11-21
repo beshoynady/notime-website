@@ -1,12 +1,12 @@
 import { cn } from "@/lib/utils";
 
 /**
- * Roman numerals are always set in Montserrat: in Alexandria, Latin I and V look like
- * the Arabic-Indic digits ١ and ٧, so "IV" would read as "١٧". A <bdi> isolates the numeral,
- * so in Arabic it can't merge with neighbouring digits into one left-to-right run
- * ("III · 6 خدمات" would show as "6 · III خدمات"). Its own direction is then LTR, so as a grid
- * item it would align left in Arabic; `justify-self: start` follows the grid's direction instead
- * (Chrome has no `text-align: match-parent`).
+ * An order numeral (`orderNumeral`, D74): Roman in English, two-digit Western numerals in Arabic.
+ * Always set in Montserrat, so both locales share one figure style. A <bdi> isolates it, so in
+ * Arabic it can't merge with neighbouring digits into one left-to-right run ("03 · 6 خدمات" would
+ * show as "6 · 03 خدمات"). Its own direction is then LTR, so as a grid item it would align left in
+ * Arabic; `justify-self: start` follows the grid's direction instead (Chrome has no
+ * `text-align: match-parent`).
  */
 export function Numeral({ children, className }: { children: string; className?: string }) {
   return (

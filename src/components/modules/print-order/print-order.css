@@ -1,0 +1,135 @@
+/* Print order (spec §6, IV.23): four job tickets from one docket. Each ticket has a stub with its
+   step number and a perforation (a dashed tear line with a notch at each end). Side by side when
+   the module is wide enough, stacked below that (the stub moves to inline-start). Logical only. */
+.po {
+  --po-rule: color-mix(in srgb, var(--color-taupe) 80%, transparent);
+  --po-ground: var(--tone-ground, var(--color-champagne));
+  container-type: inline-size;
+  display: grid;
+  gap: 20px;
+  justify-items: start;
+  min-inline-size: 0;
+}
+.po-title {
+  margin: 0;
+  color: var(--color-cocoa);
+}
+.po-steps {
+  display: grid;
+  gap: 10px;
+  inline-size: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+.po-ticket {
+  --notch: 7px;
+  position: relative;
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  background: color-mix(in srgb, var(--color-ivory) 72%, transparent);
+  border: 1px solid var(--po-rule);
+  border-radius: 2px;
+}
+.po-stub {
+  position: relative;
+  display: grid;
+  place-items: center;
+  border-inline-end: 1px dashed var(--po-rule);
+}
+/* The notches where the tear line meets the ticket's edges. */
+.po-stub::before,
+.po-stub::after {
+  content: "";
+  position: absolute;
+  inset-inline-end: calc(-1 * var(--notch) - 0.5px);
+  inline-size: calc(2 * var(--notch));
+  block-size: calc(2 * var(--notch));
+  border: 1px solid var(--po-rule);
+  border-radius: 50%;
+  background: var(--po-ground);
+}
+.po-stub::before {
+  inset-block-start: calc(-1 * var(--notch) - 1px);
+}
+.po-stub::after {
+  inset-block-end: calc(-1 * var(--notch) - 1px);
+}
+.po-num {
+  font-family: var(--font-en);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-espresso);
+}
+.po-body {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 4px 14px;
+  padding: 16px 18px;
+}
+.po-icon {
+  grid-row: span 2;
+  inline-size: 36px;
+  block-size: 36px;
+  fill: none;
+  stroke: var(--color-cocoa);
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+html[dir="rtl"] .po-icon[data-dir] {
+  transform: scaleX(-1);
+}
+.po-step-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-espresso);
+}
+.po-line {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+/* Wide: the four tickets in a row, stub on top, the tear line across. */
+@container (min-width: 720px) {
+  .po-steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .po-ticket {
+    grid-template-columns: none;
+    grid-template-rows: auto 1fr;
+  }
+  .po-stub {
+    justify-items: start;
+    padding: 14px 18px;
+    border-inline-end: 0;
+    border-block-end: 1px dashed var(--po-rule);
+  }
+  .po-stub::before,
+  .po-stub::after {
+    inset-block: auto calc(-1 * var(--notch) - 0.5px);
+  }
+  .po-stub::before {
+    inset-inline: calc(-1 * var(--notch) - 1px) auto;
+  }
+  .po-stub::after {
+    inset-inline: auto calc(-1 * var(--notch) - 1px);
+  }
+  .po-body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+  .po-icon {
+    grid-row: auto;
+  }
+}
+.po-cta {
+  margin-block-start: 4px;
+}

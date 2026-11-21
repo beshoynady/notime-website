@@ -1,0 +1,34 @@
+[
+  {
+    "route": "/links",
+    "locale": "en",
+    "width": 1440,
+    "height": 1330,
+    "overflow": 0,
+    "errors": []
+  },
+  {
+    "route": "/links",
+    "locale": "ar",
+    "width": 1440,
+    "height": 1333,
+    "overflow": 0,
+    "errors": []
+  },
+  {
+    "route": "/links",
+    "locale": "en",
+    "width": 390,
+    "height": 1564,
+    "overflow": 0,
+    "errors": []
+  },
+  {
+    "route": "/links",
+    "locale": "ar",
+    "width": 390,
+    "height": 1623,
+    "overflow": 0,
+    "errors": []
+  }
+]

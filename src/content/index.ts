@@ -5,6 +5,7 @@
 import { categories } from "./categories";
 import { imageSlots } from "./images";
 import { products } from "./products";
+export { productLockup } from "./products";
 import { services } from "./services";
 import type { Category, CategorySlug, ImageSlot, Product, Service } from "./types";
 

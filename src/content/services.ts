@@ -8,6 +8,141 @@ import type { CategorySlug, Localized, ModuleKey, QuoteType, Service } from "./t
 type Row = [slug: string, title: Localized<string>, summary: Localized<string>];
 
 /**
+ * "What we deliver" points per service: the named deliverables the user confirmed (D71) and each
+ * category's copy deck (Events approved; the other four are drafts for Rand's review).
+ */
+const POINTS: Record<string, Localized<string[]>> = {
+  // Events & Hospitality: copy deck docs/content/category-copy-events.md (approved 2026-11-09).
+  "conferences-summits": {
+    en: ["Programme and running order", "Venue and room layout", "Speaker and guest care", "Event branding on site", "Ceremonies and award nights"],
+    ar: ["البرنامج وتسلسل الفقرات", "اختيار المكان وتوزيع القاعة", "استقبال المتحدثين ورعاية الضيوف", "هوية الحدث في أرجاء المكان", "حفلات التكريم وليالي الجوائز"],
+  },
+  "exhibitions-booths": {
+    en: ["Stand concept and design", "Fabrication and installation", "Mall and exhibition stands", "Staffing on the stand", "On-site PR management"],
+    ar: ["فكرة الجناح وتصميمه", "التصنيع والتركيب", "أجنحة المراكز التجارية والمعارض", "فريق عمل الجناح", "إدارة العلاقات العامة في أرض الحدث"],
+  },
+  "product-launches-activations": {
+    en: ["Launch concept and the reveal", "Brand activations in malls and venues", "Technology and robotics experiences", "Sponsor activations", "Branded environments"],
+    ar: ["فكرة الإطلاق ولحظة الكشف", "تفعيل العلامات في المراكز التجارية والقاعات", "عروض تفاعلية بالتقنية والروبوتات", "تفعيلات الرعاة", "مساحات بهوية العلامة"],
+  },
+  "galas-private-celebrations": {
+    en: ["Concept decks and theming", "Gala and wedding décor", "Floral design and styling", "Giveaways and keepsakes", "Photobooths and guest moments", "Full on-day production"],
+    ar: ["ملف الفكرة واختيار الطابع", "ديكور الحفلات والأعراس", "تصميم الزهور وتنسيق المكان", "الهدايا والتذكارات", "ركن التصوير ولحظات الضيوف", "تنفيذ اليوم كاملًا"],
+  },
+  "catering-heritage-hospitality": {
+    en: ["Majlis setups and desert tents", "Arabic coffee and welcome ceremonies", "Heritage carts and live stations", "Signature desserts and beverages", "Buffet and table styling", "Private service and boardroom hospitality"],
+    ar: ["تجهيز المجالس والخيام الصحراوية", "القهوة العربية ومراسم الاستقبال", "العربات التراثية ومحطات الطهي أمام الضيوف", "حلويات ومشروبات بتوقيعنا", "تنسيق البوفيه والطاولات", "الخدمة الخاصة وضيافة مجالس الإدارة"],
+  },
+  "stage-technical-production": {
+    en: ["Stage design", "Rigging", "Live sound", "Lighting", "Screens", "Technical setup"],
+    ar: ["تصميم المسرح", "تركيب الهياكل وتعليق المعدات", "الصوت المباشر", "الإضاءة", "الشاشات", "التجهيز التقني"],
+  },
+  "commercial-large-format-printing": {
+    en: ["Roll-up banners", "Feather flags", "Business cards", "Brochures", "Backdrops and wall graphics"],
+    ar: ["لافتات رول أب", "أعلام الريشة", "بطاقات العمل", "البروشورات", "الخلفيات والرسومات الجدارية"],
+  },
+  "corporate-gifts": {
+    en: ["Gift sets", "Branded bottles", "Bags", "Notebooks & pens", "Giveaways", "Screen printing, UV, foiling, debossing and laser engraving"],
+    ar: ["أطقم الهدايا", "زجاجات بهوية العلامة", "الحقائب", "الدفاتر والأقلام", "الهدايا الترويجية", "الطباعة الحريرية، والطباعة بالأشعة فوق البنفسجية، والطباعة بالرقائق المعدنية، والكبس الغائر، والحفر بالليزر"],
+  },
+  // Creative Production: copy deck docs/content/category-copy-creative.md (draft for Rand's
+  // review; v1 decks task, with the clear fixes from deck-review-2026-11-09.md).
+  photography: {
+    en: ["Event coverage", "Product photography", "Food styling and photography", "Portraits", "Light planned for each shot"],
+    ar: ["تغطية الفعاليات", "تصوير المنتجات", "تنسيق الأطباق وتصويرها", "البورتريه", "إضاءة مدروسة لكل لقطة"],
+  },
+  "video-production": {
+    en: ["Script and shoot", "Cinematic product and brand films", "Event films and coverage", "Editing and colour", "Sound design and post-production"],
+    ar: ["النص والتصوير", "أفلام سينمائية للمنتجات والعلامات", "أفلام الفعاليات وتغطيتها", "المونتاج وتصحيح الألوان", "تصميم الصوت ومرحلة ما بعد الإنتاج"],
+  },
+  "motion-graphics": {
+    en: ["Motion graphics and logo animation", "Titles and explainers", "Short videos and motion for social media", "Screen content for events and stages"],
+    ar: ["موشن جرافيك وتحريك الشعارات", "العناوين وفيديوهات الشرح", "مقاطع قصيرة وموشن جرافيك لمنصات التواصل", "محتوى الشاشات للفعاليات والمسارح"],
+  },
+  "ai-content-creation": {
+    en: ["AI video ads and short videos", "Cinematic AI video", "AI imagery and campaign key visuals", "Art direction true to your brand", "Editing, sound and finishing"],
+    ar: ["إعلانات فيديو ومقاطع قصيرة بالذكاء الاصطناعي", "فيديو سينمائي بالذكاء الاصطناعي", "صور بالذكاء الاصطناعي ومرئيات رئيسية للحملات", "توجيه فني يلتزم بهويتكم", "المونتاج والصوت واللمسات الأخيرة"],
+  },
+  "set-stage-design": {
+    en: ["Set and stage concepts", "Drawings and 3D models", "Sets built for the camera", "Stages built for the room"],
+    ar: ["فكرة الديكور والمسرح", "الرسومات والنماذج ثلاثية الأبعاد", "ديكورات مبنية للكاميرا", "مسارح مبنية للقاعة"],
+  },
+  "equipment-camera-rental": {
+    en: ["Cameras", "Lenses", "Lighting", "Audio"],
+    ar: ["الكاميرات", "العدسات", "الإضاءة", "الصوت"],
+  },
+  // Marketing & Brand: copy deck docs/content/category-copy-marketing.md (draft, as above).
+  "branding-identity": {
+    en: ["Brand strategy", "Naming", "Logo and visual identity", "Tone of voice", "Brand guidelines"],
+    ar: ["استراتيجية العلامة", "ابتكار الاسم", "الشعار والهوية البصرية", "نبرة الخطاب", "دليل الهوية"],
+  },
+  "social-media-management": {
+    en: ["Content strategy and a monthly calendar", "Daily publishing in Arabic and English", "Design, motion and short videos", "On-ground coverage", "Community management", "Paid campaigns and growth"],
+    ar: ["استراتيجية المحتوى وخطة نشر شهرية", "نشر يومي بالعربية والإنجليزية", "التصميم والموشن جرافيك والمقاطع القصيرة", "التغطية من أرض الحدث", "إدارة التفاعل مع الجمهور", "حملات مدفوعة ونمو الحسابات"],
+  },
+  "digital-marketing-seo": {
+    en: ["Search engine optimisation", "Site speed and Core Web Vitals", "Analytics and reporting", "Measurement across search and your site"],
+    ar: ["تحسين الظهور في محركات البحث", "سرعة الموقع ومؤشرات أداء الويب الأساسية", "التحليلات والتقارير", "قياس النتائج في البحث وعلى موقعكم"],
+  },
+  "content-strategy": {
+    en: ["Messages and topics per channel", "A monthly content calendar", "Arabic and English content", "Content systems and templates"],
+    ar: ["الرسائل والمواضيع لكل قناة", "خطة محتوى شهرية", "محتوى بالعربية والإنجليزية", "أنظمة المحتوى وقوالبه"],
+  },
+  "public-relations": {
+    en: ["Press releases and announcements", "Media relations", "On-site PR at exhibitions and events", "Media coverage after the event"],
+    ar: ["البيانات الصحفية والإعلانات الرسمية", "العلاقات الإعلامية", "العلاقات العامة في أرض المعارض والفعاليات", "التغطية الإعلامية بعد الحدث"],
+  },
+  "paid-media-planning": {
+    en: ["Google Ads campaigns", "Meta campaigns on Facebook and Instagram", "Channel and budget planning", "Campaign timing and flighting", "Performance reporting"],
+    ar: ["حملات Google", "حملات Meta على فيسبوك وإنستغرام", "تخطيط القنوات والميزانيات", "توقيت الحملات وجدولتها", "تقارير الأداء"],
+  },
+  // Production, Print & Gifts: copy deck docs/content/category-copy-print.md (draft, as above;
+  // printing and gifts keep the D71 points and add the deck's).
+  "stand-fabrication-signage": {
+    en: ["Stand design", "Fabrication", "Installation on site", "Activations and branded spaces", "Wayfinding signage"],
+    ar: ["تصميم الأجنحة", "التصنيع", "التركيب في أرض الحدث", "مساحات التفعيل والمساحات بهوية العلامة", "لافتات إرشادية للضيوف"],
+  },
+  "packaging-design": {
+    en: ["Custom boxes and wraps", "Packaging for awards and gift sets", "Structure and dielines", "Print-ready artwork"],
+    ar: ["علب وتغليف حسب الطلب", "تغليف للجوائز وأطقم الهدايا", "الهيكل وقوالب القصّ", "ملفات جاهزة للطباعة"],
+  },
+  "print-ordering": {
+    en: ["Tell us the item and the quantity", "Send your artwork, or ask for a reprint", "Approve the proof before printing", "Printed to brand standard"],
+    ar: ["أخبرونا بالمنتج والكمية", "أرسلوا التصميم، أو اطلبوا إعادة الطباعة", "اعتمدوا النسخة التجريبية قبل التنفيذ", "طباعة بمعايير علامتكم"],
+  },
+  "branded-merchandise": {
+    en: ["Apparel", "Bags and totes", "Desk and everyday objects", "Printed or engraved, to suit the material"],
+    ar: ["الملابس", "الحقائب وحقائب القماش", "أدوات المكتب والاستخدام اليومي", "طباعة أو حفر بما يناسب الخامة"],
+  },
+  // Software & Digital: copy deck docs/content/category-copy-software.md (draft, as above;
+  // exactly 3 deliverables per service, D65).
+  websites: {
+    en: ["Arabic and English, with full right-to-left layouts", "A content system your team runs", "SEO and speed from day one"],
+    ar: ["العربية والإنجليزية، مع دعم كامل للاتجاه من اليمين إلى اليسار", "نظام لإدارة المحتوى يديره فريقكم", "الظهور في محركات البحث والسرعة من اليوم الأول"],
+  },
+  "mobile-apps": {
+    en: ["iOS and Android", "Connected to your website", "Arabic and English"],
+    ar: ["iOS وAndroid", "مرتبط بموقعكم الإلكتروني", "بالعربية والإنجليزية"],
+  },
+  "custom-systems": {
+    en: ["Admin dashboards and analytics", "Roles and permissions", "Integrations with your tools"],
+    ar: ["لوحات إدارة وتحليلات", "أدوار وصلاحيات لفريقكم", "الربط بأدواتكم وأنظمتكم"],
+  },
+  "e-commerce": {
+    en: ["Catalogue management", "Checkout and payment integration", "An orders dashboard"],
+    ar: ["إدارة المنتجات", "إتمام الشراء وربط بوابات الدفع", "لوحة لمتابعة الطلبات"],
+  },
+  "ui-ux-design": {
+    en: ["User research and flows", "Clickable prototypes", "A design system"],
+    ar: ["بحث المستخدمين ومسارات الاستخدام", "نماذج أولية قابلة للنقر", "نظام تصميم"],
+  },
+  "ai-consulting": {
+    en: ["A review of where AI fits your work", "A pilot plan", "Getting your team started"],
+    ar: ["مراجعة لمواضع فائدة الذكاء الاصطناعي في عملكم", "خطة لمشروع تجريبي أول", "تهيئة فريقكم للبدء"],
+  },
+};
+
+/**
  * Category-page fields per service (D57): the anchor (docs/content/services-list.md) and the
  * signature module (docs/design/category-pages.md §6). quoteType defaults to the category's.
  */
@@ -29,12 +164,12 @@ const PAGE: Record<string, { anchor: string; module: ModuleKey; quoteType?: Quot
   "digital-marketing-seo": { anchor: "digital-marketing", module: "example-dashboard" },
   "content-strategy": { anchor: "content-strategy", module: "content-calendar" },
   "public-relations": { anchor: "pr", module: "press-release" },
-  "media-planning": { anchor: "media-planning", module: "flighting-chart" },
-  "large-format-printing": { anchor: "large-format", module: "human-scale" },
+  "paid-media-planning": { anchor: "paid-media", module: "campaign-funnel" },
+  "commercial-large-format-printing": { anchor: "printing", module: "human-scale" },
   "stand-fabrication-signage": { anchor: "fabrication", module: "build-layers" },
   "packaging-design": { anchor: "packaging", module: "unboxing" },
   "corporate-gifts": { anchor: "gifts", module: "gift-configurator" },
-  "online-print-store": { anchor: "print-store", module: "print-order" },
+  "print-ordering": { anchor: "print-ordering", module: "print-order" },
   "branded-merchandise": { anchor: "merchandise", module: "merch-placement" },
   websites: { anchor: "websites", module: "responsive-frames" },
   "mobile-apps": { anchor: "apps", module: "app-screens" },
@@ -51,13 +186,6 @@ const QUOTE_TYPE: Record<CategorySlug, QuoteType> = {
   "production-print-gifts": "print",
   "software-digital": "digital",
 };
-
-// TODO: replace placeholder — "what we deliver" points are written per category with its copy
-// deck (phase-2 plan, Task 3.1 and later). Four obvious placeholders until then.
-const placeholderPoints = (): Localized<string[]> => ({
-  en: [1, 2, 3, 4].map((n) => `TODO: what we deliver, point ${n}`),
-  ar: [1, 2, 3, 4].map((n) => `TODO: ما نقدّمه، النقطة ${n}`),
-});
 
 function group(category: CategorySlug, rows: Row[]): Service[] {
   const cat = categories.find((c) => c.slug === category)!;
@@ -77,7 +205,7 @@ function group(category: CategorySlug, rows: Row[]): Service[] {
       status: "approved",
       anchor: page.anchor,
       signatureModule: page.module,
-      points: placeholderPoints(),
+      points: POINTS[slug],
       relatedWork: [],
       quoteType: page.quoteType ?? QUOTE_TYPE[category],
     };
@@ -91,7 +219,7 @@ export const services: Service[] = [
       { en: "Conferences & summits", ar: "المؤتمرات والقمم" },
       {
         en: "Programme, venue, speakers and the running of the day, planned as one.",
-        ar: "البرنامج والمكان والمتحدثون وإدارة اليوم، في خطة واحدة متكاملة.",
+        ar: "البرنامج والمكان والمتحدثون وسير اليوم، في خطة واحدة.",
       },
     ],
     [
@@ -107,7 +235,7 @@ export const services: Service[] = [
       { en: "Product launches & brand activations", ar: "إطلاق المنتجات وتفعيل العلامات" },
       {
         en: "Launches and brand activations in malls, venues and exhibitions, including technology and robotics experiences.",
-        ar: "إطلاقات وتفعيلات للعلامات في المراكز التجارية والقاعات والمعارض، بما فيها تجارب التقنية والروبوتات.",
+        ar: "إطلاقات وتفعيلات للعلامات في المراكز التجارية والقاعات والمعارض، ومعها عروض تفاعلية بالتقنية والروبوتات.",
       },
     ],
     [
@@ -115,7 +243,7 @@ export const services: Service[] = [
       { en: "Galas & private celebrations", ar: "الحفلات والاحتفالات الخاصة" },
       {
         en: "Galas, weddings, baby receptions and intimate gatherings: theming, décor, florals, keepsakes and the full day.",
-        ar: "حفلات وأعراس واستقبالات مواليد وتجمّعات عائلية: الفكرة والديكور والزهور والتذكارات، وتنفيذ اليوم كاملًا.",
+        ar: "حفلات رسمية وأعراس واستقبال مواليد ولقاءات عائلية خاصة: الفكرة والديكور والزهور والتذكارات، وتنفيذ اليوم كاملًا.",
       },
     ],
     [
@@ -123,15 +251,15 @@ export const services: Service[] = [
       { en: "Catering & heritage hospitality", ar: "الضيافة والمجالس التراثية" },
       {
         en: "Private and corporate catering, signature desserts and beverages, majlis setups, desert tents and Arabic coffee service.",
-        ar: "ضيافة للمناسبات الخاصة والشركات، وحلويات ومشروبات مميّزة، ومجالس وخيام صحراوية وتقديم القهوة العربية.",
+        ar: "ضيافة للمناسبات الخاصة وللشركات، وحلويات ومشروبات بتوقيعنا، ومجالس وخيام صحراوية تُقدَّم فيها القهوة العربية.",
       },
     ],
     [
       "stage-technical-production",
       { en: "Stage & technical production", ar: "الإنتاج الفني والتقني للمسرح" },
       {
-        en: "Stage, sound, light and screens, rigged and run by one crew.",
-        ar: "المسرح والصوت والإضاءة والشاشات، يجهّزها ويديرها فريق واحد.",
+        en: "Stage design, rigging, live sound, lighting and screens.",
+        ar: "تصميم المسرح، وتركيب المعدات، والصوت المباشر، والإضاءة، والشاشات.",
       },
     ],
   ]),
@@ -140,24 +268,24 @@ export const services: Service[] = [
       "photography",
       { en: "Photography", ar: "التصوير الفوتوغرافي" },
       {
-        en: "Event, product and portrait photography, lit with intent.",
-        ar: "تصوير الفعاليات والمنتجات والبورتريه، بإضاءة مدروسة.",
+        en: "Photography for events, products, food and portraits.",
+        ar: "تصوير الفعاليات والمنتجات والأطباق والبورتريه.",
       },
     ],
     [
       "video-production",
       { en: "Video production", ar: "إنتاج الفيديو" },
       {
-        en: "From script and shoot to the final edit and colour.",
-        ar: "من النص والتصوير حتى المونتاج النهائي وتصحيح الألوان.",
+        en: "Brand, product and event films, sound design included.",
+        ar: "أفلام للعلامات والمنتجات والفعاليات، مع تصميم الصوت.",
       },
     ],
     [
       "motion-graphics",
       { en: "Motion graphics", ar: "الموشن جرافيك" },
       {
-        en: "Titles, explainers and screen content that move with purpose.",
-        ar: "عناوين وفيديوهات شرح ومحتوى للشاشات، بحركة لها هدف.",
+        en: "Titles, explainers and screen content, moving in your brand's style.",
+        ar: "عناوين وفيديوهات شرح ومحتوى للشاشات، تتحرّك بأسلوب علامتكم.",
       },
     ],
     [
@@ -181,7 +309,7 @@ export const services: Service[] = [
       { en: "Equipment & camera rental", ar: "تأجير المعدّات والكاميرات" },
       {
         en: "Cameras, lenses and lighting, ready for your production.",
-        ar: "كاميرات وعدسات وإضاءة، جاهزة لإنتاجك.",
+        ar: "كاميرات وعدسات وإضاءة، جاهزة لإنتاجكم.",
       },
     ],
   ]),
@@ -190,8 +318,8 @@ export const services: Service[] = [
       "branding-identity",
       { en: "Branding & identity", ar: "الهوية التجارية" },
       {
-        en: "Name, mark, voice and system, built to hold together.",
-        ar: "الاسم والشعار والنبرة والنظام البصري، متماسكة معًا.",
+        en: "Brand strategy, naming, visual identity and guidelines.",
+        ar: "استراتيجية العلامة، والتسمية، والهوية البصرية، ودليل الاستخدام.",
       },
     ],
     [
@@ -204,10 +332,10 @@ export const services: Service[] = [
     ],
     [
       "digital-marketing-seo",
-      { en: "Digital marketing & SEO", ar: "التسويق الرقمي وSEO" },
+      { en: "Digital marketing & SEO", ar: "التسويق الرقمي وتحسين الظهور في محركات البحث (SEO)" },
       {
-        en: "Search, paid media and measurement that show what works.",
-        ar: "محركات البحث والإعلانات المدفوعة والقياس، لتعرف ما الذي ينجح.",
+        en: "Search, site speed and measurement that show what works.",
+        ar: "محركات البحث وسرعة الموقع والقياس، لتعرفوا ما الذي ينجح.",
       },
     ],
     [
@@ -223,25 +351,25 @@ export const services: Service[] = [
       { en: "Public relations", ar: "العلاقات العامة" },
       {
         en: "Press, media relations and announcements, handled with care.",
-        ar: "الصحافة والعلاقات الإعلامية والإعلانات الرسمية، بعناية.",
+        ar: "البيانات الصحفية والعلاقات الإعلامية والإعلانات الرسمية، من الصياغة حتى النشر.",
       },
     ],
     [
-      "media-planning",
-      { en: "Media planning", ar: "تخطيط الإعلام" },
+      "paid-media-planning",
+      { en: "Paid media & media planning (Google & Meta ads)", ar: "الإعلانات المدفوعة وتخطيط الإعلام (Google وMeta)" },
       {
-        en: "Channels, budgets and timing matched to the audience.",
-        ar: "القنوات والميزانيات والتوقيت، بما يناسب الجمهور.",
+        en: "Google and Meta campaigns, with the channels, budgets and timing behind them matched to the audience.",
+        ar: "حملات على Google و Meta، نخطّط لقنواتها وميزانياتها وتوقيتها بما يناسب الجمهور.",
       },
     ],
   ]),
   ...group("production-print-gifts", [
     [
-      "large-format-printing",
-      { en: "Large-format printing", ar: "الطباعة كبيرة الحجم" },
+      "commercial-large-format-printing",
+      { en: "Commercial & large-format printing", ar: "الطباعة التجارية وكبيرة الحجم" },
       {
-        en: "Banners, backdrops and wall graphics, printed to scale.",
-        ar: "لافتات وخلفيات ورسومات جدارية، مطبوعة بالمقاس الكامل.",
+        en: "From business cards and brochures to banners, backdrops and wall graphics, printed to scale.",
+        ar: "من بطاقات العمل والبروشورات إلى اللافتات والخلفيات والرسومات الجدارية، مطبوعة بالمقاس المطلوب.",
       },
     ],
     [
@@ -249,7 +377,7 @@ export const services: Service[] = [
       { en: "Stand fabrication & signage", ar: "تصنيع الأجنحة واللافتات" },
       {
         en: "Exhibition stands, activations and branded spaces, designed, fabricated and installed, with the signage that guides guests.",
-        ar: "أجنحة معارض ومساحات تفعيل وبيئات تحمل هوية العلامة، نصمّمها ونصنّعها ونركّبها، مع لافتات ترشد الضيوف.",
+        ar: "أجنحة معارض ومساحات تفعيل ومساحات تحمل هوية العلامة، نصمّمها ونصنّعها ونركّبها، مع لافتات ترشد الضيوف.",
       },
     ],
     [
@@ -265,23 +393,23 @@ export const services: Service[] = [
       { en: "Corporate gifts", ar: "هدايا الشركات" },
       {
         en: "Gifts chosen, branded and delivered for clients and teams.",
-        ar: "هدايا نختارها ونضع عليها هويتك ونوصلها لعملائك وفريقك.",
+        ar: "هدايا نختارها ونضع عليها هويتكم ونوصلها إلى عملائكم وفريقكم.",
       },
     ],
     [
-      "online-print-store",
-      { en: "Online print store", ar: "متجر الطباعة الإلكتروني" },
+      "print-ordering",
+      { en: "Print ordering", ar: "طلب المطبوعات" },
       {
-        en: "Order approved print items online, on brand every time.",
-        ar: "اطلب مطبوعاتك المعتمدة عبر الإنترنت، بهوية ثابتة في كل مرة.",
+        en: "Tell us the item and the quantity, approve the proof, and we print it to your brand.",
+        ar: "أخبرونا بالمنتج والكمية، واعتمدوا النسخة التجريبية، ونطبعه بهوية علامتكم.",
       },
     ],
     [
       "branded-merchandise",
       { en: "Branded merchandise", ar: "منتجات بهوية العلامة" },
       {
-        en: "Apparel and objects carrying the brand with restraint.",
-        ar: "ملابس وقطع تحمل العلامة بأناقة وهدوء.",
+        en: "Apparel, bags and desk items, printed or engraved.",
+        ar: "ملابس وحقائب وأدوات مكتب، بالطباعة أو الحفر.",
       },
     ],
   ]),
@@ -299,7 +427,7 @@ export const services: Service[] = [
       { en: "Mobile apps", ar: "تطبيقات الجوّال" },
       {
         en: "iOS and Android apps designed around how people use them.",
-        ar: "تطبيقات iOS وAndroid مصمّمة حول طريقة استخدام الناس لها.",
+        ar: "تطبيقات iOS وAndroid مصمّمة وفق طريقة استخدام الناس لها.",
       },
     ],
     [
@@ -307,7 +435,7 @@ export const services: Service[] = [
       { en: "Custom systems", ar: "أنظمة مخصّصة" },
       {
         en: "Internal tools and systems built for the way your team works.",
-        ar: "أدوات وأنظمة داخلية مبنية على طريقة عمل فريقك.",
+        ar: "أدوات وأنظمة داخلية نبنيها وفق طريقة عمل فريقكم.",
       },
     ],
     [
@@ -315,7 +443,7 @@ export const services: Service[] = [
       { en: "E-commerce", ar: "المتاجر الإلكترونية" },
       {
         en: "Online stores with clear checkout and simple management.",
-        ar: "متاجر إلكترونية بدفع واضح وإدارة بسيطة.",
+        ar: "متاجر إلكترونية بخطوات شراء واضحة وإدارة بسيطة.",
       },
     ],
     [
@@ -323,7 +451,7 @@ export const services: Service[] = [
       { en: "UI/UX design", ar: "تصميم الواجهات وتجربة المستخدم" },
       {
         en: "Interfaces researched, prototyped and tested before they are built.",
-        ar: "واجهات نبحثها ونجرّب نماذجها ونختبرها قبل بنائها.",
+        ar: "واجهات ندرس مستخدميها ونجرّب نماذجها ونختبرها قبل بنائها.",
       },
     ],
     [
@@ -331,7 +459,7 @@ export const services: Service[] = [
       { en: "AI consulting", ar: "استشارات الذكاء الاصطناعي" },
       {
         en: "Where AI helps your work, where it does not, and how to start.",
-        ar: "أين يفيد الذكاء الاصطناعي عملك، وأين لا يفيد، وكيف تبدأ.",
+        ar: "أين يفيد الذكاء الاصطناعي عملكم، وأين لا يفيد، وكيف تبدؤون.",
       },
     ],
   ]),

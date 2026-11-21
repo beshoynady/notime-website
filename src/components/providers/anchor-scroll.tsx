@@ -6,6 +6,7 @@ import { useLenis, type LenisControls } from "@/components/providers/lenis-provi
 import { prefersReducedMotion } from "@/hooks/use-reduced-motion";
 import { anchorScrollTop, sameDocumentHash } from "@/lib/anchor";
 import { ScrollTrigger } from "@/lib/gsap";
+import { currentAnchor } from "@/lib/legacy-anchors";
 
 /** How long a deep link keeps re-landing while late layout (pin spacer, fonts, images) settles. */
 const SETTLE_MS = 2500;
@@ -18,31 +19,49 @@ function headingFor(target: HTMLElement): HTMLElement {
   return byLabel ?? target.querySelector<HTMLElement>("h1, h2, h3") ?? target;
 }
 
-/** Moves focus without scrolling; the heading gets tabindex="-1" (no outline, see globals.css). */
+/**
+ * Whether the visitor has pointed or typed in this document yet. Before that (a deep link on
+ * load) the browser can't tell how they arrived and would show the ring, even after a click on
+ * another page; after it, its focus-visible heuristic knows (D74, P7).
+ */
+let interacted = false;
+if (typeof window !== "undefined") {
+  for (const t of ["pointerdown", "keydown"] as const) addEventListener(t, () => (interacted = true), { capture: true, once: true, passive: true });
+}
+
+/**
+ * Moves focus without scrolling; the heading gets tabindex="-1". The ring shows only after
+ * keyboard navigation (globals.css): a landing on load never shows it.
+ */
 function focusHeading(target: HTMLElement) {
   const h = headingFor(target);
   if (!h.hasAttribute("tabindex")) h.setAttribute("tabindex", "-1");
-  h.focus({ preventScroll: true });
+  h.focus({ preventScroll: true, ...(interacted ? {} : { focusVisible: false }) });
 }
 
 /**
  * Where content starts under the bars that cover the top of the viewport: the lowest bottom of
  * every visible `[data-anchor-offset]` element (the fixed header; the sticky chip bar on mobile
  * category pages). A non-empty attribute value is a media query the element counts under.
- * A sticky bar counts at its stuck position, and only when `target` is inside its container
- * (it scrolls away with that container). Viewport px.
+ * A sticky bar counts at its stuck position, and only when `target` is inside its scope: the
+ * nearest `[data-anchor-scope]` ancestor, else its parent (it scrolls away with that box; the
+ * category index sits in a track beside the content it indexes, so it names its scope). Viewport px.
+ * The header that hides on category pages (HeaderAutohide) counts as shown, its `translate` taken
+ * out: a jump up brings it back, so the landing must clear it (a jump down keeps its 68px, spec).
  */
 export function anchorOffset(target?: Element): number {
   let bottom = 0;
   for (const el of document.querySelectorAll<HTMLElement>("[data-anchor-offset]")) {
     const media = el.dataset.anchorOffset;
-    if ((media && !matchMedia(media).matches) || !el.checkVisibility()) continue;
+    if ((media && !matchMedia(media).matches) || !(el.checkVisibility?.() ?? true)) continue;
     const style = getComputedStyle(el);
     if (style.position === "sticky") {
-      if (target && !el.parentElement?.contains(target)) continue;
+      const scope = el.closest("[data-anchor-scope]") ?? el.parentElement;
+      if (target && !scope?.contains(target)) continue;
       bottom = Math.max(bottom, parseFloat(style.top) + el.offsetHeight);
     } else {
-      bottom = Math.max(bottom, el.getBoundingClientRect().bottom);
+      const shiftY = parseFloat(style.translate.split(" ")[1] ?? "") || 0;
+      bottom = Math.max(bottom, el.getBoundingClientRect().bottom - shiftY);
     }
   }
   return bottom;
@@ -81,6 +100,11 @@ function settleOn(lenis: LenisControls, id: string): () => void {
       focused = true;
     });
   };
+  // While settling, this re-landing is what keeps the target in place: Chrome's scroll anchoring
+  // would also react to the pin spacers being re-measured and pull the page back by a pin's
+  // length for a few frames (M1: 1260 px on /en#digital, 1800 px on Marketing). Off until stop.
+  const root = document.documentElement;
+  root.style.overflowAnchor = "none";
   const ro = new ResizeObserver(land);
   ro.observe(document.body);
   ScrollTrigger.addEventListener("refresh", land);
@@ -89,6 +113,7 @@ function settleOn(lenis: LenisControls, id: string): () => void {
 
   const passive: AddEventListenerOptions = { passive: true };
   const stop = () => {
+    root.style.overflowAnchor = "";
     cancelAnimationFrame(raf);
     ro.disconnect();
     ScrollTrigger.removeEventListener("refresh", land);
@@ -134,8 +159,11 @@ export function AnchorScroll() {
   }, [lenis]);
 
   useEffect(() => {
-    const id = sameDocumentHash(location.href, location.href);
+    const hash = sameDocumentHash(location.href, location.href);
+    // A renamed anchor (D123: #print-store) lands on its section, and the address shows the new name.
+    const id = hash && currentAnchor(hash);
     if (!id || id === "main" || !document.getElementById(id)) return;
+    if (id !== hash) history.replaceState(history.state, "", `#${id}`);
     return settleOn(lenis, id);
   }, [lenis, pathname, search]);
 

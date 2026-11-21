@@ -35,20 +35,20 @@ This file and `src/content/services.ts` must match: `src/content/content.test.ts
 |---|---|---|---|---|
 | 13 | branding-identity | branding | Branding & identity | الهوية التجارية |
 | 14 | social-media-management | social | Social media management | إدارة وسائل التواصل الاجتماعي |
-| 15 | digital-marketing-seo | digital-marketing | Digital marketing & SEO | التسويق الرقمي وSEO |
+| 15 | digital-marketing-seo | digital-marketing | Digital marketing & SEO | التسويق الرقمي وتحسين الظهور في محركات البحث (SEO) |
 | 16 | content-strategy | content-strategy | Content strategy | استراتيجية المحتوى |
 | 17 | public-relations | pr | Public relations | العلاقات العامة |
-| 18 | media-planning | media-planning | Media planning | تخطيط الإعلام |
+| 18 | paid-media-planning | paid-media | Paid media & media planning (Google & Meta ads) | الإعلانات المدفوعة وتخطيط الإعلام (Google وMeta) |
 
 ## 4. Production, Print & Gifts · الإنتاج والطباعة والهدايا (`production-print-gifts`)
 
 | # | Slug | Anchor | EN | AR |
 |---|---|---|---|---|
-| 19 | large-format-printing | large-format | Large-format printing | الطباعة كبيرة الحجم |
+| 19 | commercial-large-format-printing | printing | Commercial & large-format printing | الطباعة التجارية وكبيرة الحجم |
 | 20 | stand-fabrication-signage | fabrication | Stand fabrication & signage | تصنيع الأجنحة واللافتات |
 | 21 | packaging-design | packaging | Packaging design | تصميم التغليف |
 | 22 | corporate-gifts | gifts | Corporate gifts | هدايا الشركات |
-| 23 | online-print-store | print-store | Online print store | متجر الطباعة الإلكتروني |
+| 23 | print-ordering | print-ordering | Print ordering | طلب المطبوعات |
 | 24 | branded-merchandise | merchandise | Branded merchandise | منتجات بهوية العلامة |
 
 ## 5. Software & Digital · البرمجيات والحلول الرقمية (`software-digital`)

@@ -1,0 +1,97 @@
+/* Pinned horizontal photo strip (D109). Logical properties only; unlayered.
+   Default (phones, reduced motion, no JS): a native swipe row with snap points.
+   Desktop with motion: a tall wrapper, a sticky stage, the track moved by GSAP. */
+
+.pstrip {
+  --strip-h: 34svh;
+  --strip-gap: 16px;
+  /* The track's inline padding lines its first frame up with the page's frame. */
+  --strip-pad: max(var(--gutter-start), calc((100vw - var(--frame)) / 2 + var(--gutter-start)));
+  /* Room below the hero's letterbox; the next section brings its own top padding. */
+  padding-block-start: clamp(56px, 8vw, 96px);
+}
+.pstrip-head {
+  display: grid;
+  gap: 10px;
+  margin-block-end: clamp(20px, 3vw, 36px);
+}
+.pstrip-title {
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 300;
+  line-height: 1.15;
+}
+.pstrip-title:lang(ar) {
+  font-weight: 400;
+  line-height: 1.45;
+}
+.pstrip-track {
+  display: flex;
+  gap: var(--strip-gap);
+  margin: 0;
+  padding-block: 0 8px;
+  padding-inline: var(--strip-pad);
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--strip-pad);
+  scrollbar-width: none;
+}
+.pstrip-track::-webkit-scrollbar {
+  display: none;
+}
+.pstrip-frame {
+  flex: none;
+  scroll-snap-align: start;
+}
+.pstrip-frame figure {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+.pstrip-img {
+  position: relative;
+  overflow: hidden;
+  /* A warm ground while the photo loads: on a slow line the frame still shows (W02). */
+  background-color: color-mix(in srgb, var(--color-cocoa) 55%, var(--color-espresso));
+  block-size: var(--strip-h);
+  aspect-ratio: var(--ar);
+}
+.pstrip-frame figcaption {
+  color: color-mix(in srgb, var(--color-ivory) 70%, transparent);
+}
+
+@media (min-width: 900px) {
+  .pstrip {
+    --strip-h: 46svh;
+    --strip-gap: 24px;
+  }
+}
+
+/* Desktop with motion: hold the stage while the track crosses. The wrapper's height is one
+   screen plus the track's overflow (frames' ratios × height + gaps + padding − the viewport). */
+@media (min-width: 900px) {
+  html[data-js]:not([data-reduced]) .pstrip {
+    padding-block-start: 0; /* the sticky stage centres itself under the header */
+    block-size: calc(
+      100svh +
+        max(0px, var(--strip-h) * var(--strip-r) + (var(--strip-n) - 1) * var(--strip-gap) + 2 * var(--strip-pad) - 100vw)
+    );
+  }
+  html[data-js]:not([data-reduced]) .pstrip-stage {
+    position: sticky;
+    inset-block-start: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    block-size: 100svh;
+    padding-block-start: var(--header-h);
+    overflow: hidden;
+  }
+  /* The stage clips; the track itself must not, or its clip would travel with it. */
+  html[data-js]:not([data-reduced]) .pstrip-track {
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+}

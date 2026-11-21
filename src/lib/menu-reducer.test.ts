@@ -1,43 +1,47 @@
 import { describe, expect, it } from "vitest";
-import { CLICK_GRACE_MS, initialMenuState, menuReducer, type MenuState } from "./menu-reducer";
+import { initialMenuState, menuReducer, type MenuState } from "./menu-reducer";
 
-const open = (now = 1000): MenuState => menuReducer(initialMenuState("events-hospitality"), { type: "INTENT_OPEN", now });
+const hoverOpen = (): MenuState => menuReducer(initialMenuState("events-hospitality"), { type: "INTENT_OPEN" });
+const click = (s: MenuState) => menuReducer(s, { type: "CLICK_TRIGGER" });
 
 describe("menuReducer", () => {
   it("starts closed on the first category", () => {
-    expect(initialMenuState("events-hospitality")).toEqual({ open: false, active: "events-hospitality", openedAt: 0 });
+    expect(initialMenuState("events-hospitality")).toEqual({ open: false, active: "events-hospitality", openedBy: null });
   });
 
-  it("INTENT_OPEN opens and records the time", () => {
-    expect(open(1000)).toMatchObject({ open: true, openedAt: 1000 });
+  it("INTENT_OPEN opens it by hover", () => {
+    expect(hoverOpen()).toMatchObject({ open: true, openedBy: "hover" });
   });
 
-  it("INTENT_OPEN while open keeps the original openedAt", () => {
-    expect(menuReducer(open(1000), { type: "INTENT_OPEN", now: 1300 }).openedAt).toBe(1000);
+  it("INTENT_OPEN while open changes nothing", () => {
+    const s = hoverOpen();
+    expect(menuReducer(s, { type: "INTENT_OPEN" })).toBe(s);
   });
 
-  it("a click right after a hover-open does not close it (grace period)", () => {
-    expect(CLICK_GRACE_MS).toBe(450);
-    expect(menuReducer(open(1000), { type: "CLICK_TRIGGER", now: 1200 }).open).toBe(true);
+  // Self-audit B09 (2026-11-20): a visitor who hovers, reads, then clicks «Services» means
+  // "open it"; the click used to close a hover-opened panel once 450 ms had passed.
+  it("a click on a hover-opened panel keeps it open, however late, and holds it as clicked", () => {
+    expect(click(hoverOpen())).toMatchObject({ open: true, openedBy: "click" });
   });
 
-  it("a click after the grace period closes it", () => {
-    expect(menuReducer(open(1000), { type: "CLICK_TRIGGER", now: 1600 }).open).toBe(false);
+  it("the next click then closes it", () => {
+    expect(click(click(hoverOpen())).open).toBe(false);
   });
 
-  it("a click while closed opens it", () => {
-    const s = menuReducer(initialMenuState("events-hospitality"), { type: "CLICK_TRIGGER", now: 5000 });
-    expect(s).toMatchObject({ open: true, openedAt: 5000 });
+  it("a click while closed opens it; a second click closes it", () => {
+    const s = click(initialMenuState("events-hospitality"));
+    expect(s).toMatchObject({ open: true, openedBy: "click" });
+    expect(click(s)).toMatchObject({ open: false, openedBy: null });
   });
 
   it("CLOSE keeps the active category", () => {
-    const s = menuReducer(menuReducer(open(), { type: "SET_ACTIVE", slug: "marketing-brand" }), { type: "CLOSE" });
-    expect(s).toMatchObject({ open: false, active: "marketing-brand" });
+    const s = menuReducer(menuReducer(hoverOpen(), { type: "SET_ACTIVE", slug: "marketing-brand" }), { type: "CLOSE" });
+    expect(s).toMatchObject({ open: false, active: "marketing-brand", openedBy: null });
   });
 
   it("SET_ACTIVE while closed only changes the category", () => {
     const s = menuReducer(initialMenuState("events-hospitality"), { type: "SET_ACTIVE", slug: "software-digital" });
-    expect(s).toEqual({ open: false, active: "software-digital", openedAt: 0 });
+    expect(s).toEqual({ open: false, active: "software-digital", openedBy: null });
   });
 
   it("returns the same object when nothing changes (no extra renders)", () => {

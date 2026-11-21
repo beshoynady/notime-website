@@ -101,7 +101,6 @@ The palette's hex values are #2E2017, #634731, #BB9A79, #EAD4AB and #F5E9D3. Giv
 - **Prompt:** House style. A clean desk at night: a laptop half open, its screen glowing softly out of focus in champagne tones; a ceramic cup and a phone face down beside it. A window behind shows only blurred warm city lights, no skyline. Quiet, focused.
 - **Alt EN:** A clean workspace at night, a laptop screen glowing softly out of focus.
 - **Alt AR:** مساحة عمل مرتّبة ليلًا، وشاشة حاسوب تتوهّج بنعومة خارج التركيز.
-- **Real alternative:** `uae-athletics-federation-2` (the federation's app on mobile, 459 × 1048) is real NO TIME work, but small and named (OQ #17).
 - **Now:** AI image until the client approves; marked `// TODO: swap to real photo after approval` in `images.ts` (D49).
 
 ## Categories, 16:9 (category page headers)
@@ -149,7 +148,6 @@ The palette's hex values are #2E2017, #634731, #BB9A79, #EAD4AB and #F5E9D3. Giv
 - **Prompt:** House style. A wide, minimal workspace in warm ambient light: two monitors on a long oak desk showing soft, abstract interface shapes in champagne and taupe (no readable text), a keyboard and a small plant. Evening, one desk lamp, the rest of the room in shadow.
 - **Alt EN:** A wide, minimal software workspace with two screens in warm ambient light.
 - **Alt AR:** مساحة عمل برمجية واسعة وبسيطة بشاشتين تحت إضاءة محيطة دافئة.
-- **Real alternative:** `uae-athletics-federation-1` (uaeathletics.ae home page, 1544 × 965) is real NO TIME work (OQ #17).
 - **Now:** AI image until the client approves; marked `// TODO: swap to real photo after approval` in `images.ts` (D49).
 
 ## Hero fallback (only if the canvas scene is ever replaced by media)
@@ -295,6 +293,42 @@ Native sizes as in the delivery spec: 4:5 → 1136 × 1408, 16:9 → 1680 × 944
 - **Label:** Example. No handles, likes or follower counts in the UI.
 
 **Module visuals total:** 12 new slots (1 + 2 + 3 + 6), plus the 2 rejected heroes to regenerate.
+
+## Work cards: retired (D106)
+
+No photo, AI or stock, may stand in for a real NO TIME project. Anonymised cases show a drawing of the work (`CaseVisual`: the stand for the airline pavilion, the stage for the league), until the client approves its name and its own photos. The three slots that were here (`work-sports-league-16x9`, `work-airline-pavilion-16x9`) are gone.
+
+## This website: real screenshots (Software & Digital proof)
+
+Captured from this site with Playwright (Chrome, reduced motion, review banner off) and saved through sharp as AVIF and WebP. Real NO TIME work, not AI, shown in code-drawn laptop and phone frames on /services/software-digital.
+
+### `notime-website-home-en`
+
+- **Page · section:** Software & Digital › Proof · **Aspect:** 16:9
+- **Source:** a screenshot of this site (home page, 1440 × 810); no prompt.
+- **Alt EN:** The NO TIME homepage in English, on a laptop screen.
+- **Alt AR:** الصفحة الرئيسية لموقع NO TIME بالإنجليزية على شاشة حاسوب محمول.
+
+### `notime-website-home-ar`
+
+- **Page · section:** Software & Digital › Proof · **Aspect:** 16:9
+- **Source:** a screenshot of this site (home page, 1440 × 810); no prompt.
+- **Alt EN:** The NO TIME homepage in Arabic, laid out right to left.
+- **Alt AR:** الصفحة الرئيسية لموقع NO TIME بالعربية، بتخطيط من اليمين إلى اليسار.
+
+### `notime-website-category-en`
+
+- **Page · section:** Software & Digital › Proof · **Aspect:** 9:16
+- **Source:** a screenshot of this site (Creative Production page at 390 px, 2×); no prompt.
+- **Alt EN:** A NO TIME service page in English, on a phone.
+- **Alt AR:** صفحة خدمات من موقع NO TIME بالإنجليزية على شاشة هاتف.
+
+### `notime-website-category-ar`
+
+- **Page · section:** Software & Digital › Proof · **Aspect:** 9:16
+- **Source:** a screenshot of this site (Creative Production page at 390 px, 2×); no prompt.
+- **Alt EN:** A NO TIME service page in Arabic, on a phone.
+- **Alt AR:** صفحة خدمات من موقع NO TIME بالعربية على شاشة هاتف.
 
 ---
 

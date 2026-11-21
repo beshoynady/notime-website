@@ -119,7 +119,7 @@ How to read this file:
 > — AI imagery & campaign key visuals
 > — Editing, sound design & post-production
 >
-> PRODUCED WITH AI — UAE ATHLETICS FEDERATION, OREGON 26
+> (A credit line for a withdrawn work is left out, D121.)
 
 ## Page 15: 07 Digital platforms (folio 15)
 
@@ -134,61 +134,6 @@ How to read this file:
 > SEO & PERFORMANCE — Core Web Vitals & accessibility
 > ARABIC / ENGLISH — Full bilingual RTL–LTR builds
 > INTEGRATIONS & APIS — Data feeds & third-party systems
-
-## Page 16: case study, UAE Athletics Federation (folio 16)
-
-> CASE STUDY
-> UAE ATHLETICS FEDERATION
-> OFFICIAL DIGITAL & MEDIA PARTNER
->
-> No Time is the appointed digital and media partner of the UAE Athletics Federation, leading its full online presence and digital platform.
->
-> — Social Media Management
-> — Creative Content & Design
-> — Media Coverage & Production
-> — Paid Media & Growth
-> — Website & Mobile Application
->
-> Championship campaign key visuals — World Athletics U20 Championships, Oregon 26
-
-## Page 17: case study, social media & content (folio 17)
-
-> CASE STUDY
-> SOCIAL MEDIA & CONTENT
-> UAE ATHLETICS FEDERATION
->
-> — Content strategy & monthly calendar
-> — Daily publishing in Arabic & English
-> — On-ground coverage & photography
-> — Motion graphics, reels & AI video
-> — Paid campaigns & community growth
->
-> CAMPAIGN SNAPSHOT — OREGON 26, FIRST WEEK
-> 487K VIEWS
-> +37.6K NEW FOLLOWERS
-> 271K CAMPAIGN REACH
-
-These three figures are verified for use (Task 11b rule 5), always with their scope: Oregon 26 campaign, first week.
-
-## Page 18: case study, digital platform (folio 18)
-
-> CASE STUDY
-> DIGITAL PLATFORM
-> WEBSITE & MOBILE APPLICATION — LIVE
->
-> A full rebuild of the federation's digital platform — a modern bilingual website with a complete CMS and a connected mobile application, now live.
->
-> — UX / UI redesign, fully responsive
-> — Athletes, clubs, coaches & referees modules
-> — Championships, results & national records
-> — News, media library & live coverage
-> — Admin dashboard, CMS & analytics
-> — Arabic / English, SEO & performance
->
-> uaeathletics.ae
-> Website · Admin Panel · Mobile App
-
-⚠ The site screenshots show the federation's own statistics (medals, clubs, athletes). They are the client's figures, not NO TIME's, and are never quoted as ours.
 
 ## Page 19: 08 PR (folio 19)
 

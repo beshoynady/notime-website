@@ -489,8 +489,8 @@ Source: `docs/brand/company-profile-2026.pdf` (38 pages), the client's official 
 1. Extract the embedded images at native resolution (image objects, not page screenshots) to `public/images/work/raw/p{page}-{n}.{ext}`. Skip pages 34–36 (influencer network) and page 20 (media logos). Requested tool: Python + PyMuPDF. Check the interpreter first, because the `python` on PATH is the Windows Store stub.
 2. `docs/content/profile-inventory.md`: one row per image with page/section, client/project, pixel size + quality, identifiable people, AI-generated (page 14 is "Produced with AI"), stock (the page 3 About photo is stock: never use it), proposed slot. Curate the good, relevant images into `public/images/work/<project-slug>/` as AVIF/WebP.
 3. `docs/content/profile-copy.md`: the text verbatim, by page.
-4. Real projects for Our Work (Challenge → Idea → Execution → Result, `{{TODO}}` where the profile doesn't support it): UAE Pro League; UAE Athletics Federation (incl. Oregon 26: 487K views, +37.6K followers, 271K reach in the first week); EgyptAir pavilion; Ultimate Power Solution; Smith Gulf; Sandoz; private celebrations & heritage (no client names).
-5. Verified figures only: 6 markets; 360° integrated; the Oregon 26 figures. Never "49+ talent network".
+4. Real projects for Our Work (Challenge → Idea → Execution → Result, `{{TODO}}` where the profile doesn't support it): UAE Pro League; EgyptAir pavilion; Ultimate Power Solution; Smith Gulf; Sandoz; private celebrations & heritage (no client names).
+5. Verified figures only: 6 markets; 360° integrated. Never "49+ talent network".
 6. `docs/content/services-reconciliation.md` (profile vs draft vs `services-list.md`). Do not change `services.ts` until the user confirms.
 7. Hero variant with the official line "IT'S TIME TO START." plus an OPEN_QUESTIONS entry (being confirmed with the client).
 8. OPEN_QUESTIONS / CONTENT_CHECKLIST: permission for each client name/logo; rights to photos of identifiable people; which page-20 media outlets actually published (show none until confirmed); NO TIME's role in the government portals on the Marketing page.

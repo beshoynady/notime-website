@@ -1,0 +1,99 @@
+{
+  "m:scenes.creative.s4": {
+    "rule": "§3 vague; after N06 this line leads the hero",
+    "en": "Then the final cut, ready to show.",
+    "ar": "ثم النسخة النهائية، جاهزة للعرض."
+  },
+  "c:categories:categories[creative-production].faq[0].a": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "نعم. نصوّر الفعالية صورًا وفيديو في أرض الحدث، ثم نجهّز المادة بالمونتاج لتناسب قنواتكم."
+  },
+  "c:categories:categories[creative-production].faq[4].q": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "هل يمكننا استئجار المعدّات؟"
+  },
+  "c:categories:categories[creative-production].faq[4].a": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "نعم: الكاميرات والعدسات والإضاءة والصوت. أخبرونا بما تحتاجون إليه وبالمواعيد، ونؤكّد لكم التوفّر.",
+    "facts": "⚑ FC#8 (owned or rented; with crew or without)"
+  },
+  "c:categories:categories[creative-production].faq[5].a": {
+    "rule": "keep",
+    "facts": "⚑ FC#10"
+  },
+  "c:categories:categories[creative-production].faq[6].a": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "يعتمد ذلك على مدة العمل ونوع المونتاج، ونتّفق معكم على الجدول الزمني في العرض."
+  },
+  "c:categories:categories[creative-production].faq[7].q": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "ماذا تحتاجون منّا للبدء؟"
+  },
+  "c:categories:categories[creative-production].faq[7].a": {
+    "rule": "Owner rule 1 (AR); EN keep. A promise (a treatment with the proposal)",
+    "ar": "أخبرونا بما تريدون صنعه، وأين سيُعرض، ومتى تحتاجون إليه، ونعود إليكم بتصوّر وعرض.",
+    "facts": "⚑ R3 (a treatment comes with every proposal)"
+  },
+  "c:categories:categories[creative-production].closing": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "لقطتكم الأولى تبدأ من هنا."
+  },
+  "c:services:services[photography].points[3]": {
+    "rule": "keep",
+    "facts": "⚑ FC#9 (portraits)"
+  },
+  "c:services:services[motion-graphics].summary": {
+    "rule": "§3: \"move with purpose\" is a phrase any studio uses; say what it's for",
+    "en": "Titles, explainers and screen content, moving in your brand's style.",
+    "ar": "عناوين وفيديوهات شرح ومحتوى للشاشات، تتحرّك بأسلوب علامتكم."
+  },
+  "c:services:services[set-stage-design].summary": {
+    "rule": "keep",
+    "facts": "⚑ FC#7 (built in-house or with partners)"
+  },
+  "c:services:services[equipment-camera-rental].summary": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "كاميرات وعدسات وإضاءة، جاهزة لإنتاجكم.",
+    "facts": "⚑ FC#8"
+  },
+  "c:services:services[ai-content-creation].points[3]": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "توجيه فني يلتزم بهويتكم"
+  },
+  "c:service-hooks:SERVICE_HOOKS.video-production": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "فريق واحد من كتابة النص حتى تصحيح الألوان، فيصلكم الفيلم كما وافقتم عليه على الورق."
+  },
+  "c:service-hooks:SERVICE_HOOKS.motion-graphics": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "شعاركم وعناوينكم وشاشات مسرحكم، تتحرّك كلها بأسلوب واحد."
+  },
+  "c:service-hooks:SERVICE_HOOKS.ai-content-creation": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "الذكاء الاصطناعي يختصر وقت الإنتاج، والتوجيه الفني يُبقي كل لقطة على هوية علامتكم."
+  },
+  "c:service-hooks:SERVICE_HOOKS.equipment-camera-rental": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "الكاميرات والعدسات والإضاءة والصوت لتصويركم، تحجزونها بطلب واحد."
+  },
+  "c:modules/motion-playground:MOTION_PLAYGROUND.legend": {
+    "rule": "D-C1 (owner): a form, system or navigation button, so the verbal noun",
+    "ar": "اختيار منحنى الحركة"
+  },
+  "c:modules/rental-categories:RENTAL_CATEGORIES.hint": {
+    "rule": "Owner rule 1",
+    "ar": "اختاروا ما يحتاج إليه إنتاجكم."
+  },
+  "c:modules/rental-categories:RENTAL_CATEGORIES.selected": {
+    "rule": "Owner rule 1",
+    "ar": "اخترتم:"
+  },
+  "c:modules/rental-categories:RENTAL_CATEGORIES.cta": {
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "اسألوا عن التوفّر"
+  },
+  "c:categories:categories[creative-production].faq[1].a": {
+    "rule": "Owner rule 1",
+    "ar": "نعم: إعلانات فيديو ومقاطع قصيرة، وفيديو سينمائي، وصور ومرئيات رئيسية للحملات، كلها بالذكاء الاصطناعي وبتوجيه فني يلتزم بهويتكم."
+  }
+}

@@ -17,7 +17,6 @@ Status: **for review at Checkpoint 4.** Live in `src/messages/{en,ar}.json`, gua
     - the profile's "49+ talent network";
     - client names (until OQ #17);
     - press coverage (OQ #19).
-  - **Allowed but not used on the homepage:** the Oregon 26 figures (they belong to that project's page).
 - **Voice:** calm, exact, confident. Short declarative sentences. Concrete nouns (stands, majlis, dashboards) over adjectives. The time motif from the hero ("Every second is planned.") returns once, in the closing CTA.
 - **Banned** (tested): `elevate`, `cutting-edge`, `one-stop`, `unleash`, `الارتقاء بعلامتك`, `متطور جدًا`, `حلول متكاملة شاملة`.
 - **Digits:** Western digits everywhere (UI and data). No editorial line on the homepage uses Arabic-Indic digits.
@@ -163,5 +162,5 @@ The existing `footer.rights` and `footer.stub` stay. The stub goes when the full
 
 - **No proof strip** (client logos, "trusted by"): permission is pending (OQ #17), and the brief forbids fakes.
 - **No numbers** beyond 6 and 360°. "Years of experience", project counts and team size are not in the profile.
-- **No live-work claim** in the Digital section ("the UAEAF site is live"), even though the profile states it. It names a client (OQ #17); it moves into the section once approved.
+- **No live-work claim** in the Digital section until a client approves its name (OQ #17).
 - **No talent, no pricing, no comparison.**

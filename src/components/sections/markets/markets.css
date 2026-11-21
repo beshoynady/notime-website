@@ -1,0 +1,125 @@
+/* Home · Six markets (H-08): a board of local times. */
+.markets-grid {
+  display: grid;
+  gap: clamp(40px, 6vw, 72px);
+}
+.markets-head h2 {
+  margin: 20px 0 0;
+}
+.markets-head h2 b {
+  display: block;
+}
+.markets-intro {
+  margin: 24px 0 0;
+  max-inline-size: 40ch;
+  color: var(--color-cocoa);
+}
+
+.markets-caption {
+  margin: 0 0 14px;
+  color: var(--color-cocoa);
+  text-align: end;
+}
+.markets-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-block-start: 1px solid var(--color-line-light);
+}
+.market {
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  grid-template-areas:
+    "dial name time"
+    "dial name offset";
+  align-items: center;
+  column-gap: 16px;
+  padding-block: 16px;
+  border-block-end: 1px solid var(--color-line-light);
+}
+.market-dial {
+  grid-area: dial;
+  inline-size: 34px;
+  block-size: 34px;
+  fill: none;
+  stroke: var(--color-cocoa);
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+.market-dial .market-hands {
+  opacity: 0;
+  transition: opacity 0.4s ease-out;
+}
+.market-dial[data-visible] .market-hands {
+  opacity: 1;
+}
+.market-dial .market-hands circle {
+  fill: var(--color-espresso);
+  stroke: none;
+}
+.market-hour {
+  stroke: var(--color-espresso);
+  stroke-width: 2;
+}
+.market-minute {
+  stroke: var(--color-espresso);
+  stroke-width: 1.25;
+}
+.market-name {
+  grid-area: name;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+  font-size: clamp(1.15rem, 2.4vw, 2rem);
+  font-weight: 300;
+  line-height: 1.2;
+}
+.market-base {
+  color: var(--color-cocoa);
+}
+/* The time box is sized before the time arrives, so the row never moves (CLS 0). */
+.market-time {
+  grid-area: time;
+  min-inline-size: 5ch;
+  font-size: clamp(1.15rem, 2.4vw, 2rem);
+  font-weight: 500;
+  text-align: end;
+  line-height: 1.2;
+  min-block-size: 1.2em;
+}
+.market-offset {
+  grid-area: offset;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--color-cocoa);
+  text-align: end;
+}
+/* The base: champagne dial face and an espresso rule at the start edge. */
+.market[data-base] .market-dial circle:first-child {
+  fill: var(--color-champagne);
+}
+.market[data-base] {
+  box-shadow: inset 2px 0 0 var(--color-espresso);
+  padding-inline-start: 12px;
+}
+[dir="rtl"] .market[data-base] {
+  box-shadow: inset -2px 0 0 var(--color-espresso);
+}
+
+@media (min-width: 900px) {
+  .markets-grid {
+    grid-template-columns: 5fr 7fr;
+    align-items: start;
+  }
+  .market {
+    grid-template-columns: 40px 1fr auto 72px;
+    grid-template-areas: "dial name time offset";
+    padding-block: 20px;
+  }
+  .market-dial {
+    inline-size: 40px;
+    block-size: 40px;
+  }
+}

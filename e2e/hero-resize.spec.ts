@@ -1,7 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import { gotoReady, waitForIntroEnd } from "./helpers";
 
-/** Pin geometry: hero height + 140% of the viewport (the scroll timeline's `end: "+=140%"`). */
+/** Pin geometry: hero height + 100% of the viewport (the scroll timeline's `end: "+=100%"`, N05). */
 async function pinState(page: Page) {
   return page.evaluate(() => {
     const spacer = document.querySelector<HTMLElement>(".pin-spacer")!;
@@ -9,7 +9,7 @@ async function pinState(page: Page) {
     const cv = document.querySelector<HTMLCanvasElement>(".hero-canvas")!;
     return {
       spacer: spacer.offsetHeight,
-      expected: hero.offsetHeight + innerHeight * 1.4,
+      expected: hero.offsetHeight + innerHeight * 1.0,
       heroTop: hero.getBoundingClientRect().top,
       canvas: { cssW: cv.clientWidth, cssH: cv.clientHeight, heroW: hero.clientWidth, heroH: hero.clientHeight, w: cv.width, h: cv.height },
     };
@@ -41,7 +41,7 @@ test.describe("hero pin on mobile", () => {
       }
     };
 
-    await swipe(500); // inside the pin (pin length 1.4 × 844 ≈ 1182px)
+    await swipe(500); // inside the pin (pin length 1.0 × 844 = 844px)
     await page.waitForTimeout(400);
     const mid = await pinState(page);
     expect(await page.evaluate(() => scrollY)).toBeGreaterThan(200);
@@ -60,7 +60,7 @@ test.describe("hero pin on mobile", () => {
     await gotoReady(page, "/en");
     await page.touchscreen.tap(30, 420);
     await waitForIntroEnd(page);
-    await page.evaluate(() => scrollTo(0, innerHeight * 0.7));
+    await page.evaluate(() => scrollTo(0, innerHeight * 0.5)); // mid-pin
     await page.waitForTimeout(400);
     const before = await pinState(page);
 

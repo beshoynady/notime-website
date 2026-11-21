@@ -13,6 +13,8 @@
 @custom-variant ltr (&:where([dir="ltr"], [dir="ltr"] *));
 /* Arabic-only adjustments (no tracking, no uppercase, one step larger). */
 @custom-variant lang-ar (&:lang(ar));
+/* English-only (the header drops Events between 900 and 1023px in EN, where the row is full). */
+@custom-variant lang-en (&:lang(en));
 /* Tone variants keyed off the nearest data-tone ancestor. */
 @custom-variant tone-dark (&:where([data-tone="dark"], [data-tone="dark"] *));
 @custom-variant tone-light (&:where([data-tone="light"], [data-tone="light"] *));
@@ -31,7 +33,9 @@
   --color-error: #9b3b2a;
 
   /* Fonts (variables and @font-face in src/app/fonts.css, self-hosted, D45) */
-  --font-en: var(--font-montserrat), ui-sans-serif, system-ui, "Segoe UI", Arial, sans-serif;
+  --font-en:
+    var(--font-montserrat), ui-sans-serif, system-ui, "Segoe UI", Arial,
+    sans-serif;
   --font-ar: var(--font-alexandria), "Segoe UI", Tahoma, sans-serif;
 
   /* Shape */
@@ -79,7 +83,9 @@
   --radius: 4px;
   --header-h: 68px;
   --frame: 1280px;
-  --section-pad: clamp(72px, 11vw, 160px);
+  /* Bounded by height too: by width alone, two of them stacked to over half of a 1280 × 720 or
+     1366 × 768 screen (W02, empty screens). */
+  --section-pad: clamp(72px, min(11vw, 17svh), 160px);
   --page-bg: var(--color-espresso); /* tweened by ToneController */
 
   /* Light tone (default) */
@@ -164,6 +170,19 @@
   html[lang="ar"] {
     font-family: var(--font-ar);
   }
+  /* Capitals swap from their own fallback (fonts.css, self-audit B02). In the base layer, so any
+     font utility on the element still wins. */
+  :root {
+    --font-caps: var(--font-montserrat-caps), ui-sans-serif, system-ui, "Segoe UI", Arial, sans-serif;
+  }
+  /* Arabic (a page or any lang="ar" subtree): guaranteed-invalid, so font-family: var(--font-caps)
+     falls back to inheriting (an English mark inside .font-en keeps its face). */
+  :lang(ar) {
+    --font-caps: initial;
+  }
+  :is(.uppercase, .text-eyebrow) {
+    font-family: var(--font-caps);
+  }
   body {
     margin: 0;
     background: var(--color-ivory);
@@ -182,15 +201,30 @@
   h3 {
     text-wrap: balance;
   }
+  /* No paragraph ends on a lone word, in either script (post-M3 polish). */
+  p,
+  li {
+    text-wrap: pretty;
+  }
   ::selection {
     background: var(--color-champagne);
     color: var(--color-espresso);
   }
+  /* The browser's own surfaces carry the palette: the scrollbar (taupe on espresso, the page's
+     usual ground) and native controls. */
+  html {
+    scrollbar-color: var(--color-taupe) var(--color-espresso);
+    accent-color: var(--color-cocoa);
+  }
+  /* Espresso on light grounds (13.1:1), champagne on dark ones (10.9:1); taupe on ivory was
+     2.18:1 (M1 gate, WCAG 1.4.11). The header isn't a tone section, so it follows its own tone. */
   :focus-visible {
-    outline: 2px solid var(--color-taupe);
+    outline: 2px solid var(--color-espresso);
     outline-offset: 3px;
   }
-  [data-tone="dark"] :focus-visible {
+  [data-tone="dark"] :focus-visible,
+  #site-header:is([data-header-tone="hero"], [data-header-tone="dark"])
+    :focus-visible {
     outline-color: var(--color-champagne);
   }
   a {
@@ -254,7 +288,7 @@
   line-height: 1.04;
   letter-spacing: -0.015em;
   &:lang(ar) {
-    line-height: 1.3;
+    line-height: 1.4;
     letter-spacing: 0;
   }
   & b,
@@ -306,10 +340,14 @@
 /* ==========================================================================
    Tones and grain
    ========================================================================== */
+/* --tone-ground: the ground a tone paints. Themes may change it (category.css: the Studio's
+   night, the Workshop's champagne); ToneController tweens #page-stage to each section's value. */
 [data-tone="dark"] {
+  --tone-ground: var(--color-espresso);
   color: var(--color-ivory);
 }
 [data-tone="light"] {
+  --tone-ground: var(--color-ivory);
   color: var(--color-espresso);
 }
 /* Grain overlay on every dark section (static; the hero has its own animated layer). */
@@ -350,10 +388,11 @@
 html {
   scroll-padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px));
 }
-/* Headings focused by the anchor utility (tabindex="-1"): focus moves, no outline appears. */
-h1[tabindex="-1"]:focus,
-h2[tabindex="-1"]:focus,
-h3[tabindex="-1"]:focus {
+/* Headings focused by the anchor utility (tabindex="-1"): the ring shows only where the browser
+   judges focus-visible, i.e. after keyboard navigation (D74, P7); a pointer click lands with none. */
+h1[tabindex="-1"]:focus:not(:focus-visible),
+h2[tabindex="-1"]:focus:not(:focus-visible),
+h3[tabindex="-1"]:focus:not(:focus-visible) {
   outline: none;
 }
 a,
@@ -373,39 +412,92 @@ summary,
 }
 .paint-event {
   background:
-    radial-gradient(60% 40% at 72% 30%, rgba(234, 212, 171, 0.55), transparent 60%),
-    radial-gradient(30% 22% at 20% 22%, rgba(255, 220, 160, 0.45), transparent 70%),
-    radial-gradient(80% 60% at 50% 100%, rgba(99, 71, 49, 0.95), transparent 70%),
+    radial-gradient(
+      60% 40% at 72% 30%,
+      rgba(234, 212, 171, 0.55),
+      transparent 60%
+    ),
+    radial-gradient(
+      30% 22% at 20% 22%,
+      rgba(255, 220, 160, 0.45),
+      transparent 70%
+    ),
+    radial-gradient(
+      80% 60% at 50% 100%,
+      rgba(99, 71, 49, 0.95),
+      transparent 70%
+    ),
     linear-gradient(180deg, #1f150e, #3b2a1d 55%, #2a1d13);
 }
 .paint-table {
   background:
-    radial-gradient(40% 30% at 50% 35%, rgba(245, 233, 211, 0.6), transparent 70%),
-    radial-gradient(70% 20% at 50% 78%, rgba(187, 154, 121, 0.7), transparent 70%),
+    radial-gradient(
+      40% 30% at 50% 35%,
+      rgba(245, 233, 211, 0.6),
+      transparent 70%
+    ),
+    radial-gradient(
+      70% 20% at 50% 78%,
+      rgba(187, 154, 121, 0.7),
+      transparent 70%
+    ),
     linear-gradient(160deg, #4a3526, #241810);
 }
 .paint-studio {
   background:
-    conic-gradient(from 200deg at 30% 40%, rgba(234, 212, 171, 0), rgba(234, 212, 171, 0.45), rgba(234, 212, 171, 0) 30%),
-    radial-gradient(30% 50% at 75% 50%, rgba(187, 154, 121, 0.55), transparent 70%),
+    conic-gradient(
+      from 200deg at 30% 40%,
+      rgba(234, 212, 171, 0),
+      rgba(234, 212, 171, 0.45),
+      rgba(234, 212, 171, 0) 30%
+    ),
+    radial-gradient(
+      30% 50% at 75% 50%,
+      rgba(187, 154, 121, 0.55),
+      transparent 70%
+    ),
     linear-gradient(120deg, #2b1e15, #5b412d 60%, #2e2017);
 }
 .paint-print {
   background:
-    repeating-linear-gradient(90deg, rgba(245, 233, 211, 0.12) 0 2px, transparent 2px 22px),
-    radial-gradient(50% 50% at 40% 40%, rgba(234, 212, 171, 0.55), transparent 70%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(245, 233, 211, 0.12) 0 2px,
+      transparent 2px 22px
+    ),
+    radial-gradient(
+      50% 50% at 40% 40%,
+      rgba(234, 212, 171, 0.55),
+      transparent 70%
+    ),
     linear-gradient(200deg, #6d4f37, #2e2017);
 }
 .paint-code {
   background:
-    repeating-linear-gradient(0deg, rgba(234, 212, 171, 0.1) 0 1px, transparent 1px 18px),
-    radial-gradient(40% 40% at 65% 40%, rgba(234, 212, 171, 0.4), transparent 70%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(234, 212, 171, 0.1) 0 1px,
+      transparent 1px 18px
+    ),
+    radial-gradient(
+      40% 40% at 65% 40%,
+      rgba(234, 212, 171, 0.4),
+      transparent 70%
+    ),
     linear-gradient(140deg, #1d140d, #3e2c1f);
 }
 .paint-brand {
   background:
-    radial-gradient(35% 35% at 35% 50%, rgba(245, 233, 211, 0.55), transparent 70%),
-    radial-gradient(25% 25% at 70% 40%, rgba(187, 154, 121, 0.6), transparent 70%),
+    radial-gradient(
+      35% 35% at 35% 50%,
+      rgba(245, 233, 211, 0.55),
+      transparent 70%
+    ),
+    radial-gradient(
+      25% 25% at 70% 40%,
+      rgba(187, 154, 121, 0.6),
+      transparent 70%
+    ),
     linear-gradient(60deg, #3a291c, #634731);
 }
 
@@ -415,6 +507,7 @@ summary,
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
+  font-family: var(--font-caps); /* capitals swap from their own fallback (B02) */
   line-height: 1.3;
   padding: 5px 8px;
   border-radius: var(--radius-tag);
@@ -429,23 +522,80 @@ summary,
 }
 
 /* ==========================================================================
-   Stage and section tones. Each tone section paints its own background by
-   default (readable without JS). Once ToneController runs, sections turn
-   transparent and #page-stage tweens --page-bg between espresso and ivory.
+   Stage and section tones. Each tone section paints its own background, with
+   or without JS (W02: a see-through section on the other tone had to be hidden
+   until the page ground turned, which left empty screens). #page-stage still
+   tweens its own background-color (from --page-bg, the first paint) as each
+   section crosses 55%, for what shows between sections and over-scroll.
    ========================================================================== */
 #page-stage {
   background: var(--page-bg);
   min-height: 100dvh;
 }
-section[data-tone="dark"] {
-  background-color: var(--color-espresso);
+section[data-tone] {
+  background-color: var(--tone-ground);
 }
-section[data-tone="light"] {
-  background-color: var(--color-ivory);
+/* Pin reservations (M1, anchor landing). A pinned block's scroll distance is reserved on its
+   server-rendered spacer from the first paint, wherever JS will pin it (data-js, set before paint;
+   no pin under reduced motion). ScrollTrigger adopts the spacer (pinSpacer) and writes the same
+   distance inline, so nothing below moves when the pin is built: a landing on #printing moved
+   1800 px before this. Heights in svh, as innerHeight on load.
+   The floor (min-block-size: the pinned block's own height + the distance; never more than the
+   real height, as svh <= innerHeight): ScrollTrigger swaps a pin in with `padding: 0` and
+   `height: <the pin>`, and reverts the pins above a trigger to measure it, so for one layout the
+   page was a pin length shorter; Chrome then moved a visitor already below it (scroll anchoring,
+   or clamping near the end). On a slow CPU the pins are built after the visitor has scrolled:
+   1800 px back on Events at 4-8x CPU (final pass, 2026-11-17; e2e/pin-build-scroll.spec.ts).
+   `--pin-on` is 0 without a distance, so a scene that only passes gets no floor. */
+html[data-js]:not([data-reduced]) .hero-pin {
+  padding-block-end: 100svh; /* hero-controller: end "+=100%" at every width (N05) */
+  min-block-size: calc(max(100svh, 520px) + 100svh);
 }
-#page-stage[data-tone-ready] section[data-tone]:not([data-bg="own"]) {
-  background-color: transparent;
+html[data-js]:not([data-reduced]) .scene-pin {
+  --pin-own: 100svh;
+  --pin-on: min(var(--pin-m, 0) * 1000, 1);
+  padding-block-end: calc(var(--pin-m, 0) * 100svh);
+  min-block-size: calc((var(--pin-own) + var(--pin-m, 0) * 100svh) * var(--pin-on));
 }
+/* The pinned element never stretches to the floor: while ScrollTrigger swaps a pin in (padding 0) the
+   floor is all content box, and a pin with no height of its own (Software's opening, the home
+   process stage) grew to it, was measured at that height and kept it: Software's title opened
+   1086 px down, behind two empty screens (UX audit, 2026-11-17). */
+html[data-js]:not([data-reduced]) :is(.hero-pin, .scene-pin, .process-pin) > * {
+  align-self: start;
+}
+html[data-js]:not([data-reduced]) .scene-pin:has(> .scene) {
+  --pin-own: max(100svh, 480px); /* layered-scene.css: height 100svh, min-height 480px */
+}
+html[data-js]:not([data-reduced]) .svc-scene .scene-pin:has(> .scene) {
+  /* A scene inside a service section sits under the header (category.css). */
+  --pin-own: max(calc(100svh - var(--header-h) - var(--scene-top-extra, 0px)), 480px);
+}
+/* Software's opening doesn't pin on a desktop screen under 680px tall (PIN_MIN_H in
+   interface-director.tsx): no distance is reserved there. */
+@media (min-width: 900px) and (max-height: 679.98px) {
+  html[data-js]:not([data-reduced]) .sw-opening .scene-pin {
+    padding-block-end: 0;
+    min-block-size: 0;
+  }
+}
+/* 640px: PROCESS_PIN_MIN_H in process-scroll.tsx (no pin on a screen too short for the steps). */
+@media (min-width: 900px) and (min-height: 640px) {
+  html[data-js]:not([data-reduced]) .process-pin {
+    padding-block-end: 100svh; /* process-scroll: end "+=100%", desktop only */
+    min-block-size: 200svh;
+  }
+  html[data-js]:not([data-reduced]) .scene-pin {
+    --pin-on: min(var(--pin-d, 0) * 1000, 1);
+    padding-block-end: calc(var(--pin-d, 0) * 100svh);
+    min-block-size: calc((var(--pin-own) + var(--pin-d, 0) * 100svh) * var(--pin-on));
+  }
+}
+
+/* No zone fades out (W02, the owner 2026-11-20: "no empty screen at any scroll moment"). Each tone
+   section paints its own ground (above), so the head of the section coming in is readable on its
+   own ground from its first pixel; hiding it until the page ground turned left up to half a
+   screen empty at every tone change. */
 
 /* ==========================================================================
    Marquee (CSS-driven; reverses in RTL; pauses on hover; still when reduced)
@@ -463,8 +613,35 @@ section[data-tone="light"] {
 [dir="rtl"] .marquee-track {
   animation-name: mq-rtl;
 }
-.marquee:hover .marquee-track {
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track,
+.marquee[data-paused] .marquee-track {
   animation-play-state: paused;
+}
+.marquee:has(.marquee-toggle) {
+  position: relative;
+}
+/* Pause/play (WCAG 2.2.2, M1 gate): a 44px round control at the band's reading end. */
+.marquee-toggle {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: 16px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  inline-size: 44px;
+  block-size: 44px;
+  translate: 0 -50%;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--tone-ground);
+  color: inherit;
+  cursor: pointer;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-toggle {
+    display: none; /* nothing moves, so nothing to pause */
+  }
 }
 .marquee-list {
   display: flex;
@@ -523,7 +700,8 @@ section[data-tone="light"] {
   transition:
     background-color 0.3s var(--ease-expo-out),
     color 0.3s var(--ease-expo-out),
-    border-color 0.3s var(--ease-expo-out);
+    border-color 0.3s var(--ease-expo-out),
+    translate 0.35s var(--ease-expo-out);
 }
 html:not([data-js]) #site-header {
   background: rgba(46, 32, 23, 0.94);
@@ -548,6 +726,29 @@ html[data-overlay-open] #site-header {
   color: var(--color-ivory);
   border-color: var(--color-line-dark);
 }
+
+/* Header autohide (category pages below 900px; HeaderAutohide sets html[data-header-hidden]).
+   Everything moves by `translate`, which never changes layout (no CLS). The header goes up by its
+   height and the safe area; what is held under it (the chip bar, category.css; the private-
+   celebrations cards, photo-stack.css) goes up by the header's height, so it stops at the safe-
+   area line under the strip. The header's translate stays `none` while shown: any other value
+   would make it the containing block of the mobile menu's fixed overlay (as backdrop-filter does). */
+:root {
+  --header-shift: 0px;
+  --header-follow: 0px;
+}
+html[data-header-hidden] {
+  --header-shift: calc(-1 * (var(--header-h) + env(safe-area-inset-top, 0px)));
+  --header-follow: calc(-1 * var(--header-h));
+}
+html[data-header-hidden]:not([data-overlay-open]) #site-header {
+  translate: 0 var(--header-shift);
+}
+@media (prefers-reduced-motion: reduce) {
+  #site-header {
+    transition: none;
+  }
+}
 .nav-link {
   opacity: 0.78;
   transition: opacity 0.3s var(--ease-expo-out);
@@ -567,10 +768,11 @@ html[data-overlay-open] #site-header {
   border-radius: var(--radius-tag);
   background: var(--color-champagne);
   color: var(--color-espresso);
-  font-size: 0.56rem;
+  font-size: 0.64rem; /* M3: 0.56rem read about 9px */
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
+  font-family: var(--font-caps); /* capitals swap from their own fallback (B02) */
   line-height: 1.4;
 }
 .badge-soon::before {
@@ -601,10 +803,11 @@ html[data-overlay-open] #site-header {
   padding: 3px 7px;
   border: 1px solid currentColor;
   border-radius: var(--radius-tag);
-  font-size: 0.56rem;
+  font-size: 0.64rem; /* M3: 0.56rem read about 9px */
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
+  font-family: var(--font-caps); /* capitals swap from their own fallback (B02) */
   line-height: 1.4;
 }
 .badge:lang(ar) {
@@ -641,6 +844,7 @@ html[data-overlay-open] #site-header {
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
+  font-family: var(--font-caps); /* capitals swap from their own fallback (B02) */
   color: var(--color-cocoa);
 }
 .field label:lang(ar) {
@@ -663,11 +867,13 @@ html[data-overlay-open] #site-header {
     border-color 0.3s var(--ease-expo-out),
     box-shadow 0.3s var(--ease-expo-out);
 }
-/* Focus: the rule darkens and thickens to 2px (no outline box on an underlined field). */
+/* Focus: the rule darkens and thickens to 2px (no outline box on an underlined field). The extra
+   pixel comes out of the padding, so the field keeps its height. */
 .field-control:focus-visible {
   outline: none;
+  border-block-end-width: 2px;
+  padding-block-end: 11px;
   border-block-end-color: var(--color-espresso);
-  box-shadow: 0 1px 0 var(--color-espresso);
 }
 .field-hint {
   font-size: 0.78rem;
@@ -677,7 +883,7 @@ html[data-overlay-open] #site-header {
   border-block-end-color: var(--color-error);
 }
 .field-error .field-control:focus-visible {
-  box-shadow: 0 1px 0 var(--color-error);
+  border-block-end-color: var(--color-error);
 }
 .field-error .field-hint {
   color: var(--color-error);
@@ -702,7 +908,15 @@ html[data-overlay-open] #site-header {
 .wa-fab {
   transition:
     opacity 0.3s var(--ease-expo-out),
+    translate 0.4s var(--ease-expo-out),
     visibility 0.3s;
+}
+/* Phones: the shared CTA bar carries WhatsApp, so the floating button steps aside (N04). On
+   Software (its own bar, no WhatsApp half) it stays, above that bar (software.css). */
+@media (max-width: 899.98px) {
+  body:has(.cta-bar) .wa-fab {
+    display: none;
+  }
 }
 html[data-overlay-open] .wa-fab {
   opacity: 0;
@@ -745,7 +959,71 @@ html[data-overlay-open] #site-header .logo-on-light {
   background: currentColor;
   opacity: 0.25;
 }
+/* Footer links: quiet until hovered; the global focus ring shows for keyboard users. */
+/* The underline sweeps in from the reading start, as `.text-link` (M3). */
+.footer-link {
+  position: relative;
+  text-decoration: none;
+  background: linear-gradient(var(--color-taupe), var(--color-taupe)) no-repeat;
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  padding-block-end: 2px;
+  transition:
+    color 0.3s var(--ease-power3-out),
+    background-size 0.5s var(--ease-expo-out);
+}
+[dir="rtl"] .footer-link {
+  background-position: 100% 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  .footer-link {
+    transition: color 0.3s var(--ease-power3-out);
+  }
+}
+
+/* Hit area: the 10px gap shared out above and below (≥ 32px per link, WCAG 2.5.8). */
+.footer-link::after {
+  content: "";
+  position: absolute;
+  inset: -5px 0;
+}
+
+/* Footer columns (H-11). */
+.footer-top {
+  display: grid;
+  gap: 40px;
+}
+.footer-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 32px 24px;
+}
+.footer-cols ul {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.92rem;
+  color: color-mix(in srgb, var(--color-ivory) 78%, transparent);
+}
+.footer-col-title {
+  margin: 0 0 16px;
+  color: var(--color-taupe);
+}
+@media (min-width: 900px) {
+  .footer-top {
+    grid-template-columns: 4fr 8fr;
+    align-items: start;
+  }
+}
+.footer-link:hover,
+.footer-link:focus-visible {
+  color: var(--color-ivory);
+  background-size: 100% 1px;
+}
 .text-link {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -759,6 +1037,12 @@ html[data-overlay-open] #site-header .logo-on-light {
 }
 [dir="rtl"] .text-link {
   background-position: 100% 100%;
+}
+/* Hit area 44px tall around a ~20px line (M1 gate, target size at 390). */
+.text-link::after {
+  content: "";
+  position: absolute;
+  inset: -12px -4px;
 }
 .text-link:hover,
 .text-link:focus-visible {

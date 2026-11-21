@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { getCategories, getCategory, getServices, type Category } from "@/content";
-import { categoryJsonLd, overviewJsonLd } from "./jsonld";
+import { categoryJsonLd, homeJsonLd, overviewJsonLd } from "./jsonld";
 
 const SITE = "https://x.test";
 const events = getCategory("events-hospitality")!;
@@ -50,8 +50,14 @@ describe("categoryJsonLd", () => {
     expect(faq.mainEntity).toEqual([
       { "@type": "Question", name: "How do we start?", acceptedAnswer: { "@type": "Answer", text: "With the brief." } },
     ]);
-    // Today every FAQ is a TODO placeholder: no FAQPage at all.
-    expect(byType(categoryJsonLd(events, getServices("events-hospitality"), "en", SITE), "FAQPage")).toBeUndefined();
+    // A category whose FAQ is still all TODO placeholders gets no FAQPage at all.
+    const studio: Category = { ...getCategory("creative-production")!, faq: [written.faq[1]] };
+    expect(byType(categoryJsonLd(studio, getServices("creative-production"), "en", SITE), "FAQPage")).toBeUndefined();
+    // Events' approved FAQ (copy deck, 2026-11-09) goes in whole, in each language.
+    for (const l of ["en", "ar"] as const) {
+      const entries = byType(categoryJsonLd(events, getServices("events-hospitality"), l, SITE), "FAQPage").mainEntity;
+      expect(entries.map((e: { name: string }) => e.name)).toEqual(events.faq.map((f) => f.q[l]));
+    }
   });
 
   it("claims nothing unconfirmed: no ratings, reviews, area served or prices", () => {
@@ -66,5 +72,27 @@ describe("overviewJsonLd", () => {
     expect(list.itemListElement.map((e: { url: string }) => e.url)).toEqual(
       getCategories().map((c) => `https://x.test/en/services/${c.slug}`),
     );
+  });
+});
+
+describe("work and page trails (F1)", () => {
+  it("describes a case as a CreativeWork by the house, with no client field", async () => {
+    const { workCaseJsonLd, trailJsonLd } = await import("./jsonld");
+    const node = workCaseJsonLd({ label: "A national airline", summary: "Stand design.", path: "/work/airline-exhibition-pavilion", genres: ["Events"] }, "en", "https://x.test") as Record<string, unknown>;
+    expect(node).toMatchObject({ "@type": "CreativeWork", url: "https://x.test/en/work/airline-exhibition-pavilion", name: "A national airline" });
+    expect(node).not.toHaveProperty("sponsor");
+    expect(node).not.toHaveProperty("funder");
+    const trail = trailJsonLd([{ name: "Work", path: "/work" }], "ar", "https://x.test") as { itemListElement: { item: string }[] };
+    expect(trail.itemListElement.map((i) => i.item)).toEqual(["https://x.test/ar", "https://x.test/ar/work"]);
+  });
+});
+
+describe("homeJsonLd (D103)", () => {
+  it("states the house and the site, with no invented facts", () => {
+    const [org, site] = homeJsonLd("ar", "https://x.test", "info@example.com") as Record<string, unknown>[];
+    expect(org["@type"]).toBe("Organization");
+    expect((org.areaServed as unknown[]).length).toBe(6);
+    for (const k of ["foundingDate", "aggregateRating", "review", "sameAs", "numberOfEmployees"]) expect(org).not.toHaveProperty(k);
+    expect(site).toMatchObject({ "@type": "WebSite", url: "https://x.test/ar", inLanguage: "ar", publisher: { "@id": "https://x.test/#organization" } });
   });
 });

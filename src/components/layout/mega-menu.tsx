@@ -33,7 +33,7 @@ const serviceVariants: Variants = {
 };
 
 /** Directional arrow that mirrors in RTL. */
-function Arrow({ className }: { className?: string }) {
+export function Arrow({ className }: { className?: string }) {
   return <ArrowRight aria-hidden="true" strokeWidth={1.25} className={cn("size-4 rtl:-scale-x-100", className)} />;
 }
 

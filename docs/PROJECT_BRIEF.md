@@ -67,7 +67,7 @@
 
 ## 6. Our Work
 
-- Real photos: about 75 from the old company profile PDF, plus the UAE Athletics Federation case study.
+- Real photos: about 75 from the old company profile PDF.
 - Each project is presented as **Challenge → Idea → Execution → Result**.
 - Real projects that have no photos get AI images with a visible **"Illustrative" / "صورة توضيحية"** label.
 

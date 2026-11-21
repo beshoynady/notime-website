@@ -1,10 +1,9 @@
 import { ArrowRight } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
-import { SERVICES_HREF } from "@/components/layout/nav-links";
 import { BrandImage } from "@/components/ui/brand-image";
-import { getCategories, getServices, type Locale } from "@/content";
+import { categoryHref, getCategories, getServices, type Locale } from "@/content";
 import { Link } from "@/i18n/navigation";
-import { toRoman } from "@/lib/roman";
+import { orderNumeral } from "@/lib/roman";
 import { CategoryCardsScroll } from "./category-cards-scroll";
 import "./categories.css";
 
@@ -19,15 +18,14 @@ export async function CategoryCards() {
   return (
     <CategoryCardsScroll>
       {getCategories().map((c, i) => (
-        // TODO: replace placeholder — link to the category page once the Phase 2 routes exist.
-        <Link key={c.slug} href={SERVICES_HREF} className={i === 0 ? "cat is-on" : "cat"}>
+        <Link key={c.slug} href={categoryHref(c.slug)} className={i === 0 ? "cat is-on" : "cat"}>
           <div className="cat-media">
             {/* Open card: about 55% of the 1280px frame (≈ 700px); closed or stacked: full width on phones. */}
-            <BrandImage slot={c.image} fill sizes="(min-width: 1280px) 700px, (min-width: 900px) 55vw, 100vw" />
+            <BrandImage slot={c.image} fill decorative sizes="(min-width: 1280px) 700px, (min-width: 900px) 55vw, 100vw" />
           </div>
           <div className="cat-txt">
             <span className="cat-num tabular" aria-hidden="true">
-              {toRoman(c.order)}
+              {orderNumeral(c.order, locale)}
             </span>
             <h3>{c.title[locale]}</h3>
             <div className="cat-fold">

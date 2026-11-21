@@ -1,0 +1,62 @@
+{
+  "m:workIndex.metaTitle": {
+    "rule": "SEO: \"Our work\" alone matches no search",
+    "en": "Our work: events, stands and digital",
+    "ar": "أعمالنا: فعاليات وأجنحة وحلول رقمية"
+  },
+  "m:workIndex.metaDescription": {
+    "rule": "SEO: the old line was cut in results; the withdrawn case is gone (D121)",
+    "en": "An airline's pavilion at the Dubai Airshow and a football league's award nights: what we did on each.",
+    "ar": "جناح لشركة طيران في معرض دبي للطيران، وليالي تكريم لدوري كرة قدم: ما الذي قدّمناه في كل منهما.",
+    "facts": "case studies (anonymous)"
+  },
+  "m:workIndex.emptyBody": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "لا ننشر إلا عملًا نملك حقائقه، لذلك تكبر هذه الصفحة مشروعًا بعد مشروع. أزيلوا أحد عوامل التصفية، أو تعرّفوا على ما نقدّمه في هذا المجال."
+  },
+  "m:workIndex.showAll": {
+    "rule": "D-C1 (owner): a form, system or navigation button, so the verbal noun",
+    "ar": "عرض كل الأعمال"
+  },
+  "m:workIndex.exploreServices": {
+    "rule": "D-C1 (owner): a form, system or navigation button, so the verbal noun",
+    "ar": "استعراض خدماتنا"
+  },
+  "new:workIndex.closing.title": {
+    "page": "work",
+    "rule": "N16 (approved, copy §7.1): reuses `workCase.ctaTitle`, below",
+    "en": "(= workCase.ctaTitle)",
+    "ar": "(= workCase.ctaTitle)"
+  },
+  "new:workIndex.closing.body": {
+    "page": "work",
+    "rule": "N16 (approved) EN; AR by owner rule 1",
+    "en": "Tell us the date and what you need. One team replies within one working day.",
+    "ar": "أخبرونا بالموعد وما تحتاجون إليه، ويرد عليكم فريق واحد خلال يوم عمل.",
+    "facts": "⚑ FC#23"
+  },
+  "m:workCase.ctaTitle": {
+    "rule": "N16 (approved) EN; AR by owner rule 1 (was «تخطّط»): confirm",
+    "ar": "تخطّطون لمشروع كهذا؟"
+  },
+  "m:workCase.ctaBody": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "ابدؤوا بالخدمات التي قام عليها هذا المشروع. في كل صفحة ما نقدّمه، وطريقة التواصل معنا."
+  },
+  "m:workCase.ctaQuote": {
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "اطلبوا عرض سعر"
+  },
+  "m:workCase.ctaCategory": {
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "استكشفوا {category}"
+  },
+  "c:work:workItems[airline-exhibition-pavilion].named.summary": {
+    "rule": "keep (shows only with the client's written approval)",
+    "facts": "⚑ FC#4"
+  },
+  "c:work:workItems[football-league-events-awards].named.summary": {
+    "rule": "keep (shows only with the client's written approval)",
+    "facts": "⚑ FC#4"
+  }
+}

@@ -6,7 +6,7 @@ Rules used:
 
 - Every sentence below is supported by the profile (`profile-copy.md`, page given) or by what its photos plainly show (`profile-inventory.md`).
 - Anything else is `{{TODO}}`: dates, locations, budgets, audience numbers, and the "why" behind decisions. That includes most Challenges and Results, because the profile describes deliverables, not briefs or outcomes.
-- **Figures:** only the verified Oregon 26 numbers, always with their scope.
+- **Figures:** only verified numbers, always with their scope. None of the remaining cases has one yet.
 - **People:** no photo of an identifiable person until consent is confirmed (OQ #18).
 
 Structure per project: Challenge → Idea → Execution → Result.
@@ -26,20 +26,6 @@ Structure per project: Challenge → Idea → Execution → Result.
 | Result | {{TODO}} |
 
 Open: the year of each tournament or awards edition. The box on p24 is printed "2021-2020". Is the gift set the same edition?
-
-## 2. UAE Athletics Federation: official digital & media partner
-
-- **Client:** UAE Athletics Federation · **Profile:** p14, p16–18
-- **Images ready:** `uae-athletics-federation-1…3` (website desktop and mobile, sponsor backdrop). The Oregon 26 key visuals show named athletes (pending rights).
-
-| | |
-|---|---|
-| Challenge | {{TODO}}: the federation's starting point (for example, the state of its old site and channels). The profile says only that the platform was "a full rebuild" (p18). |
-| Idea | {{TODO}} |
-| Execution | "No Time is the appointed digital and media partner of the UAE Athletics Federation, leading its full online presence and digital platform" (p16). Scope (p16): social media management, creative content & design, media coverage & production, paid media & growth, website & mobile application. Social (p17): content strategy and a monthly calendar, daily publishing in Arabic and English, on-ground coverage and photography, motion graphics, reels and AI video, paid campaigns and community growth. Platform (p18): "a modern bilingual website with a complete CMS and a connected mobile application, now live", with athletes, clubs, coaches and referees modules; championships, results and national records; news, a media library and live coverage; an admin dashboard and analytics; Arabic/English, SEO and performance. Site: uaeathletics.ae. Championship campaign key visuals for the World Athletics U20 Championships, Oregon 26 (p16), some produced with AI (p14). |
-| Result | **Oregon 26 campaign, first week: 487K views · +37.6K new followers · 271K campaign reach** (p17). Website and app live (p18). {{TODO}}: any platform results. |
-
-Display rule: the three figures always carry their scope ("Oregon 26 campaign, first week"). Never present them as yearly or account-wide numbers.
 
 ## 3. EgyptAir: pavilion at ATM and the Dubai Airshow
 
@@ -62,7 +48,7 @@ Display rule: the three figures always carry their scope ("Oregon 26 campaign, f
 |---|---|
 | Challenge | {{TODO}} |
 | Idea | {{TODO}} |
-| Execution | The profile places these stand photos under "Exhibitions · technology & robotics experiences" (p7) and "Brand activations · mall & exhibition stands" (p8). They show a branded stand with power-generator displays, humanoid robots, performers in robot costumes, and live musicians. {{TODO}}: the event names, the dates, and NO TIME's exact scope (design, build, staffing, entertainment). The company also appears as an official sponsor on UAEAF material (p6, p18); that is its own sponsorship, not NO TIME work. |
+| Execution | The profile places these stand photos under "Exhibitions · technology & robotics experiences" (p7) and "Brand activations · mall & exhibition stands" (p8). They show a branded stand with power-generator displays, humanoid robots, performers in robot costumes, and live musicians. {{TODO}}: the event names, the dates, and NO TIME's exact scope (design, build, staffing, entertainment). |
 | Result | {{TODO}} |
 
 ## 5. Smith Gulf: exhibition stands and fabrication
@@ -113,4 +99,3 @@ These are shown as a body of work, not as one project, so the Challenge → Idea
 - "49+ talent network" (p3), and all of sections 13 (entertainment talent) and 14 (influencers).
 - The four press clippings (p19) and the media-outlet logos (p20), until confirmed (OQ #19).
 - The government portals and accounts (p12–13), until NO TIME's role is stated (OQ #20).
-- The federation's own figures visible in the website screenshots (p18).

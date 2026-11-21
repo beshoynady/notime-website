@@ -8,7 +8,8 @@ import { setOverlayOpen } from "@/lib/overlay";
 const PANEL_ID = "mega-panel";
 
 /**
- * Mega-menu behaviour: hover intent (90ms, fine pointers only) or click to open;
+ * Mega-menu behaviour: hover intent (90ms, fine pointers only) or click to open (a click on a
+ * hover-opened panel keeps it open: menuReducer);
  * close 240ms after the pointer leaves the header, on Esc (focus returns to the
  * trigger), on backdrop click, when focus leaves trigger+panel, on a link click,
  * and when the viewport drops below 900px.
@@ -74,12 +75,12 @@ export function useMegaMenu(firstCategory: CategorySlug) {
     "aria-controls": PANEL_ID,
     onClick: () => {
       clearTimers();
-      dispatch({ type: "CLICK_TRIGGER", now: Date.now() });
+      dispatch({ type: "CLICK_TRIGGER" });
     },
     onPointerEnter: (e: PointerEvent) => {
       if (e.pointerType !== "mouse") return;
       window.clearTimeout(closeTimer.current);
-      openTimer.current = window.setTimeout(() => dispatch({ type: "INTENT_OPEN", now: Date.now() }), OPEN_INTENT_MS);
+      openTimer.current = window.setTimeout(() => dispatch({ type: "INTENT_OPEN" }), OPEN_INTENT_MS);
     },
     onPointerLeave: () => window.clearTimeout(openTimer.current),
   };

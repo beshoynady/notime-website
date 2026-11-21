@@ -1,0 +1,313 @@
+{
+  "c:software/page:cta.book": {
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "en": "Request a free intro call",
+    "ar": "اطلبوا مكالمة تعارف مجانية",
+    "facts": "R1 confirmed by the owner (2026-11-17)"
+  },
+  "c:software/page:cta.micro": {
+    "rule": "R1 (owner): the call's length goes in the line beside the button",
+    "en": "A free 30-minute call, with no obligation. We reply within one working day.",
+    "ar": "مكالمة مجانية مدتها 30 دقيقة، دون أي التزام. نرد عليكم خلال يوم عمل.",
+    "facts": "R1 confirmed by the owner (2026-11-17); ⚑ FC#23"
+  },
+  "c:software/page:cta.review": {
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "اطلبوا مراجعة مجانية لموقعكم",
+    "facts": "R2 confirmed by the owner (2026-11-17)"
+  },
+  "c:software/page:cta.reviewShort": {
+    "rule": "Owner rule 1",
+    "ar": "مراجعة مجانية لموقعكم",
+    "facts": "R2 confirmed by the owner (2026-11-17)"
+  },
+  "c:software/page:cta.reviewPromise": {
+    "rule": "Owner rule 1 (AR); EN keep: the kind of specific promise §1 asks for",
+    "ar": "أرسلوا لنا موقعكم، وخلال 3 أيام عمل نرد عليكم بخمسة تحسينات عملية، مجانًا.",
+    "facts": "R2 confirmed by the owner (2026-11-17)"
+  },
+  "c:software/page:cta.work": {
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "شاهدوا أعمالنا"
+  },
+  "c:software/page:cta.discuss": {
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "ناقشوا هذه الخدمة معنا"
+  },
+  "c:software/page:cta.discussFor": {
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "ناقشوا هذه الخدمة معنا: {service}"
+  },
+  "c:software/page:eventTech.intro": {
+    "rule": "Choice 1 (\"one team\" stays in this page's main promise, `why.title`); choice 2 (\"brief\")",
+    "en": "We build the event registration system, the app and the results screens, and we're on the floor running the event too. One request, from the first invitation to the last result on screen.",
+    "ar": "نبني نظام التسجيل والتطبيق وشاشات النتائج، ونكون في أرض الحدث نديره أيضًا. طلب واحد، من أول دعوة إلى آخر نتيجة تظهر على الشاشة."
+  },
+  "c:software/page:eventTech.items[0].body": {
+    "rule": "Fixed principle: no \"coming soon\". Say what it is and where it stands",
+    "en": "Minute Zero by NO TIME, our own check-in product (in development)",
+    "ar": "«الدقيقة صفر» من NO TIME، منتجنا لتسجيل الحضور (قيد التطوير)"
+  },
+  "c:software/page:eventTech.items[2].body": {
+    "rule": "keep",
+    "facts": "FC#19 confirmed by the owner (2026-11-17): an event app was delivered to a client"
+  },
+  "c:software/page:eventTech.receive[0]": {
+    "rule": "Owner rule 1",
+    "ar": "التسجيل وتسجيل الحضور لضيوفكم"
+  },
+  "c:software/page:eventTech.eventsLink": {
+    "rule": "D-C1 (owner): a form, system or navigation button, so the verbal noun",
+    "ar": "استعراض الفعاليات والضيافة"
+  },
+  "c:software/page:hero.title": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "مواقع وتطبيقات يستخدمها عملاؤكم فعلًا، بالعربية والإنجليزية."
+  },
+  "c:software/page:hero.sub": {
+    "rule": "Owner rule 1 (AR), N18 rule; EN keep",
+    "ar": "الفريق الذي يدير فعالياتكم يبني منصّتكم أيضًا: مواقع بلغتين، وتطبيقات iOS وAndroid، ولوحات إدارة والأنظمة التي تعمل خلفها. نصمّمها ونطوّرها في دبي."
+  },
+  "c:software/page:problems.lead": {
+    "rule": "§3: a question answered by the next line",
+    "en": "Here is how we fix each one.",
+    "ar": "هكذا نعالج كلًّا منها."
+  },
+  "c:software/page:problems.items[0].pain": {
+    "rule": "Owner rule 1",
+    "ar": "موقعكم بالإنجليزية، وكثير من عملائكم يقرؤون بالعربية أولًا."
+  },
+  "c:software/page:problems.items[2].fix": {
+    "rule": "Owner rule 1",
+    "ar": "يحدّث فريقكم الصفحات والأخبار والصور بنفسه، من نظام لإدارة المحتوى يعمل باللغتين."
+  },
+  "c:software/page:problems.items[3].fix": {
+    "rule": "keep",
+    "facts": "FC#24 confirmed by the owner (2026-11-17)"
+  },
+  "c:software/page:problems.items[4].fix": {
+    "rule": "Choice 1",
+    "en": "The people who build your event technology also run the event.",
+    "ar": "من يبني تقنيات فعاليتكم يدير الفعالية نفسها."
+  },
+  "c:software/page:process.title": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "ترون مشروعكم في كل مرحلة، لا يوم الإطلاق وحده.",
+    "facts": "FC#24 confirmed by the owner (2026-11-17)"
+  },
+  "c:software/page:process.lead": {
+    "rule": "Owner rule 1",
+    "ar": "خمس مراحل، تنتهي كلٌّ منها بشيء تفتحونه أو تجرّبونه أو تعتمدونه."
+  },
+  "c:software/page:process.receive": {
+    "rule": "Owner rule 1",
+    "ar": "تستلمون"
+  },
+  "c:software/page:process.steps.discover.body": {
+    "rule": "Owner rule 1",
+    "ar": "نتعرّف على أهدافكم ومستخدميكم ومحتواكم، ونتّفق على النطاق."
+  },
+  "c:software/page:process.steps.design.receive": {
+    "rule": "Owner rule 1",
+    "ar": "نموذج تفاعلي تجرّبونه بأنفسكم"
+  },
+  "c:software/page:process.steps.build.body": {
+    "rule": "Owner rule 1",
+    "ar": "نبرمج على مراحل قصيرة تتابعونها خطوة بخطوة."
+  },
+  "c:software/page:process.steps.build.receive": {
+    "rule": "Owner rule 1",
+    "ar": "رابط تجريبي ترون عليه التقدّم في كل مرحلة",
+    "facts": "FC#24 confirmed by the owner (2026-11-17)"
+  },
+  "c:software/page:process.steps.launch.receive": {
+    "rule": "Owner rule 1",
+    "ar": "قائمة تحقق للإطلاق نعتمدها معكم"
+  },
+  "c:software/page:productsCopy.eyebrow": {
+    "rule": "Fixed principle: no \"coming soon\"",
+    "en": "Our products · in development",
+    "ar": "منتجاتنا · قيد التطوير"
+  },
+  "c:software/page:productsCopy.intro": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "نطوّرهما من خبرتنا في الفعاليات والضيافة. سجّلوا اهتمامكم، وسنكتب لكم حين يصبحان جاهزين."
+  },
+  "c:software/page:productsCopy.register": {
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "سجّلوا اهتمامكم"
+  },
+  "c:software/page:productsCopy.registerFor": {
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "سجّلوا اهتمامكم بـ{product}"
+  },
+  "c:software/page:productsCopy.close": {
+    "rule": "D-C1 (owner): a form, system or navigation button, so the verbal noun",
+    "ar": "إغلاق النموذج"
+  },
+  "c:software/page:productsCopy.more": {
+    "rule": "N18 (approved): gender agreement and «» around the name; a text link, so the plural command (owner rule 1)",
+    "ar": "اكتشفوا ما ستقدّمه «{product}»"
+  },
+  "c:software/page:productsCopy.items.minute-zero.features[2]": {
+    "rule": "Owner rule 1",
+    "ar": "متابعة الوصول لحظة بلحظة لفريقكم"
+  },
+  "c:software/page:proof.title": {
+    "rule": "Owner rule 1 (AR); the line names this site only (D121)",
+    "ar": "يعمل اليوم: الموقع الذي تقرؤونه الآن."
+  },
+  "c:software/page:proof.site.toggle": {
+    "rule": "D-C1 (owner): a form, system or navigation button, so the verbal noun",
+    "ar": "عرض الموقع بـ"
+  },
+  "c:software/page:proof.review.title": {
+    "rule": "Owner rule 1",
+    "ar": "كيف يبدو موقعكم على الهاتف، وبالعربية؟"
+  },
+  "c:software/page:quality.items[3]": {
+    "rule": "FC#22 (owner): no compliance or certification the company doesn't hold",
+    "en": "Security and data protection, planned into the build",
+    "ar": "الأمان وحماية البيانات، ضمن خطة البناء من البداية",
+    "facts": "FC#22: the owner (2026-11-17)"
+  },
+  "c:software/page:quality.stack": {
+    "rule": "N18 rule (AR)",
+    "ar": "نبني بـ Next.js · React · TypeScript · Node.js · iOS وAndroid",
+    "facts": "FC#21 confirmed by the owner (2026-11-17)"
+  },
+  "c:software/page:serviceBlocks.websites.outcome": {
+    "rule": "Owner rule 1",
+    "ar": "موقع يستخدمه عملاؤكم فعلًا، بالعربية والإنجليزية."
+  },
+  "c:software/page:serviceBlocks.mobile-apps.outcome": {
+    "rule": "Owner rule 1",
+    "ar": "تطبيق على هواتف عملائكم، يعرض المحتوى نفسه الذي في موقعكم."
+  },
+  "c:software/page:serviceBlocks.custom-systems.outcome": {
+    "rule": "Owner rule 1",
+    "ar": "نظام واحد يديره فريقكم، بدل جداول البيانات وسلاسل الرسائل."
+  },
+  "c:software/page:serviceBlocks.ai-consulting.outcome": {
+    "rule": "Owner rule 1",
+    "ar": "إجابة واضحة عن المواضع التي يوفّر فيها الذكاء الاصطناعي وقت فريقكم، وأين لا يفعل."
+  },
+  "c:software/page:services.receive": {
+    "rule": "Owner rule 1",
+    "ar": "ما تحصلون عليه"
+  },
+  "c:software/page:sticky.book": {
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "en": "Request a free call",
+    "ar": "اطلبوا مكالمة مجانية",
+    "facts": "R1 confirmed by the owner (2026-11-17)"
+  },
+  "c:software/page:tiers.title": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "ابدؤوا من حيث يقف عملكم اليوم، ثم توسّعوا منه."
+  },
+  "c:software/page:tiers.note": {
+    "rule": "Corporate register (§2), as the Contact FAQ",
+    "en": "We price each project once we understand it.",
+    "ar": "نسعّر كل مشروع بعد أن نفهمه."
+  },
+  "c:software/page:tiers.receive": {
+    "rule": "Owner rule 1",
+    "ar": "تستلمون"
+  },
+  "c:software/page:tiers.cta": {
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "ناقشوا معنا مستوى {tier}"
+  },
+  "c:software/page:tiers.items.launch.receive": {
+    "rule": "Owner rule 1",
+    "ar": "موقع يعمل، وجلسة تسليم لفريقكم"
+  },
+  "c:software/page:tiers.items.grow.summary": {
+    "rule": "Owner rule 1",
+    "ar": "موقع ونظام لإدارة المحتوى وظهور في محركات البحث وربط بأدواتكم."
+  },
+  "c:software/page:tiers.items.grow.included[1]": {
+    "rule": "Owner rule 1",
+    "ar": "نظام لإدارة المحتوى يديره فريقكم"
+  },
+  "c:software/page:tiers.items.grow.receive": {
+    "rule": "Owner rule 1",
+    "ar": "موقع يحدّثه فريقكم بنفسه، ومرتبط بالأدوات التي تستخدمونها"
+  },
+  "c:software/page:ways.items[project].points[1]": {
+    "rule": "Owner rule 1",
+    "ar": "تقدّم ترونه في كل مرحلة",
+    "facts": "FC#24 confirmed by the owner (2026-11-17)"
+  },
+  "c:software/page:ways.items[project].points[2]": {
+    "rule": "Owner rule 1",
+    "ar": "الإطلاق والتسليم لفريقكم"
+  },
+  "c:software/page:ways.items[support].points[3]": {
+    "rule": "R7 (owner): no fixed frequency",
+    "en": "Regular reports",
+    "ar": "تقارير دورية",
+    "facts": "R7: the owner (2026-11-17)"
+  },
+  "c:software/page:why.items[0].title": {
+    "rule": "Choice 1 (`why.title` above already says it)",
+    "en": "Events and digital under one roof",
+    "ar": "الفعاليات والحلول الرقمية تحت سقف واحد"
+  },
+  "c:software/page:why.items[0].body": {
+    "rule": "Owner rule 1",
+    "ar": "من يدير فعاليتكم يبني تسجيلها وتطبيقها وشاشاتها، فلا يضيع شيء بين الموردين."
+  },
+  "c:software/page:why.items[1].body": {
+    "rule": "Owner: \"the region\", not \"the Gulf\" (the markets reach Egypt)",
+    "en": "Arabic is written for readers in the region, not translated at the end, and every layout mirrors properly.",
+    "ar": "نكتب العربية لقرّاء المنطقة لا نترجمها في النهاية، وكل تصميم ينعكس اتجاهه كما ينبغي."
+  },
+  "c:software/page:why.items[3].body": {
+    "rule": "Owner rule 1",
+    "ar": "نبقى معكم بعد الإطلاق، بالصيانة والتحسينات وفق ما نتّفق عليه.",
+    "facts": "FC#24 confirmed by the owner (2026-11-17)"
+  },
+  "c:software/page:why.items[4].title": {
+    "rule": "Owner rule 1",
+    "ar": "تقدّم ترونه بأعينكم"
+  },
+  "c:software/page:why.items[4].body": {
+    "rule": "Owner rule 1",
+    "ar": "نموذج تفاعلي أولًا، ثم رابط تجريبي تفتحونه في أي مرحلة."
+  },
+  "c:software/page:finalCta.risk": {
+    "rule": "D-C1 (owner): the line opens with the call to action, so the plural command; N13 wording",
+    "ar": "اطلبوا مكالمة تعارف مجانية (30 دقيقة)، دون أي التزام. نرد عليكم خلال يوم عمل.",
+    "facts": "⚑ FC#23; R1 confirmed by the owner (2026-11-17)"
+  },
+  "c:software/page:finalCta.reviewTitle": {
+    "rule": "Owner rule 1",
+    "ar": "أو ابدؤوا بمراجعة مجانية لموقعكم",
+    "facts": "R2 confirmed by the owner (2026-11-17)"
+  },
+  "c:software/page:quality.title": {
+    "rule": "R8 (owner's wording)",
+    "en": "We test the site automatically before every update.",
+    "ar": "نختبر الموقع آليًا قبل كل تحديث.",
+    "facts": "R8: the owner (2026-11-17)"
+  },
+  "c:software/page:hero.ui.soon": {
+    "rule": "Fixed principle: no \"coming soon\" (it renders as the badge on both product cards)",
+    "en": "In development",
+    "ar": "قيد التطوير"
+  },
+  "c:software/page:hero.ui.welcome": {
+    "rule": "Owner rule 1 (the drawn interface too: one voice on the site)",
+    "ar": "أهلًا بكم"
+  },
+  "c:software/page:hero.ui.welcomeOther": {
+    "rule": "Owner rule 1 (this key holds the Arabic shown on the English page)",
+    "en": "أهلًا بكم"
+  },
+  "c:software/page:hero.ui.button": {
+    "rule": "D-C1 (owner): the drawn site's call to action, so the plural command (replaces D-C5's «حجز زيارة»)",
+    "ar": "احجزوا زيارة"
+  }
+}

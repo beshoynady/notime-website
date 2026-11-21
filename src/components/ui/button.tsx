@@ -6,14 +6,15 @@ import { cn } from "@/lib/utils";
 
 /**
  * Buttons per the reference: 4px radius, uppercase tracked label (Arabic: none),
- * and a fill that rises from the bottom on hover/focus (CSS, 0.5s expo.out).
+ * and a fill that rises from the bottom on hover/focus (CSS, 0.5s expo.out). A press sinks it 1px
+ * (M3); keyboard focus moves the arrow as hover does.
  */
 export const buttonVariants = cva(
   [
     "group/btn relative isolate inline-flex items-center justify-center gap-3 overflow-hidden",
     "rounded-[var(--radius)] border font-medium uppercase no-underline select-none",
     "tracking-[0.18em] lang-ar:tracking-normal lang-ar:normal-case",
-    "transition-[color,border-color] duration-300 ease-expo-out",
+    "transition-[color,border-color,translate] duration-300 ease-expo-out active:translate-y-px motion-reduce:active:translate-y-0",
     "before:absolute before:inset-0 before:-z-10 before:origin-bottom before:scale-y-0 before:content-['']",
     "before:transition-transform before:duration-500 before:ease-expo-out",
     "hover:before:scale-y-100 focus-visible:before:scale-y-100",
@@ -25,7 +26,8 @@ export const buttonVariants = cva(
         /** Champagne on dark grounds. */
         primary: "border-champagne bg-champagne text-espresso before:bg-ivory",
         /** Outline in the current text colour; fills champagne. */
-        ghost: "border-current bg-transparent text-current before:bg-champagne hover:border-champagne hover:text-espresso focus-visible:text-espresso",
+        ghost:
+          "border-current bg-transparent text-current before:bg-champagne hover:border-champagne hover:text-espresso focus-visible:text-espresso",
         /** Espresso on light grounds; fills cocoa. */
         dark: "border-espresso bg-espresso text-ivory before:bg-cocoa hover:border-cocoa",
       },
@@ -46,7 +48,7 @@ export function ButtonArrow() {
     <ArrowRight
       aria-hidden="true"
       strokeWidth={1.25}
-      className="size-4 shrink-0 transition-transform duration-500 ease-expo-out group-hover/btn:translate-x-[5px] rtl:-scale-x-100 rtl:group-hover/btn:-translate-x-[5px]"
+      className="size-4 shrink-0 transition-transform duration-500 ease-expo-out group-hover/btn:translate-x-[5px] group-focus-visible/btn:translate-x-[5px] rtl:-scale-x-100 rtl:group-hover/btn:-translate-x-[5px] rtl:group-focus-visible/btn:-translate-x-[5px]"
     />
   );
 }
@@ -57,18 +59,39 @@ interface CommonProps extends Variants {
   className?: string;
 }
 
-export function Button({ children, arrow, variant, size, className, ...rest }: CommonProps & Omit<ComponentProps<"button">, "children">) {
+export function Button({
+  children,
+  arrow,
+  variant,
+  size,
+  className,
+  ...rest
+}: CommonProps & Omit<ComponentProps<"button">, "children">) {
   return (
-    <button type="button" className={cn(buttonVariants({ variant, size }), className)} {...rest}>
+    <button
+      type="button"
+      className={cn(buttonVariants({ variant, size }), className)}
+      {...rest}
+    >
       <span>{children}</span>
       {arrow && <ButtonArrow />}
     </button>
   );
 }
 
-export function ButtonLink({ children, arrow, variant, size, className, ...rest }: CommonProps & Omit<ComponentProps<typeof Link>, "children">) {
+export function ButtonLink({
+  children,
+  arrow,
+  variant,
+  size,
+  className,
+  ...rest
+}: CommonProps & Omit<ComponentProps<typeof Link>, "children">) {
   return (
-    <Link className={cn(buttonVariants({ variant, size }), className)} {...rest}>
+    <Link
+      className={cn(buttonVariants({ variant, size }), className)}
+      {...rest}
+    >
       <span>{children}</span>
       {arrow && <ButtonArrow />}
     </Link>

@@ -2,12 +2,15 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
-// Supplied logo PNGs, trimmed and resampled only (scripts/export-logos.mjs); never recoloured.
+// The supplied logo PNGs vectorised as-is (scripts/vectorise-logos.mjs, D88 (6)): same artwork,
+// same colours, checked against the PNGs. On dark grounds the wordmark (the lockup without the
+// "CREATIVE HOUSE" line, which is too low-contrast there at this size) in the lockup's own box,
+// so a tone switch never moves the letters. next/image serves SVGs unoptimized.
 // TODO: replace placeholder — swap for the designer's SVGs when they arrive (CONTENT_CHECKLIST #14).
-import logoOnDark from "../../../public/images/brand/logo/logo-dark-bg.png";
-import logoOnLight from "../../../public/images/brand/logo/logo-light-bg.png";
+import logoOnDark from "../../../public/images/brand/logo/logo-dark-bg-wordmark.svg";
+import logoOnLight from "../../../public/images/brand/logo/logo-light-bg.svg";
 
-/** Rendered width at 1x; next/image serves 1x/2x from the 340px masters. */
+/** Rendered width at 1x (128px on phones, 150px from 900px; see the class below). */
 const WIDTH = 150;
 
 /**

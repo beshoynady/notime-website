@@ -1,0 +1,34 @@
+[
+  {
+    "route": "/services/production-print-gifts",
+    "locale": "en",
+    "width": 1440,
+    "height": 10533,
+    "overflow": 0,
+    "errors": []
+  },
+  {
+    "route": "/services/production-print-gifts",
+    "locale": "ar",
+    "width": 1440,
+    "height": 10510,
+    "overflow": 0,
+    "errors": []
+  },
+  {
+    "route": "/services/production-print-gifts",
+    "locale": "en",
+    "width": 390,
+    "height": 10002,
+    "overflow": 0,
+    "errors": []
+  },
+  {
+    "route": "/services/production-print-gifts",
+    "locale": "ar",
+    "width": 390,
+    "height": 9993,
+    "overflow": 0,
+    "errors": []
+  }
+]

@@ -1,0 +1,149 @@
+/* The showreel dialog (H-09). */
+.reel-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.reel {
+  inline-size: min(1100px, 94vw);
+  max-inline-size: none;
+  max-block-size: 94svh;
+  margin: auto;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--color-night);
+  color: var(--color-ivory);
+}
+.reel::backdrop {
+  background: color-mix(in srgb, var(--color-night) 82%, transparent);
+}
+.reel-box {
+  display: grid;
+  gap: 14px;
+  padding: 14px 16px 16px;
+}
+.reel-bar,
+.reel-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.reel-bar {
+  justify-content: space-between;
+}
+.reel-bar h2 {
+  margin: 0;
+  color: var(--color-champagne);
+}
+.reel-btn {
+  display: inline-grid;
+  place-items: center;
+  min-inline-size: 44px;
+  min-block-size: 44px;
+  padding: 0;
+  border: 1px solid var(--color-line-dark);
+  border-radius: var(--radius);
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+.reel-btn:hover {
+  border-color: var(--color-champagne);
+}
+.reel-text-btn {
+  padding-inline: 16px;
+  font: inherit;
+  font-size: 0.85rem;
+}
+
+.reel-stage {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: calc(var(--radius) / 2);
+  background: var(--color-espresso);
+}
+.reel-frame {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.9s var(--ease-power3-out);
+}
+.reel-frame[data-active] {
+  opacity: 1;
+}
+.reel-frame img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  transform-origin: 60% 45%;
+}
+/* Ken Burns: the active frame pushes in over its time on screen (a little past, so the crossfade
+   never shows it standing still). */
+.reel-frame[data-active] img {
+  animation: reel-push calc(var(--reel-frame) + 1s) linear both;
+}
+@keyframes reel-push {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+.reel-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* The brand grain (globals.css), over the photos rather than behind them. */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity: 0.09;
+  mix-blend-mode: screen;
+}
+
+.reel-count {
+  font-size: 0.8rem;
+  color: color-mix(in srgb, var(--color-ivory) 70%, transparent);
+}
+.reel-progress {
+  position: relative;
+  flex: 1;
+  block-size: 1px;
+  background: var(--color-line-dark);
+}
+.reel-progress-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--color-champagne);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+[dir="rtl"] .reel-progress-fill {
+  transform-origin: right center;
+}
+.reel-progress-fill[data-run] {
+  animation: reel-progress var(--reel-frame) linear both;
+}
+@keyframes reel-progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reel-frame {
+    transition: none;
+  }
+  .reel-frame[data-active] img {
+    animation: none;
+    transform: none;
+  }
+}

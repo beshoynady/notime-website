@@ -566,6 +566,28 @@ html[dir="rtl"] .wa{inset-inline-end:calc(20px + env(safe-area-inset-left,0px))}
     </div>
   </section>
 
+  <!-- PATTERNS (v1 plan, Task A4). Reference only, English; the live, bilingual version with the real components is /styleguide#patterns. -->
+  <section class="band tone-light" id="patterns" data-tone="light">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="idx eyebrow"><span>Patterns</span></div>
+        <h2 class="h1">Quiet <b>details.</b></h2>
+      </div>
+      <p class="small" style="color:var(--cocoa);max-width:60ch;margin:0 0 32px">Small marks that hold the pages together. Each has one job, and none of them is the point. Live specimens: <code>/styleguide#patterns</code>. Code: <code>src/components/ornaments/</code>, <code>src/components/motion/ken-burns.tsx</code>, <code>hover-sweep.tsx</code>, <code>duotone.css</code>.</p>
+      <div class="comp-grid">
+        <div class="panel"><h3>Hairline</h3><p class="small">1px, text colour at 25%; optional taupe diamond at the reading start.<br><b>Do</b> divide lists and close section heads. <b>Don't</b> box content in, or stack two rules.</p></div>
+        <div class="panel"><h3>Frame corners</h3><p class="small">Crop marks, 1px, inset 12 / 24px or 10px outside the box; logical, so they mirror in Arabic.<br><b>Do</b> mark one featured image per section. <b>Don't</b> frame every card, or put them around text.</p></div>
+        <div class="panel"><h3>Gulf pattern</h3><p class="small">8-fold khatam tile, 64px, champagne line, 4% on dark sections.<br><b>Do</b> texture a dark section, behind everything. <b>Don't</b> use it on light sections or raise it until it reads as a picture.</p></div>
+        <div class="panel"><h3>Light leak</h3><p class="small">Static radial bloom, champagne 22% to taupe 8%, blurred; one corner, logical.<br><b>Do</b> warm one corner of a dark section. <b>Don't</b> use two per section, or put it behind body text.</p></div>
+        <div class="panel"><h3>Clock ticks</h3><p class="small">12-tick dial before an eyebrow; the hand points at the section's place on the page (30° per section) and steps once when it scrolls in (GSAP · base). Reduced motion: drawn in place.<br><b>Do</b> lead a section eyebrow. <b>Don't</b> use it as a loader, or twice in one section.</p></div>
+        <div class="panel"><h3>Slow push-in (Ken Burns)</h3><p class="small">Scale 1 → 1.08, scrubbed while the frame crosses the viewport (GSAP); origin follows the reading direction. Reduced motion: no transform.<br><b>Do</b> move slowly into a still. <b>Don't</b> combine it with parallax on one image.</p></div>
+        <div class="panel"><h3>Hover sweep</h3><p class="small">Ivory 16% sheen crosses the media once, 0.9s expo-out, in the reading direction (Motion). Fine pointers only; not rendered on touch.<br><b>Do</b> use it on card media. <b>Don't</b> loop it.</p></div>
+        <div class="panel"><h3>Duotone</h3><p class="small">Greyscale image, champagne multiply + espresso lighten; the colour returns on card hover or focus (CSS, fine pointers).<br><b>Do</b> unify Work card images. <b>Don't</b> use it on the hero or on product screenshots.</p></div>
+        <div class="panel"><h3>Marquee divider</h3><p class="small">The marquee, slim: 0.72rem caps, 5px diamonds, 60s; reverses in Arabic, still under reduced motion, hidden from screen readers.<br><b>Do</b> join two sections with words already on the page. <b>Don't</b> put new information in it.</p></div>
+      </div>
+    </div>
+  </section>
+
   <!-- COMPONENTS -->
   <section class="band tone-light" id="components" data-tone="light">
     <div class="wrap">
@@ -760,14 +782,14 @@ const CATS=[
   en:{t:'Events & Hospitality',d:'Conferences, exhibitions, launches and celebrations, from the first concept to the last guest.',items:['Conferences & summits','Exhibitions & booths','Product launches','Galas & private events','Hospitality & guest management','Stage & technical production']},
   ar:{t:'الفعاليات والضيافة',d:'مؤتمرات ومعارض وإطلاقات واحتفالات، من أول فكرة حتى آخر ضيف.',items:['المؤتمرات والقمم','المعارض والأجنحة','إطلاق المنتجات','الحفلات والمناسبات الخاصة','الضيافة وإدارة الضيوف','الإنتاج الفني والتقني للمسرح']}},
  {k:'creative',n:'II',paint:'studio',
-  en:{t:'Creative Production',d:'Photo, film, motion and AI content, with the studio and equipment to make it.',items:['Photography','Video production','Motion graphics','AI content creation','Set & stage design','Equipment & camera rental']},
-  ar:{t:'الإنتاج الإبداعي',d:'تصوير وفيديو وموشن ومحتوى بالذكاء الاصطناعي، مع الاستوديو والمعدات اللازمة.',items:['التصوير الفوتوغرافي','إنتاج الفيديو','الموشن جرافيك','صناعة المحتوى بالذكاء الاصطناعي','تصميم الديكور والمسرح','تأجير المعدات والكاميرات']}},
+  en:{t:'Creative Production',d:'Photo, film, motion and AI content, with the sets and equipment to make it.',items:['Photography','Video production','Motion graphics','AI content creation','Set & stage design','Equipment & camera rental']},
+  ar:{t:'الإنتاج الإبداعي',d:'تصوير وفيديو وموشن ومحتوى بالذكاء الاصطناعي، مع الديكورات والمعدات اللازمة.',items:['التصوير الفوتوغرافي','إنتاج الفيديو','الموشن جرافيك','صناعة المحتوى بالذكاء الاصطناعي','تصميم الديكور والمسرح','تأجير المعدات والكاميرات']}},
  {k:'marketing',n:'III',paint:'brand',
-  en:{t:'Marketing & Brand',d:'Identity, social, search and PR that keep people talking after the event ends.',items:['Branding & identity','Social media management','Digital marketing & SEO','Content strategy','Public relations','Media planning']},
-  ar:{t:'التسويق والعلامة',d:'هوية وسوشيال ميديا وبحث وعلاقات عامة تُبقي الناس يتحدثون بعد انتهاء الفعالية.',items:['الهوية التجارية','إدارة السوشيال ميديا','التسويق الرقمي وSEO','استراتيجية المحتوى','العلاقات العامة','تخطيط الإعلام']}},
+  en:{t:'Marketing & Brand',d:'Identity, social, search and PR that keep people talking after the event ends.',items:['Branding & identity','Social media management','Digital marketing & SEO','Content strategy','Public relations','Paid media & media planning (Google & Meta ads)']},
+  ar:{t:'التسويق والعلامة',d:'هوية وسوشيال ميديا وبحث وعلاقات عامة تُبقي الناس يتحدثون بعد انتهاء الفعالية.',items:['الهوية التجارية','إدارة السوشيال ميديا','التسويق الرقمي وSEO','استراتيجية المحتوى','العلاقات العامة','الإعلانات المدفوعة وتخطيط الإعلام (Google وMeta)']}},
  {k:'print',n:'IV',paint:'print',
-  en:{t:'Production, Print & Gifts',d:'Signage, large-format print, packaging and gifts produced to the brand standard.',items:['Large-format printing','Event signage','Packaging design','Corporate gifts','Online print store','Branded merchandise']},
-  ar:{t:'الإنتاج والطباعة والهدايا',d:'لافتات وطباعة كبيرة وتغليف وهدايا منفذة بمعايير العلامة.',items:['الطباعة كبيرة الحجم','لافتات الفعاليات','تصميم التغليف','هدايا الشركات','متجر الطباعة الإلكتروني','منتجات بهوية العلامة']}},
+  en:{t:'Production, Print & Gifts',d:'Signage, large-format print, packaging and gifts produced to the brand standard.',items:['Commercial & large-format printing','Event signage','Packaging design','Corporate gifts','Online print store','Branded merchandise']},
+  ar:{t:'الإنتاج والطباعة والهدايا',d:'لافتات وطباعة كبيرة وتغليف وهدايا منفذة بمعايير العلامة.',items:['الطباعة التجارية وكبيرة الحجم','لافتات الفعاليات','تصميم التغليف','هدايا الشركات','متجر الطباعة الإلكتروني','منتجات بهوية العلامة']}},
  {k:'digital',n:'V',paint:'code',
   en:{t:'Software & Digital',d:'Websites, apps and custom systems that keep working long after launch day.',items:['Websites','Mobile apps','Custom systems','E-commerce','UI/UX design','AI consulting']},
   ar:{t:'البرمجيات والحلول الرقمية',d:'مواقع وتطبيقات وأنظمة حسب الطلب تستمر في العمل بعد يوم الإطلاق بكثير.',items:['المواقع الإلكترونية','تطبيقات الموبايل','أنظمة حسب الطلب','المتاجر الإلكترونية','تصميم الواجهات وتجربة المستخدم','استشارات الذكاء الاصطناعي']}}

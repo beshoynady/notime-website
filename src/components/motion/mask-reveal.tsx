@@ -30,7 +30,7 @@ export function MaskReveal({ children, from = "start", className, trigger = "scr
   const build = (withScroll: boolean) => {
     const node = el.current;
     if (!node || prefersReducedMotion()) return;
-    const st = withScroll ? { trigger: node, start: "top 80%", once: true } : undefined;
+    const st = withScroll ? { trigger: node, start: "top 80%", toggleActions: "play none none none" } : undefined;
     gsap.fromTo(
       node,
       { clipPath: maskFrom(from, isRtl(locale)) },

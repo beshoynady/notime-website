@@ -2,9 +2,29 @@
    each theme (Task 2.5, then per category) dresses it through tokens on main[data-theme].
    Unlayered: spacing for these classes lives here, not in utilities on the same element. */
 
-/* Hero shell */
-.cat-hero {
-  padding-block: calc(var(--header-h) + clamp(28px, 4vw, 56px)) clamp(48px, 7vw, 96px);
+/* Act 1 · the opening (CategoryOpening). Its overlay is a `frame`: at ≥ 900px the content
+   starts at the sections' column and leaves the first column to the rail (the index track). */
+.cat-opening-static {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 16px;
+  min-block-size: min(64svh, 640px);
+  padding-block: calc(var(--header-h) + var(--scene-top-extra, 0px) + 24px)
+    clamp(40px, 6vw, 72px);
+}
+.cat-opening-overlay > .crumbs {
+  margin-block-end: auto;
+}
+/* Over the Evening's photo the crumbs sat on a bright ceiling under 3:1 (M3): full opacity and
+   a soft espresso halo, which only shows where the photo is light. */
+main[data-theme="evening"] .cat-opening-overlay > .crumbs {
+  text-shadow:
+    0 1px 2px rgba(46, 32, 23, 0.6),
+    0 0 18px rgba(46, 32, 23, 0.65);
+}
+main[data-theme="evening"] .cat-opening-overlay > .crumbs a {
+  opacity: 1;
 }
 .crumbs ol {
   display: flex;
@@ -21,6 +41,10 @@
   opacity: 0.45;
 }
 .crumbs a {
+  /* A 44px hit area around a 15px line, without moving the line (touch targets). */
+  display: inline-block;
+  padding: 15px 4px;
+  margin: -15px -4px;
   text-decoration: none;
   opacity: 0.75;
 }
@@ -30,35 +54,120 @@
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-.cat-hero-head {
-  display: grid;
-  gap: 24px;
-  margin-block: clamp(40px, 6vw, 80px) clamp(32px, 4vw, 56px);
+.cat-opening-head h1 {
+  margin: 16px 0 0;
 }
-.cat-hero-head h1 {
-  margin: 20px 0 0;
-}
-.cat-hero-eyebrow,
-.cat-hero-intro {
+.cat-opening-eyebrow,
+.cat-opening-intro {
   opacity: 0.85;
 }
-.cat-hero-intro {
+.cat-opening-intro {
   margin: 0;
+  max-inline-size: 56ch;
+}
+.cat-opening-after {
+  padding-block: clamp(40px, 6vw, 72px) 0;
+}
+/* N06 · the hero's lead: the scene's promise (its last shot line), set as the build scene sets it. */
+.cat-opening-lead {
+  margin: 20px 0 0;
+  max-inline-size: 42rem;
+  font-size: clamp(1.25rem, 0.95rem + 0.8vw, 1.6rem);
+  font-weight: 300;
+  line-height: 1.3;
+}
+/* "Request a quote", then the skip control: one row under the lead. On desktop the skip keeps
+   its place at the opening's bottom inline-end; below 900px it follows the button at
+   inline-start (inline-end belongs to the floating WhatsApp button) and wraps under it if needed. */
+.cat-opening-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 28px;
+  margin-block-start: 12px;
 }
 @media (min-width: 900px) {
-  .cat-hero-head {
-    grid-template-columns: 7fr 5fr;
-    align-items: end;
-  }
-  .cat-hero-intro {
-    padding-block-end: 0.5em;
+  .cat-opening-actions .cat-skip {
+    margin-inline-start: auto;
   }
 }
-.cat-hero-image {
-  border-radius: var(--radius);
+/* "Skip to services": a quiet text control beside "Request a quote" (N06). */
+.cat-skip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-block-size: 44px;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.3s var(--ease-expo-out);
+}
+.cat-skip:hover,
+.cat-skip:focus-visible {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+@media (min-width: 900px) {
+  .cat-opening-overlay > * {
+    margin-inline-start: calc(
+      (100% - var(--rail-gap)) * 0.25 + var(--rail-gap)
+    );
+  }
 }
 
-/* Body: the service index column (Task 2.3) and the six sections */
+/* The index track: spans the opening and the services, so the index shows from the first frame
+   and stays sticky to the end (storyboards README §2). Only the index takes pointer events. */
+/* `--rail-gap`: the gap of the 3fr / 9fr rail grid, shared by the grids, the opening's column
+   offset and the majlis bleed. `--scene-top-extra`: what sits under the header from the first
+   frame, the chip bar below 900px (8 + 44 + 8 + 1); openings, scenes and landings read it.
+   overflow-x: clip hides the full-bleed scene's vw overshoot (a classic scrollbar), see below. */
+.cat-page {
+  --rail-gap: 24px;
+  position: relative;
+  overflow-x: clip;
+}
+@media (max-width: 899.98px) {
+  .cat-page {
+    --scene-top-extra: 61px;
+  }
+}
+/* The page box carries the grain (CategoryView), so its sections are see-through and the box
+   holds their ground (its grain, z-index -1 in the box, paints above that background). */
+.cat-page > section[data-tone] {
+  background-color: transparent;
+}
+#page-stage .cat-page {
+  background-color: var(--tone-ground);
+}
+.cat-index-track {
+  --theme-scrim: color-mix(in srgb, var(--tone-ground) 60%, transparent);
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+}
+/* An Act 3 in the other tone: the ground turns when its top crosses 55% of the viewport
+   (ToneController), so the track ends 55svh short and the index has scrolled away by then. */
+.cat-index-track[data-release="early"] {
+  inset-block-end: 55svh;
+}
+.cat-index-frame {
+  block-size: 100%;
+}
+.cat-index-track .svc-index {
+  pointer-events: auto;
+}
+@media (min-width: 900px) {
+  .cat-index-frame {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+    column-gap: var(--rail-gap);
+  }
+}
+
+/* Body: the six sections, in the second column (the first is the rail's, on the track) */
 .cat-body {
   padding-block-end: var(--section-pad);
 }
@@ -66,7 +175,7 @@
   .cat-layout {
     display: grid;
     grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
-    column-gap: 24px;
+    column-gap: var(--rail-gap);
   }
   .cat-sections {
     grid-column: 2;
@@ -77,7 +186,7 @@
 .svc {
   display: grid;
   gap: 32px;
-  padding-block: clamp(56px, 8vw, 120px);
+  padding-block: clamp(56px, min(8vw, 12svh), 120px); /* height-bound: W02 */
   border-block-start: 1px solid var(--border);
 }
 [data-tone="dark"] .svc {
@@ -112,6 +221,17 @@
   margin: 0;
   opacity: 0.85;
 }
+/* The section's one-line hook (service-hooks.ts), between the H2 and the promise. */
+.svc-hook {
+  margin: 0;
+  max-inline-size: 46ch;
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  line-height: 1.5;
+  color: var(--theme-accent, currentColor);
+}
+.svc-hook:lang(ar) {
+  line-height: 1.75;
+}
 .svc-deliver h3 {
   margin: 0 0 16px;
   opacity: 0.7;
@@ -144,6 +264,8 @@
 /* Service index: a sticky chip bar below 900px, a sticky rail at ≥ 900px (spec §4, part 2).
    The indicator is one element that Motion moves between links (layoutId). */
 .svc-index {
+  display: flex;
+  align-items: flex-start;
   position: sticky;
   top: calc(var(--header-h) + env(safe-area-inset-top, 0px));
   z-index: 20;
@@ -152,15 +274,24 @@
   background: rgba(245, 233, 211, 0.92);
   backdrop-filter: blur(10px);
 }
+/* Below 900px the chip bar moves up with the hiding header, in step with it (globals.css, "Header
+   autohide"; its transition is set below); translate only, so its sticky
+   place and every anchor landing stay the same. */
+html[data-header-hidden] .svc-index {
+  translate: 0 var(--header-follow);
+}
 [data-tone="dark"] .svc-index {
   border-color: var(--color-line-dark);
   background: rgba(46, 32, 23, 0.92);
 }
 .svc-index ol {
+  flex: 1 1 auto;
+  min-inline-size: 0;
   display: flex;
   gap: 8px;
   margin: 0;
-  padding: 10px var(--gutter-end) 10px var(--gutter-start);
+  padding-block: 8px;
+  padding-inline: 8px var(--gutter-end); /* the toggle holds the gutter at inline-start */
   list-style: none;
   overflow-x: auto;
   overscroll-behavior-x: contain;
@@ -175,6 +306,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  min-block-size: 44px; /* touch target */
   white-space: nowrap;
   padding: 8px 14px;
   border: 1px solid var(--color-line-light);
@@ -207,25 +339,59 @@
 [data-tone="dark"] .svc-index-link[aria-current="location"] {
   color: var(--color-espresso);
 }
+/* The "all services" toggle (below 900px): a 44px square at the bar's inline-start; open, the
+   same list stacks into full-width rows under it. Hidden with the rail, which shows all six. */
+.svc-index-toggle {
+  flex: none;
+  display: grid;
+  place-items: center;
+  inline-size: 44px;
+  block-size: 44px;
+  margin-block: 8px;
+  margin-inline-start: var(--gutter-start);
+  border: 1px solid var(--color-line-light);
+  border-radius: var(--radius);
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+[data-tone="dark"] .svc-index-toggle {
+  border-color: var(--color-line-dark);
+}
+.svc-index-toggle[aria-expanded="true"] {
+  border-color: currentColor;
+}
+.svc-index[data-open] ol {
+  flex-direction: column;
+  max-block-size: calc(100svh - var(--header-h) - 16px);
+  overflow-y: auto;
+}
+.svc-index[data-open] .svc-index-link {
+  white-space: normal;
+}
 /* Without JS a hash jump uses scroll-padding (the header): leave room for the chip bar too. */
-@media (max-width: 899.98px) {
-  .svc {
-    scroll-margin-top: 58px;
-  }
+.svc {
+  scroll-margin-top: var(--scene-top-extra, 0px);
 }
 
 @media (min-width: 900px) {
+  .svc-index-toggle {
+    display: none;
+  }
   .svc-index {
+    display: block;
     top: calc(var(--header-h) + 24px);
     align-self: start;
     margin: 0;
-    padding-block-start: clamp(16px, 3vw, 40px);
+    padding-block: 8px;
     border: 0;
-    background: none;
+    border-radius: var(--radius);
     backdrop-filter: none;
   }
+  /* The rail's scrim, tuned per tone on the track: it keeps the rail legible over the opening. */
+  .svc-index,
   [data-tone="dark"] .svc-index {
-    background: none;
+    background: var(--theme-scrim, none);
   }
   .svc-index ol {
     flex-direction: column;
@@ -239,11 +405,12 @@
     align-items: baseline;
     gap: 0;
     white-space: normal;
+    min-block-size: 0; /* the rail is pointer UI; the 44px touch height is the chips' */
     padding-block: 9px;
     padding-inline: 16px 12px;
     border: 0;
     line-height: 1.35;
-    opacity: 0.62;
+    opacity: 0.78; /* M3: 0.62 measured 4.2:1 on ivory, 3.6:1 on champagne */
     transition: opacity 0.3s var(--ease-expo-out);
   }
   .svc-index-link:hover,
@@ -254,6 +421,12 @@
   .svc-index-link[aria-current="location"],
   [data-tone="dark"] .svc-index-link[aria-current="location"] {
     color: inherit;
+  }
+  /* Rail numerals in the theme's accent (spec §5.1: champagne on the Evening), at full opacity:
+     at 0.7 inside a 0.62 link (now 0.78) they measured 3.76:1 at 10.9px. */
+  .svc-index-num {
+    color: var(--theme-accent);
+    opacity: 1;
   }
   /* The rail's indicator: a short bar at the inline start of the active item. */
   .svc-index-ind {
@@ -267,7 +440,27 @@
     background: var(--color-champagne);
   }
 }
+/* The index stays at full from the first frame (D64). It stepped back to 40% during the pinned
+   build scene's first shot (D74, P3); that scene is v1.1 (the owner's scope cut, 2026-11-18). */
+.svc-index {
+  transition: translate 0.35s var(--ease-expo-out); /* with the hiding header (above) */
+}
+/* Over a full-bleed scene the rail steps aside (ServiceIndex sets data-over-scene; self-audit
+   B11): its 60% scrim cut the scene. It stays while it holds focus. */
+@media (min-width: 900px) {
+  .svc-index {
+    transition:
+      translate 0.35s var(--ease-expo-out),
+      opacity 0.35s var(--ease-expo-out),
+      visibility 0.35s;
+  }
+  .svc-index[data-over-scene]:not(:focus-within) {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
+  .svc-index,
   .svc-index-link {
     transition: none;
   }
@@ -277,6 +470,156 @@
    static fallback replaces it. */
 .svc-module {
   min-inline-size: 0;
+}
+
+/* Signature module reservations (M1). The production fallback is empty (D78), so each built
+   module's slot reserves its height from the server render; a module mounting above a
+   deep-linked section then moves it by a few pixels at most. Measured per locale on the
+   production build at 390 and 1440 (scripts/anchor-shift.mjs, M1), minus 4 px so a module is
+   never shorter than its slot at those widths. Re-measure when a module's layout changes. */
+html[lang="en"] .svc-module[data-module="motion-playground"] {
+  min-block-size: 584px;
+}
+html[lang="ar"] .svc-module[data-module="motion-playground"] {
+  min-block-size: 590px;
+}
+html[lang="en"] .svc-module[data-module="rental-categories"] {
+  min-block-size: 431px;
+}
+html[lang="ar"] .svc-module[data-module="rental-categories"] {
+  min-block-size: 464px;
+}
+html[lang="en"] .svc-module[data-module="content-calendar"] {
+  min-block-size: 866px;
+}
+html[lang="ar"] .svc-module[data-module="content-calendar"] {
+  min-block-size: 861px;
+}
+html[lang="en"] .svc-module[data-module="press-release"] {
+  min-block-size: 1323px;
+}
+html[lang="ar"] .svc-module[data-module="press-release"] {
+  min-block-size: 1225px;
+}
+html[lang="en"] .svc-module[data-module="human-scale"] {
+  min-block-size: 462px;
+}
+html[lang="ar"] .svc-module[data-module="human-scale"] {
+  min-block-size: 468px;
+}
+html[lang="en"] .svc-module[data-module="print-order"] {
+  min-block-size: 589px;
+}
+html[lang="ar"] .svc-module[data-module="print-order"] {
+  min-block-size: 525px;
+}
+@media (min-width: 900px) {
+  html[lang="en"] .svc-module[data-module="motion-playground"] {
+    min-block-size: 590px;
+  }
+  html[lang="ar"] .svc-module[data-module="motion-playground"] {
+    min-block-size: 594px;
+  }
+  html[lang="en"] .svc-module[data-module="rental-categories"] {
+    min-block-size: 256px;
+  }
+  html[lang="ar"] .svc-module[data-module="rental-categories"] {
+    min-block-size: 239px;
+  }
+  html[lang="en"] .svc-module[data-module="content-calendar"] {
+    min-block-size: 976px;
+  }
+  html[lang="ar"] .svc-module[data-module="content-calendar"] {
+    min-block-size: 969px;
+  }
+  html[lang="en"] .svc-module[data-module="press-release"] {
+    min-block-size: 1036px;
+  }
+  html[lang="ar"] .svc-module[data-module="press-release"] {
+    min-block-size: 1025px;
+  }
+  html[lang="en"] .svc-module[data-module="human-scale"] {
+    min-block-size: 599px;
+  }
+  html[lang="ar"] .svc-module[data-module="human-scale"] {
+    min-block-size: 579px;
+  }
+  html[lang="en"] .svc-module[data-module="print-order"] {
+    min-block-size: 312px;
+  }
+  html[lang="ar"] .svc-module[data-module="print-order"] {
+    min-block-size: 293px;
+  }
+}
+/* The Events & Hospitality modules (batch 2). Their static fallback is server-rendered in the same
+   box, so these only guard the first paint. ESTIMATES from the CSS boxes at 390 and 1440, kept
+   below the expected height (a short slot grows, it never leaves a gap); re-measure at M3 with
+   scripts/anchor-shift.mjs and replace them. */
+html[lang="en"] .svc-module[data-module="agenda-timeline"] {
+  min-block-size: 680px;
+}
+html[lang="ar"] .svc-module[data-module="agenda-timeline"] {
+  min-block-size: 700px;
+}
+html[lang="en"] .svc-module[data-module="stage-lights"] {
+  min-block-size: 440px;
+}
+html[lang="ar"] .svc-module[data-module="stage-lights"] {
+  min-block-size: 450px;
+}
+html[lang="en"] .svc-module[data-module="launch-reveal"] {
+  min-block-size: 640px;
+}
+html[lang="ar"] .svc-module[data-module="launch-reveal"] {
+  min-block-size: 650px;
+}
+html[lang="en"] .svc-module[data-module="candle-moodboard"] {
+  min-block-size: 560px;
+}
+html[lang="ar"] .svc-module[data-module="candle-moodboard"] {
+  min-block-size: 570px;
+}
+html[lang="en"] .svc-module[data-module="menu-majlis"] {
+  min-block-size: 760px;
+}
+html[lang="ar"] .svc-module[data-module="menu-majlis"] {
+  min-block-size: 780px;
+}
+html[lang="en"] .svc-module[data-module="stand-assembly"] {
+  min-block-size: 680px;
+}
+html[lang="ar"] .svc-module[data-module="stand-assembly"] {
+  min-block-size: 690px;
+}
+@media (min-width: 900px) {
+  html[lang="en"] .svc-module[data-module="agenda-timeline"] {
+    min-block-size: 460px;
+  }
+  html[lang="ar"] .svc-module[data-module="agenda-timeline"] {
+    min-block-size: 480px;
+  }
+  html[lang="en"] .svc-module[data-module="stage-lights"],
+  html[lang="ar"] .svc-module[data-module="stage-lights"] {
+    min-block-size: 640px;
+  }
+  html[lang="en"] .svc-module[data-module="launch-reveal"],
+  html[lang="ar"] .svc-module[data-module="launch-reveal"] {
+    min-block-size: 660px;
+  }
+  html[lang="en"] .svc-module[data-module="candle-moodboard"],
+  html[lang="ar"] .svc-module[data-module="candle-moodboard"] {
+    min-block-size: 520px;
+  }
+  html[lang="en"] .svc-module[data-module="menu-majlis"] {
+    min-block-size: 520px;
+  }
+  html[lang="ar"] .svc-module[data-module="menu-majlis"] {
+    min-block-size: 540px;
+  }
+  html[lang="en"] .svc-module[data-module="stand-assembly"],
+  html[lang="ar"] .svc-module[data-module="stand-assembly"] {
+    min-block-size: 520px;
+  }
 }
 .module-placeholder {
   display: grid;
@@ -293,4 +636,228 @@
 }
 .module-placeholder p {
   margin: 0;
+}
+
+/* A section's own scene (the Events majlis, the page's peak): full-bleed and one screen tall, so
+   it outranks the opening's frame instead of reading as one more card (review D73: it covered
+   52% of the screen in the column). It pins briefly under the header on desktop, never on
+   mobile (D74, P2). It breaks out of the sections' column to
+   both viewport edges; the numeral, H2 and promise stay on the column's line, over its lower
+   third. Sized so that a landing on the section (its top under the header and any sticky bar)
+   shows the whole scene with the H2 and the promise above the fold.
+   vw includes a classic scrollbar: the overshoot (half its width at each edge) is clipped by
+   `.cat-page { overflow-x: clip }`, and the overlay uses the same terms, so the H2 still sits
+   on the column's line. */
+.svc[data-scene-section] {
+  padding-block-start: 0;
+  border-block-start: 0;
+}
+.svc-scene {
+  --frame-w: min(100vw, var(--frame));
+  --bleed-start: calc(
+    (100vw - var(--frame-w)) / 2 + var(--gutter-start) + var(--col-start, 0px)
+  );
+  --bleed-end: calc((100vw - var(--frame-w)) / 2 + var(--gutter-end));
+  margin-inline: calc(-1 * var(--bleed-start)) calc(-1 * var(--bleed-end));
+}
+.svc-scene .scene {
+  block-size: calc(100svh - var(--header-h) - var(--scene-top-extra, 0px));
+  min-block-size: 480px;
+}
+.svc-scene .svc-scene-overlay {
+  padding-block: 24px clamp(32px, 6vh, 64px);
+  padding-inline: var(--bleed-start) var(--bleed-end);
+}
+@media (min-width: 900px) {
+  .svc-scene {
+    /* the rail's column: a quarter of the frame's 3fr / 9fr grid plus its gap */
+    --col-start: calc(
+      (
+          var(--frame-w) - var(--gutter-start) - var(--gutter-end) -
+            var(--rail-gap)
+        ) /
+        4 + var(--rail-gap)
+    );
+  }
+}
+@media (max-width: 899.98px) {
+  .svc-scene .svc-scene-overlay {
+    /* the floating WhatsApp button sits at the bottom inline-end */
+    padding-block-end: 96px;
+  }
+}
+
+/* Theme tokens (spec §5), set per tone: a theme can span both (the Evening's ivory end). The
+   per-category builds dress the rest; this is the ground, ink, accent and rule each starts from. */
+main[data-theme] [data-tone="dark"] {
+  --theme-ink: var(--color-ivory);
+  --theme-accent: var(--color-champagne);
+  --theme-line: var(--color-line-dark);
+}
+main[data-theme] [data-tone="light"] {
+  --theme-ink: var(--color-espresso);
+  --theme-accent: var(--color-cocoa);
+  --theme-line: var(--border);
+}
+main[data-theme="studio"] [data-tone="dark"] {
+  --tone-ground: var(--color-night); /* the black box */
+}
+main[data-theme="workshop"] [data-tone="light"] {
+  --tone-ground: var(--color-champagne); /* paper stock */
+  --theme-ink: var(--color-cocoa);
+}
+main[data-theme] [data-tone] {
+  color: var(--theme-ink);
+}
+
+/* Act 3 · the FAQ and the quote block (CategoryFaq, CategoryQuote). At ≥ 900px they keep the
+   page's columns: the label in the rail's column, the content in the sections' column. */
+.cat-end {
+  padding-block: clamp(64px, min(9vw, 13svh), 128px); /* height-bound: W02 */
+}
+.cat-faq + .cat-quote {
+  padding-block-start: 0;
+}
+.cat-end-grid {
+  display: grid;
+  gap: 24px 24px;
+}
+@media (min-width: 900px) {
+  .cat-end-grid {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+  }
+  .cat-end-head {
+    align-self: start;
+  }
+}
+.cat-end-head .text-eyebrow,
+.cat-end-head.text-eyebrow {
+  margin: 0 0 12px;
+  color: var(--theme-accent);
+}
+.cat-faq-title {
+  margin: 0;
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  font-weight: 300;
+  line-height: 1.15;
+}
+.cat-faq-title:lang(ar) {
+  line-height: 1.45;
+}
+.cat-faq-list {
+  border-block-start: 1px solid var(--theme-line);
+}
+.cat-faq-item {
+  border-block-end: 1px solid var(--theme-line);
+}
+.cat-faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-block-size: 64px;
+  padding-block: 16px;
+  font-size: clamp(1.0625rem, 1.4vw, 1.2rem);
+  font-weight: 500;
+  line-height: 1.4;
+  list-style: none;
+  cursor: pointer;
+}
+.cat-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.cat-faq-icon {
+  flex: none;
+  inline-size: 20px;
+  block-size: 20px;
+  color: var(--theme-accent);
+  transition: transform 0.4s var(--ease-expo-out);
+}
+.cat-faq-item[open] .cat-faq-icon {
+  transform: rotate(45deg);
+}
+.cat-faq-a {
+  padding-block-end: 24px;
+  max-inline-size: 64ch;
+  line-height: 1.65;
+  opacity: 0.85;
+}
+.cat-faq-a p {
+  margin: 0;
+}
+
+.cat-quote-body {
+  display: grid;
+  justify-items: start;
+  gap: 20px;
+}
+.cat-quote-title {
+  margin: 0;
+  max-inline-size: 18ch;
+  font-size: clamp(2.2rem, 5.2vw, 4.4rem);
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+}
+.cat-quote-title:lang(ar) {
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+.cat-quote-note,
+.cat-quote-pending {
+  margin: 0;
+  max-inline-size: 56ch;
+  line-height: 1.65;
+  opacity: 0.85;
+}
+.cat-quote-service {
+  margin: 0;
+  font-weight: 600;
+}
+.cat-quote-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-block-start: 8px;
+}
+
+/* A section's lightweight visual while its module waits for v1.1 (D100): a fixed 16:9 box, a
+   graded photo or a hairline drawing in the theme's accent. Static: nothing to reduce. */
+.svc-visual {
+  position: relative;
+  margin: 0;
+  inline-size: 100%;
+  max-inline-size: 720px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--theme-line, var(--border));
+  border-radius: var(--radius);
+  color: var(--theme-accent, currentColor);
+}
+.svc-visual[data-visual="drawing"] {
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, currentColor 4%, transparent);
+}
+.svc-drawing {
+  inline-size: 88%;
+  block-size: 88%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.svc-drawing * {
+  vector-effect: non-scaling-stroke;
+}
+.svc-drawing .dim {
+  stroke: color-mix(in srgb, currentColor 38%, transparent);
+}
+.svc-drawing .tint {
+  fill: color-mix(in srgb, currentColor 14%, transparent);
+}
+/* Time and reading order run from inline-start: the drawings mirror in Arabic (they hold no text). */
+[dir="rtl"] .svc-drawing {
+  transform: scaleX(-1);
 }

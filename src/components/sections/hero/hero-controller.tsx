@@ -24,6 +24,8 @@ const INTRO_DEADLINE_MS = 4500;
 const REVEAL_DEADLINE_MS = 2400;
 /** Same as the motion-mode CSS on .hero-title, so the focus pull can add blur to it. */
 const TITLE_SHADOW = "drop-shadow(0px 4px 40px rgba(13, 8, 5, 0.55))";
+/** How far the title dims on its way out (W02): still read, no longer competing. */
+const TITLE_FLOOR = 0.45;
 /** Same breakpoint as the CSS: masks, letter rise and SplitText only from here up. */
 const WIDE = "(min-width: 900px)";
 const NARROW = "(max-width: 899.98px)";
@@ -34,13 +36,14 @@ const NARROW = "(max-width: 899.98px)";
  * - the first-visit intro (once per session; skippable by wheel, touch, key or click, and
  *   finished early when focus enters the header);
  * - the short title reveal on repeat visits (no shutters; desktop only);
- * - the pinned, scrubbed scroll timeline (mirrored in Arabic).
+ * - the pinned, scrubbed scroll timeline: the exit only (mirrored in Arabic; N05 dropped the
+ *   second beat, so the pin is one screen, not 1.4).
  * Each element is animated by one timeline only: the intro moves inner elements, the
  * scroll timeline their wrappers. Reduced motion: none of this; the static frame is final.
  *
  * LCP (D43): below 900px the title is painted in place from the first frame on every
  * visit (no masks, no split, no fade, no motion); the first-visit shutters part over it.
- * SplitText is downloaded only at >= 900px (letter rise, beat words).
+ * SplitText is downloaded only at >= 900px (letter rise).
  */
 export function HeroController() {
   const [state] = useState(createSceneState);
@@ -62,7 +65,6 @@ export function HeroController() {
       const root = document.documentElement;
       const shell = document.querySelector<HTMLElement>("[data-header-shell]");
       const title = q(".hero-title")[0];
-      const beat = q(".hero-beat")[0];
       const inners = q(".hero-line-inner");
       const dir = locale === "ar" ? -1 : 1;
       // Width at start, for the intro and the repeat-visit reveal (each runs once).
@@ -72,7 +74,7 @@ export function HeroController() {
 
       // ---- Scroll: pinned, scrubbed --------------------------------------------------
       // Built synchronously at every width, so the pin spacer exists before the
-      // ToneController measures its zones; only the desktop beat words wait for SplitText.
+      // ToneController measures its zones.
       const mm = gsap.matchMedia();
       // Both conditions: matchMedia only runs the callback while at least one matches.
       mm.add({ wide: WIDE, narrow: NARROW }, (ctx) => {
@@ -85,7 +87,11 @@ export function HeroController() {
             // The server-rendered wrapper (hero.tsx), so the hero is never moved in the DOM.
             pinSpacer: hero.parentElement?.classList.contains("hero-pin") ? hero.parentElement : undefined,
             start: "top top",
-            end: "+=140%",
+            // One screen (N05). The exit keeps about the old pace (lines out after 0.56 of a
+            // screen, 0.58 in the 140% pin; the clock after 0.69), and the last 0.31 screen
+            // (the scene settling) leaves room for scrub's 1 s catch-up, so the exit has
+            // finished before the hero unpins. globals.css reserves the same 100svh (.hero-pin).
+            end: "+=100%",
             scrub: 1,
             anticipatePin: 1,
             invalidateOnRefresh: true,
@@ -95,31 +101,24 @@ export function HeroController() {
           },
         });
         ScrollTrigger.sort();
-        // Line 1 exits towards the reading start, line 2 towards the end (mirrored in AR).
-        tl.to(lines[0], { xPercent: -38 * dir, opacity: 0, ease: "power2.in", duration: 1 }, 0)
-          .to(lines[1], { xPercent: 38 * dir, opacity: 0, ease: "power2.in", duration: 1 }, 0)
-          .to(q(".hero-sub"), { y: -50, opacity: 0, duration: 0.6 }, 0)
+        // Line 1 parts towards the reading start, line 2 towards the end (mirrored in AR). They
+        // dim but stay on screen and leave with the hero: faded to nothing, the rest of the pin
+        // and the hero's way out were lights alone, an empty screen (W02, the owner 2026-11-20).
+        tl.to(lines[0], { xPercent: -38 * dir, opacity: TITLE_FLOOR, ease: "power2.in", duration: 1 }, 0)
+          .to(lines[1], { xPercent: 38 * dir, opacity: TITLE_FLOOR, ease: "power2.in", duration: 1 }, 0)
+          .to(q(".hero-eyebrow"), { y: -40, opacity: 0, duration: 0.6 }, 0)
+          // The lead and the quote button stay put and leave with the hero (W02): faded, the
+          // hero's lower half was lights alone on short laptops (1366 × 768, 1280 × 720).
           .to(q(".hero-clock-wrap"), { scale: 2.9, opacity: 0, duration: 1.25 }, 0)
           .to(state, { spread: 2.5, speed: 8, duration: 1.2 }, 0)
           .to(q(".hero-hud"), { opacity: 0, duration: 0.4 }, 0)
           .to(q(".hero-letterbox.top"), { yPercent: -100, duration: 0.8 }, 0.25)
           .to(q(".hero-letterbox.bottom"), { yPercent: 100, duration: 0.8 }, 0.25)
-          .to(state, { speed: 1.4, spread: 1.7, duration: 0.6 }, 1.2)
-          .to(beat, { y: -30, duration: 0.6 }, 1.8);
-        if (!ctx.conditions?.wide) {
-          // Mobile: the beat rises as one block (no SplitText below 900px).
-          tl.fromTo(beat, { opacity: 0, yPercent: 18 }, { opacity: 1, yPercent: 0, duration: 0.6, ease: "power2.out" }, 0.95);
-          return;
-        }
-        tl.set(beat, { opacity: 1 }, 0.95);
+          // The scene settles after the exit (ends at 1.8, the timeline's length).
+          .to(state, { speed: 1.4, spread: 1.7, duration: 0.6 }, 1.2);
         // Focus pull (elevation): the title racks out of focus as it leaves. Desktop only.
-        tl.fromTo(title, { filter: `${TITLE_SHADOW} blur(0px)` }, { filter: `${TITLE_SHADOW} blur(6px)`, duration: 0.4 }, 0.6);
-        // Beat words rise once SplitText is in (ends at 1.95, inside the timeline's length).
-        // Without it, the beat still appears at 0.95 as one block.
-        return withSplitText(ctx, (Split) => {
-          const words = Split.create(beat, { ...splitVars(locale, { wordsOnly: true }), aria: "none" }).words;
-          tl.from(words, { yPercent: 110, stagger: 0.09, duration: 0.5, ease: "power2.out" }, 0.95);
-        });
+        if (ctx.conditions?.wide)
+          tl.fromTo(title, { filter: `${TITLE_SHADOW} blur(0px)` }, { filter: `${TITLE_SHADOW} blur(3px)`, duration: 0.4 }, 0.6);
       });
 
       // ---- Intro or repeat-visit reveal ----------------------------------------------
@@ -176,8 +175,9 @@ export function HeroController() {
           .fromTo(q(".hero-clock-ring"), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 2.4, ease: "power3.inOut" }, 0.55)
           .to(state, { handIntro: 1, duration: 2.6, ease: "power3.inOut" }, 0.7)
           .from(q(".hero-clock-ticks line"), { autoAlpha: 0, duration: 0.6, stagger: 0.014 }, 0.8)
-          // The lead is visible from frame one (LCP candidate): y only.
-          .from([q(".hero-lead")[0], q(".hero-sub a")[0]], { y: 26, duration: 1.1, ease: "power3.out", stagger: 0.12 }, 1.9)
+          // The lead and actions are visible from frame one (LCP candidates): y only. The
+          // eyebrow stays still (the shutters reveal it): the scroll timeline owns it.
+          .from([q(".hero-lead")[0], ...q(".hero-actions a")], { y: 26, duration: 1.1, ease: "power3.out", stagger: 0.12 }, 1.9)
           .from(hud, { autoAlpha: 0, duration: 0.8, stagger: 0.08 }, 2.1)
           .to(shell ?? [], { opacity: 1, duration: 0.8, ease: "power2.out" }, 2.1);
 

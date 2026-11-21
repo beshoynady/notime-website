@@ -1,0 +1,39 @@
+/* Home · Final CTA (H-10). */
+.final-cta {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.final-cta-frame {
+  display: grid;
+  justify-items: start;
+  gap: 28px;
+  /* Bottom only: on top of the section's own padding, the top one left 430px of bare ground
+     between the markets board and the title on a laptop (W02, empty screens). */
+  padding-block: 0 clamp(32px, 6vw, 80px);
+}
+.final-cta-title {
+  margin: 0;
+  max-inline-size: 18ch;
+  /* Bounded by height too, so the heading, body and action fit 1440 × 900 (M1 gate). */
+  font-size: clamp(3rem, min(9vw, 15svh), 9rem);
+  font-weight: 200;
+}
+.final-cta-title b {
+  display: block;
+  font-weight: 500;
+  color: var(--color-champagne);
+}
+.final-cta-body {
+  margin: 0;
+  text-wrap: pretty;
+  max-inline-size: 44ch;
+  color: color-mix(in srgb, var(--color-ivory) 76%, transparent);
+}
+.final-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 28px;
+  margin-block-start: 8px;
+}

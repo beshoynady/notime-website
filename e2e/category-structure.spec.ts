@@ -1,0 +1,157 @@
+import { expect, test, type Page } from "@playwright/test";
+import { getCategories, getServices } from "../src/content";
+import { END_TONE, THEME_TONE } from "../src/components/category/theme";
+import { GROUND, gotoReady, heroLcp } from "./helpers";
+import { shownFaq } from "../src/lib/content-status";
+
+/**
+ * Category pages · structure and themes (Task 2.5), every category in EN and AR: one H1, the six
+ * service sections in data order (Software's own sales page, D96), the FAQ, the quote block (D102),
+ * JSON-LD, no overflow, and the
+ * header never dark-on-dark (it follows each section's tone) while the page ground is the theme's.
+ */
+const overflow = (page: Page) => page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+
+/** Scrolls the section's top to just above the header's bottom (or mid-viewport). Returns false
+ * when the page ends first (the footer under a short last section never reaches the header). */
+const scrollSectionTo = (page: Page, i: number, line: "header" | "mid") =>
+  page.evaluate(
+    ([i, line]) => {
+      const s = document.querySelectorAll<HTMLElement>("#page-stage section[data-tone]")[i as number];
+      const header = document.getElementById("site-header")!.getBoundingClientRect().bottom;
+      const at = line === "header" ? header : innerHeight * 0.5;
+      window.scrollTo(0, s.getBoundingClientRect().top + scrollY - at + 12);
+      return s.getBoundingClientRect().top <= at;
+    },
+    [i, line] as const,
+  );
+
+for (const category of getCategories()) {
+  const services = getServices(category.slug);
+  for (const locale of ["en", "ar"] as const) {
+    const path = `/${locale}/services/${category.slug}`;
+
+    test.describe(`${path}`, () => {
+      test("overflow: none at this width, top to bottom", async ({ page }) => {
+        await gotoReady(page, path);
+        await page.evaluate(async () => {
+          for (let y = 0; y < document.documentElement.scrollHeight; y += 700) {
+            window.scrollTo(0, y);
+            await new Promise((r) => setTimeout(r, 60));
+          }
+        });
+        expect(await overflow(page)).toBeLessThanOrEqual(0);
+      });
+
+      if (END_TONE[category.theme] !== THEME_TONE[category.theme]) {
+        test("the index has scrolled away before the ground turns to Act 3's tone", async ({ page }) => {
+          await gotoReady(page, path);
+          // ToneController turns the ground when the FAQ's top crosses 55% of the viewport.
+          const overlap = await page.evaluate(async () => {
+            const faq = document.querySelector("section.cat-faq")!;
+            window.scrollTo(0, faq.getBoundingClientRect().top + scrollY - innerHeight * 0.55);
+            await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+            const header = document.getElementById("site-header")!.getBoundingClientRect().bottom;
+            return document.querySelector(".cat-index-track .svc-index")!.getBoundingClientRect().bottom - header;
+          });
+          expect(overlap).toBeLessThanOrEqual(0);
+        });
+      }
+
+      test.describe("desktop only", () => {
+        test.skip(({ isMobile }) => isMobile, "structure is the same at every width");
+
+        test("one H1, six sections in data order, the FAQ, the quote block; service CTAs go to the brief (D102)", async ({ page }) => {
+          // Software is its own sales page (D96): service blocks are articles with a hook heading,
+          // and each leads to the page's consultation form instead of the brief.
+          const software = category.slug === "software-digital";
+          await gotoReady(page, path);
+          await expect(page.locator("h1")).toHaveCount(1);
+          const ids = await page.locator(software ? ".sw-blocks > article[id]" : ".cat-sections > section[id]").evaluateAll((els) => els.map((e) => e.id));
+          expect(ids).toEqual(services.map((s) => s.anchor));
+          await expect(page.locator("section.cat-faq h2")).toHaveCount(1);
+          await expect(page.locator("section.cat-faq details")).toHaveCount(shownFaq(category.faq).length);
+          if (software) {
+            for (const s of services) {
+              await expect(page.locator(`#${s.anchor} #${s.anchor}-title`)).toHaveCount(1);
+              await expect(page.locator(`#${s.anchor} a[href$="?build=${s.anchor}#consult"]`)).toHaveCount(1);
+            }
+            await expect(page.locator("#consult form")).toHaveCount(1);
+            return;
+          }
+          for (const s of services) {
+            await expect(page.locator(`#${s.anchor} h2#${s.anchor}-title`)).toHaveText(s.title[locale]);
+          }
+          await expect(page.locator("section#quote")).toHaveCount(1);
+          for (const s of services) {
+            await expect(page.locator(`#${s.anchor} a.svc-quote`)).toHaveAttribute("href", new RegExp(`/contact\\?service=${s.anchor}$`));
+          }
+          await expect(page.locator('section#quote a[href*="/contact"]')).toHaveCount(1);
+        });
+
+        test("the FAQ opens and closes with Enter", async ({ page }) => {
+          await gotoReady(page, path);
+          const item = page.locator("section.cat-faq details").first();
+          await item.locator("summary").focus();
+          await page.keyboard.press("Enter");
+          await expect(item).toHaveAttribute("open", "");
+          await expect(item.locator("summary + *")).toBeVisible();
+          await page.keyboard.press("Enter");
+          await expect(item).not.toHaveAttribute("open");
+        });
+
+        test("grain only on dark grounds: none over a light section, never the LCP", async ({ page }) => {
+          await gotoReady(page, path);
+          // For each visible section in main: does it or any ancestor paint the film grain (the
+          // screen-blended noise of dark grounds, D69)? The Workshop's static paper tile on its
+          // champagne ground is approved (category-pages §5.4, D72) and isn't the grain.
+          const sections = await page.locator("main section[data-tone]").evaluateAll((els) =>
+            els
+              .filter((e) => e.checkVisibility())
+              .map((e) => {
+                let grained = false;
+                for (let a: Element | null = e; a; a = a.parentElement) {
+                  const before = getComputedStyle(a, "::before");
+                  if (before.backgroundImage.includes("feTurbulence") && before.mixBlendMode === "screen") grained = true;
+                }
+                return { tone: (e as HTMLElement).dataset.tone, grained };
+              }),
+          );
+          for (const s of sections) expect(s.grained, `a ${s.tone} section`).toBe(s.tone === "dark");
+          // N06: the LCP is the hero's text or its eager, high-priority image; never the grain tile.
+          const lcp = await heroLcp(page);
+          expect(["h1", "lead", "image", "text"], `the LCP is the hero's text or priority image (${lcp.label})`).toContain(lcp.kind);
+        });
+
+        test("JSON-LD parses: ItemList, BreadcrumbList, FAQPage once the FAQ is written", async ({ page }) => {
+          await gotoReady(page, path);
+          const types = await page.locator('script[type="application/ld+json"]').evaluateAll((els) =>
+            els.flatMap((e) => [JSON.parse(e.textContent ?? "")].flat().map((n: { "@type": string }) => n["@type"])),
+          );
+          expect(types).toEqual(expect.arrayContaining(["ItemList", "BreadcrumbList"]));
+          // FAQPage only for written answers (jsonld.ts); the placeholders are TODO keys until Task 3.1.
+          const written = category.faq.some((f) => !f.a[locale].startsWith("TODO"));
+          expect(types.includes("FAQPage")).toBe(written);
+        });
+
+        test("header tone follows each section; the page ground is the theme's", async ({ page }) => {
+          await gotoReady(page, path);
+          const tones = await page
+            .locator("#page-stage section[data-tone]")
+            .evaluateAll((els) => els.filter((e) => e.checkVisibility()).map((e) => [(e as HTMLElement).dataset.tone, (e as HTMLElement).dataset.header ?? "", e.closest("main") ? "main" : "outside"]));
+          const header = page.locator("#site-header");
+          const stage = page.locator("#page-stage");
+          for (const [i, [tone, headerKind, where]] of tones.entries()) {
+            if (!(await scrollSectionTo(page, i, "header"))) continue;
+            await expect(header).toHaveAttribute("data-header-tone", headerKind === "hero" ? "hero" : tone!);
+            if (where !== "main") continue; // the footer paints its own ground
+            await scrollSectionTo(page, i, "mid");
+            const ground = GROUND[category.theme][tone as "dark" | "light"];
+            expect(ground, `${category.theme} has a ${tone} ground`).toBeDefined();
+            await expect.poll(() => stage.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(ground);
+          }
+        });
+      });
+    });
+  }
+}

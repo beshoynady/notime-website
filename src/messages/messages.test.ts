@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs";
+import { copyProblems } from "@/lib/copy-rules";
 import path from "node:path";
 import { createTranslator } from "next-intl";
 import { describe, expect, it } from "vitest";
@@ -27,6 +28,8 @@ const AR_LATIN_ALLOW = [
   "CREATIVE HOUSE",
   "English", // endonym on the language toggle: each language is named in its own script
   "WhatsApp",
+  "Pexels", // image sources, named on the credits page (D80)
+  "Unsplash",
   "iOS",
   "Android",
   // Library names on the styleguide's motion tokens (proper nouns, like WhatsApp).
@@ -82,16 +85,20 @@ describe("messages", () => {
     expect(bad).toEqual([]);
   });
 
-  // Copy deck (Task 13): phrases the brand voice rules out, in both languages.
-  const BANNED = ["elevate", "cutting-edge", "cutting edge", "one-stop", "one stop", "unleash", "الارتقاء بعلامتك", "متطور جدًا", "حلول متكاملة شاملة"];
-
-  it("uses none of the banned phrases", () => {
-    const hits: string[] = [];
-    for (const [k, v] of [...Object.entries(EN), ...Object.entries(AR)]) {
-      const lower = v.toLowerCase();
-      for (const phrase of BANNED) if (lower.includes(phrase)) hits.push(`${k} contains "${phrase}"`);
-    }
+  // Copy decks: phrases the brand voice rules out, and «في الموقع» for on-site (copy-rules.ts).
+  it("follows the copy rules: no banned phrases, no ambiguous «في الموقع»", () => {
+    const hits = [
+      ...Object.entries(EN).flatMap(([k, v]) => copyProblems(k, v, "en")),
+      ...Object.entries(AR).flatMap(([k, v]) => copyProblems(k, v, "ar")),
+    ];
     expect(hits).toEqual([]);
+  });
+
+  it("copy rules catch a banned filler word and an on-site «في الموقع»", () => {
+    expect(copyProblems("x", "في خطة واحدة متكاملة.", "ar")).toHaveLength(1);
+    expect(copyProblems("x", "إدارة العلاقات العامة في الموقع", "ar")).toHaveLength(1);
+    expect(copyProblems("styleguide.closing.body", "كل قسم في الموقع", "ar")).toEqual([]);
+    expect(copyProblems("x", "إدارة العلاقات العامة في أرض الحدث", "ar")).toEqual([]);
   });
 
   it("has every homepage namespace of the copy deck", () => {
@@ -124,14 +131,20 @@ describe("messages", () => {
     expect(EN["hero.title.start.label"]).toBe("It's time to start.");
     expect(AR["hero.title.start.line2"]).toBe("البداية.");
     expect(AR["hero.title.start.label"]).toBe("حان وقت البداية.");
-    expect(EN["hero.lead"]).toBe(
-      "Events, creative production, marketing and digital solutions, planned and delivered by one house.",
-    );
-    expect(AR["hero.lead"]).toBe("فعاليات، إنتاج إبداعي، تسويق وحلول رقمية، نخطط لها وننفذها تحت سقف واحد.");
-    expect(EN["hero.beatLead"] + " " + EN["hero.beatKey"]).toBe("Every second is planned.");
-    expect(AR["hero.beatLead"] + " " + AR["hero.beatKey"]).toBe("كل ثانية محسوبة.");
+    // The owner's lead (copy rewrite, owner rule 4): films are Video production, one of the 30 services.
+    expect(EN["hero.lead"]).toBe("Events, films, campaigns and websites, from the first idea to launch day.");
+    expect(AR["hero.lead"]).toBe("فعاليات وأفلام وحملات ومواقع، من أول فكرة حتى يوم الإطلاق.");
+    // N05: the old second beat, said once as the eyebrow; two marketing CTAs in the plural command (D118).
+    expect(EN["hero.eyebrow"]).toBe("Every second is planned.");
+    expect(AR["hero.eyebrow"]).toBe("كل ثانية محسوبة.");
+    expect(EN["hero.cta"]).toBe("Plan your event");
+    expect(AR["hero.cta"]).toBe("خطّطوا لفعاليتكم معنا");
+    expect(EN["hero.ctaWork"]).toBe("See our work");
+    expect(AR["hero.ctaWork"]).toBe("شاهدوا أعمالنا");
+    expect(EN["hero.beatLead"]).toBeUndefined();
+    expect(AR["hero.beatKey"]).toBeUndefined();
     expect(EN["megaMenu.headingLead"] + " " + EN["megaMenu.headingKey"]).toBe("One house. Five crafts.");
-    expect(AR["megaMenu.headingLead"] + " " + AR["megaMenu.headingKey"]).toBe("بيت واحد. خمس حِرَف.");
+    expect(AR["megaMenu.headingLead"] + " " + AR["megaMenu.headingKey"]).toBe("خمس حِرَف، يجمعها سقف واحد.");
   });
 });
 

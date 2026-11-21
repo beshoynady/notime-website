@@ -6,6 +6,8 @@ import { SITE_URL as siteUrl } from "@/config/site";
  * meta tag instead of a Disallow rule: a crawler has to fetch a page to see its noindex.
  */
 export default function robots(): MetadataRoute.Robots {
+  // The review build (NEXT_PUBLIC_REVIEW_MODE=1) is closed to crawlers as well as noindexed.
+  if (process.env.NEXT_PUBLIC_REVIEW_MODE === "1") return { rules: { userAgent: "*", disallow: "/" } };
   return {
     rules: { userAgent: "*", allow: "/" },
     sitemap: `${siteUrl}/sitemap.xml`,

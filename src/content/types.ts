@@ -34,25 +34,29 @@ export interface ImageSlot {
   height?: number;
   paint: Paint;
   alt: Localized<string>;
-  /** True when an AI image stands in for a real past project → visible "Illustrative" label. */
-  illustrative: boolean;
 }
+
+/** `hidden`: the line stays in the data but doesn't render (fill or hide, D78), e.g. a claim the site can't back yet (D123). */
+export type FaqItem = { q: Localized<string>; a: Localized<string>; hidden?: true };
 
 export interface Category {
   slug: CategorySlug;
   order: 1 | 2 | 3 | 4 | 5;
   title: Localized<string>;
   summary: Localized<string>;
+  /** The search title and description, when they should say more than the card's title and summary. */
+  metaTitle?: Localized<string>;
+  metaDescription?: Localized<string>;
   /** 4:5 image slot id (mega menu, cards). */
   image: string;
-  /** 16:9 image slot id (category headers). */
-  imageWide: string;
   /** Category page design (D57, docs/design/category-pages.md §5). */
   theme: CategoryTheme;
   /** Page intro under the H1 (2–3 sentences). */
   intro: Localized<string>;
   /** FAQ (4–6) for the page and its FAQPage JSON-LD. Answers state process, never unconfirmed numbers. */
-  faq: { q: Localized<string>; a: Localized<string> }[];
+  faq: FaqItem[];
+  /** The closing line (the storyboard's bookend): the quote block's H2, echoing the opening. */
+  closing: Localized<string>;
 }
 
 export type CategoryTheme = "evening" | "studio" | "editorial" | "workshop" | "interface";
@@ -76,7 +80,7 @@ export type ModuleKey =
   | "example-dashboard"
   | "content-calendar"
   | "press-release"
-  | "flighting-chart"
+  | "campaign-funnel"
   | "human-scale"
   | "build-layers"
   | "unboxing"
@@ -124,8 +128,10 @@ export type ProductStatus = "comingSoon" | "live";
 export interface Product {
   slug: "qr-check-in" | "restaurant-system";
   status: ProductStatus;
-  /** Working name; the final product names are TBD (OPEN_QUESTIONS #5). */
+  /** The short name (D78), used inside the pages. */
   name: Localized<string>;
+  /** What it does, shown with the name in the lockup (titles, metadata, schema, menus). */
+  descriptor: Localized<string>;
   summary: Localized<string>;
   image: string;
 }

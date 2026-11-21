@@ -1,228 +1,105 @@
-# Session handoff: Phase 1
+# Session handoff: finishing the site, phases 1–5 (from 2026-11-18)
 
-Written 2026-11-07 at the end of a session, for the session that continues the work. Read `CLAUDE.md` and `AGENTS.md` first; they hold the permanent rules.
+Read `CLAUDE.md`, `AGENTS.md` and `PRODUCT.md` first. Decisions: `docs/DECISIONS.md` (latest D124; new ones from D125).
 
-## Status
+## Now: the owner's mandate of 2026-11-20 (review, fix, creative pass)
 
-- **Branch:** `phase-1-foundations`. Not merged; do not merge. `main` stays at `c2c85b2`.
-- **Last commit:** `chore: session handoff`, which contains this file. Run `git log -1` for its hash. The last feature commit before it is `83bd6da` (hero canvas).
-- **Working tree:** clean after the handoff commit.
-- **Servers:** none running. Production uses port 3100 and the dev server port 3200; both were stopped.
+Four phases (the owner's message of 2026-11-20): **1** cut-off sections fixed on `phase-2-services`; **2** self-audit on a new branch `visual-pass` (from the last commit): `docs/review/self-audit.md`, scores per page × three lenses (art director, senior front-end, UX/conversion), notes split into bugs (fix now, one commit each) / weaknesses / opportunities (don't build), compare with nqshmedia.com/ar-ae and `docs/review/benchmark.md`; then **stop** and send the scores, the bug count, top 5 weaknesses, top 5 opportunities; **3** brainstorming with the owner, one question at a time in plain Arabic, 2–3 options each with mockups, home → Events → other categories → Work → global; design doc in `docs/superpowers/specs/` for approval; **4** plan and build only after approval. Limits: Lighthouse mobile not below today (home 52–55, /links ≥ 95), CLS 0; no cut section at any of the seven sizes; axe clean; honesty (D78); no merge to main.
 
-### Verification at handoff
+**Current step (2026-11-20):** Phase 1 done (46fedb8, D140). **Phase 2 done on `visual-pass`:** `docs/review/self-audit.md` (72769e0; scores AD 6.7 / FE 7.0 / UX 6.2; 12 bugs, 14 weaknesses, 8 opportunities) and all twelve bugs fixed, one commit each with a test: B04 002ce19, B05+B06 90cf315, B09 e47a1f2, B03 b84bbec, B07+B08 92d2b7b, B01 433d94c, B11 fa07a7e, B12 3cdedc5, B02 e91ba8a (font fallbacks per weight/caps/Arabic, Latin Alexandria preloaded first; D141), B10 53f61ef (Lighthouse A/B in `docs/checkpoints/lighthouse/self-audit-b10/`, all inside the spread). Follow-ups: /links' inlined faces (725d23b, Lighthouse /links median 100 EN / 99 AR), the late-swap check skips without local Arial (Linux CI, like Android: D141's limit). CI full 44714566217 green (e2e 576 passed, 0 failed, 0 flaky; unit 517/517). Decisions D141–D144, to confirm #50–53. **Next:** send the owner the phase-2 report (Arabic: scores, 12 fixed, top 5 W, top 5 O) and wait; then phase 3 (brainstorming). Queued after the report: the owner's extra task (humanizer skill on the English copy, results only in `docs/review/humanizer-pass.md`, nothing applied before approval).
 
-The production build includes the late-hydration fix.
+**Before phase 3 (the owner, 2026-11-20, after the phase-2 report):** (1) the empty band under a closed card on the phone home: fixed, the title rides down into the fold (D146, 1e6522b); #50 (the /services dark block) left as is, ask again in phase 3. (2) Android fallbacks matched to Roboto / Noto Naskh Arabic (D145, d295326), `e2e/android-font.spec.ts` imitates a Pixel; Lighthouse A/B in `docs/checkpoints/lighthouse/android-fonts/` (all inside the spread; home 48 both sides, slow machine). (3) **Next: W02 empty screens are a bug**: fix every empty viewport at the seven sizes, motion and reduced, plus an e2e that scrolls each page and checks every screen has content. (4) `.next-before/` deleted (approved). (5) Then the humanizer task (docs/review/humanizer-pass.md only). Then phase 3, one question at a time: home first screen → Software length → layer images/motion → Work → home interactive glimpse.
 
-| Check | Result |
+**Before launch (the owner, 2026-11-20, latest; authoritative):** humanizer group (b) and the phase-3 brainstorm wait until after launch. Done: W02 (D147, 78b0656: no screen over half empty at 7 sizes × 16 pages, motion and reduced; `e2e/empty-screens.spec.ts`, `scripts/empty-screens.mjs`); copy, humanizer group (a) and the crew claims (D148, ef63b1a; Rand reviews `copy-pending.md` H1–H17; question 17 added, PDF reprinted); shots `docs/checkpoints/copy-a/`; launch steps `docs/launch/checklist.md` (1f7c22a); `phase-2-services` fast-forwarded to `visual-pass` (bug and copy fixes only; #55 asks the owner to confirm D147's edge instead of the fade); the full CI caught a font swap in steps on Android (D149, 1ac76ca: one-step swap) and Linux glyph rounding in the test (638e67f); full CI 44878106334 green on 638e67f (617 e2e, 517 unit). **Next:** report to the owner and stop; then the launch checklist, in order.
+
+Untracked: `.next-base/` (the 423a732 "before" build for the A/Bs; delete only with the owner's OK). Servers: 3000 = prod build of 1ac76ca; 3100 = review build behind the tunnel https://pink-courtesy-dive-conference.trycloudflare.com.
+
+## Before: the owner's mandate of 2026-11-18 (authoritative; run without waiting)
+
+1. **Audit fixes:** `docs/superpowers/plans/2026-11-17-audit-fixes.md`, Tasks 0–15 (with 6B), subagent-driven, in the worktree `E:/NO Time/nt-audit-fixes` (branch `audit-fixes` from e19404f). Stop points don't stop: take the safer call (rules in the ledger), record the evidence for the final report. One commit per audit item.
+2. **Copy rewrite apply:** branch `copy-rewrite` cut after `audit-fixes` merges; apply `docs/review/copy-rewrite/*.json` (D118–D124), the phone field test-first (D124). Unconfirmed ⚑ lines keep today's text or hide (D78); list them in one file. Don't wait for Rand.
+3. **Full verification:** unit + e2e green locally and on CI (run number); Lighthouse mobile ab before/after (home, a category page, /links ≥ 95); axe on the nine pages; shots of every page 1440/390 EN/AR in `docs/checkpoints/final/`; the five copy scans; the preview link on a production build of the last commit.
+4. **Final report** (Arabic, for the owner): `docs/report/final-report.md`.
+5. **Site guide for Rand** (Arabic, for the owner to explain the site to Rand): `docs/report/site-guide-for-rand.md` + an RTL Alexandria PDF with a shot per section.
+
+Deliver: a short message with the preview link, both report paths, and anything not merged with its reason. No push to main. Never delete untracked/gitignored files without asking.
+
+**Progress ledger:** `.superpowers/sdd/2026-11-17-audit-fixes/progress.md` in this repo (gitignored; moved here from the removed worktree `nt-audit-fixes` on 2026-11-19). The helper worktrees `nt-audit-fixes`, `nt-mid` and `nt-before` were removed on 2026-11-19 (only builds and node_modules in them); ports 3200 and 3300 no longer exist.
+
+**Current step (2026-11-19, second session):** the owner's four tasks are done, one commit each: (1) "Plan your event" opens `/contact?category=events-hospitality` with the event fields, e2e in `hero-intro.spec.ts` (D138, 690363e); (2) the 17 singular ⚑ Arabic lines + 4 slips outside the list moved to the plural, facts unchanged, `copy-pending.md` splits address (done) from fact (waits on Rand) (D139, #48, 2ae25bd); (3) axe on the nine pages EN/AR 1440/390: 0 violations as loaded and under reduced motion, nothing to fix (`docs/checkpoints/final/axe/`, 0423bce); (4) worktrees nt-audit-fixes, nt-mid, nt-before removed, ledger kept (4914483). Full CI 44551771340 green (unit 513/513, e2e 531 passed, 0 failed, 0 flaky). Review build of 4914483 on 3100 behind the same tunnel (`docs/review/tunnel.md`). Not merged into main. **Next:** the owner confirms #48 and the rest; Rand answers the 16 questions (then apply the ⚑ proposals); launch (`docs/launch/checklist.md`).
+
+**Before that:** All five phases done (2026-11-19). Final report docs/report/final-report.md; Rand guide docs/report/site-guide-for-rand.md.
+
+Servers: only 3100 = the review build behind the tunnel (link in `docs/review/tunnel.md`). 3000 is free (start a prod build there for e2e/axe; `PW_BASE_URL=http://localhost:3000`).
+
+## Before (2026-11-17)
+
+
+Branch `phase-2-services`.
+
+| Work | State | Next action |
+|---|---|---|
+| **Audit fixes** (N03–N22 as chosen) | Design approved (`docs/superpowers/specs/2026-11-17-audit-fixes-design.md`). Plan: `docs/superpowers/plans/2026-11-17-audit-fixes.md`, 16 tasks; branches `audit-fixes`, `audit-n06`, `audit-n17` | **Waiting for the user to confirm the plan.** The withdrawn case (D121) touches some of its tasks: see the summary sent to the user. Then subagent-driven, TDD, one agent at a time (D93) |
+| **Copy rewrite** (docs first) | Two rounds of owner decisions applied (D-C1–D-C8, D118–D124). Table `docs/review/copy-rewrite.md` (1,423 strings, 428 proposals, 2 hidden, 47 ⚑, all Rand's). Rand's 16 questions: `docs/review/rand-questions.md` + `.pdf` | **Waiting for Rand's answers.** Apply on a separate branch after `audit-fixes` merges: from the JSONs, the phone function test-first with `libphonenumber-js` (D124), print → `print-ordering` (D123), EN/AR screenshots |
+| **Withdrawn case (D121)** | Removed from `src` (Work, Home, About, Software's case study and proof card, photos) and from every doc but DECISIONS.md. Work has 2 cases; the work filter has no Software chip. Screenshots: `docs/review/shots/work-two-cases/` | **Waiting for the user's call on the visual balance** (Software's single proof card, Home's two-up, the one-option market row). Change no design before that |
+
+Rebuild the table after editing a JSON: `node --no-warnings --import ./scripts/lib/alias.mjs scripts/copy-inventory.mjs --render docs/review/copy-rewrite docs/review/copy-rewrite.md --head=docs/review/copy-rewrite/_head.md` (it warns about proposal IDs that no longer exist).
+
+Servers: prod on 3000 and the review build on 3100 (both rebuilt without the withdrawn case), tunnel https://commerce-tension-petersburg-rom.trycloudflare.com/ar. Run e2e with `PW_BASE_URL=http://localhost:3000`.
+
+## The user's message (2026-11-17, authoritative)
+
+#30 #32 #33 approved (Rand reads the Arabic). #31 approved if every story has a static reduced-motion version and doesn't stutter at 4× CPU. #34 `/links` waits for the WhatsApp number; no Instagram row; the WhatsApp row turns on from `contact.ts`. #35 approved + the WhatsApp message names the source (floating button and `/links`). #36 v1.1, except `/links`: no scroll animation, minimal JS, 90+ on phones before launch. Requests: (1) Lighthouse before/after on the same machine, a complete table; (2) does the Events EN layout really move on a slow device (fix the page, not the test); (3) the reviewer's notes moved to v1.1 with their grades; (4) why 369 local tests vs 379 in CI.
+
+| Item | State |
 |---|---|
-| `npm run build` | pass (exit 0). `/en` and `/ar` are prerendered static (○). |
-| `npm run lint` | pass, 0 warnings |
-| `npm run typecheck` | pass |
-| `npm test` (Vitest) | 9 files, 61/61 pass |
-| `npx playwright test` (full suite, 1 worker) | 25 passed, 15 skipped, 6 failed in 9.7 min. See below. |
-| Rerun of the 6 failing specs alone (`locale-switch`, `mega-keyboard`, desktop) | 6/6 pass |
-| `cls` + `hero-intro` (desktop, `--repeat-each=3`) | Intermittent timeouts before the fix below. After the fix, all pass in the full-suite run above. |
+| #31 static versions + 4× CPU | **Done.** `e2e/photo-stories-reduced.spec.ts`; `docs/checkpoints/frames/scroll-4x.md`; the tone stutter fixed (D115), look unchanged (`docs/checkpoints/frames/tone-fix/`). |
+| #34 #35 #36 `/links` | **Done** (D113, D114): measured alone 95–100 EN, 97–99 AR (5 runs each). |
+| Request 1 (Lighthouse A/B) | **Done:** `docs/checkpoints/lighthouse/ab-2026-11-17/` (performance flat 50–63 → 51–62; D111 corrected). Worktrees removed. |
+| Request 2 (Events EN) | **Done** (D112); D112's floor stretched two pins (Software's title 1086 px down, an empty screen before the home process): fixed in D117, test tightened. #20 deep-link flicker verified gone. |
+| Requests 3, 4 | **Done:** v1.1 "From the final-pass code review" (graded table); 369 vs 379 = the 10 lab tests (`NEXT_PUBLIC_ENABLE_LAB=1`). |
+| Accessibility (D116) | Chip fieldsets are radiogroups; Software's off phase chips 5.7:1. |
+| UX audit (the user's brief, `docs/review/ux-audit-brief.md`) | **Done by a fresh agent:** `docs/review/ux-audit.md`, `benchmark.md`, `copy-proposals.md`, `shots/`. Score 6.6/10. Top-10 #1 and #6 were D117 (fixed). #2 is the fail-closed Turnstile without real keys (by design). **The user chooses the rest; implement nothing from it until they do.** |
+| e2e (prod build, `NEXT_PUBLIC_ENABLE_LAB=1` + the Turnstile test site key, as CI) | 406 passed, 0 failed, 158 skipped; 1 flaky on a re-run of the form specs (clean on the second). A build without `NEXT_PUBLIC_TURNSTILE_SITE_KEY` fails the form specs by design. |
+| CI | Full run 44117716681 (workflow_dispatch) on db71ccc+docs. |
 
-**About the 6 full-suite failures.** They are `locale-switch` ×2 and `mega-keyboard` ×4, all with timeouts and "page closed" errors. The run took 9.7 min, against 4.7 min for the run before it on the same code, which means the machine was under heavy load. Every one of those specs passes when run alone.
+Servers: prod on 3000 (CI-equivalent build); review build on 3100 behind the tunnel https://commerce-tension-petersburg-rom.trycloudflare.com/ar (cloudflared from WinGet's package folder; restarting the review server keeps the link). Playwright's default port is 3100: with the review server up, run e2e with `PW_BASE_URL=http://localhost:3000`.
 
-The earlier intermittent `cls`/`hero-intro` failures had a real cause, now fixed:
-- When hydration landed after the 4.5 s intro deadline, the controller took the short-reveal path.
-- That path never set `html[data-intro-seen]`, so the specs waiting for it timed out.
-- It now records the intro as seen (D40 addendum).
-- `hero-intro.spec.ts` "first visit" now skips itself when the late path ran, because no shutters are expected then.
+**Next:** wait for the user's choices from the audit's top 10 and the copy proposals.
 
-**First action next session:** run the full suite on a quiet machine. If anything still fails, debug it (`superpowers:systematic-debugging`) before Checkpoint 3.
+## History (before this session's post-M3 pass)
 
-## Done
+## The user's priority (2026-11-10, latest message, authoritative)
 
-| Task | Commit | Notes |
-|---|---|---|
-| Setup and docs | `c2c85b2`, `cc5e85c` | Scaffold (Next 16.4.5), the plan, the approved reference `docs/design/notime-styleguide.html`, D1–D23 |
-| **Checkpoint 1** (plan) | approved | Contact config in `src/config/contact.ts`; Vitest/Playwright as devDeps only; Chrome channel; image generation on hold until Checkpoint 4 |
-| 1 Tokens and fonts | `c4b17fe` | Brand tokens, type scale, motion tokens, test tooling |
-| 2 i18n | `28d000b`, `93347ec` | next-intl via `next/root-params`, RTL, DirectionProvider (D13, D26–D30) |
-| 3 Content system | `498ca2c` | Typed categories, services (prototype draft, OQ #11), products, image slots, contact config |
-| 4 Motion infrastructure | `57a1113` | Lenis on the GSAP ticker, ToneController, `useSplitText`, 6 primitives |
-| 5 Header | `4ddbcd3` | Logo lockup, language toggle (plain `<a>`, D31), Button |
-| 6 Mega menu | `e8ecffc` | Data-driven; hover-intent timing and keyboard support; reducer tests |
-| 7 Mobile menu | `f40ea1f` | Accordions (native `details`), scroll lock |
-| 8 Shell extras | `5d2d6f9` | WhatsApp button, cursor, footer stub, overflow guard (360px) |
-| **Checkpoint 2** (shell) | approved | Screenshots in `docs/checkpoints/checkpoint-2/`. The approval added the hero requirements listed under "In progress". |
-| Logo integration (from `docs/brand/logo-source/`) | `070b3f6` | **Done.** Real logo with tone variants, `scripts/export-logo` (D37), client-side footer year (D33), zero-CLS fonts (D34, D35, D38). The dark-background logo is still needed (OQ #12). |
-| 9 Hero static layers | `2a085f2` | Server-rendered, visible-at-rest frame, clock, HUD, `time.ts`/`hero-math.ts` tests, `no-js.spec.ts` |
-| 10 Hero canvas | `83bd6da` | Transparent canvas with `plus-lighter`, pixel budget, IntersectionObserver/visibility/overlay pauses. Mobile at 4× CPU throttle: 52–60 fps (D39). |
-| 11 Steps 1–3: intro + scroll timelines | `chore: session handoff` | See below |
+- **Launch work is paused** (Hostinger, domains, DNS, email verification). Keep what's documented in `docs/launch/` and the review notes; spend no more time on it.
+- **M1:** finish quickly (green full CI, the review build, the tunnel), send a short Arabic report, and **don't wait** for a reply.
+- **Then build everything left at full speed** (at most 2 parallel agents in worktrees; the lead integrates into `phase-2-services`):
+  - Events full ‖ Software full (sales page: anonymised case study, event-tech band, Minute Zero and Peak Hour cards, consultation form);
+  - Marketing / Creative / Print visual completion;
+  - Work index (filters: category × market) + case template + the 3 anonymised cases;
+  - About (story from the profile, principles, markets);
+  - Products: Minute Zero, Peak Hour (Coming soon + register interest);
+  - Contact (form + `info@notimehub.com`), the form pipeline (Task 4.2), legal, credits, 404, sitemap/robots/OG/JSON-LD.
+- **Images, without waiting:** curated real profile photos wherever they fit (no identifiable faces, no client branding in anonymised work); otherwise art-directed code visuals in the brand style; designed placeholders only where neither works. Ingest `assets-inbox/` whenever files appear.
+- **Copy:** write all remaining EN + native AR copy ourselves (approved voice, banned list, honesty rules); log judgment calls in decisions-to-confirm.
+- **M2 is not a stop:** send a one-screen progress note and continue. **The only stop is M3:** the fresh-subagent gate, a green full CI, and screenshots of every page (1440/390, EN/AR).
 
-### Task 11 and the Checkpoint 2 hero requirements
+## Branch
 
-All of this code is in the handoff commit.
+- **`phase-2-services`** (see `git log -1`). Never commit to `main`. Push in batches; if `git push` hangs up, retry with `git -c http.postBuffer=524288000 push origin phase-2-services`.
 
-**Code**
-- `hero-controller.tsx`: intro timeline, pinned scrubbed scroll timeline (`gsap.matchMedia` with complementary wide/narrow conditions), repeat-visit reveal, skip listeners, focus pull.
-- `hero.tsx`/`hero.css`: `.hero-line-inner` wrappers and the repeat-visit CSS mask with a 2.5 s failsafe.
-- `use-split-text.ts`: `splitVars()`.
-- `tone-controller.tsx`: numeric zones (D41).
+## Current step
 
-**Requirements status**
+- **M1 closed** (2026-11-10): full CI 42900663990 green on `0bd0043`; screenshots retaken in `docs/checkpoints/m1/`; the review build is served on port 3100 through a Cloudflare quick tunnel (the link changes on every restart; `docs/review/tunnel.md`; current link 2026-11-11: https://voices-cylinder-evolution-vids.trycloudflare.com/ar); the forms contract is frozen (D92, `4593f13`).
+- **Final push (2026-11-11, user, authoritative):** §1 hero fit done (D94, `a6945f9`); §2–§3 native Arabic rewrite + sharper copy, page by page, logged in `docs/content/copy-ar-rewrite.md`: **homepage done** (D95, `72edc41`; decisions-to-confirm #21). Then Software → Events → the other categories, menus, footer, forms, FAQ, legal.
+- **Step 2 done (2026-11-15):** Software (D96) and Events (D98) merged. **Step 3a done:** Marketing/Creative/Print hooks, Creative's real frame, AR fixes (D99; the 12 photo modules → v1.1).
+- **Step 3 done (2026-11-16):** section visuals (D100), Work/About/Products (D101). **Step 4 done:** Contact + the form pipeline (D102, `9e06281`): Turnstile (test keys on dev/review/e2e; fail closed in production without keys), Resend team email + auto-reply (needs `MAIL_FROM` on the verified domain), the brief with `?service=`, quote block + service CTAs public. `e2e/forms.spec.ts` 6/6 green on the prod build. Also fixed: ToneController initial state (a short opening hid the next section on phones), About/Contact light-leak overflow. **Step 5 done (D103):** share images per page/locale on one renderer, layout openGraph/twitter, home Organization + WebSite JSON-LD, the 404 with a Services route; legal already current. **Now (lead): M3** (the only stop): the fresh-subagent gate (design-critique, accessibility-review, copy check; fix High), the full e2e on a prod build, the full CI by `workflow_dispatch`, every-page screenshots 1440/390 EN/AR, the review build + a fresh tunnel, the one-screen Arabic report (decisions #21–#28), and the manual form send to the user's inbox via the review build. Rule (D100): a production build after each merge; e2e at M3 only.
+- **M3 (2026-11-16):** the quality gate ran (fresh reviewer; copy check passed); fixes D104 (no self-killing ScrollTriggers: the Software page crashed when opened scrolled) and D105 (the footer no longer hides the last section, Marketing's hook, contrast, forms, Contact in the footer, five polish states; Lows deferred to v1.1.md). e2e: each form test posts as its own client (rate limit). Final screenshots: `docs/checkpoints/m3/<page>/full-{en,ar}-{1440,390}.jpg` (local only, gitignored; 64 shots, no console errors, no overflow). Review build on 3100 + quick tunnel (link in `docs/review/tunnel.md`). **Next:** the user reads the Arabic M3 report and confirms decisions #21–#29; the user sends the brief through the tunnel to confirm the email arrives (Task 4.2 step 4).
+- **M3 to-do carried:** run the edited e2e specs (`events-animatic`, `opening`, `category-modules`, `hero-fit`), re-measure module reservations (`scripts/anchor-shift.mjs`), retake the Software proof shots, check the custom cursor in AR for horizontal scroll.
+- **Next:** step 3 (Marketing/Creative/Print visual completion ‖ Work index + case template + 3 cases), step 4 (About ‖ Products), step 5 (Contact + the pipeline delivery ‖ legal, credits, 404, SEO), step 6 (the M3 gate, CI, every-page screenshots; the only stop).
 
-| # | Requirement | Status |
-|---|---|---|
-| 1 | Intro once per session | Done. `sessionStorage["nt-intro"]`; the boot script sets `html[data-intro-seen]`. A repeat visit gets a short title reveal. |
-| 2 | Skippable intro | Done. Wheel, touch, pointer or key calls `tl.progress(1)`. |
-| 3 | Header keyboard access | Done. The header stays focusable (opacity only); focus entering it finishes the intro. |
-| 4 | Canvas pause | Done. Pauses on `html[data-overlay-open]`, when off-screen, and when the tab is hidden. |
-| 5 | Mobile pin stability | Done. `svh`, `invalidateOnRefresh`, `ignoreMobileResize`. `e2e/hero-resize.spec.ts` uses a real touch swipe through CDP `Input.dispatchTouchEvent` at 390px. |
-| 6 | LCP report | **Not done.** See Next steps 2. |
-| 7 | Deliverables | Captured in `docs/checkpoints/checkpoint-3/`, but **stale**: the beat frames were captured before the header-tone fix and must be re-captured. |
+## Machine notes
 
-**Specs:** `e2e/hero-intro.spec.ts`, `e2e/locale-switch.spec.ts`, `e2e/hero-resize.spec.ts`. `e2e/cls.spec.ts` now waits for the intro to end.
-
-**Scripts**
-- `scripts/shots.mjs --hero`: warm fonts by reloading in the same tab, plus the intro, split and beat frames at 1440 and 390 in EN and AR, the cold first visit, and the `hero.webp` recording.
-- `scripts/lighthouse.mjs`: 3 runs per locale, mobile, medians plus the LCP element.
-
-**Decisions and questions logged:** D38 amendment (font measurements), D40 (controller design), D41 (tone zones), OPEN_QUESTIONS #14 (font display).
-
-## In progress
-
-**Task 11, Step 4 (LCP report) and Step 5 (re-capture, simplify, report).**
-
-- **Already written and committed:**
-  - all of the Task 11 code and specs;
-  - the docs listed above;
-  - `scripts/lighthouse.mjs`.
-- **What's left:**
-  1. Run Lighthouse.
-  2. Log the LCP element and time for `/en` and `/ar`.
-  3. Re-capture the screenshots.
-  4. Run `/simplify` within its guardrails.
-  5. Commit.
-  6. Send the Checkpoint 3 report.
-
-No file is half-written.
-
-## Next steps, in order
-
-1. **Re-verify the e2e suite** on a quiet machine (`npm run build`, then `npx playwright test`). Fix any real failure. The 6 load-related failures listed above should pass.
-2. **Finish Task 11 Step 4, the LCP report** (the last Checkpoint 2 hero requirement):
-   - start production with `node node_modules/next/dist/bin/next start -p 3100`;
-   - with nothing else running, run `node scripts/lighthouse.mjs http://localhost:3100 docs/checkpoints/lighthouse`;
-   - log the median Performance/A11y/BP/SEO scores, LCP time, LCP element and CLS for `/en` and `/ar` in DECISIONS (new row D42 or the D38 amendment);
-   - targets: LCP < 2.5 s and CLS 0.
-   - If the shutters defer the LCP paint on mobile, apply the fallback in the plan: the mobile shutters become a clip-path on the letterbox.
-3. **Finish Task 11 Step 5 and send Checkpoint 3:**
-   - run `node scripts/shots.mjs checkpoint-3 --hero` with the production server up;
-   - run `/simplify`; the guardrails are in CLAUDE.md and the plan: keep reduced motion, RTL, TODOs, ARIA, and the IntersectionObserver/DPR safeguards;
-   - commit `feat(hero): …`.
-   - Then send the **Checkpoint 3 report in Arabic** and stop for approval. The report must cover:
-     - the deliverable paths;
-     - the LCP numbers;
-     - the fps numbers (D39);
-     - OQ #14 (recommend `swap`; show `cold-first-visit-en-1440.png`);
-     - that the recording is `hero.webp`, because Playwright video needs an ffmpeg download, which is not allowed;
-     - that every font file is preloaded on every page (Alexandria on `/en` too);
-     - the ToneController fix (D41);
-     - the `ignoreMobileResize` semantics (a height-only resize keeps the pin spacer; an orientation change re-measures);
-     - OQ #15 and OQ #16.
-4. **Task 11b: profile extraction and content inventory** (done 2026-11-07; see the plan's status line, D47 and D48). From `docs/brand/company-profile-2026.pdf` (38 pages). Full spec: `docs/plans/phase-1.md` → Task 11b.
-   - Tool: MuPDF.js in %TEMP%, via `scripts/extract-profile.mjs` (D47). Never add it to `package.json`.
-   - Extract to `public/images/work/raw/` (gitignored), skipping pages 20, 30 and 34–37. Then run `scripts/curate-profile.mjs`.
-   - Write `docs/content/profile-inventory.md`, `profile-copy.md` and `services-reconciliation.md`.
-   - Do not change `services.ts` until the user confirms.
-   - Case studies use verified figures only.
-   - Add the hero variant "IT'S TIME TO START." (OQ #15).
-   - Log the permission questions.
-   - The inventory summary and the reconciliation table are reported at Checkpoint 4.
-5. **Task 12: `/[locale]/styleguide`.** The approval page mirrors the reference, with computed contrast badges (D20).
-6. **Task 13: homepage copy deck** (EN first, then AR written natively), with the banned-phrase test.
-7. **Task 14: `image-prompts.md`** and the designed placeholders. Then **Checkpoint 4**: send the copy deck, `image-prompts.md`, the profile inventory summary and the reconciliation table. **No image generation before approval.**
-8. **Task 15:** image generation, only if approved. Then **Task 16:** the final review by a **fresh subagent** (`superpowers:requesting-code-review`), accessibility review and Lighthouse ≥ 90/95/95/95. Then **Checkpoint 5**.
-
-## Decisions made this session
-
-All of them are in `docs/DECISIONS.md`:
-
-- **D33** footer year;
-- **D34, D35** fonts;
-- **D36** Montserrat stays the primary face;
-- **D37** logo export;
-- **D38**: fonts use `display: optional`, plus the Task 11 amendment;
-- **D39** canvas performance;
-- **D40** hero controller, including the late-hydration addendum;
-- **D41** numeric tone zones.
-
-Earlier sessions: D1–D32.
-
-## Open questions
-
-All of them are in `docs/OPEN_QUESTIONS.md`:
-
-- open: #1–#6 and #10–#14;
-- added at handoff: **#15** (hero line "TO CREATE" vs the profile's "TO START") and **#16** (the `.gitignore` ` /docs` entry);
-- #7–#9 are resolved (D26–D28).
-
-Task 11b added #17–#21: client names and logos, identifiable people, press and media outlets, the government portals, and original files. #14 and #16 are resolved (D45, D46).
-
-## Known issues and gotchas
-
-- **Ports:**
-  - production on **3100** (Playwright's `webServer` reuses it; `PW_BASE_URL=http://localhost:3200` points the suite at the dev server instead);
-  - dev on **3200**.
-  - Dev and production share `.next`, so stop the other one before `npm run build`.
-- **Start production** with `node node_modules/next/dist/bin/next start -p 3100`; in a background shell, prefix it with `exec` so stopping the task kills the server.
-- **Slow E: drive:** the project lives on `E:`. Next warns that the filesystem is slow, builds take minutes, and Turbopack caches aggressively. After a change, grep `.next/static` to confirm that it reached the bundle.
-- **Machine load:** e2e runs with `workers: 1` on purpose; parallel browsers starve this machine. Timing specs (CLS, intro, menu timing) can fail when the machine is busy. Rerun a failing spec alone before you debug it.
-- **next-intl + `cacheComponents`:**
-  - `app/[locale]/layout.tsx` is the root layout, with `next/root-params`;
-  - the request config pins `timeZone: "Asia/Dubai"`;
-  - `cacheComponents` and `partialPrefetching` stay on (D13, D28);
-  - unknown paths go to the `[...rest]` catch-all (D29);
-  - pages left behind by a client navigation stay in the DOM hidden (React Activity), so controllers bind only `checkVisibility()` elements (D32).
-- **Next.js 16:** read `node_modules/next/dist/docs/` before using any API (AGENTS.md).
-- **Playwright:**
-  - `channel: "chrome"` (the installed Chrome); **never download browsers or ffmpeg**;
-  - video needs ffmpeg, so `shots.mjs` records with CDP `Page.startScreencast` and builds an animated WebP with sharp;
-  - CDP `Input.synthesizeScrollGesture` does not scroll in headless; use `Input.dispatchTouchEvent`.
-- **Fonts:**
-  - `display: optional` means a cold first visit usually renders the fallback face (OQ #14);
-  - for screenshots, warm the fonts by reloading in the same tab after `sessionStorage.clear()`; a separate warm-up tab does not work.
-- **Hero gating attributes:**
-  - motion mode is `html[data-js]:not([data-reduced])`;
-  - the intro gate is `#hero[data-hero-intro]` without `html[data-intro-seen]`;
-  - `#hero[data-hero-ready]` means the controller has taken over;
-  - CSS failsafes: shutters and header at 5 s, repeat-visit rise at 2.5 s;
-  - the intro deadline is 4.5 s.
-- **ScrollTrigger:** when the trigger element is itself pinned, ScrollTrigger subtracts the pin length from its positions. Use numeric start and end values (D41), and give pins `refreshPriority`.
-- **Windows and Git Bash:**
-  - files use CRLF, and `sed -i` rewrites them as LF; use a Node script that keeps the line endings, or the Edit tool;
-  - avoid backticks and nested quotes in inline `node -e`; write a script file instead.
-- **Session scratchpad:** temporary helper scripts lived in this session's scratchpad and are gone. The ones worth keeping are now `scripts/shots.mjs` and `scripts/lighthouse.mjs`.
-- **Repo size:** the handoff commit includes `docs/brand/company-profile-2026.pdf` (15 MB) and `docs/checkpoints/checkpoint-3/` (31 MB), because the user asked to commit everything. Consider Git LFS or moving them out before pushing.
-
-## Skills used and skill rules
-
-**Used:**
-- `superpowers:brainstorming`, `superpowers:writing-plans`, `superpowers:test-driven-development`, `superpowers:verification-before-completion`;
-- `frontend-design`, `ui-ux-pro-max`, `framer-motion-animator` (the package is `motion`; import from `motion/react`, tweens only);
-- `gsap-framer-scroll-animation`, `design:ux-copy`, `simplify`, `find-skills`.
-
-**Still to use:**
-- `superpowers:requesting-code-review` (Task 16, with a fresh subagent);
-- `design:accessibility-review`, `wcag-audit-patterns`, `design:design-critique`.
-
-**Rules:**
-- install every skill or plugin **globally (user scope) only**: `~/.claude/skills/`, `--scope user`, `-g`;
-- never install into `.claude/skills/` in this repo, and never commit skill files;
-- confirm the location after installing;
-- if a skill only installs per project, stop and ask.
-
-## Files to read first, in order
-
-1. `CLAUDE.md` and `AGENTS.md`: permanent rules.
-2. `docs/HANDOFF.md`: this file.
-3. `docs/plans/phase-1.md`: Global Constraints, then Task 11 to the end (Tasks 11b–16).
-4. `docs/DECISIONS.md`: D13, D16, D19, D32, D38–D41.
-5. `docs/OPEN_QUESTIONS.md` and `docs/CONTENT_CHECKLIST.md`.
-6. `docs/PROJECT_BRIEF.md` and `docs/design/notime-styleguide.html`: the approved reference. Never replace its palette, fonts or 4px radius.
-7. `src/components/sections/hero/hero-controller.tsx`, `hero.css` and `hero.tsx`, then `src/components/providers/tone-controller.tsx`.
-8. `scripts/shots.mjs`, `scripts/lighthouse.mjs` and `playwright.config.ts`.
+- Stopping a background `next build`/`next start` leaves node running: kill the leftover `next` processes (PowerShell `Get-CimInstance Win32_Process … Stop-Process`) before rebuilding.
+- Local Node is 24; the repo pins 22 (`engines`, `.nvmrc`), so npm prints an EBADENGINE warning locally. Harmless; CI runs 22.
+- Git Bash mangles `/en` arguments: pass `//en`.

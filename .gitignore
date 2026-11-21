@@ -15,6 +15,8 @@
 
 # next.js
 /.next/
+# The review build (NEXT_PUBLIC_REVIEW_MODE=1, scripts/review.mjs)
+/.next-review/
 /out/
 
 # production
@@ -52,3 +54,26 @@ docs/checkpoints/**/*.webp
 # Raw company-profile extraction (scripts/extract-profile.mjs, D47): includes stock, AI and
 # unapproved photos of people, so it never ships. Curated images go to public/images/work/<slug>/.
 public/images/work/raw/
+
+# AI image generation through an API (D76): originals, never committed
+raw/
+
+# Hand-generated AI images waiting for ingest (D79): originals, never committed
+assets-inbox/
+
+# Agent worktrees (D82)
+.claude/worktrees/
+.worktrees/
+
+# M3 every-page screenshots stay local (88 full pages; docs/checkpoints/m3/README is the index).
+docs/checkpoints/m3/**/*.jpg
+
+# Local Claude Code state and project-scope skill copies (skills install globally only; CLAUDE.md)
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
+.claude/skills/
+.claude/agents/
+.github/skills/
+.github/agents/
+.github/hooks/
+scripts/tmp/

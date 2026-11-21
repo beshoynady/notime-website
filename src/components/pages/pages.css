@@ -1,0 +1,41 @@
+/* Shared by the pages outside /services (Work, About, products): the breadcrumb trail.
+   Same look as the category pages' .crumbs; logical properties only. */
+.pg-crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8rem;
+}
+.pg-crumbs li + li::before {
+  content: "/";
+  margin-inline-end: 10px;
+  opacity: 0.45;
+}
+.pg-crumbs a {
+  /* A 44px hit area around a 15px line, without moving the line (touch targets). */
+  display: inline-block;
+  padding: 15px 4px;
+  margin: -15px -4px;
+  text-decoration: none;
+  opacity: 0.75;
+}
+.pg-crumbs a:hover,
+.pg-crumbs a:focus-visible {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.pg-crumbs [aria-current] {
+  opacity: 0.95;
+}
+
+/* The opening band of each page: clears the fixed header. */
+.pg-open {
+  padding-block: calc(var(--header-h) + clamp(28px, 4vw, 48px)) clamp(48px, 7vw, 96px);
+}
+.pg-open .pg-crumbs {
+  margin-block-end: clamp(36px, 6vw, 72px);
+}

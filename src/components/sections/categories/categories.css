@@ -60,7 +60,8 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(180deg, transparent 30%, rgba(46, 32, 23, 0.92));
+  /* Darker from mid-card (M3): the Events list sat on white flowers under 3:1. */
+  background: linear-gradient(180deg, transparent 20%, rgba(46, 32, 23, 0.6) 50%, rgba(46, 32, 23, 0.95));
 }
 .cat-media {
   position: absolute;
@@ -165,10 +166,35 @@
   }
 }
 @media (max-width: 899.98px) {
-  html:not([data-js]) .cat-fold,
-  html[data-reduced] .cat-fold {
+  /* A phone opens the card in view while the visitor reads: growing the fold pushed everything
+     below it (CLS 0.09-0.11, self-audit B01). The fold keeps its space here and only fades and
+     rises in; the card's height never changes. */
+  .cats .cat .cat-fold {
+    max-block-size: none;
+    transform: translateY(8px);
+    transition:
+      opacity 0.6s,
+      transform 0.9s var(--ease-expo-out);
+  }
+  .cats .cat.is-on .cat-fold {
+    transform: none;
+  }
+  /* A closed card's text drops by the fold's height (measured into --fold-h, CategoryCardsScroll),
+     so its title sits at the card's foot, not above an empty band; opening lifts it as the list
+     fades in. A transform: nothing around it moves. */
+  .cats .cat .cat-txt {
+    transition: transform 0.9s var(--ease-expo-out);
+  }
+  .cats .cat:not(.is-on) .cat-txt {
+    transform: translateY(var(--fold-h, 0px));
+  }
+  html:not([data-js]) .cats .cat .cat-fold,
+  html[data-reduced] .cats .cat .cat-fold,
+  html:not([data-js]) .cats .cat .cat-txt,
+  html[data-reduced] .cats .cat .cat-txt {
     max-block-size: none;
     opacity: 1;
+    transform: none;
   }
   html:not([data-js]) .cat-media,
   html[data-reduced] .cat-media {
@@ -179,7 +205,8 @@
 @media (prefers-reduced-motion: reduce) {
   .cat,
   .cat-media,
-  .cat-fold {
+  .cat-fold,
+  .cat-txt {
     transition: none;
   }
 }

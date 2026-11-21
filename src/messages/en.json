@@ -1,26 +1,25 @@
 {
   "meta": {
     "title": "NO TIME Creative House",
-    "description": "A Dubai creative house for events, creative production, marketing and digital solutions."
+    "homeTitle": "NO TIME Creative House · Events and marketing in Dubai",
+    "description": "A Dubai creative house for events, creative production, marketing and digital. One team takes an idea from the first sketch to the day it goes live, across six markets."
   },
   "brand": {
     "name": "NO TIME",
     "tagline": "Creative House",
-    "homeLabel": "NO TIME Creative House — home",
+    "homeLabel": "NO TIME Creative House, home",
     "logoAlt": "NO TIME Creative House"
   },
   "common": {
     "skipToContent": "Skip to content",
-    "aiPlaceholder": "AI image · placeholder",
-    "illustrative": "Illustrative",
     "preview": "Preview",
     "comingSoon": "Coming soon",
-    "example": "Example",
-    "aiExample": "AI-generated example"
+    "example": "Example"
   },
   "nav": {
     "label": "Main",
     "services": "Services",
+    "events": "Events",
     "work": "Work",
     "digital": "Digital Solutions",
     "about": "About",
@@ -29,20 +28,23 @@
   "header": {
     "quote": "Request a quote"
   },
+  "ctaBar": {
+    "label": "Quick contact"
+  },
   "langToggle": {
     "label": "Language",
     "en": "EN",
     "ar": "ع",
-    "enName": "English",
-    "arName": "العربية"
+    "enLabel": "EN, English",
+    "arLabel": "ع، العربية"
   },
   "megaMenu": {
     "eyebrow": "Services",
     "headingLead": "One house.",
     "headingKey": "Five crafts.",
-    "intro": "Everything an event or a brand needs, delivered by one team.",
+    "intro": "Book one service, or hand us the whole event.",
     "count": "{count, plural, one {# service} other {# services}}",
-    "viewCategory": "View category",
+    "viewCategory": "See the services",
     "inDevelopment": "In development",
     "allServices": "All {count} services"
   },
@@ -53,10 +55,24 @@
   },
   "whatsapp": {
     "label": "Chat with us on WhatsApp",
+    "short": "WhatsApp",
     "pending": "WhatsApp · number pending",
-    "prefill": "Hello NO TIME, I'd like to talk about a project."
+    "prefill": "Hello NO TIME, I'd like to talk about a project.",
+    "prefillFrom": "Hello NO TIME, I found you through {channel} and I'd like to talk about a project.",
+    "channels": {
+      "instagram": "Instagram",
+      "linkedin": "LinkedIn",
+      "facebook": "Facebook",
+      "tiktok": "TikTok",
+      "snapchat": "Snapchat",
+      "x": "X",
+      "youtube": "YouTube",
+      "google": "Google",
+      "print": "a printed QR code"
+    }
   },
   "hero": {
+    "eyebrow": "Every second is planned.",
     "titleLine1": "IT'S TIME",
     "title": {
       "create": {
@@ -68,29 +84,27 @@
         "label": "It's time to start."
       }
     },
-    "lead": "Events, creative production, marketing and digital solutions, planned and delivered by one house.",
-    "cta": "Explore our services",
-    "beatLead": "Every second",
-    "beatKey": "is planned."
+    "lead": "Events, films, campaigns and websites, from the first idea to launch day.",
+    "cta": "Plan your event",
+    "ctaWork": "See our work"
   },
   "hud": {
-    "scene": "Scene 01 — NO TIME",
+    "scene": "Scene 01 · NO TIME",
     "coords": "25.2048° N · 55.2708° E",
     "scroll": "Scroll",
     "city": "Dubai"
   },
   "about": {
     "eyebrow": "About NO TIME",
-    "statement": "A creative house for events, brands and the ideas in between. One team plans it, builds it, prints it and launches it.",
-    "body": "Based in Dubai, we deliver events, marketing and PR for clients across local, regional and global markets. We build each idea where the brand meets its audience, then carry it all the way through: strategy, creative, production and delivery, under one roof.",
+    "statement": "We build ideas where a brand meets its audience, then carry them all the way: strategy, creative, production and delivery, under one roof.",
+    "body": "Our base is Dubai, and our work runs across six markets, from Saudi Arabia to Egypt. It ranges from an airline's pavilion at the Dubai Airshow to a majlis dressed for a heritage welcome, and the same team stays with each idea from strategy to delivery.",
     "stats": {
       "markets": {
         "value": "6",
         "label": "Markets"
       },
-      "integrated": {
-        "value": "360°",
-        "label": "Integrated"
+      "services": {
+        "label": "Services"
       }
     }
   },
@@ -98,14 +112,14 @@
     "eyebrow": "What we do",
     "headingLead": "Five crafts,",
     "headingKey": "one team behind them.",
-    "intro": "Each craft stands on its own. Together they carry an event or a brand from the first idea to the last detail.",
-    "viewServices": "View services",
+    "intro": "Book one, or hand us the whole project. A launch can need a stage, a film, a campaign and a gift box, and here the same people plan all four.",
+    "viewServices": "See the services",
     "allServices": "See all services"
   },
   "services": {
     "meta": {
-      "title": "Services",
-      "description": "Every NO TIME service in one place, across five categories: events and hospitality, creative production, marketing and brand, production, print and gifts, and software and digital."
+      "title": "Services: events, film, marketing, print and digital",
+      "description": "Thirty services in five categories, from conferences and weddings to films, campaigns, print and websites. Find yours, or ask us."
     },
     "eyebrow": "Services",
     "headingLead": "Everything we make,",
@@ -123,47 +137,49 @@
     "faqHeading": "Common questions",
     "quote": {
       "eyebrow": "Request a quote",
-      "headingLead": "Tell us what you're planning.",
-      "headingKey": "We'll take it from there.",
-      "body": "The online quote form is on its way. Until then, message us on WhatsApp or by email, and we'll come back to you with the next steps.",
+      "body": "Tell us the date, the place and what you need. One team picks it up and replies within one working day.",
       "service": "Service: {service}",
       "whatsapp": "Chat on WhatsApp",
       "email": "Email us",
-      "contactPending": "Our contact details will appear here soon."
+      "prefill": "Hello NO TIME, I'd like a quote for {service}.",
+      "brief": "Send a request"
     },
-    "modulePending": "Interactive preview in design"
+    "modulePending": "Interactive preview in design",
+    "skip": "Go to the services"
   },
   "work": {
     "eyebrow": "Our work",
     "headingLead": "Real projects,",
     "headingKey": "start to finish.",
-    "intro": "Each project is told the way it was built: the challenge, the idea, the execution and the result.",
+    "intro": "An airline's pavilion and a football league's award nights. The names stay private until each client says yes.",
     "labels": {
       "challenge": "Challenge",
       "idea": "Idea",
       "execution": "Execution",
       "result": "Result"
     },
-    "illustrativeNote": "Images marked “Illustrative” are AI visuals. They stand in for project photos we can't show yet.",
     "viewProject": "View project",
     "allWork": "All work",
     "todo": {
       "title": "TODO: project title, pending client approval",
       "summary": "TODO: one-line project summary from docs/content/case-studies.md"
-    }
+    },
+    "spansLabel": "Services in this project"
   },
   "marquee": {
-    "label": "All our services"
+    "label": "All our services",
+    "pause": "Pause the services list",
+    "play": "Play the services list"
   },
   "digital": {
     "eyebrow": "Beyond events",
-    "headingLead": "Digital solutions,",
-    "headingKey": "built to keep working.",
-    "intro": "End-to-end digital builds, from UX and design systems to development, content management and analytics, delivered bilingual and performance-ready.",
+    "headingLead": "The team behind your event",
+    "headingKey": "builds your platform too.",
+    "intro": "Websites, apps and dashboards, designed in Arabic and English from the first sketch and built to load fast on a phone. Your team updates the content itself.",
     "capabilities": {
       "websites": {
         "title": "Websites",
-        "body": "Bilingual sites with a content system your team can run."
+        "body": "Bilingual sites with a content system your team runs."
       },
       "apps": {
         "title": "Mobile apps",
@@ -179,19 +195,20 @@
       }
     },
     "productsEyebrow": "Our products",
-    "productsIntro": "Two products of our own, in development now.",
+    "productsIntro": "Two products of our own: check-in for events, and a system for restaurants at their busiest. Both in development.",
     "registerInterest": "Register interest",
     "requestDemo": "Request a demo",
-    "viewProduct": "View product"
+    "viewProduct": "View product",
+    "explore": "Explore Software & Digital"
   },
   "process": {
     "eyebrow": "How we work",
     "headingLead": "Four steps,",
-    "headingKey": "one team throughout.",
+    "headingKey": "one plan.",
     "steps": {
       "plan": {
         "title": "Plan",
-        "body": "We start with the brief, the audience and the date, then set the idea, the budget and the timeline."
+        "body": "We start with what you need, the audience and the date, then fix the idea, the budget and the timeline."
       },
       "build": {
         "title": "Build",
@@ -199,7 +216,7 @@
       },
       "produce": {
         "title": "Produce",
-        "body": "Fabrication, print, catering and crew come together on site, run by one team."
+        "body": "Fabrication, print, catering and crew come together on site, on one schedule."
       },
       "launch": {
         "title": "Launch",
@@ -218,18 +235,20 @@
       "qa": "Qatar",
       "om": "Oman",
       "kw": "Kuwait"
-    }
+    },
+    "base": "Our base",
+    "localTime": "Local time"
   },
   "cta": {
-    "headingLead": "Have a date in mind?",
-    "headingKey": "Let's plan every second of it.",
-    "body": "Tell us what you're planning, and we'll come back to you with the next steps.",
+    "headingLead": "Pick the date.",
+    "headingKey": "We'll plan every second of it.",
+    "body": "Tell us the date and the idea, and we'll come back with the next steps.",
     "primary": "Request a quote",
-    "secondary": "Chat on WhatsApp"
+    "secondary": "Chat on WhatsApp",
+    "bodyInterim": "Start with what you need. Each craft has its own page, with every service inside it."
   },
   "footer": {
     "rights": "© {year} NO TIME Creative House.",
-    "stub": "The full footer arrives in a later phase.",
     "tagline": "Events · Marketing · PR · Production",
     "columns": {
       "services": "Services",
@@ -243,8 +262,9 @@
       "terms": "Terms of Use",
       "cookies": "Cookie Policy"
     },
-    "licence": "TODO: trade licence number · legal entity · issuing authority",
-    "backToTop": "Back to top"
+    "backToTop": "Back to top",
+    "credits": "Image credits",
+    "legalNav": "Legal"
   },
   "styleguide": {
     "meta": {
@@ -387,7 +407,7 @@
       "disabled": "Disabled",
       "link": "Text link with an underline that draws in",
       "labels": "Labels",
-      "labelsNote": "“Illustrative” sits on any AI image that stands in for a real project. “Preview” marks concept screens of products still in development.",
+      "labelsNote": "“Coming soon” marks products in development. “Preview” marks their concept screens, and “Example” demonstration data.",
       "fields": "Form fields",
       "eventType": "Event type",
       "options": {
@@ -400,6 +420,62 @@
       "categories": "Category cards",
       "categoriesNote": "On a computer, a card opens when you hover over it or tab to it. On a phone, the card in view opens as you scroll."
     },
+    "patterns": {
+      "eyebrow": "Patterns",
+      "headingLead": "Quiet",
+      "headingKey": "details",
+      "lead": "Small marks that hold the pages together. Each has one job, and none of them is the point.",
+      "do": "Do",
+      "dont": "Don't",
+      "hoverHint": "Hover the image (mouse only).",
+      "items": {
+        "hairline": {
+          "name": "Hairline",
+          "do": "Divide lists and close section heads.",
+          "dont": "Box content in, or stack two rules."
+        },
+        "corners": {
+          "name": "Frame corners",
+          "do": "Mark one featured image per section, like a crop mark.",
+          "dont": "Frame every card, or put them around text."
+        },
+        "geometric": {
+          "name": "Gulf pattern",
+          "do": "Texture a dark section at 4%, behind everything.",
+          "dont": "Use it on light sections, or raise it until it reads as a picture."
+        },
+        "leak": {
+          "name": "Light leak",
+          "do": "Warm one corner of a dark section.",
+          "dont": "Use more than one per section, or put it behind body text."
+        },
+        "tick": {
+          "name": "Clock ticks",
+          "do": "Lead a section eyebrow. The hand points at the section's place on the page.",
+          "dont": "Use it as a loader, or twice in one section."
+        },
+        "kenBurns": {
+          "name": "Slow push-in",
+          "do": "Move slowly into a still while it crosses the screen.",
+          "dont": "Combine it with parallax on the same image."
+        },
+        "sweep": {
+          "name": "Hover sweep",
+          "do": "Cross a card's image once when the mouse arrives.",
+          "dont": "Loop it, or show it on touch screens."
+        },
+        "duotone": {
+          "name": "Duotone",
+          "do": "Unify Work card images. The colour returns on hover.",
+          "dont": "Use it on the hero or on product screenshots."
+        },
+        "divider": {
+          "name": "Marquee divider",
+          "do": "Join two sections with words already on the page.",
+          "dont": "Put new information in it: screen readers skip it."
+        }
+      }
+    },
     "closing": {
       "headingLead": "Approve the foundations,",
       "headingKey": "then we build.",
@@ -410,6 +486,199 @@
   },
   "notFound": {
     "title": "This page doesn't exist.",
-    "back": "Back to home"
+    "back": "Back to home",
+    "body": "The link may be out of date, or the address mistyped. Start from what we do, or go back home.",
+    "metaTitle": "Page not found",
+    "services": "See our services"
+  },
+  "scenes": {
+    "draft": {
+      "s1": "TODO: shot 1 line",
+      "s2": "TODO: shot 2 line",
+      "s3": "TODO: shot 3 line",
+      "s4": "TODO: shot 4 line"
+    },
+    "events": {
+      "s1": "It starts with an empty room.",
+      "s3": "Tables, flowers and candlelight, each in place.",
+      "s4": "The room is ready before the first guest walks in."
+    },
+    "creative": {
+      "s1": "A black box. Nothing in frame yet.",
+      "s2": "Take one.",
+      "s3": "Every frame is planned before we roll.",
+      "s4": "Then the final cut, ready to show."
+    },
+    "marketing": {
+      "s1": "Every brand starts on a blank page.",
+      "s2": "First, the grid.",
+      "s3": "Then words and images find their place.",
+      "s4": "And the brand is ready to post."
+    },
+    "print": {
+      "s1": "Paper, board, ribbon.",
+      "s2": "Measured, then cut.",
+      "s3": "Printed, then folded into shape.",
+      "s4": "Closed, wrapped, ready to give."
+    },
+    "software": {
+      "s1": "Every platform starts with a cursor.",
+      "s2": "Lines become a layout.",
+      "s3": "The layout becomes a working product.",
+      "s4": "From idea to a live product."
+    }
+  },
+  "legal": {
+    "eyebrow": "Legal",
+    "updated": "Last updated:",
+    "contents": "On this page",
+    "description": {
+      "privacy": "What personal data NO TIME Creative House collects through this website, why, who processes it, and your rights.",
+      "terms": "The terms that apply when you use the NO TIME Creative House website.",
+      "cookies": "The cookies and similar storage this website uses, and your choices."
+    }
+  },
+  "credits": {
+    "eyebrow": "Credits",
+    "title": "Image credits",
+    "description": "The photographers whose licensed images appear on the NO TIME Creative House website.",
+    "intro": "Some photographs on this site are used under the Pexels and Unsplash licences. They are graded and cropped to the site's palette. Thank you to the photographers below.",
+    "on": "on {source}"
+  },
+  "reel": {
+    "open": "See the photos",
+    "title": "Showreel",
+    "description": "Photographs from our events, one after another: dressed tables, florals, hospitality and a heritage setting.",
+    "close": "Close the reel",
+    "pause": "Pause the reel",
+    "play": "Play the reel",
+    "previous": "Previous",
+    "next": "Next",
+    "frame": "{n} / {total}"
+  },
+  "servicesIndex": {
+    "closing": {
+      "title": "Not sure which service you need?",
+      "body": "Tell us the occasion and the date. One team will shape it with you and reply within one working day."
+    }
+  },
+  "workIndex": {
+    "metaTitle": "Our work: events, stands and digital",
+    "metaDescription": "An airline's pavilion at the Dubai Airshow and a football league's award nights: what we did on each.",
+    "metaFiltered": "Our work: {filter}",
+    "eyebrow": "Our work",
+    "headingLead": "Work for national organisations,",
+    "headingKey": "shown project by project.",
+    "intro": "A pavilion at the Dubai Airshow and a football league's award nights. Each client's name appears once they approve it.",
+    "filterLabel": "Filter the work",
+    "serviceFacet": "Service",
+    "marketFacet": "Market",
+    "allServices": "All services",
+    "allMarkets": "All markets",
+    "count": "{count, plural, =0 {No projects} one {# project} other {# projects}}",
+    "emptyTitle": "No project to show here yet.",
+    "emptyBody": "We list only work we can back with facts, so this page grows one project at a time. Clear a filter, or see what we do in this area.",
+    "showAll": "Show all work",
+    "exploreServices": "Explore our services",
+    "closing": {
+      "body": "Tell us the date and what you need. One team replies within one working day."
+    }
+  },
+  "workCase": {
+    "factsLabel": "Key facts",
+    "client": "Client",
+    "market": "Market",
+    "services": "Services",
+    "onThisPage": "On this page",
+    "scopeTitle": "The services behind it",
+    "scopeIntro": "Each one has its own section, with what we deliver.",
+    "next": "Next project",
+    "ctaTitle": "Planning something like this?",
+    "ctaBody": "Start with the services this project used, or tell us the date and what you need.",
+    "ctaQuote": "Request a quote",
+    "ctaCategory": "Explore {category}"
+  },
+  "aboutPage": {
+    "metaTitle": "About NO TIME, a creative house in Dubai",
+    "metaDescription": "NO TIME is a Dubai house for events, marketing, PR and production. One team carries each idea through strategy, creative, production and delivery, across six markets.",
+    "title": "Ideas built where a brand meets its audience.",
+    "story1": "NO TIME is an events, marketing and PR house based in Dubai, working for clients in local, regional and global markets.",
+    "story2": "We start at the exact point where a brand meets its audience, then carry the idea all the way: strategy, creative, production and delivery, by one team.",
+    "story3": "That's why the work spans so much: an airline's pavilion at the Dubai Airshow, a majlis dressed for a heritage welcome and award nights for a football league.",
+    "story4": "Our name comes with a line we keep: it's time to start.",
+    "seeWork": "See the work",
+    "principlesEyebrow": "How we work",
+    "principlesTitle": "What stays the same on every project."
+  },
+  "productPage": {
+    "inDevelopment": "In development",
+    "hookMinuteZero": "The first minute at the door sets the tone for the whole evening.",
+    "hookPeakHour": "Built for the hour when every table is full and the kitchen can't wait.",
+    "problemTitle": "The problem",
+    "featuresTitle": "What it does",
+    "screensTitle": "Concept screens",
+    "screensNote": "Concept screens with example data. The product is in development, so details may change.",
+    "registerTitle": "Be the first to hear when {product} is ready.",
+    "registerBody": "We're building it from our own event and hospitality work. Leave your details and we'll write to you when it's ready.",
+    "registerCta": "Register interest",
+    "otherProduct": "Also in development",
+    "softwareLink": "See our software services"
+  },
+  "contactPage": {
+    "metaTitle": "Request a quote",
+    "metaDescription": "Tell us about your event, campaign, production or platform. One team picks it up and replies within one working day.",
+    "eyebrow": "Contact",
+    "title": "Tell us what you're planning.",
+    "lead": "A few lines are enough to start: the occasion, the date and what you need. One team picks it up and replies within one working day.",
+    "formTitle": "Request a quote",
+    "directTitle": "Or write to us directly",
+    "emailLabel": "Email",
+    "copy": "Copy the address",
+    "copied": "Copied",
+    "whatsapp": "Message us on WhatsApp",
+    "base": "Based in Dubai",
+    "faqEyebrow": "Before you write",
+    "faqTitle": "Questions we're asked first",
+    "faq": {
+      "q1": "Do you work outside the UAE?",
+      "a1": "Yes. We're based in Dubai and work across the markets on our About page. Put the city in your brief and we'll plan around it.",
+      "q2": "How quickly do you reply, and can you work to a tight date?",
+      "a2": "We reply within one working day. Put your date in the brief, and we'll tell you honestly what can be done by then.",
+      "q3": "Can one team handle it from strategy to delivery?",
+      "a3": "Yes, that's how we work: one team carries the idea through strategy, creative, production and delivery, so nothing is lost between suppliers.",
+      "q4": "What do you need from us to prepare a proposal?",
+      "a4": "The occasion or goal, the date, the place, the audience, and a budget range if you have one. We ask the rest on a short call. We price each project once we understand it.",
+      "q5": "Do you work in Arabic and English?",
+      "a5": "Yes. We write, design and publish in both, and each language is written natively, not translated word for word."
+    }
+  },
+  "linksPage": {
+    "metaTitle": "Links",
+    "metaDescription": "NO TIME Creative House in one tap: request a quote, see the work, plan an event or a private celebration, or start a website or an app.",
+    "eyebrow": "Dubai · six markets",
+    "title": "It's time to start.",
+    "lead": "Events, production, marketing, print and software, from one team in Dubai.",
+    "listLabel": "Quick links",
+    "whatsapp": {
+      "title": "Message us on WhatsApp",
+      "note": "The quickest way to reach the team"
+    },
+    "quote": {
+      "title": "Request a quote",
+      "note": "We reply within one working day"
+    },
+    "work": {
+      "title": "See our work",
+      "note": "Pavilions, award nights, platforms"
+    },
+    "celebrations": {
+      "title": "Events & private celebrations",
+      "note": "Galas, weddings and family evenings"
+    },
+    "software": {
+      "title": "Websites, apps & software",
+      "note": "Built in Arabic and English"
+    },
+    "email": "Or write to us"
   }
 }

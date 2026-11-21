@@ -14,5 +14,10 @@ const currentYear = () => String(new Date().getFullYear());
 export function CopyrightYear({ buildYear }: { buildYear: string }) {
   const t = useTranslations("footer");
   const year = useSyncExternalStore(noop, currentYear, () => buildYear);
-  return <p>{t("rights", { year })}</p>;
+  // <bdi>: the line is Latin, so in an Arabic paragraph it keeps its own order ("© 2026 NO TIME…").
+  return (
+    <p>
+      <bdi>{t("rights", { year })}</bdi>
+    </p>
+  );
 }

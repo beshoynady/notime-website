@@ -1,0 +1,101 @@
+/* Home · How we work (H-07). The stage is the pinned box on desktop. */
+/* The pin wrapper and the stage fill the section: with align-self: start (globals.css) they shrink
+   to the frame's 1280px and sit at the viewport edge, leaving the heading off the page grid. */
+.process-pin,
+.process-stage {
+  inline-size: 100%;
+}
+.process-stage {
+  display: flex;
+  align-items: center;
+  min-block-size: 100svh;
+  padding-block: clamp(80px, 10vw, 128px);
+}
+.process-frame {
+  inline-size: 100%;
+}
+/* Pinned on a short laptop screen (640–780px tall): the stage is one screen, so the frame's
+   breathing room comes from centring, and its padding only keeps the steps clear of the header
+   above and the screen edge below. With the full 128px the stage outgrew the screen and the steps
+   stayed cut off for the whole pin (owner report 2026-11-20). Taller screens keep the padding.
+   640px: PROCESS_PIN_MIN_H in process-scroll.tsx. */
+@media (min-width: 900px) and (min-height: 640px) and (max-height: 779.98px) {
+  html[data-js]:not([data-reduced]) .process-stage {
+    padding-block: calc(var(--header-h) + 16px) 24px;
+  }
+}
+.process-head h2 {
+  margin: 20px 0 0;
+}
+.process-head h2 b {
+  display: block;
+}
+
+/* The rail: a hairline that the scroll fills from the reading start. */
+.process-rail {
+  position: relative;
+  block-size: 1px;
+  margin-block: clamp(40px, 6vw, 72px) 28px;
+  background: var(--color-line-dark);
+}
+.process-rail-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--color-champagne);
+  transform-origin: left center;
+}
+[dir="rtl"] .process-rail-fill {
+  transform-origin: right center;
+}
+
+.process-steps {
+  display: grid;
+  gap: 36px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.process-step {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+.process-num {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--color-champagne);
+}
+.process-title {
+  margin: 0;
+  font-size: clamp(1.6rem, 2.8vw, 2.3rem);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+}
+.process-step p {
+  margin: 0;
+  max-inline-size: 34ch;
+  color: color-mix(in srgb, var(--color-ivory) 74%, transparent);
+  line-height: 1.6;
+}
+
+@media (min-width: 900px) {
+  .process-steps {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+}
+@media (max-width: 899.98px) {
+  .process-stage {
+    min-block-size: 0;
+  }
+  /* Stacked: the rail runs down the start edge instead of across. */
+  .process-rail {
+    display: none;
+  }
+  .process-steps {
+    border-inline-start: 1px solid var(--color-line-dark);
+    padding-inline-start: 20px;
+    margin-block-start: 40px;
+  }
+}

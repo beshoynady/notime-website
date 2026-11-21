@@ -1,0 +1,90 @@
+/* Stacking photo cards (D109). Logical properties only; unlayered.
+   Each card is sticky a step lower than the last, under the header and (below 900px) the chip bar,
+   so a held card never sits under a sticky bar and the next one slides over it. */
+
+.pstack {
+  --stack-top: calc(var(--header-h) + env(safe-area-inset-top, 0px) + 72px);
+  display: grid;
+  gap: clamp(24px, 4vw, 40px);
+}
+.pstack-lead {
+  margin: 0;
+  max-inline-size: 46ch;
+}
+.pstack-cards {
+  display: grid;
+  gap: 18svh;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.pstack-card {
+  position: sticky;
+  inset-block-start: calc(var(--stack-top) + var(--i) * 12px);
+}
+/* Below 900px the header hides on the way down (globals.css, "Header autohide"): every card moves
+   up with it by translate, in step with the chip bar, so a held card keeps its gap under the bar.
+   All cards move alike, so their order and overlaps are unchanged; the list keeps the header's
+   height above it, so a raised card still in flow never reaches the lead. GSAP owns the figure's
+   transform; the card's translate is CSS's, and the two compose. Reduced motion: static cards. */
+@media (max-width: 899.98px) and (prefers-reduced-motion: no-preference) {
+  .pstack-cards {
+    margin-block-start: var(--header-h);
+  }
+  .pstack-card {
+    transition: translate 0.35s var(--ease-expo-out);
+  }
+  html[data-header-hidden] .pstack-card {
+    translate: 0 var(--header-follow);
+  }
+}
+.pstack-fig {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 2px;
+  transform-origin: 50% 0;
+  box-shadow: 0 -18px 40px -24px rgba(0, 0, 0, 0.6);
+}
+.pstack-img {
+  position: relative;
+  /* A warm ground while the photo loads: on a slow line the frame still shows (W02). */
+  background-color: color-mix(in srgb, var(--color-cocoa) 55%, var(--color-espresso));
+  aspect-ratio: 4 / 3;
+  max-block-size: 62svh;
+  inline-size: 100%;
+}
+.pstack-fig figcaption {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline: 0;
+  padding: 40px 18px 16px;
+  background: linear-gradient(to top, rgba(26, 18, 12, 0.78), rgba(26, 18, 12, 0));
+  color: var(--color-ivory);
+  font-size: 1.05rem;
+  font-weight: 300;
+}
+.pstack-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .pstack {
+    --stack-top: calc(var(--header-h) + 32px);
+  }
+  .pstack-cards {
+    max-inline-size: 640px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pstack-card {
+    position: static;
+  }
+  .pstack-cards {
+    gap: 24px;
+  }
+}

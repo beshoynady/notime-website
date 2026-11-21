@@ -29,16 +29,16 @@ Items that need an answer from Rand or the user before the related work can be b
 ## Added with the 2026 profile (Task 11b)
 17. **Permission to name each client and show its logo.** Our Work and the curated images (`public/images/work/<slug>/`) stay unwired until each one is confirmed:
     - UAE Pro League
-    - UAE Athletics Federation
     - EgyptAir
     - Ultimate Power Solution
     - Smith Gulf
     - Sandoz (A Novartis Division)
     - Emirates Driving Institute (T-shirt mock-up, p23)
-    - ADIB (sponsor, p5)
+
+    Not clients: **brands visible in photos**, such as ADIB as the prize sponsor in the UAE PL photo (p5-4). Such a photo needs its own usage rights (and OQ #18 for any people in it), not a client permission.
 
     Private celebrations and heritage work are shown without client names in any case.
-18. **Rights to photos of identifiable people.** 19 profile photos show identifiable faces: UAE PL winners and prize presentation, UAEAF ceremonies, the athletes in the Oregon 26 key visuals, Ultimate Power Solution stand guests and performers, heritage hosts. Does NO TIME (or the client) hold consent for web use? Until then none is used (`profile-inventory.md`, "Pending rights").
+18. **Rights to photos of identifiable people.** 19 profile photos show identifiable faces: UAE PL winners and prize presentation, Ultimate Power Solution stand guests and performers, heritage hosts. Does NO TIME (or the client) hold consent for web use? Until then none is used (`profile-inventory.md`, "Pending rights").
 19. **Press and media outlets.** Which outlets actually published NO TIME work? This covers the 41 outlet logos on page 20 ("Media network") and the four headline clippings on page 19 (Aviation Daily, Gulf Media, Travel Weekly, Exhibition News). For each confirmed item we need the link or a scan with its date. Until then the site shows none.
 20. **NO TIME's role in the portals and accounts on pages 12–13.** These are the UAE Pro League site, the "Expo 2020 Game" portal, a government portal and the Dubai e-services portal, plus a Dubai government investment social account. Did NO TIME design, build, run or market them? They are not shown until that is stated.
 21. **Original files.** Some profile images are too small for the site or are not NO TIME's own work.
@@ -49,7 +49,7 @@ Items that need an answer from Rand or the user before the related work can be b
 
 ## Added with the category pages (D57, 2026-11-08)
 <!-- Category pages replacing per-service pages was approved by the user under Rand's delegation (2026-11-07): DECISIONS D57, no open question. -->
-22. **Rental equipment inventory.** Which cameras, lenses, lighting, sound and stage equipment does NO TIME actually rent out? Until this list arrives, the rental module shows four categories only (Camera, Lighting, Sound, Stage): no models, brands, quantities or prices (CONTENT_CHECKLIST #20).
+22. **Rental equipment inventory.** Which cameras, lenses, lighting, sound and stage equipment does NO TIME actually rent out? Until this list arrives, the rental module shows four categories only (Camera, Lighting, Sound, Stage): no models, brands, quantities or prices (CONTENT_CHECKLIST #20). **Also (D71):** does NO TIME rent out event equipment (LED screens, audio, lighting, kiosks) as well as cameras? If yes, LED screens and kiosks join the module as two more categories; until the client confirms, they are not shown.
 23. **Online print store.** Is an online print store live today, or planned? Until a real store exists, the page presents "Order your print online" through the quote form: no cart, no prices (CONTENT_CHECKLIST #21).
 
 ## Added with the Software & Digital brief (D65, 2026-11-08)

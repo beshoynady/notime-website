@@ -1,0 +1,89 @@
+{
+  "m:scenes.marketing.s4": {
+    "rule": "§3: \"comes alive\" is a stock phrase; after N06 this line leads the hero",
+    "en": "And the brand is ready to post.",
+    "ar": "وتصبح العلامة جاهزة للنشر."
+  },
+  "c:categories:categories[marketing-brand].summary": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "هوية، وتواصل اجتماعي، وظهور في البحث، وعلاقات عامة، تُبقي الحديث عنكم قائمًا بعد الفعالية."
+  },
+  "c:categories:categories[marketing-brand].faq[1].q": {
+    "rule": "N18 rule (the «و» joined to the Latin word)",
+    "ar": "هل تديرون إعلانات على Google وMeta؟"
+  },
+  "c:categories:categories[marketing-brand].faq[1].a": {
+    "rule": "keep",
+    "facts": "⚑ FC#14 (Google and Meta, in whose accounts)"
+  },
+  "c:categories:categories[marketing-brand].faq[4].a": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "نتّفق معكم على مواعيد التقارير منذ البداية، بما يناسب الخطة وحملاتها."
+  },
+  "c:categories:categories[marketing-brand].faq[6].q": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "ماذا تحتاجون منّا للبدء؟"
+  },
+  "c:categories:categories[marketing-brand].faq[6].a": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "أهدافكم وجمهوركم والقنوات التي تستخدمونها الآن، ودليل هويتكم إن وُجد، ونعود إليكم بخطة وعرض."
+  },
+  "c:categories:categories[marketing-brand].closing": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "صفحتكم هي التالية."
+  },
+  "c:services:services[branding-identity].points[1]": {
+    "rule": "keep",
+    "facts": "⚑ FC#11 (naming)"
+  },
+  "c:services:services[digital-marketing-seo].summary": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "محركات البحث وسرعة الموقع والقياس، لتعرفوا ما الذي ينجح."
+  },
+  "c:services:services[public-relations].summary": {
+    "rule": "§3: \"handled with care\" is filler; the AR already says what happens",
+    "en": "Press releases, media relations and announcements, from the first draft to publication.",
+    "facts": "⚑ FC#12 (press releases, media relations)"
+  },
+  "c:services:services[public-relations].points[3]": {
+    "rule": "keep",
+    "facts": "⚑ FC#13 (which media have published NO TIME's work)"
+  },
+  "c:services:services[paid-media-planning].title": {
+    "rule": "N18 (approved)",
+    "ar": "الإعلانات المدفوعة وتخطيط الإعلام (Google وMeta)"
+  },
+  "c:services:services[paid-media-planning].summary": {
+    "rule": "N18 rule (AR)",
+    "ar": "حملات على Google وMeta، نخطّط لقنواتها وميزانياتها وتوقيتها بما يناسب الجمهور.",
+    "facts": "⚑ FC#14"
+  },
+  "c:service-hooks:SERVICE_HOOKS.social-media-management": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "نشر يومي بالعربية والإنجليزية، وفق خطة نشر اعتمدتموها مسبقًا."
+  },
+  "c:service-hooks:SERVICE_HOOKS.digital-marketing-seo": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "ظهور في نتائج البحث، وسرعة على الهاتف، وقياس يجعل قراركم التالي مبنيًا على الأرقام."
+  },
+  "c:service-hooks:SERVICE_HOOKS.paid-media-planning": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "ميزانيتكم حيث يتصفّح جمهوركم فعلًا، وتقارير بأرقام واضحة."
+  },
+  "c:modules/content-calendar:CALENDAR.note": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "خطة نموذجية لعلامة افتراضية. صفّوها حسب المحور أو القناة، ثم اختاروا يومًا لتروا المنشور."
+  },
+  "c:modules/content-calendar:CALENDAR.empty": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "لا يوجد منشور يطابق الاختيارين. اختاروا محورًا أو قناة أخرى."
+  },
+  "c:modules/press-release:PRESS_RELEASE.hint": {
+    "rule": "Owner rule 1 (AR)",
+    "ar": "اختاروا جزءًا مرقّمًا لتعرفوا دوره."
+  },
+  "c:services:services[digital-marketing-seo].points[3]": {
+    "rule": "Owner rule 1",
+    "ar": "قياس النتائج في البحث وعلى موقعكم"
+  }
+}

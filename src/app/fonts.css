@@ -57,26 +57,481 @@
   unicode-range: U+0000-00FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* Metric-matched local fallbacks: next/font's adjustFontFallback values for Arial (D34). */
+/* Metric-matched local fallbacks (Arial). One face per weight band, and for Alexandria one more set
+   for Arabic glyphs: a single face (next/font's values, D34) matched only the regular weight's Latin
+   width, so the swap re-wrapped headings and moved whole blocks (Software's opening 30px; Arabic
+   text ran 13-24% narrower; self-audit B02). size-adjust matches each band's width on the site's
+   own text (within 0.5%); the ascent/descent overrides are divided by the same factor, so the line
+   box stays exactly next/font's. Alexandria's Latin faces match the «0» instead: on an Arabic page
+   they set the ch unit (the font holding the space), which sizes the headlines (max-inline-size
+   in ch, 9-23% off), while the Arabic faces below carry the text, matched on the site's Arabic
+   text by length with the Latin faces' (wider) spaces in it. Spaces get no face of their own: while
+   only one of Alexandria's files had loaded, Chrome took ch from such a face (ch -30%). */
 @font-face {
   font-family: "Montserrat Fallback";
   src: local("Arial");
-  ascent-override: 85.79%;
-  descent-override: 22.25%;
+  font-weight: 100 249;
+  size-adjust: 109.41%;
+  ascent-override: 88.47%;
+  descent-override: 22.95%;
   line-gap-override: 0%;
-  size-adjust: 112.83%;
 }
-
+@font-face {
+  font-family: "Montserrat Fallback";
+  src: local("Arial");
+  font-weight: 250 349;
+  size-adjust: 110.63%;
+  ascent-override: 87.49%;
+  descent-override: 22.69%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Montserrat Fallback";
+  src: local("Arial");
+  font-weight: 350 449;
+  size-adjust: 112.14%;
+  ascent-override: 86.32%;
+  descent-override: 22.39%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Montserrat Fallback";
+  src: local("Arial");
+  font-weight: 450 549;
+  size-adjust: 114.01%;
+  ascent-override: 84.91%;
+  descent-override: 22.02%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Montserrat Fallback";
+  src: local("Arial");
+  font-weight: 550 649;
+  size-adjust: 116.07%;
+  ascent-override: 83.40%;
+  descent-override: 21.63%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Montserrat Fallback";
+  src: local("Arial");
+  font-weight: 650 900;
+  size-adjust: 118.29%;
+  ascent-override: 81.83%;
+  descent-override: 21.22%;
+  line-gap-override: 0%;
+}
 @font-face {
   font-family: "Alexandria Fallback";
   src: local("Arial");
-  ascent-override: 86.13%;
-  descent-override: 22.33%;
+  font-weight: 100 249;
+  size-adjust: 129.30%;
+  ascent-override: 74.86%;
+  descent-override: 19.41%;
   line-gap-override: 0%;
-  size-adjust: 112.38%;
+}
+@font-face {
+  font-family: "Alexandria Fallback";
+  src: local("Arial");
+  font-weight: 250 349;
+  size-adjust: 128.20%;
+  ascent-override: 75.50%;
+  descent-override: 19.57%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Fallback";
+  src: local("Arial");
+  font-weight: 350 449;
+  size-adjust: 127.10%;
+  ascent-override: 76.15%;
+  descent-override: 19.74%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Fallback";
+  src: local("Arial");
+  font-weight: 450 549;
+  size-adjust: 126.90%;
+  ascent-override: 76.27%;
+  descent-override: 19.77%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Fallback";
+  src: local("Arial");
+  font-weight: 550 649;
+  size-adjust: 126.80%;
+  ascent-override: 76.34%;
+  descent-override: 19.79%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Fallback";
+  src: local("Arial");
+  font-weight: 650 900;
+  size-adjust: 126.40%;
+  ascent-override: 76.58%;
+  descent-override: 19.85%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Fallback";
+  src: local("Arial");
+  font-weight: 100 249;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF;
+  size-adjust: 122.33%;
+  ascent-override: 79.12%;
+  descent-override: 20.51%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Fallback";
+  src: local("Arial");
+  font-weight: 250 349;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF;
+  size-adjust: 131.59%;
+  ascent-override: 73.55%;
+  descent-override: 19.07%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Fallback";
+  src: local("Arial");
+  font-weight: 350 449;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF;
+  size-adjust: 137.52%;
+  ascent-override: 70.39%;
+  descent-override: 18.26%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Fallback";
+  src: local("Arial");
+  font-weight: 450 549;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF;
+  size-adjust: 144.10%;
+  ascent-override: 67.17%;
+  descent-override: 17.42%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Fallback";
+  src: local("Arial");
+  font-weight: 550 649;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF;
+  size-adjust: 145.07%;
+  ascent-override: 66.71%;
+  descent-override: 17.30%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Fallback";
+  src: local("Arial");
+  font-weight: 650 900;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF;
+  size-adjust: 150.66%;
+  ascent-override: 64.24%;
+  descent-override: 16.65%;
+  line-gap-override: 0%;
+}
+
+/* Capitals (buttons, nav links, eyebrows: .uppercase and .text-eyebrow on English pages, globals.css):
+   Arial's capitals run about 9% wider than Montserrat's against the mixed-case match above, so the
+   Software opening's two buttons wrapped onto a second row until the swap (60px, B02). Matched on
+   the site's own capital labels, against Arial regular; same line box. */
+@font-face {
+  font-family: "Montserrat Caps Fallback";
+  src: local("Arial");
+  font-weight: 100 249;
+  size-adjust: 102.10%;
+  ascent-override: 94.81%;
+  descent-override: 24.59%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Montserrat Caps Fallback";
+  src: local("Arial");
+  font-weight: 250 349;
+  size-adjust: 102.70%;
+  ascent-override: 94.25%;
+  descent-override: 24.44%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Montserrat Caps Fallback";
+  src: local("Arial");
+  font-weight: 350 449;
+  size-adjust: 103.45%;
+  ascent-override: 93.57%;
+  descent-override: 24.27%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Montserrat Caps Fallback";
+  src: local("Arial");
+  font-weight: 450 549;
+  size-adjust: 104.39%;
+  ascent-override: 92.73%;
+  descent-override: 24.05%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Montserrat Caps Fallback";
+  src: local("Arial");
+  font-weight: 550 649;
+  size-adjust: 105.43%;
+  ascent-override: 91.81%;
+  descent-override: 23.81%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Montserrat Caps Fallback";
+  src: local("Arial");
+  font-weight: 650 900;
+  size-adjust: 106.55%;
+  ascent-override: 90.85%;
+  descent-override: 23.56%;
+  line-gap-override: 0%;
+}
+
+/* Android has no Arial, so every face above fails there and the stack falls to these: Roboto for
+   Latin and capitals, Noto Naskh Arabic for Arabic (the system's own), matched the same way (per
+   weight band, Alexandria's Latin on the «0», its Arabic on the site's text), same line box.
+   Elsewhere neither local font is usually installed and the Arial faces win anyway. Measured
+   against Google Fonts' Roboto (variable, as on Android 12+) and a static regular Naskh. */
+@font-face {
+  font-family: "Montserrat Fallback Android";
+  src: local("Roboto"), local("Roboto Regular"), local("Roboto-Regular");
+  font-weight: 100 249;
+  size-adjust: 113.34%;
+  ascent-override: 85.41%;
+  descent-override: 22.15%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Montserrat Fallback Android";
+  src: local("Roboto"), local("Roboto Regular"), local("Roboto-Regular");
+  font-weight: 250 349;
+  size-adjust: 113.49%;
+  ascent-override: 85.30%;
+  descent-override: 22.12%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Montserrat Fallback Android";
+  src: local("Roboto"), local("Roboto Regular"), local("Roboto-Regular");
+  font-weight: 350 449;
+  size-adjust: 113.16%;
+  ascent-override: 85.54%;
+  descent-override: 22.18%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Montserrat Fallback Android";
+  src: local("Roboto"), local("Roboto Regular"), local("Roboto-Regular");
+  font-weight: 450 549;
+  size-adjust: 114.08%;
+  ascent-override: 84.85%;
+  descent-override: 22.00%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Montserrat Fallback Android";
+  src: local("Roboto"), local("Roboto Regular"), local("Roboto-Regular");
+  font-weight: 550 649;
+  size-adjust: 115.73%;
+  ascent-override: 83.64%;
+  descent-override: 21.69%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Montserrat Fallback Android";
+  src: local("Roboto"), local("Roboto Regular"), local("Roboto-Regular");
+  font-weight: 650 900;
+  size-adjust: 117.55%;
+  ascent-override: 82.35%;
+  descent-override: 21.35%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Montserrat Caps Fallback Android";
+  src: local("Roboto"), local("Roboto Regular"), local("Roboto-Regular");
+  font-weight: 100 249;
+  size-adjust: 112.08%;
+  ascent-override: 86.36%;
+  descent-override: 22.39%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Montserrat Caps Fallback Android";
+  src: local("Roboto"), local("Roboto Regular"), local("Roboto-Regular");
+  font-weight: 250 349;
+  size-adjust: 112.37%;
+  ascent-override: 86.14%;
+  descent-override: 22.34%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Montserrat Caps Fallback Android";
+  src: local("Roboto"), local("Roboto Regular"), local("Roboto-Regular");
+  font-weight: 350 449;
+  size-adjust: 112.51%;
+  ascent-override: 86.03%;
+  descent-override: 22.31%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Montserrat Caps Fallback Android";
+  src: local("Roboto"), local("Roboto Regular"), local("Roboto-Regular");
+  font-weight: 450 549;
+  size-adjust: 112.71%;
+  ascent-override: 85.88%;
+  descent-override: 22.27%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Montserrat Caps Fallback Android";
+  src: local("Roboto"), local("Roboto Regular"), local("Roboto-Regular");
+  font-weight: 550 649;
+  size-adjust: 113.49%;
+  ascent-override: 85.29%;
+  descent-override: 22.12%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Montserrat Caps Fallback Android";
+  src: local("Roboto"), local("Roboto Regular"), local("Roboto-Regular");
+  font-weight: 650 900;
+  size-adjust: 114.37%;
+  ascent-override: 84.64%;
+  descent-override: 21.95%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Fallback Android";
+  src: local("Roboto"), local("Roboto Regular"), local("Roboto-Regular");
+  font-weight: 100 249;
+  size-adjust: 130.66%;
+  ascent-override: 74.08%;
+  descent-override: 19.20%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Fallback Android";
+  src: local("Roboto"), local("Roboto Regular"), local("Roboto-Regular");
+  font-weight: 250 349;
+  size-adjust: 128.54%;
+  ascent-override: 75.30%;
+  descent-override: 19.52%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Fallback Android";
+  src: local("Roboto"), local("Roboto Regular"), local("Roboto-Regular");
+  font-weight: 350 449;
+  size-adjust: 125.80%;
+  ascent-override: 76.94%;
+  descent-override: 19.94%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Fallback Android";
+  src: local("Roboto"), local("Roboto Regular"), local("Roboto-Regular");
+  font-weight: 450 549;
+  size-adjust: 124.22%;
+  ascent-override: 77.92%;
+  descent-override: 20.20%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Fallback Android";
+  src: local("Roboto"), local("Roboto Regular"), local("Roboto-Regular");
+  font-weight: 550 649;
+  size-adjust: 123.41%;
+  ascent-override: 78.43%;
+  descent-override: 20.33%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Fallback Android";
+  src: local("Roboto"), local("Roboto Regular"), local("Roboto-Regular");
+  font-weight: 650 900;
+  size-adjust: 122.53%;
+  ascent-override: 78.99%;
+  descent-override: 20.48%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Fallback Android";
+  src: local("Noto Naskh Arabic"), local("Noto Naskh Arabic Regular"), local("NotoNaskhArabic-Regular");
+  font-weight: 100 249;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF;
+  size-adjust: 108.13%;
+  ascent-override: 89.51%;
+  descent-override: 23.20%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Fallback Android";
+  src: local("Noto Naskh Arabic"), local("Noto Naskh Arabic Regular"), local("NotoNaskhArabic-Regular");
+  font-weight: 250 349;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF;
+  size-adjust: 115.42%;
+  ascent-override: 83.86%;
+  descent-override: 21.74%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Fallback Android";
+  src: local("Noto Naskh Arabic"), local("Noto Naskh Arabic Regular"), local("NotoNaskhArabic-Regular");
+  font-weight: 350 449;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF;
+  size-adjust: 122.68%;
+  ascent-override: 78.90%;
+  descent-override: 20.45%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Fallback Android";
+  src: local("Noto Naskh Arabic"), local("Noto Naskh Arabic Regular"), local("NotoNaskhArabic-Regular");
+  font-weight: 450 549;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF;
+  size-adjust: 126.07%;
+  ascent-override: 76.77%;
+  descent-override: 19.90%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Fallback Android";
+  src: local("Noto Naskh Arabic"), local("Noto Naskh Arabic Regular"), local("NotoNaskhArabic-Regular");
+  font-weight: 550 649;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF;
+  size-adjust: 130.96%;
+  ascent-override: 73.91%;
+  descent-override: 19.16%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Fallback Android";
+  src: local("Noto Naskh Arabic"), local("Noto Naskh Arabic Regular"), local("NotoNaskhArabic-Regular");
+  font-weight: 650 900;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF;
+  size-adjust: 136.11%;
+  ascent-override: 71.11%;
+  descent-override: 18.43%;
+  line-gap-override: 0%;
 }
 
 :root {
-  --font-montserrat: "Montserrat", "Montserrat Fallback";
-  --font-alexandria: "Alexandria", "Alexandria Fallback";
+  --font-montserrat: "Montserrat", "Montserrat Fallback", "Montserrat Fallback Android";
+  --font-montserrat-caps: "Montserrat", "Montserrat Caps Fallback", "Montserrat Caps Fallback Android";
+  --font-alexandria: "Alexandria", "Alexandria Fallback", "Alexandria Fallback Android";
+}
+/* Until every brand file the page uses has loaded (the boot script, D149), the fallbacks alone:
+   the swap then happens in one step, never with a line set half in each. */
+html[data-font-wait] {
+  --font-montserrat: "Montserrat Fallback", "Montserrat Fallback Android";
+  --font-montserrat-caps: "Montserrat Caps Fallback", "Montserrat Caps Fallback Android";
+  --font-alexandria: "Alexandria Fallback", "Alexandria Fallback Android";
 }

@@ -49,10 +49,7 @@ These three need originals from the client before their project pages can carry 
 | p5-2.jpg | 5 · Events | UAE Pro League: Sponsor's Tournament winners, confetti | 1224×664 · A | yes | — | Pending rights |
 | p5-3.jpg | 5 · Events | UAE Pro League: Super Cup pre-match ceremony (Al Ain v Sharjah) | 1060×575 · B | distant | — | → **uae-pro-league-2** |
 | p5-4.jpg | 5 · Events | UAE Pro League: ADIB grand-prize presentation on the pitch | 1224×665 · A | yes | — | Pending rights; ADIB is a sponsor brand (OQ #17) |
-| p6-1.jpg | 6 · Ceremonies | **UAE Athletics Federation**: award ceremony, athlete on screen | 1273×619 · A | yes | — | Pending rights |
-| p6-2.jpg | 6 · Ceremonies | UAEAF: National Athletics Team Recognition Ceremony, group on stage | 1284×619 · A | yes | — | Pending rights |
 | p6-3.jpg | 6 · Ceremonies | unnamed ceremony: harpist and performer on stage | 1281×622 · A | yes | — | **Not used** (talent performers) |
-| p6-4.jpg | 6 · Ceremonies | UAEAF event backdrop, Ultimate Power Solution as sponsor | 1281×622 · A | none | — | → **uae-athletics-federation-3** |
 | p7-1.jpg | 7 · Exhibitions | **Ultimate Power Solution**: stand with robot-costume performers and guests | 931×620 · B | yes | — | Pending rights |
 | p7-2.jpg | 7 · Exhibitions | Ultimate Power Solution: stand, humanoid robots, performers, meeting | 931×620 · B | yes | — | Pending rights |
 | p7-3.jpg | 7 · Exhibitions | Ultimate Power Solution: stand, musicians with robots | 931×620 · B | yes | — | Pending rights |
@@ -80,20 +77,8 @@ These three need originals from the client before their project pages can carry 
 | p13-2.jpg | 13 · Social media | unnamed Dubai government account: investment posts incl. a ruler's portrait | 683×686 · C | ruler | — | Hold (OQ #20) |
 | p13-3.jpg | 13 · Social media | UAE Pro League: "Fan Zone" post | 643×738 · C | distant | — | → **uae-pro-league-3** |
 | p13-4.jpg | 13 · Social media | UAE Pro League: "Dawri Al Jamaheer" round-result post (club crests) | 643×738 · C | none | — | → **uae-pro-league-4** |
-| p14-1.jpg | 14 · AI content | UAEAF Oregon 26: three athletes, flags | 547×980 · B | AI likenesses | **AI deliverable** | Hold: AI-content case only, labelled "Produced with AI" as in the profile; client OK needed |
-| p14-2.jpg | 14 · AI content | UAEAF Oregon 26: federation banner, empty stadium | 547×980 · B | none | **AI deliverable** | Hold (same) |
-| p14-3.jpg | 14 · AI content | UAEAF Oregon 26: championship banner, athlete | 547×980 · B | AI likeness | **AI deliverable** | Hold (same) |
-| p14-4.jpg | 14 · AI content | UAEAF Oregon 26: sprinter at dusk | 547×980 · B | AI likeness | **AI deliverable** | Hold (same) |
-| p16-1.jpg | 16 · Case study | UAEAF Oregon 26 key visual: named athlete, "The final awaits" | 659×879 · B | yes | — | Pending rights |
-| p16-2.jpg | 16 · Case study | UAEAF Oregon 26 key visual: named athlete | 659×879 · B | yes | — | Pending rights |
-| p16-3.jpg | 16 · Case study | UAEAF Oregon 26 key visual: named athlete, 400 m | 659×879 · B | yes | — | Pending rights |
-| p17-1.jpg | 17 · Case study | UAEAF Oregon 26 post: athlete warming up | 659×879 · B | yes | — | Pending rights |
-| p17-2.jpg | 17 · Case study | UAEAF Oregon 26 post: athlete on the track | 659×879 · B | yes | — | Pending rights |
-| p17-3.jpg | 17 · Case study | UAEAF Oregon 26 post: two officials in the stands | 659×879 · B | yes | — | Pending rights |
 | p18-1.png | 18 · Case study | none: grey device-frame mask | 594×421 | — | — | Empty, not a picture |
-| p18-2.jpg | 18 · Case study | UAEAF: uaeathletics.ae home page, desktop (screenshot) | 1544×965 · A | illustrated athlete (site artwork) | — | → **uae-athletics-federation-1** |
 | p18-3.png | 18 · Case study | none: device-frame mask | 358×699 | — | — | Empty |
-| p18-4.png | 18 · Case study | UAEAF: uaeathletics.ae on mobile (screenshot) | 459×1048 · B | as above | — | → **uae-athletics-federation-2**. The federation's own figures appear on screen; never quoted as NO TIME's |
 | p19-1.png | 19 · PR | none: device-frame mask | 511×490 | — | — | Empty |
 | p19-2.jpg | 19 · PR | **EgyptAir**: pavilion, wide view with aircraft model | 751×501 · C | distant | — | → **egyptair-pavilion-1** (originals wanted, OQ #21) |
 | p19-3.png | 19 · PR | none: mask | 1029×243 | — | — | Empty |
@@ -146,7 +131,6 @@ These three need originals from the client before their project pages can carry 
 | Slug | Images | Best size | Notes |
 |---|---|---|---|
 | `uae-pro-league` | 5 | 1280×882 | Tournament identity, Super Cup ceremony, two social posts, gift set |
-| `uae-athletics-federation` | 3 | 1544×965 | Website desktop and mobile, sponsor backdrop. The Oregon 26 key visuals all show named athletes (pending rights) |
 | `egyptair-pavilion` | 1 | 751×501 | Small: card use only until originals arrive |
 | `sandoz` | 1 | 577×1280 | Portrait |
 | `private-celebrations` | 8 | 1600×1066 | No client names (Task 11b rule 4) |

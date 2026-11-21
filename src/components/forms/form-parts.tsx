@@ -1,0 +1,392 @@
+"use client";
+
+import { AlertCircle, Check } from "lucide-react";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
+import { useEffect, useRef, useState, type HTMLInputTypeAttribute, type ReactNode, type RefObject } from "react";
+import type { UseFormRegister } from "react-hook-form";
+import { contact } from "@/config/contact";
+import { errorText, fill, formCopy, minutesLabel } from "@/content/form-copy";
+import type { Locale } from "@/content/types";
+import { Link } from "@/i18n/navigation";
+import { HONEYPOT, TURNSTILE_FIELD, type FieldErrorCode, type FormState } from "@/lib/forms/schemas";
+import { turnstileSiteKey } from "@/lib/forms/turnstile-config";
+import { cn } from "@/lib/utils";
+import type { SummaryItem } from "./use-contract-form";
+import "./forms.css";
+
+type Register = UseFormRegister<Record<string, unknown>>;
+
+const optionalTag = (locale: Locale) => <span className="form-optional"> ({formCopy.optional[locale]})</span>;
+
+/** Ids for a field's control, hint and error, so the summary and aria-describedby agree. */
+export const fieldId = (prefix: string, name: string) => `${prefix}-${name}`;
+
+export function TextField({
+  prefix,
+  name,
+  label,
+  locale,
+  register,
+  code,
+  optional = false,
+  hint,
+  type = "text",
+  inputMode,
+  autoComplete,
+  multiline = false,
+  dir,
+  caret = false,
+  max,
+}: {
+  prefix: string;
+  name: string;
+  label: string;
+  locale: Locale;
+  register: Register;
+  code?: FieldErrorCode;
+  optional?: boolean;
+  hint?: string;
+  type?: HTMLInputTypeAttribute;
+  inputMode?: "text" | "email" | "tel" | "url";
+  autoComplete?: string;
+  multiline?: boolean;
+  /** Addresses and numbers read left to right in Arabic too. */
+  dir?: "ltr";
+  /** The page's bookend: the opening's caret blinks in this field until it's used. */
+  caret?: boolean;
+  /** The schema's character limit, named by the tooLong message (useContractForm's `maxOf`). */
+  max?: number;
+}) {
+  const id = fieldId(prefix, name);
+  const described = [hint && `${id}-hint`, code && `${id}-error`].filter(Boolean).join(" ") || undefined;
+  const common = {
+    id,
+    className: cn("field-control form-control", dir && "form-ltr"),
+    "aria-invalid": code ? (true as const) : undefined,
+    "aria-describedby": described,
+    "aria-required": optional ? undefined : (true as const),
+    dir,
+    ...register(name),
+  };
+  return (
+    <div className={cn("field form-field", code && "field-error", caret && "form-caret")}>
+      <label htmlFor={id}>
+        {label}
+        {optional && optionalTag(locale)}
+      </label>
+      {multiline ? <textarea rows={3} {...common} /> : <input type={type} inputMode={inputMode} autoComplete={autoComplete} {...common} />}
+      {hint && (
+        <span id={`${id}-hint`} className="field-hint">
+          {hint}
+        </span>
+      )}
+      {code && <FieldError id={`${id}-error`}>{errorText(name, code, locale, max)}</FieldError>}
+    </div>
+  );
+}
+
+function FieldError({ id, children }: { id: string; children: ReactNode }) {
+  return (
+    <span id={id} className="form-error">
+      <AlertCircle aria-hidden="true" strokeWidth={1.5} className="size-4 shrink-0" />
+      {children}
+    </span>
+  );
+}
+
+/** A radio group drawn as chips (fewer than ~8 options: one tap, no dropdown). */
+export function ChoiceChips({
+  prefix,
+  name,
+  legend,
+  options,
+  locale,
+  register,
+  code,
+  optional = false,
+  caret = false,
+}: {
+  prefix: string;
+  name: string;
+  legend: string;
+  options: { value: string; label: string }[];
+  locale: Locale;
+  register: Register;
+  code?: FieldErrorCode;
+  optional?: boolean;
+  caret?: boolean;
+}) {
+  const id = fieldId(prefix, name);
+  return (
+    // A radio group: `radiogroup` (not the fieldset's implicit `group`) is the role that allows
+    // aria-required and aria-invalid; its name stays the legend.
+    <fieldset
+      id={id}
+      role="radiogroup"
+      aria-labelledby={`${id}-legend`}
+      className={cn("form-field form-chips", code && "field-error", caret && "form-caret")}
+      aria-describedby={code ? `${id}-error` : undefined}
+      aria-invalid={code ? true : undefined}
+      aria-required={optional ? undefined : true}
+    >
+      <legend id={`${id}-legend`} className="form-legend">
+        {legend}
+        {optional && optionalTag(locale)}
+      </legend>
+      <div className="form-chip-row">
+        {options.map((o) => (
+          <label key={o.value} className="form-chip">
+            <input type="radio" value={o.value} id={`${id}-${o.value}`} {...register(name)} />
+            <span className="form-chip-face">
+              <Check aria-hidden="true" strokeWidth={1.75} className="form-chip-tick size-3.5" />
+              {o.label}
+            </span>
+          </label>
+        ))}
+      </div>
+      {code && <FieldError id={`${id}-error`}>{errorText(name, code, locale)}</FieldError>}
+    </fieldset>
+  );
+}
+
+export function SelectField({
+  prefix,
+  name,
+  label,
+  options,
+  groups,
+  placeholder,
+  locale,
+  register,
+  code,
+  optional = true,
+  hint,
+}: {
+  prefix: string;
+  name: string;
+  label: string;
+  options?: { value: string; label: string }[];
+  /** Grouped options (rendered as `<optgroup>`), for a long list; `options` stays for flat ones. */
+  groups?: { label: string; options: { value: string; label: string }[] }[];
+  placeholder: string;
+  locale: Locale;
+  register: Register;
+  code?: FieldErrorCode;
+  optional?: boolean;
+  hint?: string;
+}) {
+  const id = fieldId(prefix, name);
+  const described = [hint && `${id}-hint`, code && `${id}-error`].filter(Boolean).join(" ") || undefined;
+  const option = (o: { value: string; label: string }) => (
+    <option key={o.value} value={o.value}>
+      {o.label}
+    </option>
+  );
+  return (
+    <div className={cn("field form-field", code && "field-error")}>
+      <label htmlFor={id}>
+        {label}
+        {optional && optionalTag(locale)}
+      </label>
+      <select id={id} className="field-control form-control form-select" aria-invalid={code ? true : undefined} aria-describedby={described} {...register(name)}>
+        <option value="">{placeholder}</option>
+        {options?.map(option)}
+        {groups?.map((g) => (
+          <optgroup key={g.label} label={g.label}>
+            {g.options.map(option)}
+          </optgroup>
+        ))}
+      </select>
+      {hint && (
+        <span id={`${id}-hint`} className="field-hint">
+          {hint}
+        </span>
+      )}
+      {code && <FieldError id={`${id}-error`}>{errorText(name, code, locale)}</FieldError>}
+    </div>
+  );
+}
+
+/**
+ * The error summary: focused after a failed submit, one link per field (it focuses the control).
+ * Inline errors stay under each field.
+ */
+export function ErrorSummary({
+  items,
+  prefix,
+  labels,
+  locale,
+  summaryRef,
+}: {
+  items: SummaryItem[];
+  prefix: string;
+  labels: Record<string, string>;
+  locale: Locale;
+  summaryRef: RefObject<HTMLDivElement | null>;
+}) {
+  const titleId = `${prefix}-errors-title`;
+  return (
+    <div ref={summaryRef} tabIndex={-1} className="form-summary" aria-labelledby={titleId} hidden={items.length === 0}>
+      <p id={titleId} className="form-summary-title">
+        <AlertCircle aria-hidden="true" strokeWidth={1.5} className="size-4 shrink-0" />
+        {formCopy.summaryTitle[locale]}
+      </p>
+      <ul>
+        {items.map((it) => {
+          const target = fieldId(prefix, it.name);
+          return (
+            <li key={it.name}>
+              <a
+                href={`#${target}`}
+                onClick={(e) => {
+                  const box = document.getElementById(target);
+                  const control = box?.matches("input, select, textarea") ? box : box?.querySelector<HTMLElement>("input:checked, input, select, textarea");
+                  if (!control) return;
+                  e.preventDefault();
+                  control.focus();
+                  control.scrollIntoView({ block: "center" });
+                }}
+              >
+                <b>{labels[it.name] ?? it.name}:</b> {errorText(it.name, it.code, locale, it.max)}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
+
+/** Server states other than success and invalid, each with the email fallback (contact.ts). */
+export function FormNotice({ state, locale }: { state: FormState; locale: Locale }) {
+  const s = state.status;
+  const message =
+    s === "rateLimited"
+      ? formCopy.states.rateLimited[locale]
+      : s === "blocked"
+        ? formCopy.states.blocked[locale]
+        : s === "failed"
+          ? formCopy.states.failed[locale]
+          : null;
+  // A failed send disables the button while pending, which drops focus to <body>: bring it here (WCAG 2.4.3).
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (message) ref.current?.focus();
+  }, [state, message]);
+  return (
+    <div ref={ref} tabIndex={-1} className="form-notice" role="alert" hidden={!message}>
+      {message && <EmailSentence text={fill(message, { minutes: minutesLabel(Math.max(1, Math.ceil((state.retryAfter ?? 60) / 60)), locale) })} />}
+    </div>
+  );
+}
+
+/** Renders `{email}` as a mailto link. */
+function EmailSentence({ text }: { text: string }) {
+  const [before, after = ""] = text.split("{email}");
+  return (
+    <p>
+      {before}
+      <a href={`mailto:${contact.email}`} className="form-mail" dir="ltr">
+        {contact.email}
+      </a>
+      {after}
+    </p>
+  );
+}
+
+export function PrivacyNotice({ locale }: { locale: Locale }) {
+  return (
+    <p className="form-privacy">
+      {formCopy.privacy.text[locale]}{" "}
+      <Link href="/privacy" className="form-privacy-link">
+        {formCopy.privacy.link[locale]}
+      </Link>
+    </p>
+  );
+}
+
+/** The fields every action reads first (D92): locale, source and the honeypot. */
+export function SharedFields({ locale, source }: { locale: Locale; source: string }) {
+  return (
+    <>
+      <input type="hidden" name="locale" value={locale} />
+      <input type="hidden" name="source" value={source} />
+      {/* Honeypot: off-screen and hidden from assistive tech; people never reach it (D92). */}
+      <div className="form-hp" aria-hidden="true">
+        <label>
+          {formCopy.honeypot[locale]}
+          <input type="text" name={HONEYPOT} tabIndex={-1} autoComplete="off" defaultValue="" />
+        </label>
+      </div>
+    </>
+  );
+}
+
+/**
+ * Cloudflare Turnstile (D102): it posts its token as `TURNSTILE_FIELD`. The widget (and its
+ * script) mounts only once the form nears the viewport, so no page loads it up front; it stays
+ * invisible unless Cloudflare needs an interaction. A token works once, so the widget resets after
+ * every answer that isn't a success. No site key (a production build without real keys): nothing
+ * renders, and the server refuses the submission with the email fallback (fail closed).
+ */
+export function TurnstileSlot({ state, locale }: { state: FormState; locale: Locale }) {
+  const slot = useRef<HTMLDivElement>(null);
+  const widget = useRef<TurnstileInstance>(null);
+  const [near, setNear] = useState(false);
+  useEffect(() => {
+    const el = slot.current;
+    if (!el || near || !turnstileSiteKey) return;
+    const io = new IntersectionObserver(([e]) => e.isIntersecting && setNear(true), { rootMargin: "400px 0px" });
+    io.observe(el);
+    // Also on the first focus in the form (M3): on a phone the slot can sit just past the margin
+    // while the visitor types, and Enter would submit before a token exists.
+    const form = el.closest("form");
+    const onFocus = () => setNear(true);
+    form?.addEventListener("focusin", onFocus, { once: true });
+    return () => {
+      io.disconnect();
+      form?.removeEventListener("focusin", onFocus);
+    };
+  }, [near]);
+  useEffect(() => {
+    if (state.status !== "idle" && state.status !== "success") widget.current?.reset();
+  }, [state]);
+  if (!turnstileSiteKey) return null;
+  return (
+    <div ref={slot} className="form-turnstile">
+      {near && (
+        <Turnstile
+          ref={widget}
+          siteKey={turnstileSiteKey}
+          options={{ language: locale, appearance: "interaction-only", size: "flexible", theme: "auto", responseFieldName: TURNSTILE_FIELD }}
+        />
+      )}
+    </div>
+  );
+}
+
+export function SubmitButton({ label, pending, locale }: { label: string; pending: boolean; locale: Locale }) {
+  return (
+    <button type="submit" className="form-submit" aria-disabled={pending || undefined} disabled={pending}>
+      <span>{pending ? formCopy.sending[locale] : label}</span>
+    </button>
+  );
+}
+
+/** The success state replaces the form; it takes focus so the confirmation is read. */
+export function SuccessPanel({ title, body, again, onAgain }: { title: string; body: string; again: string; onAgain: () => void }) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => ref.current?.focus(), []);
+  return (
+    <div ref={ref} tabIndex={-1} className="form-success" role="status">
+      <span className="form-success-mark" aria-hidden="true">
+        <Check strokeWidth={1.5} className="size-5" />
+      </span>
+      <p className="form-success-title">{title}</p>
+      <p className="form-success-body">{body}</p>
+      <button type="button" className="form-again" onClick={onAgain}>
+        {again}
+      </button>
+    </div>
+  );
+}

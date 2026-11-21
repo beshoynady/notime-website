@@ -1,0 +1,383 @@
+{
+  "m:contactPage.metaTitle": {
+    "rule": "A title, not a button: the noun reads right; SEO: the action people search",
+    "en": "Request a quote",
+    "ar": "طلب عرض سعر"
+  },
+  "m:contactPage.metaDescription": {
+    "rule": "Approved sample; AR by owner rule 1",
+    "en": "Tell us about your event, film, campaign or website. A few lines are enough, and we reply within one working day.",
+    "ar": "حدّثونا عن فعاليتكم أو فيلمكم أو حملتكم أو موقعكم. تكفي بضعة أسطر، ونرد عليكم خلال يوم عمل.",
+    "facts": "⚑ FC#23"
+  },
+  "m:contactPage.eyebrow": {
+    "rule": "Owner rule 1 (the page's name, as the menu)",
+    "ar": "تواصلوا معنا"
+  },
+  "m:contactPage.title": {
+    "rule": "Approved sample: keep EN; AR by owner rule 1",
+    "ar": "أخبرونا بما تخطّطون له."
+  },
+  "m:contactPage.lead": {
+    "rule": "Approved sample; AR by owner rule 1",
+    "en": "A few lines are enough: the occasion, the date and what you need. We reply within one working day, with our questions or a time to talk.",
+    "ar": "تكفي بضعة أسطر: المناسبة والموعد وما تحتاجون إليه. نرد عليكم خلال يوم عمل، بأسئلتنا أو بموعد نتحدّث فيه.",
+    "facts": "⚑ FC#23"
+  },
+  "m:contactPage.formTitle": {
+    "rule": "A title, not a button: the noun reads right",
+    "en": "Request a quote",
+    "ar": "طلب عرض سعر"
+  },
+  "m:contactPage.directTitle": {
+    "rule": "Approved sample (§3 question headline); AR by owner rule 1",
+    "en": "Or write to us directly",
+    "ar": "أو راسلونا مباشرة"
+  },
+  "m:contactPage.copy": {
+    "rule": "D-C1 (owner): a form, system or navigation button, so the verbal noun",
+    "ar": "نسخ العنوان"
+  },
+  "m:contactPage.whatsapp": {
+    "rule": "D-C1 (owner): a marketing call to action, so the plural command",
+    "ar": "راسلونا على واتساب"
+  },
+  "m:contactPage.faqEyebrow": {
+    "rule": "Owner rule 1",
+    "ar": "قبل أن تكتبوا لنا"
+  },
+  "m:contactPage.faq.a1": {
+    "rule": "Owner rule 1 (AR); EN: \"brief\" → \"request\" (choice 2)",
+    "en": "Yes. We're based in Dubai and work across the markets on our About page. Put the city in your request and we'll plan around it.",
+    "ar": "نعم. مقرّنا في دبي، ونعمل في الأسواق المذكورة في صفحة «من نحن». اذكروا المدينة في طلبكم، ونخطّط على أساسها.",
+    "facts": "⚑ FC#1"
+  },
+  "m:contactPage.faq.a2": {
+    "rule": "Owner rule 1 (AR); EN: \"brief\" → \"request\" (choice 2)",
+    "en": "We reply within one working day. Put your date in the request, and we'll tell you honestly what can be done by then.",
+    "ar": "نرد عليكم خلال يوم عمل. اذكروا موعدكم في الطلب، وسنخبركم بصراحة بما يمكن إنجازه قبله.",
+    "facts": "⚑ FC#23"
+  },
+  "m:contactPage.faq.a3": {
+    "rule": "Approved sample: keep; this is where \"one team\" belongs on this page (choice 1)",
+    "facts": "p3"
+  },
+  "m:contactPage.faq.a4": {
+    "rule": "Approved sample (last sentence: corporate register, §2); AR by owner rule 1",
+    "en": "The occasion or goal, the date, the place, the audience, and a budget range if you have one. We ask the rest on a short call. We price each project once we understand it.",
+    "ar": "المناسبة أو الهدف، والموعد، والمكان، والجمهور، ونطاق الميزانية إن توفّر. ونسألكم عن الباقي في مكالمة قصيرة. نسعّر كل مشروع بعد أن نفهمه."
+  },
+  "c:form-copy:errorMessages.required": {
+    "rule": "Owner rule 1 (AR); fallback when a field has no message of its own",
+    "ar": "املؤوا هذا الحقل."
+  },
+  "c:form-copy:errorMessages.email": {
+    "rule": "Owner rule 7 (one message per field, saying what's needed)",
+    "en": "Enter an email like name@company.com.",
+    "ar": "اكتبوا البريد الإلكتروني بهذا الشكل: name@company.com"
+  },
+  "c:form-copy:errorMessages.url": {
+    "rule": "Owner rule 1 (AR); EN keep (already says what's needed)",
+    "ar": "اكتبوا عنوان الموقع بهذا الشكل: yourcompany.ae"
+  },
+  "c:form-copy:errorMessages.phone": {
+    "rule": "D-C3 (owner): letters or a wrong length; a number with no country code has its own message (`phoneCode`)",
+    "en": "Use digits only, e.g. +971 50 123 4567.",
+    "ar": "اكتبوا الرقم بالأرقام فقط، مثل ‎+971 50 123 4567."
+  },
+  "c:form-copy:errorMessages.contact": {
+    "rule": "Owner rule 7: say both shapes that work",
+    "en": "Enter an email like name@company.com, or a number with the country code, e.g. +971.",
+    "ar": "اكتبوا بريدًا إلكترونيًا مثل name@company.com، أو رقمًا مع رمز الدولة مثل ‎+971."
+  },
+  "c:form-copy:errorMessages.tooLong": {
+    "rule": "Owner rule 7. Needs `{max}` passed from the schema (a small code change at apply time)",
+    "en": "Keep it under {max} characters.",
+    "ar": "الحد الأقصى لعدد الأحرف: {max}"
+  },
+  "c:form-copy:errorMessages.invalid": {
+    "rule": "Owner rule 7: stays only as the fallback for a field with no message of its own (today: an unknown product or option)",
+    "en": "Something in this field doesn't fit. Check it and try again.",
+    "ar": "في هذا الحقل ما لا يناسب. راجعوه وحاولوا مرة أخرى."
+  },
+  "c:form-copy:formCopy.summaryTitle": {
+    "rule": "Owner rule 1",
+    "ar": "راجعوا ما يلي قبل الإرسال:"
+  },
+  "c:form-copy:formCopy.states.rateLimited": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "محاولات كثيرة من هذا الاتصال. حاولوا مرة أخرى بعد {minutes}، أو راسلونا على {email}."
+  },
+  "c:form-copy:formCopy.states.blocked": {
+    "rule": "Owner rule 7 (the owner's text)",
+    "en": "The security check didn't load. Try again, or email us at {email}.",
+    "ar": "لم يكتمل التحقق الأمني. حاولوا مرة أخرى أو راسلونا على {email}."
+  },
+  "c:form-copy:formCopy.states.failed": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "لم يُرسَل طلبكم بسبب خلل لدينا. حاولوا مرة أخرى، أو راسلونا على {email}."
+  },
+  "c:form-copy:formCopy.states.another": {
+    "rule": "D-C1 (owner): a form, system or navigation button, so the verbal noun",
+    "ar": "إرسال طلب آخر"
+  },
+  "c:form-copy:formCopy.privacy.text": {
+    "rule": "N15 (approved): first sentence; AR by owner rule 1. The vendor sentence stays (the legal page names them too)",
+    "en": "We use your details only to reply to you. Resend delivers our email and Cloudflare protects this form from spam.",
+    "ar": "نستخدم بياناتكم للرد عليكم فقط. توصل خدمة Resend رسائلنا، وتحمي Cloudflare هذا النموذج من الرسائل المزعجة."
+  },
+  "c:form-copy:formCopy.honeypot": {
+    "rule": "Owner rule 1 (screen readers can reach it)",
+    "ar": "اتركوا هذا الحقل فارغًا"
+  },
+  "c:form-copy:formCopy.fields.name": {
+    "rule": "Owner rule 1: a label with no pronoun reads cleaner in the plural form",
+    "ar": "الاسم"
+  },
+  "c:form-copy:formCopy.fields.websiteUrl": {
+    "rule": "Owner rule 1",
+    "ar": "موقعكم الحالي"
+  },
+  "c:form-copy:formCopy.consultation.project": {
+    "rule": "Owner rule 1",
+    "ar": "مشروعكم"
+  },
+  "c:form-copy:formCopy.consultation.you": {
+    "rule": "Owner rule 1",
+    "ar": "عنكم"
+  },
+  "c:form-copy:formCopy.consultation.build": {
+    "rule": "Owner rule 1",
+    "ar": "ماذا تريدون أن تبنوا؟"
+  },
+  "c:form-copy:formCopy.consultation.buildOptions.ai-consulting": {
+    "rule": "keep: a service name the client sells (not about how the site's images were made, D106)"
+  },
+  "c:form-copy:formCopy.consultation.tierNone": {
+    "rule": "Owner rule 1 (an option the user picks, in the plural voice)",
+    "ar": "لم نحدّد بعد"
+  },
+  "c:form-copy:formCopy.consultation.timeline": {
+    "rule": "Owner rule 1",
+    "ar": "متى تريدون أن تبدؤوا؟"
+  },
+  "c:form-copy:formCopy.consultation.timelineOptions.flexible": {
+    "rule": "EN: the option speaks as the user (\"I\"), the others don't",
+    "en": "Flexible"
+  },
+  "c:form-copy:formCopy.consultation.budgetNone": {
+    "rule": "Owner rule 1",
+    "ar": "اختاروا نطاقًا"
+  },
+  "c:form-copy:formCopy.consultation.message": {
+    "rule": "Owner rule 1",
+    "ar": "أخبرونا بالمزيد"
+  },
+  "c:form-copy:formCopy.consultation.messageHint": {
+    "rule": "Owner rule 1",
+    "ar": "لمن هو، وما الذي يجب أن يفعله، وأي موعد يهمّكم."
+  },
+  "c:form-copy:formCopy.consultation.submit": {
+    "rule": "D-C1 + N13 (owner): the plural command, and no \"30-min\" on the button; the duration is in the line beside it",
+    "en": "Request a free intro call",
+    "ar": "اطلبوا مكالمة تعارف مجانية",
+    "facts": "R1 confirmed by the owner (2026-11-17)"
+  },
+  "c:form-copy:formCopy.consultation.micro": {
+    "rule": "R1 (owner): the call's length goes in the line beside the button",
+    "en": "A free 30-minute call, with no obligation. We reply within one working day.",
+    "ar": "مكالمة مجانية مدتها 30 دقيقة، دون أي التزام. نرد عليكم خلال يوم عمل.",
+    "facts": "R1 confirmed by the owner (2026-11-17); ⚑ FC#23"
+  },
+  "c:form-copy:formCopy.consultation.successTitle": {
+    "rule": "Choice 2, as the contact form",
+    "en": "Thanks, {name}. We have your request.",
+    "ar": "شكرًا، {name}. وصلنا طلبكم."
+  },
+  "c:form-copy:formCopy.consultation.successBody": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "نرد عليكم خلال يوم عمل لنحدّد موعد المكالمة.",
+    "facts": "⚑ FC#23"
+  },
+  "c:form-copy:formCopy.consultation.prefilled": {
+    "rule": "Owner rule 1",
+    "ar": "اخترنا لكم: {choice}. يمكنكم تغييره."
+  },
+  "c:form-copy:formCopy.review.websiteUrl": {
+    "rule": "Owner rule 1",
+    "ar": "عنوان موقعكم"
+  },
+  "c:form-copy:formCopy.review.goal": {
+    "rule": "Owner rule 1",
+    "ar": "ما هدفكم الأساسي؟"
+  },
+  "c:form-copy:formCopy.review.message": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "هل هناك ما يجب أن نعرفه؟"
+  },
+  "c:form-copy:formCopy.review.submit": {
+    "rule": "D-C1 (owner): a form, system or navigation button, so the verbal noun",
+    "ar": "إرسال الموقع للمراجعة"
+  },
+  "c:form-copy:formCopy.review.successTitle": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "شكرًا، {name}. وصلنا موقعكم."
+  },
+  "c:form-copy:formCopy.review.successBody": {
+    "rule": "Owner rule 1 (AR); EN keep. A promise with a number in it",
+    "ar": "خلال 3 أيام عمل نرد عليكم بخمسة تحسينات عملية، مجانًا.",
+    "facts": "R2 confirmed by the owner (2026-11-17)"
+  },
+  "c:form-copy:formCopy.interest.message": {
+    "rule": "Owner rule 1",
+    "ar": "فيمَ ستستخدمونه؟"
+  },
+  "c:form-copy:formCopy.interest.submit": {
+    "rule": "D-C1 (owner): a form, system or navigation button, so the verbal noun",
+    "ar": "تسجيل الاهتمام"
+  },
+  "c:form-copy:formCopy.interest.successTitle": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "شكرًا، {name}. سجّلنا اهتمامكم بـ{product}."
+  },
+  "c:form-copy:formCopy.interest.successBody": {
+    "rule": "Owner rule 1 (AR); EN keep",
+    "ar": "سنكتب لكم حين يصبح جاهزًا."
+  },
+  "c:form-copy:formCopy.interest.type": {
+    "rule": "Owner rule 1",
+    "ar": "ما الذي تديرونه؟"
+  },
+  "c:form-copy:formCopy.contact.project": {
+    "rule": "Owner rule 1",
+    "ar": "مشروعكم"
+  },
+  "c:form-copy:formCopy.contact.you": {
+    "rule": "Owner rule 1",
+    "ar": "كيف نتواصل معكم"
+  },
+  "c:form-copy:formCopy.contact.service": {
+    "rule": "Approved sample: keep EN; AR by owner rule 1",
+    "ar": "ما الذي تحتاجون إليه؟"
+  },
+  "c:form-copy:formCopy.contact.serviceNone": {
+    "rule": "Approved sample: keep EN; AR by owner rule 1 (the option speaks as the user)",
+    "ar": "لم نحدّد بعد، أو أكثر من خدمة"
+  },
+  "c:form-copy:formCopy.contact.prefilled": {
+    "rule": "Owner rule 1",
+    "ar": "اخترنا لكم: {choice}. غيّروه إن كنتم تحتاجون شيئًا آخر."
+  },
+  "c:form-copy:formCopy.contact.timeline": {
+    "rule": "Approved sample (reads as an event's date; N10 shows the event date separately); AR by owner rule 1",
+    "en": "When do you need it?",
+    "ar": "متى تحتاجون إليه؟"
+  },
+  "c:form-copy:formCopy.contact.message": {
+    "rule": "Approved sample: keep EN; AR by owner rule 1",
+    "ar": "حدّثونا عنه"
+  },
+  "c:form-copy:formCopy.contact.submit": {
+    "rule": "Approved sample (choice 2) + owner rule 2",
+    "en": "Send my request",
+    "ar": "إرسال الطلب"
+  },
+  "c:form-copy:formCopy.contact.micro": {
+    "rule": "keep",
+    "facts": "⚑ FC#23"
+  },
+  "c:form-copy:formCopy.contact.successTitle": {
+    "rule": "Approved sample (choice 2); AR by owner rule 1",
+    "en": "Thanks, {name}. We have your request.",
+    "ar": "شكرًا، {name}. وصلنا طلبكم."
+  },
+  "c:form-copy:formCopy.contact.successBody": {
+    "rule": "Approved sample: keep EN; AR by owner rule 1",
+    "ar": "نرد عليكم خلال يوم عمل، بما نحتاج إلى معرفته أو بموعد للحديث.",
+    "facts": "⚑ FC#23"
+  },
+  "new:formCopy.contact.eventDate": {
+    "page": "contact",
+    "rule": "N10 (approved, copy §9.1): shows only for an Events service or ?category=events-hospitality",
+    "en": "Event date (roughly)",
+    "ar": "تاريخ المناسبة (تقريبًا)"
+  },
+  "new:formCopy.contact.eventDateNone": {
+    "page": "contact",
+    "rule": "N10: the month select's empty option",
+    "en": "Not set yet",
+    "ar": "لم نحدّده بعد"
+  },
+  "new:formCopy.contact.guests": {
+    "page": "contact",
+    "rule": "N10 (approved, copy §9.1)",
+    "en": "Number of guests",
+    "ar": "عدد الضيوف"
+  },
+  "new:formCopy.contact.guestsNone": {
+    "page": "contact",
+    "rule": "N10: the guest select's empty option",
+    "en": "Not sure yet",
+    "ar": "لم نحدّد بعد"
+  },
+  "new:formCopy.contact.guestBands": {
+    "page": "contact",
+    "rule": "N10 (GUEST_BANDS in the plan, Task 7); numerals follow the locale rule already in use",
+    "en": "Under 50 · 50–150 · 150–500 · 500–1,000 · Over 1,000",
+    "ar": "أقل من 50 · 50–150 · 150–500 · 500–1,000 · أكثر من 1,000"
+  },
+  "c:form-copy:requiredMessages.name": {
+    "rule": "Owner rule 1",
+    "ar": "اكتبوا اسمكم."
+  },
+  "c:form-copy:requiredMessages.email": {
+    "rule": "Owner rule 1",
+    "ar": "اكتبوا بريدكم الإلكتروني."
+  },
+  "c:form-copy:requiredMessages.build": {
+    "rule": "Owner rule 1",
+    "ar": "اختاروا ما تريدون بناءه."
+  },
+  "c:form-copy:requiredMessages.timeline": {
+    "rule": "Owner rule 1",
+    "ar": "اختاروا متى تريدون أن تبدؤوا."
+  },
+  "c:form-copy:requiredMessages.websiteUrl": {
+    "rule": "Owner rule 1",
+    "ar": "اكتبوا عنوان موقعكم."
+  },
+  "c:form-copy:requiredMessages.contact": {
+    "rule": "Owner rule 1",
+    "ar": "اكتبوا بريدًا إلكترونيًا أو رقم واتساب."
+  },
+  "c:form-copy:requiredMessages.goal": {
+    "rule": "Owner rule 1",
+    "ar": "اختاروا هدفكم الأساسي."
+  },
+  "c:form-copy:requiredMessages.message": {
+    "rule": "Owner rule 1",
+    "ar": "اكتبوا لنا بضعة أسطر عن مشروعكم."
+  },
+  "c:forms:budgetBands.events[5].label": {
+    "rule": "Owner rule 1 (an option the user picks, in the plural voice)",
+    "ar": "نفضّل عدم التحديد"
+  },
+  "new:errorMessages.phoneCode": {
+    "page": "contact",
+    "rule": "D-C3 (owner): a number that starts with 0, or with neither + nor 00",
+    "en": "Include the country code, e.g. +971.",
+    "ar": "أضيفوا رمز الدولة، مثل ‎+971."
+  },
+  "new:formCopy.fields.phoneHint": {
+    "page": "contact",
+    "rule": "D-C3 (owner): shown under the field from the start, before any error",
+    "en": "For example, +971 50 123 4567",
+    "ar": "مثال: ‎+971 50 123 4567"
+  },
+  "new:formCopy.review.contactHint": {
+    "page": "contact",
+    "rule": "D-C3: the review form's \"Email or WhatsApp\" field takes a number too, so it shows both shapes",
+    "en": "For example, name@company.com or +971 50 123 4567",
+    "ar": "مثال: name@company.com أو ‎+971 50 123 4567"
+  }
+}
