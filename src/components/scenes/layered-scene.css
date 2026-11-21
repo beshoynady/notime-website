@@ -141,12 +141,6 @@ html[data-js]:not([data-reduced]) .scene:not([data-mode]) .scene-line:not(:first
 .fx-glow {
   background: radial-gradient(closest-side, rgba(234, 212, 171, 0.14), rgba(234, 212, 171, 0) 100%);
 }
-.fx-beam {
-  background: linear-gradient(to bottom, rgba(234, 212, 171, 0.18), rgba(234, 212, 171, 0) 80%);
-}
-.fx-haze {
-  background: radial-gradient(closest-side, rgba(245, 233, 211, 0.04), rgba(245, 233, 211, 0) 100%);
-}
 
 /* Animatic: flat boxes, one tone per level, labelled with the slot id and depth. */
 .scene-box {

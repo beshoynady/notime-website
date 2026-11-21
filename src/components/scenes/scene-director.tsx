@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { anchorOffset } from "@/components/providers/anchor-scroll";
 import type { SceneConfig, Viewport } from "@/content/scenes";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { enterFrom, layerDrift, lineSpans, pinLength, PIN_MIN_WIDTH, sceneMode, shotAt, wipeInset } from "@/lib/scene-math";
+import { enterFrom, layerDrift, lineSpans, pinLength, PIN_MIN_WIDTH, sceneMode, shotAt, showsOn, wipeInset } from "@/lib/scene-math";
 
 /**
  * Cross-fade of two shot lines, in vh of scroll, centred on the shot boundary: the next line comes
@@ -90,8 +90,7 @@ export function SceneDirector({ scene, pinUnderBars = false, desktopOnly = false
         tl.set({}, {}, pin); // the timeline lasts exactly the pin
 
         for (const layer of scene.layers) {
-          if (viewport === "mobile" && !layer.mobile) continue;
-          if (viewport === "desktop" && layer.desktop === false) continue;
+          if (!showsOn(layer, viewport)) continue;
           const el = root.querySelector<HTMLElement>(`[data-layer="${CSS.escape(layer.id)}"]`);
           if (!el) continue;
           const enter = el.querySelector<HTMLElement>(".scene-enter")!;

@@ -4,9 +4,9 @@
 
    Espresso ground, ivory ink, champagne light (glows at 8–14% alpha), an ivory "morning after" end
    band (END_TONE). Display in Montserrat 200 / Alexandria 300, keys at 500, eyebrows tracked 0.24em.
-   The signature (the theme's one risk): the page is lit like a room. Each service section has its
-   own small light at inline-start that comes on as it arrives (EveningLights, GSAP, once), and the
-   rail's active numeral is a lit candle point. Everything else stays quiet. */
+   The signature (the theme's one risk): the page is lit like a room. Every service section is a
+   scene of Rand's photographs (D153), and the rail's active numeral is a lit candle point.
+   Everything else stays quiet. */
 
 /* ==========================================================================
    Type (§5.1): large, airy display, like candlelit signage.
@@ -32,16 +32,12 @@ main[data-theme="evening"] [data-tone="dark"] .svc-num {
 /* ==========================================================================
    Act 1 · the opening (EVENTS_OPENING, src/content/scenes/events-hospitality.ts)
    ========================================================================== */
-/* L0 · the empty hall: night at the edges, espresso in the room, the drawing on top. */
 /* L2 · a framed photograph inside a scene (the entrance, D154): a champagne hairline and a deep
    shadow, so a real photo reads as a print set into the room, not a cut-out. */
 main[data-theme="evening"] .fx-ev-frame {
   outline: 1px solid color-mix(in srgb, var(--color-champagne) 55%, transparent);
   outline-offset: 6px;
   box-shadow: 0 30px 80px -20px rgb(0 0 0 / 0.65);
-}
-main[data-theme="evening"] .fx-ev-frame img {
-  object-fit: cover;
 }
 /* L0 · a beat's own photo as atmosphere behind its sharp frame (D153): blurred and dimmed, so a
    file smaller than the screen never shows soft. Scaled past the edges so the blur has no rim. */
@@ -111,28 +107,13 @@ main[data-theme="evening"] .scene[data-mode] .scene-layers::after {
   }
 }
 /* ==========================================================================
-   Act 2 · each section's own light (EveningDirector)
+   Act 2 · the sections (EveningDirector)
    ========================================================================== */
 main[data-theme="evening"] .svc {
   position: relative;
 }
-main[data-theme="evening"] .svc-light {
-  position: absolute;
-  z-index: -1;
-  inset-block-start: clamp(-40px, -4vw, -16px);
-  inset-inline-start: clamp(-220px, -14vw, -60px);
-  inline-size: clamp(280px, 38vw, 560px);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(closest-side, color-mix(in srgb, var(--color-champagne) 13%, transparent), transparent);
-  pointer-events: none;
-}
 main[data-theme="evening"] .cat-body {
   isolation: isolate;
-}
-html[data-js]:not([data-reduced]) main[data-theme="evening"] .svc-light:not([data-lit]) {
-  opacity: 0;
-  transform: scale(0.6);
 }
 
 /* Hover (spec #19, 2026-11-11): "the visual animates, a light sweep, and the deliverables reveal
@@ -140,28 +121,12 @@ html[data-js]:not([data-reduced]) main[data-theme="evening"] .svc-light:not([dat
    hover, on keyboard focus inside it, or while it crosses the viewport's middle (data-active,
    EveningDirector), so a visitor who never hovers still sees it. Desktop with a pointer only;
    touch, narrow screens, no script and reduced motion keep every deliverable shown and still.
-   - the visual: the section's light swells (a second glow on the pseudo-element; GSAP owns the
-     light element's own opacity and transform);
    - the light sweep: a champagne line draws along the deliverables from inline-start;
    - the deliverables rise in, staggered. */
 main[data-theme="evening"] .svc-deliver {
   position: relative;
 }
-main[data-theme="evening"] .svc-light::after {
-  content: "";
-  position: absolute;
-  inset: -18%;
-  border-radius: 50%;
-  background: radial-gradient(closest-side, color-mix(in srgb, var(--color-champagne) 9%, transparent), transparent);
-  opacity: 0;
-}
 @media (hover: hover) and (min-width: 900px) and (prefers-reduced-motion: no-preference) {
-  html[data-js]:not([data-reduced]) main[data-theme="evening"] .svc-light::after {
-    transition: opacity 0.9s var(--ease-expo-out);
-  }
-  html[data-js]:not([data-reduced]) main[data-theme="evening"] .svc:is(:hover, :focus-within, [data-active]) .svc-light::after {
-    opacity: 1;
-  }
   html[data-js]:not([data-reduced]) main[data-theme="evening"] .svc-deliver::before {
     content: "";
     position: absolute;

@@ -17,9 +17,8 @@ import { categoryRef } from "@/lib/review";
  * still, one screen, unpinned (a scene marked `hero`, D154, plays its film pinned from 1024px and is
  * that still below; the head below is on screen from the first frame either way): breadcrumbs, eyebrow, the H1 (text), the last shot line as the
  * lead (the promise), "Request a quote" (the header's string, to the brief with the category
- * hinted, as the CTA bar) and the skip control. Nothing pins at any width and no ScrollTrigger is
- * built here: the pinned build scene that followed the hero on desktop is v1.1 (the owner's scope
- * cut, 2026-11-18; LayeredScene keeps `mode="build"` for it). The intro follows the hero. Without
+ * hinted, as the CTA bar) and the skip control. Only a `hero` scene pins (from 1024px, through
+ * LayeredScene's SceneDirector); a plain still builds no ScrollTrigger. The intro follows the hero. Without
  * a scene (until a category's scene is approved) it's a static opening with no image.
  *
  * The skip control is a hash link, so the anchor utility lands it on the first service's H2

@@ -1,7 +1,6 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { STATIC_FALLBACKS } from "@/components/modules/static-fallbacks";
 import { MODULES } from "@/components/modules/registry";
 import { getSectionScene } from "./scenes";
 import { services } from "./services";
@@ -14,7 +13,7 @@ const TEMPLATE = ["events-hospitality", "creative-production", "marketing-brand"
 describe("service visuals (D100)", () => {
   it("no template section ends on a bare list: each has a module, a visual or its photo scene", () => {
     for (const s of services.filter((s) => TEMPLATE.includes(s.category))) {
-      const hasModule = !!s.signatureModule && (!!MODULES[s.signatureModule] || !!STATIC_FALLBACKS[s.signatureModule]);
+      const hasModule = !!s.signatureModule && !!MODULES[s.signatureModule];
       expect(hasModule || !!SERVICE_VISUALS[s.slug] || !!getSectionScene(s, false), s.slug).toBe(true);
     }
   });
@@ -22,7 +21,7 @@ describe("service visuals (D100)", () => {
     for (const slug of Object.keys(SERVICE_VISUALS)) {
       const s = services.find((x) => x.slug === slug);
       expect(s, slug).toBeDefined();
-      expect(!!s!.signatureModule && (!!MODULES[s!.signatureModule] || !!STATIC_FALLBACKS[s!.signatureModule]), slug).toBe(false);
+      expect(!!s!.signatureModule && !!MODULES[s!.signatureModule], slug).toBe(false);
     }
   });
   it("photos exist, come from curated unbranded sources, and carry alt text in both locales", () => {

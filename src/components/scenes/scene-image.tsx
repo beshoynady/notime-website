@@ -2,7 +2,7 @@ import { getImageProps } from "next/image";
 import { useLocale } from "next-intl";
 import type { Locale } from "@/content";
 import { getSceneImage } from "@/content/scenes";
-import type { ImageLoading } from "@/lib/scene-math";
+import { PIN_MIN_WIDTH, type ImageLoading } from "@/lib/scene-math";
 import { capSrcSet } from "@/lib/srcset";
 
 /**
@@ -31,12 +31,12 @@ export function SceneImage({ slot, sizes, loading, fit = "cover" }: { slot: stri
   const { props } = getImageProps({ ...common, src: s.src, className: fit === "contain" ? "object-contain" : "object-cover" });
   // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text -- getImageProps output (alt included); the srcset is trimmed (D51)
   const img = <img {...props} srcSet={capSrcSet(props.srcSet, s.width)} />;
-  // An eager desktop-only image (the Workshop's gift, N06): phones take a 1 px placeholder, so
-  // the eager load never fetches the file below 900px, where the layer is `display: none`.
+  // An eager desktop-only image (the Workshop's gift, N06): below PIN_MIN_WIDTH, where the layer is
+  // `display: none`, the browser takes a 1 px placeholder, so the eager load never fetches the file.
   if (loading?.phoneGate)
     return (
       <picture>
-        <source media="(max-width: 899.98px)" srcSet={PHONE_PLACEHOLDER} />
+        <source media={`(max-width: ${PIN_MIN_WIDTH - 0.02}px)`} srcSet={PHONE_PLACEHOLDER} />
         {img}
       </picture>
     );

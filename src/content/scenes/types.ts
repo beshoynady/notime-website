@@ -47,7 +47,7 @@ export interface SceneLayer {
   push?: number;
   /** Scene image slot id (`SCENE_IMAGES`, scenes/images.ts). None on L3. */
   slot?: string;
-  /** L3 effect class (`fx-<name>` in layered-scene.css), e.g. "glow", "shade", "beam". */
+  /** L3 effect class (`fx-<name>` in layered-scene.css), e.g. "glow", "shade", "ev-frame". */
   fx?: string;
   /** Rendered and animated below PIN_MIN_WIDTH (1024px) too. */
   mobile: boolean;
@@ -61,6 +61,12 @@ export interface SceneLayer {
   enter?: { shot: number; from: EnterFrom };
   /** Changes at shot starts (light coming up, an overlay falling). The last one is the still. */
   keys?: LayerKey[];
+  /** Requests its image at another layer's size (by id), not its own box's: a blurred backdrop
+   * asks for its sharp frame's size, so the two share one file (D153). */
+  sizesOf?: string;
+  /** How the image fills its box. Default: `cover` for a full-frame layer (it registers with its
+   * plate), `contain` otherwise (a trimmed cutout is never cropped); a framed photo is `cover`. */
+  fit?: "cover" | "contain";
   /** Loads eagerly (shot-1 layers within the opening's budget only). */
   eager?: boolean;
 }

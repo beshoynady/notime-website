@@ -55,7 +55,7 @@ export function LayeredScene({
   const scene = visibleLayers(config, has);
   const still = mode === "still";
   const hero = mode === "hero";
-  const loading = imageLoading(scene, mode, has);
+  const loading = imageLoading(scene, mode);
   const stage = (
     <div
       className="scene"
@@ -67,9 +67,10 @@ export function LayeredScene({
       aria-label={label}
     >
       <div className="scene-layers" aria-hidden="true">
-        {scene.layers.map((layer) => (
-          <Layer key={layer.id} layer={layer} variant={variant} loading={loading[layer.id]} />
-        ))}
+        {scene.layers.map((layer) => {
+          const sizedBy = (layer.sizesOf && scene.layers.find((l) => l.id === layer.sizesOf)) || layer;
+          return <Layer key={layer.id} layer={layer} sizes={layerSizes(sizedBy.box)} variant={variant} loading={loading[layer.id]} />;
+        })}
       </div>
       <div className={cn("scene-overlay", overlayClassName)}>
         {children}
@@ -106,7 +107,7 @@ export function LayeredScene({
   );
 }
 
-function Layer({ layer, variant, loading }: { layer: SceneLayer; variant: "live" | "animatic"; loading?: ImageLoading }) {
+function Layer({ layer, sizes, variant, loading }: { layer: SceneLayer; sizes: string; variant: "live" | "animatic"; loading?: ImageLoading }) {
   const still = stillState(layer);
   const light = {
     "--rest-opacity": layer.style?.opacity,
@@ -137,10 +138,9 @@ function Layer({ layer, variant, loading }: { layer: SceneLayer; variant: "live"
           ) : layer.slot ? (
             <SceneImage
               slot={layer.slot}
-              sizes={layerSizes(layer.box)}
+              sizes={sizes}
               loading={loading}
-              // A full-frame layer registers with its plate (cover); a trimmed cutout is never cropped (contain).
-              fit={layer.box.block === "0" && layer.box.inline === "0" ? "cover" : "contain"}
+              fit={layer.fit ?? (layer.box.block === "0" && layer.box.inline === "0" ? "cover" : "contain")}
             />
           ) : null}
         </div>

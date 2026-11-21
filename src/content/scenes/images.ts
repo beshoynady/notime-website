@@ -21,8 +21,10 @@ const BY_CATEGORY: { category: CategorySlug; grade: SceneImageSlot["grade"]; slo
     grade: "evening",
     slots: [
       plate("ev-open-hall"),
-      // The room, dressed (batch 2): a real photo as a plate, graded with scripts/grade.mjs. It
-      // fades in over the drawn hall on the same vanishing point (scenes/events-hospitality.ts).
+      // The room, dressed (batch 2): a real photo as a plate, graded with scripts/grade.mjs. It wipes
+      // in over the same room at night (ev-open-night, scenes/events-hospitality.ts). The ev-open-hall,
+      // -florals, -candles, -glasses and ev-majlis-* slots below are from the drawn scenes and unused
+      // since D153; they leave with the move into media.ts (D152).
       {
         id: "ev-open-room",
         source: { kind: "real", from: "private-celebrations-1" },

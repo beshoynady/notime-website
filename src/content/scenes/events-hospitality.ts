@@ -1,4 +1,4 @@
-import type { SceneConfig } from "./types";
+import type { SceneConfig, SceneLayer } from "./types";
 
 /**
  * I · Events & Hospitality, "The evening, before the first guest" (docs/content/visual-stories.md;
@@ -13,6 +13,33 @@ import type { SceneConfig } from "./types";
  *   4. the entrance arrangement comes in from the inline-end, a framed photo: the first guest's view.
  * Phones and reduced motion: the still, the lit room with its tables (the entrance is desktop-only).
  */
+/** A full-frame box: the layer fills the stage. */
+const FULL = { block: "0", inline: "0" } as const;
+
+/** L3 · the scrim under the head and the shot lines, so ivory text holds on a photo's pale parts. */
+const scrim: SceneLayer = { id: "scrim", level: 3, fx: "ev-scrim", depth: 0, mobile: true, box: FULL };
+
+/** L2 · one of Rand's photos framed at about its own size, cropped to its box (`fx-ev-frame`).
+ * Laptop only: on a phone the frame would be a sliver, and the work follows in the section's strip. */
+const frame = (id: string, slot: string, depth: number, box: SceneLayer["box"], rest: Partial<SceneLayer> = {}): SceneLayer => ({
+  id,
+  level: 2,
+  slot,
+  fx: "ev-frame",
+  depth,
+  mobile: false,
+  box,
+  fit: "cover",
+  ...rest,
+});
+
+/** L0 · a frame's own photo, blurred and dimmed behind it (`fx-ev-blur`), at the frame's size so the
+ * two share one file. Laptop only. */
+const backdrop = (slot: string, sizesOf: string): SceneLayer => ({ id: "backdrop", level: 0, slot, fx: "ev-blur", depth: 0.1, mobile: false, box: FULL, sizesOf });
+
+/** L0 · a portrait photo as the phone's plate, where a laptop shows frames (`desktop: false`). */
+const phonePlate = (slot: string): SceneLayer => ({ id: "phone-plate", level: 0, slot, depth: 0.15, push: 0.04, mobile: true, desktop: false, box: FULL });
+
 export const EVENTS_OPENING: SceneConfig = {
   id: "events-opening",
   hero: true,
@@ -25,20 +52,19 @@ export const EVENTS_OPENING: SceneConfig = {
   layers: [
     // L0: the room at night, the hour before (the film's first frame, desktop only: phones get the
     // still, D154). Push-in 1.00 → 1.04 over the act.
-    { id: "night", level: 0, slot: "ev-open-night", depth: 0.15, push: 0.04, mobile: false, eager: true, box: { block: "0", inline: "0" } },
+    { id: "night", level: 0, slot: "ev-open-night", depth: 0.15, push: 0.04, mobile: false, eager: true, box: FULL },
     // L0: the same room in its light, wiping in from the centre aisle like curtains (D109).
-    { id: "room", level: 0, slot: "ev-open-room", depth: 0.15, push: 0.04, mobile: true, eager: true, box: { block: "0", inline: "0" }, style: { wipe: 0 }, keys: [{ shot: 1, to: { wipe: 1 } }] },
+    { id: "room", level: 0, slot: "ev-open-room", depth: 0.15, push: 0.04, mobile: true, box: FULL, style: { wipe: 0 }, keys: [{ shot: 1, to: { wipe: 1 } }] },
     // L1: the near tables, cut from the same photo along the aisle (D109): they open as the room is
     // dressed, then drift and push faster than it, so the camera walks down the aisle (2.5D).
-    { id: "near-tables", level: 1, slot: "ev-open-table", depth: 0.55, push: 0.1, mobile: true, eager: true, box: { block: "0", inline: "0" }, style: { wipe: 0 }, keys: [{ shot: 2, to: { wipe: 1 } }] },
+    { id: "near-tables", level: 1, slot: "ev-open-table", depth: 0.55, push: 0.1, mobile: true, box: FULL, style: { wipe: 0 }, keys: [{ shot: 2, to: { wipe: 1 } }] },
     // L3: the overlay lifts as the light comes up (text stays AA over the scrim below).
-    { id: "dusk", level: 3, fx: "shade", depth: 0, mobile: true, box: { block: "0", inline: "0" }, style: { opacity: 0.3 }, keys: [{ shot: 1, to: { opacity: 0.2 } }, { shot: 3, to: { opacity: 0.15 } }] },
+    { id: "dusk", level: 3, fx: "shade", depth: 0, mobile: true, box: FULL, style: { opacity: 0.3 }, keys: [{ shot: 1, to: { opacity: 0.2 } }, { shot: 3, to: { opacity: 0.15 } }] },
     // L3: the stage's warm glow at the end of the aisle.
     { id: "stage-glow", level: 3, fx: "glow", depth: 0.2, mobile: true, box: { block: "18% 38%", inline: "26% 26%" }, style: { opacity: 0 }, keys: [{ shot: 1, to: { opacity: 0.8, scale: 1.1 } }, { shot: 3, to: { scale: 1.5 } }] },
     // L2: the entrance (a real NO TIME arrangement), a framed photo at the inline-end (mirrors in AR).
-    { id: "entrance", level: 2, slot: "private-celebrations-3", fx: "ev-frame", depth: 0.6, mobile: false, box: { block: "24% 14%", inline: "66% 7%" }, enter: { shot: 3, from: { x: 12, opacity: 0 } } },
-    // L3: the scrim under the H1 and the lines.
-    { id: "scrim", level: 3, fx: "ev-scrim", depth: 0, mobile: true, box: { block: "0", inline: "0" } },
+    frame("entrance", "private-celebrations-3", 0.6, { block: "24% 14%", inline: "66% 7%" }, { enter: { shot: 3, from: { x: 12, opacity: 0 } } }),
+    scrim,
   ],
 };
 
@@ -50,8 +76,6 @@ export const EVENTS_OPENING: SceneConfig = {
  * Arabic), clear of the head, which sits over the lower third on the scrim. Frames are laptop-only:
  * on a phone the plates play and the work follows in the section's strip (GALLERIES).
  */
-const scrim = { id: "scrim", level: 3, fx: "ev-scrim", depth: 0, mobile: true, box: { block: "0", inline: "0" } } as const;
-
 /** I · "Eight in the morning, the hall fills": the rows set, the session running, the break laid. */
 export const EVENTS_CONFERENCES: SceneConfig = {
   id: "events-conferences",
@@ -62,9 +86,9 @@ export const EVENTS_CONFERENCES: SceneConfig = {
     { id: "break", desktop: [0.42, 0.55], mobile: null },
   ],
   layers: [
-    { id: "rows", level: 0, slot: "ev-conf-rows", depth: 0.15, push: 0.03, mobile: true, box: { block: "0", inline: "0" } },
-    { id: "session", level: 0, slot: "ev-conf-session", depth: 0.15, push: 0.03, mobile: true, box: { block: "0", inline: "0" }, style: { opacity: 0 }, keys: [{ shot: 1, to: { opacity: 1 } }] },
-    { id: "break", level: 2, slot: "catering-7", fx: "ev-frame", depth: 0.3, mobile: false, box: { block: "12% 50%", inline: "58% 6%" }, enter: { shot: 2, from: { x: 12, opacity: 0 } } },
+    { id: "rows", level: 0, slot: "ev-conf-rows", depth: 0.15, push: 0.03, mobile: true, box: FULL },
+    { id: "session", level: 0, slot: "ev-conf-session", depth: 0.15, push: 0.03, mobile: true, box: FULL, style: { opacity: 0 }, keys: [{ shot: 1, to: { opacity: 1 } }] },
+    frame("break", "catering-7", 0.3, { block: "12% 50%", inline: "58% 6%" }, { enter: { shot: 2, from: { x: 12, opacity: 0 } } }),
     scrim,
   ],
 };
@@ -79,10 +103,10 @@ export const EVENTS_EXHIBITIONS: SceneConfig = {
     { id: "work", desktop: [0.42, 0.55], mobile: null },
   ],
   layers: [
-    { id: "hall", level: 0, slot: "ev-exh-hall", depth: 0.15, push: 0.04, mobile: true, box: { block: "0", inline: "0" } },
-    { id: "stand", level: 2, slot: "sandoz-1", fx: "ev-frame", depth: 0.35, mobile: false, box: { block: "8% 30%", inline: "50% 28%" }, enter: { shot: 1, from: { y: 8, opacity: 0 } } },
-    { id: "pavilion", level: 2, slot: "egyptair-pavilion-1", fx: "ev-frame", depth: 0.5, mobile: false, box: { block: "10% 64%", inline: "76% 3%" }, enter: { shot: 2, from: { x: 12, opacity: 0 } } },
-    { id: "identity", level: 2, slot: "uae-pro-league-1", fx: "ev-frame", depth: 0.5, mobile: false, box: { block: "42% 34%", inline: "76% 3%" }, enter: { shot: 2, from: { x: 12, opacity: 0 } } },
+    { id: "hall", level: 0, slot: "ev-exh-hall", depth: 0.15, push: 0.04, mobile: true, box: FULL },
+    frame("stand", "sandoz-1", 0.35, { block: "8% 30%", inline: "50% 28%" }, { enter: { shot: 1, from: { y: 8, opacity: 0 } } }),
+    frame("pavilion", "egyptair-pavilion-1", 0.5, { block: "10% 64%", inline: "76% 3%" }, { enter: { shot: 2, from: { x: 12, opacity: 0 } } }),
+    frame("identity", "uae-pro-league-1", 0.5, { block: "42% 34%", inline: "76% 3%" }, { enter: { shot: 2, from: { x: 12, opacity: 0 } } }),
     scrim,
   ],
 };
@@ -96,11 +120,11 @@ export const EVENTS_LAUNCHES: SceneConfig = {
     { id: "moment", desktop: [0.32, 0.5], mobile: [0.3, 0.5] },
   ],
   layers: [
-    { id: "spot", level: 0, slot: "ev-launch-spot", depth: 0.15, push: 0.05, mobile: true, box: { block: "0", inline: "0" } },
+    { id: "spot", level: 0, slot: "ev-launch-spot", depth: 0.15, push: 0.05, mobile: true, box: FULL },
     { id: "glow", level: 3, fx: "glow", depth: 0.2, mobile: true, box: { block: "20% 30%", inline: "25% 25%" }, style: { opacity: 0.4 }, keys: [{ shot: 1, to: { opacity: 0, scale: 1.3 } }] },
     // The real ceremony in a frame: the file is 1060px wide and busy, too soft and loud as a backdrop
     // behind the head. Laptop only (a phone keeps the spot, the frame would be a sliver).
-    { id: "moment", level: 2, slot: "uae-pro-league-2", fx: "ev-frame", depth: 0.35, mobile: false, box: { block: "10% 46%", inline: "42% 5%" }, enter: { shot: 1, from: { x: 10, opacity: 0 } } },
+    frame("moment", "uae-pro-league-2", 0.35, { block: "10% 46%", inline: "42% 5%" }, { enter: { shot: 1, from: { x: 10, opacity: 0 } } }),
     scrim,
   ],
 };
@@ -121,10 +145,10 @@ export const EVENTS_GALAS: SceneConfig = {
     { id: "roses", desktop: [0.3, 0.45], mobile: null },
   ],
   layers: [
-    { id: "backdrop", level: 0, slot: "private-celebrations-4", fx: "ev-blur", depth: 0.1, mobile: false, box: { block: "0", inline: "0" } },
-    { id: "phone-plate", level: 0, slot: "private-celebrations-2", depth: 0.15, push: 0.04, mobile: true, desktop: false, box: { block: "0", inline: "0" } },
-    { id: "runner", level: 2, slot: "private-celebrations-4", fx: "ev-frame", depth: 0.3, mobile: false, box: { block: "10% 50%", inline: "34% 25%" } },
-    { id: "roses", level: 2, slot: "private-celebrations-2", fx: "ev-frame", depth: 0.55, mobile: false, box: { block: "6% 30%", inline: "78% 4%" }, enter: { shot: 1, from: { y: 8, opacity: 0 } } },
+    backdrop("private-celebrations-4", "runner"),
+    phonePlate("private-celebrations-2"),
+    frame("runner", "private-celebrations-4", 0.3, { block: "10% 50%", inline: "34% 25%" }),
+    frame("roses", "private-celebrations-2", 0.55, { block: "6% 30%", inline: "78% 4%" }, { enter: { shot: 1, from: { y: 8, opacity: 0 } } }),
     scrim,
   ],
 };
@@ -134,6 +158,9 @@ export const EVENTS_GALAS: SceneConfig = {
  * the header, the tent at night, then the carts, then the coffee on the carpet. Phone: no pin, the
  * brass cart as its plate as it crosses. Reduced motion: the end frame, every photo in place.
  */
+/** The majlis's centre frame: the tent, then the coffee in its place. */
+const CENTRE = { block: "8% 42%", inline: "34% 36%" };
+
 export const EVENTS_MAJLIS: SceneConfig = {
   id: "events-majlis",
   mode: { desktop: "pin", mobile: "pass" },
@@ -143,13 +170,13 @@ export const EVENTS_MAJLIS: SceneConfig = {
     { id: "coffee", desktop: [0.4, 0.6], mobile: null },
   ],
   layers: [
-    { id: "backdrop", level: 0, slot: "heritage-5", fx: "ev-blur", depth: 0.1, mobile: false, box: { block: "0", inline: "0" } },
-    { id: "phone-plate", level: 0, slot: "heritage-4", depth: 0.15, push: 0.04, mobile: true, desktop: false, box: { block: "0", inline: "0" } },
+    backdrop("heritage-5", "tent"),
+    phonePlate("heritage-4"),
     // The centre frame: the tent, then the coffee poured on the carpet in its place (beat 3).
-    { id: "tent", level: 1, slot: "heritage-5", fx: "ev-frame", depth: 0.3, mobile: false, box: { block: "8% 42%", inline: "34% 36%" } },
-    { id: "coffee", level: 1, slot: "heritage-2", fx: "ev-frame", depth: 0.3, mobile: false, box: { block: "8% 42%", inline: "34% 36%" }, enter: { shot: 2, from: { opacity: 0 } } },
+    frame("tent", "heritage-5", 0.3, CENTRE, { level: 1 }),
+    frame("coffee", "heritage-2", 0.3, CENTRE, { level: 1, enter: { shot: 2, from: { opacity: 0 } } }),
     // The right column: the brass carts arrive (beat 2).
-    { id: "carts", level: 2, slot: "heritage-1", fx: "ev-frame", depth: 0.5, mobile: false, box: { block: "10% 56%", inline: "67% 3%" }, enter: { shot: 1, from: { x: 12, opacity: 0 } } },
+    frame("carts", "heritage-1", 0.5, { block: "10% 56%", inline: "67% 3%" }, { enter: { shot: 1, from: { x: 12, opacity: 0 } } }),
     scrim,
   ],
 };
@@ -168,9 +195,9 @@ export const EVENTS_STAGE: SceneConfig = {
     { id: "live", desktop: [0.4, 0.6], mobile: [0.3, 0.55] },
   ],
   layers: [
-    { id: "beams", level: 0, slot: "ev-stage-beams", depth: 0.15, push: 0.04, mobile: true, box: { block: "0", inline: "0" }, style: { opacity: 0.35 }, keys: [{ shot: 1, to: { opacity: 1 } }] },
-    { id: "live", level: 0, slot: "ev-stage-live", depth: 0.15, push: 0.04, mobile: true, box: { block: "0", inline: "0" }, style: { opacity: 0 }, keys: [{ shot: 2, to: { opacity: 1 } }] },
-    { id: "rig", level: 2, slot: "private-celebrations-8", fx: "ev-frame", depth: 0.4, mobile: false, box: { block: "10% 46%", inline: "44% 10%" }, keys: [{ shot: 1, to: { opacity: 0 } }] },
+    { id: "beams", level: 0, slot: "ev-stage-beams", depth: 0.15, push: 0.04, mobile: true, box: FULL, style: { opacity: 0.35 }, keys: [{ shot: 1, to: { opacity: 1 } }] },
+    { id: "live", level: 0, slot: "ev-stage-live", depth: 0.15, push: 0.04, mobile: true, box: FULL, style: { opacity: 0 }, keys: [{ shot: 2, to: { opacity: 1 } }] },
+    frame("rig", "private-celebrations-8", 0.4, { block: "10% 46%", inline: "44% 10%" }, { keys: [{ shot: 1, to: { opacity: 0 } }] }),
     scrim,
   ],
 };

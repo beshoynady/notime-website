@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { SceneConfig, SceneLayer, SceneShot } from "@/content/scenes/types";
-import { PIN_LIMIT, SECTION_PIN_LIMIT, enterFrom, imageLoading, layerDrift, layerSizes, lineSpans, pinLength, sceneMode, sceneProblems, shotAt, stillState, stillLead, wipeInset } from "./scene-math";
+import { PIN_LIMIT, SECTION_PIN_LIMIT, enterFrom, imageLoading, layerDrift, layerSizes, lineSpans, pinLength, sceneMode, sceneProblems, shotAt, showsOn, stillState, stillLead, wipeInset } from "./scene-math";
 
 const shots: SceneShot[] = [
   { id: "a", copyKey: "a", desktop: [0, 0.45], mobile: [0, 0.35] },
@@ -214,11 +214,17 @@ describe("wipeInset (D109)", () => {
   });
 });
 
+describe("showsOn (D153)", () => {
+  it("a layer shows on phones when `mobile`, and on laptops unless it is phone-only", () => {
+    expect([showsOn({ mobile: true }, "mobile"), showsOn({ mobile: true }, "desktop")]).toEqual([true, true]);
+    expect([showsOn({ mobile: false }, "mobile"), showsOn({ mobile: false }, "desktop")]).toEqual([false, true]);
+    expect([showsOn({ mobile: true, desktop: false }, "mobile"), showsOn({ mobile: true, desktop: false }, "desktop")]).toEqual([true, false]);
+  });
+});
+
 describe("imageLoading (N06)", () => {
-  const files = new Set(["room", "table", "desk"]);
-  const has = (slot: string) => files.has(slot);
+  // Layers without a file never reach imageLoading: visibleLayers drops them first (D78).
   const layers = [
-    layer({ id: "hall", level: 0, slot: "hall-plate" }), // no file yet: never loads
     layer({ id: "room", level: 0, slot: "room", style: { wipe: 0 }, keys: [{ shot: 2, to: { wipe: 1 } }] }),
     layer({ id: "table", level: 1, slot: "table", style: { wipe: 0 }, keys: [{ shot: 2, to: { wipe: 1 } }] }),
     layer({ id: "desk", level: 2, slot: "desk", mobile: false }),
@@ -229,23 +235,23 @@ describe("imageLoading (N06)", () => {
   const lazy = { eager: false, high: false, phoneGate: false };
 
   it("the still: the first image it shows has high priority, the other phone layers load eagerly, desktop-only ones lazily", () => {
-    expect(imageLoading(scene({ layers }), "still", has)).toEqual({ room: high, table: eager, desk: lazy });
+    expect(imageLoading(scene({ layers }), "still")).toEqual({ room: high, table: eager, desk: lazy });
   });
 
   it("the still skips an image its end frame hides", () => {
-    const gone = [layer({ id: "flash", slot: "room", style: { opacity: 0 }, keys: [{ shot: 1, to: { opacity: 1 } }, { shot: 2, to: { opacity: 0 } }] }), layers[2]];
-    expect(imageLoading(scene({ layers: gone }), "still", has)).toEqual({ flash: lazy, table: high });
+    const gone = [layer({ id: "flash", slot: "room", style: { opacity: 0 }, keys: [{ shot: 1, to: { opacity: 1 } }, { shot: 2, to: { opacity: 0 } }] }), layers[1]];
+    expect(imageLoading(scene({ layers: gone }), "still")).toEqual({ flash: lazy, table: high });
   });
 
   it("a desktop-only first image is eager with high priority on desktop, and gated from phones", () => {
     // `phoneGate`: SceneImage gives phones a placeholder source, so they never fetch the file.
-    expect(imageLoading(scene({ layers: [layers[3], layers[2]] }), "still", has)).toEqual({ desk: { eager: true, high: true, phoneGate: true }, table: eager });
+    expect(imageLoading(scene({ layers: [layers[2], layers[1]] }), "still")).toEqual({ desk: { eager: true, high: true, phoneGate: true }, table: eager });
   });
 
   it("the hero (D154): desktop's first frame and the phone's still both load first; a later entrance waits", () => {
     const night = layer({ id: "night", level: 0, slot: "desk", mobile: false });
     const entrance = layer({ id: "door", level: 2, slot: "table", mobile: false, enter: { shot: 3, from: { opacity: 0 } } });
-    expect(imageLoading(scene({ layers: [night, layers[1], layers[2], entrance] }), "hero", has)).toEqual({
+    expect(imageLoading(scene({ layers: [night, layers[0], layers[1], entrance] }), "hero")).toEqual({
       night: { eager: true, high: true, phoneGate: true },
       room: high,
       table: eager,
@@ -255,11 +261,11 @@ describe("imageLoading (N06)", () => {
 
   it("a phone-only plate (desktop: false) never loads eagerly: laptops hide it and must not fetch it", () => {
     const phone = layer({ id: "phone", level: 0, slot: "room", desktop: false });
-    expect(imageLoading(scene({ layers: [phone, layers[2]] }), "still", has)).toEqual({ phone: lazy, table: high });
+    expect(imageLoading(scene({ layers: [phone, layers[1]] }), "still")).toEqual({ phone: lazy, table: high });
   });
 
   it("the build scene never competes with the hero: every image is lazy", () => {
-    expect(imageLoading(scene({ layers }), "build", has)).toEqual({ room: lazy, table: lazy, desk: lazy });
+    expect(imageLoading(scene({ layers }), "build")).toEqual({ room: lazy, table: lazy, desk: lazy });
   });
 });
 

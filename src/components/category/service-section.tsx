@@ -1,7 +1,6 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { ModulePlaceholder } from "@/components/modules/module-placeholder";
 import { ModuleSlot } from "@/components/modules/module-slot";
-import { STATIC_FALLBACKS } from "@/components/modules/static-fallbacks";
 import { ServiceVisual } from "./service-visual";
 import { ServiceGallery } from "./service-gallery";
 import { GALLERIES } from "@/content/galleries";
@@ -24,8 +23,7 @@ import { serviceRef } from "@/lib/review";
 /**
  * One service on its category page (spec §4, part 3): `section#<anchor>`, named by its H2 so the
  * anchor utility focuses the heading on arrival (D53). Its signature module loads into a slot
- * around its static fallback (STATIC_FALLBACKS: the module's final state, server-rendered in the
- * same box), or the empty one when it has none (Task 2.4). Related work is one block per page
+ * (ModuleSlot) around the empty placeholder (Task 2.4). Related work is one block per page
  * (RelatedWork, before the FAQ).
  *
  * A section with its own scene (every Events section, D153) sets its numeral, H2 and promise over
@@ -36,15 +34,12 @@ export async function ServiceSection({
   tone,
   lab = false,
   hook,
-  light = false,
 }: {
   service: Service;
   tone: "dark" | "light";
   lab?: boolean;
   /** The section's one-line hook, under the H2 (service-hooks.ts); none keeps the plain head. */
   hook?: Localized<string>;
-  /** The Evening's own light per section (themes/evening.css, EveningDirector). */
-  light?: boolean;
 }) {
   const locale = (await getLocale()) as Locale;
   const t = await getTranslations("category");
@@ -52,10 +47,9 @@ export async function ServiceSection({
   const titleId = `${service.anchor}-title`;
   const scene = getSectionScene(service, lab);
   const moduleKey = service.signatureModule;
-  const Static = lab || !moduleKey ? undefined : STATIC_FALLBACKS[moduleKey];
   // A section whose module waits for v1.1 shows a lightweight visual instead (D100); a photo
   // scene has neither: Rand's own work follows it as a strip (D153).
-  const visual = lab || Static || !moduleKey ? undefined : serviceVisual(service.slug);
+  const visual = lab || !moduleKey ? undefined : serviceVisual(service.slug);
   const gallery = GALLERIES[service.slug];
   const head = (
     <header className="svc-head">
@@ -77,7 +71,6 @@ export async function ServiceSection({
       data-scene-section={scene ? "" : undefined}
     >
       <SectionRef id={serviceRef(service)} />
-      {light && !scene && <span className="svc-light" aria-hidden="true" />}
       {scene ? (
         <div className="svc-scene">
           <LayeredScene
@@ -120,11 +113,7 @@ export async function ServiceSection({
           service={service}
           locale={locale}
         >
-          {Static ? (
-            <Static service={service} locale={locale} />
-          ) : (
-            <ModulePlaceholder />
-          )}
+          <ModulePlaceholder />
         </ModuleSlot>
       )}
       {/* Public pages go straight to the brief with this service preset (D102); the lab keeps the

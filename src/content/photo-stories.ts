@@ -52,22 +52,6 @@ export const STORY_PHOTOS = {
     en: "A desert tent at night, its floor laid with carpets.",
     ar: "خيمة في الصحراء ليلًا، أرضها مفروشة بالسجاد.",
   }),
-  terrace: p("st-terrace", "private-celebrations-7", 850, 638, {
-    en: "A terrace with a white floral installation among palms.",
-    ar: "شرفة يتوسّطها تنسيق زهور أبيض بين أشجار النخيل.",
-  }),
-  dessert: p("st-dessert", "private-celebrations-5", 949, 534, {
-    en: "A reception dessert table with a silver candelabra.",
-    ar: "طاولة حلويات لحفل استقبال، يتوسّطها شمعدان فضي.",
-  }),
-  runner: p("st-runner", "private-celebrations-4", 811, 541, {
-    en: "Candles and hydrangeas along a table runner.",
-    ar: "شموع وزهور كوبية على امتداد مفرش الطاولة.",
-  }),
-  keepsake: p("st-keepsake", "private-celebrations-6", 859, 1290, {
-    en: "A bouquet wrapped as a keepsake for guests.",
-    ar: "باقة زهور مغلّفة تذكارًا للضيوف.",
-  }),
 } as const satisfies Record<string, StoryPhoto>;
 
 export type StoryPhotoKey = keyof typeof STORY_PHOTOS;

@@ -46,7 +46,7 @@ async function source(src) {
 }
 
 /** The largest `aspect` box inside w×h, centred on focus (clamped inside the image). */
-export function cropBox(w, h, aspect, focus = [0.5, 0.5]) {
+function cropBox(w, h, aspect, focus = [0.5, 0.5]) {
   const r = ratio(aspect);
   let cw = w;
   let ch = Math.round(w / r);
@@ -70,25 +70,24 @@ async function render(file, crop, item, suffix = "") {
     img = img.recomb(g.matrix).modulate(g.modulate);
   }
   if (item.night) img = img.modulate({ brightness: 0.62, saturation: 0.65 }).recomb([[0.82, 0, 0], [0, 0.9, 0], [0, 0.04, 1.08]]);
-  let buf = await img.png().toBuffer();
+  // A cutout goes through rembg as a lossless PNG; everything else is encoded straight to WebP.
   if (item.cut === "rembg") {
     const tmpIn = path.join(STOCK, `_cut-${item.id}${suffix}.png`);
     const tmpOut = path.join(STOCK, `_cut-${item.id}${suffix}-out.png`);
-    await sharp(buf).toFile(tmpIn);
+    await img.png().toFile(tmpIn);
     execFileSync("python", ["scripts/lib/rembg-cut.py", tmpIn, tmpOut], { stdio: "inherit" });
-    buf = readFileSync(tmpOut);
+    img = sharp(readFileSync(tmpOut));
   }
   const out = suffix ? item.out.replace(/\.webp$/, `${suffix}.webp`) : item.out;
   mkdirSync(path.dirname(out), { recursive: true });
-  const info = await sharp(buf).webp({ quality: 80, alphaQuality: 90, effort: 5 }).toFile(out);
+  const info = await img.webp({ quality: 80, alphaQuality: 90, effort: 5 }).toFile(out);
   return { file: "/" + out.replace(/^public\//, "").replaceAll("\\", "/"), width: info.width, height: info.height, kb: Math.round(info.size / 1024) };
 }
 
 for (const item of items) {
   if (only && item.id !== only) continue;
   const { file } = await source(item.src);
-  const main = await render(file, item.crop, item);
-  const mobile = item.mobile ? await render(file, item.mobile, item, "-9x16") : null;
+  const [main, mobile] = await Promise.all([render(file, item.crop, item), item.mobile ? render(file, item.mobile, item, "-9x16") : null]);
   console.log(
     `${item.id}: ${main.file} ${main.width}x${main.height} ${main.kb}KB` + (mobile ? ` · mobile ${mobile.file} ${mobile.width}x${mobile.height} ${mobile.kb}KB` : ""),
   );
