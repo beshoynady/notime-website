@@ -43,7 +43,7 @@ Why B: it's the only one that stays credible with the photos available, it reuse
 - **Image ids, not paths.** Every layer's `slot` names an entry of the central registry (§6).
 - **Breakpoints.** The pin plays at **≥ 1024px** (the owner's "laptop"); below that the scene **passes** (no pin, a calm parallax while it crosses the screen); the 9:16 art-directed crops still switch at 900px. Reduced motion: the end frame, no movement. (D151)
 - **Captions.** One short line per beat at most (the existing `copyKey`), new lines only where a section needs one, written to `copy-voice-reference.md`, humanizer for EN, native AR in the plural, marked for Rand in `copy-pending.md`.
-- **Budget.** At most 4 image layers per scene on desktop, 2 on phones; each layer's `sizes` from its box (B10's `layerSizes`); AVIF + WebP at 640/1080/1600/2400 widths; plates ≥ 2000px wide where the source allows, never upscaled; nothing eager below the first screen.
+- **Budget.** At most 4 image layers per scene on desktop, 2 on phones; each layer's `sizes` from its box (B10's `layerSizes`); one graded WebP master per layer (alpha kept for cutouts), from which next/image serves AVIF and WebP at the configured widths (`next.config.ts`), trimmed to the native width (`capSrcSet`); plates ≥ 2000px wide where the source allows, never upscaled; nothing eager below the first screen.
 
 **Where scenes go.**
 - **Category openings** keep their current still hero (D129: headline and CTA at first paint) with a real photo plate; the build scene after the hero (desktop) is the photo-beat scene.
