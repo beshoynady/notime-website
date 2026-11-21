@@ -17,6 +17,7 @@
 /.next/
 # The review build (NEXT_PUBLIC_REVIEW_MODE=1, scripts/review.mjs)
 /.next-review/
+/.next-base/
 /out/
 
 # production

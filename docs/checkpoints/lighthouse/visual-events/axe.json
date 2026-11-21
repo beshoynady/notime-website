@@ -1,0 +1,42 @@
+[
+  {
+    "path": "/en/services/events-hospitality",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/services/events-hospitality",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/services/events-hospitality",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/services/events-hospitality",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar",
+    "width": 390,
+    "violations": []
+  }
+]

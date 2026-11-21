@@ -17,7 +17,8 @@ const WIDTH = 150;
  * Brand logo linking home.
  * - `tone="auto"` (header): both variants render; CSS shows the one matching
  *   `#site-header[data-header-tone]` (globals.css, "Logo variants").
- * - `tone="dark" | "light"`: the background it sits on.
+ * - `tone="dark" | "light"`: the background it sits on (the footer).
+ * Only the header's logo loads eagerly: the footer's sits screens below the fold (Review Focus 5).
  */
 export function Logo({
   tone = "auto",
@@ -34,7 +35,7 @@ export function Logo({
       src={src}
       alt={t("logoAlt")}
       width={WIDTH}
-      loading="eager"
+      loading={tone === "auto" ? "eager" : "lazy"}
       className={cn("block h-auto w-[128px] min-[900px]:w-[150px]", cls)}
     />
   );
