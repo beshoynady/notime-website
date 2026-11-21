@@ -2,6 +2,16 @@
 
 Read `CLAUDE.md`, `AGENTS.md` and `PRODUCT.md` first. Decisions: `docs/DECISIONS.md` (latest D124; new ones from D125).
 
+## Now: the visual portfolio mandate (2026-11-21, authoritative)
+
+The owner's Arabic mandate «تحويل الموقع إلى معرض أعمال بصري»: photo layers instead of code drawings on every page, one image registry, the home first screen, Software's length, Work. Spec `docs/superpowers/specs/2026-11-21-visual-portfolio-design.md`, plan `docs/superpowers/plans/2026-11-21-visual-portfolio.md` (16 tasks), inline execution with the ledger `.superpowers/sdd/2026-11-21-visual-portfolio/progress.md` (gitignored; trust it over memory). Branch `phase-2-services`; no merge into main, no deploy; ends with a PR (not merged) and `docs/report/visual-report.md` (Arabic).
+
+**Done:** Task 1 registry `src/content/media.ts` (c0e742e) · Task 3 layer pipeline `scripts/scene-layers.mjs` + recipes (72164a7) · Tasks 2+4 pin from 1024px and the Events opening as a photo film, mode "hero" (1e6686a; D150–D154).
+**Owner add-on (2026-11-21):** ui-ux-pro-max installed at user scope from nextlevelbuilder/ui-ux-pro-max-skill; run `docs/review/ui-ux-checklist.md` on each page before its commit (brand colours and fonts never change; suggestions go to the report's proposals only).
+**Next:** Task 5, Events sections I–III: section scenes and galleries, delete the agenda-timeline, stand-assembly and launch-reveal modules. Then Tasks 6–7 (IV–VI, Events verification with before/after shots and Lighthouse A/B against f086c44).
+**Open with the owner:** delete the old unscoped `~/.claude/skills/ui-ux-pro-max` copy? Clear `.next/cache/images` (the local optimizer still serves the old night plate, so W02's Events desktop case can only pass on a fresh cache)?
+**Servers:** 3000 = prod build of 1e6686a (CI env, lab on); 3100 = review build (`.next-review`, 1ac76ca) behind the tunnel in `docs/review/tunnel.md`. Don't stop 3100.
+
 ## Now: the owner's mandate of 2026-11-20 (review, fix, creative pass)
 
 Four phases (the owner's message of 2026-11-20): **1** cut-off sections fixed on `phase-2-services`; **2** self-audit on a new branch `visual-pass` (from the last commit): `docs/review/self-audit.md`, scores per page × three lenses (art director, senior front-end, UX/conversion), notes split into bugs (fix now, one commit each) / weaknesses / opportunities (don't build), compare with nqshmedia.com/ar-ae and `docs/review/benchmark.md`; then **stop** and send the scores, the bug count, top 5 weaknesses, top 5 opportunities; **3** brainstorming with the owner, one question at a time in plain Arabic, 2–3 options each with mockups, home → Events → other categories → Work → global; design doc in `docs/superpowers/specs/` for approval; **4** plan and build only after approval. Limits: Lighthouse mobile not below today (home 52–55, /links ≥ 95), CLS 0; no cut section at any of the seven sizes; axe clean; honesty (D78); no merge to main.
