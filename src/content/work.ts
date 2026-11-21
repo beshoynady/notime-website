@@ -21,6 +21,11 @@ export interface WorkItem {
   markets: MarketKey[];
   anonymous: { label: Localized<string>; summary: Localized<string>; visual: DrawingKey };
   named: { label: Localized<string>; summary: Localized<string>; photos: string[] };
+  /**
+   * The case's own photo on home (a registry id, media.ts), shown named or not: the client is visible
+   * in it, so Rand approves it (`randApproval`, D150), but the text stays anonymous until `WORK_NAMED`.
+   */
+  cover: string;
   /** The case page (F1). Written without the client's name, so it reads true in both versions. */
   story: WorkStory;
 }
@@ -53,6 +58,7 @@ export const workItems: WorkItem[] = [
   {
     key: "egyptair",
     slug: "airline-exhibition-pavilion",
+    cover: "egyptair-pavilion-1",
     categories: ["events-hospitality", "marketing-brand"],
     markets: ["ae"],
     anonymous: {
@@ -93,6 +99,7 @@ export const workItems: WorkItem[] = [
   {
     key: "uaepl",
     slug: "football-league-events-awards",
+    cover: "uae-pro-league-2",
     categories: ["events-hospitality", "production-print-gifts", "marketing-brand"],
     markets: ["ae"],
     anonymous: {

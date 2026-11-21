@@ -47,8 +47,10 @@ export interface Category {
   /** The search title and description, when they should say more than the card's title and summary. */
   metaTitle?: Localized<string>;
   metaDescription?: Localized<string>;
-  /** 4:5 image slot id (mega menu, cards). */
+  /** 4:5 image slot id (mega menu; the home card when it has no `photo`). */
   image: string;
+  /** The home card's photograph, a registry id (media.ts; visual-stories.md "Five crafts"). Hidden or unset: `image`. */
+  photo?: string;
   /** Category page design (D57, docs/design/category-pages.md §5). */
   theme: CategoryTheme;
   /** Page intro under the H1 (2–3 sentences). */

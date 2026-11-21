@@ -3,8 +3,14 @@
    layers over a greyscale image; on a fine pointer, hovering or focusing the card fades them and
    the photo's own colour comes back (CSS only: no transform, nothing shared with GSAP or Motion).
    Reduced motion keeps the swap and drops the fade. */
+/* The default position sits in the components layer, so a utility on the element (`absolute
+   inset-0`, as in CaseMedia and home's Real projects) wins; unlayered, it collapsed the box to 0px. */
+@layer components {
+  .duotone {
+    position: relative;
+  }
+}
 .duotone {
-  position: relative;
   isolation: isolate;
 }
 .duotone img {

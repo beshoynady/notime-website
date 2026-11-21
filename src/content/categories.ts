@@ -19,6 +19,7 @@ export const categories: Category[] = [
       ar: "مؤتمرات وأجنحة معارض وحفلات إطلاق وأعراس ومجالس ضيافة، نخطّط لها من دبي ويديرها الفريق نفسه يوم الحدث حتى يغادر آخر ضيف.",
     },
     image: "cat-events-hospitality-4x5",
+    photo: "private-celebrations-2",
     theme: "evening",
     // Copy deck docs/content/category-copy-events.md (approved 2026-11-09).
     intro: {
@@ -71,6 +72,7 @@ export const categories: Category[] = [
       ar: "صورة وفيلم وموشن ومحتوى بالذكاء الاصطناعي، ومعها الديكور والمعدّات التي تصنعها.",
     },
     image: "cat-creative-production-4x5",
+    photo: "catering-4",
     theme: "studio",
     intro: { en: "Photography, video, motion graphics and AI content, with the sets and the equipment behind them. We cover events on the ground, shoot products and food, and take every piece through editing, sound and post-production.", ar: "تصوير فوتوغرافي وفيديو وموشن جرافيك ومحتوى بالذكاء الاصطناعي، ومعها الديكورات والمعدّات اللازمة. نغطّي الفعاليات في أرض الحدث، ونصوّر المنتجات والأطباق، ونتابع كل عمل حتى المونتاج وتصميم الصوت ومرحلة ما بعد الإنتاج." },
     // Copy deck draft for Rand's review (v1 decks task) + the D78 FAQ fills; clear fixes applied.
@@ -119,6 +121,7 @@ export const categories: Category[] = [
       ar: "هوية، وتواصل اجتماعي، وظهور في البحث، وعلاقات عامة، تُبقي الحديث عنكم قائمًا بعد الفعالية.",
     },
     image: "cat-marketing-brand-4x5",
+    photo: "uae-pro-league-3",
     theme: "editorial",
     intro: { en: "Brand strategy and identity, social media, search, PR and paid media, planned together so the brand speaks with one voice. We publish in Arabic and English, measure what runs, and report on it.", ar: "استراتيجية العلامة وهويتها، ووسائل التواصل الاجتماعي، ومحركات البحث، والعلاقات العامة، والإعلانات المدفوعة، في خطة واحدة تتحدث فيها العلامة بصوت واحد. ننشر بالعربية والإنجليزية، ونقيس أداء كل ما يُنشر، ونقدّم عنه تقارير واضحة." },
     // Copy deck draft for Rand's review (v1 decks task) + the D78 FAQ fills; clear fixes applied.
@@ -163,6 +166,7 @@ export const categories: Category[] = [
       ar: "أجنحة وطباعة وتغليف وهدايا، بلمسات نهائية من الرقائق المعدنية وUV والكبس والحفر بالليزر.",
     },
     image: "cat-production-print-gifts-4x5",
+    photo: "gifts-1",
     theme: "workshop",
     intro: { en: "Stands and signage, commercial and large-format print, packaging, corporate gifts and merchandise, produced to brand standard. We design, fabricate and install, and finish each gift with the branding method that suits it.", ar: "أجنحة ولافتات، وطباعة تجارية وكبيرة الحجم، وتغليف، وهدايا للشركات، ومنتجات تحمل هوية علامتكم وتلتزم بمعاييرها. نصمّم ونصنّع ونركّب، ونختار لكل هدية طريقة الطباعة أو الحفر التي تليق بها." },
     // Copy deck draft for Rand's review (v1 decks task) + the D78 FAQ fills; clear fixes applied.

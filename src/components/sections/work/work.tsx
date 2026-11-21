@@ -1,9 +1,11 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { HoverSweep } from "@/components/motion/hover-sweep";
 import { SectionRef } from "@/components/review/section-ref";
-import { CaseMedia } from "@/components/pages/case-media";
+import { FrameCorners } from "@/components/ornaments/frame-corners";
+import { MediaImage } from "@/components/ui/media-image";
 import { getCategory, workHref, WORK_INDEX_HREF, type Locale } from "@/content";
 import { Link } from "@/i18n/navigation";
+import { media } from "@/content/media";
 import { workItems, workView } from "@/content/work";
 import { HOME_REF } from "@/lib/review";
 import { Showreel } from "./showreel";
@@ -14,8 +16,8 @@ import "./work.css";
  * Home · Our work (H-04, dark). The three cases from `work.ts`, anonymised until each client
  * approves its name (D78 §6): the descriptor, the categories it spans and the verified facts.
  *
- * Media: a case's own photos once named; until then a drawing of the work (CaseMedia, D106), never
- * a stand-in photo.
+ * Media: the case's own photo (`cover`), named or not (D150: the client shows in it, so Rand approves
+ * it; the text stays anonymous). Never a stand-in photo (D106); a hidden cover leaves the card as text.
  * Each card opens its case page (F1): the title is the link; the media repeats it for pointers only
  * (out of the tab order and hidden from assistive tech, so each case is one stop and one name).
  * "Watch the reel" opens the showreel (H-09) from the header: the reel as the first proof, never
@@ -23,7 +25,7 @@ import "./work.css";
  */
 export async function Work() {
   const [t, tr, locale] = await Promise.all([getTranslations("work"), getTranslations("reel"), getLocale() as Promise<Locale>]);
-  const cases = workItems.map((w) => ({ item: w, view: workView(w) }));
+  const cases = workItems.map((w) => ({ item: w, view: workView(w), cover: media(w.cover) }));
   return (
     <section id="work" data-tone="dark" aria-labelledby="work-title" className="section-pad">
       <SectionRef id={HOME_REF.work} />
@@ -56,14 +58,19 @@ export async function Work() {
           </div>
         </header>
         <ul className="work-grid">
-          {cases.map(({ item, view }, i) => {
+          {cases.map(({ item, view, cover }, i) => {
             return (
               <li key={view.key} className="work-card" data-lead={i === 0 ? "" : undefined}>
-                <Link href={workHref(view.slug)} tabIndex={-1} aria-hidden="true" className="work-media-link">
-                  <HoverSweep className="work-media">
-                    <CaseMedia view={view} locale={locale} sizes={i === 0 ? "(min-width: 900px) 58vw, 100vw" : "(min-width: 900px) 40vw, 100vw"} />
-                  </HoverSweep>
-                </Link>
+                {cover && (
+                  <Link href={workHref(view.slug)} tabIndex={-1} aria-hidden="true" className="work-media-link">
+                    <HoverSweep className="work-media">
+                      <div className="duotone absolute inset-0">
+                        <MediaImage entry={cover} locale={locale} decorative sizes={i === 0 ? "(min-width: 900px) 58vw, 100vw" : "(min-width: 900px) 40vw, 100vw"} />
+                      </div>
+                      <FrameCorners inset="md" />
+                    </HoverSweep>
+                  </Link>
+                )}
                 <div className="work-body">
                   <ul className="work-meta text-eyebrow" aria-label={t("spansLabel")}>
                     {item.categories.map((c) => (
