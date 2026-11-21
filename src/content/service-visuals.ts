@@ -6,13 +6,16 @@ import type { Localized } from "./types";
  * scripts/grade.mjs), otherwise a small code-drawn composition (service-drawings.tsx). Static, no
  * interactivity. Remove a service's entry when its real module ships (service-visuals.test.ts).
  */
-export type DrawingKey = "timeline" | "frames" | "mark" | "feed" | "search" | "funnel" | "stand" | "dieline" | "merch" | "stage";
+export type DrawingKey = "mark" | "feed" | "search" | "funnel" | "stand" | "dieline" | "merch" | "stage";
 
 export type ServiceVisual =
   | { kind: "photo"; src: string; width: number; height: number; from: string; alt: Localized<string> }
+  /** A registry picture (media.ts, D152): hidden there, the section shows no visual (fill or hide). */
+  | { kind: "media"; id: string }
   | { kind: "drawing"; drawing: DrawingKey };
 
 const draw = (drawing: DrawingKey): ServiceVisual => ({ kind: "drawing", drawing });
+const pic = (id: string): ServiceVisual => ({ kind: "media", id });
 
 export const SERVICE_VISUALS: Record<string, ServiceVisual> = {
   // Creative Production
@@ -27,8 +30,12 @@ export const SERVICE_VISUALS: Record<string, ServiceVisual> = {
       ar: "مشروبات باردة وزهور بيضاء، منسّقة ومُضاءة على طاولة إحدى الفعاليات.",
     },
   },
-  "video-production": draw("timeline"),
-  "ai-content-creation": draw("frames"),
+  // Video, Motion and AI (D158): a still from Rand's own shoots until her footage and files arrive
+  // (images-for-rand.md); Rental: stock lights on stands until NO TIME's own kit is photographed.
+  "video-production": pic("catering-2"),
+  "motion-graphics": pic("heritage-1"),
+  "ai-content-creation": pic("private-celebrations-4"),
+  "equipment-camera-rental": pic("cp-rental-lights"),
   "set-stage-design": {
     kind: "photo",
     src: "/images/services/svc-set-stage-design.webp",

@@ -47,9 +47,9 @@ export async function ServiceSection({
   const titleId = `${service.anchor}-title`;
   const scene = getSectionScene(service, lab);
   const moduleKey = service.signatureModule;
-  // A section whose module waits for v1.1 shows a lightweight visual instead (D100); a photo
-  // scene has neither: Rand's own work follows it as a strip (D153).
-  const visual = lab || !moduleKey ? undefined : serviceVisual(service.slug);
+  // A section's visual (a photograph, or a drawing while its module waits, D100) stands in for the
+  // module; a photo scene has neither: Rand's own work follows it as a strip (D153).
+  const visual = lab || scene ? undefined : serviceVisual(service.slug);
   const gallery = GALLERIES[service.slug];
   const head = (
     <header className="svc-head">
@@ -95,8 +95,7 @@ export async function ServiceSection({
           ))}
         </ul>
       </div>
-      {gallery && !lab && <ServiceGallery ids={gallery} label={t("galleryLabel", { service: title })} locale={locale} />}
-      {!moduleKey ? null : lab ? (
+      {lab && moduleKey ? (
         // The animatic (lab route, never public): a flat box named by its module key.
         <div
           className="svc-module module-placeholder"
@@ -106,7 +105,7 @@ export async function ServiceSection({
         </div>
       ) : visual ? (
         <ServiceVisual visual={visual} locale={locale} />
-      ) : (
+      ) : moduleKey ? (
         <ModuleSlot
           moduleKey={moduleKey}
           titleId={titleId}
@@ -115,7 +114,8 @@ export async function ServiceSection({
         >
           <ModulePlaceholder />
         </ModuleSlot>
-      )}
+      ) : null}
+      {gallery && !lab && <ServiceGallery ids={gallery} label={t("galleryLabel", { service: title })} locale={locale} />}
       {/* Public pages go straight to the brief with this service preset (D102); the lab keeps the
           quote block as its target. */}
       <ButtonLink

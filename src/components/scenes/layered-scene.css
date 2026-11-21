@@ -142,6 +142,38 @@ html[data-js]:not([data-reduced]) .scene:not([data-mode]) .scene-line:not(:first
   background: radial-gradient(closest-side, rgba(234, 212, 171, 0.14), rgba(234, 212, 171, 0) 100%);
 }
 
+/* L2 · a framed photograph inside a scene (D154; every theme since D158): a champagne hairline and a deep
+   shadow, so a real photo reads as a print set into the room, not a cut-out. */
+.fx-frame {
+  outline: 1px solid color-mix(in srgb, var(--color-champagne) 55%, transparent);
+  outline-offset: 6px;
+  box-shadow: 0 30px 80px -20px rgb(0 0 0 / 0.65);
+}
+/* L0 · a beat's own photo as atmosphere behind its sharp frame (D153): blurred and dimmed, so a
+   file smaller than the screen never shows soft. Scaled past the edges so the blur has no rim. */
+.fx-blur img {
+  filter: blur(28px) saturate(0.85) brightness(0.5);
+  transform: scale(1.12);
+}
+/* L3 · a scrim under the H1 and the shot lines, so ivory text holds on the lit room's pale floor. */
+.fx-scrim {
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--color-night) 88%, transparent) 0%,
+    color-mix(in srgb, var(--color-night) 62%, transparent) 26%,
+    color-mix(in srgb, var(--color-night) 0%, transparent) 62%
+  );
+}
+@media (max-width: 899.98px) {
+  .fx-scrim {
+    background: linear-gradient(
+      to top,
+      color-mix(in srgb, var(--color-night) 92%, transparent) 0%,
+      color-mix(in srgb, var(--color-night) 70%, transparent) 34%,
+      color-mix(in srgb, var(--color-night) 0%, transparent) 70%
+    );
+  }
+}
 /* Animatic: flat boxes, one tone per level, labelled with the slot id and depth. */
 .scene-box {
   position: absolute;

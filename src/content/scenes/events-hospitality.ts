@@ -17,15 +17,15 @@ import type { SceneConfig, SceneLayer } from "./types";
 const FULL = { block: "0", inline: "0" } as const;
 
 /** L3 · the scrim under the head and the shot lines, so ivory text holds on a photo's pale parts. */
-const scrim: SceneLayer = { id: "scrim", level: 3, fx: "ev-scrim", depth: 0, mobile: true, box: FULL };
+const scrim: SceneLayer = { id: "scrim", level: 3, fx: "scrim", depth: 0, mobile: true, box: FULL };
 
-/** L2 · one of Rand's photos framed at about its own size, cropped to its box (`fx-ev-frame`).
+/** L2 · one of Rand's photos framed at about its own size, cropped to its box (`fx-frame`).
  * Laptop only: on a phone the frame would be a sliver, and the work follows in the section's strip. */
 const frame = (id: string, slot: string, depth: number, box: SceneLayer["box"], rest: Partial<SceneLayer> = {}): SceneLayer => ({
   id,
   level: 2,
   slot,
-  fx: "ev-frame",
+  fx: "frame",
   depth,
   mobile: false,
   box,
@@ -33,9 +33,9 @@ const frame = (id: string, slot: string, depth: number, box: SceneLayer["box"], 
   ...rest,
 });
 
-/** L0 · a frame's own photo, blurred and dimmed behind it (`fx-ev-blur`), at the frame's size so the
+/** L0 · a frame's own photo, blurred and dimmed behind it (`fx-blur`), at the frame's size so the
  * two share one file. Laptop only. */
-const backdrop = (slot: string, sizesOf: string): SceneLayer => ({ id: "backdrop", level: 0, slot, fx: "ev-blur", depth: 0.1, mobile: false, box: FULL, sizesOf });
+const backdrop = (slot: string, sizesOf: string): SceneLayer => ({ id: "backdrop", level: 0, slot, fx: "blur", depth: 0.1, mobile: false, box: FULL, sizesOf });
 
 /** L0 · a portrait photo as the phone's plate, where a laptop shows frames (`desktop: false`). */
 const phonePlate = (slot: string): SceneLayer => ({ id: "phone-plate", level: 0, slot, depth: 0.15, push: 0.04, mobile: true, desktop: false, box: FULL });
@@ -135,7 +135,7 @@ export const EVENTS_LAUNCHES: SceneConfig = {
 /*
  * Sections IV–VI (D153). Rand's photos here are under 1100px wide, too small to fill a laptop
  * screen sharp, so on a laptop each beat is the photo framed at its own size over a blurred copy of
- * itself (`fx-ev-blur`, the same picture as atmosphere, never upscaled sharp). A phone gets one
+ * itself (`fx-blur`, the same picture as atmosphere, never upscaled sharp). A phone gets one
  * portrait photo as its plate instead (`desktop: false`), sharp at its width.
  */
 

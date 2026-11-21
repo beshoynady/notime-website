@@ -1,9 +1,11 @@
-import { getImageProps } from "next/image";
 import type { Locale } from "@/content";
+import { media } from "@/content/media";
 import type { ServiceVisual as Visual } from "@/content/service-visuals";
 import { MaskReveal } from "@/components/motion/mask-reveal";
-import { capSrcSet } from "@/lib/srcset";
+import { FillImage } from "@/components/ui/media-image";
 import { ServiceDrawing } from "./service-drawings";
+
+const SIZES = "(min-width: 900px) 720px, calc(100vw - 32px)";
 
 /**
  * A service section's lightweight visual while its module waits for v1.1 (D100): a graded real
@@ -18,19 +20,13 @@ export function ServiceVisual({ visual, locale }: { visual: Visual; locale: Loca
       </div>
     );
   }
-  const { props } = getImageProps({
-    src: visual.src,
-    alt: visual.alt[locale],
-    fill: true,
-    sizes: "(min-width: 900px) 720px, calc(100vw - 32px)",
-    className: "object-cover",
-  });
+  const photo = visual.kind === "media" ? media(visual.id) : { file: visual.src, width: visual.width, alt: visual.alt };
+  if (!photo) return null;
   // The photo opens with a mask wipe from inline-start as it enters (D109; MaskReveal, GSAP, once).
   return (
     <figure className="svc-visual" data-visual="photo">
       <MaskReveal className="absolute inset-0 overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text -- getImageProps output (alt included); the srcset is trimmed (D51) */}
-        <img {...props} srcSet={capSrcSet(props.srcSet, visual.width)} />
+        <FillImage src={photo.file} width={photo.width} alt={photo.alt?.[locale] ?? ""} sizes={SIZES} />
       </MaskReveal>
     </figure>
   );

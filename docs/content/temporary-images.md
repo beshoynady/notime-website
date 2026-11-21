@@ -17,7 +17,10 @@ Updated 2026-11-16. This list stays in the repo. The site itself never says how 
 | Home category cards, mega menu | `cat-software-digital-4x5` | AI mood image | **Yes** |
 | Software proof strip | `notime-website-home-{en,ar}`, `notime-website-category-{en,ar}` | Real screenshots of this site | No (retake after the final polish) |
 | Events opening, shot "the room" | `ev-open-room` (+ 9:16) | Real profile photo, graded (`private-celebrations-1`) | No |
-| Creative opening, the developing frame | `cp-open-frame` | Real profile photo, graded (`catering-4`) | No |
+| Creative opening, the frame | `catering-4` (media.ts) | Real profile photo | No |
+| Creative opening, the studio dark and lit (D158) | `cp-open-dark`, `cp-open-lit` (media.ts) | Stock, Unsplash `LYcuJG5LyU8`, studio grade | **Yes** (a NO TIME set) |
+| Creative · Equipment rental (D158) | `cp-rental-lights` (media.ts) | Stock, Unsplash `S6OSYUlvJxo`, studio grade | **Yes** (NO TIME's own kit) |
+| Creative · Video, Motion, AI (D158) | `catering-2`, `heritage-1`, `private-celebrations-4` (media.ts) | Real profile photos (a still each, until Rand sends footage and files) | **Yes** (her own reels and AI work) |
 | Work cards, case pages, related work (anonymised cases) | none | Code drawing `CaseVisual`: airline pavilion = `stand`, league = `stage` | Until the client approves the name and photos |
 | Named cases (private celebrations, catering, heritage, gifts) | the project's photos | Real profile photos under `public/images/work/` | No |
 | Every other scene layer (Events hall and majlis, Print bench, Marketing board, Creative studio, Software) | `src: null` | Nothing renders; the scene's code drawing is the visual | Real or graded files can be added later (`scenes/images.ts`) |

@@ -1,0 +1,27 @@
+[
+  {
+    "id": "cp-open-dark",
+    "src": "unsplash:LYcuJG5LyU8",
+    "crop": { "aspect": "16:9", "focus": [0.5, 0.5] },
+    "grade": "studio",
+    "night": true,
+    "mobile": { "aspect": "9:16", "focus": [0.5, 0.5] },
+    "out": "public/images/stock/cp-open-dark.webp"
+  },
+  {
+    "id": "cp-open-lit",
+    "src": "unsplash:LYcuJG5LyU8",
+    "crop": { "aspect": "16:9", "focus": [0.5, 0.5] },
+    "grade": "studio",
+    "mobile": { "aspect": "9:16", "focus": [0.5, 0.5] },
+    "out": "public/images/stock/cp-open-lit.webp"
+  },
+  {
+    "id": "cp-rental-lights",
+    "src": "unsplash:S6OSYUlvJxo",
+    "crop": { "aspect": "16:9", "focus": [0.5, 0.45] },
+    "grade": "studio",
+    "out": "public/images/stock/cp-rental-lights.webp",
+    "maxWidth": 1600
+  }
+]

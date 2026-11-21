@@ -156,10 +156,11 @@ const PAGE: Record<string, { anchor: string; module?: ModuleKey; quoteType?: Quo
   "stage-technical-production": { anchor: "stage" },
   photography: { anchor: "photography", module: "aperture-gallery" },
   "video-production": { anchor: "video", module: "scrub-reel" },
-  "motion-graphics": { anchor: "motion", module: "motion-playground" },
+  // Creative: a photograph in place of the module (D158).
+  "motion-graphics": { anchor: "motion" },
   "ai-content-creation": { anchor: "ai-content", module: "idea-to-image" },
   "set-stage-design": { anchor: "set-design", module: "set-model" },
-  "equipment-camera-rental": { anchor: "rental", module: "rental-categories" },
+  "equipment-camera-rental": { anchor: "rental" },
   "branding-identity": { anchor: "branding", module: "mark-build" },
   "social-media-management": { anchor: "social", module: "phone-feed" },
   "digital-marketing-seo": { anchor: "digital-marketing", module: "example-dashboard" },

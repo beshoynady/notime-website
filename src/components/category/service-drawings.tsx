@@ -7,49 +7,6 @@ import type { DrawingKey } from "@/content/service-visuals";
  * theme's rule colour and `.tint` fills at low opacity. Decorative: the section's H2 names it.
  */
 const DRAWINGS: Record<DrawingKey, ReactNode> = {
-  // Video: a film strip over an edit timeline, with the playhead.
-  timeline: (
-    <>
-      <rect x="60" y="48" width="520" height="96" />
-      {[0, 1, 2, 3, 4].map((i) => (
-        <rect key={i} x={76 + i * 100} y="66" width="88" height="60" className={i === 2 ? "tint" : undefined} />
-      ))}
-      {Array.from({ length: 26 }, (_, i) => (
-        <rect key={`p${i}`} x={66 + i * 20} y="54" width="8" height="5" className="dim" />
-      ))}
-      {Array.from({ length: 26 }, (_, i) => (
-        <rect key={`q${i}`} x={66 + i * 20} y="133" width="8" height="5" className="dim" />
-      ))}
-      <line x1="60" y1="190" x2="580" y2="190" className="dim" />
-      {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
-        <line key={`t${i}`} x1={60 + i * 52} y1="184" x2={60 + i * 52} y2="196" className="dim" />
-      ))}
-      <rect x="60" y="210" width="190" height="26" />
-      <rect x="258" y="210" width="140" height="26" className="tint" />
-      <rect x="406" y="210" width="174" height="26" />
-      <rect x="60" y="244" width="300" height="26" className="dim" />
-      <rect x="368" y="244" width="212" height="26" className="dim" />
-      <path d="M60 300 q20 -14 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" className="dim" />
-      <line x1="330" y1="176" x2="330" y2="320" />
-      <path d="M322 170 h16 l-8 10 z" className="tint" />
-    </>
-  ),
-  // AI content: a prompt line above a contact sheet of variations, one chosen.
-  frames: (
-    <>
-      <rect x="120" y="36" width="400" height="34" rx="17" />
-      <line x1="146" y1="53" x2="330" y2="53" className="dim" />
-      <line x1="338" y1="44" x2="338" y2="62" />
-      {[0, 1, 2].map((c) =>
-        [0, 1].map((r) => (
-          <rect key={`${c}${r}`} x={120 + c * 136} y={96 + r * 118} width="128" height="106" className={c === 1 && r === 0 ? "tint" : "dim"} />
-        )),
-      )}
-      <path d="M248 88 h-12 v12 M384 88 h12 v12 M248 210 h-12 v-12 M384 210 h12 v-12" />
-      <circle cx="320" cy="140" r="22" />
-      <path d="M270 194 l30 -28 l22 18 l26 -32 l30 42" />
-    </>
-  ),
   // Branding: a mark built on its construction grid.
   mark: (
     <>

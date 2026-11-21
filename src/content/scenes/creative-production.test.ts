@@ -1,39 +1,43 @@
 import { describe, expect, it } from "vitest";
-import { lineSpans, pinLength, stillState } from "@/lib/scene-math";
+import { pinLength, stillState, visibleLayers } from "@/lib/scene-math";
+import { media } from "../media";
 import { getScene } from ".";
 import { STUDIO_OPENING as scene } from "./creative-production";
 
 const layer = (id: string) => scene.layers.find((l) => l.id === id)!;
 const lined = (v: "desktop" | "mobile") => scene.shots.filter((s) => s.copyKey && s[v]).map((s) => s.copyKey);
 
-describe("the Studio opening (storyboard creative-production.md, Act 1)", () => {
-  it("is the public opening of Creative Production (D83)", () => {
+/** "Lights, then the frame" (docs/content/visual-stories.md, Creative Production; D158). */
+describe("the Studio opening in photographs", () => {
+  it("is the public opening of Creative Production, with the head there from the first frame", () => {
     expect(getScene("creative-production")).toBe(scene);
+    expect(scene.hero).toBe(true);
   });
 
-  it("pins the full 2.0 vh on desktop and 1.2 vh on mobile", () => {
+  it("is photographs: every image layer resolves in the registry; no drawn studio is left", () => {
+    const images = scene.layers.filter((l) => l.slot);
+    expect(images.length).toBeGreaterThanOrEqual(3);
+    for (const l of images) expect(media(l.slot!), l.slot).toBeDefined();
+    const drawn = new Set(["shade", "glow", "frame", "scrim", "blur"]);
+    for (const l of scene.layers) if (l.fx) expect(drawn.has(l.fx), `${l.id}: fx-${l.fx}`).toBe(true);
+  });
+
+  it("plays dark studio → lights up → Rand's frame on a 2.0 vh pin; three lines on a laptop, two on a phone", () => {
     expect(pinLength(scene.shots, "desktop")).toBe(2.0);
-    expect(pinLength(scene.shots, "mobile")).toBe(1.2);
+    expect(lined("desktop")).toEqual(["creative.s1", "creative.s3", "creative.s4"]);
+    expect(lined("mobile")).toEqual(["creative.s1", "creative.s4"]);
   });
 
-  it("reads four lines on desktop and three on mobile, where the push-in is dropped", () => {
-    expect(lined("desktop")).toEqual(["creative.s1", "creative.s2", "creative.s3", "creative.s4"]);
-    expect(lined("mobile")).toEqual(["creative.s1", "creative.s2", "creative.s4"]);
+  it("the frame is Rand's own work (catering-4), and the still is the lit studio with it", () => {
+    expect(layer("frame").slot).toBe("catering-4");
+    expect(media("catering-4")!.source).toBe("rand-profile");
+    expect(stillState(layer("lit")).wipe).toBe(1);
+    expect(stillState(layer("frame")).opacity ?? 1).toBe(1);
   });
 
-  it("cuts: each flash is two very short shots (≤ 0.03 vh each), and every line still holds its shot", () => {
-    const cuts = scene.shots.filter((s) => s.id.startsWith("cut-"));
-    for (const v of ["desktop", "mobile"] as const) {
-      for (const s of cuts) if (s[v]) expect(s[v][1] - s[v][0], `${v} ${s.id}`).toBeLessThanOrEqual(0.03);
-      for (const span of lineSpans(scene.shots, v)) expect(span.end - span.start, `${v} line ${span.shot}`).toBeGreaterThanOrEqual(0.3);
-    }
-  });
-
-  it("the still is the developed frame in the open letterbox, with the last timecode only", () => {
-    expect(stillState(layer("letterbox")).scale).toBeGreaterThan(2);
-    expect(stillState(layer("develop")).opacity).toBe(0);
-    expect(stillState(layer("key-light")).opacity).toBe(1);
-    expect(["tc-0", "tc-1", "tc-2", "tc-3"].map((id) => stillState(layer(id)).opacity)).toEqual([0, 0, 0, 1]);
-    for (const id of ["slate", "stick-open", "stick-shut", "frame-lines", "flash-1", "flash-2", "flash-3"]) expect(stillState(layer(id)).opacity, id).toBe(0);
+  it("a hidden frame leaves the lit studio, never an empty box (spec §8)", () => {
+    const shown = visibleLayers(scene, (id) => id !== "catering-4");
+    expect(shown.layers.some((l) => l.slot === "catering-4")).toBe(false);
+    expect(shown.layers.some((l) => l.slot === "cp-open-lit")).toBe(true);
   });
 });

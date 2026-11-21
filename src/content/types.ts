@@ -67,10 +67,8 @@ export type CategoryTheme = "evening" | "studio" | "editorial" | "workshop" | "i
 export type ModuleKey =
   | "aperture-gallery"
   | "scrub-reel"
-  | "motion-playground"
   | "idea-to-image"
   | "set-model"
-  | "rental-categories"
   | "mark-build"
   | "phone-feed"
   | "example-dashboard"

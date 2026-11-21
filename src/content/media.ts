@@ -130,6 +130,15 @@ export const MEDIA: MediaEntry[] = [
     en: "Hospitality laid out for an executive boardroom meeting.",
     ar: "ضيافة مجهّزة لاجتماع في قاعة مجلس إدارة.",
   }, "16:9 · a boardroom table with coffee service set, no people"),
+  // Creative's photography strip (profile page 25 and 27 alternates, D158).
+  profile("catering-8", "p25-4", 1186, 668, {
+    en: "Dessert boards and cups styled for a shoot on wooden trays.",
+    ar: "ألواح حلويات وأكواب منسّقة للتصوير على صوانٍ خشبية.",
+  }, "16:9 · styled desserts on boards, the second set of the same shoot"),
+  profile("catering-9", "p27-2", 927, 1156, {
+    en: "Dessert cups topped with lilac sugar petals, set on glass saucers.",
+    ar: "أكواب حلوى تعلوها بتلات سكّرية بلون الليلك، على صحون زجاجية.",
+  }, "portrait · one styled dessert close, shallow depth"),
 
   // Heritage hospitality (pages 31–32).
   profile("heritage-1", "p31-2", 1050, 788, {
@@ -195,12 +204,22 @@ export const MEDIA: MediaEntry[] = [
 ];
 
 /** A stock frame (public/images/stock/<id>.webp + -9x16), graded with the category's grade (D153). */
-const stock = (id: string, from: string, by: string, url: string, width: number, height: number, mobile: [number, number], spec: string): MediaEntry => ({
+const stock = (
+  id: string,
+  from: string,
+  by: string,
+  url: string,
+  width: number,
+  height: number,
+  mobile: [number, number] | null,
+  spec: string,
+  extra: Partial<MediaEntry> = {},
+): MediaEntry => ({
   id,
   file: `/images/stock/${id}.webp`,
   width,
   height,
-  mobile: { file: `/images/stock/${id}-9x16.webp`, width: mobile[0], height: mobile[1] },
+  ...(mobile ? { mobile: { file: `/images/stock/${id}-9x16.webp`, width: mobile[0], height: mobile[1] } } : {}),
   source: "stock",
   credit: { by, url, license: "Unsplash License" },
   from,
@@ -208,6 +227,7 @@ const stock = (id: string, from: string, by: string, url: string, width: number,
   grade: "evening",
   alt: null,
   spec,
+  ...extra,
 });
 
 /** Scene plates made by scripts/scene-layers.mjs (docs/content/recipes/<page>.json). */
@@ -236,6 +256,17 @@ MEDIA.push(
     "16:9 + 9:16 · the first beams through haze in a dark hall (a NO TIME rig at first light replaces it)"),
   stock("ev-stage-live", "unsplash:euieMyZIBmY", "Andrew Haha Lee", "https://unsplash.com/photos/euieMyZIBmY", 2400, 1350, [1080, 1920],
     "16:9 + 9:16 · the full rig on, the seated audience from behind, no faces"),
+  // Creative Production (docs/content/recipes/creative.json, D158): one studio, dark then lit.
+  stock("cp-open-dark", "unsplash:LYcuJG5LyU8", "Arif DALKIRAN", "https://unsplash.com/photos/LYcuJG5LyU8", 2400, 1350, [1080, 1920],
+    "16:9 + 9:16 · a studio before the lights: the white sweep, stands and rails, no people (a NO TIME set replaces it)",
+    { grade: "studio" }),
+  stock("cp-open-lit", "unsplash:LYcuJG5LyU8", "Arif DALKIRAN", "https://unsplash.com/photos/LYcuJG5LyU8", 2400, 1350, [1080, 1920],
+    "16:9 + 9:16 · the same studio with its key light on; same frame as cp-open-dark", { grade: "studio" }),
+  stock("cp-rental-lights", "unsplash:S6OSYUlvJxo", "Aditya Wardhana", "https://unsplash.com/photos/S6OSYUlvJxo", 1600, 900, null,
+    "16:9 · lights on stands against a plain wall, no brand marks (NO TIME's own kit replaces it)", {
+      grade: "studio",
+      alt: { en: "LED panel lights on stands, lit against a warm wall.", ar: "ألواح إضاءة LED على حوامل، مضاءة أمام جدار دافئ." },
+    }),
 );
 
 /** Ids hidden by the environment (tests: NEXT_PUBLIC_MEDIA_HIDE=a,b). */

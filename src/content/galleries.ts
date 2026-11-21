@@ -11,6 +11,10 @@ export const GALLERIES: Record<string, string[]> = {
   // None repeats a photo this page already shows in a scene (the opening, EVENTS_GALAS, EVENTS_MAJLIS).
   "galas-private-celebrations": ["private-celebrations-5", "private-celebrations-6", "private-celebrations-7", "catering-3"],
   "catering-heritage-hospitality": ["heritage-3", "catering-5", "catering-2", "catering-6", "catering-4"],
+  // Creative (D158): Rand's styled shoots (catering-4 is the opening's frame, catering-6 the
+  // section's photo), and the rooms the rig in Set & stage design turned into.
+  photography: ["catering-8", "catering-9", "catering-5", "catering-3"],
+  "set-stage-design": ["private-celebrations-1", "private-celebrations-7", "heritage-5"],
 };
 
 /** The ids a page shows: the visible ones in order, or none when fewer than two remain. */

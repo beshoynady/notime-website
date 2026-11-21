@@ -175,3 +175,7 @@ New copy written for the photo scenes (`docs/content/visual-stories.md`). None s
 |---|---|---|---|---|---|
 | `m:scenes.events.s1` | It starts with an empty room. | تبدأ كل مناسبة بقاعة فارغة. | It starts before the lights come on. | تبدأ قبل أن تُضاء الأنوار. | The opening's first frame is now the room at night (D153), not an empty drawn hall. |
 | `m:category.galleryLabel` | (new) | (new) | Our work: {service} | من أعمالنا في {service} | Names the strip of Rand's photos under a section (screen readers only; D153). |
+| `m:scenes.creative.s2` | Take one. | اللقطة الأولى. | (removed) | (removed) | The opening's beats are photographs now (D158); the clapper beat went with the drawn Act 1. |
+| `media:catering-8` alt | (new) | (new) | Dessert boards and cups styled for a shoot on wooden trays. | ألواح حلويات وأكواب منسّقة للتصوير على صوانٍ خشبية. | A new profile photo in the Photography strip (D158). |
+| `media:catering-9` alt | (new) | (new) | Dessert cups topped with lilac sugar petals, set on glass saucers. | أكواب حلوى تعلوها بتلات سكّرية بلون الليلك، على صحون زجاجية. | A new profile photo in the Photography strip (D158). |
+| `media:cp-rental-lights` alt | (new) | (new) | LED panel lights on stands, lit against a warm wall. | ألواح إضاءة LED على حوامل، مضاءة أمام جدار دافئ. | The rental section's stock photo (D158). |

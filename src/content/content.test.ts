@@ -124,10 +124,11 @@ const SIGNATURE_MODULES = {
   stage: undefined,
   photography: "aperture-gallery",
   video: "scrub-reel",
-  motion: "motion-playground",
+  // Creative: Motion and Rental show a photograph instead of a module (D158).
+  motion: undefined,
   "ai-content": "idea-to-image",
   "set-design": "set-model",
-  rental: "rental-categories",
+  rental: undefined,
   branding: "mark-build",
   social: "phone-feed",
   "digital-marketing": "example-dashboard",

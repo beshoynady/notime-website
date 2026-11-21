@@ -63,7 +63,7 @@ describe("scenes, public and in review", () => {
   });
 
   it("the Events sections tell their story in photographs: I–IV pass, the majlis and the stage pin from 1024px (D153)", () => {
-    const drawn = new Set(["shade", "glow", "ev-frame", "ev-scrim", "ev-blur"]);
+    const drawn = new Set(["shade", "glow", "frame", "scrim", "blur"]);
     const modes: Record<string, unknown> = {
       "events-conferences": "pass",
       "events-exhibitions": "pass",

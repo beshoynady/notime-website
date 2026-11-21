@@ -4,7 +4,7 @@ import { gotoReady } from "./helpers";
 /**
  * Labels inside the category modules don't collide (self-audit 2026-11-20):
  * B07 · Print · human scale: the figure's «1.8 m» label reached into the lens beside it on a phone.
- * B08 · Creative · motion playground: the play button put its mark above «PLAY».
+ * (B08, the motion playground's play button, went with the module: D158.)
  */
 async function reach(page: Page, selector: string) {
   // Modules load as the page nears them: walk down until it's there.
@@ -30,21 +30,5 @@ for (const locale of ["en", "ar"] as const) {
       return ys ? Math.max(lens.left - label.right, label.left - lens.right) : Infinity;
     });
     expect(gap).toBeGreaterThanOrEqual(0);
-  });
-
-  test(`${locale} · Creative: the play button keeps its mark and word on one line`, async ({ page, isMobile }) => {
-    test.skip(isMobile, "the playground's controls are checked at desktop width");
-    await gotoReady(page, `/${locale}/services/creative-production`);
-    const btn = await reach(page, ".mp-play");
-    const lines = await btn.evaluate((b) => {
-      const icon = b.querySelector("svg")!.getBoundingClientRect();
-      const range = document.createRange();
-      range.selectNodeContents(b);
-      const text = [...range.getClientRects()].filter((r) => r.width > 0);
-      // The mark and the word share a row: their vertical centres sit within a few pixels.
-      const word = text[text.length - 1];
-      return Math.abs(icon.top + icon.height / 2 - (word.top + word.height / 2));
-    });
-    expect(lines).toBeLessThanOrEqual(4);
   });
 }

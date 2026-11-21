@@ -476,18 +476,6 @@ html[data-header-hidden] .svc-index {
    deep-linked section then moves it by a few pixels at most. Measured per locale on the
    production build at 390 and 1440 (scripts/anchor-shift.mjs, M1), minus 4 px so a module is
    never shorter than its slot at those widths. Re-measure when a module's layout changes. */
-html[lang="en"] .svc-module[data-module="motion-playground"] {
-  min-block-size: 584px;
-}
-html[lang="ar"] .svc-module[data-module="motion-playground"] {
-  min-block-size: 590px;
-}
-html[lang="en"] .svc-module[data-module="rental-categories"] {
-  min-block-size: 431px;
-}
-html[lang="ar"] .svc-module[data-module="rental-categories"] {
-  min-block-size: 464px;
-}
 html[lang="en"] .svc-module[data-module="content-calendar"] {
   min-block-size: 866px;
 }
@@ -513,18 +501,6 @@ html[lang="ar"] .svc-module[data-module="print-order"] {
   min-block-size: 525px;
 }
 @media (min-width: 900px) {
-  html[lang="en"] .svc-module[data-module="motion-playground"] {
-    min-block-size: 590px;
-  }
-  html[lang="ar"] .svc-module[data-module="motion-playground"] {
-    min-block-size: 594px;
-  }
-  html[lang="en"] .svc-module[data-module="rental-categories"] {
-    min-block-size: 256px;
-  }
-  html[lang="ar"] .svc-module[data-module="rental-categories"] {
-    min-block-size: 239px;
-  }
   html[lang="en"] .svc-module[data-module="content-calendar"] {
     min-block-size: 976px;
   }

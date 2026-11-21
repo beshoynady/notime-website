@@ -26,7 +26,7 @@ export const CURATED = {
   // Ultimate Power Solution: every stand photo shows identifiable people (pending rights).
   sandoz: ["p8-1.jpg"],
   "private-celebrations": ["p9-2.jpg", "p9-1.jpg", "p10-1.jpg", "p10-5.jpg", "p11-1.jpg", "p9-3.jpg", "p8-5.jpg", "p10-2.jpg"],
-  catering: ["p28-1.jpg", "p4-1.jpg", "p4-3.jpg", "p25-3.jpg", "p26-1.jpg", "p27-1.jpg", "p29-1.jpg"],
+  catering: ["p28-1.jpg", "p4-1.jpg", "p4-3.jpg", "p25-3.jpg", "p26-1.jpg", "p27-1.jpg", "p29-1.jpg", "p25-4.jpg", "p27-2.jpg"],
   heritage: ["p31-2.jpg", "p31-3.jpg", "p31-5.jpg", "p32-1.jpg", "p31-1.jpg"],
   gifts: ["p23-3.jpg", "p23-2.jpg"],
 };

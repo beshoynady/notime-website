@@ -79,29 +79,6 @@ const BY_CATEGORY: { category: CategorySlug; grade: SceneImageSlot["grade"]; slo
     grade: "editorial",
     slots: [plate("mb-open-paper"), ai("mb-open-board", "cat-marketing-brand-4x5"), ai("mb-open-swatches"), ai("mb-open-pen")],
   },
-  {
-    category: "creative-production",
-    grade: "studio",
-    slots: [
-      plate("cp-open-studio"),
-      ai("cp-open-slate"),
-      ai("cp-open-slate-stick"),
-      ai("cp-open-camera", "cat-creative-production-4x5"),
-      // Real work shown as evidence, so it has alt text (layers.md).
-      // Graded from catering-4 (step 3): the frame that develops in shot 4.
-      {
-        id: "cp-open-frame",
-        source: { kind: "real", from: "catering-4" },
-        src: "/images/scenes/creative-production/cp-open-frame.webp",
-        width: 1187,
-        height: 668,
-        alt: {
-          en: "Dessert boards styled and photographed for an event.",
-          ar: "ألواح حلويات منسّقة ومصوّرة لإحدى الفعاليات.",
-        },
-      },
-    ],
-  },
 ];
 
 export const SCENE_IMAGES: SceneImageSlot[] = BY_CATEGORY.flatMap(({ category, grade, slots }) => slots.map((s) => ({ ...s, category, grade })));

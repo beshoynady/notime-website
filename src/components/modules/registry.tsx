@@ -43,8 +43,6 @@ const load = (importer: () => Promise<{ default: ComponentType<ModuleProps> }>) 
  */
 export const MODULES: Partial<Record<ModuleKey, LazyExoticComponent<ComponentType<ModuleProps>>>> = {
   // Batch 1 (D83): the template-built categories' modules.
-  "rental-categories": load(() => import("./rental-categories/rental-categories")),
-  "motion-playground": load(() => import("./motion-playground/motion-playground")),
   "press-release": load(() => import("./press-release/press-release")),
   "content-calendar": load(() => import("./content-calendar/content-calendar")),
   "print-order": load(() => import("./print-order/print-order")),

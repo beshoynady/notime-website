@@ -47,7 +47,7 @@ export interface SceneLayer {
   push?: number;
   /** Scene image slot id (`SCENE_IMAGES`, scenes/images.ts). None on L3. */
   slot?: string;
-  /** L3 effect class (`fx-<name>` in layered-scene.css), e.g. "glow", "shade", "ev-frame". */
+  /** L3 effect class (`fx-<name>` in layered-scene.css), e.g. "glow", "shade", "frame". */
   fx?: string;
   /** Rendered and animated below PIN_MIN_WIDTH (1024px) too. */
   mobile: boolean;

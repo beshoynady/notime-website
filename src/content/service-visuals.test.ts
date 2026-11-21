@@ -5,6 +5,7 @@ import { MODULES } from "@/components/modules/registry";
 import { getSectionScene } from "./scenes";
 import { services } from "./services";
 import { SERVICE_VISUALS } from "./service-visuals";
+import { media } from "./media";
 import { BRANDED_PHOTO_DIRS } from "./work";
 
 // The template-built categories (Software has its own page, D96).
@@ -30,6 +31,14 @@ describe("service visuals (D100)", () => {
       expect(existsSync(path.join("public", v.src)), v.src).toBe(true);
       expect(BRANDED_PHOTO_DIRS.some((d) => d.includes(v.from.replace(/-\d+$/, "")))).toBe(false);
       expect(v.alt.en.length && v.alt.ar.length).toBeTruthy();
+    }
+  });
+  it("Creative: Video, Motion, AI and Rental show registry photographs, Rand's own where they exist (D158)", () => {
+    const want = { "video-production": "rand-profile", "motion-graphics": "rand-profile", "ai-content-creation": "rand-profile", "equipment-camera-rental": "stock" };
+    for (const [slug, source] of Object.entries(want)) {
+      const v = SERVICE_VISUALS[slug];
+      expect(v?.kind, slug).toBe("media");
+      if (v?.kind === "media") expect(media(v.id)?.source, slug).toBe(source);
     }
   });
 });
