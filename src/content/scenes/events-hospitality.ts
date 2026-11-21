@@ -123,8 +123,11 @@ export const EVENTS_LAUNCHES: SceneConfig = {
     { id: "spot", level: 0, slot: "ev-launch-spot", depth: 0.15, push: 0.05, mobile: true, box: FULL },
     { id: "glow", level: 3, fx: "glow", depth: 0.2, mobile: true, box: { block: "20% 30%", inline: "25% 25%" }, style: { opacity: 0.4 }, keys: [{ shot: 1, to: { opacity: 0, scale: 1.3 } }] },
     // The real ceremony in a frame: the file is 1060px wide and busy, too soft and loud as a backdrop
-    // behind the head. Laptop only (a phone keeps the spot, the frame would be a sliver).
+    // behind the head. On a laptop it arrives beside the head with the second beat.
     frame("moment", "uae-pro-league-2", 0.35, { block: "10% 46%", inline: "42% 5%" }, { enter: { shot: 1, from: { x: 10, opacity: 0 } } }),
+    // A phone: the same photo framed across the upper half, above the head, there as the scene
+    // enters. Alone, the dark spot plate left the top half of the screen black (W02).
+    frame("moment-phone", "uae-pro-league-2", 0.25, { block: "8% 56%", inline: "6% 6%" }, { mobile: true, desktop: false, enter: { shot: 0, from: { y: 8, opacity: 0 } } }),
     scrim,
   ],
 };
