@@ -144,12 +144,13 @@ const POINTS: Record<string, Localized<string[]>> = {
 
 /**
  * Category-page fields per service (D57): the anchor (docs/content/services-list.md) and the
- * signature module (docs/design/category-pages.md §6). quoteType defaults to the category's.
+ * signature module (docs/design/category-pages.md §6), if the section still has one. quoteType defaults to the category's.
  */
-const PAGE: Record<string, { anchor: string; module: ModuleKey; quoteType?: QuoteType }> = {
-  "conferences-summits": { anchor: "conferences", module: "agenda-timeline" },
-  "exhibitions-booths": { anchor: "exhibitions", module: "stand-assembly" },
-  "product-launches-activations": { anchor: "launches", module: "launch-reveal" },
+const PAGE: Record<string, { anchor: string; module?: ModuleKey; quoteType?: QuoteType }> = {
+  // Events I–III: photo scenes and Rand's work instead of a module (D153).
+  "conferences-summits": { anchor: "conferences" },
+  "exhibitions-booths": { anchor: "exhibitions" },
+  "product-launches-activations": { anchor: "launches" },
   "galas-private-celebrations": { anchor: "celebrations", module: "candle-moodboard" },
   "catering-heritage-hospitality": { anchor: "hospitality", module: "menu-majlis" },
   "stage-technical-production": { anchor: "stage", module: "stage-lights" },

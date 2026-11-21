@@ -132,6 +132,7 @@
     "indexLabel": "Services in this category",
     "deliverTitle": "What we deliver",
     "quoteCta": "Request a quote",
+    "galleryLabel": "Our work: {service}",
     "quoteCtaFor": "Request a quote for {service}",
     "faqEyebrow": "Questions",
     "faqHeading": "Common questions",

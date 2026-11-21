@@ -63,9 +63,6 @@ export type CategoryTheme = "evening" | "studio" | "editorial" | "workshop" | "i
 
 /** One signature module per service (docs/design/category-pages.md §6). */
 export type ModuleKey =
-  | "agenda-timeline"
-  | "stand-assembly"
-  | "launch-reveal"
   | "candle-moodboard"
   | "menu-majlis"
   | "stage-lights"
@@ -115,7 +112,8 @@ export interface Service {
    * standalone page (D57).
    */
   anchor: string;
-  signatureModule: ModuleKey;
+  /** None when the section tells its story as a photo scene instead (Events I–III, D153). */
+  signatureModule?: ModuleKey;
   /** "What we deliver": 4–6 points, the same count in both locales. */
   points: Localized<string[]>;
   /** Slugs of real, client-approved work items. Empty until OQ #17 is answered. */

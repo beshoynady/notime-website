@@ -555,23 +555,11 @@ html[lang="ar"] .svc-module[data-module="print-order"] {
    box, so these only guard the first paint. ESTIMATES from the CSS boxes at 390 and 1440, kept
    below the expected height (a short slot grows, it never leaves a gap); re-measure at M3 with
    scripts/anchor-shift.mjs and replace them. */
-html[lang="en"] .svc-module[data-module="agenda-timeline"] {
-  min-block-size: 680px;
-}
-html[lang="ar"] .svc-module[data-module="agenda-timeline"] {
-  min-block-size: 700px;
-}
 html[lang="en"] .svc-module[data-module="stage-lights"] {
   min-block-size: 440px;
 }
 html[lang="ar"] .svc-module[data-module="stage-lights"] {
   min-block-size: 450px;
-}
-html[lang="en"] .svc-module[data-module="launch-reveal"] {
-  min-block-size: 640px;
-}
-html[lang="ar"] .svc-module[data-module="launch-reveal"] {
-  min-block-size: 650px;
 }
 html[lang="en"] .svc-module[data-module="candle-moodboard"] {
   min-block-size: 560px;
@@ -585,26 +573,10 @@ html[lang="en"] .svc-module[data-module="menu-majlis"] {
 html[lang="ar"] .svc-module[data-module="menu-majlis"] {
   min-block-size: 780px;
 }
-html[lang="en"] .svc-module[data-module="stand-assembly"] {
-  min-block-size: 680px;
-}
-html[lang="ar"] .svc-module[data-module="stand-assembly"] {
-  min-block-size: 690px;
-}
 @media (min-width: 900px) {
-  html[lang="en"] .svc-module[data-module="agenda-timeline"] {
-    min-block-size: 460px;
-  }
-  html[lang="ar"] .svc-module[data-module="agenda-timeline"] {
-    min-block-size: 480px;
-  }
   html[lang="en"] .svc-module[data-module="stage-lights"],
   html[lang="ar"] .svc-module[data-module="stage-lights"] {
     min-block-size: 640px;
-  }
-  html[lang="en"] .svc-module[data-module="launch-reveal"],
-  html[lang="ar"] .svc-module[data-module="launch-reveal"] {
-    min-block-size: 660px;
   }
   html[lang="en"] .svc-module[data-module="candle-moodboard"],
   html[lang="ar"] .svc-module[data-module="candle-moodboard"] {
@@ -615,10 +587,6 @@ html[lang="ar"] .svc-module[data-module="stand-assembly"] {
   }
   html[lang="ar"] .svc-module[data-module="menu-majlis"] {
     min-block-size: 540px;
-  }
-  html[lang="en"] .svc-module[data-module="stand-assembly"],
-  html[lang="ar"] .svc-module[data-module="stand-assembly"] {
-    min-block-size: 520px;
   }
 }
 .module-placeholder {
@@ -860,4 +828,47 @@ main[data-theme] [data-tone] {
 /* Time and reading order run from inline-start: the drawings mirror in Arabic (they hold no text). */
 [dir="rtl"] .svc-drawing {
   transform: scaleX(-1);
+}
+
+/* Rand's work under a section (D153, ServiceGallery): 3:4 photos in one row that snaps tile by
+   tile from the inline-start, so it runs right to left in Arabic with no extra rule. Phones see
+   most of one tile and the edge of the next (the cue to swipe); laptops see the whole set. */
+.svc-gallery {
+  margin-block-start: 32px;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: inline mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--theme-accent, var(--color-champagne)) 45%, transparent) transparent;
+}
+.svc-gallery:focus-visible {
+  outline: 2px solid var(--theme-accent, var(--color-champagne));
+  outline-offset: 4px;
+}
+.svc-gallery ul {
+  display: flex;
+  gap: 16px;
+  margin: 0;
+  padding: 0 0 12px;
+  list-style: none;
+}
+.svc-gallery li {
+  flex: 0 0 70vw;
+  max-inline-size: 320px;
+  aspect-ratio: 3 / 4;
+  scroll-snap-align: start;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--theme-ink, var(--color-ivory)) 6%, transparent);
+}
+.svc-gallery img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+@media (min-width: 1024px) {
+  /* Three to a row across the section's column, so a laptop sees the whole set. */
+  .svc-gallery li {
+    flex-basis: calc((100% - 32px) / 3);
+  }
 }

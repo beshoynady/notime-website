@@ -42,6 +42,69 @@ export const EVENTS_OPENING: SceneConfig = {
   ],
 };
 
+/*
+ * Sections I–III (D153; docs/content/visual-stories.md): each tells one moment in photographs as it
+ * crosses the viewport, never pinned, so the page keeps moving between the opening and the majlis.
+ * The beats land by the middle of the crossing (0.55), while the scene fills the screen; after
+ * that it only drifts out. Full-frame plates cross-fade; Rand's own work arrives in frames at the inline-end (mirrored in
+ * Arabic), clear of the head, which sits over the lower third on the scrim. Frames are laptop-only:
+ * on a phone the plates play and the work follows in the section's strip (GALLERIES).
+ */
+const scrim = { id: "scrim", level: 3, fx: "ev-scrim", depth: 0, mobile: true, box: { block: "0", inline: "0" } } as const;
+
+/** I · "Eight in the morning, the hall fills": the rows set, the session running, the break laid. */
+export const EVENTS_CONFERENCES: SceneConfig = {
+  id: "events-conferences",
+  mode: "pass",
+  shots: [
+    { id: "rows", desktop: [0, 0.3], mobile: [0, 0.3] },
+    { id: "session", desktop: [0.3, 0.42], mobile: [0.3, 0.5] },
+    { id: "break", desktop: [0.42, 0.55], mobile: null },
+  ],
+  layers: [
+    { id: "rows", level: 0, slot: "ev-conf-rows", depth: 0.15, push: 0.03, mobile: true, box: { block: "0", inline: "0" } },
+    { id: "session", level: 0, slot: "ev-conf-session", depth: 0.15, push: 0.03, mobile: true, box: { block: "0", inline: "0" }, style: { opacity: 0 }, keys: [{ shot: 1, to: { opacity: 1 } }] },
+    { id: "break", level: 2, slot: "catering-7", fx: "ev-frame", depth: 0.3, mobile: false, box: { block: "12% 50%", inline: "58% 6%" }, enter: { shot: 2, from: { x: 12, opacity: 0 } } },
+    scrim,
+  ],
+};
+
+/** II · "The night before doors open": the empty hall, then NO TIME's stands standing in it (⚑). */
+export const EVENTS_EXHIBITIONS: SceneConfig = {
+  id: "events-exhibitions",
+  mode: "pass",
+  shots: [
+    { id: "hall", desktop: [0, 0.3], mobile: [0, 1] },
+    { id: "stand", desktop: [0.3, 0.42], mobile: null },
+    { id: "work", desktop: [0.42, 0.55], mobile: null },
+  ],
+  layers: [
+    { id: "hall", level: 0, slot: "ev-exh-hall", depth: 0.15, push: 0.04, mobile: true, box: { block: "0", inline: "0" } },
+    { id: "stand", level: 2, slot: "sandoz-1", fx: "ev-frame", depth: 0.35, mobile: false, box: { block: "8% 30%", inline: "50% 28%" }, enter: { shot: 1, from: { y: 8, opacity: 0 } } },
+    { id: "pavilion", level: 2, slot: "egyptair-pavilion-1", fx: "ev-frame", depth: 0.5, mobile: false, box: { block: "10% 64%", inline: "76% 3%" }, enter: { shot: 2, from: { x: 12, opacity: 0 } } },
+    { id: "identity", level: 2, slot: "uae-pro-league-1", fx: "ev-frame", depth: 0.5, mobile: false, box: { block: "42% 34%", inline: "76% 3%" }, enter: { shot: 2, from: { x: 12, opacity: 0 } } },
+    scrim,
+  ],
+};
+
+/** III · "Ten seconds before the reveal": one spot on an empty floor, then the real ceremony (⚑) framed beside it. */
+export const EVENTS_LAUNCHES: SceneConfig = {
+  id: "events-launches",
+  mode: "pass",
+  shots: [
+    { id: "spot", desktop: [0, 0.32], mobile: [0, 0.3] },
+    { id: "moment", desktop: [0.32, 0.5], mobile: [0.3, 0.5] },
+  ],
+  layers: [
+    { id: "spot", level: 0, slot: "ev-launch-spot", depth: 0.15, push: 0.05, mobile: true, box: { block: "0", inline: "0" } },
+    { id: "glow", level: 3, fx: "glow", depth: 0.2, mobile: true, box: { block: "20% 30%", inline: "25% 25%" }, style: { opacity: 0.4 }, keys: [{ shot: 1, to: { opacity: 0, scale: 1.3 } }] },
+    // The real ceremony in a frame: the file is 1060px wide and busy, too soft and loud as a backdrop
+    // behind the head. Laptop only (a phone keeps the spot, the frame would be a sliver).
+    { id: "moment", level: 2, slot: "uae-pro-league-2", fx: "ev-frame", depth: 0.35, mobile: false, box: { block: "10% 46%", inline: "42% 5%" }, enter: { shot: 1, from: { x: 10, opacity: 0 } } },
+    scrim,
+  ],
+};
+
 /**
  * Section V's majlis (hospitality), the page's peak (D74, P2). Desktop: a short pin (0.6 vh) with
  * two beats, the coffee pour, then the light blooming in the tent as the sky deepens; it scrolls

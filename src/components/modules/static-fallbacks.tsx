@@ -1,11 +1,8 @@
 import type { ComponentType } from "react";
 import type { ModuleKey } from "@/content";
-import { AgendaTimelineStatic } from "./agenda-timeline/static";
 import { CandleMoodboardStatic } from "./candle-moodboard/static";
-import { LaunchRevealStatic } from "./launch-reveal/static";
 import { MenuMajlisStatic } from "./menu-majlis/static";
 import { StageLightsStatic } from "./stage-lights/static";
-import { StandAssemblyStatic } from "./stand-assembly/static";
 import type { ModuleProps } from "./types";
 
 /**
@@ -16,9 +13,6 @@ import type { ModuleProps } from "./types";
  */
 export const STATIC_FALLBACKS: Partial<Record<ModuleKey, ComponentType<ModuleProps>>> = {
   // The Events & Hospitality modules (batch 2).
-  "agenda-timeline": AgendaTimelineStatic,
-  "stand-assembly": StandAssemblyStatic,
-  "launch-reveal": LaunchRevealStatic,
   "candle-moodboard": CandleMoodboardStatic,
   "menu-majlis": MenuMajlisStatic,
   "stage-lights": StageLightsStatic,

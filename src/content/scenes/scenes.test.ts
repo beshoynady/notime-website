@@ -36,8 +36,9 @@ describe("scenes, public and in review", () => {
     expect(getSectionScene(hospitality, true)?.id).toBe("events-majlis");
     expect(getSectionScene(hospitality, true)?.mode).toEqual({ desktop: "pin", mobile: "pass" });
     expect(getSectionScene(hospitality, false)?.id).toBe("events-majlis");
+    // The other section scenes are Events I–III in photographs (D153); none elsewhere yet.
     const others = getCategories().flatMap((c) => getServices(c.slug)).filter((s) => s !== hospitality);
-    expect(others.filter((s) => getSectionScene(s, true))).toEqual([]);
+    expect(others.filter((s) => getSectionScene(s, true)).map((s) => s.anchor)).toEqual(["conferences", "exhibitions", "launches"]);
   });
 
   it("the Evening opening: three lines over four shots on desktop, the same three on mobile (D74, P1)", () => {
@@ -63,8 +64,22 @@ describe("scenes, public and in review", () => {
     expect(shown.shots).toEqual(EVENTS_OPENING.shots);
   });
 
+  it("Events I–III tell their story in photographs as they pass, never pinned (D153)", () => {
+    const drawn = new Set(["shade", "glow", "ev-frame", "ev-scrim"]);
+    for (const [slug, id] of [["conferences-summits", "events-conferences"], ["exhibitions-booths", "events-exhibitions"], ["product-launches-activations", "events-launches"]]) {
+      const scene = getSectionScene({ slug }, false);
+      expect(scene?.id, slug).toBe(id);
+      expect(scene!.mode, slug).toBe("pass");
+      for (const l of scene!.layers) {
+        if (l.slot) expect(getSceneImage(l.slot)?.src, `${id}:${l.id}`).toBeTruthy();
+        if (l.fx) expect(drawn.has(l.fx), `${id}:${l.id} fx-${l.fx}`).toBe(true);
+      }
+      expect(scene!.layers.some((l) => l.level === 0 && l.slot), id).toBe(true);
+    }
+  });
+
   it("every scene is listed once for the rule checks", () => {
-    expect(scenes.map((s) => s.id).sort()).toEqual(["draft", "editorial-opening", "events-majlis", "events-opening", "studio-opening", "workshop-opening"]);
+    expect(scenes.map((s) => s.id).sort()).toEqual(["draft", "editorial-opening", "events-conferences", "events-exhibitions", "events-launches", "events-majlis", "events-opening", "studio-opening", "workshop-opening"]);
   });
 });
 

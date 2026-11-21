@@ -3,6 +3,7 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { parseCredits } from "@/lib/credits";
 import { imageCredits } from "./credits";
+import { MEDIA } from "./media";
 
 /** Every licensed stock image on the site is credited, and every credit points at a real file (D80). */
 describe("image credits (src/content/credits.json)", () => {
@@ -19,10 +20,11 @@ describe("image credits (src/content/credits.json)", () => {
     }
   });
 
-  it("credits every file under public/images/stock", () => {
+  it("credits every file under public/images/stock (credits.json, or the registry's credit, D152)", () => {
     const dir = path.join("public", "images", "stock");
     const files = existsSync(dir) ? readdirSync(dir).filter((f) => f.endsWith(".webp")) : [];
     const credited = new Set(imageCredits.map((c) => c.file));
+    for (const m of MEDIA) if (m.credit) [m.file, m.mobile?.file].forEach((f) => f && credited.add(f));
     for (const f of files) expect(credited.has(`/images/stock/${f}`), f).toBe(true);
   });
 });

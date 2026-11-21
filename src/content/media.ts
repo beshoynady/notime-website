@@ -228,6 +228,8 @@ MEDIA.push(
     "16:9 + 9:16 · a large conference hall, chairs in exact rows, nobody yet; a real NO TIME summit hall replaces it"),
   stock("ev-conf-session", "unsplash:ZXx-aoBPYuM", "Thomas Delacrétaz", "https://unsplash.com/photos/ZXx-aoBPYuM", 2400, 1350, [1080, 1919],
     "16:9 + 9:16 · a session running, the audience from behind, the stage and screen lit"),
+  stock("ev-exh-hall", "unsplash:eDzZZ7bUlz8", "Julia Taubitz", "https://unsplash.com/photos/eDzZZ7bUlz8", 2400, 1350, [1080, 1920],
+    "16:9 + 9:16 · an empty exhibition hall the night before doors open, bare floor, no stands or logos"),
   stock("ev-launch-spot", "unsplash:kqgC_6j6AaA", "Fujiphilm", "https://unsplash.com/photos/kqgC_6j6AaA", 2400, 1350, [1080, 1920],
     "16:9 + 9:16 · a dark stage, one pool of light, seconds before a reveal"),
   stock("ev-stage-beams", "unsplash:UgKL6h7kPT8", "Liana S", "https://unsplash.com/photos/UgKL6h7kPT8", 2400, 1350, [1080, 1920],

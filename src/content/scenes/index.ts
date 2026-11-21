@@ -1,6 +1,6 @@
 import type { CategorySlug, Service } from "../types";
 import { STUDIO_OPENING } from "./creative-production";
-import { EVENTS_MAJLIS, EVENTS_OPENING } from "./events-hospitality";
+import { EVENTS_CONFERENCES, EVENTS_EXHIBITIONS, EVENTS_LAUNCHES, EVENTS_MAJLIS, EVENTS_OPENING } from "./events-hospitality";
 import { EDITORIAL_OPENING } from "./marketing-brand";
 import { WORKSHOP_OPENING } from "./production-print-gifts";
 import type { SceneConfig } from "./types";
@@ -35,6 +35,10 @@ export function getScene(slug: CategorySlug): SceneConfig | undefined {
 const LAB_SCENES: Partial<Record<CategorySlug, SceneConfig>> = {};
 /** Scenes inside a service section, by service slug: public once approved, and those in review. */
 const SECTION_SCENES: Record<string, SceneConfig> = {
+  // Events I–III in photographs, passing (D153).
+  "conferences-summits": EVENTS_CONFERENCES,
+  "exhibitions-booths": EVENTS_EXHIBITIONS,
+  "product-launches-activations": EVENTS_LAUNCHES,
   "catering-heritage-hospitality": EVENTS_MAJLIS, // the majlis (D74, P2), public with the full Events build
 };
 const LAB_SECTION_SCENES: Record<string, SceneConfig> = {};

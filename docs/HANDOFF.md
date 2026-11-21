@@ -10,7 +10,7 @@ The owner's Arabic mandate «تحويل الموقع إلى معرض أعمال 
 **Owner add-on (2026-11-21):** ui-ux-pro-max installed at user scope from nextlevelbuilder/ui-ux-pro-max-skill; run `docs/review/ui-ux-checklist.md` on each page before its commit (brand colours and fonts never change; suggestions go to the report's proposals only).
 **Next:** Task 5, Events sections I–III: section scenes and galleries, delete the agenda-timeline, stand-assembly and launch-reveal modules. Then Tasks 6–7 (IV–VI, Events verification with before/after shots and Lighthouse A/B against f086c44).
 **Open with the owner:** delete the old unscoped `~/.claude/skills/ui-ux-pro-max` copy? Clear `.next/cache/images` (the local optimizer still serves the old night plate, so W02's Events desktop case can only pass on a fresh cache)?
-**Servers:** 3000 = prod build of 1e6686a (CI env, lab on); 3100 = review build (`.next-review`, 1ac76ca) behind the tunnel in `docs/review/tunnel.md`. Don't stop 3100.
+**Servers:** 3000 = prod build of 1e6686a (CI env, lab on); 3100 = review build (`.next-review`, 1ac76ca) behind the tunnel https://minds-makers-roof-appearance.trycloudflare.com (`docs/review/tunnel.md`). Don't stop 3100 or cloudflared.
 
 ## Now: the owner's mandate of 2026-11-20 (review, fix, creative pass)
 

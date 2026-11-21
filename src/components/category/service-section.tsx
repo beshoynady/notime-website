@@ -5,6 +5,8 @@ import { STATIC_FALLBACKS } from "@/components/modules/static-fallbacks";
 import { MajlisArt } from "./majlis-art";
 import { PhotoStack } from "@/components/sections/photo-story/photo-stack";
 import { ServiceVisual } from "./service-visual";
+import { ServiceGallery } from "./service-gallery";
+import { GALLERIES } from "@/content/galleries";
 import { serviceVisual } from "@/content/service-visuals";
 import { ButtonLink } from "@/components/ui/button";
 import { Numeral } from "@/components/ui/numeral";
@@ -51,9 +53,12 @@ export async function ServiceSection({
   const title = service.title[locale];
   const titleId = `${service.anchor}-title`;
   const scene = getSectionScene(service, lab);
-  const Static = lab ? undefined : STATIC_FALLBACKS[service.signatureModule];
-  // A section whose module waits for v1.1 shows a lightweight visual instead (D100).
-  const visual = lab || Static ? undefined : serviceVisual(service.slug);
+  const moduleKey = service.signatureModule;
+  const Static = lab || !moduleKey ? undefined : STATIC_FALLBACKS[moduleKey];
+  // A section whose module waits for v1.1 shows a lightweight visual instead (D100); a photo
+  // scene has neither: Rand's own work follows it as a strip (D153).
+  const visual = lab || Static || !moduleKey ? undefined : serviceVisual(service.slug);
+  const gallery = GALLERIES[service.slug];
   const head = (
     <header className="svc-head">
       <Numeral className="svc-num">
@@ -107,19 +112,20 @@ export async function ServiceSection({
           ))}
         </ul>
       </div>
-      {lab ? (
+      {gallery && !lab && <ServiceGallery ids={gallery} label={t("galleryLabel", { service: title })} locale={locale} />}
+      {!moduleKey ? null : lab ? (
         // The animatic (lab route, never public): a flat box named by its module key.
         <div
           className="svc-module module-placeholder"
-          data-module={service.signatureModule}
+          data-module={moduleKey}
         >
-          <p className="text-eyebrow">{service.signatureModule}</p>
+          <p className="text-eyebrow">{moduleKey}</p>
         </div>
       ) : visual ? (
         <ServiceVisual visual={visual} locale={locale} />
       ) : (
         <ModuleSlot
-          moduleKey={service.signatureModule}
+          moduleKey={moduleKey}
           titleId={titleId}
           service={service}
           locale={locale}

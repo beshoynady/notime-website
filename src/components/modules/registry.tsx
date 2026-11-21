@@ -43,9 +43,6 @@ const load = (importer: () => Promise<{ default: ComponentType<ModuleProps> }>) 
  */
 export const MODULES: Partial<Record<ModuleKey, LazyExoticComponent<ComponentType<ModuleProps>>>> = {
   // Events & Hospitality (batch 2, Tasks 3.3–3.8).
-  "agenda-timeline": load(() => import("./agenda-timeline/agenda-timeline")),
-  "stand-assembly": load(() => import("./stand-assembly/stand-assembly")),
-  "launch-reveal": load(() => import("./launch-reveal/launch-reveal")),
   "candle-moodboard": load(() => import("./candle-moodboard/candle-moodboard")),
   "menu-majlis": load(() => import("./menu-majlis/menu-majlis")),
   "stage-lights": load(() => import("./stage-lights/stage-lights")),

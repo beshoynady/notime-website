@@ -174,3 +174,4 @@ New copy written for the photo scenes (`docs/content/visual-stories.md`). None s
 | ID | Was EN | Was AR | Now EN | Now AR | Why |
 |---|---|---|---|---|---|
 | `m:scenes.events.s1` | It starts with an empty room. | تبدأ كل مناسبة بقاعة فارغة. | It starts before the lights come on. | تبدأ قبل أن تُضاء الأنوار. | The opening's first frame is now the room at night (D153), not an empty drawn hall. |
+| `m:category.galleryLabel` | (new) | (new) | Our work: {service} | من أعمالنا في {service} | Names the strip of Rand's photos under a section (screen readers only; D153). |

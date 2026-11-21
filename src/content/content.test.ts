@@ -115,9 +115,10 @@ describe("services", () => {
 });
 
 const SIGNATURE_MODULES = {
-  conferences: "agenda-timeline",
-  exhibitions: "stand-assembly",
-  launches: "launch-reveal",
+  // Events I–III are photo scenes, with no module (D153).
+  conferences: undefined,
+  exhibitions: undefined,
+  launches: undefined,
   celebrations: "candle-moodboard",
   hospitality: "menu-majlis",
   stage: "stage-lights",
