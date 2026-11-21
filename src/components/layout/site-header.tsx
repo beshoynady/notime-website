@@ -11,16 +11,15 @@ import { HEADER_LINKS, QUOTE_LINK } from "./nav-links";
 import type { Locale } from "@/content";
 
 /**
- * Fixed 68px header. The outer [data-header-shell] is the only element the hero intro
- * fades (GSAP); the header itself switches tone via ToneController.
+ * Fixed 68px header, visible from first paint on every page (D156: the home intro that faded the
+ * outer [data-header-shell] is gone); the header itself switches tone via ToneController.
  */
 export function SiteHeader() {
   const t = useTranslations();
   const menu = getMenuData(useLocale() as Locale);
   return (
-    // relative z-50: the hero intro fades this shell, and opacity < 1 creates a stacking
-    // context; without its own level the shell would sit under #page-stage, so the hero would
-    // cover the header and catch its clicks.
+    // relative z-50: the shell keeps its own level above #page-stage, so the pinned hero never
+    // covers the header or catches its clicks.
     <div data-header-shell="" className="relative z-50">
       <a
         href="#main"

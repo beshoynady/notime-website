@@ -4,7 +4,7 @@ import { expectLanded as expectLandedOnCategory, gotoReady } from "./helpers";
 /**
  * Anchor landing (D53): every route to an anchor puts the target's top at the header's bottom
  * (±4px), then focuses the target's heading. Since N05 the hero's actions open /contact and /work
- * (e2e/hero-intro.spec.ts), so the home page has no in-page link to #services; a deep link still lands.
+ * (e2e/hero.spec.ts), so the home page has no in-page link to #services; a deep link still lands.
  */
 const TOLERANCE = 4;
 
@@ -37,13 +37,10 @@ async function expectLanded(page: Page, id: string, heading: string) {
   await expect(page).toHaveURL(new RegExp(`#${id}$`));
 }
 
-const skipIntro = (page: Page) => page.addInitScript(() => sessionStorage.setItem("nt-intro", "1"));
-
 for (const locale of ["en", "ar"] as const) {
   test.describe(`anchor landing (${locale})`, () => {
-    test("deep link on load (first visit: the intro is skipped, the header is visible)", async ({ page }) => {
+    test("deep link on load (the header is visible)", async ({ page }) => {
       await gotoReady(page, `/${locale}#services`);
-      await expect(page.locator("html")).toHaveAttribute("data-intro-seen", "");
       // Late layout (hero pin spacer, fonts) shifts #services after the first landing; the
       // utility re-lands until it settles.
       await page.waitForTimeout(1500);
@@ -55,7 +52,6 @@ for (const locale of ["en", "ar"] as const) {
     // page at the service's anchor; the menu closes and the landing is the same rule.
     test("mega-menu service link lands its section on the category page and closes the panel", async ({ page, isMobile }) => {
       test.skip(isMobile, "desktop mega menu");
-      await skipIntro(page);
       await gotoReady(page, `/${locale}`);
       await page.locator("button[aria-controls=mega-panel]").click();
       await page.locator('#mega-panel a[href$="/services/events-hospitality#conferences"]').first().click();
@@ -66,7 +62,6 @@ for (const locale of ["en", "ar"] as const) {
 
     test("mobile-menu service link lands its section on the category page after the menu closes", async ({ page, isMobile }) => {
       test.skip(!isMobile, "mobile menu");
-      await skipIntro(page);
       await gotoReady(page, `/${locale}`);
       await page.locator("button[aria-controls=mobile-nav]").click();
       await page.locator("#mobile-nav summary").first().click();

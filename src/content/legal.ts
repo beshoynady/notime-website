@@ -374,10 +374,6 @@ const cookies: LegalDoc = {
                 ar: ["NEXT_LOCALE", "ملف تعريف ارتباط يضعه هذا الموقع", "يتذكّر هل تتصفّحون بالعربية أم بالإنجليزية.", "حتى تغلقوا المتصفح"],
               },
               {
-                en: ["nt-intro", "Session storage (not a cookie)", "Remembers that you've seen the home page's opening animation, so it plays only once.", "Until you close the tab"],
-                ar: ["nt-intro", "تخزين الجلسة (ليس ملف تعريف ارتباط)", "يتذكّر أنكم شاهدتم الحركة الافتتاحية في الصفحة الرئيسية، فلا تُعرض إلا مرة واحدة.", "حتى تغلقوا التبويب"],
-              },
-              {
                 en: ["nt-lead", "Session storage (not a cookie)", "Notes how you reached the site (the campaign tag in the link, the site you came from and your first page), so a form you send tells us which post or link brought you. It leaves your device only with a form you submit.", "Until you close the tab"],
                 ar: ["nt-lead", "تخزين الجلسة (ليس ملف تعريف ارتباط)", "يسجّل كيف وصلتم إلى الموقع (وسم الحملة في الرابط، والموقع الذي جئتم منه، وأول صفحة زرتموها)، ليخبرنا النموذج الذي ترسلونه بالمنشور أو الرابط الذي أوصلكم إلينا. لا يغادر جهازكم إلا مع نموذج ترسلونه.", "حتى تغلقوا التبويب"],
               },

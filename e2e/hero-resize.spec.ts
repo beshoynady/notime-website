@@ -1,17 +1,15 @@
 import { expect, test, type Page } from "@playwright/test";
-import { gotoReady, waitForIntroEnd } from "./helpers";
+import { gotoReady } from "./helpers";
 
 /** Pin geometry: hero height + 100% of the viewport (the scroll timeline's `end: "+=100%"`, N05). */
 async function pinState(page: Page) {
   return page.evaluate(() => {
     const spacer = document.querySelector<HTMLElement>(".pin-spacer")!;
     const hero = document.getElementById("hero")!;
-    const cv = document.querySelector<HTMLCanvasElement>(".hero-canvas")!;
     return {
       spacer: spacer.offsetHeight,
       expected: hero.offsetHeight + innerHeight * 1.0,
       heroTop: hero.getBoundingClientRect().top,
-      canvas: { cssW: cv.clientWidth, cssH: cv.clientHeight, heroW: hero.clientWidth, heroH: hero.clientHeight, w: cv.width, h: cv.height },
     };
   });
 }
@@ -22,8 +20,6 @@ test.describe("hero pin on mobile", () => {
   test("a real touch scroll pins the hero and releases it after the pin", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await gotoReady(page, "/en");
-    await page.touchscreen.tap(30, 420); // skip the intro
-    await waitForIntroEnd(page);
     // Real touch events (touchstart → touchmove → touchend), so the browser's native touch
     // scrolling moves the page. (Input.synthesizeScrollGesture with gestureSourceType
     // "touch" does not scroll in headless Chrome; measured.)
@@ -53,13 +49,11 @@ test.describe("hero pin on mobile", () => {
     expect((await pinState(page)).heroTop).toBeLessThan(-50); // released: scrolls away
   });
 
-  test("resizing mid-pin keeps the pin and the canvas consistent", async ({ page }) => {
+  test("resizing mid-pin keeps the pin consistent", async ({ page }) => {
     const errors: string[] = [];
     page.on("pageerror", (e) => errors.push(String(e)));
     await page.setViewportSize({ width: 390, height: 844 });
     await gotoReady(page, "/en");
-    await page.touchscreen.tap(30, 420);
-    await waitForIntroEnd(page);
     await page.evaluate(() => scrollTo(0, innerHeight * 0.5)); // mid-pin
     await page.waitForTimeout(400);
     const before = await pinState(page);
@@ -69,15 +63,11 @@ test.describe("hero pin on mobile", () => {
     await page.waitForTimeout(500);
     expect((await pinState(page)).spacer).toBe(before.spacer);
 
-    // Rotation (width changes): the pin re-measures; the canvas follows its box.
+    // Rotation (width changes): the pin re-measures.
     await page.setViewportSize({ width: 844, height: 390 });
-    await page.waitForTimeout(800); // ScrollTrigger refresh + the canvas's 150 ms debounce
+    await page.waitForTimeout(800); // ScrollTrigger refresh
     const after = await pinState(page);
     expect(Math.abs(after.spacer - after.expected)).toBeLessThanOrEqual(2);
-    expect(after.canvas.cssW).toBe(after.canvas.heroW);
-    expect(after.canvas.cssH).toBe(after.canvas.heroH);
-    // Backing store keeps the box's aspect ratio (one scale for both axes).
-    expect(Math.abs(after.canvas.w / after.canvas.cssW - after.canvas.h / after.canvas.cssH)).toBeLessThan(0.01);
     expect(errors).toEqual([]);
   });
 });

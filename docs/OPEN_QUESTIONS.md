@@ -54,3 +54,6 @@ Items that need an answer from Rand or the user before the related work can be b
 
 ## Added with the Software & Digital brief (D65, 2026-11-08)
 24. **Product features.** The QR event check-in and restaurant management cards need 4–6 features each. The drafts in `docs/design/storyboards/software-digital.md` §7 are proposals; an unreleased product's features are claims, so the client confirms each one (or replaces it) before they show. Until then the features render as `TODO` placeholders.
+
+## Added with the visual portfolio (2026-11-21)
+25. **Arabic fallback faces at 400/500 (technical, not a client question).** On every Arabic page, the lead text and the buttons swap from the site-wide Alexandria fallback faces about 4–9% narrow, so text moves a few pixels when the brand font arrives (CLS 0.0012 on the Arabic home at 1440; the intro used to hide it there, D156). Recalibrating those bands means re-measuring them on the site's Arabic text across pages, so it waits for the performance pass (Task 16). Until then `e2e/cls.spec.ts` allows 0.002 in Arabic.

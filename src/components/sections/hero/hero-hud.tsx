@@ -3,7 +3,7 @@ import { formatTimecode } from "@/lib/time";
 
 /**
  * Camera HUD in the four corners (decorative, aria-hidden). The timecode is always LTR
- * with tabular figures; HeroScene updates it per frame. Coordinates hide at ≤600px.
+ * with tabular figures; HeroController runs it while the hero is on screen. Coordinates hide at ≤600px.
  */
 export async function HeroHud() {
   const t = await getTranslations("hud");
