@@ -57,9 +57,11 @@ export async function WorkCollectionPage({ collection, locale }: { collection: W
         <SectionRef id={PAGE_REF.collectionGallery} />
         <div className="frame">
           <ul className="wcol-grid">
-            {photos.map((p) => (
+            {/* The first photo is in the first screen at every width and is the page's LCP (measured
+                in the close): it loads first; the rest stay lazy. */}
+            {photos.map((p, i) => (
               <li key={p.id} className="wcol-item" style={{ aspectRatio: `${p.width} / ${p.height}` }}>
-                <MediaImage entry={p} locale={locale} sizes="(min-width: 1100px) 400px, (min-width: 640px) 50vw, 100vw" />
+                <MediaImage entry={p} locale={locale} priority={i === 0} sizes="(min-width: 1100px) 400px, (min-width: 640px) 50vw, 100vw" />
               </li>
             ))}
           </ul>
