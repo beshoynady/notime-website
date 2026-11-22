@@ -42,4 +42,4 @@ Rand reviews the **review build** (`NEXT_PUBLIC_REVIEW_MODE=1`) through a free C
 
 ## Current link
 
-https://improvement-traveling-celebrate-wales.trycloudflare.com/ar (started 2026-11-22 after a session restart stopped the previous tunnel; review build 47e1ca4, Creative done, on port 3100). The previous link (vast-expires-monica-types) is dead.
+https://improvement-traveling-celebrate-wales.trycloudflare.com/ar (started 2026-11-22 after a session restart stopped the previous tunnel; review build ba85f1a since 2026-11-22: Creative, Marketing and Print done, on port 3100). The previous link (vast-expires-monica-types) is dead.
