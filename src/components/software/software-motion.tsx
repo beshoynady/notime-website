@@ -8,14 +8,10 @@ import { gsap, useGSAP } from "@/lib/gsap";
  * gsap.matchMedia). Every target is drawn complete by the server, so without JS or under reduced
  * motion the page is its final state; the tweens start from hidden only once built (gsap.from on
  * off-screen elements, so nothing flashes).
- * - `[data-sw-draw]`: service lines draw (stroke) as their block arrives.
  * - `[data-sw-reveal]`: children rise in, staggered.
  * - the proof devices assemble; the proof phone drifts a little against the laptop.
  * - `[data-sw-steps]`: the process rail fills from inline-start (or top on mobile); steps light.
- * - `[data-sw-count]`: the event counter counts up its example value; the meter fills.
  * - `[data-sw-gridlines]`: the event band's grid wipes in from inline-start.
- * - desktop: a service block crossing the viewport's middle gets `data-active` (its state label,
- *   sweep-free state change and deliverables, CSS), so a visitor who never hovers still sees them.
  * Hover and focus states are CSS on other elements; Motion owns only the proof toggle, its light,
  * the interest disclosure and the hover sweep (never these targets).
  */
@@ -38,10 +34,6 @@ export function SoftwareMotion() {
         const dir = rtl ? -1 : 1;
         const enter = (trigger: Element, start = "top 82%") => ({ trigger, start, toggleActions: "play none none none" });
 
-        for (const v of q(".sw-v")) {
-          const paths = v.querySelectorAll("[data-sw-draw]");
-          if (paths.length) gsap.fromTo(paths, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.1, ease: "power2.out", stagger: 0.08, scrollTrigger: enter(v, "top 85%") });
-        }
         for (const el of q("[data-sw-reveal]")) {
           gsap.from(el.children, { opacity: 0, y: 18, duration: 0.8, ease: "power3.out", stagger: 0.08, scrollTrigger: enter(el) });
         }
@@ -59,7 +51,8 @@ export function SoftwareMotion() {
           }
         }
 
-        for (const wrap of q("[data-sw-steps]")) {
+        // The rail runs on desktop only: on a phone the steps are a sideways row (D161).
+        for (const wrap of desktop ? q("[data-sw-steps]") : []) {
           const fill = wrap.querySelector(".sw-steps-fill");
           const steps = Array.from(wrap.querySelectorAll<HTMLElement>(".sw-step"));
           if (!fill) continue;
@@ -81,26 +74,11 @@ export function SoftwareMotion() {
           wrap.dataset.motion = "";
         }
 
-        for (const el of q<HTMLElement>("[data-sw-count]")) {
-          const target = Number(el.dataset.swCount) || 0;
-          const box = el.closest(".sw-v-count") ?? el;
-          const counter = { v: 0 };
-          const meter = box.querySelector<HTMLElement>("[data-sw-meter]");
-          const tl = gsap.timeline({ scrollTrigger: enter(box, "top 80%") });
-          tl.fromTo(counter, { v: 0 }, { v: target, duration: 1.6, ease: "power2.out", onUpdate: () => void (el.textContent = String(Math.round(counter.v))) });
-          if (meter) tl.fromTo(meter, { scaleX: 0 }, { scaleX: Number(meter.dataset.swMeter) || 1, duration: 1.6, ease: "power2.out" }, 0);
-        }
         for (const g of q("[data-sw-gridlines]")) {
           gsap.fromTo(g, { clipPath: rtl ? "inset(0 0 0 100%)" : "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0%)", duration: 1.4, ease: "power2.inOut", scrollTrigger: enter(g, "top 85%") });
         }
 
-        if (desktop) {
-          for (const block of q(".sw-block")) {
-            gsap.timeline({ scrollTrigger: { trigger: block, start: "top 55%", end: "bottom 45%", onToggle: (self) => block.toggleAttribute("data-active", self.isActive) } });
-          }
-        }
         return () => {
-          for (const b of q(".sw-block")) b.removeAttribute("data-active");
           for (const s of q(".sw-step")) s.removeAttribute("data-lit");
           for (const w of q("[data-sw-steps]")) delete (w as HTMLElement).dataset.motion;
         };

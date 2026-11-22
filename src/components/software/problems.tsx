@@ -16,7 +16,7 @@ export function Problems({ locale }: { locale: Locale }) {
           </h2>
           <p className="sw-lead">{problems.lead[locale]}</p>
         </header>
-        <ol className="sw-diff" data-sw-reveal="">
+        <ol className="sw-diff" data-sw-reveal="" tabIndex={0} aria-labelledby="problems-title">
           {problems.items.map((it, i) => (
             <li key={i} className="sw-diff-item">
               <p className="sw-diff-line sw-diff-minus">

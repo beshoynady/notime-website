@@ -49,14 +49,14 @@ export function Products({ locale }: { locale: Locale }) {
                     <span className="sw-mini-label">{p.problem[locale]}</span>
                     {item.problem[locale]}
                   </p>
-                  <div>
-                    <span className="sw-mini-label">{p.features[locale]}</span>
+                  <details className="sw-more">
+                    <summary>{p.features[locale]}</summary>
                     <ul className="sw-product-features">
                       {item.features.map((f, k) => (
                         <li key={k}>{f[locale]}</li>
                       ))}
                     </ul>
-                  </div>
+                  </details>
                   <Link href={productHref(id)} className="sw-link">
                     {fill(p.more[locale], { product: name })}
                   </Link>

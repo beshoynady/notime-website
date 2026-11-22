@@ -71,10 +71,14 @@ export const TARGETS = {
   "/services/software-digital": [
     ["software-hero", "#page-stage > *:first-child"],
     ["software-proof", "#proof"],
+    ["software-problems", "#problems"],
     ["software-services", "#services"],
     ["software-process", "#how-we-work"],
     ["software-products", "#products"],
     ["software-quality", "#quality"],
+    ["software-tiers", ".sw-tiers"],
+    ["software-ways", ".sw-ways"],
+    ["software-consult", ".sw-consult, .sw-review"],
   ],
   "/about": [
     ["about-top", "#page-stage > *:first-child"],

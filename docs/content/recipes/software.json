@@ -1,0 +1,9 @@
+[
+  {"id": "sw-websites", "src": "unsplash:3JTi3cg1s0Y", "crop": {"aspect": "4:3", "focus": [0.42, 0.6], "scale": 0.72}, "grade": "evening", "out": "public/images/stock/sw-websites.webp", "maxWidth": 1400},
+  {"id": "sw-apps", "src": "unsplash:hTck7keIHK4", "crop": {"aspect": "4:3", "focus": [0.55, 0.6]}, "grade": "evening", "out": "public/images/stock/sw-apps.webp", "maxWidth": 1400},
+  {"id": "sw-systems", "src": "unsplash:B93kPaspXcA", "crop": {"aspect": "4:3", "focus": [0.5, 0.5]}, "grade": "evening", "out": "public/images/stock/sw-systems.webp", "maxWidth": 1400},
+  {"id": "sw-ecommerce", "src": "unsplash:MGaFENpDCsw", "crop": {"aspect": "4:3", "focus": [0.35, 0.6]}, "grade": "evening", "out": "public/images/stock/sw-ecommerce.webp", "maxWidth": 1400},
+  {"id": "sw-ux", "src": "unsplash:sv8oOQaUb-o", "crop": {"aspect": "4:3", "focus": [0.5, 0.5]}, "grade": "evening", "out": "public/images/stock/sw-ux.webp", "maxWidth": 1400},
+  {"id": "sw-ai", "src": "unsplash:26MJGnCM0Wc", "crop": {"aspect": "4:3", "focus": [0.5, 0.5]}, "grade": "evening", "out": "public/images/stock/sw-ai.webp", "maxWidth": 1400},
+  {"id": "sw-event-tech", "src": "unsplash:yz3N50D9uy4", "crop": {"aspect": "4:3", "focus": [0.72, 0.66], "scale": 0.7}, "grade": "evening", "out": "public/images/stock/sw-event-tech.webp", "maxWidth": 1400}
+]

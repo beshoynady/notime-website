@@ -78,6 +78,8 @@ export const formCopy = {
 
   consultation: {
     project: l("Your project", "مشروعكم"),
+    /** The fold around the two optional notes (D161); it opens itself when either has an error. */
+    more: l("Add your website or a note", "أضيفوا موقعكم أو ملاحظة"),
     you: l("About you", "عنكم"),
     build: l("What do you want to build?", "ماذا تريدون أن تبنوا؟"),
     buildOptions: {

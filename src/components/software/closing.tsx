@@ -6,6 +6,7 @@ import type { Category, Locale } from "@/content";
 import { cta, faqCopy, finalCta, quality, tiers, TIER_IDS } from "@/content/software/page";
 import { CONSULT_ID } from "@/lib/prefill";
 import { categoryRef } from "@/lib/review";
+import { ServiceTabs } from "./service-tabs";
 
 /** The quality strip (brief §12): quiet, text only; the stack named lightly, no logo wall. */
 export function QualityStrip({ locale }: { locale: Locale }) {
@@ -62,42 +63,51 @@ export function SoftwareFaq({ category, locale }: { category: Category; locale: 
 
 /**
  * The final CTA with risk reversal (brief §14), the bookend: the closing line answers the
- * opening's cursor, then the consultation form (#consult), then the free website review
- * (#website-review), the secondary way in.
+ * opening's cursor, then the two ways in as tabs (D161): the consultation form (#consult) and the
+ * free website review (#website-review). A link to either anchor opens its tab.
  */
 export function FinalCta({ category, locale }: { category: Category; locale: Locale }) {
   const tierLabels = Object.fromEntries(TIER_IDS.map((id) => [id, tiers.items[id].name[locale]])) as Record<(typeof TIER_IDS)[number], string>;
   return (
-    <>
-      <section id={CONSULT_ID} data-tone="light" aria-labelledby="consult-title" className="sw-section sw-consult">
-        <div className="frame sw-consult-layout">
-          <header className="sw-consult-head">
-            <h2 id="consult-title" className="sw-consult-title">
-              {category.closing[locale]}
-            </h2>
-            <p className="sw-consult-risk">{finalCta.risk[locale]}</p>
-            <a href={`#${finalCta.reviewAnchor}`} className="sw-link">
-              {finalCta.reviewTitle[locale]}
-            </a>
-          </header>
-          <div className="sw-consult-form">
-            <ConsultationForm locale={locale} source="software-digital" tierLabels={tierLabels} />
-          </div>
-        </div>
-      </section>
-      <section id={finalCta.reviewAnchor} data-tone="light" aria-labelledby="review-title" className="sw-section sw-review">
-        <div className="frame sw-consult-layout">
-          <header className="sw-consult-head">
-            <h2 id="review-title" className="sw-h2">
-              {finalCta.reviewTitle[locale]}
-            </h2>
-            <p className="sw-consult-risk">{cta.reviewPromise[locale]}</p>
-          </header>
-          <div className="sw-consult-form">
-            <WebsiteReviewForm locale={locale} source="software-digital" />
-          </div>
-        </div>
-      </section>
-    </>
+    <section data-tone="light" aria-labelledby="consult-title" className="sw-section sw-consult">
+      <div className="frame sw-consult-layout">
+        <header className="sw-consult-head">
+          <h2 id="consult-title" className="sw-consult-title">
+            {category.closing[locale]}
+          </h2>
+          <p className="sw-consult-risk">{finalCta.risk[locale]}</p>
+        </header>
+        <ServiceTabs
+          className="sw-consult-tabs"
+          panelClassName="sw-consult-panel"
+          label={finalCta.tabs[locale]}
+          items={[
+            {
+              id: CONSULT_ID,
+              num: "",
+              label: finalCta.book[locale],
+              labelledBy: `${CONSULT_ID}-tab`,
+              panel: (
+                <div className="sw-consult-form">
+                  <ConsultationForm locale={locale} source="software-digital" tierLabels={tierLabels} />
+                </div>
+              ),
+            },
+            {
+              id: finalCta.reviewAnchor,
+              num: "",
+              label: cta.reviewShort[locale],
+              labelledBy: `${finalCta.reviewAnchor}-tab`,
+              panel: (
+                <div className="sw-consult-form">
+                  <p className="sw-consult-promise">{cta.reviewPromise[locale]}</p>
+                  <WebsiteReviewForm locale={locale} source="software-digital" />
+                </div>
+              ),
+            },
+          ]}
+        />
+      </div>
+    </section>
   );
 }

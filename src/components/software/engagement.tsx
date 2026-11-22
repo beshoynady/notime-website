@@ -36,8 +36,8 @@ export function Tiers({ locale }: { locale: Locale }) {
                   <span className="sw-mini-label">{t.idealFor[locale]}</span>
                   {tier.ideal[locale]}
                 </p>
-                <div>
-                  <span className="sw-mini-label">{t.included[locale]}</span>
+                <details className="sw-more">
+                  <summary>{t.included[locale]}</summary>
                   <ul className="sw-tier-included">
                     {tier.included.map((x, k) => (
                       <li key={k}>
@@ -46,7 +46,7 @@ export function Tiers({ locale }: { locale: Locale }) {
                       </li>
                     ))}
                   </ul>
-                </div>
+                </details>
                 <p className="sw-tier-receive">
                   <span className="sw-mini-label">{t.receive[locale]}</span>
                   {tier.receive[locale]}
@@ -76,7 +76,7 @@ export function Ways({ locale }: { locale: Locale }) {
           </h2>
           <p className="sw-lead">{ways.lead[locale]}</p>
         </header>
-        <ol className="sw-ways-list">
+        <ol className="sw-ways-list" tabIndex={0} aria-labelledby="ways-title">
           {ways.items.map((w, i) => (
             <li key={w.id} className="sw-way" data-way={w.id}>
               <span className="sw-way-step tabular" aria-hidden="true">
@@ -85,11 +85,14 @@ export function Ways({ locale }: { locale: Locale }) {
               <h3 className="sw-way-name">{w.name[locale]}</h3>
               {"tag" in w && w.tag && <p className="sw-way-tag">{w.tag[locale]}</p>}
               <p className="sw-way-body">{w.body[locale]}</p>
-              <ul className="sw-way-points">
-                {w.points.map((x, k) => (
-                  <li key={k}>{x[locale]}</li>
-                ))}
-              </ul>
+              <details className="sw-more">
+                <summary>{t.included[locale]}</summary>
+                <ul className="sw-way-points">
+                  {w.points.map((x, k) => (
+                    <li key={k}>{x[locale]}</li>
+                  ))}
+                </ul>
+              </details>
             </li>
           ))}
         </ol>
@@ -109,7 +112,7 @@ export function Why({ locale }: { locale: Locale }) {
           </h2>
           <p className="sw-lead">{why.lead[locale]}</p>
         </header>
-        <ul className="sw-why-list" data-sw-reveal="">
+        <ul className="sw-why-list" data-sw-reveal="" tabIndex={0} aria-labelledby="why-title">
           {why.items.map((it, i) => (
             <li key={i}>
               <h3 className="sw-why-title">{it.title[locale]}</h3>

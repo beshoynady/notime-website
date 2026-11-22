@@ -31,14 +31,3 @@ export function Phone({ children, className, screenClassName }: { children: Reac
 export function Tag({ children, tone = "line" }: { children: ReactNode; tone?: "line" | "fill" }) {
   return <span className={cn("sw-tag", tone === "fill" && "sw-tag-fill")}>{children}</span>;
 }
-
-/** The theme's signature: a visible state label that switches as the visitor acts (§5.5). */
-export function StateLabel({ rest, active }: { rest: string; active: string }) {
-  return (
-    <span className="sw-state" aria-hidden="true">
-      <span className="sw-state-dot" />
-      <span className="sw-state-rest">{rest}</span>
-      <span className="sw-state-active">{active}</span>
-    </span>
-  );
-}

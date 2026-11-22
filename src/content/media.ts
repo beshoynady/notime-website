@@ -325,6 +325,38 @@ MEDIA.push(
     }),
 );
 
+/** Software & Digital: one device photograph per service (Task C2, D161; docs/content/recipes/software.json). */
+MEDIA.push(
+  stock("sw-websites", "unsplash:3JTi3cg1s0Y", "Nat", "https://unsplash.com/photos/3JTi3cg1s0Y", 1400, 1050, null,
+    "4:3 · a laptop showing code on a dark desk, no legible brand", {
+      alt: { en: "A laptop showing code on a dark desk at night.", ar: "حاسوب محمول يعرض شيفرة برمجية على مكتب داكن ليلًا." },
+    }),
+  stock("sw-apps", "unsplash:hTck7keIHK4", "Penfer", "https://unsplash.com/photos/hTck7keIHK4", 1400, 1050, null,
+    "4:3 · a phone resting on a laptop, lock screen only", {
+      alt: { en: "A phone resting on an open laptop in low light.", ar: "هاتف موضوع على حاسوب محمول مفتوح في إضاءة خافتة." },
+    }),
+  stock("sw-systems", "unsplash:B93kPaspXcA", "Josh Sorenson", "https://unsplash.com/photos/B93kPaspXcA", 1400, 1050, null,
+    "4:3 · two monitors with dashboards at a desk, no legible data", {
+      alt: { en: "Two monitors with dashboards on a desk, lit in teal.", ar: "شاشتان تعرضان لوحات بيانات على مكتب بإضاءة فيروزية." },
+    }),
+  stock("sw-ecommerce", "unsplash:MGaFENpDCsw", "Bench Accounting", "https://unsplash.com/photos/MGaFENpDCsw", 1400, 1050, null,
+    "4:3 · an order packed at a bright table, the face out of frame", {
+      alt: { en: "Hands packing an online order in a box at a bright table.", ar: "يدان تغلّفان طلبًا إلكترونيًا في صندوق على طاولة مضيئة." },
+    }),
+  stock("sw-ux", "unsplash:sv8oOQaUb-o", "Amélie Mourichon", "https://unsplash.com/photos/sv8oOQaUb-o", 1400, 1050, null,
+    "4:3 · app wireframes sketched on paper, a hand with a pen", {
+      alt: { en: "App wireframes sketched in pen on paper.", ar: "مخططات أولية لتطبيق مرسومة بالقلم على الورق." },
+    }),
+  stock("sw-ai", "unsplash:26MJGnCM0Wc", "Kaleidico", "https://unsplash.com/photos/26MJGnCM0Wc", 1400, 1050, null,
+    "4:3 · a process mapped on a whiteboard, hands only", {
+      alt: { en: "A workflow being mapped on a whiteboard with markers.", ar: "مسار عمل يُرسم على سبورة بيضاء بالأقلام." },
+    }),
+  stock("sw-event-tech", "unsplash:yz3N50D9uy4", "Compagnons", "https://unsplash.com/photos/yz3N50D9uy4", 1400, 1050, null,
+    "4:3 · hands on a rugged tablet on an event floor, no faces", {
+      alt: { en: "Hands using a rugged tablet on an event floor.", ar: "يدان تستخدمان جهازًا لوحيًا متينًا في أرض فعالية." },
+    }),
+);
+
 /** Ids hidden by the environment (tests: NEXT_PUBLIC_MEDIA_HIDE=a,b). */
 const ENV_HIDE = (process.env.NEXT_PUBLIC_MEDIA_HIDE ?? "").split(",").filter(Boolean);
 

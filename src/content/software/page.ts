@@ -100,8 +100,10 @@ export const problems = {
 };
 
 /** The mini landing block of each service, by service slug (services.ts holds title, promise, deliverables). */
-export const serviceBlocks: Record<string, { outcome: L; idealFor: L[]; phases: Phase[] }> = {
+/** `photo` is a registry id (media.ts): the device photograph in the service's tab panel. */
+export const serviceBlocks: Record<string, { photo: string; outcome: L; idealFor: L[]; phases: Phase[] }> = {
   websites: {
+    photo: "sw-websites",
     outcome: l("A site your clients use, written as well in Arabic as in English.", "موقع يستخدمه عملاؤكم، وعربيّته متقنة كإنجليزيته."),
     idealFor: [
       l("Companies selling to Arabic and English speakers", "شركات تخاطب عملاء بالعربية والإنجليزية"),
@@ -111,6 +113,7 @@ export const serviceBlocks: Record<string, { outcome: L; idealFor: L[]; phases: 
     phases: ["discover", "design", "build", "launch", "support"],
   },
   "mobile-apps": {
+    photo: "sw-apps",
     outcome: l("An app on your clients' phones, fed by the same content as your site.", "تطبيق على هواتف عملائكم، يعرض المحتوى نفسه الذي في موقعكم."),
     idealFor: [
       l("Services customers book or check often", "خدمات يحجزها العملاء أو يتابعونها كثيرًا"),
@@ -120,6 +123,7 @@ export const serviceBlocks: Record<string, { outcome: L; idealFor: L[]; phases: 
     phases: ["discover", "design", "build", "launch", "support"],
   },
   "custom-systems": {
+    photo: "sw-systems",
     outcome: l("Spreadsheets and email threads, replaced by one system your team runs.", "نظام واحد يديره فريقكم، بدل جداول البيانات وسلاسل الرسائل."),
     idealFor: [
       l("Operations that run on spreadsheets", "عمليات تُدار بجداول البيانات"),
@@ -129,6 +133,7 @@ export const serviceBlocks: Record<string, { outcome: L; idealFor: L[]; phases: 
     phases: ["discover", "design", "build", "launch", "support"],
   },
   "e-commerce": {
+    photo: "sw-ecommerce",
     outcome: l("A store where buying takes a few clear steps, and orders are easy to follow.", "متجر يُتمّ فيه العميل شراءه بخطوات قليلة وواضحة، ويتابع طلبه بسهولة."),
     idealFor: [
       l("Retail brands starting to sell online", "علامات تجزئة تبدأ البيع عبر الإنترنت"),
@@ -138,6 +143,7 @@ export const serviceBlocks: Record<string, { outcome: L; idealFor: L[]; phases: 
     phases: ["discover", "design", "build", "launch", "support"],
   },
   "ui-ux-design": {
+    photo: "sw-ux",
     outcome: l("Interfaces people understand the first time they use them.", "واجهات يفهمها الناس من أول استخدام."),
     idealFor: [
       l("Products before development starts", "منتجات قبل أن تبدأ برمجتها"),
@@ -147,6 +153,7 @@ export const serviceBlocks: Record<string, { outcome: L; idealFor: L[]; phases: 
     phases: ["discover", "design"],
   },
   "ai-consulting": {
+    photo: "sw-ai",
     outcome: l("A clear answer on where AI saves your team time, and where it doesn't.", "إجابة واضحة عن المواضع التي يوفّر فيها الذكاء الاصطناعي وقت فريقكم، وأين لا يفعل."),
     idealFor: [
       l("Teams with repetitive written work", "فرق لديها أعمال كتابية متكررة"),
@@ -163,11 +170,16 @@ export const services = {
   idealFor: l("Ideal for", "مناسب لـ"),
   receive: l("You receive", "ما تحصلون عليه"),
   phases: l("Stages", "المراحل"),
+  /** The fold under each panel's deliverables (D161). */
+  more: l("Who it suits, and the stages", "لمن تناسب، ومراحل العمل"),
+  /** The tab rail's name for screen readers. */
+  tabs: l("Our services", "خدماتنا"),
 };
 
 /** Event technology: the featured block (wider, darker) where the two worlds meet (D65, D91). */
 export const eventTech = {
   anchor: "event-tech",
+  photo: "sw-event-tech",
   name: l("Event technology", "تقنيات الفعاليات"),
   eyebrow: l("Event technology · our specialty", "تقنيات الفعاليات · تخصّصنا"),
   title: l("Built by people who run events.", "تبنيها فرقٌ تدير الفعاليات بنفسها."),
@@ -195,8 +207,6 @@ export const eventTech = {
   ],
   phases: ["discover", "design", "build", "launch", "support"] as Phase[],
   eventsLink: l("See Events & Hospitality", "استعراض الفعاليات والضيافة"),
-  /** The drawn check-in counter: example data, labelled (category-pages.md §1). */
-  counter: { label: l("Checked in", "سجّلوا حضورهم"), of: l("of", "من"), example: 248, total: 320 },
 };
 
 export const process = {
@@ -423,7 +433,9 @@ export const finalCta = {
     "اطلبوا مكالمة تعارف مجانية (30 دقيقة). دون أي التزام. نرد خلال يوم عمل.",
   ),
   reviewAnchor: "website-review",
-  reviewTitle: l("Or start with a free website review", "أو ابدؤوا بمراجعة مجانية لموقعكم"),
+  /** The two ways in, as tabs (D161): the intro call first, the review second. */
+  tabs: l("Two ways to start", "طريقتان للبدء"),
+  book: l("Request a free call", "اطلبوا مكالمة مجانية"),
 };
 
 export const faqCopy = {

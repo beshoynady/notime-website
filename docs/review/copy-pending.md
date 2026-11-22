@@ -191,3 +191,17 @@ New copy written for the photo scenes (`docs/content/visual-stories.md`). None s
 | `media:smith-gulf-1` alt | (new) | (new) | An exhibition stand with orange frames, built for a trade show. | جناح معرض بإطارات برتقالية، صُنع لأحد المعارض التجارية. | The Fabrication strip (D160). |
 | `media:pg-printing` alt | (new) | (new) | A large printed banner hanging in a bright hall. | لافتة مطبوعة كبيرة معلّقة في قاعة مضيئة. | Stock, Printing (D160). |
 | `media:pg-fabrication` alt | (new) | (new) | A carpentry workshop with timber boards, a mitre saw and tools. | ورشة نجارة فيها ألواح خشب ومنشار وأدوات. | Stock, Fabrication (D160). |
+| `m:software.services.more` | (new) | (new) | Who it suits, and the stages | لمن تناسب، ومراحل العمل | The fold in each service panel and in Event technology (D161). |
+| `m:software.services.tabs` | (new) | (new) | Our services | خدماتنا | The tab rail's name for screen readers (D161). |
+| `m:software.finalCta.tabs` | (new) | (new) | Two ways to start | طريقتان للبدء | The closing tabs' name for screen readers (D161). |
+| `m:software.finalCta.book` | (new) | (new) | Request a free call | اطلبوا مكالمة مجانية | The intro-call tab (same words as the sticky bar, D161). |
+| `m:form.consultation.more` | (new) | (new) | Add your website or a note | أضيفوا موقعكم أو ملاحظة | The fold around the form's two optional notes (D161). |
+| `m:software.finalCta.reviewTitle` | Or start with a free website review | أو ابدؤوا بمراجعة مجانية لموقعكم | (removed) | (removed) | The review is a tab now (D161). |
+| `m:software.eventTech.counter` | Checked in · of | سجّلوا حضورهم · من | (removed) | (removed) | The drawn counter became a photograph (D161). |
+| `media:sw-websites` alt | (new) | (new) | A laptop showing code on a dark desk at night. | حاسوب محمول يعرض شيفرة برمجية على مكتب داكن ليلًا. | Stock, Websites (D161). |
+| `media:sw-apps` alt | (new) | (new) | A phone resting on an open laptop in low light. | هاتف موضوع على حاسوب محمول مفتوح في إضاءة خافتة. | Stock, Mobile apps (D161). |
+| `media:sw-systems` alt | (new) | (new) | Two monitors with dashboards on a desk, lit in teal. | شاشتان تعرضان لوحات بيانات على مكتب بإضاءة فيروزية. | Stock, Custom systems (D161). |
+| `media:sw-ecommerce` alt | (new) | (new) | Hands packing an online order in a box at a bright table. | يدان تغلّفان طلبًا إلكترونيًا في صندوق على طاولة مضيئة. | Stock, E-commerce (D161). |
+| `media:sw-ux` alt | (new) | (new) | App wireframes sketched in pen on paper. | مخططات أولية لتطبيق مرسومة بالقلم على الورق. | Stock, UI/UX (D161). |
+| `media:sw-ai` alt | (new) | (new) | A workflow being mapped on a whiteboard with markers. | مسار عمل يُرسم على سبورة بيضاء بالأقلام. | Stock, AI consulting (D161). |
+| `media:sw-event-tech` alt | (new) | (new) | Hands using a rugged tablet on an event floor. | يدان تستخدمان جهازًا لوحيًا متينًا في أرض فعالية. | Stock, Event technology (D161). |

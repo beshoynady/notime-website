@@ -6,6 +6,12 @@
 const trimSlash = (p: string) => (p.length > 1 && p.endsWith("/") ? p.slice(0, -1) : p);
 
 /**
+ * The event the site's anchor handler dispatches on its target (bubbling) before it measures
+ * where to land, so a closed container (a tab panel) can open itself first (D161).
+ */
+export const ANCHOR_REVEAL = "anchor:reveal";
+
+/**
  * The fragment id when `href` points at an element of the current document (same origin,
  * path and query), else null. Another path, locale or query is a navigation, not an anchor.
  */

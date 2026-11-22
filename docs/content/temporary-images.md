@@ -30,6 +30,7 @@ Updated 2026-11-16. This list stays in the repo. The site itself never says how 
 | Print opening, the gift (D160) | `gifts-1` (media.ts) | Real profile photo | No |
 | Print · Printing, Fabrication (D160) | `pg-printing`, `pg-fabrication` (media.ts) | Stock, Unsplash, workshop grade | **Yes** (NO TIME's own prints and builds) |
 | Print · Packaging, Gifts, Merchandise; Fabrication strip (D160) | `uae-pro-league-7`, `uae-pro-league-5`, `gifts-2`; `sandoz-1`, `smith-gulf-1` (media.ts) ⚑ | Real profile photos | No (originals wanted for `smith-gulf-1`) |
+| Software · the six services and event technology (D161) | `sw-websites`, `sw-apps`, `sw-systems`, `sw-ecommerce`, `sw-ux`, `sw-ai`, `sw-event-tech` (media.ts) | Stock, Unsplash, evening grade (no brand marks, no faces) | **Yes** (screens of NO TIME's own builds) |
 | Every other scene layer (Events hall and majlis, Software) | `src: null` | Nothing renders; the scene's code drawing is the visual | Real or graded files can be added later (`scenes/images.ts`) |
 | Home hero, category openings, service sections | none | Code-driven scenes and drawings (`ServiceDrawing`, the decorative patterns) | No |
 
