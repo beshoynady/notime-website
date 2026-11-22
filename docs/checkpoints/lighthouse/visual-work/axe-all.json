@@ -1,0 +1,462 @@
+[
+  {
+    "path": "/en",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/services",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/services",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/services/events-hospitality",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/services/events-hospitality",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/services/marketing-brand",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/services/marketing-brand",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/services/creative-production",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/services/creative-production",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/services/production-print-gifts",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/services/production-print-gifts",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/services/software-digital",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/services/software-digital",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/work",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/work",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/work/airline-exhibition-pavilion",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/work/airline-exhibition-pavilion",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/work/football-league-events-awards",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/work/football-league-events-awards",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/work/rooms-we-dressed",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/work/rooms-we-dressed",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/work/heritage-hospitality",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/work/heritage-hospitality",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/work/buffets-and-tables",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/work/buffets-and-tables",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/work/gifts-for-companies",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/work/gifts-for-companies",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/about",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/about",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/products/minute-zero",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/products/minute-zero",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/products/peak-hour",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/products/peak-hour",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/contact",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/contact",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/links",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/links",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/privacy",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/privacy",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/terms",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/terms",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/cookies",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/cookies",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/no-such-page",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/no-such-page",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/services",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/services",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/services/events-hospitality",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/services/events-hospitality",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/services/marketing-brand",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/services/marketing-brand",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/services/creative-production",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/services/creative-production",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/services/production-print-gifts",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/services/production-print-gifts",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/services/software-digital",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/services/software-digital",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/work",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/work",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/work/airline-exhibition-pavilion",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/work/airline-exhibition-pavilion",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/work/football-league-events-awards",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/work/football-league-events-awards",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/work/rooms-we-dressed",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/work/rooms-we-dressed",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/work/heritage-hospitality",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/work/heritage-hospitality",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/work/buffets-and-tables",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/work/buffets-and-tables",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/work/gifts-for-companies",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/work/gifts-for-companies",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/about",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/about",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/products/minute-zero",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/products/minute-zero",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/products/peak-hour",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/products/peak-hour",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/contact",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/contact",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/links",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/links",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/privacy",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/privacy",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/terms",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/terms",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/cookies",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/cookies",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/no-such-page",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/no-such-page",
+    "width": 390,
+    "violations": []
+  }
+]
