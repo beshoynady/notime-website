@@ -42,4 +42,4 @@ Rand reviews the **review build** (`NEXT_PUBLIC_REVIEW_MODE=1`) through a free C
 
 ## Current link
 
-https://vast-expires-monica-types.trycloudflare.com/ar (started 2026-11-21 after Cloudflare dropped the previous quick tunnel, "Tunnel not found"; review build of `phase-2-services` 47e1ca4, Creative done, on port 3100). The previous link (minds-makers-roof-appearance) is dead.
+https://improvement-traveling-celebrate-wales.trycloudflare.com/ar (started 2026-11-22 after a session restart stopped the previous tunnel; review build 47e1ca4, Creative done, on port 3100). The previous link (vast-expires-monica-types) is dead.
