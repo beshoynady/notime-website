@@ -397,3 +397,9 @@ export function pick(list: MediaEntry[], id: string, opts: { includeHidden?: boo
 export const media = (id: string) => pick(MEDIA, id);
 /** Every entry, hidden or not (tooling: images-for-rand). */
 export const mediaAll = (id: string) => pick(MEDIA, id, { includeHidden: true });
+
+/** The entries a gallery shows, in order: the visible ones, or none when fewer than `min` remain (D78). */
+export function visibleMedia(ids: readonly string[], min: number, lookup: (id: string) => MediaEntry | undefined = media): MediaEntry[] {
+  const shown = ids.flatMap((id) => lookup(id) ?? []);
+  return shown.length >= min ? shown : [];
+}

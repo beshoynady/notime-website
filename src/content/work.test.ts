@@ -45,8 +45,6 @@ describe("case pages (F1): anonymisation", () => {
 
   it("never shows a branded photo in an anonymous case page", () => {
     for (const w of workItems) {
-      const v = workView(w, false);
-      expect(v.photos, w.key).toEqual([]);
       const media = strings(anonymousPage(w)).filter((s) => s.startsWith("/"));
       for (const dir of BRANDED_PHOTO_DIRS) for (const m of media) expect(m, `${w.key} media`).not.toContain(dir);
     }
@@ -90,9 +88,6 @@ describe("no AI or stock photo on real work (D106)", () => {
   it("no image slot is reserved for a Work case", async () => {
     const { imageSlots } = await import("./images");
     expect(imageSlots.filter((s) => s.id.startsWith("work-")).map((s) => s.id)).toEqual([]);
-  });
-  it("named cases use only their own curated photos", () => {
-    for (const w of workItems) for (const p of w.named.photos) expect(p, w.key).toMatch(/^\/images\/work\//);
   });
 });
 

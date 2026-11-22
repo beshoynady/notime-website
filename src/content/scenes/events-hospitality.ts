@@ -1,4 +1,4 @@
-import type { SceneConfig, SceneLayer } from "./types";
+import { FULL, scrim, type SceneConfig, type SceneLayer } from "./types";
 
 /**
  * I · Events & Hospitality, "The evening, before the first guest" (docs/content/visual-stories.md;
@@ -13,12 +13,6 @@ import type { SceneConfig, SceneLayer } from "./types";
  *   4. the entrance arrangement comes in from the inline-end, a framed photo: the first guest's view.
  * Phones and reduced motion: the still, the lit room with its tables (the entrance is desktop-only).
  */
-/** A full-frame box: the layer fills the stage. */
-const FULL = { block: "0", inline: "0" } as const;
-
-/** L3 · the scrim under the head and the shot lines, so ivory text holds on a photo's pale parts. */
-const scrim: SceneLayer = { id: "scrim", level: 3, fx: "scrim", depth: 0, mobile: true, box: FULL };
-
 /** L2 · one of Rand's photos framed at about its own size, cropped to its box (`fx-frame`).
  * Laptop only: on a phone the frame would be a sliver, and the work follows in the section's strip. */
 const frame = (id: string, slot: string, depth: number, box: SceneLayer["box"], rest: Partial<SceneLayer> = {}): SceneLayer => ({

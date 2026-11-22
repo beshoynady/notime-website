@@ -1,4 +1,4 @@
-import type { SceneConfig, SceneLayer } from "./types";
+import { FULL, type SceneConfig, type SceneLayer } from "./types";
 
 /**
  * IV · Production, Print & Gifts, "From the press to the hand" (docs/content/visual-stories.md;
@@ -12,7 +12,6 @@ import type { SceneConfig, SceneLayer } from "./types";
  *   3. ready to give: the gold skyline piece (gifts-1) arrives in a frame.
  * Phones and reduced motion: the still, the press (the frame is laptop-only, as in Events).
  */
-const FULL = { block: "0", inline: "0" } as const;
 
 export const WORKSHOP_OPENING: SceneConfig = {
   id: "workshop-opening",

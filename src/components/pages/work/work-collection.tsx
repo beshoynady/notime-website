@@ -20,13 +20,7 @@ import "./work.css";
  * shape (CSS columns, which follow the reading direction in Arabic) and its alt text.
  */
 export async function WorkCollectionPage({ collection, locale }: { collection: WorkCollection; locale: Locale }) {
-  const [t, tc, tl, ti, th] = await Promise.all([
-    getTranslations("workCollection"),
-    getTranslations("workCase"),
-    getTranslations("copyLink"),
-    getTranslations("workIndex"),
-    getTranslations("header"),
-  ]);
+  const [t, tc, ti, th] = await Promise.all([getTranslations("workCollection"), getTranslations("workCase"), getTranslations("workIndex"), getTranslations("header")]);
   const photos = collectionPhotos(collection) ?? [];
   const label = collection.label[locale];
   const path = workHref(collection.slug);
@@ -55,7 +49,7 @@ export async function WorkCollectionPage({ collection, locale }: { collection: W
             {label}
           </h1>
           <p className="wc-summary text-lead">{collection.summary[locale]}</p>
-          <CopyLink labels={{ copy: tl("copy"), copied: tl("copied"), failed: tl("failed") }} />
+          <CopyLink />
         </div>
       </section>
 

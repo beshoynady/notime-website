@@ -425,7 +425,7 @@ html[dir="rtl"] .form-select {
   font-size: 1.1rem;
 }
 .form-more[open] > summary::after {
-  content: "3";
+  content: "\2013";
 }
 .form-more[open] > summary {
   margin-block-end: 12px;

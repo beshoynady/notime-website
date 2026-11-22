@@ -84,9 +84,7 @@ export function FinalCta({ category, locale }: { category: Category; locale: Loc
           items={[
             {
               id: CONSULT_ID,
-              num: "",
               label: finalCta.book[locale],
-              labelledBy: `${CONSULT_ID}-tab`,
               panel: (
                 <div className="sw-consult-form">
                   <ConsultationForm locale={locale} source="software-digital" tierLabels={tierLabels} />
@@ -95,9 +93,7 @@ export function FinalCta({ category, locale }: { category: Category; locale: Loc
             },
             {
               id: finalCta.reviewAnchor,
-              num: "",
               label: cta.reviewShort[locale],
-              labelledBy: `${finalCta.reviewAnchor}-tab`,
               panel: (
                 <div className="sw-consult-form">
                   <p className="sw-consult-promise">{cta.reviewPromise[locale]}</p>

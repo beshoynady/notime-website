@@ -108,3 +108,9 @@ export interface SceneImageSlot {
   /** Only for a layer that shows real work as evidence; every other layer is decorative (alt=""). */
   alt?: Localized<string>;
 }
+
+/** A layer box that fills the scene. */
+export const FULL = { block: "0", inline: "0" } as const;
+
+/** L3 · the scrim under the head and the shot lines, so ivory text holds on a photo's pale parts. */
+export const scrim: SceneLayer = { id: "scrim", level: 3, fx: "scrim", depth: 0, mobile: true, box: FULL };

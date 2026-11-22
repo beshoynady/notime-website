@@ -1,4 +1,4 @@
-import type { SceneConfig, SceneLayer } from "./types";
+import { FULL, type SceneConfig, type SceneLayer } from "./types";
 
 /**
  * III · Marketing & Brand, "The brief on the desk" (docs/content/visual-stories.md; D159).
@@ -13,7 +13,6 @@ import type { SceneConfig, SceneLayer } from "./types";
  * Phones and reduced motion: the still, the clean desk (the frame is laptop-only, as in Events).
  * One file for both desk layers: the wash is CSS over the same image, so nothing loads twice.
  */
-const FULL = { block: "0", inline: "0" } as const;
 
 export const EDITORIAL_OPENING: SceneConfig = {
   id: "editorial-opening",

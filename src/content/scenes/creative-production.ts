@@ -1,4 +1,4 @@
-import type { SceneConfig, SceneLayer } from "./types";
+import { FULL, scrim, type SceneConfig, type SceneLayer } from "./types";
 
 /**
  * II · Creative Production, "Lights, then the frame" (docs/content/visual-stories.md; D158).
@@ -12,7 +12,6 @@ import type { SceneConfig, SceneLayer } from "./types";
  *   3. the frame: Rand's dessert boards (catering-4) arrive on the white sweep, framed like a print.
  * Phones and reduced motion: the still, the lit studio (the frame is laptop-only, as in Events).
  */
-const FULL = { block: "0", inline: "0" } as const;
 
 export const STUDIO_OPENING: SceneConfig = {
   id: "studio-opening",
@@ -44,6 +43,6 @@ export const STUDIO_OPENING: SceneConfig = {
       enter: { shot: 2, from: { y: 6, opacity: 0 } },
     },
     // L3: the scrim under the head and the shot lines.
-    { id: "scrim", level: 3, fx: "scrim", depth: 0, mobile: true, box: FULL },
+    scrim,
   ] satisfies SceneLayer[],
 };

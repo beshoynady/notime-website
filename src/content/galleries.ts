@@ -19,8 +19,5 @@ export const GALLERIES: Record<string, string[]> = {
   "stand-fabrication-signage": ["sandoz-1", "smith-gulf-1"],
 };
 
-/** The ids a page shows: the visible ones in order, or none when fewer than two remain. */
-export function visibleGallery(ids: string[], has: (id: string) => boolean): string[] {
-  const shown = ids.filter(has);
-  return shown.length >= 2 ? shown : [];
-}
+/** Under this many visible photos a strip isn't shown (`visibleMedia`, media.ts). */
+export const GALLERY_MIN = 2;

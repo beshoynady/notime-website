@@ -8,11 +8,7 @@
   --sw-grid: rgba(187, 154, 121, 0.1);
   --sw-panel: rgba(234, 212, 171, 0.24);
   --sw-ink-2: rgba(46, 32, 23, 0.78);
-  --sw-dir: 1;
   --font-mono-ui: ui-monospace, "Cascadia Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-}
-html[dir="rtl"] .sw-page {
-  --sw-dir: -1;
 }
 
 /* ------------------------------------------------------------------ type and shared parts */
@@ -94,9 +90,6 @@ html[dir="rtl"] .sw-page {
   border-color: var(--color-champagne);
   background: var(--color-champagne);
   color: var(--color-espresso);
-}
-.sw-tag-dark {
-  color: var(--color-champagne);
 }
 
 /* Buttons: the site's language (4px radius, tracked caps, a fill rising on hover). */
@@ -966,9 +959,6 @@ html[data-js]:not([data-reduced]) .sw-op-line:not([data-line="0"]) {
   gap: 24px;
   scroll-margin-block-start: var(--header-h);
 }
-.sw-block[hidden] {
-  display: none;
-}
 @media (min-width: 900px) {
   .sw-block {
     grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
@@ -1050,16 +1040,6 @@ html[data-js]:not([data-reduced]) .sw-op-line:not([data-line="0"]) {
 }
 [data-tone="dark"] .sw-more > summary::after {
   color: var(--color-champagne);
-}
-.sw-block-cols {
-  display: grid;
-  gap: 18px;
-  inline-size: 100%;
-}
-@media (min-width: 600px) {
-  .sw-block-cols {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 .sw-ideal,
 .sw-receive-list,
@@ -1829,12 +1809,6 @@ html[data-js]:not([data-reduced]) .sw-op-line:not([data-line="0"]) {
 .sw-consult-tabs {
   display: grid;
   gap: 20px;
-}
-.sw-consult-panel[hidden] {
-  display: none;
-}
-.sw-tab-num:empty {
-  display: none;
 }
 .sw-consult-promise {
   margin: 0 0 20px;

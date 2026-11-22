@@ -1,7 +1,7 @@
 import { getImageProps } from "next/image";
 import type { Locale } from "@/content";
-import { media } from "@/content/media";
-import { visibleGallery } from "@/content/galleries";
+import { GALLERY_MIN } from "@/content/galleries";
+import { visibleMedia } from "@/content/media";
 import { capSrcSet } from "@/lib/srcset";
 
 /**
@@ -11,13 +11,12 @@ import { capSrcSet } from "@/lib/srcset";
  * The strip is a named, focusable region so a keyboard can scroll it.
  */
 export function ServiceGallery({ ids, label, locale }: { ids: string[]; label: string; locale: Locale }) {
-  const shown = visibleGallery(ids, (id) => !!media(id));
+  const shown = visibleMedia(ids, GALLERY_MIN);
   if (!shown.length) return null;
   return (
     <div className="svc-gallery" role="region" aria-label={label} tabIndex={0}>
       <ul>
-        {shown.map((id) => {
-          const m = media(id)!;
+        {shown.map((m) => {
           const { props } = getImageProps({
             src: m.file,
             alt: m.alt?.[locale] ?? "",
@@ -26,7 +25,7 @@ export function ServiceGallery({ ids, label, locale }: { ids: string[]; label: s
             sizes: "(min-width: 1024px) 20vw, 70vw",
           });
           return (
-            <li key={id}>
+            <li key={m.id}>
               {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text -- getImageProps output (alt included); the srcset is trimmed (D51) */}
               <img {...props} srcSet={capSrcSet(props.srcSet, m.width)} loading="lazy" />
             </li>

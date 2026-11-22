@@ -22,12 +22,9 @@ import "./work.css";
  * "Watch the reel" opens the showreel (H-09) from the header: the reel as the first proof, never
  * autoplaying (benchmarks).
  */
-/** The collection home shows after the cases. */
-const HOME_COLLECTION = "rooms-we-dressed";
-
 export async function Work() {
   const [t, tr, locale] = await Promise.all([getTranslations("work"), getTranslations("reel"), getLocale() as Promise<Locale>]);
-  const cards = workCards().filter((c) => c.kind === "case" || c.slug === HOME_COLLECTION);
+  const cards = workCards().filter((c) => c.kind === "case" || c.home);
   return (
     <section id="work" data-tone="dark" aria-labelledby="work-title" className="section-pad">
       <SectionRef id={HOME_REF.work} />

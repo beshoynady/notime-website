@@ -27,7 +27,7 @@ const TOC_MIN = 4;
  * approves, and the story is written without names, so it reads true either way.
  */
 export async function WorkCase({ item, locale }: { item: WorkItem; locale: Locale }) {
-  const [t, tw, tm, tl] = await Promise.all([getTranslations("workCase"), getTranslations("work"), getTranslations("markets"), getTranslations("copyLink")]);
+  const [t, tw, tm] = await Promise.all([getTranslations("workCase"), getTranslations("work"), getTranslations("markets")]);
   const view = workView(item);
   const cover = media(item.cover);
   const next = workView(nextWork(item));
@@ -70,10 +70,10 @@ export async function WorkCase({ item, locale }: { item: WorkItem; locale: Local
             {view.label[locale]}
           </h1>
           <p className="wc-summary text-lead">{view.summary[locale]}</p>
-          <CopyLink labels={{ copy: tl("copy"), copied: tl("copied"), failed: tl("failed") }} />
+          <CopyLink />
           {cover && (
             <div className="wc-media">
-              <CaseMedia cover={cover} locale={locale} sizes="(min-width: 1280px) 1232px, 100vw" />
+              <CaseMedia cover={cover} locale={locale} sizes="(min-width: 900px) 960px, 100vw" />
             </div>
           )}
           <dl className="wc-facts" aria-label={t("factsLabel")}>

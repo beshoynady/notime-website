@@ -1,13 +1,13 @@
 import type { Locale } from "@/content";
-import { getCollectionBySlug, getWorkBySlug, workView } from "@/content/work";
+import { resolveWorkSlug, workView } from "@/content/work";
 import { ogImage, ogMeta } from "@/lib/og-image";
 
 /** A case's or collection's share image (D103, D164): its label and summary, as the page shows them. */
 type Params = Promise<{ locale: string; slug: string }>;
 
 function copyFor(slug: string) {
-  const item = getWorkBySlug(slug);
-  return item ? workView(item) : getCollectionBySlug(slug);
+  const found = resolveWorkSlug(slug);
+  return found?.item ? workView(found.item) : found?.collection;
 }
 
 export async function generateImageMetadata({ params }: { params: Params }) {

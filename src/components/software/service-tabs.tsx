@@ -4,7 +4,8 @@ import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 
 import { flushSync } from "react-dom";
 import { ANCHOR_REVEAL } from "@/lib/anchor";
 
-export type ServiceTab = { id: string; num: string; label: string; panel: ReactNode; labelledBy: string };
+/** `num` is shown before the label when given; a panel is named by its tab unless `labelledBy` says otherwise. */
+export type ServiceTab = { id: string; num?: string; label: string; panel: ReactNode; labelledBy?: string };
 
 /**
  * A tab set for the Software page (Task C2, D161; WAI-ARIA tabs, automatic activation): the six
@@ -76,15 +77,17 @@ export function ServiceTabs({ items, label, className = "sw-blocks", panelClassN
             className="sw-tab"
             onClick={() => choose(i)}
           >
-            <span className="sw-tab-num tabular" aria-hidden="true">
-              {t.num}
-            </span>
+            {t.num && (
+              <span className="sw-tab-num tabular" aria-hidden="true">
+                {t.num}
+              </span>
+            )}
             {t.label}
           </button>
         ))}
       </div>
       {items.map((t, i) => (
-        <article key={t.id} id={t.id} role="tabpanel" aria-labelledby={t.labelledBy} hidden={i !== active} className={panelClassName}>
+        <article key={t.id} id={t.id} role="tabpanel" aria-labelledby={t.labelledBy ?? `${t.id}-tab`} hidden={i !== active} className={panelClassName}>
           {t.panel}
         </article>
       ))}

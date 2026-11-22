@@ -3,16 +3,13 @@ import type { Localized } from "./types";
 /**
  * The lightweight visual of a service section whose signature module comes in v1.1 (D83, D100):
  * a curated real profile photo where one fits (no faces, no client branding, graded with
- * scripts/grade.mjs), otherwise a small code-drawn composition (service-drawings.tsx). Static, no
+ * scripts/grade.mjs) or a registry picture (media.ts). Static, no
  * interactivity. Remove a service's entry when its real module ships (service-visuals.test.ts).
  */
-export type DrawingKey = "stand" | "stage";
-
 export type ServiceVisual =
   | { kind: "photo"; src: string; width: number; height: number; from: string; alt: Localized<string> }
   /** A registry picture (media.ts, D152): hidden there, the section shows no visual (fill or hide). */
-  | { kind: "media"; id: string }
-  | { kind: "drawing"; drawing: DrawingKey };
+  | { kind: "media"; id: string };
 
 const pic = (id: string): ServiceVisual => ({ kind: "media", id });
 

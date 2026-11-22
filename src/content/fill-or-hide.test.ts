@@ -48,9 +48,6 @@ describe("anonymised work (D78 §6)", () => {
       expect(v.named).toBe(false);
       const text = [v.label.en, v.label.ar, v.summary.en, v.summary.ar].join(" ");
       for (const name of CLIENT_NAMES) expect(text, `${w.key} mentions ${name}`).not.toContain(name);
-      // No stand-in photo for a real project (D106): an anonymous case shows only its own cover
-      // (D150, D164), never its named gallery.
-      expect(v.photos, `${w.key} shows no gallery`).toEqual([]);
     }
   });
 

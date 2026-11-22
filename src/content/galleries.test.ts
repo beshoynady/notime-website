@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { GALLERIES, visibleGallery } from "./galleries";
-import { MEDIA, pick } from "./media";
+import { GALLERIES, GALLERY_MIN } from "./galleries";
+import { MEDIA, pick, visibleMedia } from "./media";
 import { services } from "./services";
 
 describe("service galleries (D153)", () => {
@@ -16,8 +16,8 @@ describe("service galleries (D153)", () => {
   });
 
   it("drops hidden photos, and shows nothing when fewer than two remain (fill or hide, D78)", () => {
-    const has = (hide: string[]) => (id: string) => !!pick(MEDIA, id, { hide });
-    expect(visibleGallery(["sandoz-1", "egyptair-pavilion-1", "uae-pro-league-1"], has(["sandoz-1"]))).toEqual(["egyptair-pavilion-1", "uae-pro-league-1"]);
-    expect(visibleGallery(["sandoz-1", "egyptair-pavilion-1"], has(["sandoz-1"]))).toEqual([]);
+    const ids = (list: string[], hide: string[]) => visibleMedia(list, GALLERY_MIN, (id) => pick(MEDIA, id, { hide })).map((m) => m.id);
+    expect(ids(["sandoz-1", "egyptair-pavilion-1", "uae-pro-league-1"], ["sandoz-1"])).toEqual(["egyptair-pavilion-1", "uae-pro-league-1"]);
+    expect(ids(["sandoz-1", "egyptair-pavilion-1"], ["sandoz-1"])).toEqual([]);
   });
 });

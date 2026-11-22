@@ -1,10 +1,10 @@
 "use client";
 
 import { Check, Link2 } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
-
-type Labels = { copy: string; copied: string; failed: string };
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 /**
  * Copies the page's address (Task 15): the URL the visitor is on, without its hash or query, so a
@@ -12,7 +12,8 @@ type Labels = { copy: string; copied: string; failed: string };
  * is reduced); the label confirms ("Link copied") and the status line tells screen readers. If the
  * clipboard refuses, the status says where to copy it from. Hidden without JavaScript (work.css).
  */
-export function CopyLink({ labels }: { labels: Labels }) {
+export function CopyLink() {
+  const t = useTranslations("copyLink");
   const [state, setState] = useState<"idle" | "copied" | "failed">("idle");
   const timer = useRef<number | undefined>(undefined);
   const reduce = useReducedMotion();
@@ -34,10 +35,10 @@ export function CopyLink({ labels }: { labels: Labels }) {
     <p className="copy-link-row">
       <motion.button type="button" onClick={copy} whileTap={reduce ? undefined : { scale: 0.96 }} className="copy-link" data-state={state}>
         <Icon aria-hidden="true" strokeWidth={1.5} className="copy-link-icon" />
-        <span>{state === "copied" ? labels.copied : labels.copy}</span>
+        <span>{state === "copied" ? t("copied") : t("copy")}</span>
       </motion.button>
       <span role="status" className="copy-link-status">
-        {state === "failed" ? labels.failed : state === "copied" ? <span className="sr-only">{labels.copied}</span> : null}
+        {state === "failed" ? t("failed") : state === "copied" ? <span className="sr-only">{t("copied")}</span> : null}
       </span>
     </p>
   );

@@ -1,6 +1,6 @@
 import { WORK_NAMED } from "@/config/work";
 import type { MarketKey } from "./markets";
-import { media, type MediaEntry } from "./media";
+import { media, visibleMedia, type MediaEntry } from "./media";
 import type { CategorySlug, Localized } from "./types";
 
 /**
@@ -20,7 +20,7 @@ export interface WorkItem {
   /** Where the work took place (the Work index's market filter, D88). Only what the profile states. */
   markets: MarketKey[];
   anonymous: { label: Localized<string>; summary: Localized<string> };
-  named: { label: Localized<string>; summary: Localized<string>; photos: string[] };
+  named: { label: Localized<string>; summary: Localized<string> };
   /**
    * The case's own photo on its card and page (a registry id, media.ts), shown named or not: the client is visible
    * in it, so Rand approves it (`randApproval`, D150), but the text stays anonymous until `WORK_NAMED`.
@@ -52,8 +52,6 @@ export const BRANDED_PHOTO_DIRS = ["/images/work/egyptair-pavilion/", "/images/w
 /** Words that identify a client; none may appear in an anonymised case. */
 export const CLIENT_NAMES = ["UAE Pro League", "Pro League", "EgyptAir", "Egypt Air", "ADIB", "مصر للطيران", "دوري المحترفين"] as const;
 
-const photos = (dir: string, n: number) => Array.from({ length: n }, (_, i) => `${dir}${dir.split("/").at(-2)}-${i + 1}.webp`);
-
 export const workItems: WorkItem[] = [
   {
     key: "egyptair",
@@ -74,7 +72,6 @@ export const workItems: WorkItem[] = [
         en: "EgyptAir's pavilion: stand design, build and on-site PR at the Dubai Airshow and Arabian Travel Market.",
         ar: "جناح مصر للطيران: تصميم الجناح وبناؤه وإدارة العلاقات العامة في أرض الحدث، في معرض دبي للطيران وسوق السفر العربي.",
       },
-      photos: photos("/images/work/egyptair-pavilion/", 1),
     },
     // p19. Challenge, Idea and Result are {{TODO}}: hidden. The press-headlines line stays off (OQ #19).
     story: {
@@ -114,7 +111,6 @@ export const workItems: WorkItem[] = [
         en: "Full event delivery for the UAE Pro League: tournament branding, on-ground production, award ceremonies and sponsor activations, with the league's social content, award packaging and gift sets.",
         ar: "تنفيذ متكامل لفعاليات دوري المحترفين الإماراتي: هوية البطولات، والإنتاج في أرض الحدث، وحفلات التكريم، وتفعيلات الرعاة، إلى جانب محتوى الدوري على وسائل التواصل، وتغليف الجوائز، وأطقم الهدايا.",
       },
-      photos: photos("/images/work/uae-pro-league/", 5),
     },
     // p5, p13, p23–24. Challenge, Idea and Result are {{TODO}}: hidden. No edition year (unconfirmed).
     story: {
@@ -149,13 +145,13 @@ export const workItems: WorkItem[] = [
   },
 ];
 
-export type WorkView = { key: WorkKey; slug: string; named: boolean; label: Localized<string>; summary: Localized<string>; photos: string[] };
+export type WorkView = { key: WorkKey; slug: string; named: boolean; label: Localized<string>; summary: Localized<string> };
 
 /** The version a page shows: named only with the client's approval (`WORK_NAMED`). */
 export function workView(w: WorkItem, named: boolean = WORK_NAMED[w.key]): WorkView {
   return named
-    ? { key: w.key, slug: w.slug, named, label: w.named.label, summary: w.named.summary, photos: w.named.photos }
-    : { key: w.key, slug: w.slug, named, label: w.anonymous.label, summary: w.anonymous.summary, photos: [] };
+    ? { key: w.key, slug: w.slug, named, label: w.named.label, summary: w.named.summary }
+    : { key: w.key, slug: w.slug, named, label: w.anonymous.label, summary: w.anonymous.summary };
 }
 
 export function getWorkBySlug(slug: string): WorkItem | undefined {
@@ -180,6 +176,8 @@ export interface WorkCollection {
   summary: Localized<string>;
   /** Registry ids (media.ts), in gallery order; the first one shown is the cover. */
   photos: string[];
+  /** Home's third Real-projects tile (D164: the approved move of «قاعات جهّزناها»). */
+  home?: true;
 }
 
 /** Below this many visible photos a collection hides (fill or hide, D78). */
@@ -190,6 +188,7 @@ const series = (group: string, n: number) => Array.from({ length: n }, (_, i) =>
 export const workCollections: WorkCollection[] = [
   {
     slug: "rooms-we-dressed",
+    home: true,
     categories: ["events-hospitality"],
     markets: [],
     label: { en: "Rooms we dressed", ar: "قاعات جهّزناها" },
@@ -236,8 +235,8 @@ export const workCollections: WorkCollection[] = [
 
 /** The photos a collection shows, in order; undefined when fewer than four are visible (D78). */
 export function collectionPhotos(c: WorkCollection, lookup: (id: string) => MediaEntry | undefined = media): MediaEntry[] | undefined {
-  const shown = c.photos.flatMap((id) => lookup(id) ?? []);
-  return shown.length >= COLLECTION_MIN_PHOTOS ? shown : undefined;
+  const shown = visibleMedia(c.photos, COLLECTION_MIN_PHOTOS, lookup);
+  return shown.length ? shown : undefined;
 }
 
 export function visibleCollections(lookup: (id: string) => MediaEntry | undefined = media): WorkCollection[] {
@@ -246,7 +245,16 @@ export function visibleCollections(lookup: (id: string) => MediaEntry | undefine
 
 /** A collection a page can show: known and not hidden. */
 export function getCollectionBySlug(slug: string): WorkCollection | undefined {
-  return visibleCollections().find((c) => c.slug === slug);
+  const c = workCollections.find((x) => x.slug === slug);
+  return c && collectionPhotos(c) ? c : undefined;
+}
+
+/** What `/work/<slug>` shows: a case, a collection, or nothing (404). */
+export function resolveWorkSlug(slug: string): { item: WorkItem; collection?: never } | { item?: never; collection: WorkCollection } | undefined {
+  const item = getWorkBySlug(slug);
+  if (item) return { item };
+  const collection = getCollectionBySlug(slug);
+  return collection && { collection };
 }
 
 /** One card on the Work index and on home: a case (in the version WORK_NAMED allows) or a collection. */
@@ -259,6 +267,8 @@ export interface WorkCard {
   summary: Localized<string>;
   /** Hidden or unknown leaves the card as text. */
   cover?: MediaEntry;
+  /** A collection home shows after the cases. */
+  home?: true;
 }
 
 /** The Work index's list: the cases first, then the collections that have enough photos. */
@@ -268,6 +278,9 @@ export function workCards(lookup: (id: string) => MediaEntry | undefined = media
       const v = workView(w);
       return { slug: w.slug, kind: "case", categories: w.categories, markets: w.markets, label: v.label, summary: v.summary, cover: lookup(w.cover) };
     }),
-    ...visibleCollections(lookup).map((c): WorkCard => ({ ...c, kind: "collection", cover: collectionPhotos(c, lookup)![0] })),
+    ...workCollections.flatMap((c): WorkCard[] => {
+      const shown = collectionPhotos(c, lookup);
+      return shown ? [{ slug: c.slug, kind: "collection", categories: c.categories, markets: c.markets, label: c.label, summary: c.summary, cover: shown[0], home: c.home }] : [];
+    }),
   ];
 }

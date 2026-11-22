@@ -29,12 +29,12 @@ export function RelatedWork({ category, locale, tone }: { category: CategorySlug
         </header>
         <div className="rw-body">
           <ul className="rw-list">
-            {cases.map(({ view: c, also, cover }) => {
+            {cases.map(({ card: c, also }) => {
               return (
-                <li key={c.key} className="rw-card">
-                  {cover && (
+                <li key={c.slug} className="rw-card">
+                  {c.cover && (
                     <Link href={workHref(c.slug)} tabIndex={-1} aria-hidden="true" className="rw-media">
-                      <CaseMedia cover={cover} locale={locale} sizes="(min-width: 900px) 34vw, 100vw" />
+                      <CaseMedia cover={c.cover} locale={locale} sizes="(min-width: 900px) 34vw, 100vw" />
                     </Link>
                   )}
                   <ul className="rw-meta text-eyebrow">
