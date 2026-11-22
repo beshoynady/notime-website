@@ -189,6 +189,10 @@ export const MEDIA: MediaEntry[] = [
     en: "A round-result post designed for a football league.",
     ar: "منشور لنتائج إحدى الجولات صُمّم لدوري لكرة القدم.",
   }, "portrait · one real post as published", clientVisible),
+  profile("uae-pro-league-6", "p13-1", 680, 685, {
+    en: "A grid of posts designed for a football league: results, fixtures and registration.",
+    ar: "شبكة منشورات صُمّمت لدوري لكرة القدم: نتائج ومواعيد وتسجيل.",
+  }, "1:1 · the league's feed as published (players and fans far off)", clientVisible),
   profile("uae-pro-league-5", "p23-4", 1280, 882, {
     en: "A corporate gift set: notebook, pen and flask in the league's colours.",
     ar: "طقم هدايا للشركات: دفتر وقلم وقارورة بألوان الدوري.",
@@ -266,6 +270,35 @@ MEDIA.push(
     "16:9 · lights on stands against a plain wall, no brand marks (NO TIME's own kit replaces it)", {
       grade: "studio",
       alt: { en: "LED panel lights on stands, lit against a warm wall.", ar: "ألواح إضاءة LED على حوامل، مضاءة أمام جدار دافئ." },
+    }),
+  // Marketing & Brand (D159): the editorial grade; no brand marks, no faces.
+  stock("mb-open-desk", "unsplash:8dgFq8Vbelo", "Andy Brown", "https://unsplash.com/photos/8dgFq8Vbelo", 2400, 1350, [1080, 1920],
+    "16:9 + 9:16 · a designer's desk: swatches, sketches and pens, cropped past a printed box (a NO TIME desk replaces it)",
+    { grade: "editorial" }),
+  stock("mb-branding", "unsplash:Dd079V8Letk", "Razvan Dumitrasconiu", "https://unsplash.com/photos/Dd079V8Letk", 1600, 900, null,
+    "16:9 · blank stationery and an envelope, ready for an identity (NO TIME's printed identity work replaces it)", {
+      grade: "editorial",
+      alt: { en: "Blank cards and a brown envelope laid out on a pale table.", ar: "بطاقات بيضاء وظرف بنّي مرتّبة على طاولة فاتحة." },
+    }),
+  stock("mb-digital", "unsplash:ppjk8kso8RE", "Kaleidico", "https://unsplash.com/photos/ppjk8kso8RE", 1600, 900, null,
+    "16:9 · hands at a laptop on a meeting table, no legible data", {
+      grade: "editorial",
+      alt: { en: "Hands at a laptop on a meeting table, beside a glass of coffee.", ar: "يدان على حاسوب محمول فوق طاولة اجتماعات، بجانب كوب قهوة." },
+    }),
+  stock("mb-content", "unsplash:1c-YonlQjUE", "Vitaly Gariev", "https://unsplash.com/photos/1c-YonlQjUE", 1600, 900, null,
+    "16:9 · a plan on sticky notes on a studio wall, seen from behind", {
+      grade: "editorial",
+      alt: { en: "A planner sorting sticky notes on a dark studio wall.", ar: "شخص يرتّب أوراقًا لاصقة على جدار داكن في استوديو." },
+    }),
+  stock("mb-pr", "unsplash:J0M-W7EOjrY", "Mathias Reding", "https://unsplash.com/photos/J0M-W7EOjrY", 1600, 900, null,
+    "16:9 · newspapers on a table by a window, no legible mastheads", {
+      grade: "editorial",
+      alt: { en: "Folded newspapers and magazines on a wooden table by a window.", ar: "صحف ومجلات مطويّة على طاولة خشبية بجانب نافذة." },
+    }),
+  stock("mb-paid", "unsplash:bmUa09zy2ZQ", "Gabrielle Henderson", "https://unsplash.com/photos/bmUa09zy2ZQ", 1600, 900, null,
+    "16:9 · a phone in hand scrolling a feed at a desk", {
+      grade: "editorial",
+      alt: { en: "Hands scrolling a social feed on a phone at a desk.", ar: "يدان تتصفّحان منشورات على هاتف فوق مكتب." },
     }),
 );
 

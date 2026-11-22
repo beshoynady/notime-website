@@ -6,303 +6,44 @@
    (§5.3): every service opens like a magazine spread, in three grid patterns on a fixed rotation. */
 
 /* ==========================================================================
-   Act 1 · the opening (EDITORIAL_OPENING). Every layer is drawn here, so the scene reads with
-   no image: gradients and pseudo-elements only, no url() (a full-frame image could become the
-   LCP; the H1 must stay it), no filter. Only the layers' own boxes move (SceneDirector).
+   Act 1 · the opening (EDITORIAL_OPENING, D159): photographs of the desk and the post, no
+   drawing. The head sits at the lower inline-start, so an ivory wash rises from the foot and from
+   inline-start (mirrored in Arabic) and keeps the type at AA over the desk (the cocoa eyebrow, the
+   smallest, measured ≥ 4.5:1 against the darkest pixel behind it).
    ========================================================================== */
-
-/* The spread's grid, shared by the layer boxes (marketing-brand.ts `cols`): column insets, the
-   column's width, the spread's top rule and foot (from the bottom), and the band behind the last
-   line. Below 900px the grid sits between the gutters; at ≥ 900px on the sections' column,
-   beside the rail (the same terms as `.cat-opening-overlay > *`). */
-main[data-theme="editorial"] .scene[data-scene="editorial-opening"] {
-  --ed-cs: var(--gutter-start);
-  --ed-ce: var(--gutter-end);
-  --ed-cw: calc(100% - var(--ed-cs) - var(--ed-ce));
-  --ed-top: max(25%, 200px);
-  --ed-base: max(42%, 330px);
-  --ed-band-end: 98px;
-  /* Background positions and turns that mirror in Arabic. */
-  --ed-x: 0%;
-  --ed-x-end: 100%;
-  --ed-turn: 1;
-  --ed-rule: color-mix(in srgb, var(--color-cocoa) 26%, transparent);
+main[data-theme="editorial"] .scene[data-mode] {
+  --ed-hero-from: 90deg;
 }
-[dir="rtl"]
-  main[data-theme="editorial"]
-  .scene[data-scene="editorial-opening"] {
-  --ed-x: 100%;
-  --ed-x-end: 0%;
-  --ed-turn: -1;
+[dir="rtl"] main[data-theme="editorial"] .scene[data-mode] {
+  --ed-hero-from: -90deg;
 }
-@media (min-width: 900px) {
-  main[data-theme="editorial"] .scene[data-scene="editorial-opening"] {
-    --ed-frame: min(100%, var(--frame));
-    --ed-cs: calc(
-      (100% - var(--ed-frame)) / 2 + var(--gutter-start) +
-        (
-          var(--ed-frame) - var(--gutter-start) - var(--gutter-end) -
-            var(--rail-gap)
-        ) /
-        4 + var(--rail-gap)
-    );
-    --ed-ce: calc((100% - var(--ed-frame)) / 2 + var(--gutter-end));
-    --ed-top: 17%;
-    --ed-base: max(44%, 430px);
-    --ed-band-end: 110px;
-  }
-  /* The Arabic H1 sets taller (line-height 1.28): the spread's foot rises to clear it. */
-  [dir="rtl"]
-    main[data-theme="editorial"]
-    .scene[data-scene="editorial-opening"] {
-    --ed-base: max(48%, 470px);
-  }
-}
-/* The band sits under the H1, behind the copy. In the still (no JS, reduced motion) the copy is
-   one paragraph of any length, so the band covers its last lines, the promise; in motion the
-   last line has a fixed two-line cell (category.css), so the band fills the space to the H1. */
-main[data-theme="editorial"] .scene[data-scene="editorial-opening"] {
-  --ed-band-top: calc(100% - 150px);
-}
-html[data-js]:not([data-reduced])
-  main[data-theme="editorial"]
-  .scene[data-scene="editorial-opening"]:not([data-mode="still"]) {
-  --ed-band-top: calc(100% - 170px);
-}
-@media (min-width: 900px) {
-  main[data-theme="editorial"] .scene[data-scene="editorial-opening"] {
-    --ed-band-top: calc(100% - 166px);
-  }
-  html[data-js]:not([data-reduced])
-    main[data-theme="editorial"]
-    .scene[data-scene="editorial-opening"]:not([data-mode="still"]) {
-    --ed-band-top: calc(100% - 196px);
-  }
-}
-
-/* Layers that draw on (the column lines, the rules, the band): the layer box clips its entrance,
-   so a slide reads as a stroke growing from the folio down or from inline-start across. */
-main[data-theme="editorial"] .scene [data-layer="grid"],
-main[data-theme="editorial"] .scene [data-layer="baselines"],
-main[data-theme="editorial"] .scene [data-layer="band"] {
-  overflow: hidden;
-}
-
-/* L0 · the page: ivory with a soft light where the spread sits and the faint laid lines of cotton
-   paper. The plate's image (mb-open-paper) covers it once its file exists. */
-main[data-theme="editorial"] .fx-paper {
+main[data-theme="editorial"] .scene[data-mode] .scene-layers::after {
+  content: "";
+  position: absolute;
+  inset: 0;
   background:
-    radial-gradient(
-      90% 70% at 50% 36%,
-      rgb(255 250 240 / 0.6),
-      rgb(255 250 240 / 0) 70%
-    ),
-    radial-gradient(
-      140% 120% at 50% 45%,
-      rgb(187 154 121 / 0) 55%,
-      rgb(187 154 121 / 0.18) 100%
-    ),
-    repeating-linear-gradient(
-      to bottom,
-      rgb(99 71 49 / 0.022) 0 1px,
-      transparent 1px 6px
-    ),
-    var(--color-ivory);
-}
-
-/* L3 · the folio: a heavy short bar at inline-start and a page mark at inline-end, over the
-   page's top rule. */
-main[data-theme="editorial"] .fx-folio {
-  background:
-    linear-gradient(var(--color-espresso), var(--color-espresso)) var(--ed-x)
-      4px / 32px 4px no-repeat,
-    linear-gradient(var(--color-cocoa), var(--color-cocoa)) var(--ed-x-end)
-      5px / 12px 2px no-repeat,
-    linear-gradient(var(--color-cocoa), var(--color-cocoa)) 0 100% / 100% 1px
-      no-repeat;
-}
-
-/* L3 · the grid: twelve columns (six below 900px), thin cocoa strokes fading toward the foot so
-   the H1 reads clean. */
-main[data-theme="editorial"] .fx-grid {
-  --ed-cols: 6;
-  background-image: linear-gradient(
-    to right,
-    var(--ed-rule) 1px,
-    transparent 1px
-  );
-  background-size: calc((100% - 1px) / var(--ed-cols)) 100%;
-  border-inline-end: 1px solid var(--ed-rule);
-  mask-image: linear-gradient(to bottom, #000 0 55%, rgb(0 0 0 / 0.35) 100%);
-}
-@media (min-width: 900px) {
-  main[data-theme="editorial"] .fx-grid {
-    --ed-cols: 12;
-  }
-}
-
-/* L3 · two baseline rules: the headline's, a third of the way down, and the spread's foot. */
-main[data-theme="editorial"] .fx-baselines {
-  background:
-    linear-gradient(var(--color-cocoa), var(--color-cocoa)) 0 34% / 100% 1px
-      no-repeat,
-    linear-gradient(var(--color-espresso), var(--color-espresso)) 0 100% / 100%
-      2px no-repeat;
-}
-
-/* L1 · the image cell: an art-directed colour plate (a champagne sun over a taupe horizon on
-   cocoa, inside a fine ivory frame) until the board image (mb-open-board) arrives. */
-main[data-theme="editorial"] .fx-board {
-  --ed-sun: 66%;
-  background:
-    radial-gradient(
-      circle at var(--ed-sun) 42%,
-      var(--color-champagne) 0 16%,
-      rgb(234 212 171 / 0) 16.4%
-    ),
-    linear-gradient(to top, var(--color-taupe) 0 30%, rgb(187 154 121 / 0) 30%),
     linear-gradient(
-      165deg,
-      color-mix(in srgb, var(--color-cocoa) 80%, var(--color-taupe)),
-      var(--color-cocoa) 55%,
-      color-mix(in srgb, var(--color-cocoa) 70%, var(--color-espresso))
+      to top,
+      color-mix(in srgb, var(--color-ivory) 94%, transparent) 0%,
+      color-mix(in srgb, var(--color-ivory) 88%, transparent) 30%,
+      color-mix(in srgb, var(--color-ivory) 80%, transparent) 46%,
+      color-mix(in srgb, var(--color-ivory) 40%, transparent) 60%,
+      color-mix(in srgb, var(--color-ivory) 0%, transparent) 76%
+    ),
+    linear-gradient(
+      var(--ed-hero-from),
+      color-mix(in srgb, var(--color-ivory) 72%, transparent) 0%,
+      color-mix(in srgb, var(--color-ivory) 40%, transparent) 50%,
+      color-mix(in srgb, var(--color-ivory) 0%, transparent) 80%
     );
-  outline: 1px solid rgb(245 233 211 / 0.4);
-  outline-offset: -10px;
-  box-shadow: 0 22px 44px -28px rgb(46 32 23 / 0.55);
 }
-[dir="rtl"] main[data-theme="editorial"] .fx-board {
-  --ed-sun: 34%;
-}
-main[data-theme="editorial"] .fx-board:has(img) {
-  background: none;
-  outline: 0;
-}
-
-/* L3 · set type: a heavy headline (the key), a lighter second line (the lead), a rule, then
-   greeked text lines. */
-main[data-theme="editorial"] .fx-heads {
-  background:
-    linear-gradient(var(--color-espresso), var(--color-espresso)) var(--ed-x)
-      0 / 100% 11% no-repeat,
-    linear-gradient(var(--color-espresso), var(--color-espresso)) var(--ed-x)
-      15% / 72% 11% no-repeat,
-    linear-gradient(var(--color-cocoa), var(--color-cocoa)) var(--ed-x) 31% /
-      54% 5% no-repeat,
-    linear-gradient(var(--color-cocoa), var(--color-cocoa)) var(--ed-x) 42% /
-      100% 1px no-repeat,
-    repeating-linear-gradient(
-        to bottom,
-        rgb(187 154 121 / 0.75) 0 3px,
-        transparent 3px 11px
-      )
-      var(--ed-x) 100% / 100% 50% no-repeat;
-}
-
-/* L2 · a fan of two swatch strips, on the desk at inline-start (desktop only). Drawn in its
-   pseudo-elements, so its turn never meets the layer's own transforms. */
-main[data-theme="editorial"] .fx-swatches::before,
-main[data-theme="editorial"] .fx-swatches::after {
+/* L0 · the blank page: the desk under an ivory wash, before the spread sets itself. Light enough
+   that the desk still reads (empty-screens: at 84% the first frame was 59% without detail). */
+main[data-theme="editorial"] .fx-wash::after {
   content: "";
   position: absolute;
-  inset-block: 6% 16%;
-  inset-inline: 32% 30%;
-  border-radius: 3px;
-  transform-origin: 50% 92%;
-  box-shadow: 0 12px 26px -16px rgb(46 32 23 / 0.6);
-}
-main[data-theme="editorial"] .fx-swatches::before {
-  background: linear-gradient(
-    to bottom,
-    var(--color-espresso) 0 30%,
-    var(--color-cocoa) 30% 58%,
-    var(--color-taupe) 58% 84%,
-    var(--color-ivory) 84%
-  );
-  transform: rotate(calc(-16deg * var(--ed-turn)));
-}
-main[data-theme="editorial"] .fx-swatches::after {
-  background: linear-gradient(
-    to bottom,
-    var(--color-champagne) 0 30%,
-    var(--color-taupe) 30% 58%,
-    var(--color-ivory) 58% 84%,
-    var(--color-champagne) 84%
-  );
-  transform: rotate(calc(9deg * var(--ed-turn)));
-}
-
-/* L2 · a brass pen lying across the desk at inline-end, nib toward the spread (desktop only). */
-main[data-theme="editorial"] .fx-pen::before {
-  content: "";
-  position: absolute;
-  inset-inline: 6%;
-  inset-block-start: 46%;
-  block-size: 10px;
-  border-radius: 0 5px 5px 0;
-  background: linear-gradient(
-    to right,
-    var(--color-espresso) 0 8%,
-    var(--color-taupe) 8% 12%,
-    var(--color-champagne) 12% 60%,
-    var(--color-taupe) 60% 64%,
-    var(--color-champagne) 64% 86%,
-    var(--color-cocoa) 86%
-  );
-  clip-path: polygon(0 50%, 7% 0, 100% 0, 100% 100%, 7% 100%);
-  transform: rotate(-22deg);
-}
-[dir="rtl"] main[data-theme="editorial"] .fx-pen::before {
-  transform: scaleX(-1) rotate(-22deg);
-}
-/* Its shadow on the paper. */
-main[data-theme="editorial"] .fx-pen::after {
-  content: "";
-  position: absolute;
-  inset-inline: 12%;
-  inset-block: 54% 30%;
-  background: radial-gradient(
-    closest-side,
-    rgb(46 32 23 / 0.16),
-    rgb(46 32 23 / 0)
-  );
-  transform: rotate(calc(-22deg * var(--ed-turn)));
-}
-main[data-theme="editorial"] .fx-swatches:has(img)::before,
-main[data-theme="editorial"] .fx-swatches:has(img)::after,
-main[data-theme="editorial"] .fx-pen:has(img)::before,
-main[data-theme="editorial"] .fx-pen:has(img)::after {
-  content: none;
-}
-
-/* L3 · the highlight band, full-bleed behind the last line, with a cocoa rule on its head. */
-main[data-theme="editorial"] .fx-band {
-  background: var(--color-champagne);
-  box-shadow: inset 0 1px 0 var(--ed-rule);
-}
-
-/* L3 · the seal: a neutral stand-in for the mark until the logo SVG arrives (CONTENT_CHECKLIST
-   #14): an ivory disc in an espresso ring, half filled (the storyboard's ◐), with a fine outer
-   ring. Not the logo. */
-main[data-theme="editorial"] .fx-seal {
-  border: 1.5px solid var(--color-espresso);
-  border-radius: 50%;
-  background: var(--color-ivory);
-  outline: 1px solid var(--color-cocoa);
-  outline-offset: 3px;
-  box-shadow: 0 10px 22px -14px rgb(46 32 23 / 0.6);
-}
-main[data-theme="editorial"] .fx-seal::before {
-  content: "";
-  position: absolute;
-  inset: 24%;
-  border-radius: 50%;
-  border: 1px solid var(--color-espresso);
-  background: linear-gradient(
-    to right,
-    var(--color-espresso) 50%,
-    transparent 50%
-  );
+  inset: 0;
+  background: color-mix(in srgb, var(--color-ivory) 55%, transparent);
 }
 
 /* The opening's type: the H1 is the key, set heavy and large across the grid; the lead is

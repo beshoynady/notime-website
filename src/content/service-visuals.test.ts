@@ -41,4 +41,22 @@ describe("service visuals (D100)", () => {
       if (v?.kind === "media") expect(media(v.id)?.source, slug).toBe(source);
     }
   });
+  it("Marketing: every section is a photograph, Social the league's real post (D159)", () => {
+    const want = {
+      "branding-identity": "stock",
+      "social-media-management": "rand-profile",
+      "digital-marketing-seo": "stock",
+      "content-strategy": "stock",
+      "public-relations": "stock",
+      "paid-media-planning": "stock",
+    };
+    for (const [slug, source] of Object.entries(want)) {
+      const v = SERVICE_VISUALS[slug];
+      expect(v?.kind, slug).toBe("media");
+      if (v?.kind === "media") {
+        expect(media(v.id)?.source, slug).toBe(source);
+        expect(media(v.id)?.alt?.ar, slug).toBeTruthy();
+      }
+    }
+  });
 });

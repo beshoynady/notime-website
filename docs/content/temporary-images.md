@@ -23,7 +23,10 @@ Updated 2026-11-16. This list stays in the repo. The site itself never says how 
 | Creative · Video, Motion, AI (D158) | `catering-2`, `heritage-1`, `private-celebrations-4` (media.ts) | Real profile photos (a still each, until Rand sends footage and files) | **Yes** (her own reels and AI work) |
 | Work cards, case pages, related work (anonymised cases) | none | Code drawing `CaseVisual`: airline pavilion = `stand`, league = `stage` | Until the client approves the name and photos |
 | Named cases (private celebrations, catering, heritage, gifts) | the project's photos | Real profile photos under `public/images/work/` | No |
-| Every other scene layer (Events hall and majlis, Print bench, Marketing board, Creative studio, Software) | `src: null` | Nothing renders; the scene's code drawing is the visual | Real or graded files can be added later (`scenes/images.ts`) |
+| Marketing opening, the desk (D159) | `mb-open-desk` (media.ts) | Stock, Unsplash `8dgFq8Vbelo`, editorial grade, cropped past a printed box | **Yes** (a NO TIME desk) |
+| Marketing opening, the post · Social (D159) | `uae-pro-league-4`, `-6` (media.ts) ⚑ | Real profile posts | No |
+| Marketing · Branding, Digital, Content, PR, Paid (D159) | `mb-branding`, `mb-digital`, `mb-content`, `mb-pr`, `mb-paid` (media.ts) | Stock, Unsplash, editorial grade | **Yes** (NO TIME's own work) |
+| Every other scene layer (Events hall and majlis, Print bench, Software) | `src: null` | Nothing renders; the scene's code drawing is the visual | Real or graded files can be added later (`scenes/images.ts`) |
 | Home hero, category openings, service sections | none | Code-driven scenes and drawings (`ServiceDrawing`, the decorative patterns) | No |
 
 ## In the data, not rendered yet

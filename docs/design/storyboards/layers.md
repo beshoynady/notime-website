@@ -77,17 +77,7 @@
 
 ## III · Marketing & Brand (grade: "Editorial", ivory paper, espresso ink)
 
-| Slot | Scene · level | Aspect / size | Source | Prompt / note | BG removal | Depth | Alt |
-|---|---|---|---|---|---|---|---|
-| `mb-open-paper` | Opening · L0 | 16:9 + 9:16 | AI | House style. A macro of plain ivory cotton paper filling the frame, soft raking light showing its fibres, no edges, no text. | none | 0.15 | decorative |
-| `mb-open-board` | Opening · L1 | existing 4:5 1136 × 1408 | **Re-used** AI image `cat-marketing-brand-4x5` (approved, D50) | No new generation. | none (shown as a rectangle in its grid cell) | 0.5 | decorative |
-| `mb-open-swatches` | Opening · L2 | 4:5, trimmed | AI | House style, from above. A fan of colour swatch cards in espresso, cocoa, taupe, champagne and ivory, isolated, on a plain neutral warm-grey background. No text. | Canva remove-background | 1.1 | decorative |
-| `mb-open-pen` | Opening · L2 | 4:5, trimmed | AI | House style. A brass fountain pen lying diagonally, isolated, on a plain neutral warm-grey background. No logo. | Canva remove-background | 1.3 | decorative |
-
-**Totals:**
-- **Opening, mobile:** 2 layers, ≈ 170 KB.
-- **AI generations:** 4.
-- **Background removals:** 2.
+**Superseded (D159, 2026-11-22):** the opening is in photographs and its layers live in the image registry (`src/content/media.ts`): `mb-open-desk` (one stock desk, shown under an ivory wash then clean, `docs/content/recipes/marketing.json`) and the league's real post `uae-pro-league-4` as the frame. No AI generation and no cutout. The drawn spread (paper, folio, grid, rules, board, swatches, pen, band, seal) is gone.
 
 ## II · Creative Production (grade: "Studio", night blacks, a single warm key)
 

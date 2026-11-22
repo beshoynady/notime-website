@@ -72,8 +72,6 @@ export type ModuleKey =
   | "mark-build"
   | "phone-feed"
   | "example-dashboard"
-  | "content-calendar"
-  | "press-release"
   | "campaign-funnel"
   | "human-scale"
   | "build-layers"

@@ -1,0 +1,15 @@
+[
+  {
+    "id": "mb-open-desk",
+    "src": "unsplash:8dgFq8Vbelo",
+    "crop": { "aspect": "16:9", "focus": [0.4, 0.78], "scale": 0.66 },
+    "grade": "editorial",
+    "mobile": { "aspect": "9:16", "focus": [0.25, 0.5] },
+    "out": "public/images/stock/mb-open-desk.webp"
+  },
+  { "id": "mb-branding", "src": "unsplash:Dd079V8Letk", "crop": { "aspect": "16:9", "focus": [0.5, 0.5] }, "grade": "editorial", "out": "public/images/stock/mb-branding.webp", "maxWidth": 1600 },
+  { "id": "mb-digital", "src": "unsplash:ppjk8kso8RE", "crop": { "aspect": "16:9", "focus": [0.5, 0.5] }, "grade": "editorial", "out": "public/images/stock/mb-digital.webp", "maxWidth": 1600 },
+  { "id": "mb-content", "src": "unsplash:1c-YonlQjUE", "crop": { "aspect": "16:9", "focus": [0.5, 0.5] }, "grade": "editorial", "out": "public/images/stock/mb-content.webp", "maxWidth": 1600 },
+  { "id": "mb-pr", "src": "unsplash:J0M-W7EOjrY", "crop": { "aspect": "16:9", "focus": [0.5, 0.5] }, "grade": "editorial", "out": "public/images/stock/mb-pr.webp", "maxWidth": 1600 },
+  { "id": "mb-paid", "src": "unsplash:bmUa09zy2ZQ", "crop": { "aspect": "16:9", "focus": [0.5, 0.5] }, "grade": "editorial", "out": "public/images/stock/mb-paid.webp", "maxWidth": 1600 }
+]

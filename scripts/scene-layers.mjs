@@ -4,13 +4,14 @@
  *   node --env-file=.env.local scripts/scene-layers.mjs docs/content/recipes/<page>.json [--only=<id>]
  *
  * Each recipe item:
- *   { id, src, crop: { aspect: "16:9"|"9:16"|"4:5"|"3:4"|"1:1"|"3:2", focus?: [x, y] },
+ *   { id, src, crop: { aspect: "16:9"|"9:16"|"4:5"|"3:4"|"1:1"|"3:2", focus?: [x, y], scale?: 0-1 },
  *     grade?: "evening"|"workshop"|"editorial"|"studio", night?: true, cut?: "rembg",
  *     mobile?: { aspect: "9:16", focus?: [x, y] }, out: "public/images/<folder>/<id>.webp", maxWidth?: 2400 }
  * `src` is a file (Rand's profile photos: public/images/work/... or public/images/work/raw/...) or
  * `unsplash:<id>`, downloaded once into assets-inbox/stock/ (gitignored) through the API's
  * download endpoint. The crop is the largest box of `aspect` centred on `focus` (0–1, default the
- * centre) at native pixels, then shrunk to `maxWidth`: never enlarged (D51). `night` grades the
+ * centre) at native pixels (`scale` < 1 takes that fraction of it, to crop past a detail such as a
+ * printed brand name), then shrunk to `maxWidth`: never enlarged (D51). `night` grades the
  * hour before (dark, cool, low saturation). `cut` keeps only the foreground (rembg, alpha).
  * Prints a registry stub per item for src/content/media.ts.
  */
@@ -45,8 +46,8 @@ async function source(src) {
   return { file };
 }
 
-/** The largest `aspect` box inside w×h, centred on focus (clamped inside the image). */
-function cropBox(w, h, aspect, focus = [0.5, 0.5]) {
+/** The largest `aspect` box inside w×h times `scale`, centred on focus (clamped inside the image). */
+function cropBox(w, h, aspect, focus = [0.5, 0.5], scale = 1) {
   const r = ratio(aspect);
   let cw = w;
   let ch = Math.round(w / r);
@@ -54,6 +55,8 @@ function cropBox(w, h, aspect, focus = [0.5, 0.5]) {
     ch = h;
     cw = Math.round(h * r);
   }
+  cw = Math.round(cw * scale);
+  ch = Math.round(ch * scale);
   const left = Math.min(Math.max(Math.round(focus[0] * w - cw / 2), 0), w - cw);
   const top = Math.min(Math.max(Math.round(focus[1] * h - ch / 2), 0), h - ch);
   return { left, top, width: cw, height: ch };
@@ -61,7 +64,7 @@ function cropBox(w, h, aspect, focus = [0.5, 0.5]) {
 
 async function render(file, crop, item, suffix = "") {
   const meta = await sharp(file).rotate().metadata();
-  const box = cropBox(meta.width, meta.height, crop.aspect, crop.focus);
+  const box = cropBox(meta.width, meta.height, crop.aspect, crop.focus, crop.scale);
   const maxWidth = suffix ? Math.min(item.maxWidth ?? 2400, 1080) : (item.maxWidth ?? 2400);
   let img = sharp(file).rotate().extract(box);
   if (box.width > maxWidth) img = img.resize({ width: maxWidth });

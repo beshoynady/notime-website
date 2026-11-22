@@ -179,3 +179,10 @@ New copy written for the photo scenes (`docs/content/visual-stories.md`). None s
 | `media:catering-8` alt | (new) | (new) | Dessert boards and cups styled for a shoot on wooden trays. | ألواح حلويات وأكواب منسّقة للتصوير على صوانٍ خشبية. | A new profile photo in the Photography strip (D158). |
 | `media:catering-9` alt | (new) | (new) | Dessert cups topped with lilac sugar petals, set on glass saucers. | أكواب حلوى تعلوها بتلات سكّرية بلون الليلك، على صحون زجاجية. | A new profile photo in the Photography strip (D158). |
 | `media:cp-rental-lights` alt | (new) | (new) | LED panel lights on stands, lit against a warm wall. | ألواح إضاءة LED على حوامل، مضاءة أمام جدار دافئ. | The rental section's stock photo (D158). |
+| `m:scenes.marketing.s2` | First, the grid. | أولًا، شبكة التصميم. | (removed) | (removed) | The opening's beats are photographs now (D159); the drawn grid went with the drawn spread. |
+| `media:uae-pro-league-6` alt | (new) | (new) | A grid of posts designed for a football league: results, fixtures and registration. | شبكة منشورات صُمّمت لدوري لكرة القدم: نتائج ومواعيد وتسجيل. | The Social section's photo (D159). |
+| `media:mb-branding` alt | (new) | (new) | Blank cards and a brown envelope laid out on a pale table. | بطاقات بيضاء وظرف بنّي مرتّبة على طاولة فاتحة. | Stock, Branding (D159). |
+| `media:mb-digital` alt | (new) | (new) | Hands at a laptop on a meeting table, beside a glass of coffee. | يدان على حاسوب محمول فوق طاولة اجتماعات، بجانب كوب قهوة. | Stock, Digital marketing (D159). |
+| `media:mb-content` alt | (new) | (new) | A planner sorting sticky notes on a dark studio wall. | شخص يرتّب أوراقًا لاصقة على جدار داكن في استوديو. | Stock, Content strategy (D159). |
+| `media:mb-pr` alt | (new) | (new) | Folded newspapers and magazines on a wooden table by a window. | صحف ومجلات مطويّة على طاولة خشبية بجانب نافذة. | Stock, PR (D159). |
+| `media:mb-paid` alt | (new) | (new) | Hands scrolling a social feed on a phone at a desk. | يدان تتصفّحان منشورات على هاتف فوق مكتب. | Stock, Paid media (D159). |

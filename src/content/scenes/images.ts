@@ -74,11 +74,6 @@ const BY_CATEGORY: { category: CategorySlug; grade: SceneImageSlot["grade"]; slo
       },
     ],
   },
-  {
-    category: "marketing-brand",
-    grade: "editorial",
-    slots: [plate("mb-open-paper"), ai("mb-open-board", "cat-marketing-brand-4x5"), ai("mb-open-swatches"), ai("mb-open-pen")],
-  },
 ];
 
 export const SCENE_IMAGES: SceneImageSlot[] = BY_CATEGORY.flatMap(({ category, grade, slots }) => slots.map((s) => ({ ...s, category, grade })));

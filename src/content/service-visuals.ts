@@ -6,7 +6,7 @@ import type { Localized } from "./types";
  * scripts/grade.mjs), otherwise a small code-drawn composition (service-drawings.tsx). Static, no
  * interactivity. Remove a service's entry when its real module ships (service-visuals.test.ts).
  */
-export type DrawingKey = "mark" | "feed" | "search" | "funnel" | "stand" | "dieline" | "merch" | "stage";
+export type DrawingKey = "stand" | "dieline" | "merch" | "stage";
 
 export type ServiceVisual =
   | { kind: "photo"; src: string; width: number; height: number; from: string; alt: Localized<string> }
@@ -48,10 +48,13 @@ export const SERVICE_VISUALS: Record<string, ServiceVisual> = {
     },
   },
   // Marketing & Brand
-  "branding-identity": draw("mark"),
-  "social-media-management": draw("feed"),
-  "digital-marketing-seo": draw("search"),
-  "paid-media-planning": draw("funnel"),
+  // Marketing & Brand (D159): stock photographs of the work in context; Social shows a real post.
+  "branding-identity": pic("mb-branding"),
+  "social-media-management": pic("uae-pro-league-6"),
+  "digital-marketing-seo": pic("mb-digital"),
+  "content-strategy": pic("mb-content"),
+  "public-relations": pic("mb-pr"),
+  "paid-media-planning": pic("mb-paid"),
   // Production, Print & Gifts
   "stand-fabrication-signage": draw("stand"),
   "packaging-design": draw("dieline"),

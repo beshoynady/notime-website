@@ -16,6 +16,7 @@ const PAGES = [
   "/en/services",
   "/en/services/events-hospitality",
   "/ar/services/creative-production",
+  "/en/services/marketing-brand",
   "/ar/services/software-digital",
   "/en/work",
   "/en/about",
