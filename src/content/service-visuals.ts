@@ -1,3 +1,4 @@
+import { baseHidden } from "./media";
 import type { Localized } from "./types";
 
 /**
@@ -60,6 +61,8 @@ export const SERVICE_VISUALS: Record<string, ServiceVisual> = {
   "branded-merchandise": pic("gifts-2"),
 };
 
+/** A section's visual; a graded copy of a hidden registry photo shows nothing (media.ts `base`). */
 export function serviceVisual(slug: string): ServiceVisual | undefined {
-  return SERVICE_VISUALS[slug];
+  const v = SERVICE_VISUALS[slug];
+  return v?.kind === "photo" && baseHidden(v.from) ? undefined : v;
 }

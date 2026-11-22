@@ -77,3 +77,27 @@ for (const locale of ["en", "ar"] as const) {
     expect(await page.evaluate(() => document.documentElement.scrollHeight)).toBeLessThan(11500);
   });
 }
+
+test.describe("without JavaScript", () => {
+  test.use({ javaScriptEnabled: false });
+  test("every panel shows in order and the tab rows are hidden (ar)", async ({ page }) => {
+    await page.goto(PATH("ar"));
+    await expect(page.locator("[role='tablist']").first()).toBeHidden();
+    const panels = page.locator("[role='tabpanel']");
+    const n = await panels.count();
+    expect(n).toBeGreaterThanOrEqual(8);
+    for (let i = 0; i < n; i++) await expect(panels.nth(i)).toBeVisible();
+  });
+});
+
+test("back and forward between two anchors switch the panel (en)", async ({ page }) => {
+  await gotoReady(page, PATH("en"));
+  const [a, b] = [services[1].anchor, services[2].anchor];
+  await page.evaluate((h) => (location.hash = h), a);
+  await expect(page.locator(`#${a}`)).toBeVisible();
+  await page.evaluate((h) => (location.hash = h), b);
+  await expect(page.locator(`#${b}`)).toBeVisible();
+  await page.goBack();
+  await expect(page.locator(`#${a}`)).toBeVisible();
+  await expect(page.locator(`#${b}`)).toBeHidden();
+});

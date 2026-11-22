@@ -11,7 +11,9 @@ import type { Localized } from "./types";
  * - `replace`: a stand-in until NO TIME sends a real photo of that moment.
  * - `randApproval`: "client-visible" (a client's logo or name shows in the picture: Rand's
  *   question 4) or "faces" (identifiable people). Listed in docs/content/images-for-rand.md.
- * - `hidden: true` hides it everywhere: its scene ends a beat earlier, its gallery closes up.
+ * - `hidden: true` hides it everywhere: its scene ends a beat earlier, its gallery closes up. A file
+ *   cut or graded from a registry photo names it in `base` (or a scene slot's or service photo's
+ *   `from`) and hides with it, so a photo Rand turns down leaves no crop behind (`baseHidden`).
  * - `alt: null` marks a decorative layer; every other picture has an EN and an AR alt.
  * - `spec`: what the slot needs, so whoever shoots or crops a real photo knows what to make.
  *
@@ -34,6 +36,8 @@ export interface MediaEntry extends MediaFile {
   credit?: { by: string; url: string; license: "Unsplash License" | "Pexels License" };
   /** The profile image (`p9-2`) or the stock id (`unsplash:…`) it was made from. */
   from?: string;
+  /** The registry photo this file was cut or graded from: hidden with it. */
+  base?: string;
   replace?: boolean;
   randApproval?: "client-visible" | "faces";
   hidden?: boolean;
@@ -252,6 +256,7 @@ MEDIA.push(
     mobile: { file: "/images/scenes/events-hospitality/ev-open-night-9x16.webp", width: 600, height: 1066 },
     source: "rand-profile",
     from: "p9-2",
+    base: "private-celebrations-1",
     grade: "evening",
     alt: null,
     spec: "16:9 + 9:16 · the dressed hall before the lights: same frame as ev-open-room, graded to night",
@@ -380,7 +385,7 @@ export const STORY_BASE = {
 for (const [id, base] of Object.entries(STORY_BASE)) {
   const b = MEDIA.find((e) => e.id === base);
   if (!b) throw new Error(`media: story ${id} has no profile entry ${base}`);
-  MEDIA.push({ ...b, id, file: `/images/stories/${id}.webp`, grade: "evening", spec: `${b.spec} · the Evening-graded copy for photo stories` });
+  MEDIA.push({ ...b, id, base, file: `/images/stories/${id}.webp`, grade: "evening", spec: `${b.spec} · the Evening-graded copy for photo stories` });
 }
 
 /** Ids hidden by the environment (tests: NEXT_PUBLIC_MEDIA_HIDE=a,b). */
@@ -390,13 +395,17 @@ const ENV_HIDE = (process.env.NEXT_PUBLIC_MEDIA_HIDE ?? "").split(",").filter(Bo
 export function pick(list: MediaEntry[], id: string, opts: { includeHidden?: boolean; hide?: string[] } = {}): MediaEntry | undefined {
   const m = list.find((e) => e.id === id);
   if (!m || opts.includeHidden) return m;
-  return m.hidden || (opts.hide ?? ENV_HIDE).includes(id) ? undefined : m;
+  if (m.hidden || (opts.hide ?? ENV_HIDE).includes(id)) return undefined;
+  return m.base && !pick(list, m.base, opts) ? undefined : m;
 }
 
 /** The entry a page shows, or undefined when it's hidden or unknown (fill or hide, D78). */
 export const media = (id: string) => pick(MEDIA, id);
 /** Every entry, hidden or not (tooling: images-for-rand). */
 export const mediaAll = (id: string) => pick(MEDIA, id, { includeHidden: true });
+
+/** True when `id` is a registry photo that is hidden: a file made from it must not show either. */
+export const baseHidden = (id: string | undefined) => !!id && !!mediaAll(id) && !media(id);
 
 /** The entries a gallery shows, in order: the visible ones, or none when fewer than `min` remain (D78). */
 export function visibleMedia(ids: readonly string[], min: number, lookup: (id: string) => MediaEntry | undefined = media): MediaEntry[] {

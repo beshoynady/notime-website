@@ -3,7 +3,6 @@ import { getServices } from "./index";
 import { showWorkFilters } from "@/lib/work-filter";
 import { MEDIA, mediaAll, pick } from "./media";
 import {
-  BRANDED_PHOTO_DIRS,
   CLIENT_NAMES,
   COLLECTION_MIN_PHOTOS,
   collectionPhotos,
@@ -43,10 +42,19 @@ describe("case pages (F1): anonymisation", () => {
     }
   });
 
-  it("never shows a branded photo in an anonymous case page", () => {
+  it("shows only the case's own cover photo, flagged for Rand's approval (D150, D164)", () => {
     for (const w of workItems) {
-      const media = strings(anonymousPage(w)).filter((s) => s.startsWith("/"));
-      for (const dir of BRANDED_PHOTO_DIRS) for (const m of media) expect(m, `${w.key} media`).not.toContain(dir);
+      expect(strings(anonymousPage(w)).filter((s) => s.startsWith("/")), `${w.key}: no file path in the page data`).toEqual([]);
+      const cover = mediaAll(w.cover)!;
+      expect(cover.source, w.key).toBe("rand-profile");
+      expect(cover.randApproval, w.key).toBe("client-visible");
+    }
+  });
+
+  it("no picture's alt text names a client, in either language", () => {
+    for (const m of MEDIA) {
+      const alt = `${m.alt?.en ?? ""} ‖ ${m.alt?.ar ?? ""}`.toLowerCase();
+      for (const name of CLIENT_NAMES) expect(alt, `${m.id} names ${name}`).not.toContain(name.toLowerCase());
     }
   });
 

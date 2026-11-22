@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
 import sharp from "sharp";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { MEDIA, media, mediaAll, pick, type MediaEntry } from "./media";
 
 /** The one image registry (D152; spec docs/superpowers/specs/2026-11-21-visual-portfolio-design.md §6). */
@@ -69,5 +69,23 @@ describe("scene layers read the registry", () => {
     expect(s?.src).toBe("/images/work/catering/catering-1.webp");
     expect([s?.width, s?.height]).toEqual([1408, 794]);
     expect(s?.alt?.en).toMatch(/buffet/i);
+  });
+});
+
+describe("a hidden photo hides every file made from it (review, Task 16)", () => {
+  it("crops, graded copies, scene slots and service photos drop out with their base", async () => {
+    vi.stubEnv("NEXT_PUBLIC_MEDIA_HIDE", "private-celebrations-1,catering-6");
+    vi.resetModules();
+    const { media: m } = await import("./media");
+    const { getSceneImage } = await import("./scenes/images");
+    const { serviceVisual } = await import("./service-visuals");
+    expect(m("ev-open-night"), "the night crop of the hall").toBeUndefined();
+    expect(m("st-hall"), "the story copy of the hall").toBeUndefined();
+    expect(getSceneImage("ev-open-room"), "the scene plate of the hall").toBeUndefined();
+    expect(getSceneImage("ev-open-table"), "the tables cut from the hall").toBeUndefined();
+    expect(serviceVisual("photography"), "the graded copy of catering-6").toBeUndefined();
+    expect(serviceVisual("set-stage-design"), "its base is visible").toBeDefined();
+    vi.unstubAllEnvs();
+    vi.resetModules();
   });
 });

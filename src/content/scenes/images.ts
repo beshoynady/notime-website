@@ -1,5 +1,5 @@
 import type { CategorySlug } from "../types";
-import { media } from "../media";
+import { baseHidden, media } from "../media";
 import type { SceneImageSlot } from "./types";
 
 /**
@@ -61,7 +61,8 @@ export const SCENE_IMAGES: SceneImageSlot[] = BY_CATEGORY.flatMap(({ category, g
  */
 export function getSceneImage(id: string): SceneImageSlot | undefined {
   const slot = SCENE_IMAGES.find((s) => s.id === id);
-  if (slot) return slot;
+  // A slot cut from a registry photo hides with it (media.ts `base`).
+  if (slot) return baseHidden(slot.source.from) ? undefined : slot;
   const m = media(id);
   if (!m) return undefined;
   return {

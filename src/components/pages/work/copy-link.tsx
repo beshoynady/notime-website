@@ -20,14 +20,17 @@ export function CopyLink() {
   useEffect(() => () => window.clearTimeout(timer.current), []);
 
   async function copy() {
+    let failed = false;
     try {
       await navigator.clipboard.writeText(window.location.origin + window.location.pathname);
       setState("copied");
     } catch {
+      failed = true;
       setState("failed");
     }
     window.clearTimeout(timer.current);
-    timer.current = window.setTimeout(() => setState("idle"), 2400);
+    // The confirmation fades back; the failure stays, since it tells the visitor what to do.
+    if (!failed) timer.current = window.setTimeout(() => setState("idle"), 2400);
   }
 
   const Icon = state === "copied" ? Check : Link2;

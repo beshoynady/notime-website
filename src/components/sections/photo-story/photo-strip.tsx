@@ -33,6 +33,8 @@ export function PhotoStrip({
 }) {
   const titleId = `${id}-title`;
   const photos = storyBeats(frames).map(({ entry: p, ...f }) => ({ ...f, p }));
+  // Fill or hide (D78): with fewer than two photos left there is no strip to scroll.
+  if (photos.length < 2) return null;
   const ratios = photos.reduce((sum, { p }) => sum + p.width / p.height, 0);
   const style = { "--strip-r": ratios.toFixed(3), "--strip-n": photos.length } as CSSProperties;
   return (

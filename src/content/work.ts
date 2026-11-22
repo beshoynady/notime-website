@@ -50,7 +50,7 @@ export interface WorkStory {
 export const BRANDED_PHOTO_DIRS = ["/images/work/egyptair-pavilion/", "/images/work/uae-pro-league/"] as const;
 
 /** Words that identify a client; none may appear in an anonymised case. */
-export const CLIENT_NAMES = ["UAE Pro League", "Pro League", "EgyptAir", "Egypt Air", "ADIB", "مصر للطيران", "دوري المحترفين"] as const;
+export const CLIENT_NAMES = ["UAE Pro League", "Pro League", "EgyptAir", "Egypt Air", "ADIB", "Sandoz", "Smith Gulf", "مصر للطيران", "دوري المحترفين", "ساندوز"] as const;
 
 export const workItems: WorkItem[] = [
   {

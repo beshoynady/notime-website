@@ -1971,3 +1971,18 @@ html[data-overlay-open] .sw-sticky {
     border-radius: 6px;
   }
 }
+
+/* Without JavaScript the tabs can't switch (service-tabs.tsx): every panel shows, in order, and the
+   tab row goes. In the base layer, beside Tailwind's `[hidden] { display: none !important }`, which an
+   unlayered rule can't outrank. */
+@layer base {
+  html:not([data-js]) .sw-block[role="tabpanel"][hidden] {
+    display: grid !important;
+  }
+  html:not([data-js]) .sw-consult-panel[role="tabpanel"][hidden] {
+    display: block !important;
+  }
+  html:not([data-js]) .sw-tabs[role="tablist"] {
+    display: none !important;
+  }
+}

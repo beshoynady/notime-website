@@ -14,6 +14,8 @@ export type ServiceTab = { id: string; num?: string; label: string; panel: React
  * between tabs (mirrored in Arabic), Home/End jump to the ends. A link to a service's anchor
  * (`#apps`, on load or in-page) opens its panel: the site's anchor handler announces its target
  * (ANCHOR_REVEAL) before it measures where to land, and re-lands a deep link while the page settles.
+ * Without JavaScript the tabs can't switch, so every panel shows in order and the tab row is hidden
+ * (software.css, `html:not([data-js])`); a deep link then lands on its panel like any section.
  */
 export function ServiceTabs({ items, label, className = "sw-blocks", panelClassName = "sw-block" }: { items: ServiceTab[]; label: string; className?: string; panelClassName?: string }) {
   const [active, setActive] = useState(0);
@@ -34,10 +36,17 @@ export function ServiceTabs({ items, label, className = "sw-blocks", panelClassN
       // Synchronous, so the anchor handler measures the open panel.
       if (i >= 0) flushSync(() => setActive(i));
     };
+    // Back and forward between two panels' anchors switch the panel too.
+    const onHash = () => {
+      const i = indexOf(decodeURIComponent(location.hash.slice(1)));
+      if (i >= 0) setActive(i);
+    };
     el.addEventListener(ANCHOR_REVEAL, onReveal);
+    window.addEventListener("hashchange", onHash);
     return () => {
       cancelAnimationFrame(raf);
       el.removeEventListener(ANCHOR_REVEAL, onReveal);
+      window.removeEventListener("hashchange", onHash);
     };
   }, [items]);
 

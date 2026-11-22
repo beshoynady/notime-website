@@ -20,7 +20,7 @@ export function Tiers({ locale }: { locale: Locale }) {
           </h2>
           <p className="sw-lead">{t.intro[locale]}</p>
         </header>
-        <ol className="sw-tier-list" data-sw-reveal="">
+        <ol className="sw-tier-list" data-sw-reveal="" tabIndex={0} aria-labelledby="tiers-title">
           {TIER_IDS.map((id, i) => {
             const tier = t.items[id];
             return (
