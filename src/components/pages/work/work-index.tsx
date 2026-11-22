@@ -11,7 +11,7 @@ import { SITE_URL } from "@/config/site";
 import { BREADCRUMB_LABELS, getCategories, getCategory, SERVICES_INDEX_HREF, workHref, WORK_INDEX_HREF, type Locale } from "@/content";
 import { markets } from "@/content/markets";
 import { RELATED_WORK_COPY } from "@/content/related-work";
-import { workItems, workView } from "@/content/work";
+import { workCards } from "@/content/work";
 import { Link } from "@/i18n/navigation";
 import { trailJsonLd } from "@/lib/jsonld";
 import { PAGE_REF } from "@/lib/review";
@@ -31,10 +31,11 @@ const MARKET_KEYS = markets.map((m) => m.key);
  */
 export async function WorkIndex({ locale, filter }: { locale: Locale; filter: WorkFilter }) {
   const [t, tw, tm, tc, th] = await Promise.all([getTranslations("workIndex"), getTranslations("work"), getTranslations("markets"), getTranslations("workCase"), getTranslations("header")]);
-  const cases = applyFilter(workItems, filter).map((w) => ({ item: w, view: workView(w) }));
-  const chips = facetChips(workItems, filter, CATEGORY_SLUGS, MARKET_KEYS);
+  const all = workCards();
+  const cases = applyFilter(all, filter);
+  const chips = facetChips(all, filter, CATEGORY_SLUGS, MARKET_KEYS);
   const categoryName = (c: (typeof CATEGORY_SLUGS)[number]) => getCategory(c)!.title[locale];
-  const showFilters = showWorkFilters(workItems.length);
+  const showFilters = showWorkFilters(all.length);
   const filtered = Boolean(filter.category || filter.market);
 
   return (
@@ -71,28 +72,30 @@ export async function WorkIndex({ locale, filter }: { locale: Locale; filter: Wo
 
           {cases.length > 0 ? (
             <ul className="wk-list">
-              {cases.map(({ item, view }) => {
-                const titleId = `wk-case-${view.slug}`;
+              {cases.map((card) => {
+                const titleId = `wk-case-${card.slug}`;
                 return (
-                  <li key={view.slug} className="wk-case">
+                  <li key={card.slug} className="wk-case" data-kind={card.kind}>
                     <article aria-labelledby={titleId} className="wk-case-grid" data-card="">
-                      <div className="wk-media">
-                        <div className="absolute inset-0">
-                          <CaseMedia view={view} locale={locale} sizes="(min-width: 900px) 56vw, 100vw" />
+                      {card.cover && (
+                        <div className="wk-media">
+                          <div className="absolute inset-0">
+                            <CaseMedia cover={card.cover} locale={locale} sizes="(min-width: 900px) 56vw, 100vw" />
+                          </div>
                         </div>
-                      </div>
+                      )}
                       <div className="wk-body">
                         <ul className="wk-meta text-eyebrow" aria-label={tw("spansLabel")}>
-                          {item.categories.map((c) => (
+                          {card.categories.map((c) => (
                             <li key={c}>{categoryName(c)}</li>
                           ))}
                         </ul>
                         <h2 id={titleId} className="wk-name">
-                          <Link href={workHref(view.slug)} className="wk-link">
-                            {view.label[locale]}
+                          <Link href={workHref(card.slug)} className="wk-link">
+                            {card.label[locale]}
                           </Link>
                         </h2>
-                        <p className="wk-summary">{view.summary[locale]}</p>
+                        <p className="wk-summary">{card.summary[locale]}</p>
                         <p className="wk-more" aria-hidden="true">
                           {tw("viewProject")}
                           <ArrowRight strokeWidth={1.25} className="wk-arrow rtl:-scale-x-100" />

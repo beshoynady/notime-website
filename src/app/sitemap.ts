@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/config/site";
 import { ABOUT_HREF, CONTACT_HREF, categoryHref, getCategories, productHref, SERVICES_INDEX_HREF, workHref, WORK_INDEX_HREF } from "@/content";
 import { PRODUCT_IDS } from "@/content/product-pages";
-import { workItems } from "@/content/work";
+import { workCards } from "@/content/work";
 import { routing } from "@/i18n/routing";
 import { localeAlternates } from "@/lib/seo";
 
@@ -18,7 +18,7 @@ const PAGES = [
   SERVICES_INDEX_HREF,
   ...getCategories().map((c) => categoryHref(c.slug)),
   WORK_INDEX_HREF,
-  ...workItems.map((w) => workHref(w.slug)),
+  ...workCards().map((w) => workHref(w.slug)),
   ABOUT_HREF,
   ...PRODUCT_IDS.map(productHref),
   CONTACT_HREF,

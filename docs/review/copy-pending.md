@@ -208,7 +208,7 @@ New copy written for the photo scenes (`docs/content/visual-stories.md`). None s
 
 ## Arabic for the UAE market (D163), for Rand
 
-The owner's rule of 2026-11-22: Arabic first, tuned to the UAE market (`copy-voice-reference.md` §8). These lines changed wording only; every meaning and fact is as before, and the English needed no change unless a row says so. **Rand reviews each line.** Running count: **8** lines.
+The owner's rule of 2026-11-22: Arabic first, tuned to the UAE market (`copy-voice-reference.md` §8). These lines changed wording only; every meaning and fact is as before, and the English needed no change unless a row says so. **Rand reviews each line.** Running count: **15** lines.
 
 | # | Key | Was (AR) | Now (AR) | Why |
 |---|---|---|---|---|
@@ -220,3 +220,12 @@ The owner's rule of 2026-11-22: Arabic first, tuned to the UAE market (`copy-voi
 | U6 | `c:products:minute-zero.descriptor` | تسجيل دخول الفعاليات بالـ QR | تسجيل الحضور في الفعاليات برمز QR | Events say «تسجيل الحضور»; «بالـ QR» was a literal shape. Shows in menus, titles and schema. |
 | U7 | `c:products:minute-zero.summary` | يسجّل الضيوف دخولهم عند الباب برمز QR، ويرى الفريق الحضور لحظة بلحظة. | يسجّل الضيوف حضورهم عند الباب برمز QR، ويرى الفريق من وصل لحظة بلحظة. | Same term; «من وصل» carries "arrivals" without repeating «الحضور». |
 | U8 | `c:product-pages:minute-zero.features[0].line` | يصل كل ضيف رمزه الخاص مع الدعوة. | يتسلّم كل ضيف رمزه الخاص مع الدعوة. | «يصل كلَّ ضيفٍ رمزُه» reads backwards at first glance. |
+| U9 | `c:work:uaepl.story.facts[1].value` | البطولات وليالي التكريم | البطولات وحفلات التكريم | «حفل تكريم» is the UAE word (as U4). |
+| U10 | `m:work.intro` (Home, Real projects) | جناح لشركة طيران وطنية، وليالي تكريم لدوري كرة قدم. نحتفظ بالأسماء إلى أن يأذن لنا أصحابها. | جناح لشركة طيران وطنية، وحفلات تكريم لدوري كرة قدم، وقاعات جهّزناها لمناسبات خاصة. نحتفظ بأسماء العملاء إلى أن يأذنوا لنا بذكرها. | Same term; the third tile is now the rooms collection (D164), so it is named. English updated to match. |
+| U11 | `m:workIndex.intro` | جناح في معرض دبي للطيران، وليالي تكريم لدوري كرة قدم. يظهر اسم كل عميل حين يوافق على ذكره. | جناح في معرض دبي للطيران وحفلات تكريم لدوري كرة قدم، ومعها صور من قاعات وضيافة وهدايا جهّزناها. يظهر اسم كل عميل حين يوافق على ذكره. | Same term; the collections are named (D164). English updated. |
+| U12 | `m:workIndex.metaDescription` | جناح لشركة طيران في معرض دبي للطيران، وليالي تكريم لدوري كرة قدم: ما الذي قدّمناه في كل منهما. | جناح لشركة طيران في معرض دبي للطيران، وحفلات تكريم لدوري كرة قدم، وصور من قاعات وضيافة وهدايا جهّزناها. | Same; search snippet. English updated. |
+| U13 | `m:workIndex.heading` | أعمال لجهات وطنية، مشروعًا بعد مشروع. | أعمال نفّذناها، نعرضها مشروعًا بعد مشروع. | The list now includes private celebrations, so «لجهات وطنية» no longer covers it. English: "Work we've done, shown project by project." |
+| U14 | `m:workIndex.metaTitle` | أعمالنا: فعاليات وأجنحة وحلول رقمية | أعمالنا: فعاليات وأجنحة وضيافة وهدايا | Work shows no digital project; it shows hospitality and gifts. English updated. |
+| U15 | `m:linksPage.work.note` | أجنحة معارض، ليالي تكريم، منصّات رقمية | أجنحة معارض، وحفلات تكريم، وقاعات جهّزناها | Same term; what Work shows. English updated. |
+
+New Work copy written Arabic first (D164), for Rand: the four collections' titles and summaries (`src/content/work.ts`, `workCollections`), and `copyLink.*` and `workCollection.*` in `src/messages/ar.json`.

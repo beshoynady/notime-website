@@ -1,13 +1,13 @@
 import { WORK_NAMED } from "@/config/work";
 import type { MarketKey } from "./markets";
-import type { DrawingKey } from "./service-visuals";
+import { media, type MediaEntry } from "./media";
 import type { CategorySlug, Localized } from "./types";
 
 /**
  * Work (D78 §6, approved 2026-11-09). Real facts from docs/content/case-studies.md. Until a client
- * approves its name (`WORK_NAMED`), the case shows a description instead of the name, and a drawing
- * of the work instead of its own photos, which all show the client's brand. Never a stand-in photo:
- * no AI or stock image may stand in for a real project (D106).
+ * approves its name (`WORK_NAMED`), the case shows a description instead of the name; its picture is
+ * its own cover photo (D150, D164: the client shows in it, so Rand approves it). Never a stand-in
+ * photo: no AI or stock image may stand in for a real project (D106).
  */
 export type WorkKey = keyof typeof WORK_NAMED;
 
@@ -19,10 +19,10 @@ export interface WorkItem {
   categories: CategorySlug[];
   /** Where the work took place (the Work index's market filter, D88). Only what the profile states. */
   markets: MarketKey[];
-  anonymous: { label: Localized<string>; summary: Localized<string>; visual: DrawingKey };
+  anonymous: { label: Localized<string>; summary: Localized<string> };
   named: { label: Localized<string>; summary: Localized<string>; photos: string[] };
   /**
-   * The case's own photo on home (a registry id, media.ts), shown named or not: the client is visible
+   * The case's own photo on its card and page (a registry id, media.ts), shown named or not: the client is visible
    * in it, so Rand approves it (`randApproval`, D150), but the text stays anonymous until `WORK_NAMED`.
    */
   cover: string;
@@ -67,7 +67,6 @@ export const workItems: WorkItem[] = [
         en: "Stand design, build and on-site PR at the Dubai Airshow and Arabian Travel Market.",
         ar: "صمّمنا الجناح وبنيناه، وأدرنا علاقاته العامة في أرض الحدث، في معرض دبي للطيران وسوق السفر العربي.",
       },
-      visual: "stand",
     },
     named: {
       label: { en: "EgyptAir", ar: "مصر للطيران" },
@@ -108,7 +107,6 @@ export const workItems: WorkItem[] = [
         en: "Tournament branding, on-ground production, award ceremonies and sponsor activations, with the league's social content, award packaging and gift sets.",
         ar: "هوية البطولات، والإنتاج في أرض الحدث، وحفلات التكريم، وتفعيلات الرعاة، ومعها محتوى الدوري على منصّاته، وتغليف الجوائز، وأطقم الهدايا.",
       },
-      visual: "stage",
     },
     named: {
       label: { en: "UAE Pro League", ar: "رابطة دوري المحترفين الإماراتي" },
@@ -122,7 +120,7 @@ export const workItems: WorkItem[] = [
     story: {
       facts: [
         { label: { en: "Our role", ar: "دورنا" }, value: { en: "Event delivery, content and gifts", ar: "تنفيذ الفعاليات والمحتوى والهدايا" } },
-        { label: { en: "Occasions", ar: "المناسبات" }, value: { en: "Tournaments and award nights", ar: "البطولات وليالي التكريم" } },
+        { label: { en: "Occasions", ar: "المناسبات" }, value: { en: "Tournaments and award nights", ar: "البطولات وحفلات التكريم" } },
       ],
       execution: {
         lead: {
@@ -151,13 +149,13 @@ export const workItems: WorkItem[] = [
   },
 ];
 
-export type WorkView = { key: WorkKey; slug: string; named: boolean; label: Localized<string>; summary: Localized<string>; visual?: DrawingKey; photos: string[] };
+export type WorkView = { key: WorkKey; slug: string; named: boolean; label: Localized<string>; summary: Localized<string>; photos: string[] };
 
 /** The version a page shows: named only with the client's approval (`WORK_NAMED`). */
 export function workView(w: WorkItem, named: boolean = WORK_NAMED[w.key]): WorkView {
   return named
     ? { key: w.key, slug: w.slug, named, label: w.named.label, summary: w.named.summary, photos: w.named.photos }
-    : { key: w.key, slug: w.slug, named, label: w.anonymous.label, summary: w.anonymous.summary, visual: w.anonymous.visual, photos: [] };
+    : { key: w.key, slug: w.slug, named, label: w.anonymous.label, summary: w.anonymous.summary, photos: [] };
 }
 
 export function getWorkBySlug(slug: string): WorkItem | undefined {
@@ -167,4 +165,109 @@ export function getWorkBySlug(slug: string): WorkItem | undefined {
 /** The case after this one, wrapping around: the case page's "Next case". */
 export function nextWork(w: WorkItem): WorkItem {
   return workItems[(workItems.indexOf(w) + 1) % workItems.length];
+}
+
+/**
+ * Collections (Task 15, D164): NO TIME's own photos of one kind of work, from the 2026 profile, each
+ * at `/work/<slug>` beside the cases. No client and no story, so nothing to name or claim: the
+ * summary says only what the photos show. Markets stay empty (the profile doesn't say where).
+ */
+export interface WorkCollection {
+  slug: string;
+  categories: CategorySlug[];
+  markets: MarketKey[];
+  label: Localized<string>;
+  summary: Localized<string>;
+  /** Registry ids (media.ts), in gallery order; the first one shown is the cover. */
+  photos: string[];
+}
+
+/** Below this many visible photos a collection hides (fill or hide, D78). */
+export const COLLECTION_MIN_PHOTOS = 4;
+
+const series = (group: string, n: number) => Array.from({ length: n }, (_, i) => `${group}-${i + 1}`);
+
+export const workCollections: WorkCollection[] = [
+  {
+    slug: "rooms-we-dressed",
+    categories: ["events-hospitality"],
+    markets: [],
+    label: { en: "Rooms we dressed", ar: "قاعات جهّزناها" },
+    summary: {
+      en: "Halls and tables we dressed for private celebrations: candlelight, flowers, the entrance, and the stage going up before the doors open.",
+      ar: "قاعات وطاولات جهّزناها لحفلات ومناسبات خاصة: الشموع والزهور والمدخل، والمسرح قبل أن تُفتح الأبواب.",
+    },
+    photos: series("private-celebrations", 8),
+  },
+  {
+    slug: "heritage-hospitality",
+    categories: ["events-hospitality"],
+    markets: [],
+    label: { en: "Heritage hospitality we set up", ar: "ضيافة تراثية جهّزناها" },
+    summary: {
+      en: "Heritage carts with brass dallahs, Arabic coffee laid out on a carpet, a majlis facing the sea and a desert tent lit from inside.",
+      ar: "عربات ضيافة تراثية بدلال نحاسية، وقهوة عربية على السجاد، ومجلس يطلّ على البحر، وخيمة في الصحراء مضاءة من الداخل.",
+    },
+    photos: series("heritage", 5),
+  },
+  {
+    slug: "buffets-and-tables",
+    categories: ["events-hospitality"],
+    markets: [],
+    label: { en: "Buffets and tables we styled", ar: "بوفيهات وطاولات نسّقناها" },
+    summary: {
+      en: "Buffets set with crystal and gold, dessert tables for occasions, and hospitality laid out for a boardroom meeting.",
+      ar: "بوفيهات بالكريستال والذهبي، وطاولات حلويات للمناسبات، وضيافة لاجتماع مجلس إدارة.",
+    },
+    photos: series("catering", 9),
+  },
+  {
+    slug: "gifts-for-companies",
+    categories: ["production-print-gifts"],
+    markets: [],
+    label: { en: "Gifts we made for companies", ar: "هدايا صنعناها للشركات" },
+    summary: {
+      en: "A Dubai skyline in gold-finished metal, a desk gift set, an awards box and a sports T-shirt, each made for a company.",
+      ar: "أفق دبي من معدن بلمسة ذهبية، وطقم هدايا مكتبية، وعلبة جوائز، وقميص رياضي، صُنع كلٌّ منها لإحدى الشركات.",
+    },
+    photos: ["gifts-1", "uae-pro-league-5", "uae-pro-league-7", "gifts-2"],
+  },
+];
+
+/** The photos a collection shows, in order; undefined when fewer than four are visible (D78). */
+export function collectionPhotos(c: WorkCollection, lookup: (id: string) => MediaEntry | undefined = media): MediaEntry[] | undefined {
+  const shown = c.photos.flatMap((id) => lookup(id) ?? []);
+  return shown.length >= COLLECTION_MIN_PHOTOS ? shown : undefined;
+}
+
+export function visibleCollections(lookup: (id: string) => MediaEntry | undefined = media): WorkCollection[] {
+  return workCollections.filter((c) => collectionPhotos(c, lookup));
+}
+
+/** A collection a page can show: known and not hidden. */
+export function getCollectionBySlug(slug: string): WorkCollection | undefined {
+  return visibleCollections().find((c) => c.slug === slug);
+}
+
+/** One card on the Work index and on home: a case (in the version WORK_NAMED allows) or a collection. */
+export interface WorkCard {
+  slug: string;
+  kind: "case" | "collection";
+  categories: CategorySlug[];
+  markets: MarketKey[];
+  label: Localized<string>;
+  summary: Localized<string>;
+  /** Hidden or unknown leaves the card as text. */
+  cover?: MediaEntry;
+}
+
+/** The Work index's list: the cases first, then the collections that have enough photos. */
+export function workCards(lookup: (id: string) => MediaEntry | undefined = media): WorkCard[] {
+  return [
+    ...workItems.map((w): WorkCard => {
+      const v = workView(w);
+      return { slug: w.slug, kind: "case", categories: w.categories, markets: w.markets, label: v.label, summary: v.summary, cover: lookup(w.cover) };
+    }),
+    ...visibleCollections(lookup).map((c): WorkCard => ({ ...c, kind: "collection", cover: collectionPhotos(c, lookup)![0] })),
+  ];
 }

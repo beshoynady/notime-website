@@ -1,6 +1,22 @@
 import { describe, expect, it } from "vitest";
 import { getServices } from "./index";
-import { BRANDED_PHOTO_DIRS, CLIENT_NAMES, getWorkBySlug, nextWork, workItems, workView, type WorkItem } from "./work";
+import { showWorkFilters } from "@/lib/work-filter";
+import { MEDIA, mediaAll, pick } from "./media";
+import {
+  BRANDED_PHOTO_DIRS,
+  CLIENT_NAMES,
+  COLLECTION_MIN_PHOTOS,
+  collectionPhotos,
+  getCollectionBySlug,
+  getWorkBySlug,
+  nextWork,
+  visibleCollections,
+  workCards,
+  workCollections,
+  workItems,
+  workView,
+  type WorkItem,
+} from "./work";
 
 /** Every string a value holds, however deep. */
 function strings(v: unknown): string[] {
@@ -77,5 +93,48 @@ describe("no AI or stock photo on real work (D106)", () => {
   });
   it("named cases use only their own curated photos", () => {
     for (const w of workItems) for (const p of w.named.photos) expect(p, w.key).toMatch(/^\/images\/work\//);
+  });
+});
+
+describe("Work collections: Rand's own photos (Task 15, D164)", () => {
+  it("every picture a Work page shows is NO TIME's own: rand-profile or rand", () => {
+    const ids = [...workItems.map((w) => w.cover), ...workCollections.flatMap((c) => c.photos)];
+    for (const id of ids) expect(["rand-profile", "rand"], id).toContain(mediaAll(id)?.source);
+  });
+
+  it("a collection shows its visible photos in order, and hides when fewer than four remain", () => {
+    for (const c of workCollections) {
+      expect(c.photos.length, c.slug).toBeGreaterThanOrEqual(COLLECTION_MIN_PHOTOS);
+      expect(collectionPhotos(c)?.map((m) => m.id), c.slug).toEqual(c.photos);
+    }
+    const gifts = workCollections.find((c) => c.photos.length === COLLECTION_MIN_PHOTOS)!;
+    const hide = [gifts.photos[1]];
+    expect(collectionPhotos(gifts, (id) => pick(MEDIA, id, { hide }))).toBeUndefined();
+    const big = workCollections.find((c) => c.photos.length > COLLECTION_MIN_PHOTOS)!;
+    const shown = collectionPhotos(big, (id) => pick(MEDIA, id, { hide: [big.photos[0]] }))!;
+    expect(shown.map((m) => m.id)).toEqual(big.photos.slice(1));
+    expect(visibleCollections((id) => pick(MEDIA, id, { hide })).map((c) => c.slug)).not.toContain(gifts.slug);
+  });
+
+  it("collections never name a client, and every string is written in both languages", () => {
+    for (const c of workCollections) {
+      const text = strings([c.label, c.summary]).join(" ‖ ").toLowerCase();
+      for (const name of CLIENT_NAMES) expect(text, `${c.slug} mentions ${name}`).not.toContain(name.toLowerCase());
+      for (const l of [c.label, c.summary]) expect(l.en.trim() && l.ar.trim(), c.slug).toBeTruthy();
+    }
+  });
+
+  it("cases and collections share one URL space, and together they bring the filter row back", () => {
+    const cards = workCards();
+    const slugs = cards.map((c) => c.slug);
+    expect(new Set(slugs).size).toBe(slugs.length);
+    for (const c of workCollections) {
+      expect(c.slug).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);
+      expect(getCollectionBySlug(c.slug)).toBe(c);
+      expect(getWorkBySlug(c.slug)).toBeUndefined();
+    }
+    expect(cards.map((c) => c.kind)).toEqual([...workItems.map(() => "case"), ...workCollections.map(() => "collection")]);
+    expect(cards.every((c) => c.cover)).toBe(true);
+    expect(showWorkFilters(cards.length)).toBe(true);
   });
 });

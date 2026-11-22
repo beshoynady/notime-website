@@ -263,8 +263,8 @@ export const imageSlots: ImageSlot[] = [
       ar: "منضدة تقديم في مطعم وقت الخدمة، أضواء دافئة وأطباق في تركيز ناعم.",
     },
   },
-  // Work cards: no slot. Anonymised cases show a drawing of the work (CaseVisual, D106), never a
-  // stand-in photo.
+  // Work cards: no slot. A case shows its own cover photo and a collection Rand's own photos (media.ts,
+  // D164), never a stand-in photo (D106).
   // Real screenshot of this site (Software & Digital proof strip): NO TIME's own work, no client.
   {
     id: "notime-website-home-en",

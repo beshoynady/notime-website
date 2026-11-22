@@ -8,12 +8,13 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { ButtonLink } from "@/components/ui/button";
 import { SITE_URL } from "@/config/site";
 import { BREADCRUMB_LABELS, categoryHref, getCategory, getServices, serviceHref, workHref, WORK_INDEX_HREF, type Locale } from "@/content";
+import { media } from "@/content/media";
 import { RELATED_WORK_COPY } from "@/content/related-work";
 import { nextWork, workView, type WorkItem } from "@/content/work";
 import { Link } from "@/i18n/navigation";
 import { trailJsonLd, workCaseJsonLd } from "@/lib/jsonld";
 import { PAGE_REF } from "@/lib/review";
-import "@/components/motion/duotone.css";
+import { CopyLink } from "./copy-link";
 import "./work.css";
 
 /** The section menu appears only when the case has this many sections (F1); fewer read at a glance. */
@@ -26,8 +27,9 @@ const TOC_MIN = 4;
  * approves, and the story is written without names, so it reads true either way.
  */
 export async function WorkCase({ item, locale }: { item: WorkItem; locale: Locale }) {
-  const [t, tw, tm] = await Promise.all([getTranslations("workCase"), getTranslations("work"), getTranslations("markets")]);
+  const [t, tw, tm, tl] = await Promise.all([getTranslations("workCase"), getTranslations("work"), getTranslations("markets"), getTranslations("copyLink")]);
   const view = workView(item);
+  const cover = media(item.cover);
   const next = workView(nextWork(item));
   const { story } = item;
   const path = workHref(item.slug);
@@ -68,9 +70,12 @@ export async function WorkCase({ item, locale }: { item: WorkItem; locale: Local
             {view.label[locale]}
           </h1>
           <p className="wc-summary text-lead">{view.summary[locale]}</p>
-          <div className="wc-media">
-            <CaseMedia view={view} locale={locale} sizes="(min-width: 1280px) 1232px, 100vw" />
-          </div>
+          <CopyLink labels={{ copy: tl("copy"), copied: tl("copied"), failed: tl("failed") }} />
+          {cover && (
+            <div className="wc-media">
+              <CaseMedia cover={cover} locale={locale} sizes="(min-width: 1280px) 1232px, 100vw" />
+            </div>
+          )}
           <dl className="wc-facts" aria-label={t("factsLabel")}>
             <div className="wc-fact">
               <dt className="text-eyebrow">{t("client")}</dt>
