@@ -114,7 +114,7 @@ export const SERVICE_HOOKS: Record<string, Localized<string>> = {
   "packaging-design": {
     // deck (boxes, award and gift-set packaging, dielines)
     en: "The box is the first thing they open, so we design it to feel like the brand.",
-    ar: "العلبة أول ما يفتحه ضيوفكم، فنصمّمها لتحمل إحساس العلامة.",
+    ar: "العلبة أول ما يفتحه ضيوفكم، فنصمّمها لتحمل إحساس العلامة التجارية.",
   },
   "corporate-gifts": {
     // profile (gift sets; screen printing, UV, foiling, debossing, laser engraving)

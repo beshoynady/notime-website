@@ -29,7 +29,7 @@ export const categories: Category[] = [
     faq: [
       {
         q: { en: "Which events do you run?", ar: "ما أنواع الفعاليات التي تنظّمونها؟" },
-        a: { en: "Conferences and summits, exhibitions, product launches and brand activations, galas, weddings and private celebrations, and ceremonies and award nights, for companies, government entities and private clients.", ar: "مؤتمرات وقمم، ومعارض، وإطلاق منتجات وتفعيل علامات تجارية، وحفلات رسمية وأعراس ومناسبات خاصة، وحفلات تكريم وليالي جوائز. نعمل للشركات والجهات الحكومية والأفراد." },
+        a: { en: "Conferences and summits, exhibitions, product launches and brand activations, galas, weddings and private celebrations, and ceremonies and award nights, for companies, government entities and private clients.", ar: "مؤتمرات وقمم، ومعارض، وإطلاق منتجات وتفعيل علامات تجارية، وحفلات رسمية وأعراس ومناسبات خاصة، وحفلات تكريم وتوزيع جوائز. نعمل للشركات والجهات الحكومية والأفراد." },
       },
       {
         q: { en: "Can one team handle the décor, the catering and the stage?", ar: "هل يتولى فريق واحد الديكور والضيافة والمسرح؟" },
@@ -123,7 +123,7 @@ export const categories: Category[] = [
     image: "cat-marketing-brand-4x5",
     photo: "uae-pro-league-3",
     theme: "editorial",
-    intro: { en: "Brand strategy and identity, social media, search, PR and paid media, planned together so the brand speaks with one voice. We publish in Arabic and English, measure what runs, and report on it.", ar: "استراتيجية العلامة وهويتها، ووسائل التواصل الاجتماعي، ومحركات البحث، والعلاقات العامة، والإعلانات المدفوعة، في خطة واحدة تتحدث فيها العلامة بصوت واحد. ننشر بالعربية والإنجليزية، ونقيس أداء كل ما يُنشر، ونقدّم عنه تقارير واضحة." },
+    intro: { en: "Brand strategy and identity, social media, search, PR and paid media, planned together so the brand speaks with one voice. We publish in Arabic and English, measure what runs, and report on it.", ar: "استراتيجية العلامة التجارية وهويتها، ووسائل التواصل الاجتماعي، ومحركات البحث، والعلاقات العامة، والإعلانات المدفوعة، في خطة واحدة تتحدث فيها العلامة بصوت واحد. ننشر بالعربية والإنجليزية، ونقيس أداء كل ما يُنشر، ونقدّم عنه تقارير واضحة." },
     // Copy deck draft for Rand's review (v1 decks task) + the D78 FAQ fills; clear fixes applied.
     faq: [
       {

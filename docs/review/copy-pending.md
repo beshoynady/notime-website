@@ -208,7 +208,7 @@ New copy written for the photo scenes (`docs/content/visual-stories.md`). None s
 
 ## Arabic for the UAE market (D163), for Rand
 
-The owner's rule of 2026-11-22: Arabic first, tuned to the UAE market (`copy-voice-reference.md` §8). These lines changed wording only; every meaning and fact is as before, and the English needed no change unless a row says so. **Rand reviews each line.** Running count: **15** lines.
+The owner's rule of 2026-11-22: Arabic first, tuned to the UAE market (`copy-voice-reference.md` §8). These lines changed wording only; every meaning and fact is as before, and the English needed no change unless a row says so. **Rand reviews each line.** Running count: **29** lines changed (U1–U30; U24 proposed only). Not touched: ⚑ lines that the rule would also change (`categories[events-hospitality].faq[4].a` «ليالي الجوائز», `categories[production-print-gifts].faq[1].a` and `services[stand-fabrication-signage].summary` «بهوية العلامة»): they wait for Rand with their ⚑.
 
 | # | Key | Was (AR) | Now (AR) | Why |
 |---|---|---|---|---|
@@ -227,5 +227,20 @@ The owner's rule of 2026-11-22: Arabic first, tuned to the UAE market (`copy-voi
 | U13 | `m:workIndex.heading` | أعمال لجهات وطنية، مشروعًا بعد مشروع. | أعمال نفّذناها، نعرضها مشروعًا بعد مشروع. | The list now includes private celebrations, so «لجهات وطنية» no longer covers it. English: "Work we've done, shown project by project." |
 | U14 | `m:workIndex.metaTitle` | أعمالنا: فعاليات وأجنحة وحلول رقمية | أعمالنا: فعاليات وأجنحة وضيافة وهدايا | Work shows no digital project; it shows hospitality and gifts. English updated. |
 | U15 | `m:linksPage.work.note` | أجنحة معارض، ليالي تكريم، منصّات رقمية | أجنحة معارض، وحفلات تكريم، وقاعات جهّزناها | Same term; what Work shows. English updated. |
+| U16 | `c:services:POINTS[conferences-summits][4]` | حفلات التكريم وليالي الجوائز | حفلات التكريم وتوزيع الجوائز | «حفل توزيع الجوائز» is the UAE phrase; «ليالي» read as Levant/Egypt. |
+| U17 | `c:categories:categories[events-hospitality].faq[0].a` | …وحفلات تكريم وليالي جوائز. | …وحفلات تكريم وتوزيع جوائز. | Same as U16. |
+| U18 | `c:services:POINTS[product-launches-activations][1]` | تفعيل العلامات في المراكز التجارية والقاعات | تفعيل العلامات التجارية في مراكز التسوق والقاعات | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. «مراكز التسوق» avoids «التجارية» twice. |
+| U19 | `c:services:POINTS[corporate-gifts][1]` | زجاجات بهوية العلامة | زجاجات بهوية العلامة التجارية | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U20 | `c:services:POINTS[branding-identity][0]` | استراتيجية العلامة | استراتيجية العلامة التجارية | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U21 | `c:services:POINTS[stand-fabrication-signage][3]` | …والمساحات بهوية العلامة | …والمساحات بهوية العلامة التجارية | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U22 | `c:services:services[ai-content-creation].summary` | …بتوجيه فني يناسب العلامة. | …بتوجيه فني يناسب العلامة التجارية. | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U23 | `c:services:services[packaging-design].summary` | علب وتغليف تُفتح كأنها جزء من العلامة. | علب وتغليف تُفتح كأنها جزء من العلامة التجارية. | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U24 | `c:services:services[branded-merchandise].title` | منتجات بهوية العلامة | (unchanged) | Proposed «…العلامة التجارية», not applied: service titles are the approved list (`docs/content/services-list.md`). Rand decides. |
+| U25 | `c:service-hooks:packaging-design` | …فنصمّمها لتحمل إحساس العلامة. | …فنصمّمها لتحمل إحساس العلامة التجارية. | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U26 | `c:services:services[branding-identity].summary` | استراتيجية العلامة، والتسمية، … | استراتيجية العلامة التجارية، والتسمية، … | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U27 | `c:categories:categories[marketing-brand].intro` | استراتيجية العلامة وهويتها، … تتحدث فيها العلامة بصوت واحد. | استراتيجية العلامة التجارية وهويتها، … تتحدث فيها العلامة بصوت واحد. | First mention takes the full term; the second refers back to it. |
+| U28 | `m:scenes.marketing.s1` | تبدأ العلامة من صفحة بيضاء. | تبدأ العلامة التجارية من صفحة بيضاء. | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U29 | `m:styleguide.colour.copy` / `.copied` / `.selected` (the colour lab) | انسخ {hex} / تم نسخ {hex} / …انسخه… | انسخوا {hex} / نُسخ {hex} / …انسخوه… | Plural address; «تم + مصدر» avoided. |
+| U30 | `m:styleguide.motion.demos.magneticButton` (the motion lab) | خطط لفعاليتك | خطّطوا لفعاليتكم | Plural address, as the site's own button «خطّطوا لفعاليتكم معنا». |
 
 New Work copy written Arabic first (D164), for Rand: the four collections' titles and summaries (`src/content/work.ts`, `workCollections`), and `copyLink.*` and `workCollection.*` in `src/messages/ar.json`.
