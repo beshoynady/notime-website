@@ -15,6 +15,8 @@ export const GALLERIES: Record<string, string[]> = {
   // section's photo), and the rooms the rig in Set & stage design turned into.
   photography: ["catering-8", "catering-9", "catering-5", "catering-3"],
   "set-stage-design": ["private-celebrations-1", "private-celebrations-7", "heritage-5"],
+  // Print (D160): two stands NO TIME built (⚑ client-visible; Smith Gulf's file is small, a tile only).
+  "stand-fabrication-signage": ["sandoz-1", "smith-gulf-1"],
 };
 
 /** The ids a page shows: the visible ones in order, or none when fewer than two remain. */

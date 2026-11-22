@@ -135,7 +135,7 @@ const SIGNATURE_MODULES = {
   "content-strategy": undefined,
   pr: undefined,
   "paid-media": "campaign-funnel",
-  printing: "human-scale",
+  printing: undefined,
   fabrication: "build-layers",
   packaging: "unboxing",
   gifts: "gift-configurator",

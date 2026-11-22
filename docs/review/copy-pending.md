@@ -186,3 +186,8 @@ New copy written for the photo scenes (`docs/content/visual-stories.md`). None s
 | `media:mb-content` alt | (new) | (new) | A planner sorting sticky notes on a dark studio wall. | شخص يرتّب أوراقًا لاصقة على جدار داكن في استوديو. | Stock, Content strategy (D159). |
 | `media:mb-pr` alt | (new) | (new) | Folded newspapers and magazines on a wooden table by a window. | صحف ومجلات مطويّة على طاولة خشبية بجانب نافذة. | Stock, PR (D159). |
 | `media:mb-paid` alt | (new) | (new) | Hands scrolling a social feed on a phone at a desk. | يدان تتصفّحان منشورات على هاتف فوق مكتب. | Stock, Paid media (D159). |
+| `m:scenes.print.s2` | Measured, then cut. | نقيس أولًا، ثم نقصّ. | (removed) | (removed) | The opening's beats are photographs now (D160); the drawn press sheet went with it. |
+| `media:uae-pro-league-7` alt | (new) | (new) | A black leather-finish gift box with a league's awards emblem in gold. | علبة هدايا سوداء بلمسة جلدية، عليها شعار حفل جوائز أحد الدوريات بالذهبي. | The Packaging section's photo (D160). |
+| `media:smith-gulf-1` alt | (new) | (new) | An exhibition stand with orange frames, built for a trade show. | جناح معرض بإطارات برتقالية، صُنع لأحد المعارض التجارية. | The Fabrication strip (D160). |
+| `media:pg-printing` alt | (new) | (new) | A large printed banner hanging in a bright hall. | لافتة مطبوعة كبيرة معلّقة في قاعة مضيئة. | Stock, Printing (D160). |
+| `media:pg-fabrication` alt | (new) | (new) | A carpentry workshop with timber boards, a mitre saw and tools. | ورشة نجارة فيها ألواح خشب ومنشار وأدوات. | Stock, Fabrication (D160). |

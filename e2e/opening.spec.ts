@@ -147,10 +147,8 @@ for (const slug of SCENE_CATEGORIES) {
     test(`${locale}/${slug}: the LCP is the hero's text or an eager, high-priority hero image`, async ({ page }) => {
       await gotoReady(page, `/${locale}/services/${slug}`);
       const lcp = await heroLcp(page);
-      // The Workshop's phone still has no image file: its largest paint is an inline drawing
-      // (no request), reported to the controller as the one exception to the ruling.
-      const allowed = slug === "production-print-gifts" ? ["h1", "lead", "image", "drawing"] : ["h1", "lead", "image"];
-      expect(allowed, lcp.label).toContain(lcp.kind);
+      // Every opening is photographs now (D160 took the Workshop's last drawing): no exception.
+      expect(["h1", "lead", "image"], lcp.label).toContain(lcp.kind);
       // Every hero image that shows at this width with high priority is eager (the LCP candidate).
       const candidates = await hero(page)
         .locator('img[fetchpriority="high"]')

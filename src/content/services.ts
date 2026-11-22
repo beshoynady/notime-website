@@ -167,7 +167,7 @@ const PAGE: Record<string, { anchor: string; module?: ModuleKey; quoteType?: Quo
   "content-strategy": { anchor: "content-strategy" },
   "public-relations": { anchor: "pr" },
   "paid-media-planning": { anchor: "paid-media", module: "campaign-funnel" },
-  "commercial-large-format-printing": { anchor: "printing", module: "human-scale" },
+  "commercial-large-format-printing": { anchor: "printing" },
   "stand-fabrication-signage": { anchor: "fabrication", module: "build-layers" },
   "packaging-design": { anchor: "packaging", module: "unboxing" },
   "corporate-gifts": { anchor: "gifts", module: "gift-configurator" },

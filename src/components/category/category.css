@@ -476,12 +476,6 @@ html[data-header-hidden] .svc-index {
    deep-linked section then moves it by a few pixels at most. Measured per locale on the
    production build at 390 and 1440 (scripts/anchor-shift.mjs, M1), minus 4 px so a module is
    never shorter than its slot at those widths. Re-measure when a module's layout changes. */
-html[lang="en"] .svc-module[data-module="human-scale"] {
-  min-block-size: 462px;
-}
-html[lang="ar"] .svc-module[data-module="human-scale"] {
-  min-block-size: 468px;
-}
 html[lang="en"] .svc-module[data-module="print-order"] {
   min-block-size: 589px;
 }
@@ -489,12 +483,6 @@ html[lang="ar"] .svc-module[data-module="print-order"] {
   min-block-size: 525px;
 }
 @media (min-width: 900px) {
-  html[lang="en"] .svc-module[data-module="human-scale"] {
-    min-block-size: 599px;
-  }
-  html[lang="ar"] .svc-module[data-module="human-scale"] {
-    min-block-size: 579px;
-  }
   html[lang="en"] .svc-module[data-module="print-order"] {
     min-block-size: 312px;
   }

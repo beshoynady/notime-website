@@ -59,4 +59,19 @@ describe("service visuals (D100)", () => {
       }
     }
   });
+  it("Print: every section but ordering is a photograph, NO TIME's own pieces where they exist (D160)", () => {
+    const want = {
+      "commercial-large-format-printing": "stock",
+      "stand-fabrication-signage": "stock",
+      "packaging-design": "rand-profile",
+      "corporate-gifts": "rand-profile",
+      "branded-merchandise": "rand-profile",
+    };
+    for (const [slug, source] of Object.entries(want)) {
+      const v = SERVICE_VISUALS[slug];
+      expect(v?.kind, slug).toBe("media");
+      if (v?.kind === "media") expect(media(v.id)?.source, slug).toBe(source);
+    }
+    expect(SERVICE_VISUALS["print-ordering"]).toBeUndefined();
+  });
 });

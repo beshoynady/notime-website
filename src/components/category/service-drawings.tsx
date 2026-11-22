@@ -7,7 +7,7 @@ import type { DrawingKey } from "@/content/service-visuals";
  * theme's rule colour and `.tint` fills at low opacity. Decorative: the section's H2 names it.
  */
 const DRAWINGS: Record<DrawingKey, ReactNode> = {
-  // Stand fabrication: an exhibition stand, its layers pulled apart as built.
+  // An exhibition stand, its layers pulled apart as built (Work, until Task C3 gives it a photo).
   stand: (
     <>
       <path d="M120 270 L320 330 L540 260 L340 206 Z" />
@@ -20,20 +20,6 @@ const DRAWINGS: Record<DrawingKey, ReactNode> = {
       <path d="M340 188 V228" className="dim" />
       <line x1="420" y1="120" x2="420" y2="200" className="dim" />
       <line x1="460" y1="132" x2="460" y2="212" className="dim" />
-    </>
-  ),
-  // Packaging: a box's dieline, cut lines solid and folds dashed.
-  dieline: (
-    <>
-      <path d="M220 40 H420 V100 H520 V200 H420 V320 H220 V200 H120 V100 H220 Z" />
-      <path d="M220 100 H420 M220 200 H420 M220 100 V200 M420 100 V200" className="dim" strokeDasharray="6 6" />
-      <path d="M220 40 L236 20 H404 L420 40" />
-      <path d="M520 112 L540 124 V176 L520 188" />
-      <path d="M120 112 L100 124 V176 L120 188" />
-      <rect x="250" y="122" width="140" height="56" className="tint" />
-      <path d="M80 240 h40 M100 220 v40 M520 300 h40 M540 280 v40" className="dim" />
-      <circle cx="100" cy="240" r="8" className="dim" />
-      <circle cx="540" cy="300" r="8" className="dim" />
     </>
   ),
   // An award night (Work, D106): a stage under a lighting truss, three beams down onto the podium,
@@ -59,20 +45,6 @@ const DRAWINGS: Record<DrawingKey, ReactNode> = {
       {[312, 326, 340].map((y, r) => (
         <path key={y} d={`M${100 + r * 20} ${y} Q320 ${y + 14} ${540 - r * 20} ${y}`} className="dim" strokeDasharray="2 10" />
       ))}
-    </>
-  ),
-  // Merchandise: a tote, a tee and a mug, each with its logo zone marked.
-  merch: (
-    <>
-      <path d="M64 120 H204 L214 310 H54 Z" />
-      <path d="M100 120 C100 70 168 70 168 120" />
-      <rect x="104" y="190" width="60" height="44" className="tint" strokeDasharray="4 4" />
-      <path d="M250 96 L302 70 C316 92 364 92 378 70 L430 96 L410 150 L384 140 V316 H296 V140 L270 150 Z" />
-      <rect x="318" y="140" width="44" height="36" className="tint" strokeDasharray="4 4" />
-      <path d="M470 150 H570 V300 C570 316 470 316 470 300 Z" />
-      <path d="M570 180 C610 180 610 260 570 260" />
-      <rect x="496" y="196" width="48" height="40" className="tint" strokeDasharray="4 4" />
-      <line x1="40" y1="330" x2="600" y2="330" className="dim" />
     </>
   ),
 };

@@ -6,7 +6,7 @@ import type { Localized } from "./types";
  * scripts/grade.mjs), otherwise a small code-drawn composition (service-drawings.tsx). Static, no
  * interactivity. Remove a service's entry when its real module ships (service-visuals.test.ts).
  */
-export type DrawingKey = "stand" | "dieline" | "merch" | "stage";
+export type DrawingKey = "stand" | "stage";
 
 export type ServiceVisual =
   | { kind: "photo"; src: string; width: number; height: number; from: string; alt: Localized<string> }
@@ -14,7 +14,6 @@ export type ServiceVisual =
   | { kind: "media"; id: string }
   | { kind: "drawing"; drawing: DrawingKey };
 
-const draw = (drawing: DrawingKey): ServiceVisual => ({ kind: "drawing", drawing });
 const pic = (id: string): ServiceVisual => ({ kind: "media", id });
 
 export const SERVICE_VISUALS: Record<string, ServiceVisual> = {
@@ -56,20 +55,12 @@ export const SERVICE_VISUALS: Record<string, ServiceVisual> = {
   "public-relations": pic("mb-pr"),
   "paid-media-planning": pic("mb-paid"),
   // Production, Print & Gifts
-  "stand-fabrication-signage": draw("stand"),
-  "packaging-design": draw("dieline"),
-  "corporate-gifts": {
-    kind: "photo",
-    src: "/images/services/svc-corporate-gifts.webp",
-    width: 1280,
-    height: 719,
-    from: "gifts-1",
-    alt: {
-      en: "A Dubai skyline cut in gold-finished metal, made as a corporate gift.",
-      ar: "أفق دبي مقصوص من معدن بلمسة ذهبية، صُنع هديةً لإحدى الشركات.",
-    },
-  },
-  "branded-merchandise": draw("merch"),
+  // Production, Print & Gifts (D160): NO TIME's own pieces where they exist, stock otherwise.
+  "commercial-large-format-printing": pic("pg-printing"),
+  "stand-fabrication-signage": pic("pg-fabrication"),
+  "packaging-design": pic("uae-pro-league-7"),
+  "corporate-gifts": pic("uae-pro-league-5"),
+  "branded-merchandise": pic("gifts-2"),
 };
 
 export function serviceVisual(slug: string): ServiceVisual | undefined {

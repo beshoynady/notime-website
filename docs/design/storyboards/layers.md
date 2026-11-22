@@ -62,18 +62,7 @@
 
 ## IV · Production, Print & Gifts (grade: "Workshop", champagne paper, cocoa ink)
 
-| Slot | Scene · level | Aspect / size | Source | Prompt | BG removal | Depth | Alt |
-|---|---|---|---|---|---|---|---|
-| `pg-open-bench` | Opening · L0 | 16:9 + 9:16 | AI | House style. A dark walnut worktable seen from directly above, bare, warm side light, faint tool marks, nothing on it. | none | 0.15 | decorative |
-| `pg-open-paper` + `pg-open-ribbon` | Opening · L2 | from one 4:5 generation, two cutouts | AI | House style, flat lay from above. A small stack of ivory card stock, a sheet of grey board, and a spool of champagne satin ribbon, spaced apart, isolated, on a plain neutral warm-grey background. No text. | Canva remove-background, then split into two files | 1.0 / 1.2 | decorative |
-| `pg-open-box-base` + `pg-open-box-lid` | Opening · L1 | from one 4:5 generation, two cutouts | AI | House style. A rigid gift box in deep espresso with its matching lid held a little above it, straight-on view, isolated, on a plain neutral warm-grey background. No logos, text or emblems. | Canva remove-background; the lid is split from the base with a manual SVG mask | 0.5 | decorative |
-| `pg-open-gift` | Opening · L2 (desktop; D109) | 1034 × 616 trimmed | **Real**, `gifts-1` (p23-3, gold Dubai-skyline gift, 1280 × 719, A) | The finished gift arrives near the lens as the box closes (shot 4) and drifts faster than the rigs, ending clear of the service rail. Replaces the paper cutout as a layer (the slot stays documented). | rembg `isnet-general-use` with alpha matting; edges checked on espresso and champagne | 0.9 | evidence (alt) |
-
-**Totals:**
-- **Opening, mobile:** 3 layers, ≈ 270 KB.
-- **AI generations:** 4.
-- **Background removals:** 3, giving 4 cutouts.
-- **Real gift photos** (`gifts-1`, `gifts-2`) aren't used in the scene: one is a bookmark, the other a client mock-up pending OQ #17.
+**Superseded (D160, 2026-11-22):** the opening is in photographs and its layers live in the image registry (`src/content/media.ts`): `pg-open-materials` and `pg-open-press` (stock, `docs/content/recipes/print.json`) and NO TIME's `gifts-1` as the frame. No AI generation and no cutout (the `pg-open-gift` rembg cutout is removed). The drawn press sheet, board, dieline, box and ribbon are gone.
 
 ## III · Marketing & Brand (grade: "Editorial", ivory paper, espresso ink)
 

@@ -193,6 +193,14 @@ export const MEDIA: MediaEntry[] = [
     en: "A grid of posts designed for a football league: results, fixtures and registration.",
     ar: "شبكة منشورات صُمّمت لدوري لكرة القدم: نتائج ومواعيد وتسجيل.",
   }, "1:1 · the league's feed as published (players and fans far off)", clientVisible),
+  profile("uae-pro-league-7", "p24-1", 1008, 752, {
+    en: "A black leather-finish gift box with a league's awards emblem in gold.",
+    ar: "علبة هدايا سوداء بلمسة جلدية، عليها شعار حفل جوائز أحد الدوريات بالذهبي.",
+  }, "4:3 · the award box, cropped clear of the profile's baked-in badge and label", clientVisible),
+  profile("smith-gulf-1", "p21-1", 497, 373, {
+    en: "An exhibition stand with orange frames, built for a trade show.",
+    ar: "جناح معرض بإطارات برتقالية، صُنع لأحد المعارض التجارية.",
+  }, "4:3 · small (497px): a strip tile only; originals wanted (OQ #21)", clientVisible),
   profile("uae-pro-league-5", "p23-4", 1280, 882, {
     en: "A corporate gift set: notebook, pen and flask in the league's colours.",
     ar: "طقم هدايا للشركات: دفتر وقلم وقارورة بألوان الدوري.",
@@ -299,6 +307,21 @@ MEDIA.push(
     "16:9 · a phone in hand scrolling a feed at a desk", {
       grade: "editorial",
       alt: { en: "Hands scrolling a social feed on a phone at a desk.", ar: "يدان تتصفّحان منشورات على هاتف فوق مكتب." },
+    }),
+  // Production, Print & Gifts (D160): the workshop grade; no brand marks, no faces.
+  stock("pg-open-materials", "unsplash:0vvoSlCtWTg", "Debby Hudson", "https://unsplash.com/photos/0vvoSlCtWTg", 2400, 1350, null,
+    "16:9 · twine, ribbon spools and a kraft tag on a pale bench (NO TIME's own materials replace it)", { grade: "workshop" }),
+  stock("pg-open-press", "unsplash:KAO2-CRZXTE", "Geri Sakti", "https://unsplash.com/photos/KAO2-CRZXTE", 2400, 1350, [1080, 1920],
+    "16:9 + 9:16 · a large-format printer running sheets (NO TIME's print partner's floor replaces it)", { grade: "workshop" }),
+  stock("pg-printing", "unsplash:7l7DLynLVIY", "Scarbor Siu", "https://unsplash.com/photos/7l7DLynLVIY", 1600, 900, null,
+    "16:9 · a printed banner hung in a bright hall, no text", {
+      grade: "workshop",
+      alt: { en: "A large printed banner hanging in a bright hall.", ar: "لافتة مطبوعة كبيرة معلّقة في قاعة مضيئة." },
+    }),
+  stock("pg-fabrication", "unsplash:Onty3BSYdGU", "Brett Jordan", "https://unsplash.com/photos/Onty3BSYdGU", 1600, 900, null,
+    "16:9 · a carpentry workshop: timber, a saw and tools, no people", {
+      grade: "workshop",
+      alt: { en: "A carpentry workshop with timber boards, a mitre saw and tools.", ar: "ورشة نجارة فيها ألواح خشب ومنشار وأدوات." },
     }),
 );
 

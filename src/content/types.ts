@@ -73,7 +73,6 @@ export type ModuleKey =
   | "phone-feed"
   | "example-dashboard"
   | "campaign-funnel"
-  | "human-scale"
   | "build-layers"
   | "unboxing"
   | "gift-configurator"

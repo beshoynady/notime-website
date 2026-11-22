@@ -19,9 +19,13 @@ const RAW = path.join("public", "images", "work", "raw");
 const OUT = path.join("public", "images", "work");
 const MAX = 1600;
 
-/** slug -> raw files, in display order. Keep in sync with profile-inventory.md. */
+/** p24-1 cropped clear of the carousel badge ("2 of 3", top-left) and the "PU BOX" label (bottom-left), both baked in. */
+const CROP_AWARDS_BOX = { file: "p24-1.jpg", crop: { left: 262, top: 8, width: 1008, height: 752 } };
+
+/** slug -> raw files (or { file, crop }), in display order. Keep in sync with profile-inventory.md. */
 export const CURATED = {
-  "uae-pro-league": ["p5-1.jpg", "p5-3.jpg", "p13-3.jpg", "p13-4.jpg", "p23-4.jpg", "p13-1.jpg"],
+  "uae-pro-league": ["p5-1.jpg", "p5-3.jpg", "p13-3.jpg", "p13-4.jpg", "p23-4.jpg", "p13-1.jpg", CROP_AWARDS_BOX],
+  "smith-gulf": ["p21-1.jpg"],
   "egyptair-pavilion": ["p19-2.jpg"],
   // Ultimate Power Solution: every stand photo shows identifiable people (pending rights).
   sandoz: ["p8-1.jpg"],
@@ -34,11 +38,13 @@ export const CURATED = {
 for (const [slug, files] of Object.entries(CURATED)) {
   const dir = path.join(OUT, slug);
   mkdirSync(dir, { recursive: true });
-  for (const [i, file] of files.entries()) {
+  for (const [i, item] of files.entries()) {
+    const { file, crop } = typeof item === "string" ? { file: item } : item;
     const src = path.join(RAW, file);
     if (!existsSync(src)) throw new Error(`${src} missing: run scripts/extract-profile.mjs first`);
     const base = path.join(dir, `${slug}-${i + 1}`);
-    const img = sharp(src).rotate().resize(MAX, MAX, { fit: "inside", withoutEnlargement: true });
+    const base0 = sharp(src).rotate();
+    const img = (crop ? base0.extract(crop) : base0).resize(MAX, MAX, { fit: "inside", withoutEnlargement: true });
     const [avif, webp] = await Promise.all([
       img.clone().avif({ quality: 55, effort: 6 }).toFile(`${base}.avif`),
       img.clone().webp({ quality: 78 }).toFile(`${base}.webp`),

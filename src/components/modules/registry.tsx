@@ -44,5 +44,4 @@ const load = (importer: () => Promise<{ default: ComponentType<ModuleProps> }>) 
 export const MODULES: Partial<Record<ModuleKey, LazyExoticComponent<ComponentType<ModuleProps>>>> = {
   // Batch 1 (D83): the template-built categories' modules.
   "print-order": load(() => import("./print-order/print-order")),
-  "human-scale": load(() => import("./human-scale/human-scale")),
 };

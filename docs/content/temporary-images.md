@@ -26,7 +26,11 @@ Updated 2026-11-16. This list stays in the repo. The site itself never says how 
 | Marketing opening, the desk (D159) | `mb-open-desk` (media.ts) | Stock, Unsplash `8dgFq8Vbelo`, editorial grade, cropped past a printed box | **Yes** (a NO TIME desk) |
 | Marketing opening, the post · Social (D159) | `uae-pro-league-4`, `-6` (media.ts) ⚑ | Real profile posts | No |
 | Marketing · Branding, Digital, Content, PR, Paid (D159) | `mb-branding`, `mb-digital`, `mb-content`, `mb-pr`, `mb-paid` (media.ts) | Stock, Unsplash, editorial grade | **Yes** (NO TIME's own work) |
-| Every other scene layer (Events hall and majlis, Print bench, Software) | `src: null` | Nothing renders; the scene's code drawing is the visual | Real or graded files can be added later (`scenes/images.ts`) |
+| Print opening, the materials and the press (D160) | `pg-open-materials`, `pg-open-press` (media.ts) | Stock, Unsplash `0vvoSlCtWTg`, `KAO2-CRZXTE`, workshop grade | **Yes** (NO TIME's own floor) |
+| Print opening, the gift (D160) | `gifts-1` (media.ts) | Real profile photo | No |
+| Print · Printing, Fabrication (D160) | `pg-printing`, `pg-fabrication` (media.ts) | Stock, Unsplash, workshop grade | **Yes** (NO TIME's own prints and builds) |
+| Print · Packaging, Gifts, Merchandise; Fabrication strip (D160) | `uae-pro-league-7`, `uae-pro-league-5`, `gifts-2`; `sandoz-1`, `smith-gulf-1` (media.ts) ⚑ | Real profile photos | No (originals wanted for `smith-gulf-1`) |
+| Every other scene layer (Events hall and majlis, Software) | `src: null` | Nothing renders; the scene's code drawing is the visual | Real or graded files can be added later (`scenes/images.ts`) |
 | Home hero, category openings, service sections | none | Code-driven scenes and drawings (`ServiceDrawing`, the decorative patterns) | No |
 
 ## In the data, not rendered yet
