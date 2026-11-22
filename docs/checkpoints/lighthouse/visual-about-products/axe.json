@@ -1,0 +1,62 @@
+[
+  {
+    "path": "/en/about",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/about",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/about",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/about",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/products/minute-zero",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/products/minute-zero",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/products/minute-zero",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/products/minute-zero",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/products/peak-hour",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/products/peak-hour",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/products/peak-hour",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/products/peak-hour",
+    "width": 390,
+    "violations": []
+  }
+]

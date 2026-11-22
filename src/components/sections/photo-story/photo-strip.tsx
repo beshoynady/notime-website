@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import type { Locale, Localized } from "@/content";
-import { storyPhoto, type StoryPhotoKey } from "@/content/photo-stories";
-import { StoryImage } from "./story-image";
+import { storyBeats, type StoryPhotoKey } from "@/content/photo-stories";
+import { MediaImage } from "@/components/ui/media-image";
 import { PhotoStripMotion } from "./photo-strip-motion";
 import "./photo-strip.css";
 
@@ -32,9 +32,9 @@ export function PhotoStrip({
   locale: Locale;
 }) {
   const titleId = `${id}-title`;
-  const photos = frames.map((f) => ({ ...f, p: storyPhoto(f.photo) }));
+  const photos = storyBeats(frames).map(({ entry: p, ...f }) => ({ ...f, p }));
   const ratios = photos.reduce((sum, { p }) => sum + p.width / p.height, 0);
-  const style = { "--strip-r": ratios.toFixed(3), "--strip-n": frames.length } as CSSProperties;
+  const style = { "--strip-r": ratios.toFixed(3), "--strip-n": photos.length } as CSSProperties;
   return (
     <section className="pstrip" id={id} data-tone={tone} aria-labelledby={titleId} style={style}>
       <div className="pstrip-stage">
@@ -50,7 +50,7 @@ export function PhotoStrip({
             <li key={photo} className="pstrip-frame" style={{ "--ar": `${p.width} / ${p.height}` } as CSSProperties}>
               <figure>
                 <div className="pstrip-img">
-                  <StoryImage photo={p} locale={locale} sizes="(min-width: 900px) 46vh, 72vw" />
+                  <MediaImage entry={p} locale={locale} sizes="(min-width: 900px) 46vh, 72vw" />
                 </div>
                 <figcaption className="text-eyebrow">{caption[locale]}</figcaption>
               </figure>

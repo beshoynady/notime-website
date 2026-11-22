@@ -1,3 +1,4 @@
+import { media, type MediaEntry, type STORY_BASE } from "./media";
 import type { Localized } from "./types";
 
 /**
@@ -11,48 +12,17 @@ import type { Localized } from "./types";
  * - `ROOM_STORY` (About): split screen, the line pinned beside its photo, four beats of one evening;
  * - `STRIP` (home, Our work): a pinned horizontal strip, mirrored in Arabic.
  */
-export interface StoryPhoto {
-  /** File stem in public/images/stories/ (webp + avif). */
-  id: string;
-  /** Curated source (profile-inventory.md) and its raw file in the profile extract. */
-  from: string;
-  width: number;
-  height: number;
-  alt: Localized<string>;
-}
 
-const p = (id: string, from: string, width: number, height: number, alt: Localized<string>): StoryPhoto => ({ id, from, width, height, alt });
-
+/** A story's photos, by registry id (media.ts: the Evening-graded copies, STORY_BASE). */
 export const STORY_PHOTOS = {
-  rig: p("st-rig", "private-celebrations-8", 953, 715, {
-    en: "A ballroom stage with its truss going up before an event.",
-    ar: "مسرح قاعة احتفالات وهيكله المعدني قيد التركيب قبل الفعالية.",
-  }),
-  hall: p("st-hall", "private-celebrations-1", 1600, 1066, {
-    en: "A glass-roofed hall set with long candlelit tables under woven lanterns.",
-    ar: "قاعة بسقف زجاجي، بطاولات طويلة على ضوء الشموع تحت فوانيس منسوجة.",
-  }),
-  table: p("st-table", "catering-2", 1247, 703, {
-    en: "A long dining table laid with crystal, candles and low florals.",
-    ar: "طاولة عشاء طويلة بالكريستال والشموع وتنسيقات زهور منخفضة.",
-  }),
-  cart: p("st-cart", "heritage-4", 956, 1275, {
-    en: "A carved heritage cart with brass coffee pots and dates.",
-    ar: "عربة ضيافة تراثية منقوشة، عليها دلال نحاسية وتمر.",
-  }),
-  florals: p("st-florals", "private-celebrations-2", 859, 1290, {
-    en: "White roses and blue hydrangeas on a dressed table, lit by candles.",
-    ar: "ورود بيضاء وزهور كوبية زرقاء على طاولة مزيّنة، تضيئها الشموع.",
-  }),
-  buffet: p("st-buffet", "catering-1", 1408, 794, {
-    en: "A buffet styled with crystal and gold service.",
-    ar: "بوفيه منسّق بأوانٍ من الكريستال والذهبي.",
-  }),
-  tent: p("st-tent", "heritage-5", 891, 668, {
-    en: "A desert tent at night, its floor laid with carpets.",
-    ar: "خيمة في الصحراء ليلًا، أرضها مفروشة بالسجاد.",
-  }),
-} as const satisfies Record<string, StoryPhoto>;
+  rig: "st-rig",
+  hall: "st-hall",
+  table: "st-table",
+  cart: "st-cart",
+  florals: "st-florals",
+  buffet: "st-buffet",
+  tent: "st-tent",
+} as const satisfies Record<string, keyof typeof STORY_BASE>;
 
 export type StoryPhotoKey = keyof typeof STORY_PHOTOS;
 
@@ -116,5 +86,13 @@ export const STRIP = {
   ] satisfies { photo: StoryPhotoKey; caption: Localized<string> }[],
 } as const;
 
-export const storyPhoto = (key: StoryPhotoKey): StoryPhoto => STORY_PHOTOS[key];
-export const storySrc = (photo: StoryPhoto) => `/images/stories/${photo.id}.webp`;
+/**
+ * The items of a story or strip whose photo is shown, each with its registry entry; a hidden photo
+ * drops its item and the rest close up (fill or hide, D78). `lookup` is `media` (tests pass their own).
+ */
+export function storyBeats<T extends { photo: StoryPhotoKey }>(items: readonly T[], lookup: (id: string) => MediaEntry | undefined = media) {
+  return items.flatMap((item) => {
+    const entry = lookup(STORY_PHOTOS[item.photo]);
+    return entry ? [{ ...item, entry }] : [];
+  });
+}

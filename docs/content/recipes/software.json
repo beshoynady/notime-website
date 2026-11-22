@@ -5,5 +5,7 @@
   {"id": "sw-ecommerce", "src": "unsplash:MGaFENpDCsw", "crop": {"aspect": "4:3", "focus": [0.35, 0.6]}, "grade": "evening", "out": "public/images/stock/sw-ecommerce.webp", "maxWidth": 1400},
   {"id": "sw-ux", "src": "unsplash:sv8oOQaUb-o", "crop": {"aspect": "4:3", "focus": [0.5, 0.5]}, "grade": "evening", "out": "public/images/stock/sw-ux.webp", "maxWidth": 1400},
   {"id": "sw-ai", "src": "unsplash:26MJGnCM0Wc", "crop": {"aspect": "4:3", "focus": [0.5, 0.5]}, "grade": "evening", "out": "public/images/stock/sw-ai.webp", "maxWidth": 1400},
-  {"id": "sw-event-tech", "src": "unsplash:yz3N50D9uy4", "crop": {"aspect": "4:3", "focus": [0.72, 0.66], "scale": 0.7}, "grade": "evening", "out": "public/images/stock/sw-event-tech.webp", "maxWidth": 1400}
+  {"id": "sw-event-tech", "src": "unsplash:yz3N50D9uy4", "crop": {"aspect": "4:3", "focus": [0.72, 0.66], "scale": 0.7}, "grade": "evening", "out": "public/images/stock/sw-event-tech.webp", "maxWidth": 1400},
+  {"id": "pp-minute-zero", "src": "unsplash:MLLmIskI6LU", "crop": {"aspect": "3:2", "focus": [0.5, 0.7], "scale": 0.65}, "grade": "evening", "out": "public/images/stock/pp-minute-zero.webp", "maxWidth": 1600},
+  {"id": "pp-peak-hour", "src": "unsplash:boaDpmC-_Xo", "crop": {"aspect": "3:2", "focus": [0.55, 0.5]}, "grade": "evening", "out": "public/images/stock/pp-peak-hour.webp", "maxWidth": 1600}
 ]

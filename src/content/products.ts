@@ -11,10 +11,10 @@ export const products: Product[] = [
     slug: "qr-check-in",
     status: "comingSoon",
     name: { en: "Minute Zero", ar: "الدقيقة صفر" },
-    descriptor: { en: "QR event check-in", ar: "تسجيل دخول الفعاليات بالـ QR" },
+    descriptor: { en: "QR event check-in", ar: "تسجيل الحضور في الفعاليات برمز QR" },
     summary: {
       en: "Guests check in at the door with a QR code; the team sees arrivals as they happen.",
-      ar: "يسجّل الضيوف دخولهم عند الباب برمز QR، ويرى الفريق الحضور لحظة بلحظة.",
+      ar: "يسجّل الضيوف حضورهم عند الباب برمز QR، ويرى الفريق من وصل لحظة بلحظة.",
     },
     image: "product-qr-check-in-16x9",
   },

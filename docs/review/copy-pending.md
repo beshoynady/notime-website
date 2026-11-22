@@ -205,3 +205,18 @@ New copy written for the photo scenes (`docs/content/visual-stories.md`). None s
 | `media:sw-ux` alt | (new) | (new) | App wireframes sketched in pen on paper. | مخططات أولية لتطبيق مرسومة بالقلم على الورق. | Stock, UI/UX (D161). |
 | `media:sw-ai` alt | (new) | (new) | A workflow being mapped on a whiteboard with markers. | مسار عمل يُرسم على سبورة بيضاء بالأقلام. | Stock, AI consulting (D161). |
 | `media:sw-event-tech` alt | (new) | (new) | Hands using a rugged tablet on an event floor. | يدان تستخدمان جهازًا لوحيًا متينًا في أرض فعالية. | Stock, Event technology (D161). |
+
+## Arabic for the UAE market (D163), for Rand
+
+The owner's rule of 2026-11-22: Arabic first, tuned to the UAE market (`copy-voice-reference.md` §8). These lines changed wording only; every meaning and fact is as before, and the English needed no change unless a row says so. **Rand reviews each line.** Running count: **8** lines.
+
+| # | Key | Was (AR) | Now (AR) | Why |
+|---|---|---|---|---|
+| U1 | `m:aboutPage.title` | أفكار تُبنى حيث تلتقي العلامة بجمهورها. | أفكار نبنيها حيث تلتقي العلامة التجارية بجمهورها. | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as a mark or a grade. Active verb. |
+| U2 | `m:aboutPage.story2` | نبدأ من النقطة التي تلتقي فيها العلامة بجمهورها… | نبدأ من النقطة التي تلتقي فيها العلامة التجارية بجمهورها… | Same term. |
+| U3 | `m:about.statement` (Home and About) | نصنع الفكرة في النقطة التي تلتقي فيها العلامة بجمهورها… | نصنع الفكرة في النقطة التي تلتقي فيها العلامة التجارية بجمهورها… | Same term. |
+| U4 | `m:aboutPage.story3` | …ومجلس تراثي يستقبل الضيوف، وليالي تكريم لدوري كرة قدم. | …ومجلس تراثي يستقبل الضيوف، وحفلات تكريم لدوري كرة قدم. | «حفل تكريم» is the UAE events word. |
+| U5 | `m:productPage.registerBody` | …اتركوا بياناتكم، وسنكتب لكم حين يصبح جاهزًا. | …اتركوا بياناتكم، وسنراسلكم حين يصبح جاهزًا. | Business register. |
+| U6 | `c:products:minute-zero.descriptor` | تسجيل دخول الفعاليات بالـ QR | تسجيل الحضور في الفعاليات برمز QR | Events say «تسجيل الحضور»; «بالـ QR» was a literal shape. Shows in menus, titles and schema. |
+| U7 | `c:products:minute-zero.summary` | يسجّل الضيوف دخولهم عند الباب برمز QR، ويرى الفريق الحضور لحظة بلحظة. | يسجّل الضيوف حضورهم عند الباب برمز QR، ويرى الفريق من وصل لحظة بلحظة. | Same term; «من وصل» carries "arrivals" without repeating «الحضور». |
+| U8 | `c:product-pages:minute-zero.features[0].line` | يصل كل ضيف رمزه الخاص مع الدعوة. | يتسلّم كل ضيف رمزه الخاص مع الدعوة. | «يصل كلَّ ضيفٍ رمزُه» reads backwards at first glance. |

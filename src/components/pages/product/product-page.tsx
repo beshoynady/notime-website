@@ -6,8 +6,10 @@ import { SectionRef } from "@/components/review/section-ref";
 import { JsonLd } from "@/components/seo/json-ld";
 import { MinuteZeroScreens, PeakHourScreens } from "@/components/software/product-screens";
 import { ButtonArrow, buttonVariants } from "@/components/ui/button";
+import { MediaImage } from "@/components/ui/media-image";
 import { SITE_URL } from "@/config/site";
 import { categoryHref, getCategory, getProducts, productHref, type Locale } from "@/content";
+import { media } from "@/content/media";
 import { productPages, type ProductId } from "@/content/product-pages";
 import { productsCopy } from "@/content/software/page";
 import { Link } from "@/i18n/navigation";
@@ -41,6 +43,7 @@ export async function ProductPage({ id, locale }: { id: ProductId; locale: Local
   const other = productFor(page.other);
   const software = getCategory("software-digital")!;
   const hook = id === "minute-zero" ? t("hookMinuteZero") : t("hookPeakHour");
+  const photo = media(page.photo);
 
   return (
     <main id="main" data-theme={software.theme} className="sw-page pp">
@@ -90,8 +93,21 @@ export async function ProductPage({ id, locale }: { id: ProductId; locale: Local
         </div>
       </section>
 
-      <section data-tone="light" aria-labelledby="pp-problem" className="sw-section pp-problem">
+      {/* The problem over the place it happens (Task 14, D162): the door, the pass at rush. Below the
+          first screen, so the photo never competes with the text for LCP; decorative, lazy. */}
+      <section
+        data-tone={photo ? "dark" : "light"}
+        data-grain={photo ? "off" : undefined}
+        data-photo={photo ? "" : undefined}
+        aria-labelledby="pp-problem"
+        className="sw-section pp-problem"
+      >
         <SectionRef id={PAGE_REF.productProblem} />
+        {photo && (
+          <div className="pp-problem-photo">
+            <MediaImage entry={photo} locale={locale} decorative sizes="100vw" />
+          </div>
+        )}
         <div className="frame pp-split">
           <h2 id="pp-problem" className="sw-mini-label">
             {t("problemTitle")}

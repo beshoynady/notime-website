@@ -355,7 +355,33 @@ MEDIA.push(
     "4:3 · hands on a rugged tablet on an event floor, no faces", {
       alt: { en: "Hands using a rugged tablet on an event floor.", ar: "يدان تستخدمان جهازًا لوحيًا متينًا في أرض فعالية." },
     }),
+  // The product pages (Task 14, D162): the place each problem happens, behind the problem line.
+  // Decorative (the screens and the copy say what it is); no faces, no brand marks.
+  stock("pp-minute-zero", "unsplash:MLLmIskI6LU", "Joshua Ferrer", "https://unsplash.com/photos/MLLmIskI6LU", 1600, 1066, null,
+    "3:2 · the way in to a venue at night, lit path to an open door, no faces, no signs"),
+  stock("pp-peak-hour", "unsplash:boaDpmC-_Xo", "Fabrizio Magoni", "https://unsplash.com/photos/boaDpmC-_Xo", 1600, 1067, null,
+    "3:2 · a kitchen pass at service, hands plating, no faces"),
 );
+
+/**
+ * Photo stories (D109; About's evening, Home's strip): Evening-graded copies of profile photos
+ * (public/images/stories/, scripts/grade-stories.mjs). Each copies its profile entry (alt, size,
+ * source, `hidden`), so hiding the original hides the copy too.
+ */
+export const STORY_BASE = {
+  "st-rig": "private-celebrations-8",
+  "st-hall": "private-celebrations-1",
+  "st-table": "catering-2",
+  "st-cart": "heritage-4",
+  "st-florals": "private-celebrations-2",
+  "st-buffet": "catering-1",
+  "st-tent": "heritage-5",
+} as const;
+for (const [id, base] of Object.entries(STORY_BASE)) {
+  const b = MEDIA.find((e) => e.id === base);
+  if (!b) throw new Error(`media: story ${id} has no profile entry ${base}`);
+  MEDIA.push({ ...b, id, file: `/images/stories/${id}.webp`, grade: "evening", spec: `${b.spec} · the Evening-graded copy for photo stories` });
+}
 
 /** Ids hidden by the environment (tests: NEXT_PUBLIC_MEDIA_HIDE=a,b). */
 const ENV_HIDE = (process.env.NEXT_PUBLIC_MEDIA_HIDE ?? "").split(",").filter(Boolean);
