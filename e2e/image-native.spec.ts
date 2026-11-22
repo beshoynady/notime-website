@@ -1,12 +1,17 @@
 import { expect, test } from "@playwright/test";
 import { imageSlots } from "../src/content/images";
+import { MEDIA } from "../src/content/media";
 import { gotoReady } from "./helpers";
 
 // D51: no screen requests more pixels than an image file has. A 3× screen at desktop width is
 // the worst case for `sizes`; the capped srcset must still stop at the slot's native width.
 test.use({ deviceScaleFactor: 3 });
 
-const nativeBySrc = new Map<string, number>(imageSlots.filter((s) => s.src).map((s) => [s.src!, s.width!]));
+// The older AI slots and the registry's photos (D161), each 9:16 crop under its own file.
+const nativeBySrc = new Map<string, number>([
+  ...imageSlots.filter((s) => s.src).map((s) => [s.src!, s.width!] as const),
+  ...MEDIA.flatMap((m) => [[m.file, m.width] as const, ...(m.mobile ? [[m.mobile.file, m.mobile.width] as const] : [])]),
+]);
 
 for (const locale of ["en", "ar"] as const) {
   test(`images never exceed their native width (${locale})`, async ({ page }) => {
