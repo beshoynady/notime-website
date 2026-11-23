@@ -1,0 +1,10 @@
+[
+ {
+  "id": "ev-stage-beams",
+  "src": "assets-inbox/unsplash/sol7vhs8Pdg.jpg",
+  "crop": { "aspect": "16:9", "focus": [0.5, 0.42] },
+  "grade": "evening",
+  "mobile": { "aspect": "9:16", "focus": [0.6, 0.45], "scale": 0.5 },
+  "out": "public/images/stock/ev-stage-beams.webp"
+ }
+]

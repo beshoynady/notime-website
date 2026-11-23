@@ -23,6 +23,7 @@ Updated 2026-11-16. This list stays in the repo. The site itself never says how 
 | Creative opening, the frame (D171) | `cp-frame` (media.ts) | Stock, Pexels 6584788, studio grade | **Yes** |
 | Creative opening, the studio dark and lit (D158) | `cp-open-dark`, `cp-open-lit` (media.ts) | Stock, Unsplash `LYcuJG5LyU8`, studio grade | **Yes** (a NO TIME set) |
 | Creative · Equipment rental (D158) | `cp-rental-lights` (media.ts) | Stock, Unsplash `S6OSYUlvJxo`, studio grade | **Yes** (NO TIME's own kit) |
+| Events · Stage, first beams (D172) | `ev-stage-beams` (media.ts) | Stock: Unsplash (Kevin Yudhistira Alloni), truss and beams, no people, evening grade | **Yes** (Rand's rig at first light) |
 | Creative · Video, Motion, AI, Photography, Set and stage (D171) | `cp-video`, `cp-motion`, `cp-ai`, `cp-photography`, `cp-set-stage` (media.ts) | Stock: Unsplash (video, motion), Pexels (the rest), studio grade | **Yes** (Rand's footage and files) |
 | Work cards, case pages, related work (anonymised cases) | none | Code drawing `CaseVisual`: airline pavilion = `stand`, league = `stage` | Until the client approves the name and photos |
 | Named cases (private celebrations, catering, heritage, gifts) | the project's photos | Real profile photos under `public/images/work/` | No |
