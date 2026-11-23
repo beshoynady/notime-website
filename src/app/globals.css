@@ -2,6 +2,7 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "../components/sections/hero/hero.css";
+@import "../components/sections/hero-options/hero-options.css";
 
 /* ==========================================================================
    NO TIME — design tokens

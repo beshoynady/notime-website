@@ -1,0 +1,469 @@
+/* Hero options A, B, C (branch hero-options, prototypes for the owner's choice; not merged).
+   Brand tokens only; logical properties only; the resting state is the end state (reduced motion). */
+
+/* ── Shared ─────────────────────────────────────────────────────────────── */
+.hx {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  background: var(--color-espresso);
+  color: var(--color-ivory);
+}
+.hx-copy {
+  position: relative;
+  z-index: 4;
+}
+.hx-eyebrow {
+  margin: 0 0 1.4rem;
+}
+.hx-title {
+  margin: 0;
+  font-family: var(--font-hero);
+  font-size: var(--hx-size, clamp(2.8rem, 8.4vw, 8.5rem));
+  font-weight: 200;
+  line-height: 0.94;
+  text-transform: uppercase;
+  color: var(--color-ivory);
+}
+.hx-title:lang(ar) {
+  font-family: var(--font-hero-ar);
+  line-height: 1.18;
+}
+.hx-line {
+  display: block;
+}
+.hx-line b {
+  font-weight: 600;
+  color: var(--color-champagne);
+}
+.hx-lead {
+  max-width: 36ch;
+  margin: 0;
+  color: color-mix(in srgb, var(--color-ivory) 88%, transparent);
+}
+.hx-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* The dial: engraved lines, champagne hands. */
+.hx-dial {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  overflow: visible;
+}
+.hx-dial-ring,
+.hx-dial-ring2 {
+  fill: none;
+  stroke: var(--color-taupe);
+  stroke-width: 1.2;
+}
+.hx-dial-ring2 {
+  opacity: 0.35;
+  stroke-dasharray: 2 6;
+}
+.hx-dial-ticks line {
+  stroke: var(--color-taupe);
+  stroke-width: 1;
+  opacity: 0.55;
+}
+.hx-dial-ticks line.major {
+  stroke: var(--color-champagne);
+  stroke-width: 2;
+  opacity: 0.85;
+}
+.hx-dial-minute,
+.hx-dial-second {
+  transform-box: view-box;
+  transform-origin: 300px 300px;
+}
+.hx-dial-minute line {
+  stroke: var(--color-taupe);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.hx-dial-second line {
+  stroke: var(--color-champagne);
+  stroke-width: 1.5;
+}
+.hx-dial-hub {
+  fill: var(--color-champagne);
+}
+
+/* ── A · Countdown to zero ──────────────────────────────────────────────── */
+.hx-a {
+  block-size: 220vh;
+}
+.hx-a-stage {
+  position: sticky;
+  inset-block-start: 0;
+  block-size: 100svh;
+  min-block-size: 560px;
+  display: grid;
+  place-items: center;
+  padding-block-start: var(--header-h);
+  overflow: clip;
+  background: radial-gradient(60% 55% at 50% 54%, color-mix(in srgb, var(--color-cocoa) 55%, var(--color-espresso)), var(--color-espresso) 72%);
+}
+.hx-a-dial-wrap {
+  position: absolute;
+  inset-block-start: calc(50% + var(--header-h) / 2);
+  inset-inline-start: 50%;
+  inline-size: min(78svh, 62vw);
+  translate: -50% -50%;
+  opacity: 0.9;
+}
+.hx-a-dial-wrap:dir(rtl) {
+  translate: 50% -50%;
+}
+.hx-a-dial .hx-dial-minute {
+  display: none;
+}
+.hx-a-tc {
+  position: absolute;
+  z-index: 5;
+  inset-block-end: 4.5svh;
+  inset-inline-start: 50%;
+  translate: -50% 0;
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.24em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-taupe);
+  direction: ltr;
+}
+.hx-a-tc:dir(rtl) {
+  translate: 50% 0;
+}
+.hx-a-cards {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 3;
+}
+.hx-a-card {
+  --d: clamp(84px, 8.2vw, 124px);
+  position: absolute;
+  inset-block-start: var(--y);
+  inset-inline-start: var(--x);
+  translate: calc(var(--flip, 1) * -50%) -50%;
+}
+.hx-a-card:dir(rtl) {
+  --flip: -1;
+}
+.hx-a-card[data-i="0"] { --x: 50%; --y: 15.5%; --d: clamp(76px, 6.6vw, 100px); }
+.hx-a-card[data-i="1"] { --x: 14%; --y: 30%; }
+.hx-a-card[data-i="2"] { --x: 11%; --y: 70%; }
+.hx-a-card[data-i="3"] { --x: 86%; --y: 30%; }
+.hx-a-card[data-i="4"] { --x: 89%; --y: 70%; }
+.hx-a-card figure {
+  display: grid;
+  justify-items: center;
+  gap: 0.7rem;
+  margin: 0;
+}
+.hx-a-photo {
+  position: relative;
+  display: block;
+  inline-size: var(--d);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  outline: 1px solid color-mix(in srgb, var(--color-champagne) 55%, transparent);
+  outline-offset: 5px;
+  background: var(--color-cocoa);
+}
+.hx-a-photo img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+/* Events sits on 12, under the header: its name goes beside it, not below. */
+.hx-a-card[data-i="0"] figcaption {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: calc(100% + 0.9rem);
+  translate: 0 -50%;
+}
+.hx-a-card figcaption {
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  color: var(--color-champagne);
+}
+.hx-a-content {
+  position: relative;
+  z-index: 4;
+  text-align: center;
+}
+.hx-copy-a {
+  display: grid;
+  justify-items: center;
+  --hx-size: clamp(2.6rem, min(7.6vw, 12svh), 8rem);
+}
+.hx-copy-a .hx-sub {
+  display: grid;
+  justify-items: center;
+  gap: 1.5rem;
+  margin-block-start: 1.6rem;
+}
+/* With scripts, the cards wait for their start positions (no flash of the end state). */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .hx-a:not([data-ready]) .hx-a-card {
+    opacity: 0;
+  }
+}
+@media (max-width: 899.98px) {
+  .hx-a {
+    block-size: auto;
+  }
+  .hx-a-stage {
+    position: relative;
+    min-block-size: 100svh;
+    padding-block: calc(var(--header-h) + 22svh) 12svh;
+  }
+  .hx-a-dial-wrap {
+    inline-size: 118vw;
+    inset-block-start: 46%;
+    opacity: 0.55;
+  }
+  .hx-a-card {
+    --d: 54px;
+  }
+  .hx-a-card figcaption {
+    display: none;
+  }
+  .hx-a-card[data-i="0"] { --x: 50%; --y: 15%; }
+  .hx-a-card[data-i="1"] { --x: 13%; --y: 20%; }
+  .hx-a-card[data-i="2"] { --x: 31%; --y: 16.5%; }
+  .hx-a-card[data-i="3"] { --x: 69%; --y: 16.5%; }
+  .hx-a-card[data-i="4"] { --x: 87%; --y: 20%; }
+  .hx-copy-a {
+    --hx-size: clamp(2.5rem, 12.5vw, 4rem);
+  }
+}
+
+/* ── B · Cinematic loop ─────────────────────────────────────────────────── */
+.hx-b {
+  min-block-size: max(100svh, 600px);
+  display: grid;
+  align-items: end;
+}
+.hx-b-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  transform-origin: 50% 40%;
+}
+.hx-b-poster,
+.hx-b-video {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+.hx-b-video {
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+.hx-b-video[data-playing] {
+  opacity: 1;
+}
+.hx-b-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, color-mix(in srgb, var(--color-espresso) 94%, transparent) 0%, color-mix(in srgb, var(--color-espresso) 60%, transparent) 42%, color-mix(in srgb, var(--color-espresso) 20%, transparent) 100%),
+    linear-gradient(to right, color-mix(in srgb, var(--color-espresso) 55%, transparent), transparent 60%);
+}
+.hx-b-shade:dir(rtl) {
+  background:
+    linear-gradient(to top, color-mix(in srgb, var(--color-espresso) 94%, transparent) 0%, color-mix(in srgb, var(--color-espresso) 60%, transparent) 42%, color-mix(in srgb, var(--color-espresso) 20%, transparent) 100%),
+    linear-gradient(to left, color-mix(in srgb, var(--color-espresso) 55%, transparent), transparent 60%);
+}
+.hx-b-clock {
+  position: absolute;
+  z-index: 3;
+  inset-block-start: calc(var(--header-h) + 4svh);
+  inset-inline-end: clamp(1rem, 5vw, 5rem);
+  display: grid;
+  justify-items: center;
+  gap: 0.6rem;
+}
+.hx-b-dial {
+  inline-size: clamp(64px, 6.5vw, 96px);
+}
+.hx-b-dial .hx-dial-ring2 {
+  display: none;
+}
+.hx-b-time {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-champagne);
+  direction: ltr;
+}
+.hx-b-content {
+  position: relative;
+  z-index: 2;
+  padding-block: calc(var(--header-h) + 8svh) 9svh;
+}
+.hx-copy-b {
+  --hx-size: clamp(3rem, min(9.6vw, 16svh), 10rem);
+}
+.hx-copy-b .hx-sub {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.5rem 3rem;
+  margin-block-start: 2rem;
+  padding-block-start: 1.6rem;
+  border-block-start: 1px solid color-mix(in srgb, var(--color-champagne) 30%, transparent);
+}
+@media (max-width: 899.98px) {
+  .hx-b-clock {
+    inset-block-start: calc(var(--header-h) + 3svh);
+  }
+  .hx-copy-b {
+    --hx-size: clamp(2.6rem, 13vw, 4.2rem);
+  }
+}
+
+/* ── C · The dial ───────────────────────────────────────────────────────── */
+.hx-c {
+  min-block-size: max(100svh, 600px);
+  display: grid;
+  align-items: center;
+}
+.hx-c-face {
+  position: absolute;
+  z-index: 0;
+  inset-block-start: 50%;
+  inset-inline-end: -58svh;
+  inline-size: 150svh;
+  aspect-ratio: 1;
+  translate: 0 -50%;
+}
+.hx-c-turn,
+.hx-c-spot,
+.hx-c-spot-m {
+  position: absolute;
+  inset: 0;
+}
+.hx-c-dial-base .hx-dial-ticks line,
+.hx-c-dial-base .hx-dial-ring,
+.hx-c-dial-base .hx-dial-ring2 {
+  opacity: 0.34;
+}
+.hx-c-dial-base .hx-dial-second,
+.hx-c-dial-base .hx-dial-minute,
+.hx-c-dial-base .hx-dial-hub {
+  opacity: 0.45;
+}
+.hx-dial-rays line,
+.hx-dial-rays circle {
+  fill: none;
+  stroke: var(--color-taupe);
+  stroke-width: 0.6;
+}
+.hx-c-dial-base .hx-dial-rays {
+  opacity: 0.12;
+}
+.hx-c-dial-lit .hx-dial-rays line,
+.hx-c-dial-lit .hx-dial-rays circle {
+  stroke: var(--color-champagne);
+  opacity: 0.75;
+}
+.hx-c-dial-lit .hx-dial-ticks line {
+  stroke: var(--color-champagne);
+  opacity: 1;
+}
+.hx-c-dial-lit .hx-dial-ring {
+  stroke: var(--color-champagne);
+}
+.hx-c-spot {
+  --sx: 50%;
+  --sy: 6%;
+  mask-image: radial-gradient(circle at var(--sx) var(--sy), #000 0, #000 6%, transparent 24%);
+}
+/* The light itself, a warm glow where it falls (inside the same mask). */
+.hx-c-spot-m::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--sx, 50%) var(--sy, 6%), color-mix(in srgb, var(--color-champagne) 22%, transparent), transparent 22%);
+}
+.hx-c-dial .hx-dial-second {
+  animation: hx-sweep 2.6s cubic-bezier(0.2, 0.7, 0.1, 1) 0.3s both;
+}
+@keyframes hx-sweep {
+  from {
+    transform: rotate(-150deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+.hx-c-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(70% 80% at 0% 100%, color-mix(in srgb, var(--color-cocoa) 45%, transparent), transparent 70%);
+}
+.hx-c-glow:dir(rtl) {
+  background: radial-gradient(70% 80% at 100% 100%, color-mix(in srgb, var(--color-cocoa) 45%, transparent), transparent 70%);
+}
+.hx-c-content {
+  position: relative;
+  z-index: 2;
+  padding-block: calc(var(--header-h) + 6svh) 8svh;
+}
+.hx-copy-c {
+  max-inline-size: min(64rem, 64vw);
+  --hx-size: clamp(3rem, min(9.2vw, 15svh), 9.6rem);
+}
+.hx-copy-c .hx-sub {
+  display: grid;
+  gap: 1.6rem;
+  margin-block-start: 2rem;
+}
+@media (hover: none), (pointer: coarse) {
+  .hx-c-spot {
+    mask-image: none;
+  }
+  .hx-c-spot-m {
+    --mx: 38%;
+    --my: 8%;
+    mask-image: radial-gradient(circle at var(--mx) var(--my), #000 0, #000 7%, transparent 26%);
+  }
+  .hx-c-spot-m::before {
+    background: radial-gradient(circle at var(--mx) var(--my), color-mix(in srgb, var(--color-champagne) 22%, transparent), transparent 24%);
+  }
+}
+@media (max-width: 899.98px) {
+  .hx-c {
+    align-items: end;
+  }
+  .hx-c-face {
+    inline-size: 150vw;
+    inset-block-start: -36vw;
+    inset-inline-end: -62vw;
+    translate: none;
+  }
+  .hx-copy-c {
+    max-inline-size: none;
+    --hx-size: clamp(2.6rem, 13vw, 4.2rem);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hx-c-dial .hx-dial-second {
+    animation: none;
+  }
+}
