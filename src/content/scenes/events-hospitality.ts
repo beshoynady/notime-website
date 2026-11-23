@@ -13,7 +13,7 @@ import { FULL, scrim, type SceneConfig, type SceneLayer } from "./types";
  *   4. the entrance arrangement comes in from the inline-end, a framed photo: the first guest's view.
  * Phones and reduced motion: the still, the lit room with its tables (the entrance is desktop-only).
  */
-/** L2 · one of Rand's photos framed at about its own size, cropped to its box (`fx-frame`).
+/** L2 · a photo (its own: D169, one photograph, one place) framed at about its own size, cropped to its box (`fx-frame`).
  * Laptop only: on a phone the frame would be a sliver, and the work follows in the section's strip. */
 const frame = (id: string, slot: string, depth: number, box: SceneLayer["box"], rest: Partial<SceneLayer> = {}): SceneLayer => ({
   id,
@@ -57,7 +57,7 @@ export const EVENTS_OPENING: SceneConfig = {
     // L3: the stage's warm glow at the end of the aisle.
     { id: "stage-glow", level: 3, fx: "glow", depth: 0.2, mobile: true, box: { block: "18% 38%", inline: "26% 26%" }, style: { opacity: 0 }, keys: [{ shot: 1, to: { opacity: 0.8, scale: 1.1 } }, { shot: 3, to: { scale: 1.5 } }] },
     // L2: the entrance (a real NO TIME arrangement), a framed photo at the inline-end (mirrors in AR).
-    frame("entrance", "private-celebrations-3", 0.6, { block: "24% 14%", inline: "66% 7%" }, { enter: { shot: 3, from: { x: 12, opacity: 0 } } }),
+    frame("entrance", "ev-entrance", 0.6, { block: "24% 14%", inline: "66% 7%" }, { enter: { shot: 3, from: { x: 12, opacity: 0 } } }),
     scrim,
   ],
 };
@@ -82,7 +82,7 @@ export const EVENTS_CONFERENCES: SceneConfig = {
   layers: [
     { id: "rows", level: 0, slot: "ev-conf-rows", depth: 0.15, push: 0.03, mobile: true, box: FULL },
     { id: "session", level: 0, slot: "ev-conf-session", depth: 0.15, push: 0.03, mobile: true, box: FULL, style: { opacity: 0 }, keys: [{ shot: 1, to: { opacity: 1 } }] },
-    frame("break", "catering-7", 0.3, { block: "12% 50%", inline: "58% 6%" }, { enter: { shot: 2, from: { x: 12, opacity: 0 } } }),
+    frame("break", "ev-break", 0.3, { block: "12% 50%", inline: "58% 6%" }, { enter: { shot: 2, from: { x: 12, opacity: 0 } } }),
     scrim,
   ],
 };
@@ -98,8 +98,8 @@ export const EVENTS_EXHIBITIONS: SceneConfig = {
   ],
   layers: [
     { id: "hall", level: 0, slot: "ev-exh-hall", depth: 0.15, push: 0.04, mobile: true, box: FULL },
-    frame("stand", "sandoz-1", 0.35, { block: "8% 30%", inline: "50% 28%" }, { enter: { shot: 1, from: { y: 8, opacity: 0 } } }),
-    frame("pavilion", "egyptair-pavilion-1", 0.5, { block: "10% 64%", inline: "76% 3%" }, { enter: { shot: 2, from: { x: 12, opacity: 0 } } }),
+    frame("stand", "ev-stand", 0.35, { block: "8% 30%", inline: "50% 28%" }, { enter: { shot: 1, from: { y: 8, opacity: 0 } } }),
+    frame("pavilion", "ev-pavilion", 0.5, { block: "10% 64%", inline: "76% 3%" }, { enter: { shot: 2, from: { x: 12, opacity: 0 } } }),
     frame("identity", "uae-pro-league-1", 0.5, { block: "42% 34%", inline: "76% 3%" }, { enter: { shot: 2, from: { x: 12, opacity: 0 } } }),
     scrim,
   ],
@@ -118,10 +118,10 @@ export const EVENTS_LAUNCHES: SceneConfig = {
     { id: "glow", level: 3, fx: "glow", depth: 0.2, mobile: true, box: { block: "20% 30%", inline: "25% 25%" }, style: { opacity: 0.4 }, keys: [{ shot: 1, to: { opacity: 0, scale: 1.3 } }] },
     // The real ceremony in a frame: the file is 1060px wide and busy, too soft and loud as a backdrop
     // behind the head. On a laptop it arrives beside the head with the second beat.
-    frame("moment", "uae-pro-league-2", 0.35, { block: "10% 46%", inline: "42% 5%" }, { enter: { shot: 1, from: { x: 10, opacity: 0 } } }),
+    frame("moment", "ev-moment", 0.35, { block: "10% 46%", inline: "42% 5%" }, { enter: { shot: 1, from: { x: 10, opacity: 0 } } }),
     // A phone: the same photo framed across the upper half, above the head, there as the scene
     // enters. Alone, the dark spot plate left the top half of the screen black (W02).
-    frame("moment-phone", "uae-pro-league-2", 0.25, { block: "8% 56%", inline: "6% 6%" }, { mobile: true, desktop: false, enter: { shot: 0, from: { y: 8, opacity: 0 } } }),
+    frame("moment-phone", "ev-moment", 0.25, { block: "8% 56%", inline: "6% 6%" }, { mobile: true, desktop: false, enter: { shot: 0, from: { y: 8, opacity: 0 } } }),
     scrim,
   ],
 };
@@ -142,10 +142,10 @@ export const EVENTS_GALAS: SceneConfig = {
     { id: "roses", desktop: [0.3, 0.45], mobile: null },
   ],
   layers: [
-    backdrop("private-celebrations-4", "runner"),
-    phonePlate("private-celebrations-2"),
-    frame("runner", "private-celebrations-4", 0.3, { block: "10% 50%", inline: "34% 25%" }),
-    frame("roses", "private-celebrations-2", 0.55, { block: "6% 30%", inline: "78% 4%" }, { enter: { shot: 1, from: { y: 8, opacity: 0 } } }),
+    backdrop("ev-runner", "runner"),
+    phonePlate("ev-roses"),
+    frame("runner", "ev-runner", 0.3, { block: "10% 50%", inline: "34% 25%" }),
+    frame("roses", "ev-roses", 0.55, { block: "6% 30%", inline: "78% 4%" }, { enter: { shot: 1, from: { y: 8, opacity: 0 } } }),
     scrim,
   ],
 };
@@ -167,13 +167,13 @@ export const EVENTS_MAJLIS: SceneConfig = {
     { id: "coffee", desktop: [0.4, 0.6], mobile: null },
   ],
   layers: [
-    backdrop("heritage-5", "tent"),
-    phonePlate("heritage-4"),
+    backdrop("ev-tent", "tent"),
+    phonePlate("ev-majlis-phone"),
     // The centre frame: the tent, then the coffee poured on the carpet in its place (beat 3).
-    frame("tent", "heritage-5", 0.3, CENTRE, { level: 1 }),
-    frame("coffee", "heritage-2", 0.3, CENTRE, { level: 1, enter: { shot: 2, from: { opacity: 0 } } }),
+    frame("tent", "ev-tent", 0.3, CENTRE, { level: 1 }),
+    frame("coffee", "ev-coffee", 0.3, CENTRE, { level: 1, enter: { shot: 2, from: { opacity: 0 } } }),
     // The right column: the brass carts arrive (beat 2).
-    frame("carts", "heritage-1", 0.5, { block: "10% 56%", inline: "67% 3%" }, { enter: { shot: 1, from: { x: 12, opacity: 0 } } }),
+    frame("carts", "ev-dates", 0.5, { block: "10% 56%", inline: "67% 3%" }, { enter: { shot: 1, from: { x: 12, opacity: 0 } } }),
     scrim,
   ],
 };
@@ -194,7 +194,7 @@ export const EVENTS_STAGE: SceneConfig = {
   layers: [
     { id: "beams", level: 0, slot: "ev-stage-beams", depth: 0.15, push: 0.04, mobile: true, box: FULL, style: { opacity: 0.35 }, keys: [{ shot: 1, to: { opacity: 1 } }] },
     { id: "live", level: 0, slot: "ev-stage-live", depth: 0.15, push: 0.04, mobile: true, box: FULL, style: { opacity: 0 }, keys: [{ shot: 2, to: { opacity: 1 } }] },
-    frame("rig", "private-celebrations-8", 0.4, { block: "10% 46%", inline: "44% 10%" }, { keys: [{ shot: 1, to: { opacity: 0 } }] }),
+    frame("rig", "ev-rig", 0.4, { block: "10% 46%", inline: "44% 10%" }, { keys: [{ shot: 1, to: { opacity: 0 } }] }),
     scrim,
   ],
 };

@@ -1,0 +1,170 @@
+[
+ {
+  "id": "ev-entrance",
+  "src": "unsplash:kqPRRRAFs10",
+  "crop": {
+   "aspect": "3:4",
+   "focus": [
+    0.5,
+    0.5
+   ]
+  },
+  "grade": "evening",
+  "out": "public/images/stock/ev-entrance.webp",
+  "maxWidth": 1200
+ },
+ {
+  "id": "ev-break",
+  "src": "unsplash:dPGrexR20CE",
+  "crop": {
+   "aspect": "3:2",
+   "focus": [
+    0.5,
+    0.5
+   ]
+  },
+  "grade": "evening",
+  "out": "public/images/stock/ev-break.webp",
+  "maxWidth": 1600
+ },
+ {
+  "id": "ev-stand",
+  "src": "unsplash:IIavGesRDcc",
+  "crop": {
+   "aspect": "3:4",
+   "focus": [
+    0.5,
+    0.55
+   ]
+  },
+  "grade": "evening",
+  "out": "public/images/stock/ev-stand.webp",
+  "maxWidth": 1200
+ },
+ {
+  "id": "ev-pavilion",
+  "src": "unsplash:--202fwufNQ",
+  "crop": {
+   "aspect": "3:2",
+   "focus": [
+    0.5,
+    0.55
+   ]
+  },
+  "grade": "evening",
+  "out": "public/images/stock/ev-pavilion.webp",
+  "maxWidth": 1600
+ },
+ {
+  "id": "ev-moment",
+  "src": "unsplash:mU2qHI5EXas",
+  "crop": {
+   "aspect": "3:2",
+   "focus": [
+    0.5,
+    0.5
+   ]
+  },
+  "grade": "evening",
+  "out": "public/images/stock/ev-moment.webp",
+  "maxWidth": 1600
+ },
+ {
+  "id": "ev-runner",
+  "src": "unsplash:XRzEwQN1vQs",
+  "crop": {
+   "aspect": "3:2",
+   "focus": [
+    0.5,
+    0.6
+   ]
+  },
+  "grade": "evening",
+  "out": "public/images/stock/ev-runner.webp",
+  "maxWidth": 1600
+ },
+ {
+  "id": "ev-roses",
+  "src": "unsplash:WKMEVVgmB-M",
+  "crop": {
+   "aspect": "9:16",
+   "focus": [
+    0.4,
+    0.5
+   ]
+  },
+  "grade": "evening",
+  "out": "public/images/stock/ev-roses.webp",
+  "maxWidth": 1080
+ },
+ {
+  "id": "ev-tent",
+  "src": "unsplash:py8P4qr1f-8",
+  "crop": {
+   "aspect": "3:2",
+   "focus": [
+    0.5,
+    0.6
+   ]
+  },
+  "grade": "evening",
+  "out": "public/images/stock/ev-tent.webp",
+  "maxWidth": 1600
+ },
+ {
+  "id": "ev-majlis-phone",
+  "src": "unsplash:QpPDH5yeGFo",
+  "crop": {
+   "aspect": "9:16",
+   "focus": [
+    0.45,
+    0.5
+   ]
+  },
+  "grade": "evening",
+  "out": "public/images/stock/ev-majlis-phone.webp",
+  "maxWidth": 1080
+ },
+ {
+  "id": "ev-coffee",
+  "src": "unsplash:Iq5k2I-VLqw",
+  "crop": {
+   "aspect": "3:2",
+   "focus": [
+    0.5,
+    0.5
+   ]
+  },
+  "grade": "evening",
+  "out": "public/images/stock/ev-coffee.webp",
+  "maxWidth": 1600
+ },
+ {
+  "id": "ev-dates",
+  "src": "unsplash:URncnSvN6Kw",
+  "crop": {
+   "aspect": "3:2",
+   "focus": [
+    0.5,
+    0.5
+   ]
+  },
+  "grade": "evening",
+  "out": "public/images/stock/ev-dates.webp",
+  "maxWidth": 1600
+ },
+ {
+  "id": "ev-rig",
+  "src": "unsplash:rnpSVkbmf6c",
+  "crop": {
+   "aspect": "3:2",
+   "focus": [
+    0.5,
+    0.5
+   ]
+  },
+  "grade": "evening",
+  "out": "public/images/stock/ev-rig.webp",
+  "maxWidth": 1600
+ }
+]

@@ -51,13 +51,13 @@ describe("scenes, public and in review", () => {
     for (const l of EVENTS_OPENING.layers.filter((x) => x.slot)) expect(getSceneImage(l.slot!)?.src, l.id).toBeTruthy();
     const plate = EVENTS_OPENING.layers.find((l) => l.level === 0 && !l.keys);
     expect(plate?.slot).toBe("ev-open-night");
-    const entrance = EVENTS_OPENING.layers.find((l) => l.slot === "private-celebrations-3");
+    const entrance = EVENTS_OPENING.layers.find((l) => l.slot === "ev-entrance");
     expect(entrance?.enter?.shot).toBe(3);
   });
 
   it("a scene drops the layers whose picture is hidden, and keeps its shots (fill or hide, D78)", () => {
-    const shown = visibleLayers(EVENTS_OPENING, (slot) => slot !== "private-celebrations-3");
-    expect(shown.layers.some((l) => l.slot === "private-celebrations-3")).toBe(false);
+    const shown = visibleLayers(EVENTS_OPENING, (slot) => slot !== "ev-entrance");
+    expect(shown.layers.some((l) => l.slot === "ev-entrance")).toBe(false);
     expect(shown.layers.length).toBe(EVENTS_OPENING.layers.length - 1);
     expect(shown.shots).toEqual(EVENTS_OPENING.shots);
   });

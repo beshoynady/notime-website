@@ -81,20 +81,27 @@ const reel = new Set(reelFrames.map((f) => root(f.src)));
  * The list may only shrink: a root listed here that no longer repeats fails the test too.
  */
 const PENDING: string[] = [
-  // Events (the scenes still frame Rand's photos that Home, About and Work now hold).
-  "p9-2", "p10-1", "p9-1", "p31-1", "p32-1", "p29-1", "p19-2", "p5-3", "p10-5", "p31-3", "p8-1", "p10-2",
   // Creative Production (scene and service visuals), with Software's AI picture.
-  "p4-1", "p27-1", "p31-2", "p25-3", "unsplash:26MJGnCM0Wc",
+  "p10-2", "p4-1", "p27-1", "p31-2", "p25-3", "unsplash:26MJGnCM0Wc",
   // Production, Print & Gifts (scene and service visuals).
   "p24-1", "p23-4", "p23-2", "p23-3",
 ];
+
+/**
+ * The one repeat kept on purpose, with its reason. The Events opening is a film cut from one photo
+ * in three depths (the room at night, lit, and its near tables, D109); it is the glass-roofed hall
+ * that is also Home's hero. It goes when Rand sends a wide photo of another room she dressed
+ * (rand-images-message.md), which the film is then cut from.
+ */
+const KEPT: Record<string, string[]> = { "p9-2": ["home hero", "scene events-opening"] };
 
 describe("one photograph, one place (D169)", () => {
   const where = slots();
   const repeats = [...where].filter(([, s]) => s.size > 1);
 
   it("no picture shows in two slots", () => {
-    const open = repeats.filter(([r]) => !PENDING.includes(r));
+    const kept = (r: string, s: Set<string>) => KEPT[r] && [...s].sort().join() === [...KEPT[r]].sort().join();
+    const open = repeats.filter(([r, s]) => !PENDING.includes(r) && !kept(r, s));
     expect(open.map(([r, s]) => `${r}: ${[...s].join(" · ")}`)).toEqual([]);
   });
 
