@@ -22,7 +22,7 @@ for (const locale of ["en", "ar"] as const) {
     const work = page.locator("#work .work-media img");
     await expect(work).toHaveCount(3);
     const workSrcs = await srcs(work);
-    for (const file of ["egyptair-pavilion-1", "uae-pro-league-2", "private-celebrations-1"]) expect(workSrcs.some((s) => s.includes(`${file}.webp`)), file).toBe(true);
+    for (const file of ["egyptair-pavilion-1", "uae-pro-league-2", "private-celebrations-4"]) expect(workSrcs.some((s) => s.includes(`${file}.webp`)), file).toBe(true);
     // Every photo loads (no broken box).
     for (const img of await page.locator(".cats img, #work .work-media img").all()) {
       await img.scrollIntoViewIfNeeded();

@@ -398,6 +398,37 @@ MEDIA.push(
 );
 
 /**
+ * The Events scenes' framed photos (D169; docs/content/recipes/events-d169.json): their own stock
+ * frames, graded Evening, where Rand's photos now show on Home, About and the Work pages. Decorative.
+ */
+MEDIA.push(
+  stock("ev-entrance", "unsplash:kqPRRRAFs10", "Jennifer Kalenberg", "https://unsplash.com/photos/kqPRRRAFs10", 1200, 1600, null,
+    "3:4 · a floral arrangement with candles at an entrance, no people"),
+  stock("ev-break", "unsplash:dPGrexR20CE", "Ahmet Yüksek", "https://unsplash.com/photos/dPGrexR20CE", 1600, 1067, null,
+    "3:2 · coffee and cake set for a break, florals, no people"),
+  stock("ev-stand", "unsplash:IIavGesRDcc", "Declan Sun", "https://unsplash.com/photos/IIavGesRDcc", 1200, 1600, null,
+    "3:4 · a built stand: curved timber slats and a round seat, no logo (a NO TIME stand replaces it)"),
+  stock("ev-pavilion", "unsplash:--202fwufNQ", "Mockaps", "https://unsplash.com/photos/--202fwufNQ", 1600, 1067, null,
+    "3:2 · a blank stand with its counter, ready for a brand (a NO TIME pavilion replaces it)"),
+  stock("ev-moment", "unsplash:mU2qHI5EXas", "Sergi Brylev", "https://unsplash.com/photos/mU2qHI5EXas", 1600, 1067, null,
+    "3:2 · confetti and beams over a crowd in silhouette, no faces"),
+  stock("ev-runner", "unsplash:XRzEwQN1vQs", "Steven Van Elk", "https://unsplash.com/photos/XRzEwQN1vQs", 1600, 1067, null,
+    "3:2 · candles in glass along a table, florals above"),
+  stock("ev-roses", "unsplash:WKMEVVgmB-M", "Skye Studios", "https://unsplash.com/photos/WKMEVVgmB-M", 1080, 1920, null,
+    "9:16 · white roses and greenery on a table, close"),
+  stock("ev-tent", "unsplash:py8P4qr1f-8", "SAMI7", "https://unsplash.com/photos/py8P4qr1f-8", 1600, 1067, null,
+    "3:2 · a desert camp at night, tents lit by a fire"),
+  stock("ev-majlis-phone", "unsplash:QpPDH5yeGFo", "AmirHadi Manavi Moghadam", "https://unsplash.com/photos/QpPDH5yeGFo", 1080, 1920, null,
+    "9:16 · brass dallahs in a row, close, warm"),
+  stock("ev-coffee", "unsplash:Iq5k2I-VLqw", "yaz00ne alani", "https://unsplash.com/photos/Iq5k2I-VLqw", 1600, 1067, null,
+    "3:2 · two brass dallahs on a tray, night"),
+  stock("ev-dates", "unsplash:URncnSvN6Kw", "L Photography", "https://unsplash.com/photos/URncnSvN6Kw", 1600, 1067, null,
+    "3:2 · dates in a woven basket beside a dallah, sadu weave behind"),
+  stock("ev-rig", "unsplash:rnpSVkbmf6c", "boris misevic", "https://unsplash.com/photos/rnpSVkbmf6c", 1600, 1067, null,
+    "3:2 · a lighting truss with moving heads, beams through haze"),
+);
+
+/**
  * The category cards and the menu (D169): their own stock frames, graded like their category, so
  * no profile photo shows twice (docs/content/recipes/home.json). Decorative: the card names it.
  */

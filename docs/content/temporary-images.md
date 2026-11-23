@@ -19,6 +19,7 @@ Updated 2026-11-16. This list stays in the repo. The site itself never says how 
 | Mega menu | `cat-software-digital-4x5` | AI mood image | **Yes** |
 | Software proof strip | `notime-website-home-{en,ar}`, `notime-website-category-{en,ar}` | Real screenshots of this site | No (retake after the final polish) |
 | Events opening, shot "the room" | `ev-open-room` (+ 9:16) | Real profile photo, graded (`private-celebrations-1`) | No |
+| Events scenes, the framed photos (D170) | `ev-entrance`, `ev-break`, `ev-stand`, `ev-pavilion`, `ev-moment`, `ev-runner`, `ev-roses`, `ev-tent`, `ev-majlis-phone`, `ev-coffee`, `ev-dates`, `ev-rig` (media.ts) | Stock, Unsplash, Evening grade | **Yes** (Rand's photos of each moment) |
 | Creative opening, the frame | `catering-4` (media.ts) | Real profile photo | No |
 | Creative opening, the studio dark and lit (D158) | `cp-open-dark`, `cp-open-lit` (media.ts) | Stock, Unsplash `LYcuJG5LyU8`, studio grade | **Yes** (a NO TIME set) |
 | Creative · Equipment rental (D158) | `cp-rental-lights` (media.ts) | Stock, Unsplash `S6OSYUlvJxo`, studio grade | **Yes** (NO TIME's own kit) |
