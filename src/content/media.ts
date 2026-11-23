@@ -298,8 +298,10 @@ MEDIA.push(
     "16:9 + 9:16 · an empty exhibition hall the night before doors open, bare floor, no stands or logos"),
   stock("ev-launch-spot", "unsplash:kqgC_6j6AaA", "Fujiphilm", "https://unsplash.com/photos/kqgC_6j6AaA", 2400, 1350, [1080, 1920],
     "16:9 + 9:16 · a dark stage, one pool of light, seconds before a reveal"),
-  stock("ev-stage-beams", "unsplash:UgKL6h7kPT8", "Liana S", "https://unsplash.com/photos/UgKL6h7kPT8", 2400, 1350, [1080, 1920],
-    "16:9 + 9:16 · the first beams through haze in a dark hall (a NO TIME rig at first light replaces it)"),
+  // D172: the first beams on a truss, cropped above the stage and the crowd (no people). The earlier
+  // plate was a smooth light leak with no detail, an empty screen on phones as the stage entered.
+  stock("ev-stage-beams", "unsplash:sol7vhs8Pdg", "Kevin Yudhistira Alloni", "https://unsplash.com/photos/sol7vhs8Pdg", 2400, 1350, [1080, 1920],
+    "16:9 + 9:16 · the first beams through haze on a truss rig, no people (a NO TIME rig at first light replaces it)"),
   stock("ev-stage-live", "unsplash:euieMyZIBmY", "Andrew Haha Lee", "https://unsplash.com/photos/euieMyZIBmY", 2400, 1350, [1080, 1920],
     "16:9 + 9:16 · the full rig on, the seated audience from behind, no faces"),
   // Creative Production (docs/content/recipes/creative.json, D158): one studio, dark then lit.
