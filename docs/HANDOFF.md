@@ -2,6 +2,22 @@
 
 Read `CLAUDE.md`, `AGENTS.md` and `PRODUCT.md` first. Decisions: `docs/DECISIONS.md` (latest D124; new ones from D125).
 
+## Now: hero options, waiting for the owner's choice (2026-11-23, late)
+
+- Branch `hero-options` (not merged): three home-hero prototypes at `/[locale]/hero-lab/a|b|c`.
+  - A: countdown to zero.
+  - B: cinematic loop.
+  - C: the dial.
+- Shots, GIFs, sources and licences are in `docs/review/hero-options/`.
+- Preview: https://notime-website-git-hero-options-beshoynadys-projects.vercel.app/ar/hero-lab/a (needs the owner's Vercel login).
+- **Next, after the owner picks:**
+  - Build it fully as `Hero` on Home.
+  - Give A five photos of its own (D169).
+  - Credit the Pexels video in media.ts if B.
+  - Move Rand's hall (p9-2) to a fitting Events section, keeping one photo per place (it then leaves Home, and `KEPT` in photo-slots.test.ts goes).
+  - Delete the lab route.
+  - Typecheck, unit tests, build and the fast CI, then merge to main.
+
 ## Now: images done, README done (2026-11-23, late night)
 
 **Status.** `main` is at the README merge (PR #7, 5395e0b). Preview for Rand (public, no login): https://notime-website-ashen.vercel.app/ar; `docs/content/rand-images-message.md` links it. The CLS investigation, long e2e runs and Lighthouse are still paused by the owner.
