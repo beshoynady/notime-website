@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { emulateAndroidFonts } from "./android-fonts";
 import { gotoReady } from "./helpers";
 
 /**
@@ -10,10 +11,21 @@ import { gotoReady } from "./helpers";
  * OPEN_QUESTIONS #25; then this goes back to 0.001.
  */
 const LIMIT = { en: 0.001, ar: 0.002 } as const;
+/**
+ * Linux (the CI runner) has neither Arial nor Roboto, so neither set of matched faces would apply and
+ * the swap there stood for no real visitor (CLS 0.003 EN, 0.009 AR on CI). There the page resolves
+ * its fonts as a device without Arial does (Android, ChromeOS), which also covers the hero's
+ * Android-matched title faces at desktop width. Windows and macOS runs measure the Arial path.
+ */
+const WITHOUT_ARIAL = process.platform === "linux" || process.env.E2E_WITHOUT_ARIAL === "1";
+// As in android-font.spec: Chromium on Linux hints and rounds glyph advances unless told not to,
+// which Android and Windows don't. The flag only acts on Linux.
+test.use({ launchOptions: { args: ["--font-render-hinting=none"] } });
 
 test.describe("no layout shift on load (font swap, hero)", () => {
   for (const locale of ["en", "ar"] as const) {
     test(`CLS is 0 (${locale})`, async ({ page }) => {
+      if (WITHOUT_ARIAL) await emulateAndroidFonts(page);
       await page.addInitScript(() => {
         type Shift = { value: number; startTime: number; hadRecentInput: boolean; sources: { node?: Node; previousRect: DOMRectReadOnly; currentRect: DOMRectReadOnly }[] };
         const w = window as unknown as { __cls: number; __shifts: string[] };

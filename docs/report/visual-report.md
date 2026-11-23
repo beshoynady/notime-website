@@ -2,7 +2,7 @@
 
 **الفرع:** `phase-2-services` · **الفترة:** 21–23 نوفمبر 2026 · **الخطة:** `docs/superpowers/plans/2026-11-21-visual-portfolio.md` (16 مهمة)
 
-- **رابط المعاينة:** {{PREVIEW}}
+- **رابط المعاينة:** https://define-brad-exciting-priest.trycloudflare.com/ar (رابط مؤقت يعمل ما دام هذا الجهاز والخادم والنفق تعمل)
 - **طلب الدمج (PR):** {{PR}} (مفتوح، غير مدموج)
 - **CI الكامل:** {{CI}}
 

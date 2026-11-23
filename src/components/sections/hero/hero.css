@@ -46,15 +46,59 @@
   descent-override: 16.13%;
   line-gap-override: 0%;
 }
+/* The same title on a device without Arial (Android, and Chrome on Linux or ChromeOS), at desktop
+   widths: the stack fell to the running-text faces and the Arabic title grew from 566 to 732px on
+   the swap (CLS 2.0 at 1440, the close's CI). Matched on the same two lines and weights, against the
+   Roboto and Noto Naskh subsets in e2e/fixtures/android-fonts (2026-11-23). The Arabic faces also
+   take the space: from Roboto (the running-text face) the title's word gap was 11px wide and the
+   swap still moved it (0.004). */
+@font-face {
+  font-family: "Montserrat Hero Fallback Android";
+  src: local("Roboto"), local("Roboto Regular"), local("Roboto-Regular");
+  font-weight: 100 449;
+  size-adjust: 105.42%;
+  ascent-override: 91.82%;
+  descent-override: 23.81%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Montserrat Hero Fallback Android";
+  src: local("Roboto"), local("Roboto Regular"), local("Roboto-Regular");
+  font-weight: 450 900;
+  size-adjust: 108.78%;
+  ascent-override: 88.99%;
+  descent-override: 23.07%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Hero Fallback Android";
+  src: local("Noto Naskh Arabic"), local("Noto Naskh Arabic Regular"), local("NotoNaskhArabic-Regular");
+  font-weight: 100 449;
+  unicode-range: U+0020, U+00A0, U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF;
+  size-adjust: 112.38%;
+  ascent-override: 86.14%;
+  descent-override: 22.33%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Hero Fallback Android";
+  src: local("Noto Naskh Arabic"), local("Noto Naskh Arabic Regular"), local("NotoNaskhArabic-Regular");
+  font-weight: 450 900;
+  unicode-range: U+0020, U+00A0, U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF;
+  size-adjust: 128.65%;
+  ascent-override: 75.24%;
+  descent-override: 19.51%;
+  line-gap-override: 0%;
+}
 
 :root {
-  --font-hero: "Montserrat", "Montserrat Hero Fallback", "Montserrat Caps Fallback Android";
-  --font-hero-ar: "Alexandria", "Alexandria Hero Fallback", "Alexandria Fallback", "Alexandria Fallback Android";
+  --font-hero: "Montserrat", "Montserrat Hero Fallback", "Montserrat Hero Fallback Android", "Montserrat Caps Fallback Android";
+  --font-hero-ar: "Alexandria", "Alexandria Hero Fallback", "Alexandria Hero Fallback Android", "Alexandria Fallback", "Alexandria Fallback Android";
 }
 /* While the brand files load (data-font-wait, D149), the fallbacks alone, as fonts.css does. */
 html[data-font-wait] {
-  --font-hero: "Montserrat Hero Fallback", "Montserrat Caps Fallback Android";
-  --font-hero-ar: "Alexandria Hero Fallback", "Alexandria Fallback", "Alexandria Fallback Android";
+  --font-hero: "Montserrat Hero Fallback", "Montserrat Hero Fallback Android", "Montserrat Caps Fallback Android";
+  --font-hero-ar: "Alexandria Hero Fallback", "Alexandria Hero Fallback Android", "Alexandria Fallback", "Alexandria Fallback Android";
 }
 
 .hero {
