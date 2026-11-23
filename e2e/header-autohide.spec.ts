@@ -3,8 +3,8 @@ import { gotoReady } from "./helpers";
 
 /**
  * The header that hides on scroll (owner's change 2): on the five category pages below 900px it
- * slides up on the way down and returns on the way up; the chip bar and the private-celebrations
- * cards move with it by translate (no gap, no layout shift). Everywhere else it stays.
+ * slides up on the way down and returns on the way up; the chip bar moves with it by translate
+ * (no gap, no layout shift). Everywhere else it stays.
  */
 const EVENTS = "/services/events-hospitality";
 const PHONE_PAGES = [
@@ -79,53 +79,6 @@ test.describe("header autohide (phones)", () => {
     expect(Math.abs(shown.chip - shown.header), `chip bar top ${shown.chip}, header bottom ${shown.header}`).toBeLessThanOrEqual(2);
   });
 
-  test("the celebration cards follow", async ({ page }) => {
-    await gotoReady(page, `/en${EVENTS}`);
-    const list = await docTop(page, ".pstack-cards");
-    const geometry = () =>
-      page.evaluate(() => {
-        const card = document.querySelector(".pstack-card")!.getBoundingClientRect();
-        return {
-          card: card.top,
-          lead: document.querySelector(".pstack-lead")!.getBoundingClientRect().bottom,
-          chip: document.querySelector(".svc-index")!.getBoundingClientRect().bottom,
-          list: document.querySelector(".pstack-cards")!.getBoundingClientRect().top,
-        };
-      });
-    // On the way in (header hidden, the cards still in flow), a raised card never covers the lead.
-    await scrollSteps(page, list - 900, 300);
-    await scrollSteps(page, list - 500);
-    await expectHeader(page, "hidden");
-    const inFlow = await geometry();
-    expect(inFlow.card, `card top ${inFlow.card}, lead bottom ${inFlow.lead}`).toBeGreaterThanOrEqual(inFlow.lead);
-    // The first card stuck: the same gap under the chip bar with the header hidden and shown.
-    await scrollSteps(page, list - 40);
-    await expectHeader(page, "hidden");
-    const hidden = await geometry();
-    expect(hidden.list, "the first card is held").toBeLessThan(hidden.card);
-    await scrollSteps(page, list - 90);
-    await expectHeader(page, "shown");
-    const shown = await geometry();
-    expect(shown.list, "the first card is held").toBeLessThan(shown.card);
-    expect(Math.abs(hidden.card - hidden.chip - (shown.card - shown.chip)), `gap hidden ${hidden.card - hidden.chip}, shown ${shown.card - shown.chip}`).toBeLessThanOrEqual(2);
-    // In step on every frame of the slide, both ways: the held card never jumps against the bar.
-    const gaps = await page.evaluate(async () => {
-      const frame = () => new Promise((r) => requestAnimationFrame(r));
-      const card = document.querySelector(".pstack-card")!;
-      const chip = document.querySelector(".svc-index")!;
-      const out: number[] = [];
-      for (const d of [50, -50]) {
-        window.scrollTo({ top: scrollY + d, behavior: "instant" });
-        for (let i = 0; i < 30; i++) {
-          await frame();
-          out.push(card.getBoundingClientRect().top - chip.getBoundingClientRect().bottom);
-        }
-      }
-      return out;
-    });
-    const gap = shown.card - shown.chip;
-    for (const g of gaps) expect(Math.abs(g - gap), `per-frame gaps ${gaps.map(Math.round)}`).toBeLessThanOrEqual(2);
-  });
 
   test("no layout shift", async ({ page }) => {
     await gotoReady(page, `/en${EVENTS}`);
@@ -192,22 +145,6 @@ test.describe("header autohide (phones)", () => {
       await expectHeader(page, "shown");
     });
 
-    // Reduced motion: the cards don't stack (static, photo-stack.css), so none is ever held under
-    // the chip bar and no gap can open when the bar rises with the header; they scroll with the page.
-    test("the celebration cards are never held", async ({ page }) => {
-      await gotoReady(page, `/en${EVENTS}`);
-      const list = await docTop(page, ".pstack-cards");
-      await scrollSteps(page, list - 600, 300);
-      await scrollSteps(page, list + 300);
-      await expectHeader(page, "hidden");
-      const g = await page.evaluate(() => ({
-        positions: [...document.querySelectorAll(".pstack-card")].map((c) => getComputedStyle(c).position),
-        card: document.querySelector(".pstack-card")!.getBoundingClientRect().top,
-        list: document.querySelector(".pstack-cards")!.getBoundingClientRect().top,
-      }));
-      expect(new Set(g.positions)).toEqual(new Set(["static"]));
-      expect(Math.abs(g.card - g.list), "the first card scrolls with its list").toBeLessThanOrEqual(1);
-    });
   });
 });
 

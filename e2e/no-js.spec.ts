@@ -5,7 +5,7 @@ test.describe("hero without JavaScript", () => {
   test.use({ javaScriptEnabled: false });
 
   for (const locale of ["en", "ar"] as const) {
-    test(`title, eyebrow and CTAs are readable; no shutters (${locale})`, async ({ page }) => {
+    test(`title, eyebrow and CTAs are readable (${locale})`, async ({ page }) => {
       await page.goto(`/${locale}`);
       const hero = page.locator("#hero");
 
@@ -16,8 +16,6 @@ test.describe("hero without JavaScript", () => {
       expect(box!.width).toBeGreaterThan(0);
       expect(box!.height).toBeGreaterThan(0);
 
-      for (const shutter of await hero.locator(".hero-shutter").all()) await expect(shutter).toBeHidden();
-
       const ctas = hero.locator(".hero-sub a");
       await expect(ctas).toHaveCount(2);
       for (const cta of await ctas.all()) {
@@ -27,7 +25,7 @@ test.describe("hero without JavaScript", () => {
 
       await expect(hero.locator(".hero-eyebrow")).toBeVisible();
       await expect(hero.locator(".hero-beat")).toHaveCount(0);
-      // The header is not hidden by the intro state.
+      // The header is never hidden.
       expect(await page.locator("[data-header-shell]").evaluate((el) => getComputedStyle(el).opacity)).toBe("1");
     });
   }

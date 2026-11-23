@@ -57,7 +57,7 @@ export const SERVICE_HOOKS: Record<string, Localized<string>> = {
   "ai-content-creation": {
     // p.14 (AI video ads, AI imagery and key visuals, "produced with AI")
     en: "AI shortens the making. Art direction keeps every frame on brand.",
-    ar: "الذكاء الاصطناعي يختصر وقت الإنتاج، والتوجيه الفني يُبقي كل لقطة على هوية علامتكم.",
+    ar: "الذكاء الاصطناعي يختصر وقت الإنتاج، والتوجيه الفني يُبقي كل لقطة على هوية علامتكم التجارية.",
   },
   "set-stage-design": {
     // deck (drawings and 3D models; sets for the camera, stages for the room)
@@ -114,7 +114,7 @@ export const SERVICE_HOOKS: Record<string, Localized<string>> = {
   "packaging-design": {
     // deck (boxes, award and gift-set packaging, dielines)
     en: "The box is the first thing they open, so we design it to feel like the brand.",
-    ar: "العلبة أول ما يفتحه ضيوفكم، فنصمّمها لتحمل إحساس العلامة.",
+    ar: "العلبة أول ما يفتحه ضيوفكم، فنصمّمها لتحمل إحساس العلامة التجارية.",
   },
   "corporate-gifts": {
     // profile (gift sets; screen printing, UV, foiling, debossing, laser engraving)

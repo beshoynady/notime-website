@@ -17,10 +17,21 @@ Updated 2026-11-16. This list stays in the repo. The site itself never says how 
 | Home category cards, mega menu | `cat-software-digital-4x5` | AI mood image | **Yes** |
 | Software proof strip | `notime-website-home-{en,ar}`, `notime-website-category-{en,ar}` | Real screenshots of this site | No (retake after the final polish) |
 | Events opening, shot "the room" | `ev-open-room` (+ 9:16) | Real profile photo, graded (`private-celebrations-1`) | No |
-| Creative opening, the developing frame | `cp-open-frame` | Real profile photo, graded (`catering-4`) | No |
+| Creative opening, the frame | `catering-4` (media.ts) | Real profile photo | No |
+| Creative opening, the studio dark and lit (D158) | `cp-open-dark`, `cp-open-lit` (media.ts) | Stock, Unsplash `LYcuJG5LyU8`, studio grade | **Yes** (a NO TIME set) |
+| Creative · Equipment rental (D158) | `cp-rental-lights` (media.ts) | Stock, Unsplash `S6OSYUlvJxo`, studio grade | **Yes** (NO TIME's own kit) |
+| Creative · Video, Motion, AI (D158) | `catering-2`, `heritage-1`, `private-celebrations-4` (media.ts) | Real profile photos (a still each, until Rand sends footage and files) | **Yes** (her own reels and AI work) |
 | Work cards, case pages, related work (anonymised cases) | none | Code drawing `CaseVisual`: airline pavilion = `stand`, league = `stage` | Until the client approves the name and photos |
 | Named cases (private celebrations, catering, heritage, gifts) | the project's photos | Real profile photos under `public/images/work/` | No |
-| Every other scene layer (Events hall and majlis, Print bench, Marketing board, Creative studio, Software) | `src: null` | Nothing renders; the scene's code drawing is the visual | Real or graded files can be added later (`scenes/images.ts`) |
+| Marketing opening, the desk (D159) | `mb-open-desk` (media.ts) | Stock, Unsplash `8dgFq8Vbelo`, editorial grade, cropped past a printed box | **Yes** (a NO TIME desk) |
+| Marketing opening, the post · Social (D159) | `uae-pro-league-4`, `-6` (media.ts) ⚑ | Real profile posts | No |
+| Marketing · Branding, Digital, Content, PR, Paid (D159) | `mb-branding`, `mb-digital`, `mb-content`, `mb-pr`, `mb-paid` (media.ts) | Stock, Unsplash, editorial grade | **Yes** (NO TIME's own work) |
+| Print opening, the materials and the press (D160) | `pg-open-materials`, `pg-open-press` (media.ts) | Stock, Unsplash `0vvoSlCtWTg`, `KAO2-CRZXTE`, workshop grade | **Yes** (NO TIME's own floor) |
+| Print opening, the gift (D160) | `gifts-1` (media.ts) | Real profile photo | No |
+| Print · Printing, Fabrication (D160) | `pg-printing`, `pg-fabrication` (media.ts) | Stock, Unsplash, workshop grade | **Yes** (NO TIME's own prints and builds) |
+| Print · Packaging, Gifts, Merchandise; Fabrication strip (D160) | `uae-pro-league-7`, `uae-pro-league-5`, `gifts-2`; `sandoz-1`, `smith-gulf-1` (media.ts) ⚑ | Real profile photos | No (originals wanted for `smith-gulf-1`) |
+| Software · the six services and event technology (D161) | `sw-websites`, `sw-apps`, `sw-systems`, `sw-ecommerce`, `sw-ux`, `sw-ai`, `sw-event-tech` (media.ts) | Stock, Unsplash, evening grade (no brand marks, no faces) | **Yes** (screens of NO TIME's own builds) |
+| Every other scene layer (Events hall and majlis, Software) | `src: null` | Nothing renders; the scene's code drawing is the visual | Real or graded files can be added later (`scenes/images.ts`) |
 | Home hero, category openings, service sections | none | Code-driven scenes and drawings (`ServiceDrawing`, the decorative patterns) | No |
 
 ## In the data, not rendered yet

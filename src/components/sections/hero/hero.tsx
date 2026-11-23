@@ -1,26 +1,45 @@
-import { getTranslations } from "next-intl/server";
+import { getImageProps } from "next/image";
+import { getLocale, getTranslations } from "next-intl/server";
 import { ButtonLink } from "@/components/ui/button";
+import type { Locale } from "@/content";
 import { contactCategoryHref, WORK_INDEX_HREF } from "@/content/links";
+import { media } from "@/content/media";
 import { HERO_LINE } from "@/config/hero";
+import { capSrcSet } from "@/lib/srcset";
 import { HeroClock } from "./hero-clock";
 import { HeroController } from "./hero-controller";
 import { HeroHud } from "./hero-hud";
 import { SectionRef } from "@/components/review/section-ref";
 import { HOME_REF } from "@/lib/review";
 
+/** Rand's dressed hall (the 2026 profile, p9-2), through the image registry (D152). */
+const PLATE = "private-celebrations-1";
+
 /**
- * Cinematic clock hero (server component). Every layer is server-rendered and visible
- * at rest (DECISIONS D15); intro-only states (shutters, hidden header) are CSS-gated under
- * `html[data-js]:not([data-reduced])` on `[data-hero-intro]`.
+ * Home hero (server component; D156). The whole first screen is there at first paint: the header,
+ * the eyebrow, the title, the lead and both actions, over a real photograph of NO TIME's work
+ * (Rand's dressed hall), graded dark so the ivory text holds AA. No intro and no gate: the old
+ * shutters, the hidden header and the canvas atmosphere are gone.
  *
- * One screen says it all (N05): the eyebrow (the old second beat, read once), the title, the
- * lead and two actions. The scroll pin only plays the exit.
+ * One screen says it all (N05). The scroll pin only plays the exit (HeroController).
  *
- * Layers, back to front: 1 canvas (HeroScene, mounted client-only by HeroController; it also
- * draws the film grain, D45) · 2 vignette · 3 clock · 5 content · 7 letterbox · 8 HUD · 9 shutters.
+ * Layers, back to front: 0 plate + its grade · 1 vignette · 2 clock (one CSS sweep of the hand)
+ * · 4 content · 6 letterbox · 7 HUD.
  */
 export async function Hero() {
-  const t = await getTranslations("hero");
+  const [t, locale] = await Promise.all([getTranslations("hero"), getLocale() as Promise<Locale>]);
+  const plate = media(PLATE);
+  const img = plate
+    ? getImageProps({
+        src: plate.file,
+        alt: plate.alt?.[locale] ?? "",
+        width: plate.width,
+        height: plate.height,
+        sizes: "100vw",
+        loading: "eager",
+        fetchPriority: "high",
+      }).props
+    : null;
   return (
     // Server-rendered pin spacer for the scroll pin (D43): with its own spacer, ScrollTrigger
     // never moves #hero in the DOM. When it created one, it re-inserted the hero on every
@@ -35,24 +54,30 @@ export async function Hero() {
         data-header="hero"
         data-bg="own"
         data-grain="off"
-        data-hero-intro=""
         aria-labelledby="hero-title"
       >
         <SectionRef id={HOME_REF.hero} />
         <HeroController />
+        {img && plate && (
+          <div className="hero-plate">
+            {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text -- getImageProps output (alt included); the srcset is trimmed (D51) */}
+            <img {...img} srcSet={capSrcSet(img.srcSet, plate.width)} />
+          </div>
+        )}
         <div className="hero-vignette" aria-hidden="true" />
         <div className="hero-clock-wrap" aria-hidden="true">
           <HeroClock />
         </div>
 
         <div className="hero-content frame">
-          {/* A <p>, not a heading: the H1 stays the page's first heading and its LCP element. */}
+          {/* A <p>, not a heading: the H1 stays the page's first heading. */}
           <p className="hero-eyebrow text-eyebrow text-champagne">{t("eyebrow")}</p>
-          {/* The lines are decorative (they get split into chars/words); the heading's
-              name is the sentence-case label, so screen readers don't spell out capitals. */}
+          {/* The lines are decorative; the heading's name is the sentence-case label, so screen
+              readers don't spell out capitals. */}
           <h1 id="hero-title" className="hero-title" aria-label={t(`title.${HERO_LINE}.label`)}>
-            {/* .hero-line is the mask (scroll timeline moves it); .hero-line-inner rises
-                inside it (intro / repeat-visit reveal). */}
+            {/* .hero-line is what the scroll timeline moves; the text sits in .hero-line-inner, which
+                nothing animates. When GSAP gave the text's own box its rest transform at hydration,
+                Chrome repainted the line as a new, larger LCP entry (+0.9 s at 4x CPU, D156). */}
             <span className="hero-line" aria-hidden="true">
               <span className="hero-line-inner">{t("titleLine1")}</span>
             </span>
@@ -77,8 +102,6 @@ export async function Hero() {
         <div className="hero-letterbox top" aria-hidden="true" />
         <div className="hero-letterbox bottom" aria-hidden="true" />
         <HeroHud />
-        <div className="hero-shutter top" aria-hidden="true" />
-        <div className="hero-shutter bottom" aria-hidden="true" />
       </section>
     </div>
   );

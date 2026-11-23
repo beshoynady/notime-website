@@ -60,8 +60,15 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  /* Darker from mid-card (M3): the Events list sat on white flowers under 3:1. */
-  background: linear-gradient(180deg, transparent 20%, rgba(46, 32, 23, 0.6) 50%, rgba(46, 32, 23, 0.95));
+  /* Darker from mid-card (M3): the Events list sat on white flowers under 3:1. The real photos
+     (D157) are brighter than the old art, so the mid stop is deeper: every line ≥ 4.5:1. */
+  background: linear-gradient(180deg, transparent 20%, rgba(46, 32, 23, 0.74) 50%, rgba(46, 32, 23, 0.95));
+}
+@media (max-width: 899.98px) {
+  /* A phone card is wide and short, so its text starts near the top third: the scrim does too. */
+  .cat::after {
+    background: linear-gradient(180deg, rgba(46, 32, 23, 0.1), rgba(46, 32, 23, 0.74) 36%, rgba(46, 32, 23, 0.93) 76%);
+  }
 }
 .cat-media {
   position: absolute;

@@ -7,7 +7,7 @@ test.describe("locale switch", () => {
 
   test("mid-pin switch: one pin spacer, no leftover split, URL /ar", async ({ page }) => {
     await gotoReady(page, "/en");
-    await page.waitForFunction(() => document.documentElement.hasAttribute("data-intro-seen") || !!document.querySelector(".pin-spacer"));
+    await controllerReady(page);
     await page.evaluate(() => scrollTo(0, innerHeight * 0.5)); // 50% of the 100% pin (N05)
     await page.waitForTimeout(600);
 
@@ -17,6 +17,9 @@ test.describe("locale switch", () => {
     // The pin belongs to the hero controller, and the page can hydrate after the layout's
     // ToneController (D40): wait for the controller's own marker, not only the layout's.
     await controllerReady(page);
+    // The new page opens at the top, and the hero builds its pin on the first scroll (D156).
+    await page.evaluate(() => scrollTo(0, 40));
+    await page.locator("#hero[data-hero-pinned]").waitFor({ state: "attached" });
 
     // One spacer around the hero (other pins, How we work since D84, have their own). It is the
     // server-rendered wrapper, so the hero is never moved in the DOM (D43).
@@ -34,7 +37,7 @@ test.describe("locale switch", () => {
   test("switching with the mega menu open lands with it closed", async ({ page }) => {
     await gotoReady(page, "/en");
     await page.mouse.move(700, 450);
-    await page.mouse.wheel(0, 10); // skip the intro so the header is interactive
+    await page.mouse.wheel(0, 10);
     const trigger = page.locator("button[aria-controls=mega-panel]");
     await trigger.click();
     await expect(page.locator("#mega-panel")).toBeVisible();

@@ -11,7 +11,7 @@ import "./related-work.css";
  * category page: the category's cases from `work.ts`, anonymised until each client approves its
  * name (D78 §6). Hidden when the category has none.
  *
- * Media: CaseMedia, as on the homepage (a drawing of the work while anonymous, D106). Each card opens its case page (F1):
+ * Media: CaseMedia, the case's own cover photo (D150, D164); a hidden cover leaves the card as text. Each card opens its case page (F1):
  * the name is the link; the media repeats it for pointers only (out of the tab order).
  */
 export function RelatedWork({ category, locale, tone }: { category: CategorySlug; locale: Locale; tone: "dark" | "light" }) {
@@ -29,12 +29,14 @@ export function RelatedWork({ category, locale, tone }: { category: CategorySlug
         </header>
         <div className="rw-body">
           <ul className="rw-list">
-            {cases.map(({ view: c, also }) => {
+            {cases.map(({ card: c, also }) => {
               return (
-                <li key={c.key} className="rw-card">
-                  <Link href={workHref(c.slug)} tabIndex={-1} aria-hidden="true" className="rw-media">
-                    <CaseMedia view={c} locale={locale} sizes="(min-width: 900px) 34vw, 100vw" />
-                  </Link>
+                <li key={c.slug} className="rw-card">
+                  {c.cover && (
+                    <Link href={workHref(c.slug)} tabIndex={-1} aria-hidden="true" className="rw-media">
+                      <CaseMedia cover={c.cover} locale={locale} sizes="(min-width: 900px) 34vw, 100vw" />
+                    </Link>
+                  )}
                   <ul className="rw-meta text-eyebrow">
                     {/* The other categories the case spans; this page's own is implied. */}
                     {also.map((cat) => (

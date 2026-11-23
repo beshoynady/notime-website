@@ -4,7 +4,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useLenis, type LenisControls } from "@/components/providers/lenis-provider";
 import { prefersReducedMotion } from "@/hooks/use-reduced-motion";
-import { anchorScrollTop, sameDocumentHash } from "@/lib/anchor";
+import { ANCHOR_REVEAL, anchorScrollTop, sameDocumentHash } from "@/lib/anchor";
 import { ScrollTrigger } from "@/lib/gsap";
 import { currentAnchor } from "@/lib/legacy-anchors";
 
@@ -82,6 +82,8 @@ function landingTop(target: HTMLElement): number {
  */
 export function scrollToAnchor(lenis: LenisControls, target: HTMLElement, opts: { immediate?: boolean; focus?: boolean } = {}) {
   const immediate = opts.immediate || prefersReducedMotion() || !lenis.active;
+  // A closed container around the target (a tab panel) opens itself before the landing is measured.
+  target.dispatchEvent(new Event(ANCHOR_REVEAL, { bubbles: true }));
   const done = () => opts.focus !== false && focusHeading(target);
   // force: the mobile menu stops Lenis while open, and a link click closes it in the same task.
   lenis.scrollTo(landingTop(target), { immediate, force: true, onComplete: done });

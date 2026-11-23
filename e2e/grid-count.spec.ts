@@ -34,6 +34,8 @@ test.describe("desktop grids follow the card count", () => {
 
     test(`two work cards sit side by side at equal width (${lang})`, async ({ page }) => {
       await open(page, `/${lang}`, WORK);
+      // Home shows three (D164); with the collection hidden, two remain.
+      await page.locator(WORK).nth(2).evaluate((e) => e.remove());
       await expect(page.locator(WORK)).toHaveCount(2);
       const [a, b] = [await box(page, WORK, 0), await box(page, WORK, 1)];
       near(a.width, b.width);
@@ -44,9 +46,8 @@ test.describe("desktop grids follow the card count", () => {
       }
     });
 
-    test(`a third work card brings back the designed grid (${lang})`, async ({ page }) => {
+    test(`the third work card (the rooms collection) brings back the designed grid (${lang})`, async ({ page }) => {
       await open(page, `/${lang}`, WORK);
-      await cloneInPlace(page, WORK, 1);
       await expect(page.locator(WORK)).toHaveCount(3);
       const [a, b, c] = [await box(page, WORK, 0), await box(page, WORK, 1), await box(page, WORK, 2)];
       expect(a.width).toBeGreaterThan(b.width * 1.2);
@@ -93,7 +94,7 @@ test.describe("mobile keeps one column", () => {
   test("work cards and the proof card stack full width", async ({ page }) => {
     await open(page, "/en", "#work .work-card");
     const grid = await box(page, "#work .work-grid");
-    for (let i = 0; i < 2; i++) near((await box(page, "#work .work-card", i)).width, grid.width);
+    for (let i = 0; i < 3; i++) near((await box(page, "#work .work-card", i)).width, grid.width);
     await open(page, "/en/services/software-digital", "#proof .sw-proof-card");
     near((await box(page, "#proof .sw-proof-card")).width, (await box(page, "#proof .sw-proof-grid")).width);
   });

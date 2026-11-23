@@ -3,7 +3,7 @@ import { PHASES, process as p } from "@/content/software/page";
 
 /**
  * How we work (brief §7): Discover → Design → Build → Launch → Support, each with what happens and
- * what the client receives. Horizontal on desktop, vertical on mobile; the rail fills from
+ * what the client receives. Horizontal on desktop, a sideways row of cards on phones (D161); the rail fills from
  * inline-start as it scrolls (GSAP scrub, no pin; mirrored in Arabic), and each step lights as
  * the fill reaches it. The still is the full rail, every step lit.
  */
@@ -21,7 +21,7 @@ export function ProcessTimeline({ locale }: { locale: Locale }) {
           <span className="sw-steps-rail" aria-hidden="true">
             <i className="sw-steps-fill" />
           </span>
-          <ol className="sw-steps">
+          <ol className="sw-steps" tabIndex={0} aria-labelledby="process-title">
             {PHASES.map((id, i) => {
               const s = p.steps[id];
               return (

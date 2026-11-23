@@ -1,36 +1,28 @@
-import { getImageProps } from "next/image";
 import type { Locale } from "@/content";
+import { media } from "@/content/media";
 import type { ServiceVisual as Visual } from "@/content/service-visuals";
 import { MaskReveal } from "@/components/motion/mask-reveal";
-import { capSrcSet } from "@/lib/srcset";
-import { ServiceDrawing } from "./service-drawings";
+import { FillImage } from "@/components/ui/media-image";
+
+const SIZES = "(min-width: 900px) 720px, calc(100vw - 32px)";
 
 /**
  * A service section's lightweight visual while its module waits for v1.1 (D100): a graded real
- * photo, or a hairline drawing in the theme's colours. Static and server-rendered, in a fixed
- * 16:9 box so nothing shifts; lazy-loaded (below the opening).
+ * photo (its own file, or a registry picture). Static and server-rendered, in a fixed box
+ * so nothing shifts (16:9; a portrait or square photo keeps its own shape, at most 480px tall, so a
+ * published post is never cropped); lazy-loaded (below the opening).
  */
+const TALL = 480;
 export function ServiceVisual({ visual, locale }: { visual: Visual; locale: Locale }) {
-  if (visual.kind === "drawing") {
-    return (
-      <div className="svc-visual" data-visual="drawing">
-        <ServiceDrawing drawing={visual.drawing} />
-      </div>
-    );
-  }
-  const { props } = getImageProps({
-    src: visual.src,
-    alt: visual.alt[locale],
-    fill: true,
-    sizes: "(min-width: 900px) 720px, calc(100vw - 32px)",
-    className: "object-cover",
-  });
+  const photo = visual.kind === "media" ? media(visual.id) : { file: visual.src, width: visual.width, height: visual.height, alt: visual.alt };
+  if (!photo) return null;
+  const ratio = photo.width / photo.height;
+  const own = ratio < 4 / 3 ? { aspectRatio: `${photo.width} / ${photo.height}`, maxInlineSize: `${Math.round(TALL * ratio)}px` } : undefined;
   // The photo opens with a mask wipe from inline-start as it enters (D109; MaskReveal, GSAP, once).
   return (
-    <figure className="svc-visual" data-visual="photo">
+    <figure className="svc-visual" data-visual="photo" style={own}>
       <MaskReveal className="absolute inset-0 overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text -- getImageProps output (alt included); the srcset is trimmed (D51) */}
-        <img {...props} srcSet={capSrcSet(props.srcSet, visual.width)} />
+        <FillImage src={photo.file} width={photo.width} alt={photo.alt?.[locale] ?? ""} sizes={SIZES} />
       </MaskReveal>
     </figure>
   );

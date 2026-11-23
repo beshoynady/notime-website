@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
 import en from "@/messages/en.json";
 import ar from "@/messages/ar.json";
-import { SECTION_PIN_LIMIT, sceneProblems } from "@/lib/scene-math";
+import { SECTION_PIN_LIMIT, sceneProblems, visibleLayers } from "@/lib/scene-math";
 import { getCategories, getServices } from "..";
 import { EVENTS_OPENING } from "./events-hospitality";
-import { allScenes, allSectionScenes, DRAFT_LAB_ID, DRAFT_SCENE, getLabScene, getScene, getSectionScene, LAB_IDS, labCategory, labScene } from ".";
+import { allScenes, allSectionScenes, getSceneImage, DRAFT_LAB_ID, DRAFT_SCENE, getLabScene, getScene, getSectionScene, LAB_IDS, labCategory, labScene } from ".";
 
 const scenes = allScenes();
 const sectionScenes = new Set(allSectionScenes());
@@ -31,12 +31,11 @@ describe("scenes, public and in review", () => {
     expect(getLabScene("software-digital")).toBe(DRAFT_SCENE);
   });
 
-  it("the majlis plays in section V (hospitality), public and on the lab route: pinned on desktop, passing on mobile (D74)", () => {
-    const hospitality = getServices("events-hospitality").find((s) => s.anchor === "hospitality")!;
-    expect(getSectionScene(hospitality, true)?.id).toBe("events-majlis");
-    expect(getSectionScene(hospitality, true)?.mode).toEqual({ desktop: "pin", mobile: "pass" });
-    expect(getSectionScene(hospitality, false)?.id).toBe("events-majlis");
-    const others = getCategories().flatMap((c) => getServices(c.slug)).filter((s) => s !== hospitality);
+  it("every Events section has its scene, public and on the lab route, and no other category has one yet (D153)", () => {
+    const events = getServices("events-hospitality");
+    for (const s of events) expect(getSectionScene(s, false)?.id, s.anchor).toBe(getSectionScene(s, true)?.id);
+    expect(events.map((s) => getSectionScene(s, false)?.id)).toEqual(["events-conferences", "events-exhibitions", "events-launches", "events-galas", "events-majlis", "events-stage"]);
+    const others = getCategories().flatMap((c) => getServices(c.slug)).filter((s) => !events.includes(s));
     expect(others.filter((s) => getSectionScene(s, true))).toEqual([]);
   });
 
@@ -47,8 +46,49 @@ describe("scenes, public and in review", () => {
     expect(lined("mobile")).toEqual(lined("desktop"));
   });
 
+  it("the Evening opening is photographs only: the room at night, the light, the tables, the entrance (D153, D154)", () => {
+    expect(EVENTS_OPENING.layers.filter((l) => l.fx === "ev-hall")).toEqual([]);
+    for (const l of EVENTS_OPENING.layers.filter((x) => x.slot)) expect(getSceneImage(l.slot!)?.src, l.id).toBeTruthy();
+    const plate = EVENTS_OPENING.layers.find((l) => l.level === 0 && !l.keys);
+    expect(plate?.slot).toBe("ev-open-night");
+    const entrance = EVENTS_OPENING.layers.find((l) => l.slot === "private-celebrations-3");
+    expect(entrance?.enter?.shot).toBe(3);
+  });
+
+  it("a scene drops the layers whose picture is hidden, and keeps its shots (fill or hide, D78)", () => {
+    const shown = visibleLayers(EVENTS_OPENING, (slot) => slot !== "private-celebrations-3");
+    expect(shown.layers.some((l) => l.slot === "private-celebrations-3")).toBe(false);
+    expect(shown.layers.length).toBe(EVENTS_OPENING.layers.length - 1);
+    expect(shown.shots).toEqual(EVENTS_OPENING.shots);
+  });
+
+  it("the Events sections tell their story in photographs: I–IV pass, the majlis and the stage pin from 1024px (D153)", () => {
+    const drawn = new Set(["shade", "glow", "frame", "scrim", "blur"]);
+    const modes: Record<string, unknown> = {
+      "events-conferences": "pass",
+      "events-exhibitions": "pass",
+      "events-launches": "pass",
+      "events-galas": "pass",
+      "events-majlis": { desktop: "pin", mobile: "pass" },
+      "events-stage": { desktop: "pin", mobile: "pass" },
+    };
+    for (const service of getServices("events-hospitality")) {
+      const scene = getSectionScene(service, false)!;
+      expect(scene.mode, scene.id).toEqual(modes[scene.id]);
+      for (const l of scene.layers) {
+        if (l.slot) expect(getSceneImage(l.slot)?.src, `${scene.id}:${l.id}`).toBeTruthy();
+        if (l.fx) expect(drawn.has(l.fx), `${scene.id}:${l.id} fx-${l.fx}`).toBe(true);
+      }
+      // A photograph under everything on both widths: the phone never opens on an empty frame.
+      for (const width of ["desktop", "mobile"] as const) {
+        const shown = scene.layers.filter((l) => (width === "mobile" ? l.mobile : l.desktop !== false));
+        expect(shown.some((l) => l.level === 0 && l.slot), `${scene.id} ${width}`).toBe(true);
+      }
+    }
+  });
+
   it("every scene is listed once for the rule checks", () => {
-    expect(scenes.map((s) => s.id).sort()).toEqual(["draft", "editorial-opening", "events-majlis", "events-opening", "studio-opening", "workshop-opening"]);
+    expect(scenes.map((s) => s.id).sort()).toEqual(["draft", "editorial-opening", "events-conferences", "events-exhibitions", "events-galas", "events-launches", "events-majlis", "events-opening", "events-stage", "studio-opening", "workshop-opening"]);
   });
 });
 

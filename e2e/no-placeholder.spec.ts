@@ -1,6 +1,6 @@
 import { expect, test, type APIRequestContext } from "@playwright/test";
 import { getCategories } from "../src/content";
-import { workItems } from "../src/content/work";
+import { workCards } from "../src/content/work";
 import { gotoReady } from "./helpers";
 
 /**
@@ -13,7 +13,7 @@ const ROUTES = [
   "/services",
   ...getCategories().map((c) => `/services/${c.slug}`),
   "/work",
-  ...workItems.map((w) => `/work/${w.slug}`),
+  ...workCards().map((w) => `/work/${w.slug}`),
   "/about",
   "/products/minute-zero",
   "/products/peak-hour",

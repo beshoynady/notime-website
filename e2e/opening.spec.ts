@@ -102,15 +102,17 @@ for (const locale of ["en", "ar"] as const) {
 /**
  * N06 (A): the opening starts with the finished scene. The hero is the LayeredScene's still
  * (unpinned, one screen) with the head, the last shot line as the lead and "Request a quote".
- * Nothing pins at any width: the pinned build scene that followed it on desktop is v1.1.
+ * A scene marked `hero` (D154, Events) plays its film pinned from 1024px instead, with the same
+ * head on screen from the first frame, and is the still below 1024px.
  */
+const plays = (slug: Parameters<typeof getScene>[0], isMobile: boolean) => !!getScene(slug)?.hero && !isMobile;
 const SCENE_CATEGORIES = ["events-hospitality", "creative-production", "marketing-brand", "production-print-gifts"] as const;
 const MESSAGES = { en, ar } as const;
-const hero = (page: Page) => page.locator('.cat-opening .scene[data-mode="still"]');
+const hero = (page: Page) => page.locator('.cat-opening .scene[data-mode]');
 
 for (const slug of SCENE_CATEGORIES) {
   for (const locale of ["en", "ar"] as const) {
-    test(`${locale}/${slug}: the hero shows the finished scene at once`, async ({ page }) => {
+    test(`${locale}/${slug}: the hero shows the finished scene at once`, async ({ page, isMobile }) => {
       const scenes = MESSAGES[locale].scenes as Record<string, Record<string, string>>;
       const [group, key] = stillLead(getScene(slug)!.shots)!.split(".");
       await gotoReady(page, `/${locale}/services/${slug}`);
@@ -122,6 +124,8 @@ for (const slug of SCENE_CATEGORIES) {
       await expect(quote).toHaveAttribute("href", `/${locale}/contact?category=${slug}`);
       await expect(quote).toBeInViewport();
       expect(await page.evaluate(() => scrollY)).toBe(0);
+      // A playing hero starts at its first frame, driven by GSAP; the head above is what matters.
+      if (plays(slug, isMobile)) return await expect(hero(page)).toHaveAttribute("data-motion", "desktop");
       // The end frame: every entrance done, nothing clipped, never driven by GSAP.
       const layers = hero(page).locator("[data-layer]");
       expect(await layers.count()).toBeGreaterThan(0);
@@ -143,10 +147,8 @@ for (const slug of SCENE_CATEGORIES) {
     test(`${locale}/${slug}: the LCP is the hero's text or an eager, high-priority hero image`, async ({ page }) => {
       await gotoReady(page, `/${locale}/services/${slug}`);
       const lcp = await heroLcp(page);
-      // The Workshop's phone still has no image file: its largest paint is an inline drawing
-      // (no request), reported to the controller as the one exception to the ruling.
-      const allowed = slug === "production-print-gifts" ? ["h1", "lead", "image", "drawing"] : ["h1", "lead", "image"];
-      expect(allowed, lcp.label).toContain(lcp.kind);
+      // Every opening is photographs now (D160 took the Workshop's last drawing): no exception.
+      expect(["h1", "lead", "image"], lcp.label).toContain(lcp.kind);
       // Every hero image that shows at this width with high priority is eager (the LCP candidate).
       const candidates = await hero(page)
         .locator('img[fetchpriority="high"]')
@@ -172,7 +174,7 @@ for (const slug of SCENE_CATEGORIES) {
     await gotoReady(page, `/en/services/${slug}`);
     await page.waitForLoadState("networkidle");
     const files = await page
-      .locator('.cat-opening .scene[data-mode="still"] .scene-layer:not([data-mobile]) img')
+      .locator('.cat-opening .scene[data-mode] .scene-layer:not([data-mobile]) img')
       .evaluateAll((imgs) => imgs.map((i) => new URL((i as HTMLImageElement).getAttribute("src")!, location.href).searchParams.get("url") ?? ""));
     for (const file of files.filter(Boolean)) expect(requested.filter((u) => u.includes(file)), file).toEqual([]);
   });
@@ -191,13 +193,17 @@ test.fixme("desktop: the build scene's last line, the hero's lead, is read once"
 
 // The owner's scope cut (2026-11-18): the opening is the still hero only, at every width. No pin,
 // no ScrollTrigger and no reserved band after it: the intro, then the services, follow the hero.
+// A `hero` scene (D154) is the exception from 1024px; below that it holds to the same rule.
 for (const slug of SCENE_CATEGORIES) {
-  test(`${slug}: the opening has no pin at any width`, async ({ page }) => {
+  test(`${slug}: the opening has no pin where it is the still`, async ({ page, isMobile }) => {
+    test.skip(plays(slug, isMobile), "this hero pins here (see the next test)");
     await gotoReady(page, `/en/services/${slug}`);
     await page.waitForTimeout(1500); // past any late ScrollTrigger build
     const opening = page.locator("main .cat-opening");
     await expect(opening.locator(".pin-spacer")).toHaveCount(0);
-    await expect(opening.locator(".scene-pin")).toHaveCount(0);
+    // A hero keeps its wrapper below 1024px, reserving nothing (--pin-m 0).
+    if (getScene(slug)?.hero) expect(await opening.locator(".scene-pin").evaluate((el) => (el as HTMLElement).offsetHeight - el.firstElementChild!.getBoundingClientRect().height)).toBe(0);
+    else await expect(opening.locator(".scene-pin")).toHaveCount(0);
     await expect(opening.locator(".scene[data-motion]")).toHaveCount(0); // no SceneDirector
     // Scrolled half a screen, the hero moves with the page (nothing holds it in place).
     const top0 = await hero(page).evaluate((el) => el.getBoundingClientRect().top);
@@ -209,9 +215,29 @@ for (const slug of SCENE_CATEGORIES) {
     // No empty band: the intro starts where the hero ends, and the opening ends after the intro.
     const [heroBottom, afterTop, afterBottom, openingBottom] = await page.evaluate(() => {
       const r = (s: string) => document.querySelector(s)!.getBoundingClientRect();
-      return [r('.cat-opening .scene[data-mode="still"]').bottom, r(".cat-opening-after").top, r(".cat-opening-after").bottom, r(".cat-opening").bottom];
+      return [r('.cat-opening .scene[data-mode]').bottom, r(".cat-opening-after").top, r(".cat-opening-after").bottom, r(".cat-opening").bottom];
     });
     expect(Math.abs(afterTop - heroBottom)).toBeLessThanOrEqual(1);
     expect(Math.abs(openingBottom - afterBottom)).toBeLessThanOrEqual(1);
   });
 }
+
+test("events: the hero pins its film from 1024px, the head stays on screen, and the intro follows the pin", async ({ page, isMobile }) => {
+  test.skip(isMobile, "the film plays where scenes pin (D151)");
+  await gotoReady(page, "/en/services/events-hospitality");
+  await expect(hero(page)).toHaveAttribute("data-mode", "hero");
+  await expect(hero(page)).toHaveAttribute("data-motion", "desktop");
+  await expect(page.locator("main .cat-opening .pin-spacer")).toHaveCount(1);
+  // First frame: the night plate, the lit room still closed (wipe 0), the head readable.
+  await expect(page.locator("h1#category-title")).toBeInViewport();
+  await expect(page.locator(".cat-opening a.cat-opening-quote")).toBeInViewport();
+  // Half way through the film the scene is still held, and so is the head.
+  await page.evaluate(() => window.scrollTo(0, innerHeight));
+  await page.waitForTimeout(400);
+  expect(await hero(page).evaluate((el) => Math.round(el.getBoundingClientRect().top))).toBe(0);
+  await expect(page.locator("h1#category-title")).toBeInViewport();
+  // After the pin the intro sits right under the released scene, with no empty band.
+  await page.evaluate(() => window.scrollTo(0, document.querySelector(".cat-opening-after")!.getBoundingClientRect().top + scrollY - innerHeight / 2));
+  const gap = () => page.evaluate(() => document.querySelector(".cat-opening-after")!.getBoundingClientRect().top - document.querySelector(".cat-opening .scene")!.getBoundingClientRect().bottom);
+  await expect.poll(async () => Math.abs(await gap())).toBeLessThanOrEqual(1);
+});

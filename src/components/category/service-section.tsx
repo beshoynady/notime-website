@@ -1,10 +1,9 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { ModulePlaceholder } from "@/components/modules/module-placeholder";
 import { ModuleSlot } from "@/components/modules/module-slot";
-import { STATIC_FALLBACKS } from "@/components/modules/static-fallbacks";
-import { MajlisArt } from "./majlis-art";
-import { PhotoStack } from "@/components/sections/photo-story/photo-stack";
 import { ServiceVisual } from "./service-visual";
+import { ServiceGallery } from "./service-gallery";
+import { GALLERIES } from "@/content/galleries";
 import { serviceVisual } from "@/content/service-visuals";
 import { ButtonLink } from "@/components/ui/button";
 import { Numeral } from "@/components/ui/numeral";
@@ -24,36 +23,34 @@ import { serviceRef } from "@/lib/review";
 /**
  * One service on its category page (spec §4, part 3): `section#<anchor>`, named by its H2 so the
  * anchor utility focuses the heading on arrival (D53). Its signature module loads into a slot
- * around its static fallback (STATIC_FALLBACKS: the module's final state, server-rendered in the
- * same box), or the empty one when it has none (Task 2.4). Related work is one block per page
+ * (ModuleSlot) around the empty placeholder (Task 2.4). Related work is one block per page
  * (RelatedWork, before the FAQ).
  *
- * A section with its own scene (the Events majlis, D64) sets its numeral, H2 and promise over the
- * scene's lower third; the lab route shows it as the animatic.
+ * A section with its own scene (every Events section, D153) sets its numeral, H2 and promise over
+ * the scene's lower third; the lab route shows it as the animatic.
  */
 export async function ServiceSection({
   service,
   tone,
   lab = false,
   hook,
-  light = false,
 }: {
   service: Service;
   tone: "dark" | "light";
   lab?: boolean;
   /** The section's one-line hook, under the H2 (service-hooks.ts); none keeps the plain head. */
   hook?: Localized<string>;
-  /** The Evening's own light per section (themes/evening.css, EveningDirector). */
-  light?: boolean;
 }) {
   const locale = (await getLocale()) as Locale;
   const t = await getTranslations("category");
   const title = service.title[locale];
   const titleId = `${service.anchor}-title`;
   const scene = getSectionScene(service, lab);
-  const Static = lab ? undefined : STATIC_FALLBACKS[service.signatureModule];
-  // A section whose module waits for v1.1 shows a lightweight visual instead (D100).
-  const visual = lab || Static ? undefined : serviceVisual(service.slug);
+  const moduleKey = service.signatureModule;
+  // A section's visual (a photograph, or a drawing while its module waits, D100) stands in for the
+  // module; a photo scene has neither: Rand's own work follows it as a strip (D153).
+  const visual = lab || scene ? undefined : serviceVisual(service.slug);
+  const gallery = GALLERIES[service.slug];
   const head = (
     <header className="svc-head">
       <Numeral className="svc-num">
@@ -74,7 +71,6 @@ export async function ServiceSection({
       data-scene-section={scene ? "" : undefined}
     >
       <SectionRef id={serviceRef(service)} />
-      {light && !scene && <span className="svc-light" aria-hidden="true" />}
       {scene ? (
         <div className="svc-scene">
           <LayeredScene
@@ -84,19 +80,11 @@ export async function ServiceSection({
             overlayClassName="svc-scene-overlay"
             pinUnderBars
           >
-            {/* The majlis's drawn foreground (the dallah's pour) rides the scene's own range. */}
-            {scene.id === "events-majlis" && !lab && (
-              <MajlisArt scene={scene} />
-            )}
             {head}
           </LayeredScene>
         </div>
       ) : (
         head
-      )}
-      {/* The private client's own entry (§6.3, D109): stacking real photos, a warm line, the brief preset. */}
-      {service.slug === "galas-private-celebrations" && !lab && (
-        <PhotoStack anchor={service.anchor} locale={locale} tone={tone} />
       )}
       <div className="svc-deliver">
         <h3 className="text-eyebrow">{t("deliverTitle")}</h3>
@@ -107,30 +95,27 @@ export async function ServiceSection({
           ))}
         </ul>
       </div>
-      {lab ? (
+      {lab && moduleKey ? (
         // The animatic (lab route, never public): a flat box named by its module key.
         <div
           className="svc-module module-placeholder"
-          data-module={service.signatureModule}
+          data-module={moduleKey}
         >
-          <p className="text-eyebrow">{service.signatureModule}</p>
+          <p className="text-eyebrow">{moduleKey}</p>
         </div>
       ) : visual ? (
         <ServiceVisual visual={visual} locale={locale} />
-      ) : (
+      ) : moduleKey ? (
         <ModuleSlot
-          moduleKey={service.signatureModule}
+          moduleKey={moduleKey}
           titleId={titleId}
           service={service}
           locale={locale}
         >
-          {Static ? (
-            <Static service={service} locale={locale} />
-          ) : (
-            <ModulePlaceholder />
-          )}
+          <ModulePlaceholder />
         </ModuleSlot>
-      )}
+      ) : null}
+      {gallery && !lab && <ServiceGallery ids={gallery} label={t("galleryLabel", { service: title })} locale={locale} />}
       {/* Public pages go straight to the brief with this service preset (D102); the lab keeps the
           quote block as its target. */}
       <ButtonLink

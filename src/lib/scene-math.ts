@@ -1,5 +1,8 @@
 import type { EnterFrom, SceneConfig, SceneLayer, SceneMode, SceneShot, Viewport } from "@/content/scenes/types";
 
+/** Scenes pin from this width (D151, the owner's "laptop"); below it they pass. globals.css and layered-scene.css use the same number. */
+export const PIN_MIN_WIDTH = 1024;
+
 /** The opening's pinned scroll, at most (D64): vh of scroll per viewport. */
 export const PIN_LIMIT = { desktop: 2.0, mobile: 1.2 } as const;
 /** A scene inside a service section (the majlis, D74 P2): a short pin on desktop, none on mobile. */
@@ -8,6 +11,11 @@ export const SECTION_PIN_LIMIT = { desktop: 0.6, mobile: 0 } as const;
 const DRIFT_VH = 14;
 const MAX_IMAGE_LAYERS = 5;
 const MAX_MOBILE_IMAGE_LAYERS = 3;
+
+/** Whether a layer is rendered and animated at this width: `mobile` below PIN_MIN_WIDTH, and every
+ * layer but a phone-only one (`desktop: false`, D153) from it. */
+export const showsOn = (layer: Pick<SceneLayer, "mobile" | "desktop">, viewport: Viewport): boolean =>
+  viewport === "mobile" ? layer.mobile : layer.desktop !== false;
 
 /** Where the pinned scroll ends at this width: the end of its last shot (vh). */
 export function pinLength(shots: SceneShot[], viewport: Viewport): number {
@@ -111,25 +119,41 @@ export interface ImageLoading {
   phoneGate: boolean;
 }
 
+/** How a LayeredScene renders (D154): `build` scrubs a pinned scene (lazy images); `still` is its end
+ * frame at every width; `hero` pins from PIN_MIN_WIDTH and is the still below it. */
+export type RenderMode = "build" | "still" | "hero";
+
 /**
- * How each image layer of a scene loads (N06), by layer id; layers without a file are left out.
- * The still (a category's hero) is the first paint: the first image its end frame shows is the
- * LCP candidate, eager with high priority at every width it shows (gated from phones when the
- * layer is desktop-only); the other phone layers it shows load eagerly, desktop-only or hidden
- * ones lazily (a lazy image in a `display: none` box is never fetched). The build scene follows
- * the hero and reuses its files from the cache, so it never competes: all lazy.
+ * How each image layer of a scene loads (N06), by layer id; layers without a slot are left out
+ * (the caller has already dropped the ones without a file: visibleLayers). The still (a category's
+ * hero) is the first paint: the first image its end frame shows is the LCP candidate, eager with
+ * high priority at every width it shows (gated from phones when the layer is desktop-only); the
+ * other phone layers it shows load eagerly, desktop-only or hidden ones lazily (a lazy image in a
+ * `display: none` box is never fetched). A hero also loads its first desktop frame first (its rest
+ * state); a section scene (`build`) is below the fold, so it is all lazy.
  */
-export function imageLoading(scene: SceneConfig, mode: "build" | "still", hasFile: (slot: string) => boolean): Record<string, ImageLoading> {
+export function imageLoading(scene: SceneConfig, mode: RenderMode): Record<string, ImageLoading> {
   const out: Record<string, ImageLoading> = {};
-  let first = true;
+  let firstStill = true;
+  let firstRest = true;
   for (const layer of scene.layers) {
-    if (!layer.slot || !hasFile(layer.slot)) continue;
+    if (!layer.slot) continue;
+    // A phone-only plate is hidden on laptops, so it never loads eagerly (an eager image loads even
+    // when hidden) and never takes the first place.
+    if (!showsOn(layer, "desktop")) {
+      out[layer.id] = { eager: false, high: false, phoneGate: false };
+      continue;
+    }
     const end = { ...layer.style, ...stillState(layer) };
-    const shown = mode === "still" && end.opacity !== 0 && end.wipe !== 0;
-    const high = shown && first;
-    const eager = shown && (layer.mobile || high);
-    out[layer.id] = { eager, high, phoneGate: eager && !layer.mobile };
-    if (shown) first = false;
+    // The still shows on phones in a hero (D154) and at every width in a still.
+    const atStill = mode !== "build" && end.opacity !== 0 && end.wipe !== 0 && (mode === "still" || layer.mobile);
+    // A hero's first desktop frame: the rest state, before any entrance.
+    const atRest = mode === "hero" && !layer.enter && layer.style?.opacity !== 0 && layer.style?.wipe !== 0;
+    const high = (atStill && firstStill) || (atRest && firstRest);
+    const eager = high || ((atStill || atRest) && layer.mobile);
+    out[layer.id] = { eager, high, phoneGate: eager && !showsOn(layer, "mobile") };
+    if (atStill) firstStill = false;
+    if (atRest) firstRest = false;
   }
   return out;
 }
@@ -152,4 +176,14 @@ export function layerSizes(box: { inline: string; block?: string }): string {
   if (Number.isNaN(start) || Number.isNaN(end)) return "100vw";
   const share = Math.max(1, Math.round(100 - start - end));
   return `${share}vw`;
+}
+
+/**
+ * The scene as a page shows it: image layers whose picture is hidden or missing are dropped (fill
+ * or hide, D78; media.ts `hidden`), so a beat without its photo simply doesn't play. Code-only
+ * layers (L3 light) and the shots stay.
+ */
+export function visibleLayers(scene: SceneConfig, has: (slot: string) => boolean): SceneConfig {
+  const layers = scene.layers.filter((l) => !l.slot || has(l.slot));
+  return layers.length === scene.layers.length ? scene : { ...scene, layers };
 }

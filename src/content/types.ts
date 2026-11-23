@@ -47,8 +47,10 @@ export interface Category {
   /** The search title and description, when they should say more than the card's title and summary. */
   metaTitle?: Localized<string>;
   metaDescription?: Localized<string>;
-  /** 4:5 image slot id (mega menu, cards). */
+  /** 4:5 image slot id (mega menu; the home card when it has no `photo`). */
   image: string;
+  /** The home card's photograph, a registry id (media.ts; visual-stories.md "Five crafts"). Hidden or unset: `image`. */
+  photo?: string;
   /** Category page design (D57, docs/design/category-pages.md §5). */
   theme: CategoryTheme;
   /** Page intro under the H1 (2–3 sentences). */
@@ -63,25 +65,14 @@ export type CategoryTheme = "evening" | "studio" | "editorial" | "workshop" | "i
 
 /** One signature module per service (docs/design/category-pages.md §6). */
 export type ModuleKey =
-  | "agenda-timeline"
-  | "stand-assembly"
-  | "launch-reveal"
-  | "candle-moodboard"
-  | "menu-majlis"
-  | "stage-lights"
   | "aperture-gallery"
   | "scrub-reel"
-  | "motion-playground"
   | "idea-to-image"
   | "set-model"
-  | "rental-categories"
   | "mark-build"
   | "phone-feed"
   | "example-dashboard"
-  | "content-calendar"
-  | "press-release"
   | "campaign-funnel"
-  | "human-scale"
   | "build-layers"
   | "unboxing"
   | "gift-configurator"
@@ -115,7 +106,8 @@ export interface Service {
    * standalone page (D57).
    */
   anchor: string;
-  signatureModule: ModuleKey;
+  /** None when the section tells its story as a photo scene instead (Events I–III, D153). */
+  signatureModule?: ModuleKey;
   /** "What we deliver": 4–6 points, the same count in both locales. */
   points: Localized<string[]>;
   /** Slugs of real, client-approved work items. Empty until OQ #17 is answered. */

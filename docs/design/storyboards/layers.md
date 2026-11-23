@@ -62,46 +62,15 @@
 
 ## IV · Production, Print & Gifts (grade: "Workshop", champagne paper, cocoa ink)
 
-| Slot | Scene · level | Aspect / size | Source | Prompt | BG removal | Depth | Alt |
-|---|---|---|---|---|---|---|---|
-| `pg-open-bench` | Opening · L0 | 16:9 + 9:16 | AI | House style. A dark walnut worktable seen from directly above, bare, warm side light, faint tool marks, nothing on it. | none | 0.15 | decorative |
-| `pg-open-paper` + `pg-open-ribbon` | Opening · L2 | from one 4:5 generation, two cutouts | AI | House style, flat lay from above. A small stack of ivory card stock, a sheet of grey board, and a spool of champagne satin ribbon, spaced apart, isolated, on a plain neutral warm-grey background. No text. | Canva remove-background, then split into two files | 1.0 / 1.2 | decorative |
-| `pg-open-box-base` + `pg-open-box-lid` | Opening · L1 | from one 4:5 generation, two cutouts | AI | House style. A rigid gift box in deep espresso with its matching lid held a little above it, straight-on view, isolated, on a plain neutral warm-grey background. No logos, text or emblems. | Canva remove-background; the lid is split from the base with a manual SVG mask | 0.5 | decorative |
-| `pg-open-gift` | Opening · L2 (desktop; D109) | 1034 × 616 trimmed | **Real**, `gifts-1` (p23-3, gold Dubai-skyline gift, 1280 × 719, A) | The finished gift arrives near the lens as the box closes (shot 4) and drifts faster than the rigs, ending clear of the service rail. Replaces the paper cutout as a layer (the slot stays documented). | rembg `isnet-general-use` with alpha matting; edges checked on espresso and champagne | 0.9 | evidence (alt) |
-
-**Totals:**
-- **Opening, mobile:** 3 layers, ≈ 270 KB.
-- **AI generations:** 4.
-- **Background removals:** 3, giving 4 cutouts.
-- **Real gift photos** (`gifts-1`, `gifts-2`) aren't used in the scene: one is a bookmark, the other a client mock-up pending OQ #17.
+**Superseded (D160, 2026-11-22):** the opening is in photographs and its layers live in the image registry (`src/content/media.ts`): `pg-open-materials` and `pg-open-press` (stock, `docs/content/recipes/print.json`) and NO TIME's `gifts-1` as the frame. No AI generation and no cutout (the `pg-open-gift` rembg cutout is removed). The drawn press sheet, board, dieline, box and ribbon are gone.
 
 ## III · Marketing & Brand (grade: "Editorial", ivory paper, espresso ink)
 
-| Slot | Scene · level | Aspect / size | Source | Prompt / note | BG removal | Depth | Alt |
-|---|---|---|---|---|---|---|---|
-| `mb-open-paper` | Opening · L0 | 16:9 + 9:16 | AI | House style. A macro of plain ivory cotton paper filling the frame, soft raking light showing its fibres, no edges, no text. | none | 0.15 | decorative |
-| `mb-open-board` | Opening · L1 | existing 4:5 1136 × 1408 | **Re-used** AI image `cat-marketing-brand-4x5` (approved, D50) | No new generation. | none (shown as a rectangle in its grid cell) | 0.5 | decorative |
-| `mb-open-swatches` | Opening · L2 | 4:5, trimmed | AI | House style, from above. A fan of colour swatch cards in espresso, cocoa, taupe, champagne and ivory, isolated, on a plain neutral warm-grey background. No text. | Canva remove-background | 1.1 | decorative |
-| `mb-open-pen` | Opening · L2 | 4:5, trimmed | AI | House style. A brass fountain pen lying diagonally, isolated, on a plain neutral warm-grey background. No logo. | Canva remove-background | 1.3 | decorative |
-
-**Totals:**
-- **Opening, mobile:** 2 layers, ≈ 170 KB.
-- **AI generations:** 4.
-- **Background removals:** 2.
+**Superseded (D159, 2026-11-22):** the opening is in photographs and its layers live in the image registry (`src/content/media.ts`): `mb-open-desk` (one stock desk, shown under an ivory wash then clean, `docs/content/recipes/marketing.json`) and the league's real post `uae-pro-league-4` as the frame. No AI generation and no cutout. The drawn spread (paper, folio, grid, rules, board, swatches, pen, band, seal) is gone.
 
 ## II · Creative Production (grade: "Studio", night blacks, a single warm key)
 
-| Slot | Scene · level | Aspect / size | Source | Prompt / note | BG removal | Depth | Alt |
-|---|---|---|---|---|---|---|---|
-| `cp-open-studio` | Opening · L0 | 16:9 + 9:16 | AI | House style. An empty black-box studio with a curved seamless backdrop, one work light making a soft pool on the floor, haze, no equipment, no people. | none | 0.15 | decorative |
-| `cp-open-slate` + `cp-open-slate-stick` | Opening · L2 | from one 4:5 generation | AI | House style. A blank film clapperboard (slate) with its stick open, straight-on, with no writing, numbers or logos on it, isolated, on a plain neutral warm-grey background. | Canva remove-background; the stick is split with a manual SVG mask | 1.0 | decorative |
-| `cp-open-camera` | Opening · L1 | cut from the existing 4:5 | **Re-used** AI image `cat-creative-production-4x5` (a camera on a dolly, approved) | No new generation. | Canva remove-background | 0.6 | decorative |
-| `cp-open-frame` | Opening · L1 | 1187 × 668 | **Real**, `catering-4` (p25-3, dessert boards, food styling, grade B) | Shown at most ~1200 CSS px wide. It's the photo the profile places under Photography. | none | 0.4 | **meaningful**: "Dessert boards styled and photographed for an event." / «ألواح حلويات منسّقة ومصوّرة لإحدى الفعاليات.» |
-
-**Totals:**
-- **Opening, mobile:** 3 layers, ≈ 280 KB.
-- **AI generations:** 3.
-- **Background removals:** 2, giving 3 cutouts.
+**Superseded (D158, 2026-11-21):** the opening is in photographs and its layers live in the image registry (`src/content/media.ts`): `cp-open-dark` and `cp-open-lit` (one stock studio graded twice, `docs/content/recipes/creative.json`) and Rand's `catering-4` as the frame. No AI generation and no cutout. The drawn studio (slate, letterbox, timecodes, flash) is gone.
 
 ---
 

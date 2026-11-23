@@ -1,26 +1,21 @@
-import Image from "next/image";
 import { FrameCorners } from "@/components/ornaments/frame-corners";
-import { CaseVisual } from "@/components/ui/case-visual";
+import { MediaImage } from "@/components/ui/media-image";
 import type { Locale } from "@/content";
-import type { WorkView } from "@/content/work";
+import type { MediaEntry } from "@/content/media";
 import "@/components/motion/duotone.css";
 
 /**
- * A case's media box (16:9 by default; the parent sizes it). Named, with the client's approval:
- * its own first photo, in duotone (colour on hover). Anonymous: the drawing of the work (CaseVisual, D106), never a stand-in
- * photo and never a branded one (work.test.ts).
+ * A Work card's or case's media box (16:9 by default; the parent sizes it): its own photo from the
+ * registry, in duotone (colour on hover). A case's cover shows its client (D150, Rand approves); a
+ * collection's is Rand's own work (D164). Never a stand-in photo (D106); without one the box is
+ * left out by the caller.
  */
-export function CaseMedia({ view, locale, sizes }: { view: WorkView; locale: Locale; sizes: string }) {
-  const photo = view.named ? view.photos[0] : undefined;
+export function CaseMedia({ cover, locale, sizes }: { cover: MediaEntry; locale: Locale; sizes: string }) {
   return (
     <>
-      {photo ? (
-        <div className="duotone absolute inset-0">
-          <Image src={photo} alt={view.label[locale]} fill sizes={sizes} className="object-cover" />
-        </div>
-      ) : (
-        <CaseVisual drawing={view.visual ?? "stand"} />
-      )}
+      <div className="duotone absolute inset-0">
+        <MediaImage entry={cover} locale={locale} sizes={sizes} />
+      </div>
       <FrameCorners inset="md" />
     </>
   );

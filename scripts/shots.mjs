@@ -56,11 +56,8 @@ async function open(ctx, locale, reduced, { warm = true } = {}) {
   await page.goto(`${base}/${locale}`);
   await page.locator("#page-stage[data-tone-ready]").first().waitFor({ state: "attached" });
   await page.evaluate(() => document.fonts.ready);
-  // First visit: wait for the intro to end (it sets html[data-intro-seen]); none when reduced.
-  if (!reduced) {
-    await page.waitForFunction(() => document.documentElement.hasAttribute("data-intro-seen"), null, { timeout: 15_000 });
-    await page.waitForTimeout(400);
-  }
+  // The hand's one sweep (2.6 s) settles; nothing else gates the first screen (D156).
+  if (!reduced) await page.waitForTimeout(2800);
   return page;
 }
 
@@ -130,8 +127,7 @@ if (hero) {
   await cdp.send("Page.startScreencast", { format: "jpeg", quality: 70, maxWidth: 960, maxHeight: 600 });
   const navAt = Date.now() / 1000; // screencast timestamps are epoch seconds
   await page.goto(`${base}/en`);
-  await page.waitForFunction(() => document.documentElement.hasAttribute("data-intro-seen"), null, { timeout: 15_000 });
-  await page.waitForTimeout(1000);
+  await page.waitForTimeout(2800);
   await page.mouse.move(720, 450);
   for (let i = 0; i < 28; i++) {
     await page.mouse.wheel(0, 90);

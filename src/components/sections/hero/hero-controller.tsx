@@ -1,257 +1,139 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useLocale } from "next-intl";
-import { useEffect, useRef, useState } from "react";
-import { mediaQueryList } from "@/hooks/use-media-query";
+import { useEffect, useRef } from "react";
 import { prefersReducedMotion } from "@/hooks/use-reduced-motion";
-import { splitVars } from "@/hooks/use-split-text";
 import type { AppLocale } from "@/i18n/routing";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
-import { afterFirstPaint } from "@/lib/idle";
-import { withSplitText, type SplitTextPlugin } from "@/lib/split-text";
-import { createSceneState } from "./scene-state";
+import { formatTimecode } from "@/lib/time";
 
-// Client-only: the canvas has nothing to server-render (the CSS gradient on .hero is the
-// same picture), and keeping it out of the server bundle keeps the hero's HTML light.
-const HeroScene = dynamic(() => import("./hero-scene").then((m) => m.HeroScene), { ssr: false });
-
-/** sessionStorage key: the intro plays once per session (the boot script reads it too). */
-const INTRO_KEY = "nt-intro";
-/** The CSS failsafe lifts the shutters at 5s; a controller that starts later must not replay the intro. */
-const INTRO_DEADLINE_MS = 4500;
-/** Repeat visits: the CSS failsafe reveals the masked title at 2.5s. */
-const REVEAL_DEADLINE_MS = 2400;
-/** Same as the motion-mode CSS on .hero-title, so the focus pull can add blur to it. */
-const TITLE_SHADOW = "drop-shadow(0px 4px 40px rgba(13, 8, 5, 0.55))";
 /** How far the title dims on its way out (W02): still read, no longer competing. */
 const TITLE_FLOOR = 0.45;
-/** Same breakpoint as the CSS: masks, letter rise and SplitText only from here up. */
 const WIDE = "(min-width: 900px)";
 const NARROW = "(max-width: 899.98px)";
+/** The visitor's first move, which builds the pin (D156). */
+const INTENT = ["wheel", "touchstart", "keydown", "pointerdown", "scroll"] as const;
 
 /**
- * Client half of the hero. Owns the SceneState shared by reference with the canvas, the
- * clock hand and GSAP, and runs:
- * - the first-visit intro (once per session; skippable by wheel, touch, key or click, and
- *   finished early when focus enters the header);
- * - the short title reveal on repeat visits (no shutters; desktop only);
- * - the pinned, scrubbed scroll timeline: the exit only (mirrored in Arabic; N05 dropped the
- *   second beat, so the pin is one screen, not 1.4).
- * Each element is animated by one timeline only: the intro moves inner elements, the
- * scroll timeline their wrappers. Reduced motion: none of this; the static frame is final.
- *
- * LCP (D43): below 900px the title is painted in place from the first frame on every
- * visit (no masks, no split, no fade, no motion); the first-visit shutters part over it.
- * SplitText is downloaded only at >= 900px (letter rise).
+ * Client half of the hero (D156). Nothing here gates the first screen: the server markup is
+ * complete and visible at first paint. It runs:
+ * - the pinned, scrubbed scroll exit (mirrored in Arabic; one screen, N05), built on the first
+ *   scroll, key or touch (it sets #hero[data-hero-pinned]): the title lines part and dim, the
+ *   eyebrow, clock and HUD leave, the letterbox opens, the plate drifts closer;
+ * - the HUD timecode, while the hero is on screen (once a second under reduced motion).
+ * Reduced motion: no pin and no exit; the static frame is final.
  */
 export function HeroController() {
-  const [state] = useState(createSceneState);
-  const [sceneOn, setSceneOn] = useState(false);
   const anchor = useRef<HTMLSpanElement>(null);
   const locale = useLocale() as AppLocale;
 
-  // The canvas is atmosphere, not content (the CSS gradient is the same picture): mount it
-  // after the first paint, outside the hydration task (D44).
-  useEffect(() => afterFirstPaint(() => setSceneOn(true)), []);
-
   useGSAP(
-    (context) => {
+    () => {
       // Via the anchor, not getElementById: pages kept hidden by <Activity> after a client
       // navigation can leave a second #hero in the DOM (DECISIONS D32).
       const hero = anchor.current?.closest<HTMLElement>("#hero");
-      if (!hero || prefersReducedMotion()) return;
+      if (!hero) return;
+      hero.dataset.heroReady = "";
+      if (prefersReducedMotion()) return () => delete hero.dataset.heroReady;
       const q = gsap.utils.selector(hero);
-      const root = document.documentElement;
-      const shell = document.querySelector<HTMLElement>("[data-header-shell]");
-      const title = q(".hero-title")[0];
-      const inners = q(".hero-line-inner");
       const dir = locale === "ar" ? -1 : 1;
-      // Width at start, for the intro and the repeat-visit reveal (each runs once).
-      const wide = mediaQueryList(WIDE).matches;
       let alive = true;
-      let cancelTitle = () => {};
 
-      // ---- Scroll: pinned, scrubbed --------------------------------------------------
-      // Built synchronously at every width, so the pin spacer exists before the
-      // ToneController measures its zones.
+      // Built on the visitor's first scroll, key or touch (or at once if the page opens scrolled),
+      // not at hydration: a pin built at rest turns #hero fixed while the first screen is still
+      // being measured, and Chrome reported the title again as a new, larger LCP (+0.9 s on a slow
+      // phone, D156). LCP ends at the first input, and globals.css already reserves the pin's
+      // distance (.hero-pin), so a late build moves nothing.
       const mm = gsap.matchMedia();
-      // Both conditions: matchMedia only runs the callback while at least one matches.
-      mm.add({ wide: WIDE, narrow: NARROW }, (ctx) => {
-        const lines = q(".hero-line");
-        const tl = gsap.timeline({
-          defaults: { ease: "none" },
-          scrollTrigger: {
-            trigger: hero,
-            pin: true,
-            // The server-rendered wrapper (hero.tsx), so the hero is never moved in the DOM.
-            pinSpacer: hero.parentElement?.classList.contains("hero-pin") ? hero.parentElement : undefined,
-            start: "top top",
-            // One screen (N05). The exit keeps about the old pace (lines out after 0.56 of a
-            // screen, 0.58 in the 140% pin; the clock after 0.69), and the last 0.31 screen
-            // (the scene settling) leaves room for scrub's 1 s catch-up, so the exit has
-            // finished before the hero unpins. globals.css reserves the same 100svh (.hero-pin).
-            end: "+=100%",
-            scrub: 1,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-            // The page subtree can hydrate after the layout's ToneController has made its
-            // triggers; refresh the pin first so later triggers include its spacing.
-            refreshPriority: 1,
-          },
+      const intent = new AbortController();
+      const build = () => {
+        intent.abort();
+        // Both conditions: matchMedia only runs while at least one matches.
+        mm.add({ wide: WIDE, narrow: NARROW }, (ctx) => {
+          const lines = q(".hero-line");
+          const tl = gsap.timeline({
+            defaults: { ease: "none" },
+            scrollTrigger: {
+              trigger: hero,
+              pin: true,
+              // The server-rendered wrapper (hero.tsx), so the hero is never moved in the DOM.
+              pinSpacer: hero.parentElement?.classList.contains("hero-pin") ? hero.parentElement : undefined,
+              start: "top top",
+              // One screen (N05); the last part of the timeline leaves room for scrub's 1 s
+              // catch-up, so the exit has finished before the hero unpins.
+              end: "+=100%",
+              scrub: 1,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+              refreshPriority: 1,
+            },
+          });
+          ScrollTrigger.sort();
+          // Line 1 parts towards the reading start, line 2 towards the end (mirrored in AR). They
+          // dim but stay, and leave with the hero (W02). The lead and actions stay put.
+          tl.to(lines[0], { xPercent: -38 * dir, opacity: TITLE_FLOOR, ease: "power2.in", duration: 1 }, 0)
+            .to(lines[1], { xPercent: 38 * dir, opacity: TITLE_FLOOR, ease: "power2.in", duration: 1 }, 0)
+            .to(q(".hero-eyebrow"), { y: -40, opacity: 0, duration: 0.6 }, 0)
+            .to(q(".hero-clock-wrap"), { scale: 2.2, opacity: 0, duration: 1.25 }, 0)
+            .to(q(".hero-plate"), { scale: 1.08, duration: 1.8 }, 0)
+            .to(q(".hero-hud"), { opacity: 0, duration: 0.4 }, 0)
+            .to(q(".hero-letterbox.top"), { yPercent: -100, duration: 0.8 }, 0.25)
+            .to(q(".hero-letterbox.bottom"), { yPercent: 100, duration: 0.8 }, 0.25);
+          // Focus pull: the title racks out of focus as it leaves. Desktop only.
+          if (ctx.conditions?.wide)
+            tl.fromTo(q(".hero-title"), { filter: "blur(0px)" }, { filter: "blur(3px)", duration: 0.4 }, 0.6);
         });
-        ScrollTrigger.sort();
-        // Line 1 parts towards the reading start, line 2 towards the end (mirrored in AR). They
-        // dim but stay on screen and leave with the hero: faded to nothing, the rest of the pin
-        // and the hero's way out were lights alone, an empty screen (W02, the owner 2026-11-20).
-        tl.to(lines[0], { xPercent: -38 * dir, opacity: TITLE_FLOOR, ease: "power2.in", duration: 1 }, 0)
-          .to(lines[1], { xPercent: 38 * dir, opacity: TITLE_FLOOR, ease: "power2.in", duration: 1 }, 0)
-          .to(q(".hero-eyebrow"), { y: -40, opacity: 0, duration: 0.6 }, 0)
-          // The lead and the quote button stay put and leave with the hero (W02): faded, the
-          // hero's lower half was lights alone on short laptops (1366 × 768, 1280 × 720).
-          .to(q(".hero-clock-wrap"), { scale: 2.9, opacity: 0, duration: 1.25 }, 0)
-          .to(state, { spread: 2.5, speed: 8, duration: 1.2 }, 0)
-          .to(q(".hero-hud"), { opacity: 0, duration: 0.4 }, 0)
-          .to(q(".hero-letterbox.top"), { yPercent: -100, duration: 0.8 }, 0.25)
-          .to(q(".hero-letterbox.bottom"), { yPercent: 100, duration: 0.8 }, 0.25)
-          // The scene settles after the exit (ends at 1.8, the timeline's length).
-          .to(state, { speed: 1.4, spread: 1.7, duration: 0.6 }, 1.2);
-        // Focus pull (elevation): the title racks out of focus as it leaves. Desktop only.
-        if (ctx.conditions?.wide)
-          tl.fromTo(title, { filter: `${TITLE_SHADOW} blur(0px)` }, { filter: `${TITLE_SHADOW} blur(3px)`, duration: 0.4 }, 0.6);
-      });
-
-      // ---- Intro or repeat-visit reveal ----------------------------------------------
-      const firstVisit = !root.hasAttribute("data-intro-seen") && performance.now() < INTRO_DEADLINE_MS;
-      // Session flag only: html[data-intro-seen] is set when the intro ends, because the
-      // CSS intro gate (shutters, hidden header) keys off its absence.
-      const markSeen = () => {
-        try {
-          sessionStorage.setItem(INTRO_KEY, "1");
-        } catch {}
+        hero.dataset.heroPinned = "";
       };
-      let cleanupSkip = () => {};
-
-      if (!firstVisit) {
-        // Also reached on a first visit that hydrated past the deadline (the CSS failsafe
-        // has already opened the shutters): record the intro as seen either way.
-        markSeen();
-        root.dataset.introSeen = "";
-        // Desktop: same masked state the CSS held (as yPercent, so GSAP owns it), then rise.
-        // Mobile: the title is already painted in place (LCP), so it stays put.
-        const reveal = wide && performance.now() < REVEAL_DEADLINE_MS;
-        if (reveal) gsap.set(inners, { y: 0, yPercent: 115 });
-        hero.dataset.heroReady = "";
-        delete hero.dataset.heroIntro;
-        if (reveal) gsap.to(inners, { yPercent: 0, duration: 1.1, ease: "expo.out", stagger: 0.08 });
-      } else {
-        markSeen(); // a reload mid-intro gets the short reveal, not the intro again
-        hero.dataset.heroReady = "";
-        const shutters = q(".hero-shutter");
-        const hud = q("[data-hud]");
-        const owned = shell ? [...shutters, shell] : shutters;
-        // The controller owns these now: cancel the CSS failsafe animations.
-        gsap.set(owned, { animation: "none" });
-
-        const finish = () => {
-          // Desktop: shows the held lines if the intro ended before their rise was added.
-          gsap.set(inners, { visibility: "visible" });
-          cleanupSkip();
-          root.dataset.introSeen = "";
-          delete hero.dataset.heroIntro; // shutters and intro-only CSS off
-          gsap.set(owned, { clearProps: "all" });
-          // The split stays (reverted with the context on unmount): reverting here moved the
-          // centred block by a subpixel, a measured 0.0011 layout shift at the end of the intro.
-        };
-        // Start dark, hand at 12 (through GSAP like every other write to the shared state).
-        gsap.set(state, { alpha: 0, handIntro: 0 });
-        const intro = gsap.timeline({ onComplete: finish });
-        intro
-          // Header: opacity only, never visibility, so it stays focusable.
-          .set(shell ?? [], { opacity: 0 }, 0)
-          .to(shutters[0], { yPercent: -101, duration: 1.7, ease: "expo.inOut" }, 0.15)
-          .to(shutters[1], { yPercent: 101, duration: 1.7, ease: "expo.inOut" }, 0.15)
-          .to(state, { alpha: 1, duration: 2.6, ease: "power2.out" }, 0.3)
-          .fromTo(q(".hero-clock-ring"), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 2.4, ease: "power3.inOut" }, 0.55)
-          .to(state, { handIntro: 1, duration: 2.6, ease: "power3.inOut" }, 0.7)
-          .from(q(".hero-clock-ticks line"), { autoAlpha: 0, duration: 0.6, stagger: 0.014 }, 0.8)
-          // The lead and actions are visible from frame one (LCP candidates): y only. The
-          // eyebrow stays still (the shutters reveal it): the scroll timeline owns it.
-          .from([q(".hero-lead")[0], ...q(".hero-actions a")], { y: 26, duration: 1.1, ease: "power3.out", stagger: 0.12 }, 1.9)
-          .from(hud, { autoAlpha: 0, duration: 0.8, stagger: 0.08 }, 2.1)
-          .to(shell ?? [], { opacity: 1, duration: 0.8, ease: "power2.out" }, 2.1);
-
-        // Mobile (LCP rule, D43): the title is painted in place and stays still; the shutters
-        // part over it. Any animation of it after its first paint (a transform settle, even a
-        // blur) made Chrome report a second LCP entry when the tween ended: measured +1.1-2.1 s
-        // at 4x CPU, versus LCP = first contentful paint with the title still.
-        if (wide) {
-          // Desktop: letters (EN) or words (AR) rise out of the line masks at 1.15s. The lines
-          // are held with visibility, not moved: the split can change their width (a cold
-          // first visit re-renders in the loaded webfont), and a hidden box is not a layout
-          // shift. If SplitText never arrives, the lines rise whole.
-          gsap.set(inners, { visibility: "hidden" });
-          const addTitle = (Split: SplitTextPlugin | null) => {
-            if (intro.progress() === 1) return; // skipped or ended meanwhile: finish() showed the lines
-            const at = Math.max(1.15, intro.time());
-            const split = Split?.create(inners, { ...splitVars(locale, { mask: false }), aria: "none" });
-            const units = split ? (locale === "ar" ? split.words : split.chars) : inners;
-            const stagger = split ? (locale === "ar" ? 0.11 : 0.045) : 0.08;
-            intro
-              .set(inners, { visibility: "visible" }, at)
-              .from(units, { duration: 1.5, ease: "expo.out", yPercent: 118, rotate: split ? 5 : 0, stagger }, at);
-          };
-          cancelTitle = withSplitText(context, addTitle, () => addTitle(null));
-        }
-
-        // Skippable: any scroll, touch, key or click jumps to the end state; so does
-        // focus entering the header (e.g. Tab to the skip link) before it has faded in.
-        const skip = () => {
-          if (intro.progress() < 1) intro.progress(1);
-        };
-        const passive = { passive: true, capture: true } as const;
-        addEventListener("wheel", skip, passive);
-        addEventListener("touchstart", skip, passive);
-        addEventListener("pointerdown", skip, passive);
-        addEventListener("keydown", skip, true);
-        shell?.addEventListener("focusin", skip);
-        cleanupSkip = () => {
-          removeEventListener("wheel", skip, passive);
-          removeEventListener("touchstart", skip, passive);
-          removeEventListener("pointerdown", skip, passive);
-          removeEventListener("keydown", skip, true);
-          shell?.removeEventListener("focusin", skip);
-        };
-      }
+      if (scrollY > 0) build();
+      else for (const e of INTENT) addEventListener(e, build, { passive: true, capture: true, signal: intent.signal });
 
       // Webfonts change line widths: re-measure the pin once they are in.
       document.fonts?.ready.then(() => alive && ScrollTrigger.refresh());
 
       return () => {
         alive = false;
-        cancelTitle();
-        cleanupSkip();
+        intent.abort();
+        mm.revert();
         delete hero.dataset.heroReady;
+        delete hero.dataset.heroPinned;
       };
     },
-    { dependencies: [locale, state], revertOnUpdate: true },
+    { dependencies: [locale], revertOnUpdate: true },
   );
 
-  // Pointer parallax: mouse only; touch and pen leave the scene centred.
+  // The HUD timecode (24 fps), only while the hero is on screen and the tab visible.
   useEffect(() => {
-    const onMove = (e: PointerEvent) => {
-      if (e.pointerType !== "mouse") return;
-      state.pointer.x = (e.clientX / innerWidth) * 2 - 1;
-      state.pointer.y = (e.clientY / innerHeight) * 2 - 1;
+    const hero = anchor.current?.closest<HTMLElement>("#hero");
+    const tc = hero?.querySelector<HTMLElement>("[data-hero-tc]");
+    if (!hero || !tc) return;
+    const t0 = performance.now();
+    const reduced = prefersReducedMotion();
+    let last = "";
+    let timer = 0;
+    let onScreen = true;
+    const write = () => {
+      const txt = formatTimecode(performance.now() - t0);
+      if (txt !== last) tc.textContent = last = txt;
     };
-    addEventListener("pointermove", onMove, { passive: true });
-    return () => removeEventListener("pointermove", onMove);
-  }, [state]);
+    const stop = () => clearInterval(timer);
+    // One tick per frame of the 24 fps timecode, not per display frame (once a second when reduced).
+    const start = () => {
+      stop();
+      if (onScreen && !document.hidden) timer = window.setInterval(write, reduced ? 1000 : 1000 / 24);
+    };
+    const io = new IntersectionObserver(([e]) => {
+      onScreen = e.isIntersecting;
+      start();
+    });
+    io.observe(hero);
+    document.addEventListener("visibilitychange", start);
+    return () => {
+      stop();
+      io.disconnect();
+      document.removeEventListener("visibilitychange", start);
+    };
+  }, []);
 
-  return (
-    <>
-      <span ref={anchor} hidden />
-      {sceneOn && <HeroScene state={state} />}
-    </>
-  );
+  return <span ref={anchor} hidden />;
 }

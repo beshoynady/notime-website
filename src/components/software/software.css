@@ -8,11 +8,7 @@
   --sw-grid: rgba(187, 154, 121, 0.1);
   --sw-panel: rgba(234, 212, 171, 0.24);
   --sw-ink-2: rgba(46, 32, 23, 0.78);
-  --sw-dir: 1;
   --font-mono-ui: ui-monospace, "Cascadia Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-}
-html[dir="rtl"] .sw-page {
-  --sw-dir: -1;
 }
 
 /* ------------------------------------------------------------------ type and shared parts */
@@ -94,9 +90,6 @@ html[dir="rtl"] .sw-page {
   border-color: var(--color-champagne);
   background: var(--color-champagne);
   color: var(--color-espresso);
-}
-.sw-tag-dark {
-  color: var(--color-champagne);
 }
 
 /* Buttons: the site's language (4px radius, tracked caps, a fill rising on hover). */
@@ -188,42 +181,6 @@ html[dir="rtl"] .sw-page {
 }
 .sw-link-light {
   color: var(--color-champagne);
-}
-
-/* State label: DEFAULT → ACTIVE (the theme's signature). */
-.sw-state {
-  position: absolute;
-  z-index: 3;
-  inset-block-start: 12px;
-  inset-inline-start: 12px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding-block: 4px;
-  padding-inline: 8px;
-  border: 1px solid var(--color-line-light);
-  border-radius: var(--radius-tag);
-  background: rgba(245, 233, 211, 0.9);
-  font-family: var(--font-mono-ui);
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-cocoa);
-}
-.sw-state:lang(ar) {
-  font-family: inherit;
-  font-size: 0.75rem;
-  letter-spacing: 0;
-  text-transform: none;
-}
-.sw-state-dot {
-  inline-size: 6px;
-  block-size: 6px;
-  border-radius: 99px;
-  border: 1px solid currentColor;
-}
-.sw-state-active {
-  display: none;
 }
 
 /* ------------------------------------------------------------------ device frames */
@@ -932,7 +889,69 @@ html[data-js]:not([data-reduced]) .sw-op-line:not([data-line="0"]) {
 /* ------------------------------------------------------------------ 4 · services (mini landing blocks) */
 .sw-blocks {
   display: grid;
-  gap: clamp(56px, 8vw, 112px);
+  gap: clamp(24px, 4vw, 48px);
+}
+/* The tab rail (Task C2, D161): the six services in one row; it scrolls sideways on a phone, so
+   the page keeps one service's height instead of six. Tabs are buttons (WAI-ARIA tabs, automatic
+   activation; ServiceTabs). The selected one is espresso with an espresso rule under it. */
+.sw-tabs {
+  display: flex;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+  border-block-end: 1px solid var(--color-line-light);
+}
+.sw-tabs::-webkit-scrollbar {
+  display: none;
+}
+.sw-tab {
+  position: relative;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  min-block-size: 48px;
+  padding-block: 12px;
+  padding-inline: 14px;
+  border: 0;
+  background: none;
+  color: var(--sw-ink-2);
+  font: inherit;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  cursor: pointer;
+  scroll-snap-align: start;
+}
+.sw-tab::after {
+  content: "";
+  position: absolute;
+  inset-inline: 14px;
+  inset-block-end: -1px;
+  block-size: 2px;
+  background: var(--color-espresso);
+  transform: scaleX(0);
+}
+.sw-tab:hover,
+.sw-tab[aria-selected="true"] {
+  color: var(--color-espresso);
+}
+.sw-tab[aria-selected="true"]::after {
+  transform: scaleX(1);
+}
+.sw-tab:focus-visible {
+  outline: 2px solid var(--color-espresso);
+  outline-offset: -2px;
+}
+.sw-tab-num {
+  font-size: 0.75rem;
+  color: var(--color-cocoa);
+}
+@media (min-width: 900px) {
+  .sw-tab {
+    flex: 1 1 0;
+    justify-content: center;
+  }
 }
 .sw-block {
   position: relative;
@@ -946,24 +965,24 @@ html[data-js]:not([data-reduced]) .sw-op-line:not([data-line="0"]) {
     gap: clamp(40px, 5vw, 80px);
     align-items: center;
   }
-  .sw-block[data-side="end"] {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .sw-tab::after {
+    transition: transform 0.35s var(--ease-expo-out);
   }
-  .sw-block[data-side="end"] .sw-block-visual {
-    order: 2;
+  .sw-block {
+    transition: opacity 0.4s var(--ease-expo-out);
+    @starting-style {
+      opacity: 0;
+    }
   }
 }
-.sw-block-visual {
+.sw-block-photo {
   position: relative;
-  display: grid;
-  place-items: center;
   aspect-ratio: 4 / 3;
-  border: 1px solid var(--color-line-light);
+  overflow: hidden;
   border-radius: 6px;
-  background:
-    linear-gradient(to right, var(--sw-grid) 1px, transparent 1px) 0 0 / 8px 8px,
-    linear-gradient(to bottom, var(--sw-grid) 1px, transparent 1px) 0 0 / 8px 8px,
-    var(--sw-panel);
+  background: var(--sw-panel);
 }
 .sw-block-body {
   display: grid;
@@ -985,15 +1004,42 @@ html[data-js]:not([data-reduced]) .sw-op-line:not([data-line="0"]) {
   color: var(--sw-ink-2);
   max-inline-size: 52ch;
 }
-.sw-block-cols {
+/* Who it suits and the stages: folded under the deliverables (the long lists, D161). */
+.sw-more {
+  inline-size: 100%;
+  border-block-start: 1px solid var(--color-line-light);
+}
+.sw-more > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-block-size: 44px;
+  font-size: 0.9rem;
+  list-style: none;
+  cursor: pointer;
+}
+.sw-more > summary::-webkit-details-marker {
+  display: none;
+}
+.sw-more > summary::after {
+  content: "+";
+  color: var(--color-cocoa);
+  font-size: 1.1rem;
+}
+.sw-more[open] > summary::after {
+  content: "\2013";
+}
+.sw-more-body {
   display: grid;
   gap: 18px;
-  inline-size: 100%;
+  padding-block: 4px 8px;
 }
-@media (min-width: 600px) {
-  .sw-block-cols {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+[data-tone="dark"] .sw-more {
+  border-color: var(--color-line-dark);
+}
+[data-tone="dark"] .sw-more > summary::after {
+  color: var(--color-champagne);
 }
 .sw-ideal,
 .sw-receive-list,
@@ -1069,535 +1115,6 @@ html[data-js]:not([data-reduced]) .sw-op-line:not([data-line="0"]) {
   border-color: var(--color-champagne);
   background: var(--color-champagne);
   color: var(--color-espresso);
-}
-
-/* Hover / focus / in view (desktop with a pointer): the visual's state, then the deliverables.
-   Touch, narrow screens and reduced motion keep everything visible and still (2026-11-11 spec). */
-@media (hover: hover) and (min-width: 900px) and (prefers-reduced-motion: no-preference) {
-  .sw-block .sw-receive-list li {
-    opacity: 0;
-    transform: translateY(6px);
-    transition:
-      opacity 0.45s var(--ease-expo-out),
-      transform 0.45s var(--ease-expo-out);
-  }
-  .sw-block .sw-receive-list li:nth-child(2) {
-    transition-delay: 0.06s;
-  }
-  .sw-block .sw-receive-list li:nth-child(3) {
-    transition-delay: 0.12s;
-  }
-  .sw-block:is(:hover, :focus-within, [data-active]) .sw-receive-list li {
-    opacity: 1;
-    transform: none;
-  }
-  .sw-block:is(:hover, :focus-within, [data-active]) .sw-state-rest {
-    display: none;
-  }
-  .sw-block:is(:hover, :focus-within, [data-active]) .sw-state-active {
-    display: inline;
-  }
-  .sw-block:is(:hover, :focus-within, [data-active]) .sw-state {
-    border-color: var(--color-espresso);
-    color: var(--color-espresso);
-  }
-  .sw-block:is(:hover, :focus-within, [data-active]) .sw-state-dot {
-    background: var(--color-champagne);
-    border-color: var(--color-espresso);
-  }
-}
-
-/* The visuals. */
-.sw-v {
-  position: relative;
-  inline-size: 84%;
-  aspect-ratio: 4 / 3;
-}
-.sw-v i,
-.sw-v b {
-  display: block;
-}
-.sw-v [data-sw-draw] {
-  fill: none;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 0;
-}
-@media (hover: hover) and (min-width: 900px) and (prefers-reduced-motion: no-preference) {
-  .sw-v *,
-  .sw-v *::before {
-    transition:
-      transform 0.6s var(--ease-expo-out),
-      opacity 0.45s var(--ease-expo-out),
-      background-color 0.45s var(--ease-expo-out);
-  }
-}
-/* Websites: a site and its phone view; the language switch mirrors the layout. */
-.sw-v-desk {
-  position: absolute;
-  inset-block: 12% 18%;
-  inset-inline: 4% 22%;
-  border: 1.5px solid var(--color-espresso);
-  border-radius: 6px;
-  background: var(--color-ivory);
-  overflow: hidden;
-}
-.sw-v-nav {
-  display: flex;
-  align-items: center;
-  gap: 5%;
-  block-size: 15%;
-  padding-inline: 5%;
-  border-block-end: 1px solid var(--color-line-light);
-}
-.sw-v-logo {
-  inline-size: 8%;
-  block-size: 40%;
-  background: var(--color-espresso);
-}
-.sw-v-links {
-  display: flex;
-  gap: 10%;
-  inline-size: 34%;
-}
-.sw-v-links i {
-  flex: 1;
-  block-size: 3px;
-  background: rgba(46, 32, 23, 0.35);
-}
-.sw-v-lang {
-  position: relative;
-  margin-inline-start: auto;
-  inline-size: 16%;
-  block-size: 46%;
-  border: 1px solid var(--color-espresso);
-  border-radius: 99px;
-}
-.sw-v-lang b {
-  position: absolute;
-  inset-block: 14%;
-  inset-inline-start: 6%;
-  inline-size: 42%;
-  border-radius: 99px;
-  background: var(--color-espresso);
-}
-.sw-v-site {
-  display: flex;
-  gap: 6%;
-  block-size: 85%;
-  padding: 7% 6%;
-}
-.sw-v-copy {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 9%;
-  inline-size: 52%;
-}
-.sw-v-copy i {
-  block-size: 5px;
-  background: rgba(46, 32, 23, 0.3);
-}
-.sw-v .sw-v-h {
-  block-size: 9px;
-  background: var(--color-espresso);
-}
-.sw-v-copy .sw-v-short {
-  inline-size: 60%;
-}
-.sw-v-copy .sw-v-btn {
-  inline-size: 38%;
-  block-size: 12%;
-  background: var(--color-champagne);
-  border: 1px solid var(--color-espresso);
-}
-.sw-v-site .sw-v-img {
-  flex: 1;
-  border-radius: 3px;
-  background: linear-gradient(150deg, var(--color-taupe), var(--color-cocoa));
-}
-.sw-v-mob {
-  position: absolute;
-  inset-block: 26% 8%;
-  inset-inline-end: 4%;
-  inline-size: 21%;
-  display: flex;
-  flex-direction: column;
-  gap: 6%;
-  padding: 5%;
-  border: 1.5px solid var(--color-espresso);
-  border-radius: 12px;
-  background: var(--color-ivory);
-}
-.sw-v-mob i {
-  block-size: 4px;
-  background: rgba(46, 32, 23, 0.3);
-}
-.sw-v-mob .sw-v-img {
-  flex: 1;
-  border-radius: 3px;
-  background: linear-gradient(150deg, var(--color-taupe), var(--color-cocoa));
-}
-@media (hover: hover) and (min-width: 900px) {
-  .sw-block:is(:hover, :focus-within, [data-active]) .sw-v-lang b {
-    transform: translateX(calc(115% * var(--sw-dir)));
-  }
-  .sw-block:is(:hover, :focus-within, [data-active]) .sw-v-copy {
-    transform: translateX(calc(85% * var(--sw-dir)));
-  }
-  .sw-block:is(:hover, :focus-within, [data-active]) .sw-v-site .sw-v-img {
-    transform: translateX(calc(-110% * var(--sw-dir)));
-  }
-}
-/* Apps: a phone with two screens and a tab bar, synced to a web panel. */
-.sw-v-phone {
-  position: absolute;
-  inset-block: 6%;
-  inset-inline-start: 12%;
-  inline-size: 30%;
-  overflow: hidden;
-  border: 2px solid var(--color-espresso);
-  border-radius: 16px;
-  background: var(--color-ivory);
-}
-.sw-v-screens {
-  position: absolute;
-  inset: 10% 9% 20%;
-}
-.sw-v-screen {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 7%;
-}
-.sw-v-tile {
-  block-size: 26%;
-  border-radius: 4px;
-  background: var(--color-champagne);
-}
-.sw-v-cal {
-  block-size: 42%;
-  border: 1px solid var(--color-line-light);
-  border-radius: 4px;
-  background:
-    linear-gradient(to right, var(--color-line-light) 1px, transparent 1px) 0 0 / 25% 100%,
-    linear-gradient(to bottom, var(--color-line-light) 1px, transparent 1px) 0 0 / 100% 33%;
-}
-.sw-v-screen .sw-v-short {
-  inline-size: 60%;
-  block-size: 4px;
-  background: rgba(46, 32, 23, 0.3);
-}
-.sw-v-screen-2 {
-  opacity: 0;
-}
-.sw-v-tabs {
-  position: absolute;
-  inset-block-end: 5%;
-  inset-inline: 9%;
-  block-size: 9%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.sw-v-tabs i {
-  inline-size: 18%;
-  block-size: 40%;
-  border-radius: 3px;
-  background: rgba(46, 32, 23, 0.22);
-}
-.sw-v-tab-on {
-  position: absolute;
-  inset-block-end: 0;
-  inset-inline-start: 0;
-  inline-size: 18%;
-  block-size: 2px;
-  background: var(--color-espresso);
-}
-.sw-v-sync {
-  position: absolute;
-  inset-block-start: 40%;
-  inset-inline-start: 44%;
-  inline-size: 16%;
-  block-size: 20%;
-}
-html[dir="rtl"] .sw-v-sync,
-html[dir="rtl"] .sw-v-flowsvg {
-  transform: scaleX(-1);
-}
-.sw-v-sync path {
-  stroke: var(--color-cocoa);
-  stroke-width: 1.5;
-}
-.sw-v-web {
-  position: absolute;
-  inset-block: 24% 24%;
-  inset-inline-end: 6%;
-  inline-size: 32%;
-  display: flex;
-  flex-direction: column;
-  gap: 10%;
-  padding: 5%;
-  border: 1.5px solid var(--color-espresso);
-  border-radius: 5px;
-  background: var(--color-ivory);
-}
-.sw-v-web i {
-  block-size: 4px;
-  background: rgba(46, 32, 23, 0.3);
-}
-.sw-v-web .sw-v-short {
-  inline-size: 50%;
-}
-@media (hover: hover) and (min-width: 900px) {
-  .sw-block:is(:hover, :focus-within, [data-active]) .sw-v-screen:not(.sw-v-screen-2) {
-    opacity: 0;
-  }
-  .sw-block:is(:hover, :focus-within, [data-active]) .sw-v-screen-2 {
-    opacity: 1;
-  }
-  .sw-block:is(:hover, :focus-within, [data-active]) .sw-v-tab-on {
-    transform: translateX(calc(230% * var(--sw-dir)));
-  }
-}
-/* Systems: inputs → the system → outputs. */
-.sw-v-flowsvg {
-  position: absolute;
-  inset: 0;
-  inline-size: 100%;
-  block-size: 100%;
-  overflow: visible;
-}
-.sw-v-flowsvg [data-sw-draw] {
-  stroke: rgba(46, 32, 23, 0.55);
-  stroke-width: 1.5;
-}
-.sw-v-pulse path {
-  fill: none;
-  stroke: var(--color-cocoa);
-  stroke-width: 2.5;
-  stroke-dasharray: 4 14;
-  opacity: 0;
-}
-.sw-v-in,
-.sw-v-out {
-  fill: var(--color-ivory);
-  stroke: var(--color-espresso);
-  stroke-width: 1.5;
-}
-.sw-v-out {
-  fill: var(--color-champagne);
-}
-.sw-v-core {
-  fill: var(--color-espresso);
-}
-@media (hover: hover) and (min-width: 900px) and (prefers-reduced-motion: no-preference) {
-  .sw-block:is(:hover, :focus-within, [data-active]) .sw-v-pulse path {
-    opacity: 1;
-    animation: sw-flow 1.4s linear 3;
-  }
-}
-@keyframes sw-flow {
-  to {
-    stroke-dashoffset: -36;
-  }
-}
-/* E-commerce: three products, one added, the checkout steps move on. */
-.sw-v-store {
-  position: absolute;
-  inset: 8% 6%;
-  padding: 12% 6% 6%;
-  border: 1.5px solid var(--color-espresso);
-  border-radius: 6px;
-  background: var(--color-ivory);
-}
-.sw-v-cart {
-  position: absolute;
-  inset-block-start: 4%;
-  inset-inline-end: 5%;
-  inline-size: 9%;
-  aspect-ratio: 1;
-  border: 1.5px solid var(--color-espresso);
-  border-radius: 3px;
-}
-.sw-v-cart i {
-  position: absolute;
-  inset: 25%;
-  border-radius: 99px;
-}
-.sw-v-cart-0 {
-  border: 1px solid var(--color-espresso);
-}
-.sw-v-cart-1 {
-  background: var(--color-espresso);
-  opacity: 0;
-}
-.sw-v-products {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 6%;
-}
-.sw-v-product {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.sw-v-product .sw-v-img {
-  aspect-ratio: 1;
-  border-radius: 3px;
-  background: linear-gradient(150deg, var(--color-champagne), var(--color-taupe));
-}
-.sw-v-product i:not(.sw-v-img):not(.sw-v-add) {
-  block-size: 4px;
-  background: rgba(46, 32, 23, 0.3);
-}
-.sw-v-add {
-  block-size: 14px;
-  border: 1px solid var(--color-espresso);
-  border-radius: 2px;
-}
-.sw-v-steps {
-  position: absolute;
-  inset-block-end: 7%;
-  inset-inline: 6%;
-  display: flex;
-  gap: 4%;
-}
-.sw-v-steps i {
-  flex: 1;
-  block-size: 4px;
-  border-radius: 2px;
-  background: var(--color-line-light);
-}
-.sw-v-steps .is-on {
-  background: var(--color-espresso);
-}
-@media (hover: hover) and (min-width: 900px) {
-  .sw-block:is(:hover, :focus-within, [data-active]) .sw-v-product-pick .sw-v-add {
-    background: var(--color-espresso);
-  }
-  .sw-block:is(:hover, :focus-within, [data-active]) .sw-v-product-pick {
-    transform: translateY(-6%);
-  }
-  .sw-block:is(:hover, :focus-within, [data-active]) .sw-v-cart-1 {
-    opacity: 1;
-  }
-  .sw-block:is(:hover, :focus-within, [data-active]) .sw-v-step-2 {
-    background: var(--color-espresso);
-  }
-}
-/* UI/UX: one screen at three fidelities, fanned out on hover. */
-.sw-v-fid {
-  position: absolute;
-  inset-block-start: 20%;
-  inset-inline-start: 26%;
-  inline-size: 48%;
-  aspect-ratio: 4 / 3;
-  display: flex;
-  flex-direction: column;
-  gap: 10%;
-  padding: 7%;
-  border-radius: 5px;
-}
-.sw-v-fid i {
-  block-size: 10%;
-  border-radius: 2px;
-}
-.sw-v-fid i:first-child {
-  block-size: 28%;
-}
-.sw-v-fid-wire {
-  border: 1.5px dashed var(--color-cocoa);
-  background: var(--color-ivory);
-  transform: translate(calc(-22% * var(--sw-dir)), -8%) rotate(calc(-4deg * var(--sw-dir)));
-}
-.sw-v-fid-wire i {
-  border: 1px dashed var(--color-cocoa);
-}
-.sw-v-fid-proto {
-  border: 1.5px solid var(--color-espresso);
-  background: var(--color-ivory);
-}
-.sw-v-fid-proto i {
-  background: rgba(46, 32, 23, 0.2);
-}
-.sw-v-fid-final {
-  background: var(--color-espresso);
-  transform: translate(calc(22% * var(--sw-dir)), 8%) rotate(calc(3deg * var(--sw-dir)));
-}
-.sw-v-fid-final i {
-  background: var(--color-champagne);
-}
-.sw-v-fid-final i:nth-child(2) {
-  inline-size: 60%;
-  background: rgba(245, 233, 211, 0.6);
-}
-@media (hover: hover) and (min-width: 900px) {
-  .sw-block:is(:hover, :focus-within, [data-active]) .sw-v-fid-wire {
-    transform: translate(calc(-44% * var(--sw-dir)), -12%) rotate(calc(-6deg * var(--sw-dir)));
-  }
-  .sw-block:is(:hover, :focus-within, [data-active]) .sw-v-fid-final {
-    transform: translate(calc(44% * var(--sw-dir)), 12%) rotate(calc(5deg * var(--sw-dir)));
-  }
-}
-/* AI consulting: tasks sorted into "AI helps" (start) and "Keep it human" (end). */
-.sw-v-col {
-  position: absolute;
-  inset-block: 10%;
-  inline-size: 36%;
-  border: 1.5px dashed rgba(46, 32, 23, 0.4);
-  border-radius: 6px;
-}
-.sw-v-col b {
-  margin: 8%;
-  block-size: 6px;
-  inline-size: 40%;
-  border-radius: 2px;
-}
-.sw-v-col-a {
-  inset-inline-start: 6%;
-}
-.sw-v-col-a b {
-  background: var(--color-espresso);
-}
-.sw-v-col-b {
-  inset-inline-end: 6%;
-}
-.sw-v-col-b b {
-  background: var(--color-taupe);
-}
-.sw-v-task {
-  position: absolute;
-  inset-inline-start: 36%;
-  inline-size: 28%;
-  block-size: 12%;
-  border-radius: 4px;
-}
-.sw-v-task-0 {
-  inset-block-start: 22%;
-  background: var(--color-espresso);
-}
-.sw-v-task-1 {
-  inset-block-start: 38%;
-  background: var(--color-champagne);
-  border: 1px solid var(--color-espresso);
-}
-.sw-v-task-2 {
-  inset-block-start: 54%;
-  background: var(--color-espresso);
-}
-.sw-v-task-3 {
-  inset-block-start: 70%;
-  background: var(--color-champagne);
-  border: 1px solid var(--color-espresso);
-}
-@media (hover: hover) and (min-width: 900px) {
-  .sw-block:is(:hover, :focus-within, [data-active]) :is(.sw-v-task-0, .sw-v-task-2) {
-    transform: translateX(calc(-96% * var(--sw-dir)));
-  }
-  .sw-block:is(:hover, :focus-within, [data-active]) :is(.sw-v-task-1, .sw-v-task-3) {
-    transform: translateX(calc(96% * var(--sw-dir)));
-  }
 }
 
 /* ------------------------------------------------------------------ 5 · event technology (featured) */
@@ -1681,100 +1198,12 @@ html[dir="rtl"] .sw-v-flowsvg {
   align-items: center;
   gap: 12px 24px;
 }
-.sw-v-event {
-  inline-size: 100%;
-  aspect-ratio: auto;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 12px;
-}
-.sw-v-count {
-  grid-column: 1 / -1;
-  display: grid;
-  gap: 8px;
-  justify-items: start;
-  padding: 18px 20px;
-  border: 1px solid var(--color-line-dark);
-  border-radius: 6px;
-  background: rgba(234, 212, 171, 0.06);
-}
-.sw-v-count-label {
-  font-family: var(--font-mono-ui);
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-taupe);
-}
-.sw-v-count-label:lang(ar) {
-  font-family: inherit;
-  font-size: 0.85rem;
-  letter-spacing: 0;
-  text-transform: none;
-}
-.sw-v-count-num b {
-  display: inline;
-  font-size: clamp(2.4rem, 5vw, 3.4rem);
-  font-weight: 300;
-  line-height: 1;
-}
-.sw-v-count-of {
-  color: var(--color-taupe);
-}
-.sw-v-meter {
-  display: block;
-  inline-size: 100%;
-  block-size: 4px;
-  border-radius: 2px;
-  background: var(--color-line-dark);
+.sw-event-photo {
+  position: relative;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
-}
-.sw-v-meter i {
-  block-size: 100%;
-  background: var(--color-champagne);
-  transform-origin: 0 50%;
-}
-html[dir="rtl"] .sw-v-meter i {
-  transform-origin: 100% 50%;
-}
-.sw-v-qr {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 3px;
-  inline-size: 84px;
-  padding: 8px;
-  border: 1px solid var(--color-line-dark);
   border-radius: 6px;
-  align-self: start;
-}
-.sw-v-qr i {
-  aspect-ratio: 1;
-}
-.sw-v-qr .on {
-  background: var(--color-champagne);
-}
-.sw-v-board {
-  grid-row: 2;
-  grid-column: 1;
-  display: grid;
-  gap: 8px;
-  padding: 12px;
-  border: 1px solid var(--color-line-dark);
-  border-radius: 6px;
-}
-.sw-v-board-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.sw-v-board-row i {
-  block-size: 5px;
-  border-radius: 2px;
-  background: rgba(245, 233, 211, 0.35);
-}
-.sw-v-board-row .sw-v-pos {
-  inline-size: 14px;
-  block-size: 10px;
-  background: var(--color-champagne);
+  background: var(--color-espresso);
 }
 
 /* ------------------------------------------------------------------ 7 · how we work */
@@ -2376,8 +1805,15 @@ html[dir="rtl"] .sw-v-meter i {
   background: var(--color-ivory);
   box-shadow: 0 30px 60px -40px rgba(46, 32, 23, 0.35);
 }
-.sw-review {
-  padding-block-start: 0;
+/* The two ways in, as tabs (D161). */
+.sw-consult-tabs {
+  display: grid;
+  gap: 20px;
+}
+.sw-consult-promise {
+  margin: 0 0 20px;
+  font-weight: 500;
+  max-inline-size: 48ch;
 }
 
 /* ------------------------------------------------------------------ the sticky mobile bar */
@@ -2439,5 +1875,114 @@ html[data-overlay-open] .sw-sticky {
      no layout shift): 72px bar + 12px gap, less the button's own 20px offset. */
   body:has(.sw-sticky[data-show]) .wa-fab {
     translate: 0 -64px;
+  }
+}
+
+/* ------------------------------------------------------------------ phones: rows, not stacks */
+/* Task C2, D161: below the 900px layout the long lists become sideways rows of cards that snap
+   (problems, the five steps, the tiers, the two ways, why NO TIME, the products), so the page reads
+   at under half its old length. Each row scrolls on its own, bleeds to the screen edge and lets the
+   next card peek in; the page direction mirrors it in Arabic. */
+@media (max-width: 899.98px) {
+  .sw-section {
+    padding-block: 48px;
+  }
+  .sw-head {
+    margin-block-end: 24px;
+  }
+  .sw-faq {
+    padding-block: 48px;
+  }
+  /* Photographs as a band on a phone: the device reads the same, a third less height. */
+  .sw-block-photo,
+  .sw-event-photo {
+    aspect-ratio: 16 / 9;
+  }
+  .sw-quality-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .sw-event-items > li {
+    padding: 16px;
+    border: 1px solid var(--color-line-dark);
+    border-radius: 6px;
+  }
+  /* The review hook in the proof: on a phone the sticky bar offers the review on every screen. */
+  .sw-review-cta {
+    display: none;
+  }
+  :is(.sw-diff, .sw-steps, .sw-tier-list, .sw-ways-list, .sw-why-list, .sw-product-list, .sw-event-items) {
+    /* The containing block of the cards' absolutely positioned labels (.sr-only): without it they
+       anchor to the page, escape this row's clip and widen the document (seen in reduced motion,
+       where no transform on the cards forms a containing block). */
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+    margin-inline: calc(-1 * var(--gutter-start)) calc(-1 * var(--gutter-end));
+    padding-inline: var(--gutter-start) var(--gutter-end);
+    scroll-padding-inline: var(--gutter-start) var(--gutter-end);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  :is(.sw-diff, .sw-steps, .sw-tier-list, .sw-ways-list, .sw-why-list, .sw-product-list, .sw-event-items)::-webkit-scrollbar {
+    display: none;
+  }
+  :is(.sw-diff, .sw-steps, .sw-tier-list, .sw-ways-list, .sw-why-list, .sw-product-list, .sw-event-items) > * {
+    flex: 0 0 min(84%, 340px);
+    scroll-snap-align: start;
+  }
+  :is(.sw-diff, .sw-steps, .sw-tier-list, .sw-ways-list, .sw-why-list, .sw-product-list, .sw-event-items):focus-visible {
+    outline: 2px solid var(--color-espresso);
+    outline-offset: 4px;
+  }
+  /* The diff: each pain and its fix as one card. */
+  .sw-diff {
+    border: 0;
+    border-radius: 0;
+    background: none;
+  }
+  .sw-diff-item {
+    overflow: hidden;
+    border: 1px solid var(--color-line-light);
+    border-radius: 6px;
+    background: rgba(245, 233, 211, 0.7);
+  }
+  .sw-diff-item + .sw-diff-item {
+    border-block-start: 1px solid var(--color-line-light);
+  }
+  /* The steps: cards in a row; the vertical rail has nothing to follow. */
+  .sw-steps-rail,
+  .sw-step-dot {
+    display: none;
+  }
+  .sw-step {
+    padding: 18px;
+    padding-inline-start: 18px;
+    border: 1px solid var(--color-line-light);
+    border-radius: 6px;
+  }
+  .sw-why-list > li {
+    padding: 18px;
+    border: 1px solid var(--color-line-light);
+    border-block-start: 1px solid var(--color-espresso);
+    border-radius: 6px;
+  }
+}
+
+/* Without JavaScript the tabs can't switch (service-tabs.tsx): every panel shows, in order, and the
+   tab row goes. In the base layer, beside Tailwind's `[hidden] { display: none !important }`, which an
+   unlayered rule can't outrank. */
+@layer base {
+  html:not([data-js]) .sw-block[role="tabpanel"][hidden] {
+    display: grid !important;
+  }
+  html:not([data-js]) .sw-consult-panel[role="tabpanel"][hidden] {
+    display: block !important;
+  }
+  html:not([data-js]) .sw-tabs[role="tablist"] {
+    display: none !important;
   }
 }

@@ -4,9 +4,8 @@ const TICKS = Array.from({ length: 60 }, (_, i) => tickGeometry(i));
 const { centre: C } = CLOCK;
 
 /**
- * The live clock behind the title (decorative). Server-rendered at rest: ring drawn,
- * ticks shown, hand at 12. The canvas loop (HeroScene) turns the hand to real time;
- * the intro (HeroController) draws the ring on and sweeps the hand in.
+ * The clock behind the title (decorative). Server-rendered at rest: ring drawn, ticks shown, hand
+ * at 12. In motion mode the hand makes one CSS sweep as the page opens (hero.css, D156).
  */
 export function HeroClock() {
   return (
@@ -22,10 +21,8 @@ export function HeroClock() {
         cx={C}
         cy={C}
         r={CLOCK.ring}
-        pathLength={1}
-        transform={`rotate(-90 ${C} ${C})`}
       />
-      <line className="hero-clock-hand" data-hero-hand="" x1={C} y1="332" x2={C} y2="30" />
+      <line className="hero-clock-hand" x1={C} y1="332" x2={C} y2="30" />
       <circle className="hero-clock-hub" cx={C} cy={C} r="3.5" />
     </svg>
   );

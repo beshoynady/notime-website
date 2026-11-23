@@ -1,0 +1,6 @@
+[
+  { "id": "pg-open-materials", "src": "unsplash:0vvoSlCtWTg", "crop": { "aspect": "16:9", "focus": [0.5, 0.5] }, "grade": "workshop", "out": "public/images/stock/pg-open-materials.webp" },
+  { "id": "pg-open-press", "src": "unsplash:KAO2-CRZXTE", "crop": { "aspect": "16:9", "focus": [0.5, 0.5] }, "grade": "workshop", "mobile": { "aspect": "9:16", "focus": [0.35, 0.5] }, "out": "public/images/stock/pg-open-press.webp" },
+  { "id": "pg-printing", "src": "unsplash:7l7DLynLVIY", "crop": { "aspect": "16:9", "focus": [0.5, 0.5] }, "grade": "workshop", "out": "public/images/stock/pg-printing.webp", "maxWidth": 1600 },
+  { "id": "pg-fabrication", "src": "unsplash:Onty3BSYdGU", "crop": { "aspect": "16:9", "focus": [0.5, 0.5] }, "grade": "workshop", "out": "public/images/stock/pg-fabrication.webp", "maxWidth": 1600 }
+]

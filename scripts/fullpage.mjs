@@ -47,9 +47,6 @@ async function open(s, locale, reduced) {
   await page.goto(url(locale));
   await page.locator("#page-stage[data-tone-ready]").first().waitFor({ state: "attached" });
   await page.evaluate(() => document.fonts.ready);
-  if (!reduced && route === "/") {
-    await page.waitForFunction(() => document.documentElement.hasAttribute("data-intro-seen"), null, { timeout: 15_000 });
-  }
   await page.waitForTimeout(400);
   return { ctx, page, errors };
 }

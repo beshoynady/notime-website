@@ -1,37 +1,14 @@
-import { readFileSync } from "node:fs";
-import path from "node:path";
 import { expect, test } from "@playwright/test";
+import { emulateAndroidFonts } from "./android-fonts";
 import { gotoReady } from "./helpers";
 
 /**
  * The owner (2026-11-20): a late font swap moves nothing on Android either. Android has no Arial,
  * so the stack falls to the Roboto-matched faces (Roboto for Latin, Noto Naskh Arabic for Arabic).
  * A Pixel is imitated here: local("Arial") is made to miss, and the Roboto and Naskh local()
- * sources are served from OFL subsets (e2e/fixtures/android-fonts). The brand fonts are held back
+ * sources are served from OFL subsets (e2e/android-fonts.ts). The brand fonts are held back
  * 1.5s, so the swap always happens on screen. Runs on any machine, the Linux CI runner included.
  */
-const FIXTURES = path.join(__dirname, "fixtures", "android-fonts");
-/** Inline, so they are ready at the first paint, as a phone's own system faces are (a url() face
- *  would load late and was not even fetched during the swap). */
-const inline = (file: string) => `url(data:font/woff2;base64,${readFileSync(path.join(FIXTURES, file)).toString("base64")})`;
-const ROBOTO = inline("roboto.woff2");
-const NASKH = inline("noto-naskh-arabic.woff2");
-
-/**
- * A src list of local() faces, quoted or not (the build's minifier drops the quotes), and with the
- * quotes escaped where the CSS also sits in a script string (the page's RSC payload).
- */
-const q = '(?:\\\\?")?';
-const locals = (...names: string[]) => new RegExp(names.map((n) => `local\\(\\s*${q}${n}${q}\\s*\\)`).join("\\s*,\\s*"), "g");
-
-/** The site's CSS as a Pixel resolves it: no Arial; Roboto and Naskh from the fixtures. Quote-free. */
-function asAndroid(css: string) {
-  return css
-    .replace(locals("Arial"), "local(nt-no-arial-on-android)")
-    .replace(locals("Roboto", "Roboto Regular", "Roboto-Regular"), ROBOTO)
-    .replace(locals("Noto Naskh Arabic", "Noto Naskh Arabic Regular", "NotoNaskhArabic-Regular"), NASKH);
-}
-
 const PAGES = ["/en", "/en/services/software-digital", "/en/about", "/ar", "/ar/about", "/ar/contact", "/ar/services/events-hospitality"];
 
 // Android draws text unhinted, with fractional advances. Chromium on Linux (the CI runner) hints
@@ -43,20 +20,7 @@ test.use({ launchOptions: { args: ["--font-render-hinting=none"] } });
 for (const p of PAGES) {
   test(`${p}: a late font swap on Android moves nothing`, async ({ page, isMobile }) => {
     test.skip(!isMobile, "Android is a phone");
-    // The CSS is inlined in the documents; a stylesheet, where there is one, gets the same.
-    await page.route("**/*", async (route) => {
-      const type = route.request().resourceType();
-      if (type !== "document" && type !== "stylesheet") return route.fallback();
-      const response = await route.fetch();
-      const headers = { ...response.headers() };
-      delete headers["content-length"];
-      delete headers["content-encoding"];
-      const text = await response.text();
-      // In a document, only the <style> blocks: the RSC payload's text rows carry their own
-      // byte lengths, and an edit there breaks hydration.
-      const body = type === "stylesheet" ? asAndroid(text) : text.replace(/<style\b[^>]*>[\s\S]*?<\/style>/g, (block) => asAndroid(block));
-      await route.fulfill({ status: response.status(), headers, body });
-    });
+    await emulateAndroidFonts(page);
     // The system faces are on the device; only the brand files travel. Held back, then delivered
     // in request order.
     let queue = new Promise((r) => setTimeout(r, 1500));

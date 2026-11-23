@@ -81,7 +81,7 @@ test.describe("How we work starts on the page grid", () => {
   }
 });
 
-test.describe("Choose the mood keeps its gutter at 390", () => {
+test.describe("Galas & private celebrations keeps its gutter at 390", () => {
   test.skip(({ isMobile }) => !isMobile, "mobile only");
 
   for (const locale of ["en", "ar"] as const) {
@@ -92,7 +92,6 @@ test.describe("Choose the mood keeps its gutter at 390", () => {
         const root = document.querySelector("#celebrations")!;
         const out: string[] = [];
         for (const el of root.querySelectorAll("p, h2, h3, h4, a, button, figcaption")) {
-          if (el.closest(".pstack-cards")) continue; // the photo row
           const r = el.getBoundingClientRect();
           if (r.width === 0) continue;
           if (r.left < 15 || r.right > window.innerWidth - 15) out.push(`${el.tagName}.${el.className} ${Math.round(r.left)}-${Math.round(r.right)}`);

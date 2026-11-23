@@ -87,7 +87,56 @@
 .pp-problem-detail {
   margin-block-start: 18px;
 }
-.pp-problem + .pp-features {
+/* Over a photo (Task 14, D162): an espresso wash keeps the problem line and its detail at AA. The
+   photo starts where the words start, out of a plain espresso lead-in: on a laptop the band's top
+   shows in the first screen, and a photo there would outrank the H1 as the LCP. */
+.pp-problem[data-photo] {
+  --pp-band-pad: clamp(96px, 13vw, 192px);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-block-start: 0;
+  padding-block: var(--pp-band-pad);
+}
+.pp-problem-photo {
+  position: absolute;
+  inset: var(--pp-band-pad) 0 0;
+  z-index: -1;
+}
+.pp-problem-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--color-espresso) 0%,
+    color-mix(in srgb, var(--color-espresso) 70%, transparent) 30%,
+    color-mix(in srgb, var(--color-espresso) 86%, transparent) 100%
+  );
+}
+/* The detail line reads in ivory over the photo (its muted tone fell under 4.5:1 there). */
+.pp-problem[data-photo] .pp-problem-detail {
+  color: var(--color-ivory);
+}
+/* Laptops: the band is a wide strip, so the photo shows at the open inline-start side (under the
+   label's column) and the wash closes to solid under the words; mirrored in Arabic. */
+@media (min-width: 900px) {
+  .pp-problem-photo::after {
+    --pp-wash-dir: to right;
+    background:
+      linear-gradient(to bottom, var(--color-espresso) 0%, var(--color-espresso) 12%, transparent 40%),
+      linear-gradient(
+        var(--pp-wash-dir),
+        color-mix(in srgb, var(--color-espresso) 30%, transparent) 0%,
+        color-mix(in srgb, var(--color-espresso) 90%, transparent) 30%,
+        color-mix(in srgb, var(--color-espresso) 92%, transparent) 100%
+      );
+  }
+  [dir="rtl"] .pp-problem-photo::after {
+    --pp-wash-dir: to left;
+  }
+}
+.pp-problem:not([data-photo]) + .pp-features {
   padding-block-start: 0;
 }
 .pp-feature-list {

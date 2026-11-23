@@ -14,7 +14,7 @@ import { createRequire } from "node:module";
 
 const sharp = createRequire(import.meta.url)("sharp");
 process.removeAllListeners("warning");
-const { STORY_PHOTOS } = await import("../src/content/photo-stories.ts");
+const { STORY_BASE, mediaAll } = await import("../src/content/media.ts");
 
 /** Curated id → its raw extract (profile-inventory.md). */
 const RAW = {
@@ -32,11 +32,12 @@ const RAW = {
 };
 
 const masters = mkdtempSync(path.join(tmpdir(), "nt-stories-"));
-for (const photo of Object.values(STORY_PHOTOS)) {
-  const raw = path.join("public", "images", "work", "raw", RAW[photo.from] ?? "");
-  if (!RAW[photo.from] || !existsSync(raw)) throw new Error(`${photo.id}: no raw file for ${photo.from}`);
+for (const [id, base] of Object.entries(STORY_BASE)) {
+  const photo = { id, ...mediaAll(id) };
+  const raw = path.join("public", "images", "work", "raw", RAW[base] ?? "");
+  if (!RAW[base] || !existsSync(raw)) throw new Error(`${id}: no raw file for ${base}`);
   const meta = await sharp(raw).metadata();
-  if (meta.width !== photo.width || meta.height !== photo.height) throw new Error(`${photo.id}: ${meta.width}×${meta.height} on disk, ${photo.width}×${photo.height} in photo-stories.ts`);
+  if (meta.width !== photo.width || meta.height !== photo.height) throw new Error(`${photo.id}: ${meta.width}×${meta.height} on disk, ${photo.width}×${photo.height} in media.ts`);
   await sharp(raw).png().toFile(path.join(masters, `${photo.id}.png`));
 }
 const out = path.join("public", "images", "stories");

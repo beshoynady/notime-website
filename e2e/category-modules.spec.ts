@@ -3,36 +3,35 @@ import { gotoReady } from "./helpers";
 import { expectNoShift, recordModuleShifts } from "./modules/helpers";
 
 /**
- * Module slots (Task 2.4), on the agenda-timeline (Task 3.3). Loaded at #stage (section VI), the
- * conferences slot is far above, outside the one-viewport preload margin.
- *
- * Every Events module has a server static fallback (STATIC_FALLBACKS: its final state, `.evm`),
- * so the slot reads complete before its chunk arrives, when the chunk fails and without script.
- * The slot itself, its loading and its failure handling are what these tests pin.
+ * Module slots (Task 2.4), on the print-order module (Production, print & gifts). The Events
+ * sections that used to carry modules are photo scenes now (D153), so the slot's own behaviour is
+ * pinned here: it loads only near the viewport, inside the same box, and a failed chunk leaves the
+ * section intact with no error. Loaded at the top of the page, the slot is several screens down,
+ * outside the one-viewport preload margin.
  */
-const PAGE = "/en/services/events-hospitality";
-const slot = '[data-module="agenda-timeline"]';
+const PAGE = "/en/services/production-print-gifts";
+const slot = '[data-module="print-order"]';
 
 test.describe("module slot", () => {
   test("loads near the viewport, inside the same box", async ({ page }) => {
     await recordModuleShifts(page);
-    await gotoReady(page, `${PAGE}#stage`);
+    await gotoReady(page, PAGE);
     await page.waitForTimeout(1000);
+    await expect(page.locator(slot)).toHaveCount(1);
     await expect(page.locator(slot)).not.toHaveAttribute("data-module-ready");
-    await expect(page.locator(`${slot} .evm[data-evm="agenda"]`)).toHaveCount(1);
 
     await page.locator(slot).scrollIntoViewIfNeeded();
     await expect(page.locator(slot)).toHaveAttribute("data-module-ready", "");
     await expect(page.locator(slot)).toHaveAttribute("role", "group");
-    await expect(page.locator(slot)).toHaveAttribute("aria-labelledby", "conferences-title");
+    await expect(page.locator(slot)).toHaveAttribute("aria-labelledby", "print-ordering-title");
     await expectNoShift(page);
   });
 
-  test("keeps the static fallback when the module chunk fails", async ({ page }) => {
+  test("a failed module chunk leaves the section intact, with no error", async ({ page }) => {
     const errors: string[] = [];
     page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
     page.on("pageerror", (e) => errors.push(e.message));
-    await gotoReady(page, `${PAGE}#stage`);
+    await gotoReady(page, PAGE);
     await page.waitForTimeout(1000);
     // Chunk names are hashed: block every script requested from now on (the module's included).
     let aborted = 0;
@@ -40,8 +39,8 @@ test.describe("module slot", () => {
     await page.locator(slot).scrollIntoViewIfNeeded();
     await expect.poll(() => aborted, { message: "the slot requested its chunk" }).toBeGreaterThan(0);
     await page.waitForTimeout(1500);
-    await expect(page.locator(`${slot} .evm[data-evm="agenda"]`)).toHaveCount(1);
     await expect(page.locator(slot)).not.toHaveAttribute("data-module-ready");
+    await expect(page.locator("#print-ordering .svc-quote")).toBeVisible();
     expect(errors.filter((e) => !/Failed to load resource|ERR_FAILED/.test(e))).toEqual([]);
   });
 });
@@ -49,12 +48,13 @@ test.describe("module slot", () => {
 test.describe("without JavaScript", () => {
   test.use({ javaScriptEnabled: false });
 
-  test("every slot renders its static fallback", async ({ page }) => {
+  test("Events has no module slot, and a slot elsewhere never claims to be ready", async ({ page }) => {
+    await page.goto("/en/services/events-hospitality");
+    // Every Events section is a photo scene with Rand's work (D153).
+    await expect(page.locator("[data-module]")).toHaveCount(0);
+    await expect(page.locator("section.svc .scene")).toHaveCount(6);
     await page.goto(PAGE);
-    const slots = page.locator("[data-module]");
-    await expect(slots).toHaveCount(6);
-    await expect(page.locator("[data-module] .evm")).toHaveCount(6);
-    await expect(page.locator("[data-module] .module-placeholder")).toHaveCount(0);
+    await expect(page.locator(slot)).toHaveCount(1);
     await expect(page.locator("[data-module-ready]")).toHaveCount(0);
   });
 });

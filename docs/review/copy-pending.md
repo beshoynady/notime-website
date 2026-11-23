@@ -166,3 +166,99 @@ The owner approved these English changes (`docs/review/humanizer-pass.md`). The 
 ★ on H15–H17: the claims that the crew who rig the stage also run it (D56) and that one crew makes the film are out of the site until Rand answers question 17 in `rand-questions.md` (stage and photography crews: in-house, partners or freelancers; D148). If she confirms them, they can come back.
 
 ⚑ on H12: the merchandise line waits on Rand like the other ⚑ rows. Her answers on gifts (question 14) and on branded apparel (question 15, «الملابس الممهورة بالهوية») decide whether it stays; on launch day it's hidden if unconfirmed, as every ⚑ line.
+
+## Visual portfolio: new lines (2026-11-21)
+
+New copy written for the photo scenes (`docs/content/visual-stories.md`). None states a fact, so none waits on Rand; each is shown here so the owner sees every line that changed. English checked with humanizer; Arabic written natively.
+
+| ID | Was EN | Was AR | Now EN | Now AR | Why |
+|---|---|---|---|---|---|
+| `m:scenes.events.s1` | It starts with an empty room. | تبدأ كل مناسبة بقاعة فارغة. | It starts before the lights come on. | تبدأ قبل أن تُضاء الأنوار. | The opening's first frame is now the room at night (D153), not an empty drawn hall. |
+| `m:category.galleryLabel` | (new) | (new) | Our work: {service} | من أعمالنا في {service} | Names the strip of Rand's photos under a section (screen readers only; D153). |
+| `m:scenes.creative.s2` | Take one. | اللقطة الأولى. | (removed) | (removed) | The opening's beats are photographs now (D158); the clapper beat went with the drawn Act 1. |
+| `media:catering-8` alt | (new) | (new) | Dessert boards and cups styled for a shoot on wooden trays. | ألواح حلويات وأكواب منسّقة للتصوير على صوانٍ خشبية. | A new profile photo in the Photography strip (D158). |
+| `media:catering-9` alt | (new) | (new) | Dessert cups topped with lilac sugar petals, set on glass saucers. | أكواب حلوى تعلوها بتلات سكّرية بلون الليلك، على صحون زجاجية. | A new profile photo in the Photography strip (D158). |
+| `media:cp-rental-lights` alt | (new) | (new) | LED panel lights on stands, lit against a warm wall. | ألواح إضاءة LED على حوامل، مضاءة أمام جدار دافئ. | The rental section's stock photo (D158). |
+| `m:scenes.marketing.s2` | First, the grid. | أولًا، شبكة التصميم. | (removed) | (removed) | The opening's beats are photographs now (D159); the drawn grid went with the drawn spread. |
+| `media:uae-pro-league-6` alt | (new) | (new) | A grid of posts designed for a football league: results, fixtures and registration. | شبكة منشورات صُمّمت لدوري لكرة القدم: نتائج ومواعيد وتسجيل. | The Social section's photo (D159). |
+| `media:mb-branding` alt | (new) | (new) | Blank cards and a brown envelope laid out on a pale table. | بطاقات بيضاء وظرف بنّي مرتّبة على طاولة فاتحة. | Stock, Branding (D159). |
+| `media:mb-digital` alt | (new) | (new) | Hands at a laptop on a meeting table, beside a glass of coffee. | يدان على حاسوب محمول فوق طاولة اجتماعات، بجانب كوب قهوة. | Stock, Digital marketing (D159). |
+| `media:mb-content` alt | (new) | (new) | A planner sorting sticky notes on a dark studio wall. | شخص يرتّب أوراقًا لاصقة على جدار داكن في استوديو. | Stock, Content strategy (D159). |
+| `media:mb-pr` alt | (new) | (new) | Folded newspapers and magazines on a wooden table by a window. | صحف ومجلات مطويّة على طاولة خشبية بجانب نافذة. | Stock, PR (D159). |
+| `media:mb-paid` alt | (new) | (new) | Hands scrolling a social feed on a phone at a desk. | يدان تتصفّحان منشورات على هاتف فوق مكتب. | Stock, Paid media (D159). |
+| `m:scenes.print.s2` | Measured, then cut. | نقيس أولًا، ثم نقصّ. | (removed) | (removed) | The opening's beats are photographs now (D160); the drawn press sheet went with it. |
+| `media:uae-pro-league-7` alt | (new) | (new) | A black leather-finish gift box with a league's awards emblem in gold. | علبة هدايا سوداء بلمسة جلدية، عليها شعار حفل جوائز أحد الدوريات بالذهبي. | The Packaging section's photo (D160). |
+| `media:smith-gulf-1` alt | (new) | (new) | An exhibition stand with orange frames, built for a trade show. | جناح معرض بإطارات برتقالية، صُنع لأحد المعارض التجارية. | The Fabrication strip (D160). |
+| `media:pg-printing` alt | (new) | (new) | A large printed banner hanging in a bright hall. | لافتة مطبوعة كبيرة معلّقة في قاعة مضيئة. | Stock, Printing (D160). |
+| `media:pg-fabrication` alt | (new) | (new) | A carpentry workshop with timber boards, a mitre saw and tools. | ورشة نجارة فيها ألواح خشب ومنشار وأدوات. | Stock, Fabrication (D160). |
+| `m:software.services.more` | (new) | (new) | Who it suits, and the stages | لمن تناسب، ومراحل العمل | The fold in each service panel and in Event technology (D161). |
+| `m:software.services.tabs` | (new) | (new) | Our services | خدماتنا | The tab rail's name for screen readers (D161). |
+| `m:software.finalCta.tabs` | (new) | (new) | Two ways to start | طريقتان للبدء | The closing tabs' name for screen readers (D161). |
+| `m:software.finalCta.book` | (new) | (new) | Request a free call | اطلبوا مكالمة مجانية | The intro-call tab (same words as the sticky bar, D161). |
+| `m:form.consultation.more` | (new) | (new) | Add your website or a note | أضيفوا موقعكم أو ملاحظة | The fold around the form's two optional notes (D161). |
+| `m:software.finalCta.reviewTitle` | Or start with a free website review | أو ابدؤوا بمراجعة مجانية لموقعكم | (removed) | (removed) | The review is a tab now (D161). |
+| `m:software.eventTech.counter` | Checked in · of | سجّلوا حضورهم · من | (removed) | (removed) | The drawn counter became a photograph (D161). |
+| `media:sw-websites` alt | (new) | (new) | A laptop showing code on a dark desk at night. | حاسوب محمول يعرض شيفرة برمجية على مكتب داكن ليلًا. | Stock, Websites (D161). |
+| `media:sw-apps` alt | (new) | (new) | A phone resting on an open laptop in low light. | هاتف موضوع على حاسوب محمول مفتوح في إضاءة خافتة. | Stock, Mobile apps (D161). |
+| `media:sw-systems` alt | (new) | (new) | Two monitors with dashboards on a desk, lit in teal. | شاشتان تعرضان لوحات بيانات على مكتب بإضاءة فيروزية. | Stock, Custom systems (D161). |
+| `media:sw-ecommerce` alt | (new) | (new) | Hands packing an online order in a box at a bright table. | يدان تغلّفان طلبًا إلكترونيًا في صندوق على طاولة مضيئة. | Stock, E-commerce (D161). |
+| `media:sw-ux` alt | (new) | (new) | App wireframes sketched in pen on paper. | مخططات أولية لتطبيق مرسومة بالقلم على الورق. | Stock, UI/UX (D161). |
+| `media:sw-ai` alt | (new) | (new) | A workflow being mapped on a whiteboard with markers. | مسار عمل يُرسم على سبورة بيضاء بالأقلام. | Stock, AI consulting (D161). |
+| `media:sw-event-tech` alt | (new) | (new) | Hands using a rugged tablet on an event floor. | يدان تستخدمان جهازًا لوحيًا متينًا في أرض فعالية. | Stock, Event technology (D161). |
+
+## Arabic for the UAE market (D163), for Rand
+
+The owner's rule of 2026-11-22: Arabic first, tuned to the UAE market (`copy-voice-reference.md` §8). These lines changed wording only; every meaning and fact is as before, and the English needed no change unless a row says so. **Rand reviews each line.** Running count: **46** lines changed (U1–U47 less U24; U24 and U48 proposed only). The 2026-11-23 check of every page (Home and Events included, which were done before the rule) changed U33–U47: Creative, Marketing, Print and Software service lines, the Print intro, one photo description and one legal line. Home and Events needed no change outside their ⚑ lines. Not touched: ⚑ lines that the rule would also change (`categories[events-hospitality].faq[4].a` «ليالي الجوائز», `categories[production-print-gifts].faq[1].a` and `services[stand-fabrication-signage].summary` «بهوية العلامة»): they wait for Rand with their ⚑.
+
+| # | Key | Was (AR) | Now (AR) | Why |
+|---|---|---|---|---|
+| U1 | `m:aboutPage.title` | أفكار تُبنى حيث تلتقي العلامة بجمهورها. | أفكار نبنيها حيث تلتقي العلامة التجارية بجمهورها. | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as a mark or a grade. Active verb. |
+| U2 | `m:aboutPage.story2` | نبدأ من النقطة التي تلتقي فيها العلامة بجمهورها… | نبدأ من النقطة التي تلتقي فيها العلامة التجارية بجمهورها… | Same term. |
+| U3 | `m:about.statement` (Home and About) | نصنع الفكرة في النقطة التي تلتقي فيها العلامة بجمهورها… | نصنع الفكرة في النقطة التي تلتقي فيها العلامة التجارية بجمهورها… | Same term. |
+| U4 | `m:aboutPage.story3` | …ومجلس تراثي يستقبل الضيوف، وليالي تكريم لدوري كرة قدم. | …ومجلس تراثي يستقبل الضيوف، وحفلات تكريم لدوري كرة قدم. | «حفل تكريم» is the UAE events word. |
+| U5 | `m:productPage.registerBody` | …اتركوا بياناتكم، وسنكتب لكم حين يصبح جاهزًا. | …اتركوا بياناتكم، وسنراسلكم حين يصبح جاهزًا. | Business register. |
+| U6 | `c:products:minute-zero.descriptor` | تسجيل دخول الفعاليات بالـ QR | تسجيل الحضور في الفعاليات برمز QR | Events say «تسجيل الحضور»; «بالـ QR» was a literal shape. Shows in menus, titles and schema. |
+| U7 | `c:products:minute-zero.summary` | يسجّل الضيوف دخولهم عند الباب برمز QR، ويرى الفريق الحضور لحظة بلحظة. | يسجّل الضيوف حضورهم عند الباب برمز QR، ويرى الفريق من وصل لحظة بلحظة. | Same term; «من وصل» carries "arrivals" without repeating «الحضور». |
+| U8 | `c:product-pages:minute-zero.features[0].line` | يصل كل ضيف رمزه الخاص مع الدعوة. | يتسلّم كل ضيف رمزه الخاص مع الدعوة. | «يصل كلَّ ضيفٍ رمزُه» reads backwards at first glance. |
+| U9 | `c:work:uaepl.story.facts[1].value` | البطولات وليالي التكريم | البطولات وحفلات التكريم | «حفل تكريم» is the UAE word (as U4). |
+| U10 | `m:work.intro` (Home, Real projects) | جناح لشركة طيران وطنية، وليالي تكريم لدوري كرة قدم. نحتفظ بالأسماء إلى أن يأذن لنا أصحابها. | جناح لشركة طيران وطنية، وحفلات تكريم لدوري كرة قدم، وقاعات جهّزناها لمناسبات خاصة. نحتفظ بأسماء العملاء إلى أن يأذنوا لنا بذكرها. | Same term; the third tile is now the rooms collection (D164), so it is named. English updated to match. |
+| U11 | `m:workIndex.intro` | جناح في معرض دبي للطيران، وليالي تكريم لدوري كرة قدم. يظهر اسم كل عميل حين يوافق على ذكره. | جناح في معرض دبي للطيران وحفلات تكريم لدوري كرة قدم، ومعها صور من قاعات وضيافة وهدايا جهّزناها. يظهر اسم كل عميل حين يوافق على ذكره. | Same term; the collections are named (D164). English updated. |
+| U12 | `m:workIndex.metaDescription` | جناح لشركة طيران في معرض دبي للطيران، وليالي تكريم لدوري كرة قدم: ما الذي قدّمناه في كل منهما. | جناح لشركة طيران في معرض دبي للطيران، وحفلات تكريم لدوري كرة قدم، وصور من قاعات وضيافة وهدايا جهّزناها. | Same; search snippet. English updated. |
+| U13 | `m:workIndex.heading` | أعمال لجهات وطنية، مشروعًا بعد مشروع. | أعمال نفّذناها، نعرضها مشروعًا بعد مشروع. | The list now includes private celebrations, so «لجهات وطنية» no longer covers it. English: "Work we've done, shown project by project." |
+| U14 | `m:workIndex.metaTitle` | أعمالنا: فعاليات وأجنحة وحلول رقمية | أعمالنا: فعاليات وأجنحة وضيافة وهدايا | Work shows no digital project; it shows hospitality and gifts. English updated. |
+| U15 | `m:linksPage.work.note` | أجنحة معارض، ليالي تكريم، منصّات رقمية | أجنحة معارض، وحفلات تكريم، وقاعات جهّزناها | Same term; what Work shows. English updated. |
+| U16 | `c:services:POINTS[conferences-summits][4]` | حفلات التكريم وليالي الجوائز | حفلات التكريم وتوزيع الجوائز | «حفل توزيع الجوائز» is the UAE phrase; «ليالي» read as Levant/Egypt. |
+| U17 | `c:categories:categories[events-hospitality].faq[0].a` | …وحفلات تكريم وليالي جوائز. | …وحفلات تكريم وتوزيع جوائز. | Same as U16. |
+| U18 | `c:services:POINTS[product-launches-activations][1]` | تفعيل العلامات في المراكز التجارية والقاعات | تفعيل العلامات التجارية في مراكز التسوق والقاعات | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. «مراكز التسوق» avoids «التجارية» twice. |
+| U19 | `c:services:POINTS[corporate-gifts][1]` | زجاجات بهوية العلامة | زجاجات بهوية العلامة التجارية | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U20 | `c:services:POINTS[branding-identity][0]` | استراتيجية العلامة | استراتيجية العلامة التجارية | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U21 | `c:services:POINTS[stand-fabrication-signage][3]` | …والمساحات بهوية العلامة | …والمساحات بهوية العلامة التجارية | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U22 | `c:services:services[ai-content-creation].summary` | …بتوجيه فني يناسب العلامة. | …بتوجيه فني يناسب العلامة التجارية. | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U23 | `c:services:services[packaging-design].summary` | علب وتغليف تُفتح كأنها جزء من العلامة. | علب وتغليف تُفتح كأنها جزء من العلامة التجارية. | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U24 | `c:services:services[branded-merchandise].title` | منتجات بهوية العلامة | (unchanged) | Proposed «…العلامة التجارية», not applied: service titles are the approved list (`docs/content/services-list.md`). Rand decides. |
+| U25 | `c:service-hooks:packaging-design` | …فنصمّمها لتحمل إحساس العلامة. | …فنصمّمها لتحمل إحساس العلامة التجارية. | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U26 | `c:services:services[branding-identity].summary` | استراتيجية العلامة، والتسمية، … | استراتيجية العلامة التجارية، والتسمية، … | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U27 | `c:categories:categories[marketing-brand].intro` | استراتيجية العلامة وهويتها، … تتحدث فيها العلامة بصوت واحد. | استراتيجية العلامة التجارية وهويتها، … تتحدث فيها العلامة بصوت واحد. | First mention takes the full term; the second refers back to it. |
+| U28 | `m:scenes.marketing.s1` | تبدأ العلامة من صفحة بيضاء. | تبدأ العلامة التجارية من صفحة بيضاء. | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U29 | `m:styleguide.colour.copy` / `.copied` / `.selected` (the colour lab) | انسخ {hex} / تم نسخ {hex} / …انسخه… | انسخوا {hex} / نُسخ {hex} / …انسخوه… | Plural address; «تم + مصدر» avoided. |
+| U30 | `m:styleguide.motion.demos.magneticButton` (the motion lab) | خطط لفعاليتك | خطّطوا لفعاليتكم | Plural address, as the site's own button «خطّطوا لفعاليتكم معنا». |
+| U31 | `c:services:POINTS[product-launches-activations][3]` | مساحات بهوية العلامة | مساحات بهوية العلامة التجارية | «العلامة التجارية» is the Gulf business term (as U21); missed in the first pass, found by the close's gate. |
+| U32 | `c:related-work:note` (Work index, case pages, Related work) | نعرضها دون ذكر العميل حتى يوافق على تسميته. | لا نكتب اسم أي عميل قبل موافقته. | The case covers now show the client in the photo (D164, Rand approves), so «نعرضها دون ذكر العميل» no longer held; the new line says what stays true: we don't write the name. («اسم العميل» itself is the review build's placeholder, so the leak scan forbids it.) English: "We don't write the client's name until they approve it." |
+| U33 | `c:services:POINTS[video-production][1]` | أفلام سينمائية للمنتجات والعلامات | أفلام سينمائية للمنتجات والعلامات التجارية | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U34 | `c:services:POINTS[print-ordering][3]` | طباعة بمعايير علامتكم | طباعة بمعايير علامتكم التجارية | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U35 | `c:services:services[product-launches-activations].summary` | إطلاقات وتفعيلات للعلامات في المراكز التجارية والقاعات… | إطلاقات وتفعيلات للعلامات التجارية في مراكز التسوق والقاعات… | Same term; «مراكز التسوق» avoids «التجارية» twice (as U18). |
+| U36 | `c:services:services[video-production].summary` | أفلام للعلامات والمنتجات والفعاليات… | أفلام للعلامات التجارية والمنتجات والفعاليات… | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U37 | `c:services:services[motion-graphics].summary` | …تتحرّك بأسلوب علامتكم. | …تتحرّك بأسلوب علامتكم التجارية. | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U38 | `c:services:services[print-ordering].summary` | …ونطبعه بهوية علامتكم. | …ونطبعه بهوية علامتكم التجارية. | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U39 | `c:categories:categories[production-print-gifts].intro` | …ومنتجات تحمل هوية علامتكم… | …ومنتجات تحمل هوية علامتكم التجارية… | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U40 | `c:service-hooks:ai-content-creation` | …يُبقي كل لقطة على هوية علامتكم. | …يُبقي كل لقطة على هوية علامتكم التجارية. | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U41 | `c:modules/print-order:PRINT_ORDER_COPY` (step title) | بمعايير علامتكم | بمعايير علامتكم التجارية | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U42 | `c:modules/print-order:PRINT_ORDER_COPY` (step line) | طباعة تطابق هوية علامتكم والنسخة التي اعتمدتموها. | طباعة تطابق هوية علامتكم التجارية والنسخة التي اعتمدتموها. | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U43 | `media:sandoz-1` alt | جناح لعلامة دوائية في مؤتمر طبي. | جناح لعلامة تجارية في قطاع الأدوية، في مؤتمر طبي. | Same term; «علامة دوائية» reads as a drug label. English unchanged («A pharmaceutical brand's stand…»). |
+| U44 | `c:software/page:` who it suits (websites) | علامات تستبدل موقعًا بالإنجليزية فقط | علامات تجارية تستبدل موقعًا بالإنجليزية فقط | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U45 | `c:software/page:` who it suits (e-commerce) | علامات تجزئة تبدأ البيع عبر الإنترنت | علامات تجارية في التجزئة تبدأ البيع عبر الإنترنت | Same term; «علامات تجزئة» is a literal shape of “retail brands”. |
+| U46 | `c:software/page:` websites, ideal for | عمل جديد، أو علامة جديدة، أو موقع حان وقت استبداله. | عمل جديد، أو علامة تجارية جديدة، أو موقع حان وقت استبداله. | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
+| U47 | `c:legal:legalDocs[terms]` Intellectual property | …والشعارات والعلامات الأخرى… | …والشعارات والعلامات التجارية الأخرى… | Legal precision: “trademarks” is «العلامات التجارية». The owner reads the legal pages before launch (checklist step 5). |
+| U48 | `c:services:services[product-launches-activations].title` | إطلاق المنتجات وتفعيل العلامات | (unchanged) | Proposed «…وتفعيل العلامات التجارية», not applied: service titles are the approved list (as U24). Rand decides. |
+
+New Work copy written Arabic first (D164), for Rand: the four collections' titles and summaries (`src/content/work.ts`, `workCollections`), and `copyLink.*` and `workCollection.*` in `src/messages/ar.json`.

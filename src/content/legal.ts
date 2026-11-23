@@ -255,7 +255,7 @@ const terms: LegalDoc = {
         {
           p: {
             en: "The site's text, design, graphics, code and the NO TIME name and logo belong to us or to those who licensed them to us. Other names, logos and marks that appear on the site belong to their owners. You may view and share links to our pages, but you may not copy, reproduce or reuse the content for commercial purposes without our written permission.",
-            ar: "نصوص الموقع وتصميمه ورسومه وبرمجته، واسم NO TIME وشعارها، ملكٌ لنا أو لمن رخّصها لنا. وتعود الأسماء والشعارات والعلامات الأخرى الظاهرة على صفحات الموقع إلى أصحابها. يمكنكم تصفّح صفحاتنا ومشاركة روابطها، لكن لا يجوز نسخ المحتوى أو إعادة إنتاجه أو استخدامه لأغراض تجارية دون إذن مكتوب منّا.",
+            ar: "نصوص الموقع وتصميمه ورسومه وبرمجته، واسم NO TIME وشعارها، ملكٌ لنا أو لمن رخّصها لنا. وتعود الأسماء والشعارات والعلامات التجارية الأخرى الظاهرة على صفحات الموقع إلى أصحابها. يمكنكم تصفّح صفحاتنا ومشاركة روابطها، لكن لا يجوز نسخ المحتوى أو إعادة إنتاجه أو استخدامه لأغراض تجارية دون إذن مكتوب منّا.",
           },
         },
       ],
@@ -372,10 +372,6 @@ const cookies: LegalDoc = {
               {
                 en: ["NEXT_LOCALE", "Cookie, set by this site", "Remembers whether you're reading in English or Arabic.", "Until you close your browser"],
                 ar: ["NEXT_LOCALE", "ملف تعريف ارتباط يضعه هذا الموقع", "يتذكّر هل تتصفّحون بالعربية أم بالإنجليزية.", "حتى تغلقوا المتصفح"],
-              },
-              {
-                en: ["nt-intro", "Session storage (not a cookie)", "Remembers that you've seen the home page's opening animation, so it plays only once.", "Until you close the tab"],
-                ar: ["nt-intro", "تخزين الجلسة (ليس ملف تعريف ارتباط)", "يتذكّر أنكم شاهدتم الحركة الافتتاحية في الصفحة الرئيسية، فلا تُعرض إلا مرة واحدة.", "حتى تغلقوا التبويب"],
               },
               {
                 en: ["nt-lead", "Session storage (not a cookie)", "Notes how you reached the site (the campaign tag in the link, the site you came from and your first page), so a form you send tells us which post or link brought you. It leaves your device only with a form you submit.", "Until you close the tab"],

@@ -60,6 +60,8 @@ export const PAGE_REF = {
   caseResult: "WK-15",
   caseScope: "WK-16",
   caseNext: "WK-17",
+  collectionOpening: "WK-21",
+  collectionGallery: "WK-22",
   aboutStory: "AB-01",
   aboutPrinciples: "AB-02",
   aboutMarkets: "AB-03",

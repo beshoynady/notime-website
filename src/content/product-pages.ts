@@ -18,6 +18,8 @@ export interface ProductPage {
   other: ProductId;
   /** One line under the problem: what it costs the client today. */
   problemDetail: Localized<string>;
+  /** The place the problem happens, behind the problem line (media.ts: stock mood, decorative; D162). */
+  photo: string;
   features: { title: Localized<string>; line: Localized<string> }[];
 }
 
@@ -25,12 +27,13 @@ export const productPages: Record<ProductId, ProductPage> = {
   "minute-zero": {
     id: "minute-zero",
     other: "peak-hour",
+    photo: "pp-minute-zero",
     problemDetail: {
       en: "Paper lists and a crowded door turn the first impression into a wait.",
       ar: "القوائم الورقية والازدحام عند الباب يحوّلان الانطباع الأول إلى انتظار.",
     },
     features: [
-      { title: { en: "QR invitations", ar: "دعوات برمز QR" }, line: { en: "Each guest receives a personal code with the invitation.", ar: "يصل كل ضيف رمزه الخاص مع الدعوة." } },
+      { title: { en: "QR invitations", ar: "دعوات برمز QR" }, line: { en: "Each guest receives a personal code with the invitation.", ar: "يتسلّم كل ضيف رمزه الخاص مع الدعوة." } },
       { title: { en: "Check-in at the door from a phone", ar: "تسجيل الحضور عند الباب من الهاتف" }, line: { en: "The team at the door scans each code with a phone.", ar: "يمسح فريق الاستقبال كل رمز بالهاتف." } },
       { title: { en: "Live arrivals for the team", ar: "متابعة الوصول لحظة بلحظة" }, line: { en: "Who has arrived and who is still due, as it happens.", ar: "من وصل ومن لم يصل بعد، لحظة بلحظة." } },
       { title: { en: "One guest list", ar: "قائمة ضيوف واحدة" }, line: { en: "A guest list you can search, so a name never holds up the queue.", ar: "قائمة يمكن البحث فيها، فلا يتعطّل الطابور عند اسم." } },
@@ -40,6 +43,7 @@ export const productPages: Record<ProductId, ProductPage> = {
   "peak-hour": {
     id: "peak-hour",
     other: "minute-zero",
+    photo: "pp-peak-hour",
     problemDetail: {
       en: "When the floor and the kitchen work from different slips of paper, the busiest hour is when things slip.",
       ar: "حين يعمل فريق الصالة والمطبخ من أوراق متفرقة، تفلت الأمور في أكثر الساعات ازدحامًا.",

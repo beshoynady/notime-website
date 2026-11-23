@@ -1,0 +1,32 @@
+[
+  {
+    "path": "/en/services/marketing-brand",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/services/marketing-brand",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/ar/services/marketing-brand",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/ar/services/marketing-brand",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "path": "/en/services/creative-production",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "path": "/en/services/creative-production",
+    "width": 390,
+    "violations": []
+  }
+]

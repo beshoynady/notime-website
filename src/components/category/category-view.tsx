@@ -99,7 +99,6 @@ export async function CategoryView({
                   tone={tone}
                   lab={lab}
                   hook={serviceHook(s.slug)}
-                  light={category.theme === "evening"}
                 />
               ))}
             </div>

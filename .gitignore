@@ -17,6 +17,7 @@
 /.next/
 # The review build (NEXT_PUBLIC_REVIEW_MODE=1, scripts/review.mjs)
 /.next-review/
+/.next-base/
 /out/
 
 # production
@@ -77,3 +78,6 @@ docs/checkpoints/m3/**/*.jpg
 .github/agents/
 .github/hooks/
 scripts/tmp/
+
+# graphify knowledge graph (local navigation aid; rebuilt per file, never committed)
+graphify-out/

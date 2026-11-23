@@ -139,3 +139,67 @@ These three need originals from the client before their project pages can carry 
 | `gifts` | 2 | 1280×719 | Bookmark; EDI T-shirt mock-up |
 
 No curated image is an AI image or a stock photo, so none needs the "Illustrative" label. If the page-14 AI deliverables are ever shown, they carry the profile's own "Produced with AI" line. They are real client work, not stand-ins for it.
+
+---
+
+## 2026-11-21: display plan (the owner's visual-portfolio mandate)
+
+The owner's rule now (it replaces "nothing is wired until the client approves its name" for **photos**): a real photo is shown even when a client's logo or name is visible in it, with two flags in the image registry (`src/content/media.ts`): `randApproval: "client-visible"` (Rand's question 4 decides) and a one-line `hidden` switch. **Text never names a client** that the site doesn't already name. **Not changed:** photos with identifiable faces stay off the site until Rand confirms the rights (OQ #18; decision D150), and pages 14, 16, 17 and 18 (UAE Athletics Federation) are never used until the owner confirms the work (the withdrawn case, D121). That removes the profile's only AI-content and motion examples (page 14 credits them to the Federation), so the motion and AI sections ask Rand for originals (`images-for-rand.md`).
+
+**Resolution check (PyMuPDF 2.1, 2026-11-21):** every image placed on a usable page is in `raw/` at its native embedded size; nothing larger exists in the PDF. The only placements not extracted are the excluded pages (20, 30, 34–38). No image is upscaled: below 800 px long edge (C/X) an image is only shown small (a strip tile, a card, a layer under 400 px wide).
+
+**New curated files** go to `public/images/profile/<descriptive-name>.{avif,webp}` (the already-curated set stays in `public/images/work/<slug>/`, where pages already point; the registry is the only place that names a path, so the folder doesn't matter to a component).
+
+### Pages 14–18
+
+| Page | Content | Decision |
+|---|---|---|
+| 14 · AI content & motion | 4 vertical AI key visuals (547×980) credited "Produced with AI · UAE Athletics Federation, Oregon 26" | **Excluded** (Federation). The service text stays; examples wait for Rand's originals |
+| 15 · Digital platforms | text only | The list already feeds Software |
+| 16 · Case study, UAE Athletics Federation | 6 key visuals (659×879) | **Excluded** |
+| 17 · Social media & content, Federation | snapshot figures (487K views…) | **Excluded**; the figures are never used |
+| 18 · Digital platform, Federation | site + admin + app (1544×965) and masks | **Excluded** |
+
+### Where each usable image goes
+
+"Now" = where the site shows it on 2026-11-21. "Goes to" = the visual-portfolio plan (`docs/superpowers/specs/2026-11-21-visual-portfolio-design.md`). ⚑ = client logo or name visible (`randApproval`).
+
+| Image | Now | Goes to |
+|---|---|---|
+| private-celebrations-1 (hall, lanterns) | Events opening, category card, About | Events opening plate (kept), Work gallery |
+| private-celebrations-2 (roses, 859×1290) | category card 4:5, Galas stack | Galas scene (foreground column), home card |
+| private-celebrations-3 (entrance, 537×716) | Galas stack | Galas strip (small) |
+| private-celebrations-4 (runner) | Galas stack | Galas scene |
+| private-celebrations-5 (dessert table) | Galas stack | Galas strip, Catering scene |
+| private-celebrations-6 (keepsake) | Galas stack | Gifts strip (keepsakes) |
+| private-celebrations-7 (terrace florals) | — | Galas scene plate (mobile) |
+| private-celebrations-8 (rig going up) | Set design visual | Stage scene, beat 1 (the rig) |
+| catering-1 (buffet, crystal & gold, 1408) | Events module | Catering scene plate |
+| catering-2/3 (long table, floral table, 1247) | stories | Galas and Catering strips |
+| catering-4 (dessert boards) | Creative opening frame | Photography gallery |
+| catering-5 (silver stand, server torso) | stories | Catering strip |
+| catering-6 (mocktails) | Photography visual | Photography gallery |
+| catering-7 (boardroom hospitality) | — | Conferences scene (the break), Catering strip |
+| heritage-1 (carts at night) | stories | Heritage scene foreground |
+| heritage-2 (coffee on carpet, 688) | — | Heritage strip (small) |
+| heritage-3 (beach majlis, 688) | — | Heritage strip (small) |
+| heritage-4 (cart, brass, 956×1275) | — | Heritage scene, mobile plate |
+| heritage-5 (desert tent at night) | Events majlis tent slot | Heritage scene plate |
+| uae-pro-league-1 (tournament identity) ⚑ | — | Work: football league case gallery; Exhibitions/Launches strip |
+| uae-pro-league-2 (Super Cup ceremony, distant) ⚑ | — | Work case cover; home "Real projects" |
+| uae-pro-league-3/4 (social posts, 643×738) ⚑ | — | Marketing · Social media gallery (real posts); Work case |
+| uae-pro-league-5 (gift set) ⚑ | — | Gifts gallery; Work case |
+| egyptair-pavilion-1 (751) ⚑ | — | Work airline case cover (card size only); home "Real projects" |
+| sandoz-1 (stand, 577×1280) ⚑ | — | Fabrication gallery; Exhibitions strip |
+| gifts-1 (gold skyline bookmark) | Gifts visual, Print opening | Gifts scene, Print opening |
+| gifts-2 (EDI T-shirt mock-up) ⚑ | — | Merchandise gallery |
+| **new** p13-1 → `profile/uae-pro-league-social-grid` ⚑ | — | Social media gallery |
+| **new** p23-1 → `profile/framed-tshirts-mockup` | — | Merchandise gallery |
+| **new** p24-1 → `profile/uae-pro-league-awards-box` ⚑ (cropped clear of the baked-in "2 of 3" badge) | — | Packaging gallery |
+| **new** p10-3, p10-4, p25-4, p26-2/3/4, p27-2/3, p31-4, p4-2 (alternates) | — | Strips in Galas, Catering, Photography, Heritage |
+| **new** p21-1 → `profile/smith-gulf-stand` ⚑ (497 px, small only) | — | Fabrication gallery tile |
+| p19-4/6, p21-2/3/4 (X, under 400 px) | — | Not used: too small even for a tile |
+| Faces (p5-2, p5-4, p7-*, p8-2/3/4, p19-8, p24-2, p32-2/3) | — | **Held** (D150): listed in `images-for-rand.md` |
+| p12-1..4, p13-2 (portals and government accounts) | — | **Held** (OQ #20: NO TIME's role unconfirmed; rulers' portraits) |
+| p3-1, p7-4, p33-1/2/3 (stock, AI, render) | — | **Never** |
+| p22-1/2 (supplier catalogue sheets) | — | **Never** (not NO TIME photography) |

@@ -23,7 +23,7 @@ interface SplitOptions {
  * SplitText vars for the project's language rule: chars in English, words in Arabic
  * (Arabic letters must stay joined). Shared by useSplitText and the hero controller.
  */
-export function splitVars(locale: AppLocale, { mask = true, wordsOnly = false }: { mask?: boolean; wordsOnly?: boolean } = {}) {
+function splitVars(locale: AppLocale, { mask = true, wordsOnly = false }: { mask?: boolean; wordsOnly?: boolean } = {}) {
   const byWords = wordsOnly || locale === "ar";
   return {
     type: byWords ? "words" : "words,chars",

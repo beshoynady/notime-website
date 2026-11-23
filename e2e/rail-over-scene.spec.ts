@@ -3,8 +3,9 @@ import { gotoReady } from "./helpers";
 
 /**
  * Self-audit B11 (2026-11-20): on a laptop the services rail (a 60% scrim) stayed over the
- * full-bleed scenes and cut the Events catering scene. Over a scene it steps aside; back over the
- * sections it returns.
+ * full-bleed scenes and cut the Events catering scene. Over a scene it steps aside; past the
+ * sections it returns. Since every Events section is a scene (D153, D155) it only fades: it stays
+ * in the Tab order and comes back on focus or hover (category-index.spec.ts).
  */
 for (const locale of ["en", "ar"] as const) {
   test(`${locale}: the rail steps aside over a full-bleed scene and comes back`, async ({ page, isMobile }) => {
@@ -18,10 +19,12 @@ for (const locale of ["en", "ar"] as const) {
         const r = el.getBoundingClientRect();
         window.scrollTo(0, r.top + scrollY + 40);
       });
-      await expect(rail).toBeHidden();
+      await expect(rail).toHaveAttribute("data-over-scene", "");
+      await expect(rail).toHaveCSS("opacity", "0");
     }
-    // A plain section again: the rail is back.
-    await page.locator(".svc:not([data-scene-section])").last().evaluate((el) => el.scrollIntoView({ block: "start" }));
-    await expect(rail).toBeVisible();
+    // Past the scenes (the FAQ beside the rail's track): the rail is back.
+    await page.locator("section.cat-faq").evaluate((el) => el.scrollIntoView({ block: "start" }));
+    await expect(rail).not.toHaveAttribute("data-over-scene", "");
+    await expect(rail).toHaveCSS("opacity", "1");
   });
 }

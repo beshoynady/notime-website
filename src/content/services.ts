@@ -15,7 +15,7 @@ const POINTS: Record<string, Localized<string[]>> = {
   // Events & Hospitality: copy deck docs/content/category-copy-events.md (approved 2026-11-09).
   "conferences-summits": {
     en: ["Programme and running order", "Venue and room layout", "Speaker and guest care", "Event branding on site", "Ceremonies and award nights"],
-    ar: ["البرنامج وتسلسل الفقرات", "اختيار المكان وتوزيع القاعة", "استقبال المتحدثين ورعاية الضيوف", "هوية الحدث في أرجاء المكان", "حفلات التكريم وليالي الجوائز"],
+    ar: ["البرنامج وتسلسل الفقرات", "اختيار المكان وتوزيع القاعة", "استقبال المتحدثين ورعاية الضيوف", "هوية الحدث في أرجاء المكان", "حفلات التكريم وتوزيع الجوائز"],
   },
   "exhibitions-booths": {
     en: ["Stand concept and design", "Fabrication and installation", "Mall and exhibition stands", "Staffing on the stand", "On-site PR management"],
@@ -23,7 +23,7 @@ const POINTS: Record<string, Localized<string[]>> = {
   },
   "product-launches-activations": {
     en: ["Launch concept and the reveal", "Brand activations in malls and venues", "Technology and robotics experiences", "Sponsor activations", "Branded environments"],
-    ar: ["فكرة الإطلاق ولحظة الكشف", "تفعيل العلامات في المراكز التجارية والقاعات", "عروض تفاعلية بالتقنية والروبوتات", "تفعيلات الرعاة", "مساحات بهوية العلامة"],
+    ar: ["فكرة الإطلاق ولحظة الكشف", "تفعيل العلامات التجارية في مراكز التسوق والقاعات", "عروض تفاعلية بالتقنية والروبوتات", "تفعيلات الرعاة", "مساحات بهوية العلامة التجارية"],
   },
   "galas-private-celebrations": {
     en: ["Concept decks and theming", "Gala and wedding décor", "Floral design and styling", "Giveaways and keepsakes", "Photobooths and guest moments", "Full on-day production"],
@@ -43,7 +43,7 @@ const POINTS: Record<string, Localized<string[]>> = {
   },
   "corporate-gifts": {
     en: ["Gift sets", "Branded bottles", "Bags", "Notebooks & pens", "Giveaways", "Screen printing, UV, foiling, debossing and laser engraving"],
-    ar: ["أطقم الهدايا", "زجاجات بهوية العلامة", "الحقائب", "الدفاتر والأقلام", "الهدايا الترويجية", "الطباعة الحريرية، والطباعة بالأشعة فوق البنفسجية، والطباعة بالرقائق المعدنية، والكبس الغائر، والحفر بالليزر"],
+    ar: ["أطقم الهدايا", "زجاجات بهوية العلامة التجارية", "الحقائب", "الدفاتر والأقلام", "الهدايا الترويجية", "الطباعة الحريرية، والطباعة بالأشعة فوق البنفسجية، والطباعة بالرقائق المعدنية، والكبس الغائر، والحفر بالليزر"],
   },
   // Creative Production: copy deck docs/content/category-copy-creative.md (draft for Rand's
   // review; v1 decks task, with the clear fixes from deck-review-2026-11-09.md).
@@ -53,7 +53,7 @@ const POINTS: Record<string, Localized<string[]>> = {
   },
   "video-production": {
     en: ["Script and shoot", "Cinematic product and brand films", "Event films and coverage", "Editing and colour", "Sound design and post-production"],
-    ar: ["النص والتصوير", "أفلام سينمائية للمنتجات والعلامات", "أفلام الفعاليات وتغطيتها", "المونتاج وتصحيح الألوان", "تصميم الصوت ومرحلة ما بعد الإنتاج"],
+    ar: ["النص والتصوير", "أفلام سينمائية للمنتجات والعلامات التجارية", "أفلام الفعاليات وتغطيتها", "المونتاج وتصحيح الألوان", "تصميم الصوت ومرحلة ما بعد الإنتاج"],
   },
   "motion-graphics": {
     en: ["Motion graphics and logo animation", "Titles and explainers", "Short videos and motion for social media", "Screen content for events and stages"],
@@ -74,7 +74,7 @@ const POINTS: Record<string, Localized<string[]>> = {
   // Marketing & Brand: copy deck docs/content/category-copy-marketing.md (draft, as above).
   "branding-identity": {
     en: ["Brand strategy", "Naming", "Logo and visual identity", "Tone of voice", "Brand guidelines"],
-    ar: ["استراتيجية العلامة", "ابتكار الاسم", "الشعار والهوية البصرية", "نبرة الخطاب", "دليل الهوية"],
+    ar: ["استراتيجية العلامة التجارية", "ابتكار الاسم", "الشعار والهوية البصرية", "نبرة الخطاب", "دليل الهوية"],
   },
   "social-media-management": {
     en: ["Content strategy and a monthly calendar", "Daily publishing in Arabic and English", "Design, motion and short videos", "On-ground coverage", "Community management", "Paid campaigns and growth"],
@@ -100,7 +100,7 @@ const POINTS: Record<string, Localized<string[]>> = {
   // printing and gifts keep the D71 points and add the deck's).
   "stand-fabrication-signage": {
     en: ["Stand design", "Fabrication", "Installation on site", "Activations and branded spaces", "Wayfinding signage"],
-    ar: ["تصميم الأجنحة", "التصنيع", "التركيب في أرض الحدث", "مساحات التفعيل والمساحات بهوية العلامة", "لافتات إرشادية للضيوف"],
+    ar: ["تصميم الأجنحة", "التصنيع", "التركيب في أرض الحدث", "مساحات التفعيل والمساحات بهوية العلامة التجارية", "لافتات إرشادية للضيوف"],
   },
   "packaging-design": {
     en: ["Custom boxes and wraps", "Packaging for awards and gift sets", "Structure and dielines", "Print-ready artwork"],
@@ -108,7 +108,7 @@ const POINTS: Record<string, Localized<string[]>> = {
   },
   "print-ordering": {
     en: ["Tell us the item and the quantity", "Send your artwork, or ask for a reprint", "Approve the proof before printing", "Printed to brand standard"],
-    ar: ["أخبرونا بالمنتج والكمية", "أرسلوا التصميم، أو اطلبوا إعادة الطباعة", "اعتمدوا النسخة التجريبية قبل التنفيذ", "طباعة بمعايير علامتكم"],
+    ar: ["أخبرونا بالمنتج والكمية", "أرسلوا التصميم، أو اطلبوا إعادة الطباعة", "اعتمدوا النسخة التجريبية قبل التنفيذ", "طباعة بمعايير علامتكم التجارية"],
   },
   "branded-merchandise": {
     en: ["Apparel", "Bags and totes", "Desk and everyday objects", "Printed or engraved, to suit the material"],
@@ -122,7 +122,7 @@ const POINTS: Record<string, Localized<string[]>> = {
   },
   "mobile-apps": {
     en: ["iOS and Android", "Connected to your website", "Arabic and English"],
-    ar: ["iOS وAndroid", "مرتبط بموقعكم الإلكتروني", "بالعربية والإنجليزية"],
+    ar: ["iOS و Android", "مرتبط بموقعكم الإلكتروني", "بالعربية والإنجليزية"],
   },
   "custom-systems": {
     en: ["Admin dashboards and analytics", "Roles and permissions", "Integrations with your tools"],
@@ -144,28 +144,30 @@ const POINTS: Record<string, Localized<string[]>> = {
 
 /**
  * Category-page fields per service (D57): the anchor (docs/content/services-list.md) and the
- * signature module (docs/design/category-pages.md §6). quoteType defaults to the category's.
+ * signature module (docs/design/category-pages.md §6), if the section still has one. quoteType defaults to the category's.
  */
-const PAGE: Record<string, { anchor: string; module: ModuleKey; quoteType?: QuoteType }> = {
-  "conferences-summits": { anchor: "conferences", module: "agenda-timeline" },
-  "exhibitions-booths": { anchor: "exhibitions", module: "stand-assembly" },
-  "product-launches-activations": { anchor: "launches", module: "launch-reveal" },
-  "galas-private-celebrations": { anchor: "celebrations", module: "candle-moodboard" },
-  "catering-heritage-hospitality": { anchor: "hospitality", module: "menu-majlis" },
-  "stage-technical-production": { anchor: "stage", module: "stage-lights" },
+const PAGE: Record<string, { anchor: string; module?: ModuleKey; quoteType?: QuoteType }> = {
+  // Events: photo scenes and Rand's work instead of a module (D153).
+  "conferences-summits": { anchor: "conferences" },
+  "exhibitions-booths": { anchor: "exhibitions" },
+  "product-launches-activations": { anchor: "launches" },
+  "galas-private-celebrations": { anchor: "celebrations" },
+  "catering-heritage-hospitality": { anchor: "hospitality" },
+  "stage-technical-production": { anchor: "stage" },
   photography: { anchor: "photography", module: "aperture-gallery" },
   "video-production": { anchor: "video", module: "scrub-reel" },
-  "motion-graphics": { anchor: "motion", module: "motion-playground" },
+  // Creative: a photograph in place of the module (D158).
+  "motion-graphics": { anchor: "motion" },
   "ai-content-creation": { anchor: "ai-content", module: "idea-to-image" },
   "set-stage-design": { anchor: "set-design", module: "set-model" },
-  "equipment-camera-rental": { anchor: "rental", module: "rental-categories" },
+  "equipment-camera-rental": { anchor: "rental" },
   "branding-identity": { anchor: "branding", module: "mark-build" },
   "social-media-management": { anchor: "social", module: "phone-feed" },
   "digital-marketing-seo": { anchor: "digital-marketing", module: "example-dashboard" },
-  "content-strategy": { anchor: "content-strategy", module: "content-calendar" },
-  "public-relations": { anchor: "pr", module: "press-release" },
+  "content-strategy": { anchor: "content-strategy" },
+  "public-relations": { anchor: "pr" },
   "paid-media-planning": { anchor: "paid-media", module: "campaign-funnel" },
-  "commercial-large-format-printing": { anchor: "printing", module: "human-scale" },
+  "commercial-large-format-printing": { anchor: "printing" },
   "stand-fabrication-signage": { anchor: "fabrication", module: "build-layers" },
   "packaging-design": { anchor: "packaging", module: "unboxing" },
   "corporate-gifts": { anchor: "gifts", module: "gift-configurator" },
@@ -235,7 +237,7 @@ export const services: Service[] = [
       { en: "Product launches & brand activations", ar: "إطلاق المنتجات وتفعيل العلامات" },
       {
         en: "Launches and brand activations in malls, venues and exhibitions, including technology and robotics experiences.",
-        ar: "إطلاقات وتفعيلات للعلامات في المراكز التجارية والقاعات والمعارض، ومعها عروض تفاعلية بالتقنية والروبوتات.",
+        ar: "إطلاقات وتفعيلات للعلامات التجارية في مراكز التسوق والقاعات والمعارض، ومعها عروض تفاعلية بالتقنية والروبوتات.",
       },
     ],
     [
@@ -277,7 +279,7 @@ export const services: Service[] = [
       { en: "Video production", ar: "إنتاج الفيديو" },
       {
         en: "Brand, product and event films, sound design included.",
-        ar: "أفلام للعلامات والمنتجات والفعاليات، مع تصميم الصوت.",
+        ar: "أفلام للعلامات التجارية والمنتجات والفعاليات، مع تصميم الصوت.",
       },
     ],
     [
@@ -285,7 +287,7 @@ export const services: Service[] = [
       { en: "Motion graphics", ar: "الموشن جرافيك" },
       {
         en: "Titles, explainers and screen content, moving in your brand's style.",
-        ar: "عناوين وفيديوهات شرح ومحتوى للشاشات، تتحرّك بأسلوب علامتكم.",
+        ar: "عناوين وفيديوهات شرح ومحتوى للشاشات، تتحرّك بأسلوب علامتكم التجارية.",
       },
     ],
     [
@@ -293,7 +295,7 @@ export const services: Service[] = [
       { en: "AI content creation", ar: "صناعة المحتوى بالذكاء الاصطناعي" },
       {
         en: "AI-assisted imagery and video, art-directed to the brand.",
-        ar: "صور وفيديو بمساعدة الذكاء الاصطناعي، بتوجيه فني يناسب العلامة.",
+        ar: "صور وفيديو بمساعدة الذكاء الاصطناعي، بتوجيه فني يناسب العلامة التجارية.",
       },
     ],
     [
@@ -319,7 +321,7 @@ export const services: Service[] = [
       { en: "Branding & identity", ar: "الهوية التجارية" },
       {
         en: "Brand strategy, naming, visual identity and guidelines.",
-        ar: "استراتيجية العلامة، والتسمية، والهوية البصرية، ودليل الاستخدام.",
+        ar: "استراتيجية العلامة التجارية، والتسمية، والهوية البصرية، ودليل الاستخدام.",
       },
     ],
     [
@@ -385,7 +387,7 @@ export const services: Service[] = [
       { en: "Packaging design", ar: "تصميم التغليف" },
       {
         en: "Boxes and wraps that open like part of the brand.",
-        ar: "علب وتغليف تُفتح كأنها جزء من العلامة.",
+        ar: "علب وتغليف تُفتح كأنها جزء من العلامة التجارية.",
       },
     ],
     [
@@ -401,7 +403,7 @@ export const services: Service[] = [
       { en: "Print ordering", ar: "طلب المطبوعات" },
       {
         en: "Tell us the item and the quantity, approve the proof, and we print it to your brand.",
-        ar: "أخبرونا بالمنتج والكمية، واعتمدوا النسخة التجريبية، ونطبعه بهوية علامتكم.",
+        ar: "أخبرونا بالمنتج والكمية، واعتمدوا النسخة التجريبية، ونطبعه بهوية علامتكم التجارية.",
       },
     ],
     [
@@ -427,7 +429,7 @@ export const services: Service[] = [
       { en: "Mobile apps", ar: "تطبيقات الجوّال" },
       {
         en: "iOS and Android apps designed around how people use them.",
-        ar: "تطبيقات iOS وAndroid مصمّمة وفق طريقة استخدام الناس لها.",
+        ar: "تطبيقات iOS و Android مصمّمة وفق طريقة استخدام الناس لها.",
       },
     ],
     [

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { copyProblems } from "@/lib/copy-rules";
 import { PRODUCTS } from "@/lib/forms/schemas";
+import { media } from "./media";
 import { PRODUCT_IDS, productPages } from "./product-pages";
 import { workItems } from "./work";
 
@@ -8,6 +9,16 @@ describe("product pages (F4)", () => {
   it("has one page per product in the forms contract, each pointing to the other", () => {
     expect([...PRODUCT_IDS].sort()).toEqual([...PRODUCTS].sort());
     for (const id of PRODUCT_IDS) expect(productPages[productPages[id].other].other).toBe(id);
+  });
+
+  it("shows the problem over a registry photo: stock mood, decorative, one per product (Task 14)", () => {
+    for (const p of Object.values(productPages)) {
+      const m = media(p.photo);
+      expect(m, p.id).toBeDefined();
+      expect(m!.source, p.id).toBe("stock");
+      expect(m!.alt, p.id).toBeNull();
+    }
+    expect(new Set(Object.values(productPages).map((p) => p.photo)).size).toBe(PRODUCT_IDS.length);
   });
 
   it("lists 4–6 features, written in both languages", () => {

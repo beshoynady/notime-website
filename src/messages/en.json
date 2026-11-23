@@ -132,6 +132,7 @@
     "indexLabel": "Services in this category",
     "deliverTitle": "What we deliver",
     "quoteCta": "Request a quote",
+    "galleryLabel": "Our work: {service}",
     "quoteCtaFor": "Request a quote for {service}",
     "faqEyebrow": "Questions",
     "faqHeading": "Common questions",
@@ -151,7 +152,7 @@
     "eyebrow": "Our work",
     "headingLead": "Real projects,",
     "headingKey": "start to finish.",
-    "intro": "An airline's pavilion and a football league's award nights. The names stay private until each client says yes.",
+    "intro": "An airline's pavilion, a football league's award nights and rooms we dressed for private occasions. We keep each client's name private until they say yes.",
     "labels": {
       "challenge": "Challenge",
       "idea": "Idea",
@@ -499,25 +500,22 @@
       "s4": "TODO: shot 4 line"
     },
     "events": {
-      "s1": "It starts with an empty room.",
+      "s1": "It starts before the lights come on.",
       "s3": "Tables, flowers and candlelight, each in place.",
       "s4": "The room is ready before the first guest walks in."
     },
     "creative": {
       "s1": "A black box. Nothing in frame yet.",
-      "s2": "Take one.",
       "s3": "Every frame is planned before we roll.",
       "s4": "Then the final cut, ready to show."
     },
     "marketing": {
       "s1": "Every brand starts on a blank page.",
-      "s2": "First, the grid.",
       "s3": "Then words and images find their place.",
       "s4": "And the brand is ready to post."
     },
     "print": {
       "s1": "Paper, board, ribbon.",
-      "s2": "Measured, then cut.",
       "s3": "Printed, then folded into shape.",
       "s4": "Closed, wrapped, ready to give."
     },
@@ -563,13 +561,13 @@
     }
   },
   "workIndex": {
-    "metaTitle": "Our work: events, stands and digital",
-    "metaDescription": "An airline's pavilion at the Dubai Airshow and a football league's award nights: what we did on each.",
+    "metaTitle": "Our work: events, stands, hospitality and gifts",
+    "metaDescription": "An airline's pavilion at the Dubai Airshow, a football league's award nights, and photos of the rooms, hospitality and gifts we prepared.",
     "metaFiltered": "Our work: {filter}",
     "eyebrow": "Our work",
-    "headingLead": "Work for national organisations,",
+    "headingLead": "Work we've done,",
     "headingKey": "shown project by project.",
-    "intro": "A pavilion at the Dubai Airshow and a football league's award nights. Each client's name appears once they approve it.",
+    "intro": "A pavilion at the Dubai Airshow and a football league's award nights, with photos of the rooms, hospitality and gifts we prepared. Each client's name appears once they approve it.",
     "filterLabel": "Filter the work",
     "serviceFacet": "Service",
     "marketFacet": "Market",
@@ -669,7 +667,7 @@
     },
     "work": {
       "title": "See our work",
-      "note": "Pavilions, award nights, platforms"
+      "note": "Exhibition stands, award nights, rooms we dressed"
     },
     "celebrations": {
       "title": "Events & private celebrations",
@@ -680,5 +678,15 @@
       "note": "Built in Arabic and English"
     },
     "email": "Or write to us"
+  },
+  "copyLink": {
+    "copy": "Copy link",
+    "copied": "Link copied",
+    "failed": "Couldn't copy it. Copy the link from the address bar."
+  },
+  "workCollection": {
+    "photosLabel": "Photos from this work",
+    "note": "Every photo here is from work we did.",
+    "more": "All work"
   }
 }

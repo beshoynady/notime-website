@@ -1,8 +1,8 @@
 import type { CSSProperties } from "react";
 import { Numeral } from "@/components/ui/numeral";
 import type { Locale, Localized } from "@/content";
-import { storyPhoto, type StoryBeat } from "@/content/photo-stories";
-import { StoryImage } from "./story-image";
+import { storyBeats, type StoryBeat } from "@/content/photo-stories";
+import { MediaImage } from "@/components/ui/media-image";
 import { PhotoStoryMotion } from "./photo-story-motion";
 import "./photo-story.css";
 
@@ -39,8 +39,7 @@ export function PhotoStory({
           </h2>
         </header>
         <ol className="ps-beats">
-          {beats.map((beat, i) => {
-            const photo = storyPhoto(beat.photo);
+          {storyBeats(beats).map(({ entry: photo, ...beat }, i) => {
             return (
               <li key={beat.photo} className="ps-beat">
                 <div className="ps-text">
@@ -51,7 +50,7 @@ export function PhotoStory({
                 <figure className="ps-photo" style={{ "--ar": `${photo.width} / ${photo.height}` } as CSSProperties}>
                   <div className="ps-mask">
                     <div className="ps-push">
-                      <StoryImage photo={photo} locale={locale} sizes="(min-width: 900px) 56vw, calc(100vw - 32px)" />
+                      <MediaImage entry={photo} locale={locale} sizes="(min-width: 900px) 56vw, calc(100vw - 32px)" />
                     </div>
                   </div>
                 </figure>

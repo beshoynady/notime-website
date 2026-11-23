@@ -26,6 +26,19 @@ main[data-theme="evening"] .cat-opening-overlay > .crumbs {
 main[data-theme="evening"] .cat-opening-overlay > .crumbs a {
   opacity: 1;
 }
+/* The light themes set espresso crumbs over their photo; where the photo darkens behind them (Print
+   at 390: 2.70:1 at the close's gate, 1.8:1 with a halo) they sit on a small ivory chip instead.
+   The negative start margin keeps the words on the frame's line. */
+main:is([data-theme="workshop"], [data-theme="editorial"]) .cat-opening-overlay > .crumbs ol {
+  inline-size: fit-content;
+  margin-inline-start: -12px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgb(245 233 211 / 0.9);
+}
+main:is([data-theme="workshop"], [data-theme="editorial"]) .cat-opening-overlay > .crumbs a {
+  opacity: 1;
+}
 .crumbs ol {
   display: flex;
   flex-wrap: wrap;
@@ -446,17 +459,16 @@ html[data-header-hidden] .svc-index {
   transition: translate 0.35s var(--ease-expo-out); /* with the hiding header (above) */
 }
 /* Over a full-bleed scene the rail steps aside (ServiceIndex sets data-over-scene; self-audit
-   B11): its 60% scrim cut the scene. It stays while it holds focus. */
+   B11): its 60% scrim cut the scene. It only fades: every Events section is a scene (D153), so
+   it stays in the Tab order and comes back on focus or hover, never out of reach. */
 @media (min-width: 900px) {
   .svc-index {
     transition:
       translate 0.35s var(--ease-expo-out),
-      opacity 0.35s var(--ease-expo-out),
-      visibility 0.35s;
+      opacity 0.35s var(--ease-expo-out);
   }
-  .svc-index[data-over-scene]:not(:focus-within) {
+  .svc-index[data-over-scene]:not(:focus-within, :hover) {
     opacity: 0;
-    visibility: hidden;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -477,36 +489,6 @@ html[data-header-hidden] .svc-index {
    deep-linked section then moves it by a few pixels at most. Measured per locale on the
    production build at 390 and 1440 (scripts/anchor-shift.mjs, M1), minus 4 px so a module is
    never shorter than its slot at those widths. Re-measure when a module's layout changes. */
-html[lang="en"] .svc-module[data-module="motion-playground"] {
-  min-block-size: 584px;
-}
-html[lang="ar"] .svc-module[data-module="motion-playground"] {
-  min-block-size: 590px;
-}
-html[lang="en"] .svc-module[data-module="rental-categories"] {
-  min-block-size: 431px;
-}
-html[lang="ar"] .svc-module[data-module="rental-categories"] {
-  min-block-size: 464px;
-}
-html[lang="en"] .svc-module[data-module="content-calendar"] {
-  min-block-size: 866px;
-}
-html[lang="ar"] .svc-module[data-module="content-calendar"] {
-  min-block-size: 861px;
-}
-html[lang="en"] .svc-module[data-module="press-release"] {
-  min-block-size: 1323px;
-}
-html[lang="ar"] .svc-module[data-module="press-release"] {
-  min-block-size: 1225px;
-}
-html[lang="en"] .svc-module[data-module="human-scale"] {
-  min-block-size: 462px;
-}
-html[lang="ar"] .svc-module[data-module="human-scale"] {
-  min-block-size: 468px;
-}
 html[lang="en"] .svc-module[data-module="print-order"] {
   min-block-size: 589px;
 }
@@ -514,111 +496,11 @@ html[lang="ar"] .svc-module[data-module="print-order"] {
   min-block-size: 525px;
 }
 @media (min-width: 900px) {
-  html[lang="en"] .svc-module[data-module="motion-playground"] {
-    min-block-size: 590px;
-  }
-  html[lang="ar"] .svc-module[data-module="motion-playground"] {
-    min-block-size: 594px;
-  }
-  html[lang="en"] .svc-module[data-module="rental-categories"] {
-    min-block-size: 256px;
-  }
-  html[lang="ar"] .svc-module[data-module="rental-categories"] {
-    min-block-size: 239px;
-  }
-  html[lang="en"] .svc-module[data-module="content-calendar"] {
-    min-block-size: 976px;
-  }
-  html[lang="ar"] .svc-module[data-module="content-calendar"] {
-    min-block-size: 969px;
-  }
-  html[lang="en"] .svc-module[data-module="press-release"] {
-    min-block-size: 1036px;
-  }
-  html[lang="ar"] .svc-module[data-module="press-release"] {
-    min-block-size: 1025px;
-  }
-  html[lang="en"] .svc-module[data-module="human-scale"] {
-    min-block-size: 599px;
-  }
-  html[lang="ar"] .svc-module[data-module="human-scale"] {
-    min-block-size: 579px;
-  }
   html[lang="en"] .svc-module[data-module="print-order"] {
     min-block-size: 312px;
   }
   html[lang="ar"] .svc-module[data-module="print-order"] {
     min-block-size: 293px;
-  }
-}
-/* The Events & Hospitality modules (batch 2). Their static fallback is server-rendered in the same
-   box, so these only guard the first paint. ESTIMATES from the CSS boxes at 390 and 1440, kept
-   below the expected height (a short slot grows, it never leaves a gap); re-measure at M3 with
-   scripts/anchor-shift.mjs and replace them. */
-html[lang="en"] .svc-module[data-module="agenda-timeline"] {
-  min-block-size: 680px;
-}
-html[lang="ar"] .svc-module[data-module="agenda-timeline"] {
-  min-block-size: 700px;
-}
-html[lang="en"] .svc-module[data-module="stage-lights"] {
-  min-block-size: 440px;
-}
-html[lang="ar"] .svc-module[data-module="stage-lights"] {
-  min-block-size: 450px;
-}
-html[lang="en"] .svc-module[data-module="launch-reveal"] {
-  min-block-size: 640px;
-}
-html[lang="ar"] .svc-module[data-module="launch-reveal"] {
-  min-block-size: 650px;
-}
-html[lang="en"] .svc-module[data-module="candle-moodboard"] {
-  min-block-size: 560px;
-}
-html[lang="ar"] .svc-module[data-module="candle-moodboard"] {
-  min-block-size: 570px;
-}
-html[lang="en"] .svc-module[data-module="menu-majlis"] {
-  min-block-size: 760px;
-}
-html[lang="ar"] .svc-module[data-module="menu-majlis"] {
-  min-block-size: 780px;
-}
-html[lang="en"] .svc-module[data-module="stand-assembly"] {
-  min-block-size: 680px;
-}
-html[lang="ar"] .svc-module[data-module="stand-assembly"] {
-  min-block-size: 690px;
-}
-@media (min-width: 900px) {
-  html[lang="en"] .svc-module[data-module="agenda-timeline"] {
-    min-block-size: 460px;
-  }
-  html[lang="ar"] .svc-module[data-module="agenda-timeline"] {
-    min-block-size: 480px;
-  }
-  html[lang="en"] .svc-module[data-module="stage-lights"],
-  html[lang="ar"] .svc-module[data-module="stage-lights"] {
-    min-block-size: 640px;
-  }
-  html[lang="en"] .svc-module[data-module="launch-reveal"],
-  html[lang="ar"] .svc-module[data-module="launch-reveal"] {
-    min-block-size: 660px;
-  }
-  html[lang="en"] .svc-module[data-module="candle-moodboard"],
-  html[lang="ar"] .svc-module[data-module="candle-moodboard"] {
-    min-block-size: 520px;
-  }
-  html[lang="en"] .svc-module[data-module="menu-majlis"] {
-    min-block-size: 520px;
-  }
-  html[lang="ar"] .svc-module[data-module="menu-majlis"] {
-    min-block-size: 540px;
-  }
-  html[lang="en"] .svc-module[data-module="stand-assembly"],
-  html[lang="ar"] .svc-module[data-module="stand-assembly"] {
-    min-block-size: 520px;
   }
 }
 .module-placeholder {
@@ -834,30 +716,53 @@ main[data-theme] [data-tone] {
   border-radius: var(--radius);
   color: var(--theme-accent, currentColor);
 }
-.svc-visual[data-visual="drawing"] {
-  display: grid;
-  place-items: center;
-  background: color-mix(in srgb, currentColor 4%, transparent);
+
+/* Rand's work under a section (D153, ServiceGallery): 3:4 photos in one row that snaps tile by
+   tile from the inline-start, so it runs right to left in Arabic with no extra rule. Phones see
+   most of one tile and the edge of the next (the cue to swipe); laptops see the whole set. */
+.svc-gallery {
+  margin-block-start: 32px;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: inline mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--theme-accent, var(--color-champagne)) 45%, transparent) transparent;
 }
-.svc-drawing {
-  inline-size: 88%;
-  block-size: 88%;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.25;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.svc-gallery:focus-visible {
+  outline: 2px solid var(--theme-accent, var(--color-champagne));
+  outline-offset: 4px;
 }
-.svc-drawing * {
-  vector-effect: non-scaling-stroke;
+.svc-gallery ul {
+  display: flex;
+  gap: 16px;
+  margin: 0;
+  padding: 0 0 12px;
+  list-style: none;
 }
-.svc-drawing .dim {
-  stroke: color-mix(in srgb, currentColor 38%, transparent);
+.svc-gallery li {
+  flex: 0 0 70vw;
+  max-inline-size: 320px;
+  aspect-ratio: 3 / 4;
+  scroll-snap-align: start;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--theme-ink, var(--color-ivory)) 6%, transparent);
 }
-.svc-drawing .tint {
-  fill: color-mix(in srgb, currentColor 14%, transparent);
+.svc-gallery img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
 }
-/* Time and reading order run from inline-start: the drawings mirror in Arabic (they hold no text). */
-[dir="rtl"] .svc-drawing {
-  transform: scaleX(-1);
+@media (min-width: 1024px) {
+  /* Three to a row across the section's column, so a laptop sees the whole set. */
+  .svc-gallery li {
+    flex-basis: calc((100% - 32px) / 3);
+  }
+}
+
+/* Light grounds (Workshop champagne, Editorial ivory) take no dimming: at 0.7–0.85 the cocoa and
+   espresso text measured 3.0–4.0:1 there (WCAG 1.4.3, the close's gate). Dark grounds keep it.
+   The rail's active item is marked by its bar (.svc-index-ind), not by the others fading. */
+[data-tone="light"] :is(.cat-opening-eyebrow, .cat-opening-intro, .svc-deliver h3, .svc-index-link, .svc-index-num) {
+  opacity: 1;
 }

@@ -121,21 +121,24 @@ function Inner({ locale, source, tierLabels, onAgain }: { locale: Locale; source
             code={codeOf("budget")}
           />
         </div>
-        <TextField
-          prefix={PREFIX}
-          name="websiteUrl"
-          label={f.websiteUrl[locale]}
-          hint={f.websiteUrlHint[locale]}
-          type="url"
-          inputMode="url"
-          autoComplete="url"
-          dir="ltr"
-          optional
-          locale={locale}
-          register={reg}
-          code={codeOf("websiteUrl")}
-        />
-        <TextField prefix={PREFIX} name="message" label={c.message[locale]} hint={c.messageHint[locale]} multiline optional locale={locale} register={reg} code={codeOf("message")} max={maxOf("message")} />
+        <details className="form-more" open={codeOf("websiteUrl") || codeOf("message") ? true : undefined}>
+          <summary>{c.more[locale]}</summary>
+          <TextField
+            prefix={PREFIX}
+            name="websiteUrl"
+            label={f.websiteUrl[locale]}
+            hint={f.websiteUrlHint[locale]}
+            type="url"
+            inputMode="url"
+            autoComplete="url"
+            dir="ltr"
+            optional
+            locale={locale}
+            register={reg}
+            code={codeOf("websiteUrl")}
+          />
+          <TextField prefix={PREFIX} name="message" label={c.message[locale]} hint={c.messageHint[locale]} multiline optional locale={locale} register={reg} code={codeOf("message")} max={maxOf("message")} />
+        </details>
       </fieldset>
 
       <fieldset className="form-group">

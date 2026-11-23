@@ -66,16 +66,6 @@ test("Home: the photo strip is a swipe row, not a pinned scrub", async ({ page }
   expect(await tweened(page, "#home-strip")).toEqual([]);
 });
 
-test("Events: the private-celebrations cards don't stack or dim", async ({ page }) => {
-  await gotoReady(page, "/en/services/events-hospitality");
-  await scrollThrough(page, "#celebrations .pstack");
-  const positions = await page.locator("#celebrations .pstack-card").evaluateAll((cards) => cards.map((c) => getComputedStyle(c).position));
-  expect(positions.length).toBeGreaterThan(1);
-  expect(new Set(positions)).toEqual(new Set(["static"]));
-  expect(await tweened(page, "#celebrations .pstack")).toEqual([]);
-  expect(await imagesShown(page, "#celebrations .pstack")).toEqual([]);
-});
-
 for (const path of ["/en/services/events-hospitality", "/ar/services/production-print-gifts"]) {
   test(`${path}: the opening scene is its still, unpinned and unclipped`, async ({ page }) => {
     await gotoReady(page, path);

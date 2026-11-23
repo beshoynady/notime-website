@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { anchorOffset } from "@/components/providers/anchor-scroll";
 import type { SceneConfig, Viewport } from "@/content/scenes";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { enterFrom, layerDrift, lineSpans, pinLength, sceneMode, shotAt, wipeInset } from "@/lib/scene-math";
+import { enterFrom, layerDrift, lineSpans, pinLength, PIN_MIN_WIDTH, sceneMode, shotAt, showsOn, wipeInset } from "@/lib/scene-math";
 
 /**
  * Cross-fade of two shot lines, in vh of scroll, centred on the shot boundary: the next line comes
@@ -27,8 +27,8 @@ const WIPE_EASE = "power2.inOut";
  *
  * `pinUnderBars`: a scene further down the page (the majlis) pins with its top under the fixed
  * header, where a landing on its section puts it; an opening pins at the viewport's top.
- * `desktopOnly`: no mobile condition, so nothing is built below 900px (for a scene whose box is
- * `display: none` there: the category opening's build scene, v1.1).
+ * `desktopOnly`: no mobile condition, so nothing is built below PIN_MIN_WIDTH (a hero, D154: the
+ * still shows there).
  */
 export function SceneDirector({ scene, pinUnderBars = false, desktopOnly = false }: { scene: SceneConfig; pinUnderBars?: boolean; desktopOnly?: boolean }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -39,8 +39,8 @@ export function SceneDirector({ scene, pinUnderBars = false, desktopOnly = false
     const mm = gsap.matchMedia();
     mm.add(
       {
-        desktop: "(min-width: 900px) and (prefers-reduced-motion: no-preference)",
-        ...(!desktopOnly && { mobile: "(max-width: 899.98px) and (prefers-reduced-motion: no-preference)" }),
+        desktop: `(min-width: ${PIN_MIN_WIDTH}px) and (prefers-reduced-motion: no-preference)`,
+        ...(!desktopOnly && { mobile: `(max-width: ${PIN_MIN_WIDTH - 0.02}px) and (prefers-reduced-motion: no-preference)` }),
       },
       (ctx) => {
         if (!ctx.conditions?.desktop && !ctx.conditions?.mobile) return;
@@ -90,7 +90,7 @@ export function SceneDirector({ scene, pinUnderBars = false, desktopOnly = false
         tl.set({}, {}, pin); // the timeline lasts exactly the pin
 
         for (const layer of scene.layers) {
-          if (viewport === "mobile" && !layer.mobile) continue;
+          if (!showsOn(layer, viewport)) continue;
           const el = root.querySelector<HTMLElement>(`[data-layer="${CSS.escape(layer.id)}"]`);
           if (!el) continue;
           const enter = el.querySelector<HTMLElement>(".scene-enter")!;

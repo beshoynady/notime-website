@@ -33,6 +33,9 @@ export function ProcessScroll({ children }: { children: ReactNode }) {
             pin: true,
             // The server-rendered wrapper below holds the reserved distance (globals.css).
             pinSpacer: root.parentElement ?? undefined,
+            // The wrapper is display: flex (D168), and ScrollTrigger drops pin spacing by default
+            // under a flex parent; the spacing it always had (padding: the reserved distance) stays.
+            pinSpacing: true,
             scrub: 0.6,
           },
         });
