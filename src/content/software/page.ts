@@ -108,7 +108,7 @@ export const serviceBlocks: Record<string, { photo: string; outcome: L; idealFor
     idealFor: [
       l("Companies selling to Arabic and English speakers", "شركات تخاطب عملاء بالعربية والإنجليزية"),
       l("Teams that update their content often", "فرق تحدّث محتواها باستمرار"),
-      l("Brands replacing an English-only site", "علامات تستبدل موقعًا بالإنجليزية فقط"),
+      l("Brands replacing an English-only site", "علامات تجارية تستبدل موقعًا بالإنجليزية فقط"),
     ],
     phases: ["discover", "design", "build", "launch", "support"],
   },
@@ -136,7 +136,7 @@ export const serviceBlocks: Record<string, { photo: string; outcome: L; idealFor
     photo: "sw-ecommerce",
     outcome: l("A store where buying takes a few clear steps, and orders are easy to follow.", "متجر يُتمّ فيه العميل شراءه بخطوات قليلة وواضحة، ويتابع طلبه بسهولة."),
     idealFor: [
-      l("Retail brands starting to sell online", "علامات تجزئة تبدأ البيع عبر الإنترنت"),
+      l("Retail brands starting to sell online", "علامات تجارية في التجزئة تبدأ البيع عبر الإنترنت"),
       l("Shops moving to a store of their own", "متاجر تنتقل إلى متجرها الإلكتروني الخاص"),
       l("Gift and catering orders", "طلبات الهدايا والضيافة"),
     ],
@@ -262,7 +262,7 @@ export const tiers = {
     launch: {
       name: l("Launch", "الانطلاق"),
       summary: l("A focused bilingual website.", "موقع مركّز بلغتين."),
-      ideal: l("A new business, a new brand, or a site that needs replacing.", "عمل جديد، أو علامة جديدة، أو موقع حان وقت استبداله."),
+      ideal: l("A new business, a new brand, or a site that needs replacing.", "عمل جديد، أو علامة تجارية جديدة، أو موقع حان وقت استبداله."),
       included: [
         l("A website in Arabic and English", "موقع بالعربية والإنجليزية"),
         l("Full right-to-left layout", "دعم كامل للاتجاه من اليمين إلى اليسار"),

@@ -57,7 +57,7 @@ export const SERVICE_HOOKS: Record<string, Localized<string>> = {
   "ai-content-creation": {
     // p.14 (AI video ads, AI imagery and key visuals, "produced with AI")
     en: "AI shortens the making. Art direction keeps every frame on brand.",
-    ar: "الذكاء الاصطناعي يختصر وقت الإنتاج، والتوجيه الفني يُبقي كل لقطة على هوية علامتكم.",
+    ar: "الذكاء الاصطناعي يختصر وقت الإنتاج، والتوجيه الفني يُبقي كل لقطة على هوية علامتكم التجارية.",
   },
   "set-stage-design": {
     // deck (drawings and 3D models; sets for the camera, stages for the room)

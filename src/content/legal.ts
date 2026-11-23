@@ -255,7 +255,7 @@ const terms: LegalDoc = {
         {
           p: {
             en: "The site's text, design, graphics, code and the NO TIME name and logo belong to us or to those who licensed them to us. Other names, logos and marks that appear on the site belong to their owners. You may view and share links to our pages, but you may not copy, reproduce or reuse the content for commercial purposes without our written permission.",
-            ar: "نصوص الموقع وتصميمه ورسومه وبرمجته، واسم NO TIME وشعارها، ملكٌ لنا أو لمن رخّصها لنا. وتعود الأسماء والشعارات والعلامات الأخرى الظاهرة على صفحات الموقع إلى أصحابها. يمكنكم تصفّح صفحاتنا ومشاركة روابطها، لكن لا يجوز نسخ المحتوى أو إعادة إنتاجه أو استخدامه لأغراض تجارية دون إذن مكتوب منّا.",
+            ar: "نصوص الموقع وتصميمه ورسومه وبرمجته، واسم NO TIME وشعارها، ملكٌ لنا أو لمن رخّصها لنا. وتعود الأسماء والشعارات والعلامات التجارية الأخرى الظاهرة على صفحات الموقع إلى أصحابها. يمكنكم تصفّح صفحاتنا ومشاركة روابطها، لكن لا يجوز نسخ المحتوى أو إعادة إنتاجه أو استخدامه لأغراض تجارية دون إذن مكتوب منّا.",
           },
         },
       ],

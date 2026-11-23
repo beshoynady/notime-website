@@ -53,7 +53,7 @@ const POINTS: Record<string, Localized<string[]>> = {
   },
   "video-production": {
     en: ["Script and shoot", "Cinematic product and brand films", "Event films and coverage", "Editing and colour", "Sound design and post-production"],
-    ar: ["النص والتصوير", "أفلام سينمائية للمنتجات والعلامات", "أفلام الفعاليات وتغطيتها", "المونتاج وتصحيح الألوان", "تصميم الصوت ومرحلة ما بعد الإنتاج"],
+    ar: ["النص والتصوير", "أفلام سينمائية للمنتجات والعلامات التجارية", "أفلام الفعاليات وتغطيتها", "المونتاج وتصحيح الألوان", "تصميم الصوت ومرحلة ما بعد الإنتاج"],
   },
   "motion-graphics": {
     en: ["Motion graphics and logo animation", "Titles and explainers", "Short videos and motion for social media", "Screen content for events and stages"],
@@ -108,7 +108,7 @@ const POINTS: Record<string, Localized<string[]>> = {
   },
   "print-ordering": {
     en: ["Tell us the item and the quantity", "Send your artwork, or ask for a reprint", "Approve the proof before printing", "Printed to brand standard"],
-    ar: ["أخبرونا بالمنتج والكمية", "أرسلوا التصميم، أو اطلبوا إعادة الطباعة", "اعتمدوا النسخة التجريبية قبل التنفيذ", "طباعة بمعايير علامتكم"],
+    ar: ["أخبرونا بالمنتج والكمية", "أرسلوا التصميم، أو اطلبوا إعادة الطباعة", "اعتمدوا النسخة التجريبية قبل التنفيذ", "طباعة بمعايير علامتكم التجارية"],
   },
   "branded-merchandise": {
     en: ["Apparel", "Bags and totes", "Desk and everyday objects", "Printed or engraved, to suit the material"],
@@ -237,7 +237,7 @@ export const services: Service[] = [
       { en: "Product launches & brand activations", ar: "إطلاق المنتجات وتفعيل العلامات" },
       {
         en: "Launches and brand activations in malls, venues and exhibitions, including technology and robotics experiences.",
-        ar: "إطلاقات وتفعيلات للعلامات في المراكز التجارية والقاعات والمعارض، ومعها عروض تفاعلية بالتقنية والروبوتات.",
+        ar: "إطلاقات وتفعيلات للعلامات التجارية في مراكز التسوق والقاعات والمعارض، ومعها عروض تفاعلية بالتقنية والروبوتات.",
       },
     ],
     [
@@ -279,7 +279,7 @@ export const services: Service[] = [
       { en: "Video production", ar: "إنتاج الفيديو" },
       {
         en: "Brand, product and event films, sound design included.",
-        ar: "أفلام للعلامات والمنتجات والفعاليات، مع تصميم الصوت.",
+        ar: "أفلام للعلامات التجارية والمنتجات والفعاليات، مع تصميم الصوت.",
       },
     ],
     [
@@ -287,7 +287,7 @@ export const services: Service[] = [
       { en: "Motion graphics", ar: "الموشن جرافيك" },
       {
         en: "Titles, explainers and screen content, moving in your brand's style.",
-        ar: "عناوين وفيديوهات شرح ومحتوى للشاشات، تتحرّك بأسلوب علامتكم.",
+        ar: "عناوين وفيديوهات شرح ومحتوى للشاشات، تتحرّك بأسلوب علامتكم التجارية.",
       },
     ],
     [
@@ -403,7 +403,7 @@ export const services: Service[] = [
       { en: "Print ordering", ar: "طلب المطبوعات" },
       {
         en: "Tell us the item and the quantity, approve the proof, and we print it to your brand.",
-        ar: "أخبرونا بالمنتج والكمية، واعتمدوا النسخة التجريبية، ونطبعه بهوية علامتكم.",
+        ar: "أخبرونا بالمنتج والكمية، واعتمدوا النسخة التجريبية، ونطبعه بهوية علامتكم التجارية.",
       },
     ],
     [

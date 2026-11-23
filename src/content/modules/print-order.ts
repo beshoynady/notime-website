@@ -39,10 +39,10 @@ export const ORDER_STEPS: OrderStep[] = [
   },
   {
     id: "print",
-    title: { en: "To brand standard", ar: "بمعايير علامتكم" },
+    title: { en: "To brand standard", ar: "بمعايير علامتكم التجارية" },
     line: {
       en: "Printed to match your brand, and the proof you approved.",
-      ar: "طباعة تطابق هوية علامتكم والنسخة التي اعتمدتموها.",
+      ar: "طباعة تطابق هوية علامتكم التجارية والنسخة التي اعتمدتموها.",
     },
   },
 ];

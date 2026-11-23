@@ -215,7 +215,7 @@ export const MEDIA: MediaEntry[] = [
   }, "3:2 · the pavilion wide; originals above 1600px wanted (OQ #21)", clientVisible),
   profile("sandoz-1", "p8-1", 577, 1280, {
     en: "A pharmaceutical brand's stand at a medical conference.",
-    ar: "جناح لعلامة دوائية في مؤتمر طبي.",
+    ar: "جناح لعلامة تجارية في قطاع الأدوية، في مؤتمر طبي.",
   }, "portrait · the stand front on, empty or before doors open", clientVisible),
 ];
 
