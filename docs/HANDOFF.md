@@ -2,7 +2,18 @@
 
 Read `CLAUDE.md`, `AGENTS.md` and `PRODUCT.md` first. Decisions: `docs/DECISIONS.md` (latest D124; new ones from D125).
 
-## Now: PR #2 ready for merge (2026-11-23, launch prep)
+## Now: images, one photograph per place (2026-11-23, after the merge)
+
+**Status 2026-11-23 (night).** PR #2 is merged into `main` (83bfb23, merge commit). Vercel production: https://notime-website-beshoynadys-projects.vercel.app/ar. It is behind **Vercel Authentication**: the owner turns it off (Settings → Deployment Protection) or makes a Share link, so Rand can open it. The CLS investigation, long e2e runs and Lighthouse are paused by the owner.
+
+**The owner's rule (D169):** no photo shows in two places. `src/content/photo-slots.test.ts` checks every slot in the data, with one named exception (the Events opening film is cut from the Home hero's hall, until Rand sends another wide room). Rand's photos go where the site says "our work" or "from our events"; mood slots get credited Unsplash stock (`docs/content/recipes/home.json`, `events-d169.json`, `creative-print-d169.json`).
+- PR #3 Home, About, Work (merged 3169f30). PR #4 Events (merged cfa0e92).
+- **Branch `images-creative-print` (in progress):** Creative and Print frames plus service stills. Done with 2 Unsplash + 8 Pexels files (the owner's call when the Unsplash hourly quota of 50 ran out; the Pexels key is a placeholder, so files come from each photo page under the Pexels License). `PENDING` is empty.
+- The Pexels key in `.env.local` is a 3-character placeholder (401). No AI key.
+- `docs/content/rand-images-message.md` now links the Vercel URL (works once protection is off).
+- Full e2e on PR #3's merge run was still pending; check `gh run list --workflow` and fix any red.
+
+## Before: PR #2 launch prep (2026-11-23; merged)
 
 **Status 2026-11-23 (evening): the four launch-prep tasks are done; PR #2 is ready, not merged (the owner merges).** Branch `phase-2-services`, code head `a2c2fff`. (1) The CLS 1.0 on Home is fixed (D168): How we work's pin wrapper switched display block ↔ flex on each ScrollTrigger refresh; `.process-pin` is flex now, `pinSpacing: true`; evidence recorder `e2e/cls-recorder.ts` stays in `cls.spec`; 52 consecutive load runs pass, no retries. (2) Confirm rows 70–74 confirmed by the owner; Work shows only Rand's photos (all 28 `rand-profile`, nothing replaced); row 73 confirmed as built (removing the sepia needs its own word). (3) UAE Arabic pass on the pages done before the rule: U33–U47 changed, U48 proposed (`docs/review/copy-pending.md`, 46 lines in all); Home and Events needed nothing outside ⚑ lines. (4) WhatsApp message for Rand: `docs/content/rand-images-message.md`. Full CI on the PR: see the PR description for the run. Preview: review build of `a2c2fff` on 3100 behind https://gary-farms-rays-potter.trycloudflare.com/ar (restart both after a reboot, then update the message's link). **Next:** the owner sends the message and merges PR #2; then `docs/launch/checklist.md` steps 1–6 and 8–11.
 

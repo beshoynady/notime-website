@@ -83,8 +83,7 @@ describe("a hidden photo hides every file made from it (review, Task 16)", () =>
     expect(m("st-hall"), "the story copy of its dessert table").toBeUndefined();
     expect(getSceneImage("ev-open-room"), "the scene plate of the hall").toBeUndefined();
     expect(getSceneImage("ev-open-table"), "the tables cut from the hall").toBeUndefined();
-    expect(serviceVisual("photography"), "the graded copy of catering-6").toBeUndefined();
-    expect(serviceVisual("set-stage-design"), "its base is visible").toBeDefined();
+    expect(serviceVisual("photography"), "a stock still, not made from a hidden photo").toBeDefined();
     vi.unstubAllEnvs();
     vi.resetModules();
   });

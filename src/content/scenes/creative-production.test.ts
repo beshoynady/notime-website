@@ -22,22 +22,23 @@ describe("the Studio opening in photographs", () => {
     for (const l of scene.layers) if (l.fx) expect(drawn.has(l.fx), `${l.id}: fx-${l.fx}`).toBe(true);
   });
 
-  it("plays dark studio → lights up → Rand's frame on a 2.0 vh pin; three lines on a laptop, two on a phone", () => {
+  it("plays dark studio → lights up → the frame on a 2.0 vh pin; three lines on a laptop, two on a phone", () => {
     expect(pinLength(scene.shots, "desktop")).toBe(2.0);
     expect(lined("desktop")).toEqual(["creative.s1", "creative.s3", "creative.s4"]);
     expect(lined("mobile")).toEqual(["creative.s1", "creative.s4"]);
   });
 
-  it("the frame is Rand's own work (catering-4), and the still is the lit studio with it", () => {
-    expect(layer("frame").slot).toBe("catering-4");
-    expect(media("catering-4")!.source).toBe("rand-profile");
+  // D169: one photograph, one place; Rand's styled shoots show on Work and in the photography gallery.
+  it("the frame is its own credited still (cp-frame), and the still is the lit studio with it", () => {
+    expect(layer("frame").slot).toBe("cp-frame");
+    expect(media("cp-frame")!.credit?.license).toBe("Pexels License");
     expect(stillState(layer("lit")).wipe).toBe(1);
     expect(stillState(layer("frame")).opacity ?? 1).toBe(1);
   });
 
   it("a hidden frame leaves the lit studio, never an empty box (spec §8)", () => {
-    const shown = visibleLayers(scene, (id) => id !== "catering-4");
-    expect(shown.layers.some((l) => l.slot === "catering-4")).toBe(false);
+    const shown = visibleLayers(scene, (id) => id !== "cp-frame");
+    expect(shown.layers.some((l) => l.slot === "cp-frame")).toBe(false);
     expect(shown.layers.some((l) => l.slot === "cp-open-lit")).toBe(true);
   });
 });

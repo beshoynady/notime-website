@@ -9,7 +9,7 @@ import { FULL, scrim, type SceneConfig, type SceneLayer } from "./types";
  * H1, lead and "Request a quote" there from the first frame (LayeredScene mode "hero"):
  *   1. the studio before the lights (`cp-open-dark`),
  *   2. the key light comes up: the same studio lit wipes in from the centre (`cp-open-lit`),
- *   3. the frame: Rand's dessert boards (catering-4) arrive on the white sweep, framed like a print.
+ *   3. the frame: a styled still life (`cp-frame`) arrives on the white sweep, framed like a print.
  * Phones and reduced motion: the still, the lit studio (the frame is laptop-only, as in Events).
  */
 
@@ -29,12 +29,12 @@ export const STUDIO_OPENING: SceneConfig = {
     { id: "lit", level: 0, slot: "cp-open-lit", depth: 0.15, push: 0.04, mobile: true, box: FULL, style: { wipe: 0 }, keys: [{ shot: 1, to: { wipe: 1 } }] },
     // L3: the key's warm pool on the sweep, as the light comes up.
     { id: "key", level: 3, fx: "glow", depth: 0.2, mobile: true, box: { block: "26% 30%", inline: "30% 30%" }, style: { opacity: 0 }, keys: [{ shot: 1, to: { opacity: 0.8, scale: 1.15 } }] },
-    // L2: the frame, Rand's styled shoot set on the sweep like a print (inline-end of centre, so the
+    // L2: the frame, a styled shot set on the sweep like a print (its own photo, D169) (inline-end of centre, so the
     // head keeps the lower inline-start; mirrors in Arabic).
     {
       id: "frame",
       level: 2,
-      slot: "catering-4",
+      slot: "cp-frame",
       fx: "frame",
       depth: 0.5,
       mobile: false,

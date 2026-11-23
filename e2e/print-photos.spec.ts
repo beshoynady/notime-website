@@ -24,10 +24,10 @@ for (const locale of ["en", "ar"] as const) {
     await expect(page.locator("#fabrication .svc-gallery li")).toHaveCount(2);
   });
 
-  test(`${locale}: the opening's frame is the gold skyline gift`, async ({ page, isMobile }) => {
+  test(`${locale}: the opening's frame is its own still (D169)`, async ({ page, isMobile }) => {
     test.skip(isMobile, "the frame is laptop-only, as in Events");
     await gotoReady(page, `/${locale}/services/production-print-gifts`);
     const src = await page.locator(".cat-opening [data-layer='gift'] img").getAttribute("src");
-    expect(decodeURIComponent(src ?? "")).toContain("gifts-1.webp");
+    expect(decodeURIComponent(src ?? "")).toContain("pg-frame.webp");
   });
 }

@@ -22,10 +22,10 @@ for (const locale of ["en", "ar"] as const) {
     await expect(page.locator("#set-design .svc-gallery")).toHaveCount(0);
   });
 
-  test(`${locale}: the opening's frame is Rand's dessert boards`, async ({ page, isMobile }) => {
+  test(`${locale}: the opening's frame is its own still (D169)`, async ({ page, isMobile }) => {
     test.skip(isMobile, "the frame is laptop-only, as in Events");
     await gotoReady(page, `/${locale}/services/creative-production`);
     const src = await page.locator(".cat-opening [data-layer='frame'] img").getAttribute("src");
-    expect(decodeURIComponent(src ?? "")).toContain("catering-4.webp");
+    expect(decodeURIComponent(src ?? "")).toContain("cp-frame.webp");
   });
 }

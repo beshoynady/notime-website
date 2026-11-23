@@ -25,16 +25,17 @@ describe("the Workshop opening in photographs", () => {
     expect(lined("mobile")).toEqual(["print.s1", "print.s4"]);
   });
 
-  it("the gift is NO TIME's own piece (gifts-1), and the still is the press with it", () => {
-    expect(layer("gift").slot).toBe("gifts-1");
-    expect(media("gifts-1")!.source).toBe("rand-profile");
+  // D169: one photograph, one place; NO TIME's own pieces show on Work › Gifts for companies.
+  it("the gift is its own credited still (pg-frame), and the still is the press with it", () => {
+    expect(layer("gift").slot).toBe("pg-frame");
+    expect(media("pg-frame")!.credit?.license).toBe("Pexels License");
     expect(stillState(layer("press")).wipe).toBe(1);
     expect(stillState(layer("gift")).opacity ?? 1).toBe(1);
   });
 
   it("a hidden gift leaves the press, never an empty frame (spec §8)", () => {
-    const shown = visibleLayers(scene, (id) => id !== "gifts-1");
-    expect(shown.layers.some((l) => l.slot === "gifts-1")).toBe(false);
+    const shown = visibleLayers(scene, (id) => id !== "pg-frame");
+    expect(shown.layers.some((l) => l.slot === "pg-frame")).toBe(false);
     expect(shown.layers.some((l) => l.id === "press")).toBe(true);
   });
 });
