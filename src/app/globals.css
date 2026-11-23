@@ -581,7 +581,14 @@ html[data-js]:not([data-reduced]) .svc-scene .scene-pin:has(> .scene) {
 }
 /* 640px: PROCESS_PIN_MIN_H in process-scroll.tsx (no pin on a screen too short for the steps). */
 @media (min-width: 900px) and (min-height: 640px) {
+  /* The wrapper has the stage's display (D168). ScrollTrigger gives its spacer (this wrapper) the
+     pin's display, and each refresh reverts it to its CSS display, measures, then sets it again.
+     The block ↔ flex switch rebuilt the stage, and Chrome counted it as a full-screen layout shift
+     (CLS 1.0, off screen, when the page hydrated before load or the fonts, and on every resize).
+     The hero (grid) and Software's opening (grid) keep block wrappers: measured, their refresh
+     moves nothing, and a grid hero wrapper delayed the header tone. e2e/cls.spec.ts. */
   html[data-js]:not([data-reduced]) .process-pin {
+    display: flex;
     padding-block-end: 100svh; /* process-scroll: end "+=100%", desktop only */
     min-block-size: 200svh;
   }
