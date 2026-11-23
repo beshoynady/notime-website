@@ -80,12 +80,7 @@ const reel = new Set(reelFrames.map((f) => root(f.src)));
  * Repeats still to replace, page by page (D169): each goes when its page gets its own photos.
  * The list may only shrink: a root listed here that no longer repeats fails the test too.
  */
-const PENDING: string[] = [
-  // Creative Production (scene and service visuals), with Software's AI picture.
-  "p10-2", "p4-1", "p27-1", "p31-2", "p25-3", "unsplash:26MJGnCM0Wc",
-  // Production, Print & Gifts (scene and service visuals).
-  "p24-1", "p23-4", "p23-2", "p23-3",
-];
+const PENDING: string[] = [];
 
 /**
  * The one repeat kept on purpose, with its reason. The Events opening is a film cut from one photo

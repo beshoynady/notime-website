@@ -9,7 +9,7 @@ import { FULL, type SceneConfig, type SceneLayer } from "./types";
  * H1, lead and "Request a quote" there from the first frame (LayeredScene mode "hero"):
  *   1. paper, board, ribbon: twine, spools and a kraft tag on the bench (`pg-open-materials`),
  *   2. printed: the press running sheets wipes in from the centre (`pg-open-press`),
- *   3. ready to give: the gold skyline piece (gifts-1) arrives in a frame.
+ *   3. ready to give: a gold piece (`pg-frame`) arrives in a frame (its own photo, D169).
  * Phones and reduced motion: the still, the press (the frame is laptop-only, as in Events).
  */
 
@@ -32,7 +32,7 @@ export const WORKSHOP_OPENING: SceneConfig = {
     {
       id: "gift",
       level: 2,
-      slot: "gifts-1",
+      slot: "pg-frame",
       fx: "frame",
       depth: 0.5,
       mobile: false,

@@ -1,0 +1,143 @@
+[
+ {
+  "id": "cp-video",
+  "src": "unsplash:yk9VXp4W5-Q",
+  "crop": {
+   "aspect": "16:9",
+   "focus": [
+    0.5,
+    0.5
+   ]
+  },
+  "grade": "studio",
+  "out": "public/images/stock/cp-video.webp",
+  "maxWidth": 1600
+ },
+ {
+  "id": "cp-motion",
+  "src": "unsplash:s-OgEgolTCI",
+  "crop": {
+   "aspect": "16:9",
+   "focus": [
+    0.5,
+    0.5
+   ]
+  },
+  "grade": "studio",
+  "out": "public/images/stock/cp-motion.webp",
+  "maxWidth": 1600
+ },
+ {
+  "id": "cp-photography",
+  "src": "assets-inbox/pexels/pexels-8857044.jpg",
+  "crop": {
+   "aspect": "16:9",
+   "focus": [
+    0.5,
+    0.5
+   ]
+  },
+  "grade": "studio",
+  "out": "public/images/stock/cp-photography.webp",
+  "maxWidth": 1600
+ },
+ {
+  "id": "cp-set-stage",
+  "src": "assets-inbox/pexels/pexels-29858811.jpg",
+  "crop": {
+   "aspect": "16:9",
+   "focus": [
+    0.5,
+    0.55
+   ]
+  },
+  "grade": "studio",
+  "out": "public/images/stock/cp-set-stage.webp",
+  "maxWidth": 1600
+ },
+ {
+  "id": "cp-ai",
+  "src": "assets-inbox/pexels/pexels-7147722.jpg",
+  "crop": {
+   "aspect": "16:9",
+   "focus": [
+    0.55,
+    0.5
+   ]
+  },
+  "grade": "studio",
+  "out": "public/images/stock/cp-ai.webp",
+  "maxWidth": 1600
+ },
+ {
+  "id": "cp-frame",
+  "src": "assets-inbox/pexels/pexels-6584788.jpg",
+  "crop": {
+   "aspect": "16:9",
+   "focus": [
+    0.5,
+    0.42
+   ]
+  },
+  "grade": "studio",
+  "out": "public/images/stock/cp-frame.webp",
+  "maxWidth": 1600
+ },
+ {
+  "id": "pg-packaging",
+  "src": "assets-inbox/pexels/pexels-9594423.jpg",
+  "crop": {
+   "aspect": "16:9",
+   "focus": [
+    0.5,
+    0.55
+   ]
+  },
+  "grade": "workshop",
+  "out": "public/images/stock/pg-packaging.webp",
+  "maxWidth": 1600
+ },
+ {
+  "id": "pg-gifts",
+  "src": "assets-inbox/pexels/pexels-8250924.jpg",
+  "crop": {
+   "aspect": "16:9",
+   "focus": [
+    0.45,
+    0.45
+   ]
+  },
+  "grade": "workshop",
+  "out": "public/images/stock/pg-gifts.webp",
+  "maxWidth": 1600
+ },
+ {
+  "id": "pg-merch",
+  "src": "assets-inbox/pexels/pexels-9869067.jpg",
+  "crop": {
+   "aspect": "16:9",
+   "focus": [
+    0.5,
+    0.38
+   ],
+   "scale": 0.9
+  },
+  "grade": "workshop",
+  "out": "public/images/stock/pg-merch.webp",
+  "maxWidth": 1600
+ },
+ {
+  "id": "pg-frame",
+  "src": "assets-inbox/pexels/pexels-15838158.jpg",
+  "crop": {
+   "aspect": "16:9",
+   "focus": [
+    0.5,
+    0.55
+   ]
+  },
+  "grade": "workshop",
+  "out": "public/images/stock/pg-frame.webp",
+  "maxWidth": 1600
+ }
+]

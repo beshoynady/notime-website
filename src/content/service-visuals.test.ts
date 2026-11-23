@@ -33,12 +33,16 @@ describe("service visuals (D100)", () => {
       expect(v.alt.en.length && v.alt.ar.length).toBeTruthy();
     }
   });
-  it("Creative: Video, Motion, AI and Rental show registry photographs, Rand's own where they exist (D158)", () => {
-    const want = { "video-production": "rand-profile", "motion-graphics": "rand-profile", "ai-content-creation": "stock", "equipment-camera-rental": "stock" };
+  // D169: one photograph, one place. Rand's photos show on Home, About and Work, so these are stock.
+  it("Creative: every section is a registry photograph, credited stock with alt text (D158, D169)", () => {
+    const want = { photography: "stock", "video-production": "stock", "motion-graphics": "stock", "ai-content-creation": "stock", "equipment-camera-rental": "stock", "set-stage-design": "stock" };
     for (const [slug, source] of Object.entries(want)) {
       const v = SERVICE_VISUALS[slug];
       expect(v?.kind, slug).toBe("media");
-      if (v?.kind === "media") expect(media(v.id)?.source, slug).toBe(source);
+      if (v?.kind === "media") {
+        expect(media(v.id)?.source, slug).toBe(source);
+        expect(media(v.id)?.alt?.ar, slug).toBeTruthy();
+      }
     }
   });
   it("Marketing: every section is a photograph, Social the league's real post (D159)", () => {
@@ -59,13 +63,13 @@ describe("service visuals (D100)", () => {
       }
     }
   });
-  it("Print: every section but ordering is a photograph, NO TIME's own pieces where they exist (D160)", () => {
+  it("Print: every section but ordering is a photograph; NO TIME's own pieces show on Work (D160, D169)", () => {
     const want = {
       "commercial-large-format-printing": "stock",
       "stand-fabrication-signage": "stock",
-      "packaging-design": "rand-profile",
-      "corporate-gifts": "rand-profile",
-      "branded-merchandise": "rand-profile",
+      "packaging-design": "stock",
+      "corporate-gifts": "stock",
+      "branded-merchandise": "stock",
     };
     for (const [slug, source] of Object.entries(want)) {
       const v = SERVICE_VISUALS[slug];

@@ -16,36 +16,15 @@ const pic = (id: string): ServiceVisual => ({ kind: "media", id });
 
 export const SERVICE_VISUALS: Record<string, ServiceVisual> = {
   // Creative Production
-  photography: {
-    kind: "photo",
-    src: "/images/services/svc-photography.webp",
-    width: 1188,
-    height: 1196,
-    from: "catering-6",
-    alt: {
-      en: "Chilled drinks and white flowers, styled and lit for an event table.",
-      ar: "مشروبات باردة وزهور بيضاء، منسّقة ومُضاءة على طاولة إحدى الفعاليات.",
-    },
-  },
-  // Video and Motion (D158): a still from Rand's own shoots until her footage and files arrive
-  // (images-for-rand.md); Rental: stock lights on stands until NO TIME's own kit is photographed.
-  // AI content: a neutral stock still (a process mapped on a whiteboard), never a real event photo,
-  // which under that title read as AI output (the close's gate), until Rand's own work arrives.
-  "video-production": pic("catering-2"),
-  "motion-graphics": pic("heritage-1"),
-  "ai-content-creation": pic("sw-ai"),
+  photography: pic("cp-photography"),
+  // D169: each section its own credited stock still (Rand's photos show once, on Home, About and
+  // Work) until her footage, files and kit photos arrive (images-for-rand.md). AI content keeps a
+  // neutral still, never a real event photo, which under that title read as AI output (D166).
+  "video-production": pic("cp-video"),
+  "motion-graphics": pic("cp-motion"),
+  "ai-content-creation": pic("cp-ai"),
   "equipment-camera-rental": pic("cp-rental-lights"),
-  "set-stage-design": {
-    kind: "photo",
-    src: "/images/services/svc-set-stage-design.webp",
-    width: 953,
-    height: 715,
-    from: "private-celebrations-8",
-    alt: {
-      en: "A stage and its truss going up in a ballroom before an event.",
-      ar: "مسرح وهيكله المعدني قيد التركيب في قاعة احتفالات قبل إحدى الفعاليات.",
-    },
-  },
+  "set-stage-design": pic("cp-set-stage"),
   // Marketing & Brand
   // Marketing & Brand (D159): stock photographs of the work in context; Social shows a real post.
   "branding-identity": pic("mb-branding"),
@@ -55,12 +34,12 @@ export const SERVICE_VISUALS: Record<string, ServiceVisual> = {
   "public-relations": pic("mb-pr"),
   "paid-media-planning": pic("mb-paid"),
   // Production, Print & Gifts
-  // Production, Print & Gifts (D160): NO TIME's own pieces where they exist, stock otherwise.
+  // Production, Print & Gifts (D160, D169): stock; NO TIME's own pieces show on Work › Gifts for companies.
   "commercial-large-format-printing": pic("pg-printing"),
   "stand-fabrication-signage": pic("pg-fabrication"),
-  "packaging-design": pic("uae-pro-league-7"),
-  "corporate-gifts": pic("uae-pro-league-5"),
-  "branded-merchandise": pic("gifts-2"),
+  "packaging-design": pic("pg-packaging"),
+  "corporate-gifts": pic("pg-gifts"),
+  "branded-merchandise": pic("pg-merch"),
 };
 
 /** A section's visual; a graded copy of a hidden registry photo shows nothing (media.ts `base`). */

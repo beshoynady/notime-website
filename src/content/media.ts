@@ -398,6 +398,69 @@ MEDIA.push(
 );
 
 /**
+ * Creative and Print (D169; docs/content/recipes/creative-print-d169.json): the openings' frames and
+ * the service stills, each its own stock photo; Rand's pieces and shoots show on Work.
+ */
+MEDIA.push(
+  stock("cp-video", "unsplash:yk9VXp4W5-Q", "Peter Stumpf", "https://unsplash.com/photos/yk9VXp4W5-Q", 1600, 900, null,
+    "16:9 · an edit timeline on a monitor, close, no legible brand", {
+      grade: "studio",
+      alt: { en: "An edit timeline on a monitor, clips in blue and violet.", ar: "خط زمني لمونتاج فيديو على شاشة، بمقاطع زرقاء وبنفسجية." },
+    }),
+  stock("cp-motion", "unsplash:s-OgEgolTCI", "Creatvise", "https://unsplash.com/photos/s-OgEgolTCI", 1600, 900, null,
+    "16:9 · an abstract 3D object, soft light, no text", {
+      grade: "studio",
+      alt: { en: "An abstract 3D form in violet and white, softly lit.", ar: "شكل ثلاثي الأبعاد مجرّد بالبنفسجي والأبيض، بإضاءة ناعمة." },
+    }),
+  stock("cp-photography", "pexels:8857044", "Ron Lach", "https://www.pexels.com/photo/a-camera-set-up-for-food-photography-8857044/", 1600, 900, null,
+    "16:9 · a camera shooting a plated dish on a set, no faces", {
+      grade: "studio",
+      credit: { by: "Ron Lach", url: "https://www.pexels.com/photo/a-camera-set-up-for-food-photography-8857044/", license: "Pexels License" },
+      alt: { en: "A camera on a rig above a dish on a board, on a studio set.", ar: "كاميرا على حامل فوق طبق على لوح تقديم، في موقع تصوير." },
+    }),
+  stock("cp-set-stage", "pexels:29858811", "Martin de Arriba", "https://www.pexels.com/photo/empty-theater-stage-with-ladders-and-equipment-29858811/", 1600, 900, null,
+    "16:9 · an empty stage being set up, the crew far off", {
+      grade: "studio",
+      credit: { by: "Martin de Arriba", url: "https://www.pexels.com/photo/empty-theater-stage-with-ladders-and-equipment-29858811/", license: "Pexels License" },
+      alt: { en: "An empty stage with ladders and kit, being readied.", ar: "مسرح خالٍ بسلالم ومعدّات، قيد التجهيز." },
+    }),
+  stock("cp-ai", "pexels:7147722", "Michael Burrows", "https://www.pexels.com/photo/unrecognizable-artist-drawing-creative-sketch-7147722/", 1600, 900, null,
+    "16:9 · a stylus over a tablet, hands only", {
+      grade: "studio",
+      credit: { by: "Michael Burrows", url: "https://www.pexels.com/photo/unrecognizable-artist-drawing-creative-sketch-7147722/", license: "Pexels License" },
+      alt: { en: "A hand sketching on a tablet with a stylus.", ar: "يد ترسم على جهاز لوحي بقلم رقمي." },
+    }),
+  stock("cp-frame", "pexels:6584788", "Eva Bronzini", "https://www.pexels.com/photo/quail-egg-in-bowls-6584788/", 1600, 900, null,
+    "16:9 · a styled still life on a white sweep", {
+      grade: "studio",
+      credit: { by: "Eva Bronzini", url: "https://www.pexels.com/photo/quail-egg-in-bowls-6584788/", license: "Pexels License" },
+    }),
+  stock("pg-packaging", "pexels:9594423", "Ron Lach", "https://www.pexels.com/photo/brown-cardboard-box-on-white-table-9594423/", 1600, 900, null,
+    "16:9 · kraft boxes on a pale table, no print (NO TIME's own packaging replaces it)", {
+      grade: "workshop",
+      credit: { by: "Ron Lach", url: "https://www.pexels.com/photo/brown-cardboard-box-on-white-table-9594423/", license: "Pexels License" },
+      alt: { en: "A plain kraft box on a pale surface.", ar: "علبة من الورق المقوّى البنّي على سطح فاتح." },
+    }),
+  stock("pg-gifts", "pexels:8250924", "PNW Production", "https://www.pexels.com/photo/pen-and-notebook-8250924/", 1600, 900, null,
+    "16:9 · a leather notebook and a pen, close, no brand", {
+      grade: "workshop",
+      credit: { by: "PNW Production", url: "https://www.pexels.com/photo/pen-and-notebook-8250924/", license: "Pexels License" },
+      alt: { en: "A yellow leather notebook with a black pen.", ar: "دفتر جلدي أصفر بجانبه قلم أسود." },
+    }),
+  stock("pg-merch", "pexels:9869067", "Brando Ltd", "https://www.pexels.com/photo/plain-tote-bag-9869067/", 1600, 900, null,
+    "16:9 · a blank tote bag, ready for a print", {
+      grade: "workshop",
+      credit: { by: "Brando Ltd", url: "https://www.pexels.com/photo/plain-tote-bag-9869067/", license: "Pexels License" },
+      alt: { en: "A blank cotton tote bag against a grey wall.", ar: "حقيبة قماشية خالية من الطباعة أمام جدار رمادي." },
+    }),
+  stock("pg-frame", "pexels:15838158", "Coppertist Wu", "https://www.pexels.com/photo/golden-dragon-tail-15838158/", 1600, 900, null,
+    "16:9 · a gold sculptural piece on a white counter", {
+      grade: "workshop",
+      credit: { by: "Coppertist Wu", url: "https://www.pexels.com/photo/golden-dragon-tail-15838158/", license: "Pexels License" },
+    }),
+);
+
+/**
  * The Events scenes' framed photos (D169; docs/content/recipes/events-d169.json): their own stock
  * frames, graded Evening, where Rand's photos now show on Home, About and the Work pages. Decorative.
  */
