@@ -23,7 +23,7 @@ const POINTS: Record<string, Localized<string[]>> = {
   },
   "product-launches-activations": {
     en: ["Launch concept and the reveal", "Brand activations in malls and venues", "Technology and robotics experiences", "Sponsor activations", "Branded environments"],
-    ar: ["فكرة الإطلاق ولحظة الكشف", "تفعيل العلامات التجارية في مراكز التسوق والقاعات", "عروض تفاعلية بالتقنية والروبوتات", "تفعيلات الرعاة", "مساحات بهوية العلامة"],
+    ar: ["فكرة الإطلاق ولحظة الكشف", "تفعيل العلامات التجارية في مراكز التسوق والقاعات", "عروض تفاعلية بالتقنية والروبوتات", "تفعيلات الرعاة", "مساحات بهوية العلامة التجارية"],
   },
   "galas-private-celebrations": {
     en: ["Concept decks and theming", "Gala and wedding décor", "Floral design and styling", "Giveaways and keepsakes", "Photobooths and guest moments", "Full on-day production"],
@@ -122,7 +122,7 @@ const POINTS: Record<string, Localized<string[]>> = {
   },
   "mobile-apps": {
     en: ["iOS and Android", "Connected to your website", "Arabic and English"],
-    ar: ["iOS وAndroid", "مرتبط بموقعكم الإلكتروني", "بالعربية والإنجليزية"],
+    ar: ["iOS و Android", "مرتبط بموقعكم الإلكتروني", "بالعربية والإنجليزية"],
   },
   "custom-systems": {
     en: ["Admin dashboards and analytics", "Roles and permissions", "Integrations with your tools"],
@@ -429,7 +429,7 @@ export const services: Service[] = [
       { en: "Mobile apps", ar: "تطبيقات الجوّال" },
       {
         en: "iOS and Android apps designed around how people use them.",
-        ar: "تطبيقات iOS وAndroid مصمّمة وفق طريقة استخدام الناس لها.",
+        ar: "تطبيقات iOS و Android مصمّمة وفق طريقة استخدام الناس لها.",
       },
     ],
     [

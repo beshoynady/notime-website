@@ -27,11 +27,13 @@ export const SERVICE_VISUALS: Record<string, ServiceVisual> = {
       ar: "مشروبات باردة وزهور بيضاء، منسّقة ومُضاءة على طاولة إحدى الفعاليات.",
     },
   },
-  // Video, Motion and AI (D158): a still from Rand's own shoots until her footage and files arrive
+  // Video and Motion (D158): a still from Rand's own shoots until her footage and files arrive
   // (images-for-rand.md); Rental: stock lights on stands until NO TIME's own kit is photographed.
+  // AI content: a neutral stock still (a process mapped on a whiteboard), never a real event photo,
+  // which under that title read as AI output (the close's gate), until Rand's own work arrives.
   "video-production": pic("catering-2"),
   "motion-graphics": pic("heritage-1"),
-  "ai-content-creation": pic("private-celebrations-4"),
+  "ai-content-creation": pic("sw-ai"),
   "equipment-camera-rental": pic("cp-rental-lights"),
   "set-stage-design": {
     kind: "photo",

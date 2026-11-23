@@ -131,7 +131,7 @@
       ]
     },
     "grade": "evening",
-    "night": true,
+    "night": "warm",
     "mobile": {
       "aspect": "9:16",
       "focus": [

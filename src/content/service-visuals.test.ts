@@ -34,7 +34,7 @@ describe("service visuals (D100)", () => {
     }
   });
   it("Creative: Video, Motion, AI and Rental show registry photographs, Rand's own where they exist (D158)", () => {
-    const want = { "video-production": "rand-profile", "motion-graphics": "rand-profile", "ai-content-creation": "rand-profile", "equipment-camera-rental": "stock" };
+    const want = { "video-production": "rand-profile", "motion-graphics": "rand-profile", "ai-content-creation": "stock", "equipment-camera-rental": "stock" };
     for (const [slug, source] of Object.entries(want)) {
       const v = SERVICE_VISUALS[slug];
       expect(v?.kind, slug).toBe("media");

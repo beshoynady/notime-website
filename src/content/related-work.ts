@@ -17,7 +17,7 @@ export const RELATED_WORK_COPY = {
   eyebrow: { en: "Related work", ar: "أعمال ذات صلة" },
   title: { en: "Delivered for national organisations", ar: "أعمال نفّذناها لجهات وطنية" },
   note: {
-    en: "Shown without the client's name until they approve it.",
-    ar: "نعرضها دون ذكر العميل حتى يوافق على تسميته.",
+    en: "We don't write the client's name until they approve it.",
+    ar: "لا نكتب اسم أي عميل قبل موافقته.",
   },
 } satisfies Record<string, Localized<string>>;

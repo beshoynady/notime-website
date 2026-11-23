@@ -5,7 +5,7 @@
  *
  * Each recipe item:
  *   { id, src, crop: { aspect: "16:9"|"9:16"|"4:5"|"3:4"|"1:1"|"3:2", focus?: [x, y], scale?: 0-1 },
- *     grade?: "evening"|"workshop"|"editorial"|"studio", night?: true, cut?: "rembg",
+ *     grade?: "evening"|"workshop"|"editorial"|"studio", night?: true | "warm", cut?: "rembg",
  *     mobile?: { aspect: "9:16", focus?: [x, y] }, out: "public/images/<folder>/<id>.webp", maxWidth?: 2400 }
  * `src` is a file (Rand's profile photos: public/images/work/... or public/images/work/raw/...) or
  * `unsplash:<id>`, downloaded once into assets-inbox/stock/ (gitignored) through the API's
@@ -72,7 +72,11 @@ async function render(file, crop, item, suffix = "") {
     const g = GRADES[item.grade];
     img = img.recomb(g.matrix).modulate(g.modulate);
   }
-  if (item.night) img = img.modulate({ brightness: 0.62, saturation: 0.65 }).recomb([[0.82, 0, 0], [0, 0.9, 0], [0, 0.04, 1.08]]);
+  // sharp keeps one recomb and one modulate per pipeline (a later call replaces the earlier), so
+  // `night: true` replaces the grade with its cool one; `night: "warm"` only dims and keeps the
+  // grade's matrix (a cold source, e.g. a white gallery, went blue under the cool night: the close's gate).
+  if (item.night === "warm") img = img.modulate({ brightness: 0.62, saturation: 0.8 });
+  else if (item.night) img = img.modulate({ brightness: 0.62, saturation: 0.65 }).recomb([[0.82, 0, 0], [0, 0.9, 0], [0, 0.04, 1.08]]);
   // A cutout goes through rembg as a lossless PNG; everything else is encoded straight to WebP.
   if (item.cut === "rembg") {
     const tmpIn = path.join(STOCK, `_cut-${item.id}${suffix}.png`);

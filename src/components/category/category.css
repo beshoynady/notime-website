@@ -26,6 +26,19 @@ main[data-theme="evening"] .cat-opening-overlay > .crumbs {
 main[data-theme="evening"] .cat-opening-overlay > .crumbs a {
   opacity: 1;
 }
+/* The light themes set espresso crumbs over their photo; where the photo darkens behind them (Print
+   at 390: 2.70:1 at the close's gate, 1.8:1 with a halo) they sit on a small ivory chip instead.
+   The negative start margin keeps the words on the frame's line. */
+main:is([data-theme="workshop"], [data-theme="editorial"]) .cat-opening-overlay > .crumbs ol {
+  inline-size: fit-content;
+  margin-inline-start: -12px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgb(245 233 211 / 0.9);
+}
+main:is([data-theme="workshop"], [data-theme="editorial"]) .cat-opening-overlay > .crumbs a {
+  opacity: 1;
+}
 .crumbs ol {
   display: flex;
   flex-wrap: wrap;
@@ -745,4 +758,11 @@ main[data-theme] [data-tone] {
   .svc-gallery li {
     flex-basis: calc((100% - 32px) / 3);
   }
+}
+
+/* Light grounds (Workshop champagne, Editorial ivory) take no dimming: at 0.7–0.85 the cocoa and
+   espresso text measured 3.0–4.0:1 there (WCAG 1.4.3, the close's gate). Dark grounds keep it.
+   The rail's active item is marked by its bar (.svc-index-ind), not by the others fading. */
+[data-tone="light"] :is(.cat-opening-eyebrow, .cat-opening-intro, .svc-deliver h3, .svc-index-link, .svc-index-num) {
+  opacity: 1;
 }

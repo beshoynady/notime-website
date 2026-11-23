@@ -242,5 +242,7 @@ The owner's rule of 2026-11-22: Arabic first, tuned to the UAE market (`copy-voi
 | U28 | `m:scenes.marketing.s1` | تبدأ العلامة من صفحة بيضاء. | تبدأ العلامة التجارية من صفحة بيضاء. | «العلامة التجارية» is the Gulf business term; «العلامة» alone reads as any mark. |
 | U29 | `m:styleguide.colour.copy` / `.copied` / `.selected` (the colour lab) | انسخ {hex} / تم نسخ {hex} / …انسخه… | انسخوا {hex} / نُسخ {hex} / …انسخوه… | Plural address; «تم + مصدر» avoided. |
 | U30 | `m:styleguide.motion.demos.magneticButton` (the motion lab) | خطط لفعاليتك | خطّطوا لفعاليتكم | Plural address, as the site's own button «خطّطوا لفعاليتكم معنا». |
+| U31 | `c:services:POINTS[product-launches-activations][3]` | مساحات بهوية العلامة | مساحات بهوية العلامة التجارية | «العلامة التجارية» is the Gulf business term (as U21); missed in the first pass, found by the close's gate. |
+| U32 | `c:related-work:note` (Work index, case pages, Related work) | نعرضها دون ذكر العميل حتى يوافق على تسميته. | لا نكتب اسم أي عميل قبل موافقته. | The case covers now show the client in the photo (D164, Rand approves), so «نعرضها دون ذكر العميل» no longer held; the new line says what stays true: we don't write the name. («اسم العميل» itself is the review build's placeholder, so the leak scan forbids it.) English: "We don't write the client's name until they approve it." |
 
 New Work copy written Arabic first (D164), for Rand: the four collections' titles and summaries (`src/content/work.ts`, `workCollections`), and `copyLink.*` and `workCollection.*` in `src/messages/ar.json`.
