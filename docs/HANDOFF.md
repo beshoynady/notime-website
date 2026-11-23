@@ -2,7 +2,11 @@
 
 Read `CLAUDE.md`, `AGENTS.md` and `PRODUCT.md` first. Decisions: `docs/DECISIONS.md` (latest D124; new ones from D125).
 
-## Now: the visual portfolio mandate (2026-11-21, authoritative)
+## Now: PR #2 ready for merge (2026-11-23, launch prep)
+
+**Status 2026-11-23 (evening): the four launch-prep tasks are done; PR #2 is ready, not merged (the owner merges).** Branch `phase-2-services`, code head `a2c2fff`. (1) The CLS 1.0 on Home is fixed (D168): How we work's pin wrapper switched display block ↔ flex on each ScrollTrigger refresh; `.process-pin` is flex now, `pinSpacing: true`; evidence recorder `e2e/cls-recorder.ts` stays in `cls.spec`; 52 consecutive load runs pass, no retries. (2) Confirm rows 70–74 confirmed by the owner; Work shows only Rand's photos (all 28 `rand-profile`, nothing replaced); row 73 confirmed as built (removing the sepia needs its own word). (3) UAE Arabic pass on the pages done before the rule: U33–U47 changed, U48 proposed (`docs/review/copy-pending.md`, 46 lines in all); Home and Events needed nothing outside ⚑ lines. (4) WhatsApp message for Rand: `docs/content/rand-images-message.md`. Full CI on the PR: see the PR description for the run. Preview: review build of `a2c2fff` on 3100 behind https://gary-farms-rays-potter.trycloudflare.com/ar (restart both after a reboot, then update the message's link). **Next:** the owner sends the message and merges PR #2; then `docs/launch/checklist.md` steps 1–6 and 8–11.
+
+## Before: the visual portfolio mandate (2026-11-21, authoritative)
 
 **Status 2026-11-23: all 16 tasks done; the close is finished.** Report `docs/report/visual-report.md` (Arabic) with the rulings appendix `docs/report/visual-rulings.md`; decisions D150–D167, confirm rows 70–74. PR #2 phase-2-services → main open, not merged: https://github.com/beshoynady/notime-website/pull/2. Full CI green: run 45127805783 on `2ae3d14` (705 passed, 1 first-time flaky logged in `docs/e2e-flakes.md`). Preview: review build `2ae3d14` on port 3100 behind https://define-brad-exciting-priest.trycloudflare.com/ar (`docs/review/tunnel.md`; restart both after a reboot, then send the new link). **Next:** Rand's answers to `docs/content/images-for-rand.md` and confirm rows 70–74; the 12 wanted photos; then merge on the owner's word. Local e2e needs the server env in memory `prod-server-turnstile-runtime` (MAIL_SINK, MAIL_FROM, Turnstile secret; PW_BASE_URL). `cls.spec` measures the Arial-less (Android) path on Linux or with `E2E_WITHOUT_ARIAL=1` (D167).
 
