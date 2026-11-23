@@ -42,4 +42,4 @@ Rand reviews the **review build** (`NEXT_PUBLIC_REVIEW_MODE=1`) through a free C
 
 ## Current link
 
-https://define-brad-exciting-priest.trycloudflare.com/ar (started 2026-11-23 after the machine's session ended; review build c5e589d: the whole visual portfolio, Work and its collections included, with the quality-gate fixes, on port 3100). The previous links (susan-salvador-henderson-verification, improvement-traveling-celebrate-wales, vast-expires-monica-types) are dead.
+https://define-brad-exciting-priest.trycloudflare.com/ar (started 2026-11-23 after the machine's session ended; review build c5e589d, refreshed to 2ae3d14 (D167, the hero's Android fallbacks): the whole visual portfolio, Work and its collections included, with the quality-gate fixes, on port 3100). The previous links (susan-salvador-henderson-verification, improvement-traveling-celebrate-wales, vast-expires-monica-types) are dead.
