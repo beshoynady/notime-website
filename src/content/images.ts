@@ -9,20 +9,20 @@ import type { ImageSlot } from "./types";
  */
 export const imageSlots: ImageSlot[] = [
   // Category images (4:5 for menu and cards, 16:9 for headers)
-  // Real NO TIME photo from the 2026 profile (D49): no client name, no identifiable person.
   {
     id: "cat-events-hospitality-4x5",
-    kind: "real",
+    // D169: a credited stock frame (media.ts menu-events), so the Home strip's florals show once.
+    kind: "stock",
     aspect: "4:5",
-    src: "/images/work/private-celebrations/private-celebrations-2.webp",
-    width: 859,
-    height: 1290,
+    src: "/images/stock/menu-events.webp",
+    width: 1200,
+    height: 1500,
     blurDataURL:
-      "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAACwAQCdASoHAAoAA4BaJZACdADzY2sgAP4JyEXoc37eMG3RwywrbwDF3LvHIJkBLzdOcZyV3itfbZEL33Sy2+xS34Q4AA==",
+      "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADwAQCdASoHAAoAA4BaJagCdAD0MmAIOgAA/uenp+tfrb/HPDf1LTVN2x1lxu/NUv8eC4NCqYcgStL0p9EAAA==",
     paint: "event",
     alt: {
-      en: "White roses and blue hydrangeas on a dressed table, lit by candles.",
-      ar: "ورود بيضاء وزهور كوبية زرقاء على طاولة مزيّنة، تضيئها الشموع.",
+      en: "A banquet table set with gold chargers, blue napkins and gold chairs.",
+      ar: "طاولة مأدبة بأطباق تقديم ذهبية ومناديل زرقاء وكراسٍ ذهبية.",
     },
   },
   // Real NO TIME photo from the 2026 profile (D49): no client name, no identifiable person.

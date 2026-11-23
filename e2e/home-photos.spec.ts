@@ -15,7 +15,7 @@ for (const locale of ["en", "ar"] as const) {
     const cards = page.locator(".cats .cat .cat-media img");
     await expect(cards).toHaveCount(5);
     const cardSrcs = await srcs(cards);
-    for (const file of ["private-celebrations-2", "catering-4", "uae-pro-league-3", "gifts-1"])
+    for (const file of ["card-events", "card-creative", "uae-pro-league-3", "card-print", "card-software"])
       expect(cardSrcs.some((s) => s.includes(`${file}.webp`)), file).toBe(true);
 
     await expect(page.locator("#work .case-visual")).toHaveCount(0);

@@ -10,11 +10,13 @@ Updated 2026-11-16. This list stays in the repo. The site itself never says how 
 
 | Where | Slot | Source | Temporary? |
 |---|---|---|---|
-| Home category cards, mega menu | `cat-events-hospitality-4x5` | Real profile photo (`private-celebrations-2`) | No |
-| Home category cards, mega menu | `cat-creative-production-4x5` | AI mood image (Canva master, D50/D51; log in `image-prompts.md`) | **Yes** |
-| Home category cards, mega menu | `cat-marketing-brand-4x5` | AI mood image | **Yes** |
-| Home category cards, mega menu | `cat-production-print-gifts-4x5` | AI mood image | **Yes** |
-| Home category cards, mega menu | `cat-software-digital-4x5` | AI mood image | **Yes** |
+| Home category cards (D169) | `card-events`, `card-creative`, `card-print`, `card-software` (media.ts); Marketing keeps `uae-pro-league-3` | Stock, Unsplash, graded like their category | **Yes** |
+| Mega menu, Events (D169) | `cat-events-hospitality-4x5` → `menu-events` (media.ts) | Stock, Unsplash `fotUgiCbngk` | **Yes** |
+| Home hero · Home strip · About story (D169) | `private-celebrations-1` · `st-gala`, `st-display`, `st-table`, `st-service`, `st-florals`, `st-tent` · `st-rig`, `st-hall`, `st-cart`, `st-buffet` | Real profile photos, each in one place only | No |
+| Mega menu | `cat-creative-production-4x5` | AI mood image (Canva master, D50/D51; log in `image-prompts.md`) | **Yes** |
+| Mega menu | `cat-marketing-brand-4x5` | AI mood image | **Yes** |
+| Mega menu | `cat-production-print-gifts-4x5` | AI mood image | **Yes** |
+| Mega menu | `cat-software-digital-4x5` | AI mood image | **Yes** |
 | Software proof strip | `notime-website-home-{en,ar}`, `notime-website-category-{en,ar}` | Real screenshots of this site | No (retake after the final polish) |
 | Events opening, shot "the room" | `ev-open-room` (+ 9:16) | Real profile photo, graded (`private-celebrations-1`) | No |
 | Creative opening, the frame | `catering-4` (media.ts) | Real profile photo | No |

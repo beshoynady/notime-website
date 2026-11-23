@@ -20,6 +20,7 @@ const { STORY_BASE, mediaAll } = await import("../src/content/media.ts");
 const RAW = {
   "private-celebrations-1": "p9-2.jpg",
   "private-celebrations-2": "p9-1.jpg",
+  "private-celebrations-3": "p10-1.jpg",
   "private-celebrations-4": "p10-5.jpg",
   "private-celebrations-5": "p11-1.jpg",
   "private-celebrations-6": "p9-3.jpg",
@@ -27,6 +28,8 @@ const RAW = {
   "private-celebrations-8": "p10-2.jpg",
   "catering-1": "p28-1.jpg",
   "catering-2": "p4-1.jpg",
+  "catering-10": "p4-2.jpg",
+  "catering-12": "p26-3.jpg",
   "heritage-4": "p32-1.jpg",
   "heritage-5": "p31-1.jpg",
 };

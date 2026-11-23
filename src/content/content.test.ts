@@ -5,6 +5,7 @@ import { copyProblems } from "@/lib/copy-rules";
 import { imageSize } from "@/lib/image-size";
 import { getCategories, getCategory, getImageSlot, getImageSlots, getProducts, getServices, productLockup } from "./index";
 import type { Localized } from "./types";
+import { MEDIA } from "./media";
 import ar from "@/messages/ar.json";
 import { formCopy } from "./form-copy";
 import { cta, productsCopy, sticky } from "./software/page";
@@ -268,7 +269,6 @@ describe("image slots", () => {
     const real = getImageSlots().filter((s) => s.kind === "real");
     expect(real.map((s) => s.id).sort()).toEqual(
       [
-        "cat-events-hospitality-4x5",
         "cat-events-hospitality-16x9",
         "cat-creative-production-16x9",
         "cat-production-print-gifts-16x9",
@@ -284,6 +284,18 @@ describe("image slots", () => {
     for (const s of real) {
       expect(s.src, s.id).toMatch(/^\/images\/work\/[a-z0-9-]+\/[a-z0-9-]+\.webp$/);
       expect(existsSync(path.join(process.cwd(), "public", s.src!)), `${s.id}: ${s.src}`).toBe(true);
+      expect(s.blurDataURL, s.id).toMatch(/^data:image\/webp;base64,/);
+    }
+  });
+
+  // D169: the menu's Events picture is a credited stock photo, so no profile photo shows twice.
+  it("stock slots point at a credited registry file under /images/stock/", () => {
+    const stock = getImageSlots().filter((s) => s.kind === "stock");
+    expect(stock.map((s) => s.id)).toEqual(["cat-events-hospitality-4x5"]);
+    for (const s of stock) {
+      expect(s.src, s.id).toMatch(/^\/images\/stock\/[a-z0-9-]+\.webp$/);
+      expect(existsSync(path.join(process.cwd(), "public", s.src!)), `${s.id}: ${s.src}`).toBe(true);
+      expect(MEDIA.find((m) => m.file === s.src)?.credit, s.id).toBeTruthy();
       expect(s.blurDataURL, s.id).toMatch(/^data:image\/webp;base64,/);
     }
   });

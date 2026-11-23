@@ -22,8 +22,8 @@ export type Aspect = "4:5" | "16:9" | "9:16" | "1:1";
 export interface ImageSlot {
   /** Stable id used by `docs/content/image-prompts.md`, e.g. "cat-events-hospitality-4x5". */
   id: string;
-  /** "ai" lives in /images/ai/, "real" in /images/work/ or /images/brand/. */
-  kind: "ai" | "real";
+  /** "ai" lives in /images/ai/, "real" in /images/work/ or /images/brand/, "stock" (credited in media.ts) in /images/stock/. */
+  kind: "ai" | "real" | "stock";
   aspect: Aspect;
   /** null renders the designed placeholder. TODO: replace placeholder when null. */
   src: string | null;

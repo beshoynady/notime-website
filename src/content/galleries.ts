@@ -4,18 +4,15 @@
  * a hidden or unapproved photo drops out, and a strip with fewer than two left isn't shown.
  */
 export const GALLERIES: Record<string, string[]> = {
-  "conferences-summits": ["catering-7", "catering-1"],
-  // ⚑ client-visible: shown until Rand says otherwise (question 4); hide one with NEXT_PUBLIC_MEDIA_HIDE.
-  // (uae-pro-league-1, a print on fabric, stays in the laptop scene: a 3:4 tile crops it to nothing.)
-  "exhibitions-booths": ["sandoz-1", "egyptair-pavilion-1"],
-  // None repeats a photo this page already shows in a scene (the opening, EVENTS_GALAS, EVENTS_MAJLIS).
-  "galas-private-celebrations": ["private-celebrations-5", "private-celebrations-6", "private-celebrations-7", "catering-3"],
-  "catering-heritage-hospitality": ["heritage-3", "catering-5", "catering-2", "catering-6", "catering-4"],
-  // Creative (D158): Rand's styled shoots (catering-4 is the opening's frame, catering-6 the
-  // section's photo), and the rooms the rig in Set & stage design turned into.
-  photography: ["catering-8", "catering-9", "catering-5", "catering-3"],
-  "set-stage-design": ["private-celebrations-1", "private-celebrations-7", "heritage-5"],
-  // Print (D160): two stands NO TIME built (⚑ client-visible; Smith Gulf's file is small, a tile only).
+  // D169: a photo shows in one place only. The Work pages, the hero, the Home strip and About's
+  // story hold most of NO TIME's photos, so a gallery keeps only those shown nowhere else and
+  // hides below GALLERY_MIN (fill or hide, D78) until Rand's new photos arrive (rand-images-message.md).
+  "conferences-summits": [],
+  "exhibitions-booths": [],
+  "galas-private-celebrations": [],
+  "catering-heritage-hospitality": ["catering-6", "catering-13"],
+  photography: ["catering-8", "catering-9"],
+  "set-stage-design": [],
   "stand-fabrication-signage": ["sandoz-1", "smith-gulf-1"],
 };
 

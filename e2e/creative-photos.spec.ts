@@ -17,7 +17,9 @@ for (const locale of ["en", "ar"] as const) {
       await img.scrollIntoViewIfNeeded();
       await expect.poll(() => img.evaluate((i) => (i as HTMLImageElement).naturalWidth), { message: id }).toBeGreaterThan(0);
     }
-    for (const id of ["photography", "set-design"]) await expect(page.locator(`#${id} .svc-gallery li`), id).not.toHaveCount(0);
+    // D169: set design's gallery hides until Rand's photos arrive (its photos show elsewhere).
+    await expect(page.locator("#photography .svc-gallery li")).toHaveCount(2);
+    await expect(page.locator("#set-design .svc-gallery")).toHaveCount(0);
   });
 
   test(`${locale}: the opening's frame is Rand's dessert boards`, async ({ page, isMobile }) => {
