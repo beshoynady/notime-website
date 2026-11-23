@@ -65,9 +65,9 @@ The palette's hex values are #2E2017, #634731, #BB9A79, #EAD4AB and #F5E9D3. Giv
 
 - **Page · section:** Home › Categories (card 1); mega menu tile · **Aspect:** 4:5
 - **Prompt (fallback only):** House style. A ballroom set for an evening event, seen from a low angle between two dressed tables: ivory linen, crystal glasses and tall white florals catch candlelight in the foreground. Behind, soft haze and a warm wash of light across an empty stage. Calm, minutes before the doors open.
-- **Alt EN:** White roses and blue hydrangeas on a dressed table, lit by candles.
-- **Alt AR:** ورود بيضاء وزهور كوبية زرقاء على طاولة مزيّنة، تضيئها الشموع.
-- **In use: real photo** `/images/work/private-celebrations/private-celebrations-2.webp` (D49). Was: `private-celebrations-2` (white and blue florals with candles, 859 × 1290, crop to 4:5).
+- **Alt EN:** A banquet table set with gold chargers, blue napkins and gold chairs.
+- **Alt AR:** طاولة مأدبة بأطباق تقديم ذهبية ومناديل زرقاء وكراسٍ ذهبية.
+- **In use: stock** `/images/stock/menu-events.webp` (Unsplash fotUgiCbngk, Matt Benson; media.ts `menu-events`, D169), mega menu only. The Home card shows `card-events`. Was: `private-celebrations-2`, which now shows only in the Home strip.
 
 ### `cat-creative-production-4x5`
 

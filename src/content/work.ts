@@ -183,7 +183,6 @@ export interface WorkCollection {
 /** Below this many visible photos a collection hides (fill or hide, D78). */
 export const COLLECTION_MIN_PHOTOS = 4;
 
-const series = (group: string, n: number) => Array.from({ length: n }, (_, i) => `${group}-${i + 1}`);
 
 export const workCollections: WorkCollection[] = [
   {
@@ -196,7 +195,7 @@ export const workCollections: WorkCollection[] = [
       en: "Halls and tables we dressed for private celebrations: candlelight, flowers, the entrance, and the stage going up before the doors open.",
       ar: "قاعات وطاولات جهّزناها لحفلات ومناسبات خاصة: الشموع والزهور والمدخل، والمسرح قبل أن تُفتح الأبواب.",
     },
-    photos: series("private-celebrations", 8),
+    photos: ["private-celebrations-4", "private-celebrations-6", "private-celebrations-7", "private-celebrations-9", "private-celebrations-10"],
   },
   {
     slug: "heritage-hospitality",
@@ -207,7 +206,7 @@ export const workCollections: WorkCollection[] = [
       en: "Heritage carts with brass dallahs, Arabic coffee laid out on a carpet, a majlis facing the sea and a desert tent lit from inside.",
       ar: "عربات ضيافة تراثية بدلال نحاسية، وقهوة عربية على السجاد، ومجلس يطلّ على البحر، وخيمة في الصحراء مضاءة من الداخل.",
     },
-    photos: series("heritage", 5),
+    photos: ["heritage-1", "heritage-2", "heritage-3", "heritage-6"],
   },
   {
     slug: "buffets-and-tables",
@@ -218,7 +217,7 @@ export const workCollections: WorkCollection[] = [
       en: "Buffets set with crystal and gold, dessert tables for occasions, and hospitality laid out for a boardroom meeting.",
       ar: "بوفيهات بالكريستال والذهبي، وطاولات حلويات للمناسبات، وضيافة لاجتماع مجلس إدارة.",
     },
-    photos: series("catering", 9),
+    photos: ["catering-3", "catering-4", "catering-5", "catering-7", "catering-11"],
   },
   {
     slug: "gifts-for-companies",

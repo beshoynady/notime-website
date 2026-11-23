@@ -1,0 +1,7 @@
+[
+  {"id": "card-events", "src": "unsplash:7K67WDBrcIs", "crop": {"aspect": "4:5", "focus": [0.5, 0.6]}, "grade": "evening", "out": "public/images/stock/card-events.webp", "maxWidth": 1200},
+  {"id": "card-creative", "src": "unsplash:HuNenPCNG84", "crop": {"aspect": "4:5", "focus": [0.5, 0.5]}, "grade": "studio", "out": "public/images/stock/card-creative.webp", "maxWidth": 1200},
+  {"id": "card-print", "src": "unsplash:c7ep_zsHDk4", "crop": {"aspect": "4:5", "focus": [0.38, 0.6]}, "grade": "workshop", "out": "public/images/stock/card-print.webp", "maxWidth": 1200},
+  {"id": "card-software", "src": "unsplash:v-jFS1AsHXo", "crop": {"aspect": "4:5", "focus": [0.35, 0.5]}, "grade": "evening", "out": "public/images/stock/card-software.webp", "maxWidth": 1200},
+  {"id": "menu-events", "src": "unsplash:fotUgiCbngk", "crop": {"aspect": "4:5", "focus": [0.5, 0.5]}, "grade": "evening", "out": "public/images/stock/menu-events.webp", "maxWidth": 1200}
+]

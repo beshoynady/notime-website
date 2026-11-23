@@ -16,17 +16,19 @@ const f = (dir: string, n: number, width: number, height: number): ReelFrame => 
   height,
 });
 
+// The Work pages' photos only (D169): the reel is a montage of the Work, so it repeats no photo
+// that the hero, the Home strip, About's story or a service page shows.
 export const reelFrames: ReelFrame[] = [
-  f("private-celebrations", 1, 1600, 1066),
-  f("catering", 2, 1247, 703),
   f("private-celebrations", 4, 811, 541),
-  f("catering", 1, 1408, 794),
-  f("heritage", 5, 891, 668),
   f("catering", 3, 1247, 702),
-  f("private-celebrations", 7, 850, 638),
+  f("heritage", 1, 1050, 788),
   f("catering", 4, 1187, 668),
-  f("private-celebrations", 5, 949, 534),
+  f("private-celebrations", 7, 850, 638),
   f("catering", 7, 939, 529),
+  f("heritage", 2, 688, 516),
+  f("private-celebrations", 9, 811, 541),
+  f("heritage", 3, 688, 516),
+  f("heritage", 6, 688, 516),
 ];
 
 /** Seconds per frame: 10 frames × 2.8 s ≈ 28 s per loop (the plan's 20–30 s). */

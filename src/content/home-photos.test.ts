@@ -10,21 +10,25 @@ import { workItems } from "./work";
 const entry = mediaAll;
 
 describe("home: the five crafts cards", () => {
+  // D169: one photograph, one place. Rand's photos tell the hero, the strip, About and the Work
+  // pages, so the cards are credited stock frames, except Marketing's, a post shown nowhere else.
   it("each card's photo is the one the story names", () => {
     const photos = Object.fromEntries(getCategories().map((c) => [c.slug, c.photo]));
-    expect(photos).toMatchObject({
-      "events-hospitality": "private-celebrations-2",
-      "creative-production": "catering-4",
+    expect(photos).toEqual({
+      "events-hospitality": "card-events",
+      "creative-production": "card-creative",
       "marketing-brand": "uae-pro-league-3",
-      "production-print-gifts": "gifts-1",
+      "production-print-gifts": "card-print",
+      "software-digital": "card-software",
     });
   });
 
-  it("every card photo is a registry entry from Rand's own work", () => {
+  it("every card photo is a registry entry: Rand's own, or credited stock", () => {
     for (const c of getCategories()) {
-      if (!c.photo) continue;
-      expect(entry(c.photo), c.slug).toBeDefined();
-      expect(["rand-profile", "rand"], c.slug).toContain(entry(c.photo)!.source);
+      const e = c.photo ? entry(c.photo) : undefined;
+      expect(e, c.slug).toBeDefined();
+      if (e!.source === "stock") expect(e!.credit?.license, c.slug).toBeTruthy();
+      else expect(["rand-profile", "rand"], c.slug).toContain(e!.source);
     }
   });
 });

@@ -104,6 +104,15 @@ export const MEDIA: MediaEntry[] = [
     en: "A stage and its truss going up in a ballroom before an event.",
     ar: "مسرح وهيكله المعدني قيد التركيب في قاعة احتفالات قبل إحدى الفعاليات.",
   }, "4:3 · the rig going up in an empty hall, crew far off and unrecognisable"),
+  // Profile alternates curated for D169 (one place per photo): pages 10, 4, 26, 27, 31.
+  profile("private-celebrations-9", "p10-4", 811, 541, {
+    en: "Keepsakes wrapped like small blue tuxedos, tied with white ribbon.",
+    ar: "تذكارات مغلّفة على شكل بدلات زرقاء صغيرة، مربوطة بشريط أبيض.",
+  }, "3:2 · a styled detail close, soft light"),
+  profile("private-celebrations-10", "p10-3", 537, 716, {
+    en: "A centrepiece of red and orange flowers in a glass vase.",
+    ar: "تنسيق زهور حمراء وبرتقالية في مزهرية زجاجية، في وسط الطاولة.",
+  }, "3:4 portrait · one centrepiece close"),
 
   // Catering (pages 4, 25–29).
   profile("catering-1", "p28-1", 1408, 794, {
@@ -143,6 +152,22 @@ export const MEDIA: MediaEntry[] = [
     en: "Dessert cups topped with lilac sugar petals, set on glass saucers.",
     ar: "أكواب حلوى تعلوها بتلات سكّرية بلون الليلك، على صحون زجاجية.",
   }, "portrait · one styled dessert close, shallow depth"),
+  profile("catering-10", "p4-2", 1247, 702, {
+    en: "Tiered stands of savouries and desserts along a buffet.",
+    ar: "حوامل متعددة الطبقات للمقبلات والحلويات على امتداد البوفيه.",
+  }, "16:9 · a buffet in perspective, tiered stands, no people"),
+  profile("catering-11", "p27-3", 938, 1171, {
+    en: "Canapés on picks, set in a bed of moss and grasses.",
+    ar: "مقبلات صغيرة على أعواد، مغروسة في طبقة من الطحالب والأعشاب.",
+  }, "portrait · a styled canapé display close"),
+  profile("catering-12", "p26-3", 718, 759, {
+    en: "A silver tray of savoury cups with a rose, carried by a gloved server.",
+    ar: "صينية فضية بأكواب مقبلات ووردة، يحملها نادل بقفازات بيضاء.",
+  }, "square · service in motion, the server cropped at the torso"),
+  profile("catering-13", "p26-2", 718, 759, {
+    en: "A silver tray of baked savouries and roses, carried through the room.",
+    ar: "صينية فضية بمخبوزات مالحة وورود، تُقدَّم بين الضيوف.",
+  }, "square · service in motion, the server cropped at the torso"),
 
   // Heritage hospitality (pages 31–32).
   profile("heritage-1", "p31-2", 1050, 788, {
@@ -165,6 +190,10 @@ export const MEDIA: MediaEntry[] = [
     en: "A desert tent at night, carpets laid and lit from inside.",
     ar: "خيمة في الصحراء ليلًا، فُرشت بالسجاد وأُضيئت من الداخل.",
   }, "4:3 · a tent at dusk or night, lit from within, sand foreground"),
+  profile("heritage-6", "p31-4", 688, 516, {
+    en: "Brass coffee pots and a firewood stack laid out on a carpet in the sand.",
+    ar: "دلال نحاسية وحطب مصفوف على سجادة فوق الرمل.",
+  }, "4:3 · the coffee fire set out, close, warm"),
 
   // Gifts (pages 22–24).
   profile("gifts-1", "p23-3", 1280, 719, {
@@ -369,17 +398,44 @@ MEDIA.push(
 );
 
 /**
+ * The category cards and the menu (D169): their own stock frames, graded like their category, so
+ * no profile photo shows twice (docs/content/recipes/home.json). Decorative: the card names it.
+ */
+MEDIA.push(
+  stock("card-events", "unsplash:7K67WDBrcIs", "Lucas T Photography", "https://unsplash.com/photos/7K67WDBrcIs", 1200, 1500, null,
+    "4:5 · a dressed banquet room, round tables and chandeliers, no people (a NO TIME room replaces it)"),
+  stock("card-creative", "unsplash:HuNenPCNG84", "Jakob Owens", "https://unsplash.com/photos/HuNenPCNG84", 1200, 1500, null,
+    "4:5 · a cinema camera on its rig under coloured light, no brand mark", { grade: "studio" }),
+  stock("card-print", "unsplash:c7ep_zsHDk4", "Ilie Barna", "https://unsplash.com/photos/c7ep_zsHDk4", 1200, 1500, null,
+    "4:5 · one wrapped gift box with a ribbon bow, whole in frame (a NO TIME gift replaces it)", { grade: "workshop" }),
+  stock("card-software", "unsplash:v-jFS1AsHXo", "Jakub Żerdzicki", "https://unsplash.com/photos/v-jFS1AsHXo", 1200, 1500, null,
+    "4:5 · code on a screen beside a lit keyboard, no legible brand"),
+  stock("menu-events", "unsplash:fotUgiCbngk", "Matt Benson", "https://unsplash.com/photos/fotUgiCbngk", 1200, 1500, null,
+    "4:5 · a table set with gold chargers and blue napkins, gold chairs, no people", {
+      alt: {
+        en: "A banquet table set with gold chargers, blue napkins and gold chairs.",
+        ar: "طاولة مأدبة بأطباق تقديم ذهبية ومناديل زرقاء وكراسٍ ذهبية.",
+      },
+    }),
+);
+
+/**
  * Photo stories (D109; About's evening, Home's strip): Evening-graded copies of profile photos
  * (public/images/stories/, scripts/grade-stories.mjs). Each copies its profile entry (alt, size,
  * source, `hidden`), so hiding the original hides the copy too.
  */
 export const STORY_BASE = {
+  // About's evening (ROOM_STORY).
   "st-rig": "private-celebrations-8",
-  "st-hall": "private-celebrations-1",
-  "st-table": "catering-2",
+  "st-hall": "private-celebrations-5",
   "st-cart": "heritage-4",
-  "st-florals": "private-celebrations-2",
   "st-buffet": "catering-1",
+  // Home's strip (STRIP). No photo is in both, nor anywhere else on the site (D169).
+  "st-gala": "private-celebrations-3",
+  "st-display": "catering-10",
+  "st-table": "catering-2",
+  "st-service": "catering-12",
+  "st-florals": "private-celebrations-2",
   "st-tent": "heritage-5",
 } as const;
 for (const [id, base] of Object.entries(STORY_BASE)) {

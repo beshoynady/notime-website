@@ -19,7 +19,7 @@ export const categories: Category[] = [
       ar: "مؤتمرات وأجنحة معارض وحفلات إطلاق وأعراس ومجالس ضيافة، نخطّط لها من دبي ويديرها الفريق نفسه يوم الحدث حتى يغادر آخر ضيف.",
     },
     image: "cat-events-hospitality-4x5",
-    photo: "private-celebrations-2",
+    photo: "card-events",
     theme: "evening",
     // Copy deck docs/content/category-copy-events.md (approved 2026-11-09).
     intro: {
@@ -72,7 +72,7 @@ export const categories: Category[] = [
       ar: "صورة وفيلم وموشن ومحتوى بالذكاء الاصطناعي، ومعها الديكور والمعدّات التي تصنعها.",
     },
     image: "cat-creative-production-4x5",
-    photo: "catering-4",
+    photo: "card-creative",
     theme: "studio",
     intro: { en: "Photography, video, motion graphics and AI content, with the sets and the equipment behind them. We cover events on the ground, shoot products and food, and take every piece through editing, sound and post-production.", ar: "تصوير فوتوغرافي وفيديو وموشن جرافيك ومحتوى بالذكاء الاصطناعي، ومعها الديكورات والمعدّات اللازمة. نغطّي الفعاليات في أرض الحدث، ونصوّر المنتجات والأطباق، ونتابع كل عمل حتى المونتاج وتصميم الصوت ومرحلة ما بعد الإنتاج." },
     // Copy deck draft for Rand's review (v1 decks task) + the D78 FAQ fills; clear fixes applied.
@@ -166,7 +166,7 @@ export const categories: Category[] = [
       ar: "أجنحة وطباعة وتغليف وهدايا، بلمسات نهائية من الرقائق المعدنية و UV والكبس والحفر بالليزر.",
     },
     image: "cat-production-print-gifts-4x5",
-    photo: "gifts-1",
+    photo: "card-print",
     theme: "workshop",
     intro: { en: "Stands and signage, commercial and large-format print, packaging, corporate gifts and merchandise, produced to brand standard. We design, fabricate and install, and finish each gift with the branding method that suits it.", ar: "أجنحة ولافتات، وطباعة تجارية وكبيرة الحجم، وتغليف، وهدايا للشركات، ومنتجات تحمل هوية علامتكم التجارية وتلتزم بمعاييرها. نصمّم ونصنّع ونركّب، ونختار لكل هدية طريقة الطباعة أو الحفر التي تليق بها." },
     // Copy deck draft for Rand's review (v1 decks task) + the D78 FAQ fills; clear fixes applied.
@@ -217,6 +217,7 @@ export const categories: Category[] = [
       ar: "مواقع وتطبيقات وأنظمة تُبنى على مقاسكم، وتبقى تعمل طويلًا بعد الإطلاق.",
     },
     image: "cat-software-digital-4x5",
+    photo: "card-software",
     theme: "interface",
     intro: { en: "Websites, mobile apps, custom systems and online stores, designed and built in Arabic and English. We take each one from UX and design systems to development, content management and analytics, and build it to load fast.", ar: "مواقع إلكترونية وتطبيقات جوّال وأنظمة مخصّصة ومتاجر إلكترونية، نصمّمها ونبنيها بالعربية والإنجليزية. نتولّى كلًّا منها من تجربة المستخدم وأنظمة التصميم إلى البرمجة وإدارة المحتوى والتحليلات، ونبنيها لتعمل بسرعة." },
     // Copy deck draft for Rand's review (v1 decks task) + the D78 FAQ fills; clear fixes applied.

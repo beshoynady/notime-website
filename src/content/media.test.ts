@@ -74,13 +74,13 @@ describe("scene layers read the registry", () => {
 
 describe("a hidden photo hides every file made from it (review, Task 16)", () => {
   it("crops, graded copies, scene slots and service photos drop out with their base", async () => {
-    vi.stubEnv("NEXT_PUBLIC_MEDIA_HIDE", "private-celebrations-1,catering-6");
+    vi.stubEnv("NEXT_PUBLIC_MEDIA_HIDE", "private-celebrations-1,catering-6,private-celebrations-5");
     vi.resetModules();
     const { media: m } = await import("./media");
     const { getSceneImage } = await import("./scenes/images");
     const { serviceVisual } = await import("./service-visuals");
     expect(m("ev-open-night"), "the night crop of the hall").toBeUndefined();
-    expect(m("st-hall"), "the story copy of the hall").toBeUndefined();
+    expect(m("st-hall"), "the story copy of its dessert table").toBeUndefined();
     expect(getSceneImage("ev-open-room"), "the scene plate of the hall").toBeUndefined();
     expect(getSceneImage("ev-open-table"), "the tables cut from the hall").toBeUndefined();
     expect(serviceVisual("photography"), "the graded copy of catering-6").toBeUndefined();

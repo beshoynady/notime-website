@@ -11,9 +11,10 @@ import { HeroController } from "./hero-controller";
 import { HeroHud } from "./hero-hud";
 import { SectionRef } from "@/components/review/section-ref";
 import { HOME_REF } from "@/lib/review";
+import { HERO_PLATE } from "@/content/hero";
 
-/** Rand's dressed hall (the 2026 profile, p9-2), through the image registry (D152). */
-const PLATE = "private-celebrations-1";
+/** Rand's dressed hall, through the image registry (D152). */
+const PLATE = HERO_PLATE;
 
 /**
  * Home hero (server component; D156). The whole first screen is there at first paint: the header,

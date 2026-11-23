@@ -17,10 +17,13 @@ import type { Localized } from "./types";
 export const STORY_PHOTOS = {
   rig: "st-rig",
   hall: "st-hall",
-  table: "st-table",
   cart: "st-cart",
-  florals: "st-florals",
   buffet: "st-buffet",
+  gala: "st-gala",
+  display: "st-display",
+  table: "st-table",
+  service: "st-service",
+  florals: "st-florals",
   tent: "st-tent",
 } as const satisfies Record<string, keyof typeof STORY_BASE>;
 
@@ -77,10 +80,11 @@ export const STRIP = {
   eyebrow: { en: "From our events", ar: "من فعالياتنا" },
   title: { en: "Rooms we dressed, tables we set.", ar: "قاعات جهّزناها، وطاولات نسّقناها." },
   frames: [
-    { photo: "hall", caption: { en: "Gala dinner", ar: "عشاء احتفالي" } },
-    { photo: "cart", caption: { en: "Heritage hospitality", ar: "ضيافة تراثية" } },
+    // Each frame's photo is its own: About's story and the Work pages show others (D169).
+    { photo: "gala", caption: { en: "Gala dinner", ar: "عشاء احتفالي" } },
+    { photo: "display", caption: { en: "Buffet display", ar: "تنسيق البوفيه" } },
     { photo: "table", caption: { en: "Table styling", ar: "تنسيق الطاولات" } },
-    { photo: "rig", caption: { en: "Stage and technical", ar: "المسرح والتجهيزات الفنية" } },
+    { photo: "service", caption: { en: "Hospitality service", ar: "تقديم الضيافة" } },
     { photo: "florals", caption: { en: "Florals and décor", ar: "الزهور والديكور" } },
     { photo: "tent", caption: { en: "Desert majlis", ar: "مجلس في الصحراء" } },
   ] satisfies { photo: StoryPhotoKey; caption: Localized<string> }[],

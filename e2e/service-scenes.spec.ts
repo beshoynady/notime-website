@@ -23,7 +23,8 @@ for (const locale of ["en", "ar"] as const) {
 
   test(`${locale}: the work strip starts at the inline-start, and every tile has its picture`, async ({ page }) => {
     await gotoReady(page, `/${locale}/services/events-hospitality`);
-    const strip = page.locator("section#exhibitions .svc-gallery");
+    // D169: the one Events gallery left until Rand's new photos arrive.
+    const strip = page.locator("section#hospitality .svc-gallery");
     await strip.scrollIntoViewIfNeeded();
     const tiles = strip.locator("img");
     expect(await tiles.count()).toBeGreaterThanOrEqual(2);
