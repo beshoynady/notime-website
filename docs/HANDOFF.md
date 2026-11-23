@@ -2,16 +2,32 @@
 
 Read `CLAUDE.md`, `AGENTS.md` and `PRODUCT.md` first. Decisions: `docs/DECISIONS.md` (latest D124; new ones from D125).
 
-## Now: images, one photograph per place (2026-11-23, after the merge)
+## Now: images done, README done (2026-11-23, late night)
 
-**Status 2026-11-23 (night).** PR #2 is merged into `main` (83bfb23, merge commit). Vercel production: https://notime-website-beshoynadys-projects.vercel.app/ar. It is behind **Vercel Authentication**: the owner turns it off (Settings → Deployment Protection) or makes a Share link, so Rand can open it. The CLS investigation, long e2e runs and Lighthouse are paused by the owner.
+**Status.** `main` is at the README merge (PR #7, 5395e0b). Preview for Rand (public, no login): https://notime-website-ashen.vercel.app/ar; `docs/content/rand-images-message.md` links it. The CLS investigation, long e2e runs and Lighthouse are still paused by the owner.
 
-**The owner's rule (D169):** no photo shows in two places. `src/content/photo-slots.test.ts` checks every slot in the data, with one named exception (the Events opening film is cut from the Home hero's hall, until Rand sends another wide room). Rand's photos go where the site says "our work" or "from our events"; mood slots get credited Unsplash stock (`docs/content/recipes/home.json`, `events-d169.json`, `creative-print-d169.json`).
-- PR #3 Home, About, Work (merged 3169f30). PR #4 Events (merged cfa0e92).
-- **Branch `images-creative-print` (in progress):** Creative and Print frames plus service stills. Done with 2 Unsplash + 8 Pexels files (the owner's call when the Unsplash hourly quota of 50 ran out; the Pexels key is a placeholder, so files come from each photo page under the Pexels License). `PENDING` is empty.
-- The Pexels key in `.env.local` is a 3-character placeholder (401). No AI key.
-- `docs/content/rand-images-message.md` now links the Vercel URL (works once protection is off).
-- Full e2e on PR #3's merge run was still pending; check `gh run list --workflow` and fix any red.
+**Images, one photograph per place (D169–D172), all merged:**
+- PRs:
+  - #3 Home, About, Work.
+  - #4 Events.
+  - #5 Creative and Print (2 Unsplash + 8 Pexels, downloaded from each photo page under the Pexels License; the Pexels key in `.env.local` is a placeholder).
+  - #6 Stage beams (D172).
+- `src/content/photo-slots.test.ts`: `PENDING` is empty. The only repeat is the named Events-opening hall, approved by the owner.
+- New images by source:
+  - Rand's profile: 7 alternates.
+  - Unsplash: 20 (5 cards and menu, 12 Events, 2 Creative, 1 stage beams).
+  - Pexels: 8.
+  - AI: none (no key).
+- U49 and U50 (the two new Home strip captions) are in `copy-pending.md` for Rand.
+- **Full e2e:**
+  - The Events phone empty-screen failure (since #3) is fixed by D172.
+  - The last full run (45257020199) has one failure: the known `events-animatic` desktop pin-offset flake (90.45px), now on events-stage. It is logged in `docs/e2e-flakes.md` and stays deferred by the owner until after Rand's review.
+
+**Repo (PR #7):**
+- README with screenshots (`docs/readme/`, from `scripts/readme-shots.mjs`; re-run at launch for notimehub.com), a PR template, and repo description, website and topics set with `gh`.
+- The repo is **public** (the owner thought private; not changed, flagged to the owner).
+- The social preview has no API: upload `docs/readme/social-preview.jpg` by hand (Settings → General → Social preview).
+- At launch: README's production line and the repo's website go to notimehub.com; the LinkedIn link is still to come.
 
 ## Before: PR #2 launch prep (2026-11-23; merged)
 
