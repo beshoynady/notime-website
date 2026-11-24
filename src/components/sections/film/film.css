@@ -873,7 +873,7 @@ html[dir="rtl"] .film-ci-bar > span {
     block-size: min(30svh, 260px);
   }
   .film-card {
-    top: 18%;
+    top: 31%;
     inset-inline-end: auto;
     left: 30%;
     inline-size: 40%;
