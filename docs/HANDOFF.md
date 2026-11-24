@@ -18,7 +18,9 @@ Read `CLAUDE.md`, `AGENTS.md` and `PRODUCT.md` first. Decisions: `docs/DECISIONS
   - Removed: hero, hero-fit, hero-resize, pin-build-scroll and cards-no-shift.
   - New: `e2e/film.spec.ts`.
   - Re-pointed: first-screen, locale-switch, navigation, home-photos and no-js.
-- **Next:** PR to main, merged after CI, then the report to the owner (rows 81–84 to confirm).
+- **Perf (D176):** the scenes' motion is built on the first scroll, key or touch. LCP is the H1 (/en 4516 ms, /ar 4608 ms), CLS 0 (`docs/checkpoints/lighthouse/film/`).
+- **Shots:** `docs/review/film-final/` (1366/1440/390 × AR/EN, every scene; a GIF per locale). Mobile images: 256–324 KB.
+- **Next:** PR to main, merged after CI, then the report to the owner (rows 81–85 to confirm).
 
 ## Now: the countdown hero (2026-11-24, D173)
 
