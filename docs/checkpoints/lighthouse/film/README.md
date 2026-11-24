@@ -1,17 +1,27 @@
-# Home film · Lighthouse (D174)
+# Home film · Lighthouse (D174, D176)
 
-2026-11-24 · branch `home-film`, the `072cf3a` production build on port 3100. Mobile, 3 runs, medians (`summary.json`, `raw/`, `scripts/lighthouse.mjs`). Nothing else ran while it measured.
+2026-11-24 · branch `home-film`, production builds on port 3100. Mobile, 3 runs, medians (`summary.json`, `raw/`, `scripts/lighthouse.mjs`). Nothing else ran while it measured.
 
-| Page | perf | FCP ms | LCP ms | TBT ms | CLS | a11y / bp / seo |
-|---|---|---|---|---|---|---|
-| /en first visit | 51 | 1397 | 4824 | 3369 | 0 | 100 / 100 / 92 |
-| /en return | 73 | | 1279 | | 0 | |
-| /ar first visit | 48 | 1418 | 4973 | 4299 | 0.0004 | 100 / 100 / 92 |
-| /ar return | 71 | 766 | 1448 | 2408 | 0 | |
+## Final (the scenes' motion built on the first move, D176)
 
-## Against the last home checkpoint (`visual-home`, D156)
+| Page | perf | FCP ms | LCP ms | TBT ms | Speed Index ms | CLS | LCP element |
+|---|---|---|---|---|---|---|---|
+| /en first visit | 56 | 1397 | 4516 | 1866 | 3034 | 0 | the H1 |
+| /en return | 83 | 829 | 1129 | 702 | 903 | 0 | the H1 |
+| /ar first visit | 54 | 1389 | 4608 | 2339 | 3081 | 0 | the H1 |
+| /ar return | 78 | 871 | 1231 | 991 | 936 | 0 | the H1 |
 
-- LCP: /en 4643 → 4824 ms (+181), /ar 4840–4903 → 4973 ms (+70 to +133). A run's spread on this machine is 300–400 ms, so the time is level. This was not an interleaved A/B, so treat it as indicative.
-- **The LCP element changed.** It was the title text; it is now the opening plate (`img.film-img`, the empty hall, full screen). The title, both lines and both buttons are still painted at first paint (FCP ≈ 1.4 s). The photo is larger than the text, so Chrome names it once it lands. Logged as a decision to confirm (row 85).
-- CLS: 0 on /en. /ar has 0.0004 on one first run: the Alexandria swap on the lead and buttons, the same site-wide swap as before (OPEN_QUESTIONS #25).
-- TBT is higher than D156's (1507–2248 ms). The film builds a ScrollTrigger for every scene at hydration; the throttled-CPU first run carries that.
+a11y / best practices / SEO: 100 / 100 / 92 on all four. The H1 is the LCP in all 12 runs.
+
+## Against the last home checkpoint (`visual-home`, D156) and the first film build
+
+| | D156 hero | film, motion at hydration (`072cf3a`) | film, final |
+|---|---|---|---|
+| /en LCP | 4643 (the H1) | 4824 (the plate) | **4516 (the H1)** |
+| /ar LCP | 4840–4903 (the H1) | 4973 (the plate) | **4608 (the H1)** |
+| /en TBT | 1507 | 3369 | 1866 |
+| /ar TBT | 2045–2248 | 4299 | 2339 |
+| CLS | 0 / 0 | 0 / 0.0004 | 0 / 0 |
+
+- The first film build measured every scene's ScrollTriggers at hydration: 4 s of Style & Layout on a throttled CPU, and the opening plate, transformed by GSAP after it had painted, was reported as a new and larger LCP. Building the motion on the first scroll, key or touch, with the dolly's first frame set in CSS, fixes both.
+- LCP is 130–230 ms ahead of D156, about half a run's spread (300–400 ms): level or slightly better, with no regression. TBT is within 200–400 ms of D156. These are not interleaved A/B runs.
