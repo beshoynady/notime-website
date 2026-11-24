@@ -1,6 +1,8 @@
-# Home hero: three options (branch `hero-options`, not merged)
+# Home hero: three options (the record of the choice)
 
-Live on a build of this branch: `/ar/hero-lab/a`, `/ar/hero-lab/b`, `/ar/hero-lab/c` (and `/en/...`). Each shows one option over the home page's photo strip. All three keep the approved copy, both actions, the clock idea, the brand tokens and RTL. Title, lead and actions are on screen at first paint (LCP stays text), and reduced motion shows the end state.
+**Chosen (2026-11-24): A, with C's dial engraving (D173).** It is now the Home hero; the lab route and options B and C are removed from the code. The files below stay as the record of what was compared.
+
+When it was live, `/ar/hero-lab/a`, `/b` and `/c` (and `/en/...`) each showed one option over the home page's photo strip. All three keep the approved copy, both actions, the clock idea, the brand tokens and RTL. Title, lead and actions are on screen at first paint (LCP stays text), and reduced motion shows the end state.
 
 | Option | Idea | Source and licence | Weight |
 |---|---|---|---|

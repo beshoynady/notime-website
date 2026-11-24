@@ -8,7 +8,7 @@ test.describe("locale switch", () => {
   test("mid-pin switch: one pin spacer, no leftover split, URL /ar", async ({ page }) => {
     await gotoReady(page, "/en");
     await controllerReady(page);
-    await page.evaluate(() => scrollTo(0, innerHeight * 0.5)); // 50% of the 100% pin (N05)
+    await page.evaluate(() => scrollTo(0, innerHeight * 0.25)); // the middle of the 50% pin (D173)
     await page.waitForTimeout(600);
 
     await page.locator("header a[hreflang=ar]").click();

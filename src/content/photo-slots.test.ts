@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { categories } from "./categories";
 import { GALLERIES } from "./galleries";
-import { HERO_PLATE } from "./hero";
+import { HERO_OBJECTS } from "./hero";
 import { imageSlots } from "./images";
 import { MEDIA, type MediaEntry } from "./media";
 import { ROOM_STORY, STORY_PHOTOS, STRIP } from "./photo-stories";
@@ -55,7 +55,7 @@ const slotFile = (id: string) => imageSlots.find((s) => s.id === id)?.src ?? nul
 
 function slots(): Map<string, Set<string>> {
   const s = new Map<string, unknown>();
-  s.set("home hero", HERO_PLATE);
+  s.set("home hero", Object.values(HERO_OBJECTS));
   for (const c of categories) {
     s.set(`home category card ${c.slug}`, c.photo ?? slotFile(c.image));
     s.set(`menu ${c.slug}`, slotFile(c.image));
@@ -83,12 +83,10 @@ const reel = new Set(reelFrames.map((f) => root(f.src)));
 const PENDING: string[] = [];
 
 /**
- * The one repeat kept on purpose, with its reason. The Events opening is a film cut from one photo
- * in three depths (the room at night, lit, and its near tables, D109); it is the glass-roofed hall
- * that is also Home's hero. It goes when Rand sends a wide photo of another room she dressed
- * (rand-images-message.md), which the film is then cut from.
+ * Repeats kept on purpose, each with its reason. None now: the glass-roofed hall (p9-2) left Home's
+ * hero for its five objects (D173) and shows only in the Events opening film.
  */
-const KEPT: Record<string, string[]> = { "p9-2": ["home hero", "scene events-opening"] };
+const KEPT: Record<string, string[]> = {};
 
 describe("one photograph, one place (D169)", () => {
   const where = slots();

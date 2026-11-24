@@ -1,11 +1,12 @@
 import { expect, test, type Browser } from "@playwright/test";
 
 /**
- * The hero title reads in full at rest (D94): every line's text box sits inside the viewport,
- * below the fixed header and clear of the HUD, and the eyebrow and both CTAs (N05) stay inside the
- * frame, the CTAs above the bottom letterbox.
+ * The hero reads in full at its end state (D94, D173): every title line's text box sits inside the
+ * viewport, below the fixed header, and clear of the five objects and their captions; the eyebrow
+ * and both CTAs (N05) stay inside the frame and clear of the objects, the CTAs above the timecode.
+ * The end state is the layout itself, measured under reduced motion (the static frame).
  * The sizes are the user's list plus two real laptop windows (screen minus browser chrome),
- * where the title used to rise under the header and the CTA dip into the letterbox.
+ * where the title used to rise under the header.
  */
 const SIZES: [number, number][] = [
   [1440, 900],
@@ -21,7 +22,7 @@ type Box = { top: number; bottom: number; left: number; right: number };
 
 async function measure(browser: Browser, w: number, h: number, locale: string) {
   const mobile = w < 900;
-  const ctx = await browser.newContext({ viewport: { width: w, height: h }, isMobile: mobile, hasTouch: mobile });
+  const ctx = await browser.newContext({ viewport: { width: w, height: h }, isMobile: mobile, hasTouch: mobile, reducedMotion: "reduce" });
   const page = await ctx.newPage();
   await page.goto(`/${locale}`);
   await page.waitForLoadState("load");
@@ -34,16 +35,17 @@ async function measure(browser: Browser, w: number, h: number, locale: string) {
       range.selectNodeContents(el);
       return box(range.getBoundingClientRect());
     });
-    const hud = [...document.querySelectorAll(".hero-hud > div")]
-      .filter((d) => getComputedStyle(d).visibility !== "hidden" && getComputedStyle(d).display !== "none")
+    // Each object: its picture and, where shown, its caption.
+    const objects = [...document.querySelectorAll(".hero-object-img, .hero-object figcaption")]
+      .filter((d) => getComputedStyle(d).display !== "none")
       .map((d) => box(d.getBoundingClientRect()));
     return {
       header: document.querySelector("#site-header")!.getBoundingClientRect().bottom,
       lines,
-      hud,
+      objects,
       ctas: [...document.querySelectorAll("#hero .hero-sub a")].map((a) => box(a.getBoundingClientRect())),
       eyebrow: box(document.querySelector("#hero .hero-eyebrow")!.getBoundingClientRect()),
-      letterbox: document.querySelector(".hero-letterbox.bottom")!.getBoundingClientRect().top,
+      tc: document.querySelector("#hero .hero-tc")!.getBoundingClientRect().top,
       vw: innerWidth,
       vh: innerHeight,
     };
@@ -66,13 +68,15 @@ test.describe("hero title fits", () => {
             expect(l.bottom, `${at} inside the viewport`).toBeLessThanOrEqual(m.vh);
             expect(l.left, `${at} start inside`).toBeGreaterThanOrEqual(0);
             expect(l.right, `${at} end inside`).toBeLessThanOrEqual(m.vw);
-            for (const b of m.hud) expect(overlaps(l, b), `${at} clear of the HUD`).toBe(false);
+            for (const b of m.objects) expect(overlaps(l, b), `${at} clear of the objects`).toBe(false);
           }
           expect(m.eyebrow.top, "eyebrow below the header").toBeGreaterThanOrEqual(m.header);
-          for (const b of m.hud) expect(overlaps(m.eyebrow, b), "eyebrow clear of the HUD").toBe(false);
+          for (const b of m.objects) expect(overlaps(m.eyebrow, b), "eyebrow clear of the objects").toBe(false);
           expect(m.ctas.length, "two CTAs").toBe(2);
           for (const [i, c] of m.ctas.entries()) {
-            expect(c.bottom, `CTA ${i + 1} above the letterbox`).toBeLessThanOrEqual(m.letterbox);
+            expect(c.bottom, `CTA ${i + 1} above the timecode`).toBeLessThanOrEqual(m.tc);
+            expect(c.bottom, `CTA ${i + 1} inside the viewport`).toBeLessThanOrEqual(m.vh);
+            for (const b of m.objects) expect(overlaps(c, b), `CTA ${i + 1} clear of the objects`).toBe(false);
             expect(c.left, `CTA ${i + 1} start inside`).toBeGreaterThanOrEqual(0);
             expect(c.right, `CTA ${i + 1} end inside`).toBeLessThanOrEqual(m.vw);
           }

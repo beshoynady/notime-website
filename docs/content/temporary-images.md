@@ -12,7 +12,8 @@ Updated 2026-11-16. This list stays in the repo. The site itself never says how 
 |---|---|---|---|
 | Home category cards (D169) | `card-events`, `card-creative`, `card-print`, `card-software` (media.ts); Marketing keeps `uae-pro-league-3` | Stock, Unsplash, graded like their category | **Yes** |
 | Mega menu, Events (D169) | `cat-events-hospitality-4x5` → `menu-events` (media.ts) | Stock, Unsplash `fotUgiCbngk` | **Yes** |
-| Home hero · Home strip · About story (D169) | `private-celebrations-1` · `st-gala`, `st-display`, `st-table`, `st-service`, `st-florals`, `st-tent` · `st-rig`, `st-hall`, `st-cart`, `st-buffet` | Real profile photos, each in one place only | No |
+| Home hero (D173) | `hero-obj-events`, `hero-obj-creative`, `hero-obj-marketing`, `hero-obj-print`, `hero-obj-software` (media.ts) | Stock, Unsplash, cut out and finished to one look (`scripts/hero-objects.mjs`); generic screen designs drawn in code, no brand | No (props, not projects) |
+| Home strip · About story (D169) | `st-gala`, `st-display`, `st-table`, `st-service`, `st-florals`, `st-tent` · `st-rig`, `st-hall`, `st-cart`, `st-buffet` | Real profile photos, each in one place only (the hall, `private-celebrations-1`, now only in the Events opening, D173) | No |
 | Mega menu | `cat-creative-production-4x5` | AI mood image (Canva master, D50/D51; log in `image-prompts.md`) | **Yes** |
 | Mega menu | `cat-marketing-brand-4x5` | AI mood image | **Yes** |
 | Mega menu | `cat-production-print-gifts-4x5` | AI mood image | **Yes** |

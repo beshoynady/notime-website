@@ -13,12 +13,13 @@ test.describe("header tone through the pin", () => {
       await page.waitForTimeout(150);
       return page.locator("#site-header").getAttribute("data-header-tone");
     };
-    // The pin lasts 1 viewport after the hero's top (N05); the photo strip and About (both
-    // dark) follow the spacer, then Categories (light).
-    expect(await toneAt(0.5)).toBe("hero");
+    // Desktop pins for half a viewport after the hero's top (D173: 150svh in all), phones don't
+    // pin; either way the hero then scrolls away under the header, the photo strip and About (both
+    // dark) follow, then Categories (light).
+    expect(await toneAt(0.4)).toBe("hero");
     expect(await toneAt(0.9)).toBe("hero");
-    expect(await toneAt(2.6)).toBe("dark");
-    expect(await toneAt(1.0)).toBe("hero");
+    expect(await toneAt(2.1)).toBe("dark");
+    expect(await toneAt(0.5)).toBe("hero");
     await page.locator("#services").evaluate((el) => scrollTo(0, el.getBoundingClientRect().top + scrollY + 40));
     await page.waitForTimeout(150);
     expect(await page.locator("#site-header").getAttribute("data-header-tone")).toBe("light");
@@ -28,12 +29,18 @@ test.describe("header tone through the pin", () => {
 test.describe("hero (reduced motion)", () => {
   test.use({ reducedMotion: "reduce" });
 
-  test("no pin, no sweep: the static frame is final", async ({ page }) => {
+  test("no pin, no countdown: the static frame is final (zero, every object in place)", async ({ page }) => {
     await page.goto("/en");
     await page.locator("#page-stage[data-tone-ready]").waitFor({ state: "attached" });
+    await controllerReady(page);
     expect(await shellOpacity(page)).toBe(1);
-    expect(await page.locator(".hero-clock-hand").evaluate((el) => getComputedStyle(el).animationName)).toBe("none");
     expect(await page.locator(".pin-spacer").count()).toBe(0);
+    await expect(page.locator("#hero [data-hero-tc]")).toHaveText("TC 00:00:00:00");
+    const objects = await page.locator(".hero-object").evaluateAll((els) =>
+      els.map((el) => ({ opacity: Number(getComputedStyle(el).opacity), transform: getComputedStyle(el).transform })),
+    );
+    expect(objects).toHaveLength(5);
+    for (const o of objects) expect(o).toEqual({ opacity: 1, transform: "none" });
     await expect(page.locator(".hero-eyebrow")).toBeVisible();
     await expect(page.locator("#hero-title")).toBeVisible();
   });
@@ -112,7 +119,7 @@ test.describe("N05: one-screen hero", () => {
     });
   }
 
-  test("the exit still completes at the pin's end", async ({ page }) => {
+  test("the countdown reaches zero at the pin's end (D173)", async ({ page }) => {
     await openHero(page, "en");
     // The pin's end: the spacer's top plus the distance it reserves below the hero.
     await page.evaluate(() => {
@@ -125,19 +132,26 @@ test.describe("N05: one-screen hero", () => {
     await page.waitForTimeout(1800);
     const s = await page.evaluate(() => {
       const op = (sel: string) => [...document.querySelectorAll(sel)].map((el) => Number(getComputedStyle(el).opacity));
+      // Rotation and scale only (a, b, c, d of the matrix): GSAP folds the CSS centring into the translation.
+      const turn = (el: Element) => {
+        const m = new DOMMatrix(getComputedStyle(el).transform);
+        return [m.a, m.b, m.c, m.d].map((v) => Math.round(v * 100) / 100);
+      };
+      const hand = document.querySelector(".hero-dial-hand")!.getAttribute("transform") ?? "";
       return {
         heroTop: Math.round(document.getElementById("hero")!.getBoundingClientRect().top),
-        lines: op(".hero-line"),
-        clock: op(".hero-clock-wrap"),
-        sub: op(".hero-sub"),
-        eyebrow: op(".hero-eyebrow"),
+        tc: document.querySelector("#hero [data-hero-tc]")!.textContent,
+        objects: [...document.querySelectorAll(".hero-object")].map(turn),
+        hand: hand.replace(/\s/g, ""),
+        copy: op(".hero-line, .hero-eyebrow, .hero-sub"),
       };
     });
     expect(Math.abs(s.heroTop), "still held at the pin's end").toBeLessThanOrEqual(2);
-    // W02: the title dims to its floor and the lead with the quote button stays (no empty screen).
-    expect(s.lines).toEqual([0.45, 0.45]);
-    expect(s.clock).toEqual([0]);
-    expect(s.sub).toEqual([1]);
-    expect(s.eyebrow).toEqual([0]);
+    expect(s.tc).toBe("TC 00:00:00:00");
+    expect(s.objects).toEqual(Array(5).fill([1, 0, 0, 1]));
+    // The hand on 12, on its own centre (no rotation and no stray translation).
+    expect(s.hand).toMatch(/^matrix\(1,0,0,1,-?0(\.0+\d*)?,-?0(\.0+\d*)?\)$/);
+    // The copy never moves or dims: the first screen stays readable through the countdown.
+    expect(s.copy).toEqual([1, 1, 1, 1]);
   });
 });
