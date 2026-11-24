@@ -208,7 +208,7 @@ New copy written for the photo scenes (`docs/content/visual-stories.md`). None s
 
 ## Arabic for the UAE market (D163), for Rand
 
-The owner's rule of 2026-11-22: Arabic first, tuned to the UAE market (`copy-voice-reference.md` §8). These lines changed wording only; every meaning and fact is as before, and the English needed no change unless a row says so. **Rand reviews each line.** Running count: **48** lines changed (U1–U47 less U24, and U49–U50; U24 and U48 proposed only). U49–U50 (2026-11-23) are the two Home strip captions that changed with their photos (D169). The 2026-11-23 check of every page (Home and Events included, which were done before the rule) changed U33–U47: Creative, Marketing, Print and Software service lines, the Print intro, one photo description and one legal line. Home and Events needed no change outside their ⚑ lines. Not touched: ⚑ lines that the rule would also change (`categories[events-hospitality].faq[4].a` «ليالي الجوائز», `categories[production-print-gifts].faq[1].a` and `services[stand-fabrication-signage].summary` «بهوية العلامة»): they wait for Rand with their ⚑.
+The owner's rule of 2026-11-22: Arabic first, tuned to the UAE market (`copy-voice-reference.md` §8). These lines changed wording only; every meaning and fact is as before, and the English needed no change unless a row says so. **Rand reviews each line.** Running count: **95** lines changed (U1–U47 less U24, U49–U50, and U51–U97 from the 2026-11-24 Arabic-first pass; U24 and U48 proposed only). U49–U50 (2026-11-23) are the two Home strip captions that changed with their photos (D169). The 2026-11-23 check of every page (Home and Events included, which were done before the rule) changed U33–U47: Creative, Marketing, Print and Software service lines, the Print intro, one photo description and one legal line. Home and Events needed no change outside their ⚑ lines. Not touched: ⚑ lines that the rule would also change (`categories[events-hospitality].faq[4].a` «ليالي الجوائز», `categories[production-print-gifts].faq[1].a` and `services[stand-fabrication-signage].summary` «بهوية العلامة»): they wait for Rand with their ⚑.
 
 | # | Key | Was (AR) | Now (AR) | Why |
 |---|---|---|---|---|
@@ -262,5 +262,54 @@ The owner's rule of 2026-11-22: Arabic first, tuned to the UAE market (`copy-voi
 | U48 | `c:services:services[product-launches-activations].title` | إطلاق المنتجات وتفعيل العلامات | (unchanged) | Proposed «…وتفعيل العلامات التجارية», not applied: service titles are the approved list (as U24). Rand decides. |
 | U49 | `c:photo-stories:STRIP.frames[1].caption` (Home strip) | ضيافة تراثية (EN: Heritage hospitality) | تنسيق البوفيه (EN: Buffet display) | New caption, for a new photo: one photograph, one place (D169). The frame now shows Rand's buffet of tiered stands; the heritage cart moved to About. **Rand reviews.** |
 | U50 | `c:photo-stories:STRIP.frames[3].caption` (Home strip) | المسرح والتجهيزات الفنية (EN: Stage and technical) | تقديم الضيافة (EN: Hospitality service) | New caption, for a new photo (D169): a waiter's tray, shown from the chest down. The only rig photo now opens About's story. **Rand reviews.** |
+| U51 | `m:film.slate.events` (Home film) | المشهد 01 · الأضواء تشتعل | المشهد 01 · تُضاء القاعة | «تشتعل» reads as catching fire. EN: "BEAT 1 · THE HALL LIGHTS UP" (was "LIGHTS IGNITE"). |
+| U52 | `m:film.slate.digital` | المشهد 05 · التسجيل يبدأ | المشهد 05 · يبدأ تسجيل الحضور | Verb first reads naturally; «تسجيل الحضور» is the events term (§8). |
+| U53 | `m:film.line.marketing` | …قبل الحدث، وفي ليلته، وبعده. | …قبل الفعالية، وفي ليلتها، وبعدها. | «فعالية» is the UAE events word. |
+| U54 | `m:film.line.print` | هدية تحمل اسم علامتكم عند كل مقعد… | هدية تحمل اسم علامتكم التجارية عند كل مقعد… | «العلامة التجارية» (§8). |
+| U55 | `m:film.checkin.done` (example screen) | تم تسجيل الحضور | سُجّل حضوره | «تم + مصدر» avoided; the screen shows one guest. |
+| U56 | `m:process.steps.produce.body` | في موقع الحدث يجتمع… | في موقع الفعالية يجتمع… | «فعالية» is the UAE events word. |
+| U57 | `m:categories.intro` | …وعلبة هدايا، وعندنا يخطّط للأربعة الفريقُ نفسه. | …وعلبة هدايا، والفريق نفسه عندنا يخطّط لها كلها. | The inverted order read stiff. |
+| U58 | `m:workIndex.emptyBody` | لا ننشر إلا عملًا نملك حقائقه… | لا ننشر إلا عملًا نملك ما يوثّقه… | «نملك حقائقه» is a literal shape of "back with facts". |
+| U59 | `m:aboutPage.story3` | ولهذا يتّسع عملنا لكل هذا: جناح… | ولهذا تتنوّع أعمالنا: جناح… | «لهذا… لكل هذا» repeated itself. |
+| U60 | `c:categories:categories[events-hospitality].metaDescription` | …ويديرها الفريق نفسه يوم الحدث… | …ويديرها الفريق نفسه يوم الفعالية… | «فعالية» is the UAE events word. |
+| U61 | `c:categories:categories[events-hospitality].intro` | …ويهتمّ بضيوفكم يوم الحدث. | …ويهتمّ بضيوفكم يوم الفعالية. | Same. |
+| U62 | `c:categories:categories[creative-production].summary` | …ومعها الديكور والمعدّات التي تصنعها. | …ومعها الديكورات والمعدّات اللازمة لإنتاجها. | «التي تصنعها» left unclear who makes what. |
+| U63 | `c:categories:categories[marketing-brand].faq[5].q` | هل هناك مدة تعاقد دنيا؟ | هل هناك حدّ أدنى لمدة التعاقد؟ | «مدة دنيا» is a literal shape of "minimum term". |
+| U64 | `c:categories:categories[production-print-gifts].faq[2].q` (hidden) | هل يمكنني طلب المطبوعات عبر الإنترنت؟ | هل يمكننا طلب المطبوعات عبر الإنترنت؟ | Plural, as the other FAQ questions («متى ينبغي أن نحجز؟»). |
+| U65 | `c:categories:categories[production-print-gifts].faq[5].a` | …على المنتج والكمية والتشطيب. | …على المنتج والكمية واللمسات النهائية. | «التشطيب» is a building word; print says «اللمسات النهائية». |
+| U66 | `c:categories:categories[software-digital].summary` | …وتبقى تعمل طويلًا بعد الإطلاق. | …وتستمر في العمل طويلًا بعد الإطلاق. | «تبقى تعمل» leans colloquial. |
+| U67 | `c:categories:categories[software-digital].faq[3].a` | …ونعرّف فريقكم على استخدامه عند التسليم. | …ونشرح لفريقكم طريقة استخدامه عند التسليم. | «نعرّف… على» is a common calque. |
+| U68 | `c:services:POINTS[conferences-summits][3]` | هوية الحدث في أرجاء المكان | هوية الفعالية في أرجاء المكان | «فعالية» is the UAE events word. |
+| U69 | `c:services:services[mobile-apps].summary` | تطبيقات iOS و Android مصمّمة وفق طريقة استخدام الناس لها. | تطبيقات iOS و Android نصمّمها لتناسب طريقة استخدام الناس لها. | Active verb; «مصمّمة وفق» read translated. |
+| U70 | `c:service-hooks:photography` | …القاعة ليلة الحدث… | …القاعة ليلة الفعالية… | «فعالية» is the UAE events word. |
+| U71 | `c:photo-stories:ROOM_STORY.beats[0].body` (About) | الهياكل والصوت والإضاءة… | الهياكل المعدنية والصوت والإضاءة… | «الهياكل» alone is vague for truss. |
+| U72 | `c:photo-stories:ROOM_STORY.beats[1].title` (About) | تكتمل القاعة. | تتزيّن القاعة. | Repeated the section title «هكذا تكتمل القاعة»; "dressed" is «تتزيّن». |
+| U73 | `c:photo-stories:STRIP.frames[0].caption` (Home strip) | عشاء احتفالي | حفل عشاء | «حفل عشاء» is what a gala dinner is called in the UAE. |
+| U74 | `c:work:workItems[airline-exhibition-pavilion].story.execution.lead` | …وأدرنا علاقاته العامة طوال أيام الحدث. | …وأدرنا علاقاته العامة طوال أيام المعرض. | Names the show, as the EN does ("while the doors were open"). |
+| U75 | `c:work:workItems[airline-exhibition-pavilion].story.execution.points[3]` | التغطية الإعلامية التي تليه | التغطية الإعلامية بعد المعرض | «تليه» had nothing to refer to in a list. |
+| U76 | `c:legal:legalDocs[privacy].sections[1].blocks[0].p` | …والحقوق التي تملكها… | …والحقوق التي تملكونها… | Singular slip; the policy speaks in the plural everywhere else. Meaning unchanged. |
+| U77 | `c:legal:legalDocs[terms]` Images, examples and previews | …ولا عميلًا حقيقيًا، ولا حدثًا حقيقيًا. | …ولا عميلًا حقيقيًا، ولا فعالية حقيقية. | «فعالية» is the UAE events word. Meaning unchanged. |
+| U78 | `c:form-copy:formCopy.interest.successBody` | سنكتب لكم حين يصبح جاهزًا. | سنراسلكم حين يصبح جاهزًا. | Business register, as U5. |
+| U79 | `c:form-copy:formCopy.contact.cityHint` | حيث تُقام الفعالية أو يُنفَّذ العمل. | مكان إقامة الفعالية أو تنفيذ العمل. | A hint that opens with «حيث» is a literal "Where…". |
+| U80 | `c:software/page:eventTech.intro` | …ونكون في أرض الحدث نديره أيضًا… | …ونكون في موقع الفعالية لإدارتها أيضًا… | «نديره» had no clear antecedent. |
+| U81 | `c:software/page:` AI consulting, ideal for [1] | مديرون مطلوب منهم خطة للذكاء الاصطناعي | مديرون يُطلب منهم وضع خطة للذكاء الاصطناعي | Grammar: the clause needed its verb. |
+| U82 | `c:software/page:` AI consulting, ideal for [2] | أعمال لا تعرف من أين تبدأ | شركات لا تعرف من أين تبدأ | «أعمال» for "businesses" is a calque; Gulf business Arabic says «شركات». |
+| U83 | `c:software/page:` custom systems, ideal for [2] | أعمال تربط بين عدة أدوات | شركات تربط بين عدة أدوات | Same. |
+| U84 | `c:software/page:services.lead` | …لأعمال في الإمارات وفي أنحاء المنطقة. | …للشركات في الإمارات وفي أنحاء المنطقة. | Same. |
+| U85 | `c:software/page:` Platform tier, ideal | أعمال يحتاج مستخدموها… | شركات يحتاج مستخدموها… | Same. |
+| U86 | `c:software/page:` Launch tier, ideal | عمل جديد، أو علامة تجارية جديدة… | نشاط تجاري جديد، أو علامة تجارية جديدة… | «عمل جديد» reads as "a new job". |
+| U87 | `c:software/page:products.intro` | …وسنكتب لكم حين يصبحان جاهزين. | …وسنراسلكم حين يصبحان جاهزين. | Business register, as U5. |
+| U88 | `c:software/page:products.demo.scan` (example screen) | وجّه الكاميرا إلى رمز الضيف | وجّهوا الكاميرا إلى رمز الضيف | Plural address, as the film's «امسحوا رمز الدعوة». |
+| U89 | `media:gifts-2` alt | قميص رياضي صُمّم لمعهد لتعليم القيادة. | قميص رياضي صُمّم لمعهد لتعليم قيادة السيارات. | «القيادة» alone can read as leadership. |
+| U90 | `media:uae-pro-league-1` alt | …مطبوعة على القماش في موقع الحدث. | …مطبوعة على القماش في موقع الفعالية. | «فعالية» is the UAE events word. |
+| U91 | `media:cp-rental-lights` alt | …مضاءة أمام جدار دافئ. | …مضاءة أمام جدار بلون دافئ. | "A warm wall" is a literal shape. |
+| U92 | `media:sw-ecommerce` alt | يدان تغلّفان طلبًا إلكترونيًا… | يدان تغلّفان طلبًا من متجر إلكتروني… | «طلب إلكتروني» is a literal shape of "online order". |
+| U93 | `media:sw-event-tech` alt | …في أرض فعالية. | …في موقع إحدى الفعاليات. | Reads more naturally. |
+| U94 | `images:cat-software-digital-4x5` alt | …وشاشة حاسوب تتوهّج بنعومة خارج التركيز. | …وشاشة حاسوب يتوهّج ضوؤها في خلفية ضبابية. | «خارج التركيز» and «بنعومة» are camera-English calques. `docs/content/image-prompts.md` updated to match (the test reads it). |
+| U95 | `images:process-produce-4x5` alt | نادل يحمل حاملًا فضيًا… عليه حلويات. | نادل يحمل منصّة تقديم فضية… عليها حلويات. | «يحمل حاملًا» repeated the root. Doc updated. |
+| U96 | `images:product-qr-check-in-16x9` alt | …ونقطة تسجيل مضاءة بنعومة خارج التركيز. | …ونقطة تسجيل بإضاءة خافتة في خلفية ضبابية. | As U94. Doc updated. |
+| U97 | `images:product-restaurant-system-16x9` alt | …أضواء دافئة وأطباق في تركيز ناعم. | …بأضواء دافئة وأطباق تبدو ضبابية قليلًا. | As U94. Doc updated. |
+
+U51–U97 (2026-11-24): the Arabic-first pass over the whole site, the home page first (the new film included). Wording only: no meaning, fact, ⚑ line, button label or category name changed. One English line followed its Arabic (U51). Left as they are on purpose: «في أرض الحدث» (the house term for on-site, `copy-rules.ts`), the internal style guide (`styleguide.*`, it speaks to the owner in the singular), and the review build's example blocks. The Arabic product auto-reply email (`src/emails/copy.ts`) follows: «سنكتب لكم فور جاهزيته» → «سنراسلكم فور جاهزيته» (as U5, U78 and U87).
 
 New Work copy written Arabic first (D164), for Rand: the four collections' titles and summaries (`src/content/work.ts`, `workCollections`), and `copyLink.*` and `workCollection.*` in `src/messages/ar.json`.

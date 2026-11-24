@@ -136,7 +136,7 @@ export const imageSlots: ImageSlot[] = [
     paint: "code",
     alt: {
       en: "A clean workspace at night, a laptop screen glowing softly out of focus.",
-      ar: "مساحة عمل مرتّبة ليلًا، وشاشة حاسوب تتوهّج بنعومة خارج التركيز.",
+      ar: "مساحة عمل مرتّبة ليلًا، وشاشة حاسوب يتوهّج ضوؤها في خلفية ضبابية.",
     },
   },
 
@@ -215,7 +215,7 @@ export const imageSlots: ImageSlot[] = [
     paint: "print",
     alt: {
       en: "A server carrying a tiered silver stand of desserts.",
-      ar: "نادل يحمل حاملًا فضيًا من عدة طبقات عليه حلويات.",
+      ar: "نادل يحمل منصّة تقديم فضية من عدة طبقات عليها حلويات.",
     },
   },
   // Real NO TIME photo from the 2026 profile (D49): no client name, no identifiable person.
@@ -249,7 +249,7 @@ export const imageSlots: ImageSlot[] = [
     paint: "code",
     alt: {
       en: "An event entrance at dusk with a softly lit check-in point, out of focus.",
-      ar: "مدخل فعالية عند الغروب ونقطة تسجيل مضاءة بنعومة خارج التركيز.",
+      ar: "مدخل فعالية عند الغروب ونقطة تسجيل بإضاءة خافتة في خلفية ضبابية.",
     },
   },
   {
@@ -260,7 +260,7 @@ export const imageSlots: ImageSlot[] = [
     paint: "table",
     alt: {
       en: "A restaurant pass at service time, warm lights and plates in soft focus.",
-      ar: "منضدة تقديم في مطعم وقت الخدمة، أضواء دافئة وأطباق في تركيز ناعم.",
+      ar: "منضدة تقديم في مطعم وقت الخدمة، بأضواء دافئة وأطباق تبدو ضبابية قليلًا.",
     },
   },
   // Work cards: no slot. A case shows its own cover photo and a collection Rand's own photos (media.ts,

@@ -26,7 +26,7 @@ export const autoReplyCopy = {
     ),
     interest: l(
       "Thank you for your interest in {product}. We'll write to you as soon as it's ready.",
-      "شكرًا لاهتمامكم بـ{product}. سنكتب لكم فور جاهزيته.",
+      "شكرًا لاهتمامكم بـ{product}. سنراسلكم فور جاهزيته.",
     ),
     contact: l(
       "Thank you for your brief. We reply within one working day, with the questions we need answered or a time to talk.",

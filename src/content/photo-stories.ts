@@ -45,12 +45,12 @@ export const ROOM_STORY = {
       title: { en: "The rig goes up.", ar: "يُنصب المسرح." },
       body: {
         en: "Truss, sound and light, built and tested by our crew before anything else enters the room.",
-        ar: "الهياكل والصوت والإضاءة، يركّبها طاقمنا ويختبرها قبل أن يدخل القاعة أي شيء آخر.",
+        ar: "الهياكل المعدنية والصوت والإضاءة، يركّبها طاقمنا ويختبرها قبل أن يدخل القاعة أي شيء آخر.",
       },
     },
     {
       photo: "hall",
-      title: { en: "The room is dressed.", ar: "تكتمل القاعة." },
+      title: { en: "The room is dressed.", ar: "تتزيّن القاعة." },
       body: {
         en: "Tables, lanterns, florals and candlelight, set to one plan and one colour story.",
         ar: "الطاولات والفوانيس والزهور وضوء الشموع، على مخطّط واحد وألوان متناغمة.",
@@ -81,7 +81,7 @@ export const STRIP = {
   title: { en: "Rooms we dressed, tables we set.", ar: "قاعات جهّزناها، وطاولات نسّقناها." },
   frames: [
     // Each frame's photo is its own: About's story and the Work pages show others (D169).
-    { photo: "gala", caption: { en: "Gala dinner", ar: "عشاء احتفالي" } },
+    { photo: "gala", caption: { en: "Gala dinner", ar: "حفل عشاء" } },
     { photo: "display", caption: { en: "Buffet display", ar: "تنسيق البوفيه" } },
     { photo: "table", caption: { en: "Table styling", ar: "تنسيق الطاولات" } },
     { photo: "service", caption: { en: "Hospitality service", ar: "تقديم الضيافة" } },
