@@ -8,21 +8,22 @@ test.describe("header tone through the pin", () => {
   test("stays hero for the whole pin, then light, and back to hero on the way up", async ({ page }) => {
     await page.goto("/en");
     await controllerReady(page);
-    const toneAt = async (f: number) => {
+    const header = page.locator("#site-header");
+    // Polled, not read once after a fixed wait: under load (two workers) the tone took longer
+    // than 150 ms to follow a jump, and the old single read failed 2 runs in 6.
+    const toneAt = async (f: number, tone: string) => {
       await page.evaluate((f) => scrollTo(0, innerHeight * f), f);
-      await page.waitForTimeout(150);
-      return page.locator("#site-header").getAttribute("data-header-tone");
+      await expect(header, `tone at ${f} viewports`).toHaveAttribute("data-header-tone", tone, { timeout: 3000 });
     };
     // Desktop pins for half a viewport after the hero's top (D173: 150svh in all), phones don't
     // pin; either way the hero then scrolls away under the header, the photo strip and About (both
     // dark) follow, then Categories (light).
-    expect(await toneAt(0.4)).toBe("hero");
-    expect(await toneAt(0.9)).toBe("hero");
-    expect(await toneAt(2.1)).toBe("dark");
-    expect(await toneAt(0.5)).toBe("hero");
+    await toneAt(0.4, "hero");
+    await toneAt(0.9, "hero");
+    await toneAt(2.1, "dark");
+    await toneAt(0.5, "hero");
     await page.locator("#services").evaluate((el) => scrollTo(0, el.getBoundingClientRect().top + scrollY + 40));
-    await page.waitForTimeout(150);
-    expect(await page.locator("#site-header").getAttribute("data-header-tone")).toBe("light");
+    await expect(header).toHaveAttribute("data-header-tone", "light", { timeout: 3000 });
   });
 });
 
@@ -119,16 +120,35 @@ test.describe("N05: one-screen hero", () => {
     });
   }
 
-  test("the countdown reaches zero at the pin's end (D173)", async ({ page }) => {
+  test("phones: no pin, the objects gather to zero on load (D173)", async ({ page, isMobile }) => {
+    test.skip(!isMobile, "phone layout");
+    await openHero(page, "en");
+    await expect(page.locator("#hero [data-hero-tc]")).toHaveText("TC 00:00:00:00", { timeout: 6000 });
+    expect(await page.locator(".pin-spacer:has(> #hero)").count()).toBe(0);
+  });
+
+  test("the countdown reaches zero at the pin's end (D173)", async ({ page, isMobile }) => {
+    test.skip(isMobile, "phones don't pin (D173)");
     await openHero(page, "en");
     // The pin's end: the spacer's top plus the distance it reserves below the hero.
-    await page.evaluate(() => {
+    const end = await page.evaluate(() => {
       const spacer = document.querySelector<HTMLElement>(".hero-pin")!;
       const hero = document.getElementById("hero")!;
-      const end = spacer.getBoundingClientRect().top + scrollY + spacer.offsetHeight - hero.offsetHeight;
-      scrollTo(0, end - 2);
+      return spacer.getBoundingClientRect().top + scrollY + spacer.offsetHeight - hero.offsetHeight;
     });
-    // scrub: 1 (the playhead catches up within a second).
+    // Wheel steps, as a visitor scrolls: a programmatic jump can be overridden by the smooth
+    // scroller's own target (it left the page at the top in CI).
+    await page.mouse.move(700, 450);
+    // The deltas add up to the target (reading scrollY mid-glide would overshoot past the pin).
+    for (let sent = 0; sent < end - 4; ) {
+      const d = Math.min(40, end - 4 - sent);
+      await page.mouse.wheel(0, d);
+      sent += d;
+      await page.waitForTimeout(60);
+    }
+    await page.waitForTimeout(800);
+    expect(await page.evaluate(() => scrollY), "scrolled to the pin's end").toBeGreaterThanOrEqual(end - 12);
+    // scrub: 0.6 (the playhead catches up within a second).
     await page.waitForTimeout(1800);
     const s = await page.evaluate(() => {
       const op = (sel: string) => [...document.querySelectorAll(sel)].map((el) => Number(getComputedStyle(el).opacity));
