@@ -3,9 +3,9 @@ import { expect, test, type Page } from "@playwright/test";
 /**
  * Home's first screen is complete at first paint (visual portfolio C1, Task 8): no intro gate.
  * On a first visit (a fresh context, nothing in sessionStorage), 200 ms after `load`, the header,
- * the H1 and both CTAs are fully opaque and on screen, over a real photo plate that is fetched
- * with high priority. LCP is the H1, or that plate (eager, fetchpriority="high"): a full-screen
- * photo outranks the text, the same allowance as the category heroes (N06 ruling, 2026-11-18).
+ * the H1 and both CTAs are fully opaque and on screen. The hero has no photo plate since D173: its
+ * five objects load eagerly at low priority (they start outside the frame, where lazy loading
+ * never fires), and LCP is the H1.
  */
 
 /**
@@ -28,7 +28,7 @@ const seen = (page: Page, selector: string, own = true) =>
   }, own);
 
 for (const locale of ["en", "ar"] as const) {
-  test(`${locale}: header, H1 and both CTAs at first paint over the photo plate`, async ({ page, isMobile }) => {
+  test(`${locale}: header, H1 and both CTAs at first paint`, async ({ page, isMobile }) => {
     test.setTimeout(30_000);
     await page.goto(`/${locale}`);
     await page.waitForLoadState("load");
@@ -48,18 +48,18 @@ for (const locale of ["en", "ar"] as const) {
       expect(s.opacity, `${name} opacity`).toBeGreaterThanOrEqual(0.99);
       if (name !== "header") expect(s.onScreen, `${name} on screen`).toBe(true);
     }
-    const plate = page.locator("#hero .hero-plate img");
-    await expect(plate).toHaveAttribute("fetchpriority", "high");
-    expect(await plate.getAttribute("loading")).not.toBe("lazy");
-    // The grade that holds the text at AA over the photo is there (an invalid layer list once
-    // dropped the whole declaration, and the text sat on the bare photo).
-    const grade = await page.locator("#hero .hero-plate").evaluate((el) => getComputedStyle(el, "::after").backgroundImage);
-    expect(grade, "the plate's grade").toContain("radial-gradient");
+    // The five objects: eager at low priority, so they never compete with the title.
+    const objects = page.locator("#hero .hero-object img");
+    await expect(objects).toHaveCount(5);
+    for (const img of await objects.all()) {
+      await expect(img).toHaveAttribute("fetchpriority", "low");
+      expect(await img.getAttribute("loading")).not.toBe("lazy");
+    }
     // No intro gate is left in the page: no shutters, nothing waiting on html[data-intro-seen].
     await expect(page.locator(".hero-shutter")).toHaveCount(0);
   });
 
-  test(`${locale}: LCP is the H1 or the hero plate`, async ({ page }) => {
+  test(`${locale}: LCP is the H1`, async ({ page }) => {
     await page.goto(`/${locale}`);
     await page.waitForLoadState("load");
     const lcp = await page.evaluate(
@@ -69,11 +69,11 @@ for (const locale of ["en", "ar"] as const) {
           new PerformanceObserver((list) => {
             const el = (list.getEntries().at(-1) as PerformanceEntry & { element?: Element }).element;
             clearTimeout(none);
-            resolve(el?.matches("#hero-title, #hero-title *") ? "h1" : el?.closest(".hero-plate") ? "plate" : `${el?.tagName}.${el?.className}`);
+            resolve(el?.matches("#hero-title, #hero-title *") ? "h1" : `${el?.tagName}.${el?.className}`);
           }).observe({ type: "largest-contentful-paint", buffered: true });
         }),
     );
-    expect(["h1", "plate"]).toContain(lcp);
+    expect(lcp).toBe("h1");
   });
 
   // The scroll timeline gives the title's lines their rest transform when the controller hydrates.

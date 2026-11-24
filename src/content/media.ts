@@ -304,6 +304,20 @@ MEDIA.push(
     "16:9 + 9:16 · the first beams through haze on a truss rig, no people (a NO TIME rig at first light replaces it)"),
   stock("ev-stage-live", "unsplash:euieMyZIBmY", "Andrew Haha Lee", "https://unsplash.com/photos/euieMyZIBmY", 2400, 1350, [1080, 1920],
     "16:9 + 9:16 · the full rig on, the seated audience from behind, no faces"),
+  // Home hero (D173): one object per service, cut out on transparency and finished to one look
+  // (scripts/hero-objects.mjs). Props, not projects: shown in the hero only, captioned by the
+  // category name beside them (alt null). Screens carry a generic interface; maker names painted out.
+  ...([
+    ["hero-obj-events", "unsplash:DH8AInU9iYU", "Nick Fewings", 720, 468, "a stage spotlight and its beam"],
+    ["hero-obj-creative", "unsplash:m-u31puVzMQ", "Dan Gold", 720, 616, "a cine lens, three-quarter view"],
+    ["hero-obj-marketing", "unsplash:fNsML7R50Ec", "Mockupnest.com", 470, 720, "a phone showing a generic campaign post"],
+    ["hero-obj-print", "unsplash:L99DoqmExQE", "Javier Miranda", 678, 720, "an unbranded gift box with a satin bow"],
+    ["hero-obj-software", "unsplash:WPQF4r0JUcg", "Mike Meyers", 720, 483, "a laptop showing a generic website"],
+  ] as const).map(([id, from, by, w, h, what]) =>
+    stock(id, from, by, `https://unsplash.com/photos/${from.slice(9)}`, w, h, null,
+      `object cut-out, transparent · ${what}; warm key from the start side, one grade for the five`,
+      { replace: false, grade: undefined }),
+  ),
   // Creative Production (docs/content/recipes/creative.json, D158): one studio, dark then lit.
   stock("cp-open-dark", "unsplash:LYcuJG5LyU8", "Arif DALKIRAN", "https://unsplash.com/photos/LYcuJG5LyU8", 2400, 1350, [1080, 1920],
     "16:9 + 9:16 · a studio before the lights: the white sweep, stands and rails, no people (a NO TIME set replaces it)",

@@ -547,9 +547,11 @@ section[data-tone] {
    or clamping near the end). On a slow CPU the pins are built after the visitor has scrolled:
    1800 px back on Events at 4-8x CPU (final pass, 2026-11-17; e2e/pin-build-scroll.spec.ts).
    `--pin-on` is 0 without a distance, so a scene that only passes gets no floor. */
-html[data-js]:not([data-reduced]) .hero-pin {
-  padding-block-end: 100svh; /* hero-controller: end "+=100%" at every width (N05) */
-  min-block-size: calc(max(100svh, 520px) + 100svh);
+@media (min-width: 900px) {
+  html[data-js]:not([data-reduced]) .hero-pin {
+    padding-block-end: 50svh; /* hero-controller: end "+=50%", desktop only (D173: 150svh in all) */
+    min-block-size: calc(max(100svh, 520px) + 50svh);
+  }
 }
 html[data-js]:not([data-reduced]) .scene-pin {
   --pin-own: 100svh;

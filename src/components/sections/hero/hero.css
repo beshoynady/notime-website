@@ -1,7 +1,7 @@
 /* ==========================================================================
-   Home hero (D156). Static frame first: everything here renders complete without JS, and the
-   first screen is complete at first paint (no intro, no gate). "Motion mode" =
-   html[data-js]:not([data-reduced]): the pin and the hand's one sweep.
+   Home hero (D156, D173 "countdown to zero"). Static frame first: everything here renders complete
+   without JS, and the first screen is complete at first paint (no intro, no gate). "Motion mode" =
+   html[data-js]:not([data-reduced]): the desktop pin and the countdown (hero-controller.tsx).
    ========================================================================== */
 /* The home hero's title only (D156): a 180px display line, where the band faces above (matched on
    the site's running text, fonts.css) were 9-11% wide in English capitals and 4-7% narrow in Arabic, and the
@@ -102,182 +102,188 @@ html[data-font-wait] {
 }
 
 .hero {
-  --lb-top: calc(var(--header-h) + 8px + env(safe-area-inset-top, 0px));
-  --lb-bottom: clamp(44px, 8svh, 84px);
-  /* Room between the letterbox and the content for the HUD lines (D94). */
-  --hud-clear: 16px;
   position: relative;
   isolation: isolate;
+  /* The objects wait outside the frame: clipped there. */
   overflow: hidden;
-  /* At rest (no JS / reduced motion) the hero is not pinned: one viewport with the title
-     block centred in it (N05: everything is in the first screen), the bottom letterbox below. */
   display: grid;
-  grid-template-rows: minmax(max(100svh, 620px), auto);
-  padding-block-end: var(--lb-bottom);
+  align-content: center;
+  /* Events' spotlight on 12, under the header: its width; the copy starts below it (D173). */
+  --w0: clamp(84px, min(9vw, 14svh), 150px);
+  min-block-size: max(100svh, 620px);
+  padding-block: calc(var(--header-h) + 1.5svh + var(--w0) * 0.65 + 20px) 56px;
   color: var(--color-ivory);
-  /* Under the plate: what shows while the photo loads (or if it never does). */
-  background:
-    radial-gradient(ellipse 95% 80% at 50% 42%, #5c412b 0%, #2e2017 42%, #120c07 100%),
-    #1a110b;
-}
-@media (min-width: 900px) {
-  .hero {
-    --hud-clear: 44px;
-  }
+  /* A warm pool of cocoa behind the title: the text holds AA over it and over the dial's lines. */
+  background: radial-gradient(60% 58% at 50% 54%, color-mix(in srgb, var(--color-cocoa) 55%, var(--color-espresso)), var(--color-espresso) 72%);
 }
 html[data-js]:not([data-reduced]) .hero {
-  grid-template-rows: none;
-  /* Vertical centring only: the column stretches, so .hero-content is the full frame width
-     whatever the title's own width. With `place-content: center` the column was as wide as
-     the title, and a late width change (the desktop split re-rendering a cold first visit's
-     fallback face in the loaded webfont) moved the whole block: measured CLS 0.073 (D43). */
-  align-content: center;
-  height: 100svh;
-  /* 520, not 620: a laptop window is often 590–660px tall, and a hero taller than the viewport
-     pushed the CTA into the bottom letterbox (D94). */
-  min-height: 520px;
-  padding-block: calc(var(--lb-top) + var(--hud-clear)) calc(var(--lb-bottom) + var(--hud-clear));
+  block-size: 100svh;
+  /* 520, not 620: a laptop window is often 590–660px tall (D94). */
+  min-block-size: 520px;
 }
 
-
-/* 0 · The plate: Rand's dressed hall (hero.tsx), and its grade. The grade holds the ivory text at
-   AA over the photo's lanterns: an even dim, plus a darker pool where the text sits (the centre).
-   Measured against the brightest pixel behind each line (1440 and 390, EN and AR): 5.2:1 or more.
-   The photo itself is untouched; GSAP scales the plate on the way out (one owner). */
-.hero-plate {
+/* 0 · The dial: the gold sunray engraving, ticks and the second hand (hero-dial.tsx). Kept light:
+   thin lines at low opacity, so no text over it drops below AA (D173). */
+.hero-dial-wrap {
   position: absolute;
-  inset: 0;
   z-index: 0;
-  overflow: hidden;
-}
-.hero-plate img {
-  position: absolute;
-  inset: 0;
-  inline-size: 100%;
-  block-size: 100%;
-  object-fit: cover;
-  object-position: 50% 45%;
-}
-.hero-plate::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 62% 48% at 50% 50%, color-mix(in srgb, var(--color-night) 62%, transparent) 0%, color-mix(in srgb, var(--color-night) 0%, transparent) 100%),
-    /* the espresso warmth: a gradient layer, since only the last layer may be a plain colour */
-    linear-gradient(color-mix(in srgb, var(--color-espresso) 30%, transparent), color-mix(in srgb, var(--color-espresso) 30%, transparent)),
-    color-mix(in srgb, var(--color-night) 46%, transparent);
-}
-
-/* 1 · Vignette */
-.hero-vignette {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
+  inset-inline: 0;
+  inset-block-start: calc(50% + var(--header-h) / 2);
+  margin-inline: auto;
+  inline-size: min(82svh, 64vw);
+  aspect-ratio: 1;
+  translate: 0 -50%;
   pointer-events: none;
-  background: radial-gradient(110% 85% at 50% 46%, transparent 38%, rgba(13, 8, 5, 0.88));
 }
-
-/* 2 · Clock: a quiet touch behind the title over the photo, not a second subject. */
-.hero-clock-wrap {
-  --clock: min(58vmin, 540px);
-  position: absolute;
-  inset: 0 0 auto;
-  z-index: 2;
-  /* centred on the first viewport (row 1), behind the title */
-  margin: calc(max(50svh, 310px) - var(--clock) / 2) auto 0;
-  inline-size: var(--clock);
-  block-size: var(--clock);
-  pointer-events: none;
-  opacity: 0.5;
-}
-html[data-js]:not([data-reduced]) .hero-clock-wrap {
-  inset: 0;
-  margin: auto;
-}
-.hero-clock {
+.hero-dial {
   display: block;
   inline-size: 100%;
   block-size: 100%;
   overflow: visible;
 }
-.hero-clock-ring {
+.hero-dial-rays line,
+.hero-dial-rays circle {
   fill: none;
-  stroke: rgba(234, 212, 171, 0.5);
-  stroke-width: 1;
-}
-.hero-clock-ring2 {
-  fill: none;
-  stroke: rgba(234, 212, 171, 0.14);
-  stroke-width: 1;
-  stroke-dasharray: 1 7;
-}
-.hero-clock-ticks line {
-  stroke: rgba(234, 212, 171, 0.24);
-  stroke-width: 1;
-}
-.hero-clock-ticks line.major {
-  stroke: rgba(234, 212, 171, 0.6);
-}
-.hero-clock-hand {
   stroke: var(--color-champagne);
+  stroke-width: 0.6;
+}
+.hero-dial-rays {
+  opacity: 0.16;
+}
+.hero-dial-ring,
+.hero-dial-ring2 {
+  fill: none;
+  stroke: var(--color-taupe);
   stroke-width: 1.2;
+}
+.hero-dial-ring2 {
+  opacity: 0.35;
+  stroke-dasharray: 2 6;
+}
+.hero-dial-ticks line {
+  stroke: var(--color-taupe);
+  stroke-width: 1;
+  opacity: 0.5;
+}
+.hero-dial-ticks line.major {
+  stroke: var(--color-champagne);
+  stroke-width: 2;
+  opacity: 0.8;
+}
+.hero-dial-hand line {
+  stroke: var(--color-champagne);
+  stroke-width: 1.5;
   stroke-linecap: round;
-  transform-box: view-box;
-  transform-origin: 50% 50%;
 }
-/* The hand's one sweep: a full turn as the page opens, then still at 12 (motion mode only). */
-html[data-js]:not([data-reduced]) .hero-clock-hand {
-  animation: hero-sweep 2.4s var(--ease-expo-out) 0.2s both;
-}
-@keyframes hero-sweep {
-  from {
-    transform: rotate(-360deg);
-  }
-}
-.hero-clock-hub {
+.hero-dial-hub {
   fill: var(--color-champagne);
+}
+
+/* 2 · The five objects around the dial (D173). Each sits on its own point (--x, --y); GSAP moves
+   the li (transform only), nothing animates the image. The end state is this layout. */
+.hero-objects {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+}
+.hero-object {
+  --w: clamp(120px, min(12.5vw, 24svh), 210px);
+  position: absolute;
+  inset-block-start: var(--y);
+  inset-inline-start: var(--x);
+  inline-size: var(--w);
+  translate: calc(var(--flip, 1) * -50%) -50%;
+  will-change: transform;
+}
+.hero-object:dir(rtl) {
+  --flip: -1;
+}
+.hero-object figure {
+  display: grid;
+  justify-items: center;
+  gap: 0.55rem;
+  margin: 0;
+}
+.hero-object-img {
+  display: block;
+  inline-size: 100%;
+  aspect-ratio: 1;
+}
+.hero-object-img img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+}
+.hero-object figcaption {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  color: var(--color-champagne);
+}
+.hero-object:lang(ar) figcaption {
+  font-size: 0.8rem;
+  letter-spacing: 0;
+}
+/* Events: on 12, under the header, smaller, its name beside it (not below, into the eyebrow). */
+.hero-object[data-slot="0"] {
+  --w: var(--w0);
+  --x: 50%;
+  --y: calc(var(--header-h) + 1.5svh);
+  translate: calc(var(--flip, 1) * -50%) 0;
+}
+/* The spotlight's own shape (720 × 468), so its box ends where the picture does. */
+.hero-object[data-slot="0"] .hero-object-img {
+  aspect-ratio: 720 / 468;
+}
+.hero-object[data-slot="0"] figcaption {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: calc(100% + 0.6rem);
+  translate: 0 -50%;
+}
+.hero-object[data-slot="1"] { --x: 15%; --y: 35%; }
+.hero-object[data-slot="2"] { --x: 13%; --y: 72%; }
+.hero-object[data-slot="3"] { --x: 85%; --y: 35%; }
+.hero-object[data-slot="4"] { --x: 87%; --y: 72%; }
+/* Motion mode: they wait for their start positions (no flash of the end state before hydration). */
+html[data-js]:not([data-reduced]) .hero:not([data-hero-set]) :is(.hero-object, .hero-tc, .hero-dial-hand) {
+  opacity: 0;
 }
 
 /* 4 · Content */
 .hero-content {
   position: relative;
   z-index: 4;
-  align-self: center;
-  padding-block: calc(var(--lb-top) + 24px) 24px;
   display: grid;
   justify-items: center;
-  gap: clamp(22px, 3vw, 34px);
+  gap: clamp(20px, 2.6vw, 30px);
   inline-size: 100%;
   text-align: center;
 }
-/* The line the old second beat said, now said once, above the title (N05). */
 .hero-eyebrow {
   margin: 0;
   text-shadow: 0 2px 18px rgba(13, 8, 5, 0.8);
 }
 .hero-title {
-  /* Capped by height as well as width (D94): the frame between the letterboxes, less the HUD
-     clearance and the eyebrow, lead and CTAs (~245px: the eyebrow and its gap ~55px, the lead
-     two lines, the CTA row; N05), shared by the two lines (EN 2 × 0.9em + masks; AR 2 × 1.18em
-     + masks). Width-only sizing let the block overflow short laptop windows: the title rose
-     under the header and the CTA dipped into the letterbox. */
-  --fit: calc((100svh - var(--lb-top) - var(--lb-bottom) - 2 * var(--hud-clear) - 245px) / 1.95);
-  /* Its own fallback faces, matched on these two lines (fonts.css, D156). */
+  /* Its own fallback faces, matched on these two lines (D156). */
   font-family: var(--font-hero);
-  /* Full width, so the title's box never moves when the brand face replaces the fallback (D156:
-     the swap is on screen now that no intro covers it). The lines stay centred. */
+  /* Full width, so the title's box never moves when the brand face replaces the fallback (D156).
+     The lines stay centred. Sized to sit inside the dial, between the objects (D173). */
   justify-self: stretch;
   margin: 0;
-  font-size: clamp(3.2rem, min(12.5vw, var(--fit)), 11.5rem);
+  font-size: clamp(2.6rem, min(6.4vw, 11svh), 7.5rem);
   font-weight: 200;
-  line-height: 0.9;
+  line-height: 0.94;
   text-shadow: 0 4px 40px rgba(13, 8, 5, 0.55);
   text-wrap: nowrap;
 }
 .hero-title:lang(ar) {
   font-family: var(--font-hero-ar);
-  --fit: calc((100svh - var(--lb-top) - var(--lb-bottom) - 2 * var(--hud-clear) - 245px) / 2.5);
   line-height: 1.18;
 }
 .hero-line {
@@ -297,19 +303,15 @@ html[data-js]:not([data-reduced]) .hero-clock-hand {
 .hero-title:lang(ar) .hero-line b {
   letter-spacing: 0;
 }
-/* The text's own box (an inline-block, so it is the LCP element): never animated (hero.tsx). */
+/* The text's own box (an inline-block, so it is the LCP element): never animated. */
 .hero-line-inner {
   display: inline-block;
-}
-html[data-js]:not([data-reduced]) .hero-content {
-  padding-block: 0;
 }
 .hero-sub {
   display: grid;
   justify-items: center;
   gap: 24px;
-  /* A fixed measure (about 46ch of the brand face), not ch: ch follows the font, so the block
-     narrowed and moved when the brand face arrived (D156). */
+  /* A fixed measure, not ch: ch follows the font, so the block moved on the font swap (D156). */
   inline-size: min(100%, 30.5rem);
 }
 .hero-lead {
@@ -319,7 +321,6 @@ html[data-js]:not([data-reduced]) .hero-content {
   color: rgba(245, 233, 211, 0.9);
   text-shadow: 0 2px 24px rgba(13, 8, 5, 0.7);
 }
-
 /* Two actions (N05): plan an event (primary), see the work (ghost). One row from 600px;
    stacked at equal width on phones, so neither label wraps. */
 .hero-actions {
@@ -336,104 +337,44 @@ html[data-js]:not([data-reduced]) .hero-content {
   }
 }
 
-/* 6 · Letterbox bars, gold hairlines on their inner edges */
-.hero-letterbox {
+/* 5 · The countdown's timecode: always LTR, tabular figures (hero.tsx). */
+.hero-tc {
   position: absolute;
+  z-index: 5;
   inset-inline: 0;
-  z-index: 6;
-  background: var(--color-night);
-  pointer-events: none;
-}
-.hero-letterbox.top {
-  top: 0;
-  block-size: var(--lb-top);
-  border-block-end: 1px solid rgba(234, 212, 171, 0.12);
-}
-.hero-letterbox.bottom {
-  bottom: 0;
-  block-size: var(--lb-bottom);
-  border-block-start: 1px solid rgba(234, 212, 171, 0.12);
+  inset-block-end: clamp(16px, 3.5svh, 32px);
+  margin: 0;
+  text-align: center;
+  font-size: 0.7rem;
+  letter-spacing: 0.24em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-taupe);
 }
 
-/* 7 · HUD */
-.hero-hud {
-  position: absolute;
-  inset: 0;
-  z-index: 7;
-  pointer-events: none;
-  font-size: 0.62rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  font-family: var(--font-caps); /* capitals swap from their own fallback (B02) */
-  color: rgba(234, 212, 171, 0.72);
-}
-.hero-hud:lang(ar) {
-  font-size: 0.76rem;
-  letter-spacing: 0.02em;
-}
-.hero-hud > div {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.hero-hud-tl,
-.hero-hud-tr {
-  top: calc(var(--lb-top) + 20px);
-}
-.hero-hud-bl,
-.hero-hud-br {
-  bottom: calc(var(--lb-bottom) + 20px);
-}
-.hero-hud-tl,
-.hero-hud-bl {
-  inset-inline-start: max(var(--gutter-start), 4vw);
-}
-.hero-hud-tr,
-.hero-hud-br {
-  inset-inline-end: max(var(--gutter-end), 4vw);
-}
-.hero-hud-tr {
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.2em;
-}
-@media (max-width: 600px) {
-  .hero-hud-bl {
+/* Phones: no pin. The objects gather once into a band under the header; the copy below it. */
+@media (max-width: 899.98px) {
+  .hero {
+    padding-block: calc(var(--header-h) + 112px) 56px;
+  }
+  .hero-dial-wrap {
+    inline-size: 118vw;
+    inset-block-start: 46%;
+    opacity: 0.55;
+  }
+  .hero-object,
+  .hero-object[data-slot="0"] {
+    --w: 64px;
+    translate: calc(var(--flip, 1) * -50%) -50%;
+  }
+  .hero-object figcaption {
     display: none;
   }
-}
-.hero-rec {
-  inline-size: 6px;
-  block-size: 6px;
-  border-radius: 50%;
-  background: var(--color-champagne);
-  animation: hero-rec 1.6s ease-in-out infinite;
-}
-@keyframes hero-rec {
-  50% {
-    opacity: 0.25;
-  }
-}
-.hero-cue {
-  position: relative;
-  inline-size: 1px;
-  block-size: 38px;
-  overflow: hidden;
-  background: rgba(234, 212, 171, 0.25);
-}
-.hero-cue::after {
-  content: "";
-  position: absolute;
-  inset-inline-start: 0;
-  top: 0;
-  inline-size: 1px;
-  block-size: 40%;
-  background: var(--color-champagne);
-  transform: translateY(-100%);
-  animation: hero-cue 2s var(--ease-expo-out) infinite;
-}
-@keyframes hero-cue {
-  to {
-    transform: translateY(250%);
+  .hero-object[data-slot="0"] { --x: 50%; --y: calc(var(--header-h) + 40px); }
+  .hero-object[data-slot="1"] { --x: 12%; --y: calc(var(--header-h) + 66px); }
+  .hero-object[data-slot="2"] { --x: 31%; --y: calc(var(--header-h) + 50px); }
+  .hero-object[data-slot="3"] { --x: 69%; --y: calc(var(--header-h) + 50px); }
+  .hero-object[data-slot="4"] { --x: 88%; --y: calc(var(--header-h) + 66px); }
+  .hero-title {
+    font-size: clamp(2.5rem, 12.5vw, 4rem);
   }
 }

@@ -2,7 +2,21 @@
 
 Read `CLAUDE.md`, `AGENTS.md` and `PRODUCT.md` first. Decisions: `docs/DECISIONS.md` (latest D124; new ones from D125).
 
-## Now: images done, README done (2026-11-23, late night)
+## Now: the countdown hero (2026-11-24, D173)
+
+- The owner chose A ("countdown to zero") with C's gold dial engraving. Built as the Home `Hero` on branch `hero-options` (commit c03f73c), PR to main.
+  - Five cut-out objects (`hero-obj-*`, media.ts), made by `scripts/hero-objects.mjs` from credited Unsplash photos (no Replicate token, no generation budget).
+  - Desktop: a 150svh pin. Phones: one gathering on load. Reduced motion: the end state.
+  - The hall (p9-2) is only in the Events opening now; `KEPT` is empty.
+  - The lab route, options B and C, the HUD and the letterbox are gone.
+- Checked locally on a production build: typecheck, lint, 497 unit tests, the hero, fit, first-screen, locale-switch, pin, CTA-bar, home-photos and Home empty-screen specs.
+- **Next:** merge after the fast CI, wait for the Vercel deploy, then send the owner 1440 and 390 shots and a short GIF from production.
+
+## Before: hero options (2026-11-23, late)
+
+- Three prototypes compared in `docs/review/hero-options/` (A countdown, B cinematic loop, C the dial).
+
+## Before: images done, README done (2026-11-23, late night)
 
 **Status.** `main` is at the README merge (PR #7, 5395e0b). Preview for Rand (public, no login): https://notime-website-ashen.vercel.app/ar; `docs/content/rand-images-message.md` links it. The CLS investigation, long e2e runs and Lighthouse are still paused by the owner.
 
