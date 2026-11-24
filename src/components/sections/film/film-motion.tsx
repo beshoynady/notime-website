@@ -87,6 +87,8 @@ export function FilmMotion() {
         if (hand) gsap.fromTo(hand, { rotate: -30 }, { rotate: 0, ease: "steps(5)", svgOrigin: "300 300", scrollTrigger: act });
       });
     });
+    // Hydrated and built (e2e waits on it; set under reduced motion too).
+    film.dataset.filmReady = "";
     return () => mm.revert();
   });
 

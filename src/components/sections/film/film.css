@@ -131,6 +131,7 @@ html[dir="rtl"] .film {
   /* The cover box below sizes itself from the plate (cqw/cqh). */
   container-type: size;
   background: var(--color-espresso);
+  pointer-events: none;
 }
 /* The picture's own box at the plate's aspect (16:9, 9:16 on phones), covering the plate: what is
    drawn on the picture (the wall's screen, the card) is placed in % of it and stays on its spot. */
@@ -200,6 +201,10 @@ html[dir="rtl"] .film-shade {
   gap: 18px;
   inline-size: 100%;
   text-align: start;
+}
+/* A faded scene's links stay focusable: focus brings its copy back. */
+.film-copy-in:focus-within {
+  opacity: 1 !important;
 }
 .film-copy-in > * {
   max-inline-size: min(100%, 34rem);

@@ -30,3 +30,13 @@ describe("home film", () => {
     expect(CHECKIN.to).toBeLessThanOrEqual(CHECKIN.of);
   });
 });
+
+describe("the owner's label fixes (D175)", () => {
+  it("products in development are badged «قيد التطوير» / In development, never «قريبًا»", async () => {
+    const ar = (await import("../messages/ar.json")).default;
+    const en = (await import("../messages/en.json")).default;
+    expect(ar.common.comingSoon).toBe("قيد التطوير");
+    expect(en.common.comingSoon).toBe("In development");
+    expect(JSON.stringify(ar.common)).not.toContain("«قريبًا»");
+  });
+});

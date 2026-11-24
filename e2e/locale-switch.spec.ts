@@ -5,27 +5,20 @@ import { controllerReady, gotoReady } from "./helpers";
 test.describe("locale switch", () => {
   test.beforeEach(({ isMobile }) => test.skip(isMobile, "the header toggle and mega menu are desktop UI"));
 
-  test("mid-pin switch: one pin spacer, no leftover split, URL /ar", async ({ page }) => {
+  test("mid-film switch: one film, its timelines rebuilt, an Arabic title, URL /ar", async ({ page }) => {
     await gotoReady(page, "/en");
     await controllerReady(page);
-    await page.evaluate(() => scrollTo(0, innerHeight * 0.25)); // the middle of the 50% pin (D173)
+    await page.evaluate(() => scrollTo({ top: innerHeight * 1.5, behavior: "instant" })); // mid-film
     await page.waitForTimeout(600);
 
     await page.locator("header a[hreflang=ar]").click();
     await page.waitForURL(/\/ar$/);
     await page.locator("#page-stage[data-tone-ready]").waitFor({ state: "attached" });
-    // The pin belongs to the hero controller, and the page can hydrate after the layout's
-    // ToneController (D40): wait for the controller's own marker, not only the layout's.
+    // The film's timelines belong to FilmMotion, which can hydrate after the layout's
+    // ToneController (D40): wait for its own marker.
     await controllerReady(page);
-    // The new page opens at the top, and the hero builds its pin on the first scroll (D156).
-    await page.evaluate(() => scrollTo(0, 40));
-    await page.locator("#hero[data-hero-pinned]").waitFor({ state: "attached" });
-
-    // One spacer around the hero (other pins, How we work since D84, have their own). It is the
-    // server-rendered wrapper, so the hero is never moved in the DOM (D43).
-    const heroSpacer = page.locator(".pin-spacer:has(> #hero)");
-    expect(await heroSpacer.count()).toBe(1);
-    expect(await heroSpacer.evaluate((el) => el.classList.contains("hero-pin"))).toBe(true);
+    await expect(page.locator("#film")).toHaveCount(1);
+    await expect(page.locator("#film > .film-beat")).toHaveCount(7);
     const title = await page.locator("#hero-title").evaluate((el) => ({
       text: el.textContent ?? "",
       label: el.getAttribute("aria-label") ?? "",

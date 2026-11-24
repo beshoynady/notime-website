@@ -5,18 +5,19 @@ import { gotoReady } from "./helpers";
 const srcs = (imgs: Locator) => imgs.evaluateAll((els) => els.map((i) => decodeURIComponent(i.getAttribute("src") ?? "")));
 
 /**
- * Home (visual portfolio, Task C4): the «Five crafts» cards and «Real projects» show photographs.
+ * Home (visual portfolio, Task C4; the film since D174): the film's scenes and «Real projects» show
+ * photographs.
  * Real projects use each case's own photo, never a drawing (CaseVisual) or a stand-in (D106, D150),
  * plus the one collection marked for Home (D164), shown by its first photo.
  */
 for (const locale of ["en", "ar"] as const) {
-  test(`${locale}: the crafts cards and real projects are photographs`, async ({ page }) => {
+  test(`${locale}: the film's scenes and real projects are photographs`, async ({ page }) => {
     await gotoReady(page, `/${locale}`);
-    const cards = page.locator(".cats .cat .cat-media img");
-    await expect(cards).toHaveCount(5);
-    const cardSrcs = await srcs(cards);
-    for (const file of ["card-events", "card-creative", "uae-pro-league-3", "card-print", "card-software"])
-      expect(cardSrcs.some((s) => s.includes(`${file}.webp`)), file).toBe(true);
+    const plates = page.locator("#film .film-img");
+    await expect(plates).toHaveCount(7);
+    const plateSrcs = await srcs(plates);
+    for (const file of ["film-hall", "film-beams", "film-camera", "film-gift", "film-arrival", "ev-open-night"])
+      expect(plateSrcs.some((s) => s.includes(`${file}.webp`)), file).toBe(true);
 
     await expect(page.locator("#work .case-visual")).toHaveCount(0);
     const work = page.locator("#work .work-media img");
@@ -24,7 +25,7 @@ for (const locale of ["en", "ar"] as const) {
     const workSrcs = await srcs(work);
     for (const file of ["egyptair-pavilion-1", "uae-pro-league-2", "private-celebrations-4"]) expect(workSrcs.some((s) => s.includes(`${file}.webp`)), file).toBe(true);
     // Every photo loads (no broken box).
-    for (const img of await page.locator(".cats img, #work .work-media img").all()) {
+    for (const img of await page.locator("#work .work-media img").all()) {
       await img.scrollIntoViewIfNeeded();
       await expect.poll(() => img.evaluate((i) => (i as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
     }

@@ -67,15 +67,18 @@ for (const locale of ["en", "ar"] as const) {
       await expectLanded(page, service.anchor);
     });
 
-    test("homepage category cards and 'All services'", async ({ page }) => {
+    test("homepage film: each category scene links to its page", async ({ page }) => {
       for (let i = 0; i < categories.length; i++) {
         await gotoReady(page, `/${locale}`);
-        await page.locator("#services a.cat").nth(i).click();
+        // The scene held on screen (its rise done), so nothing covers its link.
+        await page.evaluate((n) => {
+          const beat = document.querySelectorAll("#film > .film-beat")[n];
+          scrollTo({ top: beat.getBoundingClientRect().top + scrollY, behavior: "instant" });
+        }, i + 1);
+        await page.waitForTimeout(400);
+        await page.locator("#film .film-go").nth(i).click();
         await expectCategory(page, locale, i);
       }
-      await gotoReady(page, `/${locale}`);
-      await page.locator("#services .cats-foot a").click();
-      await expect(page).toHaveURL(new RegExp(`/${locale}/services$`));
     });
   });
 }
