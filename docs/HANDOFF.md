@@ -2,23 +2,21 @@
 
 Read `CLAUDE.md`, `AGENTS.md` and `PRODUCT.md` first. Decisions: `docs/DECISIONS.md` (latest D124; new ones from D125).
 
-## Now: hero options, waiting for the owner's choice (2026-11-23, late)
+## Now: the countdown hero (2026-11-24, D173)
 
-- Branch `hero-options` (not merged): three home-hero prototypes at `/[locale]/hero-lab/a|b|c`.
-  - A: countdown to zero.
-  - B: cinematic loop.
-  - C: the dial.
-- Shots, GIFs, sources and licences are in `docs/review/hero-options/`.
-- Preview: https://notime-website-git-hero-options-beshoynadys-projects.vercel.app/ar/hero-lab/a (needs the owner's Vercel login).
-- **Next, after the owner picks:**
-  - Build it fully as `Hero` on Home.
-  - Give A five photos of its own (D169).
-  - Credit the Pexels video in media.ts if B.
-  - Move Rand's hall (p9-2) to a fitting Events section, keeping one photo per place (it then leaves Home, and `KEPT` in photo-slots.test.ts goes).
-  - Delete the lab route.
-  - Typecheck, unit tests, build and the fast CI, then merge to main.
+- The owner chose A ("countdown to zero") with C's gold dial engraving. Built as the Home `Hero` on branch `hero-options` (commit c03f73c), PR to main.
+  - Five cut-out objects (`hero-obj-*`, media.ts), made by `scripts/hero-objects.mjs` from credited Unsplash photos (no Replicate token, no generation budget).
+  - Desktop: a 150svh pin. Phones: one gathering on load. Reduced motion: the end state.
+  - The hall (p9-2) is only in the Events opening now; `KEPT` is empty.
+  - The lab route, options B and C, the HUD and the letterbox are gone.
+- Checked locally on a production build: typecheck, lint, 497 unit tests, the hero, fit, first-screen, locale-switch, pin, CTA-bar, home-photos and Home empty-screen specs.
+- **Next:** merge after the fast CI, wait for the Vercel deploy, then send the owner 1440 and 390 shots and a short GIF from production.
 
-## Now: images done, README done (2026-11-23, late night)
+## Before: hero options (2026-11-23, late)
+
+- Three prototypes compared in `docs/review/hero-options/` (A countdown, B cinematic loop, C the dial).
+
+## Before: images done, README done (2026-11-23, late night)
 
 **Status.** `main` is at the README merge (PR #7, 5395e0b). Preview for Rand (public, no login): https://notime-website-ashen.vercel.app/ar; `docs/content/rand-images-message.md` links it. The CLS investigation, long e2e runs and Lighthouse are still paused by the owner.
 
