@@ -375,6 +375,11 @@ html[data-js]:not([data-reduced]) .film-copy {
   min-block-size: 0;
   align-self: start;
 }
+/* The dolly's first frame, before the motion is built on the visitor's first move (film-motion.tsx):
+   GSAP takes over from the same scale, so nothing jumps. */
+html[data-js]:not([data-reduced]) .film-cover {
+  transform: scale(1.1);
+}
 
 /* ---------------------------------------------------------------- Props */
 /* Events: the hall dark, then the rig comes up (the veil lifts, the haze glows). */

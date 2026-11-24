@@ -1,0 +1,329 @@
+{
+  "lighthouse": "13.5.0",
+  "base": "http://localhost:3100",
+  "runs": 3,
+  "profile": "mobile, Moto G Power emulation, simulated throttling (150 ms RTT, 1.6 Mbps, 4x CPU)",
+  "medians": {
+    "en": {
+      "first": {
+        "perf": 51,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 92,
+        "fcp": 1397,
+        "lcp": 4824,
+        "lcpObserved": 1213,
+        "tbt": 3369,
+        "cls": 0,
+        "si": 3878,
+        "benchmarkIndex": 563,
+        "lcpElements": [
+          "div.film-copy-in > h1#hero-title > span.hero-line > b.hero-line-inner | \"TO START.\"",
+          "div.film-plate > div.film-cover > picture > img.film-img | \"div.film-plate > div.film-cover > picture > img.film-img\""
+        ]
+      },
+      "return": {
+        "perf": 73,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 92,
+        "fcp": 828,
+        "lcp": 1279,
+        "lcpObserved": 520,
+        "tbt": 1801,
+        "cls": 0,
+        "si": 1177,
+        "benchmarkIndex": 1051,
+        "lcpElements": [
+          "div.film-plate > div.film-cover > picture > img.film-img | \"div.film-plate > div.film-cover > picture > img.film-img\""
+        ]
+      }
+    },
+    "ar": {
+      "first": {
+        "perf": 48,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 92,
+        "fcp": 1418,
+        "lcp": 4973,
+        "lcpObserved": 1372,
+        "tbt": 4299,
+        "cls": 0.0004,
+        "si": 4403,
+        "benchmarkIndex": 615,
+        "lcpElements": [
+          "div.film-plate > div.film-cover > picture > img.film-img | \"div.film-plate > div.film-cover > picture > img.film-img\""
+        ]
+      },
+      "return": {
+        "perf": 71,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 92,
+        "fcp": 766,
+        "lcp": 1448,
+        "lcpObserved": 607,
+        "tbt": 2408,
+        "cls": 0,
+        "si": 1376,
+        "benchmarkIndex": 898,
+        "lcpElements": [
+          "div.film-plate > div.film-cover > picture > img.film-img | \"div.film-plate > div.film-cover > picture > img.film-img\""
+        ]
+      }
+    }
+  },
+  "runsDetail": {
+    "en": {
+      "first": [
+        {
+          "perf": 48,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 1116,
+          "lcp": 4779,
+          "lcpObserved": 1209,
+          "tbt": 3460,
+          "cls": 0,
+          "si": 6212,
+          "benchmarkIndex": 1035,
+          "lcpEl": "div.film-copy-in > h1#hero-title > span.hero-line > b.hero-line-inner | \"TO START.\"",
+          "lcpParts": {
+            "timeToFirstByte": 50,
+            "elementRenderDelay": 1159
+          }
+        },
+        {
+          "perf": 51,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 1397,
+          "lcp": 4824,
+          "lcpObserved": 1213,
+          "tbt": 3176,
+          "cls": 0,
+          "si": 3713,
+          "benchmarkIndex": 563,
+          "lcpEl": "div.film-plate > div.film-cover > picture > img.film-img | \"div.film-plate > div.film-cover > picture > img.film-img\"",
+          "lcpParts": {
+            "timeToFirstByte": 45,
+            "resourceLoadDelay": 91,
+            "resourceLoadDuration": 15,
+            "elementRenderDelay": 1062
+          }
+        },
+        {
+          "perf": 51,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 1414,
+          "lcp": 4873,
+          "lcpObserved": 1256,
+          "tbt": 3369,
+          "cls": 0,
+          "si": 3878,
+          "benchmarkIndex": 546,
+          "lcpEl": "div.film-plate > div.film-cover > picture > img.film-img | \"div.film-plate > div.film-cover > picture > img.film-img\"",
+          "lcpParts": {
+            "timeToFirstByte": 52,
+            "resourceLoadDelay": 93,
+            "resourceLoadDuration": 23,
+            "elementRenderDelay": 1087
+          }
+        }
+      ],
+      "return": [
+        {
+          "perf": 73,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 828,
+          "lcp": 1279,
+          "lcpObserved": 463,
+          "tbt": 1801,
+          "cls": 0,
+          "si": 1177,
+          "benchmarkIndex": 720,
+          "lcpEl": "div.film-plate > div.film-cover > picture > img.film-img | \"div.film-plate > div.film-cover > picture > img.film-img\"",
+          "lcpParts": {
+            "timeToFirstByte": 35,
+            "resourceLoadDelay": 214,
+            "resourceLoadDuration": 0,
+            "elementRenderDelay": 214
+          }
+        },
+        {
+          "perf": 72,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 682,
+          "lcp": 1242,
+          "lcpObserved": 527,
+          "tbt": 1996,
+          "cls": 0,
+          "si": 1227,
+          "benchmarkIndex": 1057,
+          "lcpEl": "div.film-plate > div.film-cover > picture > img.film-img | \"div.film-plate > div.film-cover > picture > img.film-img\"",
+          "lcpParts": {
+            "timeToFirstByte": 39,
+            "resourceLoadDelay": 210,
+            "resourceLoadDuration": 1,
+            "elementRenderDelay": 278
+          }
+        },
+        {
+          "perf": 74,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 895,
+          "lcp": 1294,
+          "lcpObserved": 520,
+          "tbt": 1582,
+          "cls": 0,
+          "si": 1143,
+          "benchmarkIndex": 1051,
+          "lcpEl": "div.film-plate > div.film-cover > picture > img.film-img | \"div.film-plate > div.film-cover > picture > img.film-img\"",
+          "lcpParts": {
+            "timeToFirstByte": 28,
+            "resourceLoadDelay": 199,
+            "resourceLoadDuration": 0,
+            "elementRenderDelay": 292
+          }
+        }
+      ]
+    },
+    "ar": {
+      "first": [
+        {
+          "perf": 48,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 1418,
+          "lcp": 5342,
+          "lcpObserved": 1372,
+          "tbt": 4299,
+          "cls": 0.0004,
+          "si": 4403,
+          "benchmarkIndex": 609,
+          "lcpEl": "div.film-plate > div.film-cover > picture > img.film-img | \"div.film-plate > div.film-cover > picture > img.film-img\"",
+          "lcpParts": {
+            "timeToFirstByte": 38,
+            "resourceLoadDelay": 141,
+            "resourceLoadDuration": 286,
+            "elementRenderDelay": 907
+          }
+        },
+        {
+          "perf": 48,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 1215,
+          "lcp": 4973,
+          "lcpObserved": 1437,
+          "tbt": 4620,
+          "cls": 0.0004,
+          "si": 4908,
+          "benchmarkIndex": 615,
+          "lcpEl": "div.film-plate > div.film-cover > picture > img.film-img | \"div.film-plate > div.film-cover > picture > img.film-img\"",
+          "lcpParts": {
+            "timeToFirstByte": 64,
+            "resourceLoadDelay": 163,
+            "resourceLoadDuration": 170,
+            "elementRenderDelay": 1040
+          }
+        },
+        {
+          "perf": 52,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 2127,
+          "lcp": 4623,
+          "lcpObserved": 1039,
+          "tbt": 2556,
+          "cls": 0,
+          "si": 3344,
+          "benchmarkIndex": 644,
+          "lcpEl": "div.film-plate > div.film-cover > picture > img.film-img | \"div.film-plate > div.film-cover > picture > img.film-img\"",
+          "lcpParts": {
+            "timeToFirstByte": 36,
+            "resourceLoadDelay": 85,
+            "resourceLoadDuration": 56,
+            "elementRenderDelay": 862
+          }
+        }
+      ],
+      "return": [
+        {
+          "perf": 71,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 732,
+          "lcp": 1351,
+          "lcpObserved": 607,
+          "tbt": 2408,
+          "cls": 0,
+          "si": 2141,
+          "benchmarkIndex": 1121,
+          "lcpEl": "div.film-plate > div.film-cover > picture > img.film-img | \"div.film-plate > div.film-cover > picture > img.film-img\"",
+          "lcpParts": {
+            "timeToFirstByte": 28,
+            "resourceLoadDelay": 240,
+            "resourceLoadDuration": 0,
+            "elementRenderDelay": 339
+          }
+        },
+        {
+          "perf": 71,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 766,
+          "lcp": 1448,
+          "lcpObserved": 563,
+          "tbt": 2487,
+          "cls": 0,
+          "si": 1376,
+          "benchmarkIndex": 857,
+          "lcpEl": "div.film-plate > div.film-cover > picture > img.film-img | \"div.film-plate > div.film-cover > picture > img.film-img\"",
+          "lcpParts": {
+            "timeToFirstByte": 36,
+            "resourceLoadDelay": 242,
+            "resourceLoadDuration": 1,
+            "elementRenderDelay": 284
+          }
+        },
+        {
+          "perf": 73,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 1147,
+          "lcp": 1563,
+          "lcpObserved": 656,
+          "tbt": 1646,
+          "cls": 0,
+          "si": 1196,
+          "benchmarkIndex": 898,
+          "lcpEl": "div.film-plate > div.film-cover > picture > img.film-img | \"div.film-plate > div.film-cover > picture > img.film-img\"",
+          "lcpParts": {
+            "timeToFirstByte": 30,
+            "resourceLoadDelay": 233,
+            "resourceLoadDuration": 0,
+            "elementRenderDelay": 392
+          }
+        }
+      ]
+    }
+  }
+}
