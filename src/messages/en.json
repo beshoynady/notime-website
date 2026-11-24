@@ -13,7 +13,7 @@
   "common": {
     "skipToContent": "Skip to content",
     "preview": "Preview",
-    "comingSoon": "Coming soon",
+    "comingSoon": "In development",
     "example": "Example"
   },
   "nav": {
@@ -87,6 +87,49 @@
     "lead": "Events, films, campaigns and websites, from the first idea to launch day.",
     "cta": "Plan your event",
     "ctaWork": "See our work"
+  },
+  "film": {
+    "label": "The night of an event, in six scenes",
+    "skip": "Skip the film",
+    "explore": "Explore {name}",
+    "example": "Example",
+    "slate": {
+      "opening": "OPENING · THE EMPTY HALL",
+      "events": "BEAT 1 · THE HALL LIGHTS UP",
+      "creative": "BEAT 2 · THE CAMERA FRAMES THE STAGE",
+      "marketing": "BEAT 3 · THE SCREENS LIGHT UP",
+      "print": "BEAT 4 · A GIFT AT EVERY SEAT",
+      "digital": "BEAT 5 · CHECK-IN GOES LIVE",
+      "finale": "BEAT 6 · GUESTS ARRIVE · ZERO"
+    },
+    "line": {
+      "events": "We light the hall and set the stage before the first guest walks in.",
+      "creative": "We film the night the way it deserves to be told, from the first shot to the final cut.",
+      "marketing": "Your campaign on every screen: before the night, during it, and after.",
+      "print": "A gift with your brand's name at every seat, and a printed card for every guest.",
+      "digital": "Guests check in digitally, and the screens go live on time.",
+      "finale": "The guests arrive. The clock reads zero."
+    },
+    "campaign": {
+      "kicker": "You're invited",
+      "title": "Launch Night",
+      "days": "Days",
+      "hours": "Hours",
+      "minutes": "Min",
+      "rsvp": "Confirm your seat"
+    },
+    "card": {
+      "title": "Our honoured guest",
+      "table": "Table 7"
+    },
+    "checkin": {
+      "title": "Guest check-in",
+      "guest": "Abdullah Salem",
+      "table": "Table 7",
+      "done": "Checked in",
+      "live": "In the hall now",
+      "scan": "Scan the invitation code"
+    }
   },
   "about": {
     "eyebrow": "About NO TIME",
@@ -402,7 +445,7 @@
       "disabled": "Disabled",
       "link": "Text link with an underline that draws in",
       "labels": "Labels",
-      "labelsNote": "“Coming soon” marks products in development. “Preview” marks their concept screens, and “Example” demonstration data.",
+      "labelsNote": "“In development” marks products we are still building, “Preview” their concept screens, and “Example” demonstration data.",
       "fields": "Form fields",
       "eventType": "Event type",
       "options": {

@@ -1,0 +1,905 @@
+/* ==========================================================================
+   Home · the film (film.tsx; docs/review/film-storyboard/). Layout is CSS alone: "motion mode" =
+   html[data-js]:not([data-reduced]) makes each scene a sticky stage that rises over the one
+   before; otherwise the scenes stack at their final frames. FilmMotion only fades and moves.
+   ========================================================================== */
+/* The home hero's title only (D156): a 180px display line, where the band faces above (matched on
+   the site's running text, fonts.css) were 9-11% wide in English capitals and 4-7% narrow in Arabic, and the
+   swap moved the centred lines by up to 50px (CLS 0.017 at 1440). With no intro covering the first
+   screen any more, these faces are matched on the title's own two lines at its two weights (200,
+   600): measured at 1440, the swap no longer moves them. Overrides divided by size-adjust, as in fonts.css. Here, not in fonts.css: no other page needs them. */
+@font-face {
+  font-family: "Montserrat Hero Fallback";
+  src: local("Arial");
+  font-weight: 100 449;
+  size-adjust: 99.22%;
+  ascent-override: 97.56%;
+  descent-override: 25.31%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Montserrat Hero Fallback";
+  src: local("Arial");
+  font-weight: 450 900;
+  size-adjust: 103.6%;
+  ascent-override: 93.44%;
+  descent-override: 24.24%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Hero Fallback";
+  src: local("Arial");
+  font-weight: 100 449;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF;
+  size-adjust: 127.75%;
+  ascent-override: 75.77%;
+  descent-override: 19.64%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Hero Fallback";
+  src: local("Arial");
+  font-weight: 450 900;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF;
+  size-adjust: 155.7%;
+  ascent-override: 62.17%;
+  descent-override: 16.13%;
+  line-gap-override: 0%;
+}
+/* The same title on a device without Arial (Android, and Chrome on Linux or ChromeOS), at desktop
+   widths: the stack fell to the running-text faces and the Arabic title grew from 566 to 732px on
+   the swap (CLS 2.0 at 1440, the close's CI). Matched on the same two lines and weights, against the
+   Roboto and Noto Naskh subsets in e2e/fixtures/android-fonts (2026-11-23). The Arabic faces also
+   take the space: from Roboto (the running-text face) the title's word gap was 11px wide and the
+   swap still moved it (0.004). */
+@font-face {
+  font-family: "Montserrat Hero Fallback Android";
+  src: local("Roboto"), local("Roboto Regular"), local("Roboto-Regular");
+  font-weight: 100 449;
+  size-adjust: 105.42%;
+  ascent-override: 91.82%;
+  descent-override: 23.81%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Montserrat Hero Fallback Android";
+  src: local("Roboto"), local("Roboto Regular"), local("Roboto-Regular");
+  font-weight: 450 900;
+  size-adjust: 108.78%;
+  ascent-override: 88.99%;
+  descent-override: 23.07%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Hero Fallback Android";
+  src: local("Noto Naskh Arabic"), local("Noto Naskh Arabic Regular"), local("NotoNaskhArabic-Regular");
+  font-weight: 100 449;
+  unicode-range: U+0020, U+00A0, U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF;
+  size-adjust: 112.38%;
+  ascent-override: 86.14%;
+  descent-override: 22.33%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Alexandria Hero Fallback Android";
+  src: local("Noto Naskh Arabic"), local("Noto Naskh Arabic Regular"), local("NotoNaskhArabic-Regular");
+  font-weight: 450 900;
+  unicode-range: U+0020, U+00A0, U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF;
+  size-adjust: 128.65%;
+  ascent-override: 75.24%;
+  descent-override: 19.51%;
+  line-gap-override: 0%;
+}
+
+:root {
+  --font-hero: "Montserrat", "Montserrat Hero Fallback", "Montserrat Hero Fallback Android", "Montserrat Caps Fallback Android";
+  --font-hero-ar: "Alexandria", "Alexandria Hero Fallback", "Alexandria Hero Fallback Android", "Alexandria Fallback", "Alexandria Fallback Android";
+}
+/* While the brand files load (data-font-wait, D149), the fallbacks alone, as fonts.css does. */
+html[data-font-wait] {
+  --font-hero: "Montserrat Hero Fallback", "Montserrat Hero Fallback Android", "Montserrat Caps Fallback Android";
+  --font-hero-ar: "Alexandria Hero Fallback", "Alexandria Hero Fallback Android", "Alexandria Fallback", "Alexandria Fallback Android";
+}
+
+/* ---------------------------------------------------------------- Stage */
+.film {
+  position: relative;
+  isolation: isolate;
+  color: var(--color-ivory);
+  background: var(--color-espresso);
+  /* +1 where the copy's side (start) is the left, so "end" moves go right; -1 in Arabic. */
+  --end: 1;
+  /* Scroll per scene in motion mode beyond the screen it takes to rise in (the dissolve). */
+  --film-hold: 20svh;
+}
+html[dir="rtl"] .film {
+  --end: -1;
+}
+.film-beat {
+  position: relative;
+  display: grid;
+  min-block-size: max(100svh, 560px);
+}
+.film-plate,
+.film-copy {
+  grid-area: 1 / 1;
+}
+.film-plate {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  /* The cover box below sizes itself from the plate (cqw/cqh). */
+  container-type: size;
+  background: var(--color-espresso);
+}
+/* The picture's own box at the plate's aspect (16:9, 9:16 on phones), covering the plate: what is
+   drawn on the picture (the wall's screen, the card) is placed in % of it and stays on its spot. */
+.film-cover {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  inline-size: max(100cqw, 100cqh * 16 / 9);
+  aspect-ratio: 16 / 9;
+  translate: -50% -50%;
+  container-type: inline-size;
+  will-change: transform;
+}
+.film-cover picture,
+.film-cover .film-img {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+html[dir="ltr"] .film-beat[data-mirror="ltr"] .film-img,
+html[dir="rtl"] .film-beat[data-mirror="rtl"] .film-img {
+  scale: -1 1;
+}
+/* The copy's side darkens so every line holds AA over the brightest pixel behind it. */
+.film-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, rgba(30, 20, 14, 0.94) 0%, rgba(30, 20, 14, 0.8) 30%, rgba(30, 20, 14, 0.28) 58%, rgba(30, 20, 14, 0.12) 100%),
+    radial-gradient(130% 100% at 50% 45%, transparent 55%, rgba(20, 13, 9, 0.7) 100%);
+}
+html[dir="rtl"] .film-shade {
+  background:
+    linear-gradient(to left, rgba(30, 20, 14, 0.94) 0%, rgba(30, 20, 14, 0.8) 30%, rgba(30, 20, 14, 0.28) 58%, rgba(30, 20, 14, 0.12) 100%),
+    radial-gradient(130% 100% at 50% 45%, transparent 55%, rgba(20, 13, 9, 0.7) 100%);
+}
+.film-slate {
+  position: absolute;
+  inset-block-start: calc(var(--header-h) + 22px);
+  inset-inline-end: clamp(20px, 4vw, 56px);
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--color-taupe);
+  text-shadow: 0 1px 10px rgba(13, 8, 5, 0.8);
+}
+.film-slate:lang(ar) {
+  font-size: 0.82rem;
+  letter-spacing: 0;
+}
+
+/* ---------------------------------------------------------------- Copy */
+.film-copy {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  align-items: end;
+  min-block-size: max(100svh, 560px);
+  padding-block: calc(var(--header-h) + 56px) clamp(72px, 12svh, 128px);
+}
+.film-copy-in {
+  display: grid;
+  justify-items: start;
+  align-content: end;
+  gap: 18px;
+  inline-size: 100%;
+  text-align: start;
+}
+.film-copy-in > * {
+  max-inline-size: min(100%, 34rem);
+  margin: 0;
+}
+.film-count {
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-taupe);
+}
+.film-cat {
+  font-size: clamp(2rem, 3.6vw, 3.4rem);
+  font-weight: 500;
+  line-height: 1.12;
+  color: var(--color-champagne);
+  text-wrap: balance;
+}
+.film-line {
+  font-size: clamp(1.05rem, 1.45vw, 1.35rem);
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(245, 233, 211, 0.92);
+  text-wrap: pretty;
+}
+.film-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-block-size: 44px;
+  padding-block-end: 4px;
+  border-block-end: 1px solid var(--color-taupe);
+  color: var(--color-champagne);
+  font-size: 0.98rem;
+  text-decoration: none;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+}
+.film-go:hover,
+.film-go:focus-visible {
+  border-color: var(--color-champagne);
+  color: var(--color-ivory);
+}
+
+/* The opening: the hero's lines, start-aligned on the empty hall (first paint, LCP). */
+.film-beat[data-beat="opening"] .film-copy {
+  align-items: center;
+  padding-block-end: clamp(48px, 9svh, 110px);
+}
+.film-beat[data-beat="opening"] .film-copy-in {
+  gap: clamp(18px, 2.4vw, 28px);
+}
+.film-beat[data-beat="opening"] .film-copy-in > * {
+  max-inline-size: min(100%, 40rem);
+}
+.hero-eyebrow {
+  margin: 0;
+  text-shadow: 0 2px 18px rgba(13, 8, 5, 0.8);
+}
+.hero-title {
+  /* Its own fallback faces, matched on these two lines (D156). */
+  font-family: var(--font-hero);
+  margin: 0;
+  font-size: clamp(2.6rem, min(6.4vw, 11svh), 7.5rem);
+  font-weight: 200;
+  line-height: 0.94;
+  text-shadow: 0 4px 40px rgba(13, 8, 5, 0.55);
+  text-wrap: nowrap;
+}
+.hero-title:lang(ar) {
+  font-family: var(--font-hero-ar);
+  line-height: 1.18;
+}
+.hero-line {
+  display: block;
+  padding-block-end: 0.06em;
+}
+.hero-line:first-child {
+  letter-spacing: 0.04em;
+  color: var(--color-ivory);
+}
+.hero-line b {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--color-champagne);
+}
+.hero-title:lang(ar) .hero-line,
+.hero-title:lang(ar) .hero-line b {
+  letter-spacing: 0;
+}
+/* The text's own box (an inline-block, so it is the LCP element): never animated. */
+.hero-line-inner {
+  display: inline-block;
+}
+.film-copy-in > .hero-title {
+  max-inline-size: none;
+}
+/* A fixed measure, not ch: ch follows the font, so the block moved on the font swap (D156). */
+.film-copy-in > .hero-lead {
+  max-inline-size: min(100%, 30.5rem);
+  text-wrap: balance;
+  color: rgba(245, 233, 211, 0.9);
+  text-shadow: 0 2px 24px rgba(13, 8, 5, 0.7);
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+}
+.film-final-title {
+  font-size: clamp(2.4rem, min(5.6vw, 10svh), 6.2rem);
+}
+.film-copy-in > .film-line-lead {
+  color: var(--color-champagne);
+}
+
+/* ---------------------------------------------------------------- Skip */
+/* A zero-height sticky rail: the link stays on screen through the film and takes no space. */
+.film-skip-rail {
+  position: sticky;
+  z-index: 6;
+  top: calc(100svh - 68px);
+  block-size: 0;
+}
+.film-skip {
+  position: absolute;
+  inset-inline-end: clamp(16px, 4vw, 56px);
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 44px;
+  padding-inline: 18px;
+  border: 1px solid rgba(234, 212, 171, 0.45);
+  border-radius: 999px;
+  background: rgba(46, 32, 23, 0.72);
+  backdrop-filter: blur(6px);
+  color: var(--color-champagne);
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+.film-skip:hover,
+.film-skip:focus-visible {
+  border-color: var(--color-champagne);
+  color: var(--color-ivory);
+}
+/* The skip target: scroll-margin keeps the next section clear of the header. */
+.film-after {
+  scroll-margin-block-start: var(--header-h);
+  outline: none;
+}
+
+/* ---------------------------------------------------------------- Motion mode */
+/* Each scene: a screen to rise in, a hold, then the next rises over it. The plate and the copy are
+   sticky for the scene's length; the next scene starts a screen early (negative margin), so it
+   comes up over this one while this one is held. */
+html[data-js]:not([data-reduced]) .film-beat {
+  min-block-size: 0;
+  block-size: calc(200svh + var(--film-hold));
+}
+html[data-js]:not([data-reduced]) .film-beat + .film-beat {
+  margin-block-start: -100svh;
+}
+html[data-js]:not([data-reduced]) .film-plate,
+html[data-js]:not([data-reduced]) .film-copy {
+  position: sticky;
+  top: 0;
+  block-size: 100svh;
+  min-block-size: 0;
+  align-self: start;
+}
+
+/* ---------------------------------------------------------------- Props */
+/* Events: the hall dark, then the rig comes up (the veil lifts, the haze glows). */
+.film-veil {
+  position: absolute;
+  inset: 0;
+  background: var(--color-espresso);
+  opacity: 0;
+}
+.film-haze {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(60% 50% at 50% 8%, rgba(234, 212, 171, 0.26), transparent 70%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* Creative: the viewfinder, over the whole frame. */
+.film-vf {
+  position: absolute;
+  inset-block: calc(var(--header-h) + 64px) clamp(110px, 16svh, 160px);
+  inset-inline: clamp(20px, 6vw, 120px);
+  pointer-events: none;
+  color: var(--color-ivory);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  font-variant-numeric: tabular-nums;
+}
+.film-vf-c {
+  position: absolute;
+  inline-size: clamp(26px, 3vw, 46px);
+  aspect-ratio: 1;
+  border: 1.5px solid rgba(245, 233, 211, 0.8);
+}
+.film-vf-c[data-c="a"] {
+  top: 0;
+  left: 0;
+  border-right: 0;
+  border-bottom: 0;
+}
+.film-vf-c[data-c="b"] {
+  top: 0;
+  right: 0;
+  border-left: 0;
+  border-bottom: 0;
+}
+.film-vf-c[data-c="c"] {
+  bottom: 0;
+  left: 0;
+  border-right: 0;
+  border-top: 0;
+}
+.film-vf-c[data-c="d"] {
+  bottom: 0;
+  right: 0;
+  border-left: 0;
+  border-top: 0;
+}
+.film-vf-rec {
+  position: absolute;
+  top: 14px;
+  left: clamp(40px, 4.4vw, 66px);
+}
+.film-vf-rec::before {
+  content: "";
+  display: inline-block;
+  inline-size: 9px;
+  block-size: 9px;
+  margin-right: 9px;
+  border-radius: 50%;
+  background: #c9533f;
+}
+.film-vf-tc {
+  position: absolute;
+  top: 14px;
+  right: clamp(40px, 4.4vw, 66px);
+}
+/* The crosshair on the camera, on the side away from the copy. */
+.film-vf-cross {
+  position: absolute;
+  left: 68%;
+  top: 50%;
+  inline-size: 26px;
+  block-size: 26px;
+  translate: -50% -50%;
+  background:
+    linear-gradient(rgba(245, 233, 211, 0.7), rgba(245, 233, 211, 0.7)) center / 1.5px 100% no-repeat,
+    linear-gradient(rgba(245, 233, 211, 0.7), rgba(245, 233, 211, 0.7)) center / 100% 1.5px no-repeat;
+}
+html[dir="rtl"] .film-vf-cross {
+  left: 32%;
+}
+
+/* Marketing: a screen on the hall's blank wall (measured on film-hall: the wall spans 24.5–76% ×
+   41.5–65%), on the end side of it, away from the copy. */
+.film-wall {
+  position: absolute;
+  left: 47.5%;
+  top: 43%;
+  width: 26%;
+  height: 20%;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(120% 140% at 50% 40%, #6d4f37 0%, #3a291d 70%);
+  box-shadow:
+    0 0 4cqw rgba(234, 212, 171, 0.3),
+    0 2cqw 6cqw rgba(234, 212, 171, 0.12);
+}
+html[dir="rtl"] .film-wall {
+  left: 26.5%;
+}
+.film-campaign {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 0.6em;
+  inline-size: 100%;
+  block-size: 100%;
+  color: var(--color-ivory);
+  text-align: center;
+}
+.film-wall .film-campaign {
+  font-size: 0.78cqw;
+}
+.film-campaign-kicker {
+  margin: 0;
+  font-size: 0.85em;
+  letter-spacing: 0.2em;
+  color: var(--color-taupe);
+}
+.film-campaign-kicker:lang(ar) {
+  letter-spacing: 0;
+}
+.film-campaign-title {
+  margin: 0;
+  font-size: 2.3em;
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--color-champagne);
+}
+.film-campaign-count {
+  display: flex;
+  gap: 0.9em;
+}
+.film-campaign-unit {
+  display: grid;
+  justify-items: center;
+  min-inline-size: 3.2em;
+  padding: 0.35em 0.5em;
+  border: 1px solid rgba(234, 212, 171, 0.4);
+}
+.film-campaign-unit b {
+  font-family: var(--font-hero);
+  font-size: 1.5em;
+  font-weight: 300;
+  font-variant-numeric: tabular-nums;
+}
+.film-campaign-unit small {
+  font-size: 0.62em;
+  color: var(--color-taupe);
+}
+.film-campaign-rsvp {
+  margin-block-start: 0.6em;
+  padding: 0.55em 1.2em;
+  border-radius: 999px;
+  background: var(--color-champagne);
+  color: var(--color-espresso);
+  font-weight: 500;
+  font-size: 0.85em;
+}
+.film-example {
+  position: absolute;
+  inset-block-start: 0.6em;
+  inset-inline-end: 0.7em;
+  padding: 0.15em 0.6em;
+  border: 1px solid rgba(234, 212, 171, 0.5);
+  border-radius: 999px;
+  font-size: 0.62em;
+  letter-spacing: 0.08em;
+  color: var(--color-champagne);
+}
+/* The phone: a device frame drawn in CSS, its screen the same campaign. */
+.film-phone {
+  position: absolute;
+  inset-inline-end: clamp(20px, 7vw, 120px);
+  bottom: clamp(70px, 10svh, 110px);
+  block-size: min(50svh, 440px);
+  aspect-ratio: 9 / 19;
+  padding: 2.2%;
+  border-radius: 13% / 6.2%;
+  background: linear-gradient(150deg, #4a3829, #1d140d 60%);
+  box-shadow:
+    0 30px 60px rgba(8, 5, 3, 0.6),
+    inset 0 0 0 1px rgba(234, 212, 171, 0.25);
+  container-type: inline-size;
+}
+.film-phone-screen {
+  position: relative;
+  block-size: 100%;
+  overflow: hidden;
+  border-radius: 11% / 5.2%;
+  background: radial-gradient(120% 70% at 50% 30%, #6d4f37, #2e2017 75%);
+}
+.film-phone-screen::before {
+  content: "";
+  position: absolute;
+  top: 2.2%;
+  left: 35%;
+  inline-size: 30%;
+  block-size: 2.6%;
+  border-radius: 999px;
+  background: #120c08;
+}
+.film-phone .film-campaign {
+  font-size: 7.4cqw;
+  padding-block: 18% 8%;
+}
+.film-phone .film-campaign-count {
+  gap: 0.4em;
+}
+.film-phone .film-campaign-unit {
+  min-inline-size: 2.7em;
+}
+
+/* Print & Gifts: the printed name card, set down beside the plate (on the end side). */
+.film-card {
+  position: absolute;
+  inset-inline-end: 22%;
+  top: 66%;
+  inline-size: 14%;
+  aspect-ratio: 1.6;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 0.4em;
+  font-size: 1.05cqw;
+  background: linear-gradient(160deg, #f8efdf, #eadcc3);
+  color: var(--color-espresso);
+  box-shadow:
+    0 0.6cqw 1.6cqw rgba(30, 20, 14, 0.45),
+    0 0.1cqw 0.2cqw rgba(30, 20, 14, 0.4);
+  rotate: -6deg;
+  text-align: center;
+}
+.film-card-title {
+  margin: 0;
+  font-size: 1.5em;
+  font-weight: 500;
+}
+.film-card-table {
+  margin: 0;
+  font-size: 0.8em;
+  letter-spacing: 0.12em;
+  color: var(--color-cocoa);
+}
+.film-card-rule {
+  inline-size: 3.2em;
+  block-size: 1px;
+  background: linear-gradient(90deg, transparent, #b08d57, transparent);
+}
+
+/* Software & Digital: the check-in tablet, on the end side. */
+.film-tablet {
+  position: absolute;
+  inset-inline-end: clamp(20px, 6vw, 110px);
+  top: 50%;
+  translate: 0 -46%;
+  inline-size: min(46vw, 640px);
+  aspect-ratio: 4 / 3;
+  padding: 2.4%;
+  border-radius: 4.5%;
+  background: linear-gradient(150deg, #4a3829, #1d140d 60%);
+  box-shadow:
+    0 40px 80px rgba(8, 5, 3, 0.65),
+    inset 0 0 0 1px rgba(234, 212, 171, 0.25);
+  container-type: inline-size;
+}
+.film-tablet-screen {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 4cqw;
+  block-size: 100%;
+  padding: 5cqw;
+  border-radius: 3%;
+  background: linear-gradient(170deg, #3b2a1e, #241811);
+  font-size: 2.6cqw;
+  color: var(--color-ivory);
+}
+.film-ci-head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.film-ci-head p {
+  margin: 0;
+  font-size: 1.35em;
+  font-weight: 500;
+  color: var(--color-champagne);
+}
+.film-ci-head .film-example {
+  position: static;
+  font-size: 0.8em;
+}
+.film-ci-body {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 6cqw;
+}
+.film-ci-scan {
+  display: grid;
+  justify-items: center;
+  gap: 0.8em;
+  color: var(--color-taupe);
+}
+.film-qr {
+  inline-size: 22cqw;
+  padding: 1.6cqw;
+  border-radius: 6px;
+  background: var(--color-ivory);
+  color: var(--color-espresso);
+  fill: currentColor;
+}
+.film-ci-scan small {
+  font-size: 0.8em;
+}
+.film-ci-guest p {
+  margin: 0;
+}
+.film-ci-name {
+  font-size: 1.7em;
+  font-weight: 500;
+}
+.film-ci-guest .film-ci-table {
+  margin-block: 0.3em 1em;
+  color: var(--color-taupe);
+}
+.film-ci-done {
+  display: inline-flex;
+  gap: 0.5em;
+  padding: 0.45em 1em;
+  border-radius: 999px;
+  background: rgba(234, 212, 171, 0.16);
+  border: 1px solid rgba(234, 212, 171, 0.5);
+  color: var(--color-champagne);
+}
+.film-ci-live {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.4em 0.8em;
+  color: rgba(245, 233, 211, 0.85);
+}
+.film-ci-live b {
+  font-family: var(--font-hero);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ivory);
+}
+.film-ci-dot {
+  inline-size: 0.6em;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #8fb38a;
+  box-shadow: 0 0 0 0.3em rgba(143, 179, 138, 0.2);
+}
+.film-ci-bar {
+  grid-column: 1 / -1;
+  display: block;
+  block-size: 0.35em;
+  border-radius: 999px;
+  background: rgba(234, 212, 171, 0.15);
+  overflow: hidden;
+}
+.film-ci-bar > span {
+  display: block;
+  block-size: 100%;
+  border-radius: inherit;
+  background: var(--color-champagne);
+  transform-origin: left;
+}
+html[dir="rtl"] .film-ci-bar > span {
+  transform-origin: right;
+}
+
+/* Finale: the dial at zero, on the end side, over Rand's dressed hall. */
+.film-dial-wrap {
+  position: absolute;
+  top: 50%;
+  inset-inline-end: clamp(20px, 8vw, 160px);
+  inline-size: min(62svh, 40vw);
+  aspect-ratio: 1;
+  translate: 0 -46%;
+  pointer-events: none;
+}
+.film-dial {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+}
+.film-dial-rays line,
+.film-dial-rays circle {
+  fill: none;
+  stroke: var(--color-champagne);
+  stroke-width: 0.6;
+}
+.film-dial-rays {
+  opacity: 0.2;
+}
+.film-dial-ring,
+.film-dial-ring2 {
+  fill: none;
+  stroke: var(--color-taupe);
+  stroke-width: 1.2;
+}
+.film-dial-ring2 {
+  opacity: 0.4;
+  stroke-dasharray: 2 6;
+}
+.film-dial-ticks line {
+  stroke: var(--color-taupe);
+  stroke-width: 1;
+  opacity: 0.6;
+}
+.film-dial-ticks line.major {
+  stroke: var(--color-champagne);
+  stroke-width: 2;
+  opacity: 0.85;
+}
+.film-dial-hand line {
+  stroke: var(--color-champagne);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+.film-dial-hub {
+  fill: var(--color-champagne);
+}
+
+/* ---------------------------------------------------------------- Phones and tablets */
+@media (max-width: 899.98px) {
+  .film {
+    --film-hold: 0svh;
+  }
+  .film-cover {
+    inline-size: max(100cqw, 100cqh * 9 / 16);
+    aspect-ratio: 9 / 16;
+  }
+  /* The copy sits low; the plate darkens from the bottom instead of the side. */
+  .film-shade,
+  html[dir="rtl"] .film-shade {
+    background: linear-gradient(to top, rgba(30, 20, 14, 0.96) 0%, rgba(30, 20, 14, 0.84) 40%, rgba(30, 20, 14, 0.22) 68%, rgba(30, 20, 14, 0.4) 100%);
+  }
+  .film-copy {
+    padding-block: calc(var(--header-h) + 40px) calc(92px + env(safe-area-inset-bottom));
+  }
+  .film-beat[data-beat="opening"] .film-copy {
+    align-items: end;
+  }
+  .hero-title {
+    font-size: clamp(2.5rem, 12.5vw, 4rem);
+  }
+  .film-final-title {
+    font-size: clamp(2.3rem, 11.5vw, 3.6rem);
+  }
+  /* Under the skip link's row, so the two never meet. */
+  .film-slate {
+    inset-block-start: calc(var(--header-h) + 60px);
+    inset-inline: 20px auto;
+  }
+  .film-skip-rail {
+    top: calc(var(--header-h) + 12px);
+  }
+  .film-skip {
+    min-block-size: 36px;
+    padding-inline: 14px;
+    font-size: 0.78rem;
+  }
+  /* Marketing on phones: the wall is the full width of the 9:16 crop (44–64%). */
+  .film-wall,
+  html[dir="rtl"] .film-wall {
+    left: 18%;
+    width: 64%;
+    top: 42%;
+    height: 17%;
+  }
+  .film-wall .film-campaign {
+    font-size: 2.3cqw;
+  }
+  .film-phone {
+    bottom: auto;
+    top: calc(var(--header-h) + 96px);
+    inset-inline-end: 20px;
+    block-size: min(30svh, 260px);
+  }
+  .film-card {
+    top: 18%;
+    inset-inline-end: auto;
+    left: 30%;
+    inline-size: 40%;
+    font-size: 2.8cqw;
+  }
+  .film-tablet {
+    top: calc(var(--header-h) + 96px);
+    inset-inline: 20px;
+    translate: none;
+    inline-size: auto;
+  }
+  .film-dial-wrap {
+    top: calc(var(--header-h) + 90px);
+    inset-inline: 0;
+    margin-inline: auto;
+    inline-size: min(70vw, 34svh);
+    translate: none;
+  }
+  .film-vf {
+    inset-block: calc(var(--header-h) + 96px) 46svh;
+    inset-inline: 16px;
+  }
+  .film-vf-cross,
+  html[dir="rtl"] .film-vf-cross {
+    left: 50%;
+  }
+}
+@media (max-width: 599.98px) {
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    inline-size: min(100%, 320px);
+  }
+}

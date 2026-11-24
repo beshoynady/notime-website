@@ -1,8 +1,7 @@
 import { About } from "@/components/sections/about/about";
-import { Categories } from "@/components/sections/categories/categories";
 import { Digital } from "@/components/sections/digital/digital";
 import { FinalCta } from "@/components/sections/final-cta/final-cta";
-import { Hero } from "@/components/sections/hero/hero";
+import { Film } from "@/components/sections/film/film";
 import { Markets } from "@/components/sections/markets/markets";
 import { Process } from "@/components/sections/process/process";
 import { ServicesMarquee } from "@/components/sections/services-marquee/services-marquee";
@@ -27,8 +26,9 @@ export async function generateMetadata({ params }: PageProps<"/[locale]">): Prom
 }
 
 /**
- * The homepage, in the brief's order (PROJECT_BRIEF §4). The tones alternate so the page ground
- * turns at each section (ToneController): dark hero, photo strip and about, light categories, dark
+ * The homepage, in the brief's order (PROJECT_BRIEF §4). It opens with the film (the night of an
+ * event, one scene per category; it replaces the hero and the categories grid). The tones alternate
+ * so the page ground turns at each section (ToneController): dark film, photo strip and about, dark
  * work and marquee, light digital, dark process, light markets, dark CTA and footer.
  */
 export default async function HomePage({ params }: PageProps<"/[locale]">) {
@@ -36,14 +36,13 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
   return (
     <main id="main">
       <JsonLd data={homeJsonLd(locale as Locale, SITE_URL, contact.email)} />
-      <Hero />
+      <Film />
       {/* Real rooms from our events, unnamed (D109): the proof right after the promise (N05). */}
       <PhotoStrip id="home-strip" tone="dark" eyebrow={STRIP.eyebrow} title={STRIP.title} frames={STRIP.frames} locale={locale as Locale} />
       <About />
       {/* Trust blocks (B8): hidden in production until the real material exists (D78); badged
           examples in review mode, where the benchmarks put them. */}
       <ExampleBlock kind="stats" refId={HOME_REF.stats} tone="dark" />
-      <Categories />
       <ExampleBlock kind="logos" refId={HOME_REF.logos} />
       <Work />
       <ServicesMarquee />

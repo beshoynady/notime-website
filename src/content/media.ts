@@ -202,13 +202,13 @@ export const MEDIA: MediaEntry[] = [
   }, "16:9 · the finished gift on a plain ground, raking light"),
   profile("gifts-2", "p23-2", 905, 1019, {
     en: "A sports T-shirt designed for a driving institute.",
-    ar: "قميص رياضي صُمّم لمعهد لتعليم القيادة.",
+    ar: "قميص رياضي صُمّم لمعهد لتعليم قيادة السيارات.",
   }, "portrait · the garment flat or on a form, the print readable", clientVisible),
 
   // Named projects (pages 5, 8, 13, 19, 23): a client is visible, so Rand approves each (question 4).
   profile("uae-pro-league-1", "p5-1", 1224, 664, {
     en: "A tournament's identity printed on fabric at the venue.",
-    ar: "هوية إحدى البطولات مطبوعة على القماش في موقع الحدث.",
+    ar: "هوية إحدى البطولات مطبوعة على القماش في موقع الفعالية.",
   }, "16:9 · the event identity in place at the venue", clientVisible),
   profile("uae-pro-league-2", "p5-3", 1060, 575, {
     en: "A pre-match ceremony on the pitch, seen from the stands.",
@@ -327,7 +327,7 @@ MEDIA.push(
   stock("cp-rental-lights", "unsplash:S6OSYUlvJxo", "Aditya Wardhana", "https://unsplash.com/photos/S6OSYUlvJxo", 1600, 900, null,
     "16:9 · lights on stands against a plain wall, no brand marks (NO TIME's own kit replaces it)", {
       grade: "studio",
-      alt: { en: "LED panel lights on stands, lit against a warm wall.", ar: "ألواح إضاءة LED على حوامل، مضاءة أمام جدار دافئ." },
+      alt: { en: "LED panel lights on stands, lit against a warm wall.", ar: "ألواح إضاءة LED على حوامل، مضاءة أمام جدار بلون دافئ." },
     }),
   // Marketing & Brand (D159): the editorial grade; no brand marks, no faces.
   stock("mb-open-desk", "unsplash:8dgFq8Vbelo", "Andy Brown", "https://unsplash.com/photos/8dgFq8Vbelo", 2400, 1350, [1080, 1920],
@@ -391,7 +391,7 @@ MEDIA.push(
     }),
   stock("sw-ecommerce", "unsplash:MGaFENpDCsw", "Bench Accounting", "https://unsplash.com/photos/MGaFENpDCsw", 1400, 1050, null,
     "4:3 · an order packed at a bright table, the face out of frame", {
-      alt: { en: "Hands packing an online order in a box at a bright table.", ar: "يدان تغلّفان طلبًا إلكترونيًا في صندوق على طاولة مضيئة." },
+      alt: { en: "Hands packing an online order in a box at a bright table.", ar: "يدان تغلّفان طلبًا من متجر إلكتروني في صندوق على طاولة مضيئة." },
     }),
   stock("sw-ux", "unsplash:sv8oOQaUb-o", "Amélie Mourichon", "https://unsplash.com/photos/sv8oOQaUb-o", 1400, 1050, null,
     "4:3 · app wireframes sketched on paper, a hand with a pen", {
@@ -403,12 +403,24 @@ MEDIA.push(
     }),
   stock("sw-event-tech", "unsplash:yz3N50D9uy4", "Compagnons", "https://unsplash.com/photos/yz3N50D9uy4", 1400, 1050, null,
     "4:3 · hands on a rugged tablet on an event floor, no faces", {
-      alt: { en: "Hands using a rugged tablet on an event floor.", ar: "يدان تستخدمان جهازًا لوحيًا متينًا في أرض فعالية." },
+      alt: { en: "Hands using a rugged tablet on an event floor.", ar: "يدان تستخدمان جهازًا لوحيًا متينًا في موقع إحدى الفعاليات." },
     }),
   // The product pages (Task 14, D162): the place each problem happens, behind the problem line.
   // Decorative (the screens and the copy say what it is); no faces, no brand marks.
   stock("pp-minute-zero", "unsplash:MLLmIskI6LU", "Joshua Ferrer", "https://unsplash.com/photos/MLLmIskI6LU", 1600, 1066, null,
     "3:2 · the way in to a venue at night, lit path to an open door, no faces, no signs"),
+  // The home film (docs/review/film-storyboard/, recipe docs/content/recipes/home-film.json):
+  // mood plates for the night of an event, no logos, no recognisable people.
+  stock("film-hall", "unsplash:elEIyWEj-bM", "National Asian Culture Center", "https://unsplash.com/photos/elEIyWEj-bM", 1920, 1080, [1080, 1920],
+    "16:9 + 9:16 · an empty hall before the build: trusses, a big blank wall, no people"),
+  stock("film-beams", "unsplash:sol7vhs8Pdg", "Kevin Yudhistira Alloni", "https://unsplash.com/photos/sol7vhs8Pdg", 1920, 1080, [1080, 1920],
+    "16:9 + 9:16 · the first beams on a truss, confetti taken out (a NO TIME rig at first light replaces it)"),
+  stock("film-camera", "unsplash:kbd1oAf-9Ms", "Jakob Owens", "https://unsplash.com/photos/kbd1oAf-9Ms", 1920, 1080, [1080, 1920],
+    "16:9 + 9:16 · a cinema camera as a backlit silhouette, no brand mark, no face (a NO TIME shoot replaces it)"),
+  stock("film-gift", "unsplash:gUfRIiyltf0", "Nathan Mullet", "https://unsplash.com/photos/gUfRIiyltf0", 1920, 1080, [1080, 1920],
+    "16:9 + 9:16 · a gift on a gold charger at a dressed seat, linen, no people (a NO TIME gift at a seat replaces it)"),
+  stock("film-arrival", "unsplash:MLLmIskI6LU", "Joshua Ferrer", "https://unsplash.com/photos/MLLmIskI6LU", 1280, 720, [1080, 1920],
+    "16:9 + 9:16 · the lit way in, blurred to a backdrop for the check-in screen"),
   stock("pp-peak-hour", "unsplash:boaDpmC-_Xo", "Fabrizio Magoni", "https://unsplash.com/photos/boaDpmC-_Xo", 1600, 1067, null,
     "3:2 · a kitchen pass at service, hands plating, no faces"),
 );

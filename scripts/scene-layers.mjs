@@ -68,6 +68,16 @@ async function render(file, crop, item, suffix = "") {
   const maxWidth = suffix ? Math.min(item.maxWidth ?? 2400, 1080) : (item.maxWidth ?? 2400);
   let img = sharp(file).rotate().extract(box);
   if (box.width > maxWidth) img = img.resize({ width: maxWidth });
+  // Clean-up before the grade, in its own pass (one recomb/modulate per pipeline): `median` (px)
+  // takes out specks such as confetti, `mono` drops a source's colour so the grade alone tints it,
+  // `blur` (sigma) makes a soft backdrop.
+  if (item.median || item.mono || item.blur) {
+    let pre = img;
+    if (item.median) pre = pre.median(item.median);
+    if (item.mono) pre = pre.greyscale();
+    if (item.blur) pre = pre.blur(item.blur);
+    img = sharp(await pre.toColourspace("srgb").toBuffer());
+  }
   if (item.grade) {
     const g = GRADES[item.grade];
     img = img.recomb(g.matrix).modulate(g.modulate);
