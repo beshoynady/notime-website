@@ -62,7 +62,12 @@ export function FilmMotion() {
             const copyBox = q(beat, ".film-copy");
             if (copyBox) rise.fromTo(copyBox, { yPercent: -100 }, { yPercent: 0, ease: "none", duration: 1 }, 0);
             if (prevCopy) rise.to(prevCopy, { opacity: 0, yPercent: -6, ease: "power1.in", duration: 0.3 }, 0.1);
-            if (copy) rise.fromTo(copy, { opacity: 0 }, { opacity: 1, ease: "power1.out", duration: 0.3 }, 0.4);
+            if (copy) {
+              rise.fromTo(copy, { opacity: 0 }, { opacity: 1, ease: "power1.out", duration: 0.3 }, 0.4);
+              // Unclickable until it shows: held over the scene before, it would take that scene's clicks.
+              rise.set(copy, { pointerEvents: "none", immediateRender: true }, 0);
+              rise.set(copy, { pointerEvents: "auto" }, 0.55);
+            }
           }
 
           const veil = q(beat, "[data-film-veil]");

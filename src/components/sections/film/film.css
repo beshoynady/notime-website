@@ -190,11 +190,15 @@ html[dir="rtl"] .film-shade {
   position: relative;
   z-index: 3;
   display: grid;
+  /* The box spans the screen and, while its scene waits to rise, is held over the scene before
+     (film-motion.tsx): only the copy itself takes the pointer, and only once it shows. */
+  pointer-events: none;
   align-items: end;
   min-block-size: max(100svh, 560px);
   padding-block: calc(var(--header-h) + 56px) clamp(72px, 12svh, 128px);
 }
 .film-copy-in {
+  pointer-events: auto;
   display: grid;
   justify-items: start;
   align-content: end;
