@@ -10,7 +10,7 @@ export const products: Product[] = [
   {
     slug: "qr-check-in",
     status: "comingSoon",
-    name: { en: "Minute Zero", ar: "الدقيقة صفر" },
+    name: { en: "Invitely", ar: "إنفايتلي" },
     descriptor: { en: "QR event check-in", ar: "تسجيل الحضور في الفعاليات برمز QR" },
     summary: {
       en: "Guests check in at the door with a QR code; the team sees arrivals as they happen.",
@@ -21,7 +21,7 @@ export const products: Product[] = [
   {
     slug: "restaurant-system",
     status: "comingSoon",
-    name: { en: "Peak Hour", ar: "ساعة الذروة" },
+    name: { en: "Smart Menu", ar: "سمارت منيو" },
     descriptor: { en: "Restaurant management", ar: "نظام إدارة المطاعم" },
     summary: {
       en: "Orders, tables and the kitchen in one system, built for busy service.",
@@ -31,5 +31,5 @@ export const products: Product[] = [
   },
 ];
 
-/** "Minute Zero · QR event check-in": the name with what it does, for titles, metadata and menus. */
+/** "Invitely · QR event check-in": the name with what it does, for titles, metadata and menus. */
 export const productLockup = (p: Pick<Product, "name" | "descriptor">, locale: Locale) => `${p.name[locale]} · ${p.descriptor[locale]}`;

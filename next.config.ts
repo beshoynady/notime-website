@@ -28,7 +28,15 @@ const nextConfig: NextConfig = {
   },
   // A second guard behind the host-level redirect (docs/launch/hostinger-deploy.md): path and query kept.
   async redirects() {
-    return [{ source: "/:path*", has: [{ type: "host", value: `www.${APEX}` }], destination: `https://${APEX}/:path*`, permanent: true }];
+    // The products were renamed (Minute Zero → Invitely, Peak Hour → Smart Menu): the old URLs land on the new pages.
+    const renamed = [
+      ["minute-zero", "invitely"],
+      ["peak-hour", "smart-menu"],
+    ].flatMap(([from, to]) => [
+      { source: `/:locale(en|ar)/products/${from}`, destination: `/:locale/products/${to}`, permanent: true },
+      { source: `/products/${from}`, destination: `/en/products/${to}`, permanent: true },
+    ]);
+    return [{ source: "/:path*", has: [{ type: "host", value: `www.${APEX}` }], destination: `https://${APEX}/:path*`, permanent: true }, ...renamed];
   },
   // Self-hosted brand fonts (D45): versioned file names, so they can be cached for good.
   async headers() {

@@ -29,7 +29,7 @@ export interface Mail {
   vars: Record<string, string>;
 }
 
-const PRODUCT_NAMES = { "minute-zero": "Minute Zero", "peak-hour": "Peak Hour" } as const;
+const PRODUCT_NAMES = { "invitely": "Invitely", "smart-menu": "Smart Menu" } as const;
 const isEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 const row = (label: string, value: string | undefined): [string, string][] => (value ? [[label, value]] : []);
 /** "2027-03" → "March 2027" (the team reads English). */

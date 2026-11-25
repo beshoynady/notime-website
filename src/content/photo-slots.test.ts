@@ -86,12 +86,12 @@ const PENDING: string[] = [];
  * Repeats kept on purpose, each with its reason (the owner's storyboard approval, 2026-11-24):
  * - p9-2, the glass-roofed hall: the film's payoff (its finale) and the Events opening;
  * - the first beams: Events' scene in the film and on the Events page (confetti taken out here);
- * - the lit way in: blurred to a backdrop behind the check-in tablet, and Minute Zero's photo.
+ * - the lit way in: blurred to a backdrop behind the check-in tablet, and Invitely's photo.
  */
 const KEPT: Record<string, string[]> = {
   "p9-2": ["home film", "scene events-opening"],
   "unsplash:sol7vhs8Pdg": ["home film", "scene events-stage"],
-  "unsplash:MLLmIskI6LU": ["home film", "product minute-zero"],
+  "unsplash:MLLmIskI6LU": ["home film", "product invitely"],
 };
 
 describe("one photograph, one place (D169)", () => {
@@ -120,7 +120,7 @@ describe("one photograph, one place (D169)", () => {
 
   it("finds the slots it checks (a renamed export would empty it)", () => {
     const all = new Set([...where.values()].flatMap((s) => [...s]));
-    for (const slot of ["home film", "home strip", "about story", "gallery photography", "work rooms-we-dressed", "product minute-zero"]) {
+    for (const slot of ["home film", "home strip", "about story", "gallery photography", "work rooms-we-dressed", "product invitely"]) {
       expect(all.has(slot), slot).toBe(true);
     }
     expect([...all].filter((s) => s.startsWith("scene ")).length).toBeGreaterThan(5);

@@ -7,7 +7,7 @@ const fd = (o: Record<string, string>) => {
   for (const [k, v] of Object.entries(o)) f.set(k, v);
   return f;
 };
-const ok = { locale: "en", source: "peak-hour", product: "peak-hour", name: "Lina", email: "lina@example.com" };
+const ok = { locale: "en", source: "smart-menu", product: "smart-menu", name: "Lina", email: "lina@example.com" };
 
 describe("handleSubmission", () => {
   it("returns success for a valid form and sends nothing until delivery is wired", async () => {

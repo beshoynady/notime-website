@@ -647,8 +647,8 @@
   },
   "productPage": {
     "inDevelopment": "In development",
-    "hookMinuteZero": "The first minute at the door sets the tone for the whole evening.",
-    "hookPeakHour": "Built for the hour when every table is full and the kitchen can't wait.",
+    "hookInvitely": "The first minute at the door sets the tone for the whole evening.",
+    "hookSmartMenu": "Built for the hour when every table is full and the kitchen can't wait.",
     "problemTitle": "The problem",
     "featuresTitle": "What it does",
     "screensTitle": "Concept screens",

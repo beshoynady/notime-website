@@ -87,8 +87,8 @@ export const TARGETS = {
   "/work": [["work-index", "#page-stage"]],
   "/work/airline-exhibition-pavilion": [["work-case", "#page-stage"]],
   "/work/rooms-we-dressed": [["work-collection", "#page-stage"]],
-  "/products/minute-zero": [["product-minute-zero", "#page-stage"]],
-  "/products/peak-hour": [["product-peak-hour", "#page-stage"]],
+  "/products/invitely": [["product-invitely", "#page-stage"]],
+  "/products/smart-menu": [["product-smart-menu", "#page-stage"]],
 };
 
 await mkdir(out, { recursive: true });

@@ -29,7 +29,7 @@ export const contactHref = (anchor?: string) => (anchor ? `${CONTACT_HREF}?servi
 /** The brief with a category hint (D126): that group first and, for Events, the event fields. */
 export const contactCategoryHref = (slug: CategorySlug) => `${CONTACT_HREF}?category=${slug}`;
 
-/** A product page (F4), by the product's id in the forms contract ("minute-zero", "peak-hour"). */
+/** A product page (F4), by the product's id in the forms contract ("invitely", "smart-menu"). */
 export const productHref = (id: string) => `/products/${id}`;
 
 /** Labels for breadcrumbs (visible and JSON-LD). */

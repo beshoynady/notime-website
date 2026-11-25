@@ -4,7 +4,7 @@ import { InterestForm } from "@/components/forms/interest-form";
 import { PageCrumbs } from "@/components/pages/page-crumbs";
 import { SectionRef } from "@/components/review/section-ref";
 import { JsonLd } from "@/components/seo/json-ld";
-import { MinuteZeroScreens, PeakHourScreens } from "@/components/software/product-screens";
+import { InvitelyScreens, SmartMenuScreens } from "@/components/software/product-screens";
 import { ButtonArrow, buttonVariants } from "@/components/ui/button";
 import { MediaImage } from "@/components/ui/media-image";
 import { SITE_URL } from "@/config/site";
@@ -42,7 +42,7 @@ export async function ProductPage({ id, locale }: { id: ProductId; locale: Local
   const name = product.name[locale];
   const other = productFor(page.other);
   const software = getCategory("software-digital")!;
-  const hook = id === "minute-zero" ? t("hookMinuteZero") : t("hookPeakHour");
+  const hook = id === "invitely" ? t("hookInvitely") : t("hookSmartMenu");
   const photo = media(page.photo);
 
   return (
@@ -86,7 +86,7 @@ export async function ProductPage({ id, locale }: { id: ProductId; locale: Local
                 <span className="sw-tag sw-tag-fill">{tc("preview")}</span>
                 <span className="sw-tag">{tc("example")}</span>
               </span>
-              {id === "minute-zero" ? <MinuteZeroScreens locale={locale} /> : <PeakHourScreens locale={locale} />}
+              {id === "invitely" ? <InvitelyScreens locale={locale} /> : <SmartMenuScreens locale={locale} />}
               <figcaption className="pp-visual-note">{t("screensNote")}</figcaption>
             </figure>
           </div>

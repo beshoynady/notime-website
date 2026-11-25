@@ -22,7 +22,7 @@ export interface FilmBeat {
 }
 
 export const FILM: readonly FilmBeat[] = [
-  { key: "opening", plate: "film-hall" },
+  { key: "opening", plate: "film-dawn" },
   { key: "events", category: "events-hospitality", plate: "film-beams", prop: "beams" },
   { key: "creative", category: "creative-production", plate: "film-camera", prop: "viewfinder", mirror: "ltr" },
   { key: "marketing", category: "marketing-brand", plate: "film-hall", prop: "campaign" },

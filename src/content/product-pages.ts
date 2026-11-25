@@ -1,7 +1,7 @@
 import type { Localized } from "./types";
 
 /**
- * The product pages (v1 plan F4): `/products/minute-zero` and `/products/peak-hour`. The id is the
+ * The product pages (v1 plan F4): `/products/invitely` and `/products/smart-menu`. The id is the
  * product's id in the forms contract (`PRODUCTS`, src/lib/forms/schemas.ts); the name, descriptor
  * and summary come from products.ts, the problem line and the screens from the Software page's
  * products block (software/page.ts), so the two never disagree.
@@ -10,7 +10,7 @@ import type { Localized } from "./types";
  * concept screens show or what the summary says; no capacity, price, date or integration claims.
  * Both products are "Coming soon" until they launch.
  */
-export type ProductId = "minute-zero" | "peak-hour";
+export type ProductId = "invitely" | "smart-menu";
 
 export interface ProductPage {
   id: ProductId;
@@ -24,9 +24,9 @@ export interface ProductPage {
 }
 
 export const productPages: Record<ProductId, ProductPage> = {
-  "minute-zero": {
-    id: "minute-zero",
-    other: "peak-hour",
+  "invitely": {
+    id: "invitely",
+    other: "smart-menu",
     photo: "pp-minute-zero",
     problemDetail: {
       en: "Paper lists and a crowded door turn the first impression into a wait.",
@@ -40,9 +40,9 @@ export const productPages: Record<ProductId, ProductPage> = {
       { title: { en: "Arabic and English", ar: "بالعربية والإنجليزية" }, line: { en: "Invitations and screens in both languages.", ar: "الدعوات والشاشات باللغتين." } },
     ],
   },
-  "peak-hour": {
-    id: "peak-hour",
-    other: "minute-zero",
+  "smart-menu": {
+    id: "smart-menu",
+    other: "invitely",
     photo: "pp-peak-hour",
     problemDetail: {
       en: "When the floor and the kitchen work from different slips of paper, the busiest hour is when things slip.",

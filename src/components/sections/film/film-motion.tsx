@@ -16,7 +16,7 @@ const INTENT = ["wheel", "touchstart", "keydown", "pointerdown", "scroll"] as co
  * - the rise becomes a dissolve: the incoming plate is held in place (counter-translated) while it
  *   fades in, and the outgoing copy fades out before it is covered;
  * - a slow dolly on every plate, and each scene's own move (lights up, the timecode to zero, the
- *   screens on, the card set down, the guests counted in, the hand to twelve).
+ *   screens on, the card set down, the guests counted in). The dial's second hand sweeps in CSS (film.css).
  * Transforms and opacity only (no layout, CLS 0). Nothing runs under reduced motion, where the
  * scenes stack at their final frames; the server markup is that final state.
  */
@@ -103,8 +103,6 @@ export function FilmMotion() {
               },
             });
 
-          const hand = q(beat, ".film-dial-hand");
-          if (hand) gsap.fromTo(hand, { rotate: -30 }, { rotate: 0, ease: "steps(5)", svgOrigin: "300 300", scrollTrigger: act });
         });
       });
 

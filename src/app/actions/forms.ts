@@ -40,7 +40,7 @@ export async function submitWebsiteReview(_prev: FormState, formData: FormData):
   return handleSubmission(websiteReviewSchema, formData, { ...(await steps()), deliver: (d) => deliverMail(composeMail("websiteReview", d, shared(formData))) });
 }
 
-/** Register interest in a product (Minute Zero, Peak Hour). */
+/** Register interest in a product (Invitely, Smart Menu). */
 export async function submitInterest(_prev: FormState, formData: FormData): Promise<FormState> {
   return handleSubmission(interestSchema, formData, { ...(await steps()), deliver: (d) => deliverMail(composeMail("interest", d, shared(formData))) });
 }
