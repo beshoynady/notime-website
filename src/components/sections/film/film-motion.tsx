@@ -57,8 +57,12 @@ export function FilmMotion() {
             const rise = gsap.timeline({ scrollTrigger: { trigger: beat, start: "top bottom", end: "top top", scrub: true } });
             rise.fromTo(plate, { yPercent: -100 }, { yPercent: 0, ease: "none", duration: 1 }, 0);
             rise.fromTo(plate, { opacity: 0 }, { opacity: 1, ease: "power1.inOut", duration: 0.6 }, 0);
-            if (prevCopy) rise.to(prevCopy, { opacity: 0, yPercent: -6, ease: "power1.in", duration: 0.4 }, 0);
-            if (copy) rise.fromTo(copy, { opacity: 0 }, { opacity: 1, ease: "power1.out", duration: 0.5 }, 0.45);
+            // The copy is held in place too and dissolves in as the old copy leaves, so a scene's
+            // words are on screen through every transition (W02: no empty screen mid-rise).
+            const copyBox = q(beat, ".film-copy");
+            if (copyBox) rise.fromTo(copyBox, { yPercent: -100 }, { yPercent: 0, ease: "none", duration: 1 }, 0);
+            if (prevCopy) rise.to(prevCopy, { opacity: 0, yPercent: -6, ease: "power1.in", duration: 0.3 }, 0.1);
+            if (copy) rise.fromTo(copy, { opacity: 0 }, { opacity: 1, ease: "power1.out", duration: 0.3 }, 0.4);
           }
 
           const veil = q(beat, "[data-film-veil]");

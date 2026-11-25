@@ -70,12 +70,13 @@ async function render(file, crop, item, suffix = "") {
   if (box.width > maxWidth) img = img.resize({ width: maxWidth });
   // Clean-up before the grade, in its own pass (one recomb/modulate per pipeline): `median` (px)
   // takes out specks such as confetti, `mono` drops a source's colour so the grade alone tints it,
-  // `blur` (sigma) makes a soft backdrop.
-  if (item.median || item.mono || item.blur) {
+  // `blur` (sigma) makes a soft backdrop, `sharpen` (sigma) firms up a soft or enlarged crop.
+  if (item.median || item.mono || item.blur || item.sharpen) {
     let pre = img;
     if (item.median) pre = pre.median(item.median);
     if (item.mono) pre = pre.greyscale();
     if (item.blur) pre = pre.blur(item.blur);
+    if (item.sharpen) pre = pre.sharpen({ sigma: item.sharpen, m1: 1, m2: 3 });
     img = sharp(await pre.toColourspace("srgb").toBuffer());
   }
   if (item.grade) {

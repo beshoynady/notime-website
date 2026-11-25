@@ -31,7 +31,7 @@ async function landing(page: Page, id: string) {
 
 /** Focus first: it marks the end of the landing (see expectLanded in helpers.ts). */
 async function expectLanded(page: Page, id: string, heading: string) {
-  await expect(page.locator(`#${heading}`)).toBeFocused({ timeout: 10_000 });
+  await expect(page.locator(heading)).toBeFocused({ timeout: 10_000 });
   const offset = await landing(page, id);
   expect(Math.abs(offset), `landing offset ${offset}px`).toBeLessThanOrEqual(TOLERANCE);
   await expect(page).toHaveURL(new RegExp(`#${id}$`));
@@ -41,10 +41,10 @@ for (const locale of ["en", "ar"] as const) {
   test.describe(`anchor landing (${locale})`, () => {
     test("deep link on load (the header is visible)", async ({ page }) => {
       await gotoReady(page, `/${locale}#services`);
-      // Late layout (hero pin spacer, fonts) shifts #services after the first landing; the
-      // utility re-lands until it settles.
+      // #services is the film's Events scene (D174); its heading is the category name. Late
+      // layout (fonts) can shift it after the first landing; the utility re-lands until it settles.
       await page.waitForTimeout(1500);
-      await expectLanded(page, "services", "services-title");
+      await expectLanded(page, "services", "#services .film-cat");
       expect(await page.locator("[data-header-shell]").evaluate((el) => getComputedStyle(el).opacity)).toBe("1");
     });
 
