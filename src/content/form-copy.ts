@@ -138,7 +138,7 @@ export const formCopy = {
     message: l("What would you use it for?", "فيمَ ستستخدمونه؟"),
     submit: l("Register interest", "تسجيل الاهتمام"),
     successTitle: l("Thanks, {name}. You're on the list for {product}.", "شكرًا، {name}. سجّلنا اهتمامكم بـ{product}."),
-    successBody: l("We'll write to you when it's ready.", "سنكتب لكم حين يصبح جاهزًا."),
+    successBody: l("We'll write to you when it's ready.", "سنراسلكم حين يصبح جاهزًا."),
     type: l("What do you run?", "ما الذي تديرونه؟"),
     typeOptions: {
       event: l("Events", "فعاليات"),
@@ -167,7 +167,7 @@ export const formCopy = {
       "not-sure": l("Not sure yet", "لم يتحدّد بعد"),
     } satisfies Record<(typeof GUEST_BANDS)[number], L>,
     city: l("City or country", "المدينة أو الدولة"),
-    cityHint: l("Where the event or the work takes place.", "حيث تُقام الفعالية أو يُنفَّذ العمل."),
+    cityHint: l("Where the event or the work takes place.", "مكان إقامة الفعالية أو تنفيذ العمل."),
     message: l("Tell us about it", "حدّثونا عنه"),
     messageHint: l(
       "The occasion or goal, the audience, and anything already decided. A few lines are enough.",

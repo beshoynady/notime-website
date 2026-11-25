@@ -16,7 +16,7 @@ export const categories: Category[] = [
     metaTitle: { en: "Events & hospitality in Dubai", ar: "تنظيم الفعاليات والضيافة في دبي" },
     metaDescription: {
       en: "Conferences, stands, launches, weddings and majlis hospitality, planned in Dubai and run on the day by the same team, until the last guest leaves.",
-      ar: "مؤتمرات وأجنحة معارض وحفلات إطلاق وأعراس ومجالس ضيافة، نخطّط لها من دبي ويديرها الفريق نفسه يوم الحدث حتى يغادر آخر ضيف.",
+      ar: "مؤتمرات وأجنحة معارض وحفلات إطلاق وأعراس ومجالس ضيافة، نخطّط لها من دبي ويديرها الفريق نفسه يوم الفعالية حتى يغادر آخر ضيف.",
     },
     image: "cat-events-hospitality-4x5",
     photo: "card-events",
@@ -24,7 +24,7 @@ export const categories: Category[] = [
     // Copy deck docs/content/category-copy-events.md (approved 2026-11-09).
     intro: {
       en: "Conferences, stands, launches, galas and heritage welcomes. One team draws the concept, dresses the room, runs the stage and looks after your guests on the day.",
-      ar: "مؤتمرات وأجنحة وحفلات إطلاق وحفلات رسمية واستقبال تراثي. فريق واحد يضع الفكرة، ويجهّز القاعة، ويدير المسرح، ويهتمّ بضيوفكم يوم الحدث.",
+      ar: "مؤتمرات وأجنحة وحفلات إطلاق وحفلات رسمية واستقبال تراثي. فريق واحد يضع الفكرة، ويجهّز القاعة، ويدير المسرح، ويهتمّ بضيوفكم يوم الفعالية.",
     },
     faq: [
       {
@@ -69,7 +69,7 @@ export const categories: Category[] = [
     title: { en: "Creative Production", ar: "الإنتاج الإبداعي" },
     summary: {
       en: "Photo, film, motion and AI content, with the sets and equipment to make it.",
-      ar: "صورة وفيلم وموشن ومحتوى بالذكاء الاصطناعي، ومعها الديكور والمعدّات التي تصنعها.",
+      ar: "صورة وفيلم وموشن ومحتوى بالذكاء الاصطناعي، ومعها الديكورات والمعدّات اللازمة لإنتاجها.",
     },
     image: "cat-creative-production-4x5",
     photo: "card-creative",
@@ -147,7 +147,7 @@ export const categories: Category[] = [
         a: { en: "We agree the reporting rhythm with you at the start, to match the plan and its campaigns.", ar: "نتّفق معكم على مواعيد التقارير منذ البداية، بما يناسب الخطة وحملاتها." },
       },
       {
-        q: { en: "Is there a minimum term?", ar: "هل هناك مدة تعاقد دنيا؟" },
+        q: { en: "Is there a minimum term?", ar: "هل هناك حدّ أدنى لمدة التعاقد؟" },
         a: { en: "The term is set in each proposal, to fit the plan.", ar: "تُحدَّد مدة التعاقد في كل عرض، بما يناسب الخطة." },
       },
       {
@@ -160,7 +160,7 @@ export const categories: Category[] = [
   {
     slug: "production-print-gifts",
     order: 4,
-    title: { en: "Production, Print & Gifts", ar: "الإنتاج والطباعة والهدايا" },
+    title: { en: "Print & Gifts", ar: "الطباعة والهدايا" },
     summary: {
       en: "Stands, print, packaging and gifts, finished in foil, UV, deboss or laser.",
       ar: "أجنحة وطباعة وتغليف وهدايا، بلمسات نهائية من الرقائق المعدنية و UV والكبس والحفر بالليزر.",
@@ -182,7 +182,7 @@ export const categories: Category[] = [
       // Hidden (D120, D123): there's no online store; ordering is a request through the contact form.
       {
         hidden: true,
-        q: { en: "Can I order prints online?", ar: "هل يمكنني طلب المطبوعات عبر الإنترنت؟" },
+        q: { en: "Can I order prints online?", ar: "هل يمكننا طلب المطبوعات عبر الإنترنت؟" },
         a: { en: "Yes. Tell us the item and the quantity, send your artwork, and we'll confirm the details and the proof with you before printing.", ar: "نعم. أخبرونا بالمنتج والكمية وأرسلوا التصميم، ونؤكّد معكم التفاصيل والنسخة التجريبية قبل التنفيذ." },
       },
       {
@@ -195,7 +195,7 @@ export const categories: Category[] = [
       },
       {
         q: { en: "How long does production take?", ar: "كم يستغرق التنفيذ؟" },
-        a: { en: "It depends on the item, the quantity and the finish. Share your deadline and we'll confirm what's possible.", ar: "يعتمد ذلك على المنتج والكمية والتشطيب. شاركونا الموعد المطلوب، ونؤكّد لكم ما يمكن تنفيذه." },
+        a: { en: "It depends on the item, the quantity and the finish. Share your deadline and we'll confirm what's possible.", ar: "يعتمد ذلك على المنتج والكمية واللمسات النهائية. شاركونا الموعد المطلوب، ونؤكّد لكم ما يمكن تنفيذه." },
       },
       {
         q: { en: "Do you deliver?", ar: "هل توصلون الطلبات؟" },
@@ -214,7 +214,7 @@ export const categories: Category[] = [
     title: { en: "Software & Digital", ar: "البرمجيات والحلول الرقمية" },
     summary: {
       en: "Websites, apps and custom systems that keep working long after launch day.",
-      ar: "مواقع وتطبيقات وأنظمة تُبنى على مقاسكم، وتبقى تعمل طويلًا بعد الإطلاق.",
+      ar: "مواقع وتطبيقات وأنظمة تُبنى على مقاسكم، وتستمر في العمل طويلًا بعد الإطلاق.",
     },
     image: "cat-software-digital-4x5",
     photo: "card-software",
@@ -238,7 +238,7 @@ export const categories: Category[] = [
       },
       {
         q: { en: "Will we be able to update the site ourselves?", ar: "هل سنتمكّن من تحديث الموقع بأنفسنا؟" },
-        a: { en: "Yes. We set up a content system in both languages and show your team how to use it at handover.", ar: "نعم. نجهّز نظامًا لإدارة المحتوى باللغتين، ونعرّف فريقكم على استخدامه عند التسليم." },
+        a: { en: "Yes. We set up a content system in both languages and show your team how to use it at handover.", ar: "نعم. نجهّز نظامًا لإدارة المحتوى باللغتين، ونشرح لفريقكم طريقة استخدامه عند التسليم." },
       },
       {
         q: { en: "Do you support the product after launch?", ar: "هل تقدّمون الدعم بعد الإطلاق؟" },

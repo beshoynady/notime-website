@@ -34,7 +34,7 @@ const privacy: LegalDoc = {
         {
           p: {
             en: "This policy explains what personal data we collect through this website, why, who processes it for us, how long we keep it, and the rights you have. It doesn't cover other websites we link to.",
-            ar: "توضّح هذه السياسة البيانات الشخصية التي نجمعها عبر هذا الموقع، وسبب جمعها، ومن يعالجها نيابةً عنّا، ومدة احتفاظنا بها، والحقوق التي تملكها. ولا تشمل المواقع الأخرى التي نضع روابطها.",
+            ar: "توضّح هذه السياسة البيانات الشخصية التي نجمعها عبر هذا الموقع، وسبب جمعها، ومن يعالجها نيابةً عنّا، ومدة احتفاظنا بها، والحقوق التي تملكونها. ولا تشمل المواقع الأخرى التي نضع روابطها.",
           },
         },
       ],
@@ -245,7 +245,7 @@ const terms: LegalDoc = {
       blocks: [
         // D106 (supersedes D77's disclosure line): images are not described by how they were made;
         // the labels below mark what isn't a real result.
-        { p: { en: "Demonstration data is labelled “Example”, and early product screens are labelled “Preview”. Neither shows a real result, a real client or a real event.", ar: "بيانات العرض التوضيحي تحمل عبارة «مثال»، وشاشات المنتجات الأولية تحمل عبارة «معاينة». ولا يعرض أيٌّ منهما نتيجة حقيقية، ولا عميلًا حقيقيًا، ولا حدثًا حقيقيًا." } },
+        { p: { en: "Demonstration data is labelled “Example”, and early product screens are labelled “Preview”. Neither shows a real result, a real client or a real event.", ar: "بيانات العرض التوضيحي تحمل عبارة «مثال»، وشاشات المنتجات الأولية تحمل عبارة «معاينة». ولا يعرض أيٌّ منهما نتيجة حقيقية، ولا عميلًا حقيقيًا، ولا فعالية حقيقية." } },
         { p: { en: "Our work is shown with the project’s own photos once the client approves, and otherwise with a drawing of the work, never with a stand-in photo.", ar: "نعرض أعمالنا بصور المشروع نفسه بعد موافقة العميل، وإلا فبرسم يصوّر العمل، ولا نضع مكانها صورة بديلة أبدًا." } },
       ],
     },

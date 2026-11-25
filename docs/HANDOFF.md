@@ -2,6 +2,26 @@
 
 Read `CLAUDE.md`, `AGENTS.md` and `PRODUCT.md` first. Decisions: `docs/DECISIONS.md` (latest D124; new ones from D125).
 
+## Now: the home film (2026-11-24, D174, D175), branch `home-film`
+
+- **The owner's brief (2026-11-24):** the homepage as one film, a native Arabic copy pass, and visual QA. The storyboard was approved with fixes (`docs/review/film-storyboard/`).
+- **Built:**
+  - `src/components/sections/film/` (`film.tsx`, `film-motion.tsx`, `film-props.tsx`, `film-dial.tsx`, `film.css`) and `src/content/film.ts`.
+  - The film replaces the hero and the categories grid.
+  - Plates come from `docs/content/recipes/home-film.json` through `scripts/scene-layers.mjs`, which now takes `median`, `mono` and `blur`.
+- **Bugs fixed (D175):**
+  - «قيد التطوير» everywhere.
+  - «الطباعة والهدايا» / "Print & Gifts".
+  - The reel counts projects.
+- **Copy:** Arabic-first pass U51–U97 in `copy-pending.md` (47 lines; one English line follows).
+- **e2e:**
+  - Removed: hero, hero-fit, hero-resize, pin-build-scroll and cards-no-shift.
+  - New: `e2e/film.spec.ts`.
+  - Re-pointed: first-screen, locale-switch, navigation, home-photos and no-js.
+- **Perf (D176):** the scenes' motion is built on the first scroll, key or touch. LCP is the H1 (/en 4516 ms, /ar 4608 ms), CLS 0 (`docs/checkpoints/lighthouse/film/`).
+- **Shots:** `docs/review/film-final/` (1366/1440/390 × AR/EN, every scene; a GIF per locale). Mobile images: 256–324 KB.
+- **Next:** PR to main, merged after CI, then the report to the owner (rows 81–85 to confirm).
+
 ## Now: the countdown hero (2026-11-24, D173)
 
 - The owner chose A ("countdown to zero") with C's gold dial engraving. Built as the Home `Hero` (commit c03f73c, merged to main in PR #9).

@@ -15,7 +15,7 @@ const POINTS: Record<string, Localized<string[]>> = {
   // Events & Hospitality: copy deck docs/content/category-copy-events.md (approved 2026-11-09).
   "conferences-summits": {
     en: ["Programme and running order", "Venue and room layout", "Speaker and guest care", "Event branding on site", "Ceremonies and award nights"],
-    ar: ["البرنامج وتسلسل الفقرات", "اختيار المكان وتوزيع القاعة", "استقبال المتحدثين ورعاية الضيوف", "هوية الحدث في أرجاء المكان", "حفلات التكريم وتوزيع الجوائز"],
+    ar: ["البرنامج وتسلسل الفقرات", "اختيار المكان وتوزيع القاعة", "استقبال المتحدثين ورعاية الضيوف", "هوية الفعالية في أرجاء المكان", "حفلات التكريم وتوزيع الجوائز"],
   },
   "exhibitions-booths": {
     en: ["Stand concept and design", "Fabrication and installation", "Mall and exhibition stands", "Staffing on the stand", "On-site PR management"],
@@ -429,7 +429,7 @@ export const services: Service[] = [
       { en: "Mobile apps", ar: "تطبيقات الجوّال" },
       {
         en: "iOS and Android apps designed around how people use them.",
-        ar: "تطبيقات iOS و Android مصمّمة وفق طريقة استخدام الناس لها.",
+        ar: "تطبيقات iOS و Android نصمّمها لتناسب طريقة استخدام الناس لها.",
       },
     ],
     [

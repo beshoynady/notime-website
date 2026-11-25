@@ -82,11 +82,11 @@ export const workItems: WorkItem[] = [
       execution: {
         lead: {
           en: "From the first drawing to the show floor: we designed the stand, built it, and ran its PR while the doors were open.",
-          ar: "من أول رسم حتى أرض المعرض: صمّمنا الجناح، وبنيناه، وأدرنا علاقاته العامة طوال أيام الحدث.",
+          ar: "من أول رسم حتى أرض المعرض: صمّمنا الجناح، وبنيناه، وأدرنا علاقاته العامة طوال أيام المعرض.",
         },
         points: {
           en: ["Stand design", "Stand build", "PR on the show floor", "The media coverage that follows"],
-          ar: ["تصميم الجناح", "بناء الجناح", "العلاقات العامة في أرض الحدث", "التغطية الإعلامية التي تليه"],
+          ar: ["تصميم الجناح", "بناء الجناح", "العلاقات العامة في أرض الحدث", "التغطية الإعلامية بعد المعرض"],
         },
       },
       scope: ["exhibitions-booths", "stand-fabrication-signage", "public-relations"],

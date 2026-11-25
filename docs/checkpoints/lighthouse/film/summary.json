@@ -1,0 +1,306 @@
+{
+  "lighthouse": "13.5.0",
+  "base": "http://localhost:3100",
+  "runs": 3,
+  "profile": "mobile, Moto G Power emulation, simulated throttling (150 ms RTT, 1.6 Mbps, 4x CPU)",
+  "medians": {
+    "en": {
+      "first": {
+        "perf": 56,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 92,
+        "fcp": 1397,
+        "lcp": 4516,
+        "lcpObserved": 962,
+        "tbt": 1866,
+        "cls": 0,
+        "si": 3034,
+        "benchmarkIndex": 798,
+        "lcpElements": [
+          "div.film-copy-in > h1#hero-title > span.hero-line > b.hero-line-inner | \"TO START.\""
+        ]
+      },
+      "return": {
+        "perf": 83,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 92,
+        "fcp": 829,
+        "lcp": 1129,
+        "lcpObserved": 393,
+        "tbt": 702,
+        "cls": 0,
+        "si": 903,
+        "benchmarkIndex": 1344,
+        "lcpElements": [
+          "div.film-copy-in > h1#hero-title > span.hero-line > b.hero-line-inner | \"TO START.\""
+        ]
+      }
+    },
+    "ar": {
+      "first": {
+        "perf": 54,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 92,
+        "fcp": 1389,
+        "lcp": 4608,
+        "lcpObserved": 994,
+        "tbt": 2339,
+        "cls": 0,
+        "si": 3081,
+        "benchmarkIndex": 720,
+        "lcpElements": [
+          "div.film-copy-in > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\""
+        ]
+      },
+      "return": {
+        "perf": 78,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 92,
+        "fcp": 871,
+        "lcp": 1231,
+        "lcpObserved": 452,
+        "tbt": 991,
+        "cls": 0,
+        "si": 936,
+        "benchmarkIndex": 1364,
+        "lcpElements": [
+          "div.film-copy-in > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\""
+        ]
+      }
+    }
+  },
+  "runsDetail": {
+    "en": {
+      "first": [
+        {
+          "perf": 52,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 1397,
+          "lcp": 4701,
+          "lcpObserved": 1211,
+          "tbt": 2999,
+          "cls": 0,
+          "si": 3734,
+          "benchmarkIndex": 807,
+          "lcpEl": "div.film-copy-in > h1#hero-title > span.hero-line > b.hero-line-inner | \"TO START.\"",
+          "lcpParts": {
+            "timeToFirstByte": 58,
+            "elementRenderDelay": 1153
+          }
+        },
+        {
+          "perf": 56,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 1406,
+          "lcp": 4516,
+          "lcpObserved": 962,
+          "tbt": 1866,
+          "cls": 0,
+          "si": 3034,
+          "benchmarkIndex": 772,
+          "lcpEl": "div.film-copy-in > h1#hero-title > span.hero-line > b.hero-line-inner | \"TO START.\"",
+          "lcpParts": {
+            "timeToFirstByte": 35,
+            "elementRenderDelay": 926
+          }
+        },
+        {
+          "perf": 57,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 1393,
+          "lcp": 4442,
+          "lcpObserved": 804,
+          "tbt": 1634,
+          "cls": 0,
+          "si": 2699,
+          "benchmarkIndex": 798,
+          "lcpEl": "div.film-copy-in > h1#hero-title > span.hero-line > b.hero-line-inner | \"TO START.\"",
+          "lcpParts": {
+            "timeToFirstByte": 31,
+            "elementRenderDelay": 772
+          }
+        }
+      ],
+      "return": [
+        {
+          "perf": 81,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 777,
+          "lcp": 1116,
+          "lcpObserved": 380,
+          "tbt": 802,
+          "cls": 0,
+          "si": 918,
+          "benchmarkIndex": 1235,
+          "lcpEl": "div.film-copy-in > h1#hero-title > span.hero-line > b.hero-line-inner | \"TO START.\"",
+          "lcpParts": {
+            "timeToFirstByte": 16,
+            "elementRenderDelay": 364
+          }
+        },
+        {
+          "perf": 84,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 829,
+          "lcp": 1129,
+          "lcpObserved": 393,
+          "tbt": 627,
+          "cls": 0,
+          "si": 829,
+          "benchmarkIndex": 1344,
+          "lcpEl": "div.film-copy-in > h1#hero-title > span.hero-line > b.hero-line-inner | \"TO START.\"",
+          "lcpParts": {
+            "timeToFirstByte": 29,
+            "elementRenderDelay": 364
+          }
+        },
+        {
+          "perf": 83,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 833,
+          "lcp": 1135,
+          "lcpObserved": 429,
+          "tbt": 702,
+          "cls": 0,
+          "si": 903,
+          "benchmarkIndex": 1360,
+          "lcpEl": "div.film-copy-in > h1#hero-title > span.hero-line > b.hero-line-inner | \"TO START.\"",
+          "lcpParts": {
+            "timeToFirstByte": 17,
+            "elementRenderDelay": 412
+          }
+        }
+      ]
+    },
+    "ar": {
+      "first": [
+        {
+          "perf": 54,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 1398,
+          "lcp": 4608,
+          "lcpObserved": 987,
+          "tbt": 2155,
+          "cls": 0,
+          "si": 3212,
+          "benchmarkIndex": 720,
+          "lcpEl": "div.film-copy-in > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\"",
+          "lcpParts": {
+            "timeToFirstByte": 40,
+            "elementRenderDelay": 947
+          }
+        },
+        {
+          "perf": 54,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 1386,
+          "lcp": 4591,
+          "lcpObserved": 994,
+          "tbt": 2377,
+          "cls": 0,
+          "si": 3063,
+          "benchmarkIndex": 718,
+          "lcpEl": "div.film-copy-in > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\"",
+          "lcpParts": {
+            "timeToFirstByte": 46,
+            "elementRenderDelay": 948
+          }
+        },
+        {
+          "perf": 54,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 1389,
+          "lcp": 4731,
+          "lcpObserved": 995,
+          "tbt": 2339,
+          "cls": 0,
+          "si": 3081,
+          "benchmarkIndex": 767,
+          "lcpEl": "div.film-copy-in > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\"",
+          "lcpParts": {
+            "timeToFirstByte": 26,
+            "elementRenderDelay": 970
+          }
+        }
+      ],
+      "return": [
+        {
+          "perf": 77,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 808,
+          "lcp": 1217,
+          "lcpObserved": 411,
+          "tbt": 1093,
+          "cls": 0,
+          "si": 867,
+          "benchmarkIndex": 1364,
+          "lcpEl": "div.film-copy-in > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\"",
+          "lcpParts": {
+            "timeToFirstByte": 18,
+            "elementRenderDelay": 392
+          }
+        },
+        {
+          "perf": 78,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 871,
+          "lcp": 1231,
+          "lcpObserved": 452,
+          "tbt": 991,
+          "cls": 0,
+          "si": 1040,
+          "benchmarkIndex": 1379,
+          "lcpEl": "div.film-copy-in > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\"",
+          "lcpParts": {
+            "timeToFirstByte": 15,
+            "elementRenderDelay": 436
+          }
+        },
+        {
+          "perf": 79,
+          "a11y": 100,
+          "bp": 100,
+          "seo": 92,
+          "fcp": 936,
+          "lcp": 1233,
+          "lcpObserved": 485,
+          "tbt": 916,
+          "cls": 0,
+          "si": 936,
+          "benchmarkIndex": 1351,
+          "lcpEl": "div.film-copy-in > h1#hero-title > span.hero-line > span.hero-line-inner | \"حان وقت\"",
+          "lcpParts": {
+            "timeToFirstByte": 24,
+            "elementRenderDelay": 462
+          }
+        }
+      ]
+    }
+  }
+}

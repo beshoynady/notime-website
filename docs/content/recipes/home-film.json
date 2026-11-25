@@ -1,0 +1,7 @@
+[
+ {"id": "film-hall", "src": "unsplash:elEIyWEj-bM", "crop": {"aspect": "16:9", "focus": [0.5, 0.5]}, "grade": "evening", "night": "warm", "mobile": {"aspect": "9:16", "focus": [0.5, 0.5]}, "out": "public/images/stock/film-hall.webp", "maxWidth": 1920},
+ {"id": "film-beams", "src": "assets-inbox/unsplash/sol7vhs8Pdg.jpg", "crop": {"aspect": "16:9", "focus": [0.5, 0.42]}, "median": 9, "grade": "evening", "mobile": {"aspect": "9:16", "focus": [0.6, 0.45], "scale": 0.5}, "out": "public/images/stock/film-beams.webp", "maxWidth": 1920},
+ {"id": "film-camera", "src": "unsplash:kbd1oAf-9Ms", "crop": {"aspect": "16:9", "focus": [0.45, 0.5]}, "mono": true, "median": 5, "grade": "evening", "mobile": {"aspect": "9:16", "focus": [0.33, 0.5]}, "out": "public/images/stock/film-camera.webp", "maxWidth": 1920},
+ {"id": "film-gift", "sharpen": 1.6, "src": "unsplash:gUfRIiyltf0", "crop": {"aspect": "16:9", "focus": [0.4, 0.55], "scale": 0.8}, "grade": "evening", "night": "warm", "mobile": {"aspect": "9:16", "focus": [0.6, 0.55]}, "out": "public/images/stock/film-gift.webp", "maxWidth": 1920},
+ {"id": "film-arrival", "src": "unsplash:MLLmIskI6LU", "crop": {"aspect": "16:9", "focus": [0.5, 0.6]}, "blur": 14, "grade": "evening", "night": "warm", "mobile": {"aspect": "9:16", "focus": [0.5, 0.6]}, "out": "public/images/stock/film-arrival.webp", "maxWidth": 1280}
+]

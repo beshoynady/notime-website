@@ -128,7 +128,7 @@ export const serviceBlocks: Record<string, { photo: string; outcome: L; idealFor
     idealFor: [
       l("Operations that run on spreadsheets", "عمليات تُدار بجداول البيانات"),
       l("Teams that need roles and approvals", "فرق تحتاج إلى أدوار وموافقات"),
-      l("Businesses connecting several tools", "أعمال تربط بين عدة أدوات"),
+      l("Businesses connecting several tools", "شركات تربط بين عدة أدوات"),
     ],
     phases: ["discover", "design", "build", "launch", "support"],
   },
@@ -157,8 +157,8 @@ export const serviceBlocks: Record<string, { photo: string; outcome: L; idealFor
     outcome: l("A clear answer on where AI saves your team time, and where it doesn't.", "إجابة واضحة عن المواضع التي يوفّر فيها الذكاء الاصطناعي وقت فريقكم، وأين لا يفعل."),
     idealFor: [
       l("Teams with repetitive written work", "فرق لديها أعمال كتابية متكررة"),
-      l("Managers asked for an AI plan", "مديرون مطلوب منهم خطة للذكاء الاصطناعي"),
-      l("Businesses unsure where to start", "أعمال لا تعرف من أين تبدأ"),
+      l("Managers asked for an AI plan", "مديرون يُطلب منهم وضع خطة للذكاء الاصطناعي"),
+      l("Businesses unsure where to start", "شركات لا تعرف من أين تبدأ"),
     ],
     phases: ["discover", "design", "launch"],
   },
@@ -166,7 +166,7 @@ export const serviceBlocks: Record<string, { photo: string; outcome: L; idealFor
 
 export const services = {
   title: l("Six things we build, all in Arabic and English from the first screen.", "ستة أشياء نبنيها، وكلها بالعربية والإنجليزية من الشاشة الأولى."),
-  lead: l("Website, app and system development in Dubai, for businesses in the UAE and across the region.", "تطوير المواقع والتطبيقات والأنظمة في دبي، لأعمال في الإمارات وفي أنحاء المنطقة."),
+  lead: l("Website, app and system development in Dubai, for businesses in the UAE and across the region.", "تطوير المواقع والتطبيقات والأنظمة في دبي، للشركات في الإمارات وفي أنحاء المنطقة."),
   idealFor: l("Ideal for", "مناسب لـ"),
   receive: l("You receive", "ما تحصلون عليه"),
   phases: l("Stages", "المراحل"),
@@ -185,7 +185,7 @@ export const eventTech = {
   title: l("Built by people who run events.", "تبنيها فرقٌ تدير الفعاليات بنفسها."),
   intro: l(
     "We build the event registration system, the app and the results screens, and we're on the floor running the event too. One request, from the first invitation to the last result on screen.",
-    "نبني نظام التسجيل والتطبيق وشاشات النتائج، ونكون في أرض الحدث نديره أيضًا. طلب واحد، من أول دعوة إلى آخر نتيجة تظهر على الشاشة.",
+    "نبني نظام التسجيل والتطبيق وشاشات النتائج، ونكون في موقع الفعالية لإدارتها أيضًا. طلب واحد، من أول دعوة إلى آخر نتيجة تظهر على الشاشة.",
   ),
   items: [
     { title: l("Registration and check-in", "التسجيل وتسجيل الحضور"), body: l("Minute Zero by NO TIME, our own check-in product (in development)", "«الدقيقة صفر» من NO TIME، منتجنا لتسجيل الحضور (قيد التطوير)") },
@@ -262,7 +262,7 @@ export const tiers = {
     launch: {
       name: l("Launch", "الانطلاق"),
       summary: l("A focused bilingual website.", "موقع مركّز بلغتين."),
-      ideal: l("A new business, a new brand, or a site that needs replacing.", "عمل جديد، أو علامة تجارية جديدة، أو موقع حان وقت استبداله."),
+      ideal: l("A new business, a new brand, or a site that needs replacing.", "نشاط تجاري جديد، أو علامة تجارية جديدة، أو موقع حان وقت استبداله."),
       included: [
         l("A website in Arabic and English", "موقع بالعربية والإنجليزية"),
         l("Full right-to-left layout", "دعم كامل للاتجاه من اليمين إلى اليسار"),
@@ -289,7 +289,7 @@ export const tiers = {
     platform: {
       name: l("Platform", "المنصّة"),
       summary: l("A custom system or app, dashboards and ongoing development.", "نظام أو تطبيق مخصّص، ولوحات إدارة، وتطوير مستمر."),
-      ideal: l("Businesses whose users, processes or data need more than a website.", "أعمال يحتاج مستخدموها أو عملياتها أو بياناتها إلى أكثر من موقع."),
+      ideal: l("Businesses whose users, processes or data need more than a website.", "شركات يحتاج مستخدموها أو عملياتها أو بياناتها إلى أكثر من موقع."),
       included: [
         l("A custom web platform or mobile app", "منصّة ويب أو تطبيق جوّال مخصّص"),
         l("Admin dashboards and analytics", "لوحات إدارة وتحليلات"),
@@ -365,7 +365,7 @@ export const productsCopy = {
   anchor: "products",
   eyebrow: l("Our products · in development", "منتجاتنا · قيد التطوير"),
   title: l("Two products born at the event door and in the restaurant kitchen.", "منتجان وُلدا عند باب الفعالية وفي مطبخ المطعم."),
-  intro: l("We're building both from our own event and hospitality work. Register interest and we'll write to you when they're ready.", "نطوّرهما من خبرتنا في الفعاليات والضيافة. سجّلوا اهتمامكم، وسنكتب لكم حين يصبحان جاهزين."),
+  intro: l("We're building both from our own event and hospitality work. Register interest and we'll write to you when they're ready.", "نطوّرهما من خبرتنا في الفعاليات والضيافة. سجّلوا اهتمامكم، وسنراسلكم حين يصبحان جاهزين."),
   problem: l("The problem", "المشكلة"),
   features: l("Key features", "أبرز الميزات"),
   register: l("Register interest", "سجّلوا اهتمامكم"),
@@ -398,7 +398,7 @@ export const productsCopy = {
   demo: {
     arrived: l("Arrived", "وصلوا"),
     expected: l("Expected", "متوقّع"),
-    scan: l("Point the camera at the guest's code", "وجّه الكاميرا إلى رمز الضيف"),
+    scan: l("Point the camera at the guest's code", "وجّهوا الكاميرا إلى رمز الضيف"),
     valid: l("Welcome, guest 112", "أهلًا بالضيف 112"),
     guests: [l("Guest 101", "الضيف 101"), l("Guest 102", "الضيف 102"), l("Guest 103", "الضيف 103"), l("Guest 104", "الضيف 104")],
     in: l("In", "حضر"),

@@ -100,7 +100,7 @@ The palette's hex values are #2E2017, #634731, #BB9A79, #EAD4AB and #F5E9D3. Giv
 - **Page · section:** Home › Categories (card 5); mega menu tile · **Aspect:** 4:5
 - **Prompt:** House style. A clean desk at night: a laptop half open, its screen glowing softly out of focus in champagne tones; a ceramic cup and a phone face down beside it. A window behind shows only blurred warm city lights, no skyline. Quiet, focused.
 - **Alt EN:** A clean workspace at night, a laptop screen glowing softly out of focus.
-- **Alt AR:** مساحة عمل مرتّبة ليلًا، وشاشة حاسوب تتوهّج بنعومة خارج التركيز.
+- **Alt AR:** مساحة عمل مرتّبة ليلًا، وشاشة حاسوب يتوهّج ضوؤها في خلفية ضبابية.
 - **Now:** AI image until the client approves; marked `// TODO: swap to real photo after approval` in `images.ts` (D49).
 
 ## Categories, 16:9 (category page headers)
@@ -193,7 +193,7 @@ The hero today is code-driven (canvas, clock, shutters; D43–D45) and uses neit
 - **Page · section:** Home › How we work, step "Produce" · **Aspect:** 4:5
 - **Prompt (fallback only):** House style. Close-up of two hands checking a printed proof under a warm desk lamp: a loupe resting on the sheet, colour bars at its edge, a stack of proofs beside it. The printed image is abstract warm tones, no text.
 - **Alt EN:** A server carrying a tiered silver stand of desserts.
-- **Alt AR:** نادل يحمل حاملًا فضيًا من عدة طبقات عليه حلويات.
+- **Alt AR:** نادل يحمل منصّة تقديم فضية من عدة طبقات عليها حلويات.
 - **In use: real photo** `/images/work/catering/catering-5.webp` (D49). Was: `catering-5` (tiered silver stand carried by a server, 718 × 759) shows production of the day itself rather than print.
 
 ### `process-launch-4x5`
@@ -213,7 +213,7 @@ These are concept backgrounds behind the products' "Preview" screens. The screen
 - **Page · section:** Home › Digital solutions, product card 1; product page header · **Aspect:** 16:9
 - **Prompt:** House style. An event entrance at dusk, out of focus: a softly lit check-in podium with a tablet on a stand, ivory florals either side, warm path lights leading in. The tablet screen is blank warm light. No people, no QR code drawn.
 - **Alt EN:** An event entrance at dusk with a softly lit check-in point, out of focus.
-- **Alt AR:** مدخل فعالية عند الغروب ونقطة تسجيل مضاءة بنعومة خارج التركيز.
+- **Alt AR:** مدخل فعالية عند الغروب ونقطة تسجيل بإضاءة خافتة في خلفية ضبابية.
 - **Real alternative:** none.
 
 ### `product-restaurant-system-16x9`
@@ -221,7 +221,7 @@ These are concept backgrounds behind the products' "Preview" screens. The screen
 - **Page · section:** Home › Digital solutions, product card 2; product page header · **Aspect:** 16:9
 - **Prompt:** House style. A restaurant pass at service time, in soft focus: plated dishes under warm heat lamps, a brass bell, a ticket rail with blank tickets, the kitchen glowing behind. Movement suggested only by blur, no faces.
 - **Alt EN:** A restaurant pass at service time, warm lights and plates in soft focus.
-- **Alt AR:** منضدة تقديم في مطعم وقت الخدمة، أضواء دافئة وأطباق في تركيز ناعم.
+- **Alt AR:** منضدة تقديم في مطعم وقت الخدمة، بأضواء دافئة وأطباق تبدو ضبابية قليلًا.
 - **Real alternative:** none.
 
 ---

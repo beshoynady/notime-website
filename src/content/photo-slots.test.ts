@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { categories } from "./categories";
 import { GALLERIES } from "./galleries";
-import { HERO_OBJECTS } from "./hero";
+import { FILM } from "./film";
 import { imageSlots } from "./images";
 import { MEDIA, type MediaEntry } from "./media";
 import { ROOM_STORY, STORY_PHOTOS, STRIP } from "./photo-stories";
@@ -55,7 +55,7 @@ const slotFile = (id: string) => imageSlots.find((s) => s.id === id)?.src ?? nul
 
 function slots(): Map<string, Set<string>> {
   const s = new Map<string, unknown>();
-  s.set("home hero", Object.values(HERO_OBJECTS));
+  s.set("home film", FILM.map((b) => b.plate));
   for (const c of categories) {
     s.set(`home category card ${c.slug}`, c.photo ?? slotFile(c.image));
     s.set(`menu ${c.slug}`, slotFile(c.image));
@@ -83,10 +83,16 @@ const reel = new Set(reelFrames.map((f) => root(f.src)));
 const PENDING: string[] = [];
 
 /**
- * Repeats kept on purpose, each with its reason. None now: the glass-roofed hall (p9-2) left Home's
- * hero for its five objects (D173) and shows only in the Events opening film.
+ * Repeats kept on purpose, each with its reason (the owner's storyboard approval, 2026-11-24):
+ * - p9-2, the glass-roofed hall: the film's payoff (its finale) and the Events opening;
+ * - the first beams: Events' scene in the film and on the Events page (confetti taken out here);
+ * - the lit way in: blurred to a backdrop behind the check-in tablet, and Minute Zero's photo.
  */
-const KEPT: Record<string, string[]> = {};
+const KEPT: Record<string, string[]> = {
+  "p9-2": ["home film", "scene events-opening"],
+  "unsplash:sol7vhs8Pdg": ["home film", "scene events-stage"],
+  "unsplash:MLLmIskI6LU": ["home film", "product minute-zero"],
+};
 
 describe("one photograph, one place (D169)", () => {
   const where = slots();
@@ -114,7 +120,7 @@ describe("one photograph, one place (D169)", () => {
 
   it("finds the slots it checks (a renamed export would empty it)", () => {
     const all = new Set([...where.values()].flatMap((s) => [...s]));
-    for (const slot of ["home hero", "home strip", "about story", "gallery photography", "work rooms-we-dressed", "product minute-zero"]) {
+    for (const slot of ["home film", "home strip", "about story", "gallery photography", "work rooms-we-dressed", "product minute-zero"]) {
       expect(all.has(slot), slot).toBe(true);
     }
     expect([...all].filter((s) => s.startsWith("scene ")).length).toBeGreaterThan(5);

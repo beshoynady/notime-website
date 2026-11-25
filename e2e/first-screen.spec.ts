@@ -3,9 +3,8 @@ import { expect, test, type Page } from "@playwright/test";
 /**
  * Home's first screen is complete at first paint (visual portfolio C1, Task 8): no intro gate.
  * On a first visit (a fresh context, nothing in sessionStorage), 200 ms after `load`, the header,
- * the H1 and both CTAs are fully opaque and on screen. The hero has no photo plate since D173: its
- * five objects load eagerly at low priority (they start outside the frame, where lazy loading
- * never fires), and LCP is the H1.
+ * the H1 and both CTAs are fully opaque and on screen. The film's opening plate (D174) is its only
+ * eager image; it covers the whole viewport, so Chrome reads it as background and LCP is the H1.
  */
 
 /**
@@ -48,13 +47,11 @@ for (const locale of ["en", "ar"] as const) {
       expect(s.opacity, `${name} opacity`).toBeGreaterThanOrEqual(0.99);
       if (name !== "header") expect(s.onScreen, `${name} on screen`).toBe(true);
     }
-    // The five objects: eager at low priority, so they never compete with the title.
-    const objects = page.locator("#hero .hero-object img");
-    await expect(objects).toHaveCount(5);
-    for (const img of await objects.all()) {
-      await expect(img).toHaveAttribute("fetchpriority", "low");
-      expect(await img.getAttribute("loading")).not.toBe("lazy");
-    }
+    // The film: the opening plate is the one eager picture; every later scene's waits (lazy).
+    const plates = page.locator("#film .film-img");
+    await expect(plates).toHaveCount(7);
+    await expect(plates.first()).toHaveAttribute("fetchpriority", "high");
+    for (const img of (await plates.all()).slice(1)) await expect(img).toHaveAttribute("loading", "lazy");
     // No intro gate is left in the page: no shutters, nothing waiting on html[data-intro-seen].
     await expect(page.locator(".hero-shutter")).toHaveCount(0);
   });
@@ -76,8 +73,8 @@ for (const locale of ["en", "ar"] as const) {
     expect(lcp).toBe("h1");
   });
 
-  // The scroll timeline gives the title's lines their rest transform when the controller hydrates.
-  // If that lands on the box holding the text, Chrome repaints it as a new, larger LCP entry, late
+  // Hydration builds the film's timelines (FilmMotion). If one landed on the title's box,
+  // Chrome would repaint it as a new, larger LCP entry, late
   // on a slow phone (+0.9 s in Lighthouse, D156). No title entry may come after hydration.
   test(`${locale}: hydration doesn't re-report the title as LCP`, async ({ page }) => {
     test.setTimeout(45_000);
@@ -89,14 +86,14 @@ for (const locale of ["en", "ar"] as const) {
           if (e.element?.closest("#hero-title")) w.__lcp.push(e.startTime);
       }).observe({ type: "largest-contentful-paint", buffered: true });
       new MutationObserver(() => {
-        if (w.__ready === undefined && document.querySelector("#hero[data-hero-ready]")) w.__ready = performance.now();
-      }).observe(document, { attributes: true, subtree: true, attributeFilter: ["data-hero-ready"] });
+        if (w.__ready === undefined && document.querySelector("#film[data-film-ready]")) w.__ready = performance.now();
+      }).observe(document, { attributes: true, subtree: true, attributeFilter: ["data-film-ready"] });
     });
     // A slow phone's CPU, so hydration lands after the first paint (as in Lighthouse).
     const cdp = await page.context().newCDPSession(page);
     await cdp.send("Emulation.setCPUThrottlingRate", { rate: 4 });
     await page.goto(`/${locale}`);
-    await page.locator("#hero[data-hero-ready]").waitFor({ state: "attached", timeout: 20_000 });
+    await page.locator("#film[data-film-ready]").waitFor({ state: "attached", timeout: 20_000 });
     await page.waitForTimeout(1500);
     const { lcp, ready } = await page.evaluate(() => {
       const w = window as unknown as { __lcp: number[]; __ready?: number };

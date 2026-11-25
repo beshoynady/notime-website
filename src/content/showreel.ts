@@ -20,16 +20,29 @@ const f = (dir: string, n: number, width: number, height: number): ReelFrame => 
 // that the hero, the Home strip, About's story or a service page shows.
 export const reelFrames: ReelFrame[] = [
   f("private-celebrations", 4, 811, 541),
-  f("catering", 3, 1247, 702),
-  f("heritage", 1, 1050, 788),
-  f("catering", 4, 1187, 668),
   f("private-celebrations", 7, 850, 638),
-  f("catering", 7, 939, 529),
-  f("heritage", 2, 688, 516),
   f("private-celebrations", 9, 811, 541),
+  f("catering", 3, 1247, 702),
+  f("catering", 4, 1187, 668),
+  f("catering", 7, 939, 529),
+  f("heritage", 1, 1050, 788),
+  f("heritage", 2, 688, 516),
   f("heritage", 3, 688, 516),
   f("heritage", 6, 688, 516),
 ];
+
+/** The project a frame comes from (its Work collection folder). */
+const projectOf = (fr: ReelFrame) => fr.src.split("/")[3];
+
+/**
+ * The reel's counter counts projects, not photos (the owner, 2026-11-24: "1 / 10" read as ten
+ * projects when the reel shows three). Frames play grouped by project, so the count only rises.
+ */
+export function reelProject(index: number, frames: readonly ReelFrame[] = reelFrames): { n: number; total: number } {
+  const projects = [...new Set(frames.map(projectOf))];
+  const fr = frames[((index % frames.length) + frames.length) % frames.length];
+  return { n: projects.indexOf(projectOf(fr)) + 1, total: projects.length };
+}
 
 /** Seconds per frame: 10 frames × 2.8 s ≈ 28 s per loop (the plan's 20–30 s). */
 export const REEL_FRAME_SECONDS = 2.8;

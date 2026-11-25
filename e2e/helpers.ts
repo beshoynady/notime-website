@@ -7,8 +7,8 @@ export async function gotoReady(page: Page, path: string) {
   await page.locator("#page-stage[data-tone-ready]").first().waitFor({ state: "attached" });
 }
 
-/** Wait until the hero controller has hydrated and taken over (it sets #hero[data-hero-ready]). */
-export const controllerReady = (page: Page) => page.locator("#hero[data-hero-ready]").waitFor({ state: "attached" });
+/** Wait until the home film's motion has hydrated and built its timelines (#film[data-film-ready]). */
+export const controllerReady = (page: Page) => page.locator("#film[data-film-ready]").waitFor({ state: "attached" });
 
 /** Anchor landings (D53): within ±4px of the lowest covering bar. */
 const TOLERANCE = 4;

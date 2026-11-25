@@ -42,7 +42,7 @@ export const SERVICE_HOOKS: Record<string, Localized<string>> = {
   photography: {
     // deck: "light planned for each shot"; events, products, food
     en: "Every shot lit on purpose: the room on the night, the product on the table, the dish before it cools.",
-    ar: "لكل لقطة إضاءتها المقصودة: القاعة ليلة الحدث، والمنتج على الطاولة، والطبق قبل أن يبرد.",
+    ar: "لكل لقطة إضاءتها المقصودة: القاعة ليلة الفعالية، والمنتج على الطاولة، والطبق قبل أن يبرد.",
   },
   "video-production": {
     // p.14 (cinematic films; editing, sound design and post-production). "One crew" is out until Rand confirms it (D148).

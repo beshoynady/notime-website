@@ -5,7 +5,7 @@ import { getImageProps } from "next/image";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { useLenis } from "@/components/providers/lenis-provider";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
-import { REEL_FRAME_SECONDS, reelFrames } from "@/content/showreel";
+import { REEL_FRAME_SECONDS, reelFrames, reelProject } from "@/content/showreel";
 import { capSrcSet } from "@/lib/srcset";
 import "./showreel.css";
 
@@ -124,7 +124,7 @@ export function Showreel({ labels }: { labels: Labels }) {
               </button>
             )}
             <span className="reel-count tabular" aria-live="off">
-              {labels.frame.replace("{n}", String(index + 1)).replace("{total}", String(reelFrames.length))}
+              {labels.frame.replace("{n}", String(reelProject(index).n)).replace("{total}", String(reelProject(index).total))}
             </span>
             <span className="reel-progress" aria-hidden="true">
               <span key={`${index}-${auto}`} className="reel-progress-fill" data-run={auto ? "" : undefined} />
