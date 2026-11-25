@@ -81,8 +81,11 @@ for (const { anchor, config } of PINNED) {
       const [from, to] = shot.desktop;
       await pinTo((from + to) / 2);
       await expect(scene).toHaveAttribute("data-shot-active", String(i));
-      const top = (await scene.evaluate((el) => el.getBoundingClientRect().top)) - (await headerBottom());
-      expect(Math.abs(top)).toBeLessThanOrEqual(2); // held under the header
+      // Held under the header. Polled: the shot can switch while Lenis is still easing the scroll
+      // in (CI caught html.lenis-scrolling with the scene 90px short).
+      await expect
+        .poll(async () => Math.abs((await scene.evaluate((el) => el.getBoundingClientRect().top)) - (await headerBottom())), { timeout: 5000 })
+        .toBeLessThanOrEqual(2);
     }
     // The end frame: the last beat's photo is fully in.
     await pinTo(0.6);
