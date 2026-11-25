@@ -17,8 +17,8 @@ function Panel({ title, children }: { title: string; children: React.ReactNode }
   );
 }
 
-export function MinuteZeroScreens({ locale }: { locale: Locale }) {
-  const s = productsCopy.items["minute-zero"].screens;
+export function InvitelyScreens({ locale }: { locale: Locale }) {
+  const s = productsCopy.items["invitely"].screens;
   return (
     <div className="sw-ps-row" aria-hidden="true">
       <Panel title={s[0][locale]}>
@@ -63,8 +63,8 @@ export function MinuteZeroScreens({ locale }: { locale: Locale }) {
   );
 }
 
-export function PeakHourScreens({ locale }: { locale: Locale }) {
-  const s = productsCopy.items["peak-hour"].screens;
+export function SmartMenuScreens({ locale }: { locale: Locale }) {
+  const s = productsCopy.items["smart-menu"].screens;
   return (
     <div className="sw-ps-row" aria-hidden="true">
       <Panel title={s[0][locale]}>

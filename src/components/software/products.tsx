@@ -3,12 +3,12 @@ import { Link } from "@/i18n/navigation";
 import { fill } from "@/content/form-copy";
 import { hero, productsCopy as p } from "@/content/software/page";
 import { InterestDisclosure } from "./interest-disclosure";
-import { MinuteZeroScreens, PeakHourScreens } from "./product-screens";
+import { InvitelyScreens, SmartMenuScreens } from "./product-screens";
 
-const ORDER = ["minute-zero", "peak-hour"] as const;
+const ORDER = ["invitely", "smart-menu"] as const;
 
 /**
- * Products, Coming soon (brief §11): Minute Zero and Peak Hour (D78 names). Each card: the
+ * Products, Coming soon (brief §11): Invitely and Smart Menu (D78 names). Each card: the
  * problem, 3 key features (drafts the client confirms, OQ #24), concept screens labelled
  * "Preview" with "Example" data, and "Register interest" (the interest form, D92). Kept apart
  * from the service visuals so a demo is never mistaken for a product (§5.5).
@@ -37,7 +37,7 @@ export function Products({ locale }: { locale: Locale }) {
                     <span className="sw-tag sw-tag-fill">{hero.ui.preview[locale]}</span>
                     <span className="sw-tag">{hero.ui.example[locale]}</span>
                   </span>
-                  {id === "minute-zero" ? <MinuteZeroScreens locale={locale} /> : <PeakHourScreens locale={locale} />}
+                  {id === "invitely" ? <InvitelyScreens locale={locale} /> : <SmartMenuScreens locale={locale} />}
                 </div>
                 <div className="sw-product-body">
                   <span className="badge badge-soon">{hero.ui.soon[locale]}</span>

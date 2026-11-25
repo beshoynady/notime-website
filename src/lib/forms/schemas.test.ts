@@ -40,7 +40,7 @@ describe("website review", () => {
 
 describe("register interest", () => {
   it("takes the two products only", () => {
-    const ok = { product: "peak-hour", name: "Lina", email: "lina@example.com" };
+    const ok = { product: "smart-menu", name: "Lina", email: "lina@example.com" };
     expect(interestSchema.safeParse(ok).success).toBe(true);
     expect(errs(interestSchema.safeParse({ ...ok, product: "other" }))).toEqual({ product: "invalid" });
   });

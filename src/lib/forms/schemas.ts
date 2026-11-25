@@ -50,7 +50,7 @@ const siteUrl = (required: boolean) =>
     .optional()
     .default("");
 
-/** Shared by every form. `source` is the page (e.g. "software-digital", "contact", "minute-zero"). */
+/** Shared by every form. `source` is the page (e.g. "software-digital", "contact", "invitely"). */
 export const sharedFields = z.object({
   locale: z.enum(["en", "ar"]),
   source: z.string().trim().max(60).default(""),
@@ -114,7 +114,7 @@ export type WebsiteReview = z.output<typeof websiteReviewSchema>;
 
 // ---------------------------------------------------------------- register interest (products)
 
-export const PRODUCTS = ["minute-zero", "peak-hour"] as const;
+export const PRODUCTS = ["invitely", "smart-menu"] as const;
 
 /** What the visitor runs (the storyboard's question; optional, D102). */
 export const INTEREST_TYPES = ["event", "restaurant", "other"] as const;

@@ -411,6 +411,8 @@ MEDIA.push(
     "3:2 · the way in to a venue at night, lit path to an open door, no faces, no signs"),
   // The home film (docs/review/film-storyboard/, recipe docs/content/recipes/home-film.json):
   // mood plates for the night of an event, no logos, no recognisable people.
+  stock("film-dawn", "unsplash:-K_UEc_kXP8", "Ahmed Galal", "https://unsplash.com/photos/-K_UEc_kXP8", 1920, 1080, [1080, 1920],
+    "16:9 + 9:16 · Dubai's skyline at first light, calm water, warm grade, no people, no logos (the film's first frame)"),
   stock("film-hall", "unsplash:elEIyWEj-bM", "National Asian Culture Center", "https://unsplash.com/photos/elEIyWEj-bM", 1920, 1080, [1080, 1920],
     "16:9 + 9:16 · an empty hall before the build: trusses, a big blank wall, no people"),
   stock("film-beams", "unsplash:sol7vhs8Pdg", "Kevin Yudhistira Alloni", "https://unsplash.com/photos/sol7vhs8Pdg", 1920, 1080, [1080, 1920],

@@ -188,7 +188,7 @@ export const eventTech = {
     "نبني نظام التسجيل والتطبيق وشاشات النتائج، ونكون في موقع الفعالية لإدارتها أيضًا. طلب واحد، من أول دعوة إلى آخر نتيجة تظهر على الشاشة.",
   ),
   items: [
-    { title: l("Registration and check-in", "التسجيل وتسجيل الحضور"), body: l("Minute Zero by NO TIME, our own check-in product (in development)", "«الدقيقة صفر» من NO TIME، منتجنا لتسجيل الحضور (قيد التطوير)") },
+    { title: l("Registration and check-in", "التسجيل وتسجيل الحضور"), body: l("Invitely by NO TIME, our own check-in product (in development)", "«إنفايتلي» من NO TIME، منتجنا لتسجيل الحضور (قيد التطوير)") },
     { title: l("Event apps and websites", "تطبيقات ومواقع للفعاليات"), body: l("The agenda, the speakers and live updates.", "البرنامج والمتحدثون والتحديثات المباشرة.") },
     {
       title: l("Live results and screens", "النتائج المباشرة والشاشات"),
@@ -373,7 +373,7 @@ export const productsCopy = {
   close: l("Close the form", "إغلاق النموذج"),
   more: l("See what {product} will do", "اكتشفوا ما ستقدّمه «{product}»"),
   items: {
-    "minute-zero": {
+    "invitely": {
       slug: "qr-check-in",
       problem: l("Queues at the door, and no clear picture of who has arrived.", "طوابير عند الباب، ولا صورة واضحة لمن وصل."),
       features: [
@@ -383,7 +383,7 @@ export const productsCopy = {
       ],
       screens: [l("Check-in dashboard", "لوحة الحضور"), l("QR scan", "مسح الرمز"), l("Guest list", "قائمة الضيوف")],
     },
-    "peak-hour": {
+    "smart-menu": {
       slug: "restaurant-system",
       problem: l("Orders, tables and the kitchen, out of step at the busiest hour.", "الطلبات والطاولات والمطبخ، كلٌّ في وادٍ ساعةَ الذروة."),
       features: [

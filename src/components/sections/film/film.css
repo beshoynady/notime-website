@@ -816,6 +816,29 @@ html[dir="rtl"] .film-ci-bar > span {
   stroke-width: 2;
   opacity: 0.85;
 }
+/* The second hand turns on the dial's centre (300, 300 in the viewBox) at any size: one turn a
+   minute, linear, for ever. Still under reduced motion. */
+.film-dial-hand {
+  transform-box: view-box;
+  transform-origin: 300px 300px;
+  animation: film-dial-sweep 60s linear infinite;
+}
+@keyframes film-dial-sweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .film-dial-hand {
+    animation: none;
+  }
+}
+html[data-reduced] .film-dial-hand {
+  animation: none;
+}
 .film-dial-hand line {
   stroke: var(--color-champagne);
   stroke-width: 1.5;

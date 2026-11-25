@@ -232,10 +232,10 @@ describe("products", () => {
 
   it("carries the approved names, with a lockup that says what each one does (D78)", () => {
     const [qr, rs] = getProducts();
-    expect(qr.name).toEqual({ en: "Minute Zero", ar: "الدقيقة صفر" });
-    expect(rs.name).toEqual({ en: "Peak Hour", ar: "ساعة الذروة" });
-    expect(productLockup(qr, "en")).toBe("Minute Zero · QR event check-in");
-    expect(productLockup(rs, "ar")).toBe("ساعة الذروة · نظام إدارة المطاعم");
+    expect(qr.name).toEqual({ en: "Invitely", ar: "إنفايتلي" });
+    expect(rs.name).toEqual({ en: "Smart Menu", ar: "سمارت منيو" });
+    expect(productLockup(qr, "en")).toBe("Invitely · QR event check-in");
+    expect(productLockup(rs, "ar")).toBe("سمارت منيو · نظام إدارة المطاعم");
   });
 });
 
@@ -361,8 +361,8 @@ describe("N18 Arabic fixes", () => {
   it("Arabic product links agree in gender", () => {
     const render = (name: string) => productsCopy.more.ar.replace("{product}", name);
     const [qr, rs] = getProducts();
-    expect(render(qr.name.ar)).toBe("اكتشفوا ما ستقدّمه «الدقيقة صفر»");
-    expect(render(rs.name.ar)).toBe("اكتشفوا ما ستقدّمه «ساعة الذروة»");
+    expect(render(qr.name.ar)).toBe("اكتشفوا ما ستقدّمه «إنفايتلي»");
+    expect(render(rs.name.ar)).toBe("اكتشفوا ما ستقدّمه «سمارت منيو»");
   });
   it("Google/Meta title", () => {
     const s = getServices().find((x) => x.slug === "paid-media-planning");

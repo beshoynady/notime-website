@@ -11,8 +11,8 @@ const RAYS = Array.from({ length: 180 }, (_, i) => {
 
 /**
  * The finale's dial (decorative; from the D173 hero): the gold sunray engraving, a dotted outer ring, 60
- * ticks, the ring, and the second hand. Server-rendered at its end state: the hand on 12 (zero).
- * FilmMotion turns the hand back five seconds and counts it down.
+ * ticks, the ring, and the second hand, which sweeps once a minute on the dial's centre (film.css;
+ * still under reduced motion). It sits in the plate, behind the copy.
  */
 export function FilmDial() {
   return (
